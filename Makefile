@@ -319,7 +319,7 @@ clean:
 
 ## help — show targets
 	help:
-	@echo "9RouterX — Makefile targets:"
+	@echo "Alyysha Router — Makefile targets:"
 	@grep -E '^## ' Makefile | sed 's/## /  make /' | sed 's/ — /  /'
 	@echo ""
 	@echo "Options:"
