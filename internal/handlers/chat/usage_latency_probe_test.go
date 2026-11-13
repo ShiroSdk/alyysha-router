@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 // Latency probe for the synchronous usage-write tail that logUsage runs on
@@ -20,8 +20,8 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/dbtest"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/dbtest"
 )
 
 type latProbe struct {

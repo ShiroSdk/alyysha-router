@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+# Alyysha Router — built by YannClipper — https://t.me/YannClippers
 set -euo pipefail
 
 # Central version bump — single source: VERSION file
@@ -25,7 +25,7 @@ ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT_DIR"
 
 # A prerelease must never reach version.json: that manifest is polled by
-# `9routerx update` on the stable channel, so naming an experimental build
+# `alyysha update` on the stable channel, so naming an experimental build
 # there offers it to every install. The release workflow refuses to run when it
 # sees the two out of step; the point here is to keep them in step by default.
 IS_PRERELEASE=false

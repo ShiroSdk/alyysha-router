@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 // Response translation for Zed's google (Gemini) provider.
@@ -16,8 +16,8 @@ import (
 	"net/http"
 	"time"
 
-	"9routerx/proxy/internal/proxy"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/proxy"
+	"alyysha/proxy/internal/translator"
 )
 
 // zedGeminiStream translates a Zed google stream into OpenAI chat SSE.

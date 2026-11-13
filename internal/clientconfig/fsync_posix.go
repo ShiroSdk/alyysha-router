@@ -1,13 +1,13 @@
 //go:build !windows
 
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package clientconfig
 
 import (
 	"errors"
 	"syscall"
 
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/log"
 )
 
 // fsyncDir flushes the directory entry the rename just changed, so a power

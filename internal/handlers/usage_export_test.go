@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package handlers
 
 import (
@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/db"
 )
 
 // exportTestRepo builds a repository with the tables the export walks and a

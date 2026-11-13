@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Package smart holds the pattern rules that keep a combo's membership in step
 // with the models the gateway actually knows about.
 //
@@ -631,7 +631,7 @@ func (c compiled) matches(cand Candidate) bool {
 // with.
 //
 // This is the semantics of providers.MatchAllowPattern (upstream parity with
-// decolua/9router keyAccess.js, #365). It lives here rather than there because
+// decolua/alyysha keyAccess.js, #365). It lives here rather than there because
 // the commit this branch was cut from predates that function: the providers
 // package only ships the segment-local MatchModelPattern, whose single `*`
 // cannot cross a `/` and therefore cannot express "kenari/deepseek*". The two

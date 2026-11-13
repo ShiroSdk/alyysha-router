@@ -1,5 +1,4 @@
-<!-- 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
-
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   import { onMount } from 'svelte'
   import { sanitizeHtml } from '../lib/sanitizeHtml'

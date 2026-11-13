@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package translator
 
 import (
@@ -486,7 +486,7 @@ func TestConcealFingerprintToolsChatShapeWhenNoTools(t *testing.T) {
 }
 
 func TestConcealFingerprintTools_AliasesDeclaredTerminalTools(t *testing.T) {
-	// Upstream decolua/9router#5319, #5328: free tier rejects tool names containing "terminal"
+	// Upstream decolua/alyysha#5319, #5328: free tier rejects tool names containing "terminal"
 	body := []byte(`{"model":"oc/deepseek-v4.1-free","tools":[
 		{"type":"function","name":"read_file"},
 		{"type":"function","name":"terminal"},

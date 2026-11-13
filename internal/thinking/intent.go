@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Package thinking is the unified reasoning normalisation pass — port of
 // open-sse/translator/concerns/thinkingUnified.js (upstream v0.5.99).
 //

@@ -1,4 +1,4 @@
-<!-- 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   // Node Health table for the Details section (issue #280): providers ranked by
   // a 7-day health score, expandable to the models under each node. Port of

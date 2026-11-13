@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
@@ -13,8 +13,8 @@ import (
 
 	"github.com/google/uuid"
 
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/providers"
 )
 
 // Qoder chat payload — port of open-sse/executors/qoder.js: extractText,

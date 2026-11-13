@@ -1,6 +1,6 @@
 #!/bin/bash
-# 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
-# Benchmark comparison: Go Proxy vs Legacy Next.js 9Router
+# Alyysha Router — built by YannClipper — https://t.me/YannClippers
+# Benchmark comparison: Go Proxy vs Legacy Next.js Alyysha
 # Both use same mock upstream + same SQLite DB for fair comparison.
 set -e
 
@@ -46,7 +46,7 @@ if ! command -v hey &> /dev/null; then
 fi
 
 echo -e "${BLUE}╔══════════════════════════════════════════════════════════╗${NC}"
-echo -e "${BLUE}║    9Router Benchmark: Go Proxy vs Legacy Next.js        ║${NC}"
+echo -e "${BLUE}║    Alyysha Benchmark: Go Proxy vs Legacy Next.js        ║${NC}"
 echo -e "${BLUE}╚══════════════════════════════════════════════════════════╝${NC}"
 echo ""
 
@@ -115,8 +115,8 @@ echo "  Benchmark DB ready."
 # Step 3: Build & start Go proxy
 echo -e "${GREEN}[3/5] Building Go proxy...${NC}"
 cd "$GO_PROXY_DIR"
-go build -o /tmp/9router-bench-go "$GO_PROXY_DI./cmd/9routerx/"
-DATA_DIR="$BENCH_DB_DIR" PORT=$GO_PORT /tmp/9router-bench-go &
+go build -o /tmp/alyysha-bench-go "$GO_PROXY_DI./cmd/alyysha/"
+DATA_DIR="$BENCH_DB_DIR" PORT=$GO_PORT /tmp/alyysha-bench-go &
 GO_PID=$!
 sleep 1
 

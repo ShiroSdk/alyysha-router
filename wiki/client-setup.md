@@ -32,7 +32,7 @@ curl http://localhost:20128/v1/chat/completions \
 |---|---|---|
 | `PORT` | `20128` | HTTP port |
 | `HOST` / `BIND_ADDR` | `127.0.0.1` (loopback) | Listener address; explicit `0.0.0.0` or `*` allows all interfaces |
-| `DATA_DIR` | `~/.9router` (`%APPDATA%/9router` on Windows) | Data root |
+| `DATA_DIR` | `~/.alyysha` (`%APPDATA%/alyysha` on Windows) | Data root |
 | `DB_PATH` | `$DATA_DIR/db/data.sqlite` | SQLite file |
 | `INITIAL_PASSWORD` | unset (fallback `123456` locally) | First dashboard password |
 | `RTK_ENABLED` | `true` | RTK input compression |

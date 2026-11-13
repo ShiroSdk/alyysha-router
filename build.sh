@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
-# Build 9routerx reproducibly: web assets first (embedded at compile time),
+# Alyysha Router — built by YannClipper — https://t.me/YannClippers
+# Build alyysha reproducibly: web assets first (embedded at compile time),
 # then the binary with the version from VERSION.
 #
 # web/dist is gitignored, so a fresh clone has no SPA to embed and the Go build
@@ -25,7 +25,7 @@ if [[ ! -f web/dist/index.html ]]; then
 fi
 
 VERSION="$(cat VERSION)"
-echo "==> building 9routerx ${VERSION}"
-go build -ldflags="-s -w -X 9routerx/proxy/internal/updater.CurrentVersion=${VERSION}" \
-  -o ./9routerx ./cmd/9routerx/
-echo "==> ./9routerx"
+echo "==> building alyysha ${VERSION}"
+go build -ldflags="-s -w -X alyysha/proxy/internal/updater.CurrentVersion=${VERSION}" \
+  -o ./alyysha ./cmd/alyysha/
+echo "==> ./alyysha"

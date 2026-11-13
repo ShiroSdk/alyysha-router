@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 import idDict from '../locales/id.json'
 
 export type Locale = 'en' | 'id'
@@ -16,7 +16,7 @@ const dictionaries: Record<Locale, Record<string, string>> = {
 let currentLocale = $state<Locale>('en')
 
 if (typeof window !== 'undefined') {
-  const saved = localStorage.getItem('9routerx-locale') as Locale | null
+  const saved = localStorage.getItem('alyysha-locale') as Locale | null
   if (saved && (saved === 'en' || saved === 'id')) {
     currentLocale = saved
   }
@@ -30,7 +30,7 @@ export function setLocale(loc: Locale) {
   if (loc === 'en' || loc === 'id') {
     currentLocale = loc
     if (typeof window !== 'undefined') {
-      localStorage.setItem('9routerx-locale', loc)
+      localStorage.setItem('alyysha-locale', loc)
       localStorage.setItem('locale', loc)
     }
   }

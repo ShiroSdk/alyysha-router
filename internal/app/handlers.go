@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package app
 
 import (
@@ -9,11 +9,11 @@ import (
 	chiMiddleware "github.com/go-chi/chi/v5/middleware"
 	"go.uber.org/fx"
 
-	"9routerx/proxy/internal/auth"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlers"
-	"9routerx/proxy/internal/handlers/chat"
-	"9routerx/proxy/internal/middleware"
+	"alyysha/proxy/internal/auth"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlers"
+	"alyysha/proxy/internal/handlers/chat"
+	"alyysha/proxy/internal/middleware"
 )
 
 // HandlersModule provides TokenSaverConfig and sets up the server router.
@@ -84,7 +84,7 @@ func ProvideRouter(repo *db.Repo, ts *handlers.TokenSaverConfig) (*chi.Mux, *cha
 	// including the NotFound probe surface and Recoverer's panic answers
 	// (audit B-04: the gateway shipped none of these headers at all).
 	r.Use(middleware.SecurityHeaders)
-	// 9RouterX rebrand (FASE 0.3): the API identity header on every response.
+	// Alyysha Router rebrand (FASE 0.3): the API identity header on every response.
 	r.Use(middleware.ProductIdentity)
 	// Body limits are path-aware: JSON APIs keep the 10MB ceiling, the media
 	// endpoints that receive multipart video/audio bodies get their own larger

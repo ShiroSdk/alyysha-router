@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package daemon
 
 import (
@@ -8,15 +8,15 @@ import (
 	"strconv"
 	"strings"
 
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/proc"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/proc"
 )
 
 // The pid file carries the executable the daemon was launched from next to its
 // PID, on one line:
 //
-//	20130 /usr/local/bin/9routerx
+//	20130 /usr/local/bin/alyysha
 //
 // The PID alone is not a claim on a process: the OS recycles PIDs, so a file
 // left behind by a daemon that was killed can name an unrelated program by the

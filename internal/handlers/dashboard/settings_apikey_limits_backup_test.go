@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -8,9 +8,9 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"9routerx/proxy/internal/auth"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/keikey"
+	"alyysha/proxy/internal/auth"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/keikey"
 )
 
 // TestBackupPreservesApiKeyLimits proves a database backup carries every

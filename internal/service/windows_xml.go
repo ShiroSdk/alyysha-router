@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package service
 
 import (
@@ -18,7 +18,7 @@ func createWindowsTaskXML(exe string, args []string) error {
 	}
 	escape := func(s string) string { var b bytes.Buffer; _ = xml.EscapeText(&b, []byte(s)); return b.String() }
 	doc := `<?xml version="1.0" encoding="UTF-16"?><Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task"><Triggers><LogonTrigger><Enabled>true</Enabled><UserId>` + escape(user) + `</UserId></LogonTrigger></Triggers><Principals><Principal id="User"><UserId>` + escape(user) + `</UserId><LogonType>InteractiveToken</LogonType><RunLevel>LeastPrivilege</RunLevel></Principal></Principals><Settings><MultipleInstancesPolicy>IgnoreNew</MultipleInstancesPolicy><DisallowStartIfOnBatteries>false</DisallowStartIfOnBatteries><StopIfGoingOnBatteries>false</StopIfGoingOnBatteries><ExecutionTimeLimit>PT0S</ExecutionTimeLimit></Settings><Actions Context="User"><Exec><Command>` + escape(exe) + `</Command><Arguments>` + escape(windowsArguments(args)) + `</Arguments></Exec></Actions></Task>`
-	file, err := os.CreateTemp("", "9routerx-task-*.xml")
+	file, err := os.CreateTemp("", "alyysha-task-*.xml")
 	if err != nil {
 		return err
 	}

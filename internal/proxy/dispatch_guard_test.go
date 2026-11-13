@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package proxy
 
 import (
@@ -8,8 +8,8 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/providers"
 )
 
 // TestAssertDispatchURLAllowed pins the URL-level dispatch guard: scheme and

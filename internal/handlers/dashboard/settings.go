@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -18,14 +18,14 @@ import (
 
 	"golang.org/x/crypto/bcrypt"
 
-	"9routerx/proxy/internal/auth"
-	"9routerx/proxy/internal/config"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlers/chat"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/proxy"
-	"9routerx/proxy/internal/thinking"
-	"9routerx/proxy/internal/updater"
+	"alyysha/proxy/internal/auth"
+	"alyysha/proxy/internal/config"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlers/chat"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/proxy"
+	"alyysha/proxy/internal/thinking"
+	"alyysha/proxy/internal/updater"
 )
 
 // Dashboard client headers, matching the Next dashboard settings/database route.
@@ -208,7 +208,7 @@ func (h *DashboardHandler) HandleExportDatabase(w http.ResponseWriter, r *http.R
 	}
 
 	nowStr := time.Now().Format("2006-01-02")
-	w.Header().Set("Content-Disposition", fmt.Sprintf(`attachment; filename="9routerx-backup-%s.json"`, nowStr))
+	w.Header().Set("Content-Disposition", fmt.Sprintf(`attachment; filename="alyysha-backup-%s.json"`, nowStr))
 	handlerutil.WriteJSONIndented(w, http.StatusOK, payload)
 }
 
@@ -337,7 +337,7 @@ func (h *DashboardHandler) HandleProxyTest(w http.ResponseWriter, r *http.Reques
 		handlerutil.WriteJSON(w, http.StatusInternalServerError, map[string]any{"ok": false, "error": err.Error()})
 		return
 	}
-	req.Header.Set("User-Agent", "9Router")
+	req.Header.Set("User-Agent", "Alyysha")
 
 	resp, err := client.Do(req)
 	if err != nil {

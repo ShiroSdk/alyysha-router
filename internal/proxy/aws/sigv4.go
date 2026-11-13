@@ -1,5 +1,5 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
-// Package aws implements the AWS protocol primitives 9router needs to speak to
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
+// Package aws implements the AWS protocol primitives alyysha needs to speak to
 // Amazon Bedrock: Signature Version 4 request signing and AWS credential resolution.
 //
 // SigV4 is hand-rolled rather than pulled from the AWS SDK for Go because every request

@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 /**
  * The list primitives the two arrangement editors share: the Usage panel list in
  * Settings and the sidebar list. They are generic over the id type so each

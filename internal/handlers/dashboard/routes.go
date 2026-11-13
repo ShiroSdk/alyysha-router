@@ -1,18 +1,18 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
 	"net/http"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/freeresilience"
-	"9routerx/proxy/internal/handlers/shared"
-	"9routerx/proxy/internal/middleware"
-	"9routerx/proxy/internal/modelhealth"
-	"9routerx/proxy/internal/observ"
-	"9routerx/proxy/internal/resilience"
-	"9routerx/proxy/internal/semanticcache"
-	"9routerx/proxy/internal/webexec"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/freeresilience"
+	"alyysha/proxy/internal/handlers/shared"
+	"alyysha/proxy/internal/middleware"
+	"alyysha/proxy/internal/modelhealth"
+	"alyysha/proxy/internal/observ"
+	"alyysha/proxy/internal/resilience"
+	"alyysha/proxy/internal/semanticcache"
+	"alyysha/proxy/internal/webexec"
 	"github.com/go-chi/chi/v5"
 )
 

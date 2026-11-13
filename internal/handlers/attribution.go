@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 
 package handlers
 
@@ -8,8 +8,8 @@ package handlers
 // runtime; read by tools/scripts/detect-derivative.sh, never by app logic.
 const (
 	attribHost  = "github.com/"
-	attribUserA = "yanstd"
-	attribUserB = "888/"
+	attribUserA = "Shiro"
+	attribUserB = "Sdk/"
 )
 
 // SourceRepo joins the fragments. Passive canary by design: nothing in this

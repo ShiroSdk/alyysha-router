@@ -1,8 +1,8 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Package syncbundle exports and imports a portable snapshot of an
 // installation's configuration — the CONFIG BUNDLE half of OmniRoute's
 // "Sync Tokens & Config Bundle" feature (src/lib/sync/bundle.ts), ported for
-// the `9routerx export-bundle` / `import-bundle` CLI pair instead of a REST
+// the `alyysha export-bundle` / `import-bundle` CLI pair instead of a REST
 // endpoint.
 //
 // The bundle is a secret-aware snapshot, not a full backup (internal/backup
@@ -27,8 +27,8 @@ import (
 
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/models"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/models"
 )
 
 // BundleVersion is the schema version Export writes and Import requires.
@@ -39,7 +39,7 @@ const BundleVersion = 1
 // Gateway names the product a bundle came from. Import refuses a different
 // value: the sections are this gateway's table shapes, and a foreign bundle
 // would import into rows nothing reads.
-const Gateway = "9RouterX"
+const Gateway = "Alyysha Router"
 
 // secretSettingKeys are the settings the bundle must never carry. Mirrors the
 // dashboard's own secretSettingKeys (internal/handlers/dashboard/settings.go)

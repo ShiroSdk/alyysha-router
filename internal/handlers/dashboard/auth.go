@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -11,15 +11,15 @@ import (
 
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/auth"
-	"9routerx/proxy/internal/config"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/securitylog"
+	"alyysha/proxy/internal/auth"
+	"alyysha/proxy/internal/config"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/securitylog"
 )
 
 // resetHint mirrors upstream RESET_HINT in src/app/api/auth/login/route.js.
-const resetHint = "Forgot password? Reset to default via 9RouterX CLI → Settings → Reset Password to Default."
+const resetHint = "Forgot password? Reset to default via Alyysha Router CLI → Settings → Reset Password to Default."
 
 // HandleAuthLogin handles POST /api/auth/login: verify the dashboard password
 // and issue the session cookie. Mirrors upstream

@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package middleware
 
 import (
@@ -9,9 +9,9 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/dbtest"
-	"9routerx/proxy/internal/keikey"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/dbtest"
+	"alyysha/proxy/internal/keikey"
 )
 
 func setupTestDB(t *testing.T) (*sql.DB, func()) {

@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -7,10 +7,10 @@ import (
 	"strconv"
 	"time"
 
-	"9routerx/proxy/internal/analyticsrange"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/semanticcache"
+	"alyysha/proxy/internal/analyticsrange"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/semanticcache"
 )
 
 type CacheConfigResponse struct {

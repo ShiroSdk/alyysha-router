@@ -1,4 +1,4 @@
-<!-- 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   import { onMount, onDestroy } from 'svelte'
   import Card from '../lib/ui/Card.svelte'
@@ -760,7 +760,7 @@ f6e5d4c3b2a1   redis:7-alpine "docker-entrypoint.s…"   2 hours ago     Up 2 ho
 
   onMount(async () => {
     try {
-      const savedLocale = localStorage.getItem('9routerx-locale') || localStorage.getItem('locale')
+      const savedLocale = localStorage.getItem('alyysha-locale') || localStorage.getItem('locale')
       if (savedLocale) locale = savedLocale
     } catch {
       // localStorage throws in private-browsing modes; the default locale is

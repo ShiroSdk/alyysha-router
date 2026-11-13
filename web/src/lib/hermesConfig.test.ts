@@ -1,11 +1,11 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 import { describe, expect, it } from 'bun:test'
 import {
   activeRoleModels,
   hermesConfigYaml,
   hermesEnvContent,
   hermesHomeDir,
-  isKnown9RouterEndpoint,
+  isKnownAlyyshaEndpoint,
   normalizeHermesEndpoint,
   profileStatus,
   type HermesProfileSummary,
@@ -47,25 +47,25 @@ describe('normalizeHermesEndpoint', () => {
   })
 })
 
-describe('isKnown9RouterEndpoint', () => {
+describe('isKnownAlyyshaEndpoint', () => {
   it('accepts the local origin, with or without /v1', () => {
-    expect(isKnown9RouterEndpoint(LOCAL, ctx)).toBe(true)
-    expect(isKnown9RouterEndpoint(`${LOCAL}/v1`, ctx)).toBe(true)
+    expect(isKnownAlyyshaEndpoint(LOCAL, ctx)).toBe(true)
+    expect(isKnownAlyyshaEndpoint(`${LOCAL}/v1`, ctx)).toBe(true)
   })
 
   it('accepts the tunnel, Tailscale and configured public endpoints', () => {
-    expect(isKnown9RouterEndpoint('https://abc.trycloudflare.com', ctx)).toBe(true)
-    expect(isKnown9RouterEndpoint('http://box.tail1234.ts.net', ctx)).toBe(true)
-    expect(isKnown9RouterEndpoint('https://gw.example.com', { ...ctx, publicEndpoints: ['https://gw.example.com'] })).toBe(true)
+    expect(isKnownAlyyshaEndpoint('https://abc.trycloudflare.com', ctx)).toBe(true)
+    expect(isKnownAlyyshaEndpoint('http://box.tail1234.ts.net', ctx)).toBe(true)
+    expect(isKnownAlyyshaEndpoint('https://gw.example.com', { ...ctx, publicEndpoints: ['https://gw.example.com'] })).toBe(true)
   })
 
   it('rejects a foreign provider URL — applying it everywhere would leak the key', () => {
-    expect(isKnown9RouterEndpoint('https://openrouter.ai/api/v1', ctx)).toBe(false)
-    expect(isKnown9RouterEndpoint('http://10.0.0.9:20130', ctx)).toBe(false)
+    expect(isKnownAlyyshaEndpoint('https://openrouter.ai/api/v1', ctx)).toBe(false)
+    expect(isKnownAlyyshaEndpoint('http://10.0.0.9:20130', ctx)).toBe(false)
   })
 
   it('rejects an empty endpoint', () => {
-    expect(isKnown9RouterEndpoint('  ', ctx)).toBe(false)
+    expect(isKnownAlyyshaEndpoint('  ', ctx)).toBe(false)
   })
 })
 
@@ -75,16 +75,16 @@ const profile = (over: Partial<HermesProfileSummary> = {}): HermesProfileSummary
   displayName: null,
   command: 'hermes -p work',
   baseUrl: null,
-  has9Router: false,
+  hasAlyysha: false,
   ...over,
 })
 
 describe('profileStatus', () => {
-  it('is configured when the backend flagged it as 9router-wired', () => {
-    expect(profileStatus(profile({ has9Router: true }), ctx)).toBe('configured')
+  it('is configured when the backend flagged it as alyysha-wired', () => {
+    expect(profileStatus(profile({ hasAlyysha: true }), ctx)).toBe('configured')
   })
 
-  it('is configured when its base_url points at a known 9router endpoint', () => {
+  it('is configured when its base_url points at a known alyysha endpoint', () => {
     expect(profileStatus(profile({ baseUrl: `${LOCAL}/v1` }), ctx)).toBe('configured')
   })
 
@@ -135,6 +135,6 @@ describe('hermesConfigYaml', () => {
 
 describe('hermesEnvContent', () => {
   it('exports the key the yaml references by name', () => {
-    expect(hermesEnvContent('sk-9router-local-token')).toBe('OPENAI_API_KEY=sk-9router-local-token\n')
+    expect(hermesEnvContent('sk-alyysha-local-token')).toBe('OPENAI_API_KEY=sk-alyysha-local-token\n')
   })
 })

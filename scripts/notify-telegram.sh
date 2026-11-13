@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+# Alyysha Router — built by YannClipper — https://t.me/YannClippers
 #
 # Telegram release notification — format a message and post it to a group.
 #
@@ -95,13 +95,13 @@ if [ -z "$entries" ]; then
   entries="$(grep -E '^[-*] ' "$NOTES_FILE" | head -"$ENTRIES" || true)"
 fi
 
-release_url="https://github.com/yanstd888/9routerx/releases/tag/${TAG}"
-docker_image="${DOCKER_IMAGE:-ghcr.io/yanstd888/9routerx}"
+release_url="https://github.com/ShiroSdk/alyysha-router/releases/tag/${TAG}"
+docker_image="${DOCKER_IMAGE:-ghcr.io/ShiroSdk/alyysha-router}"
 
 # A prerelease must not read like a stable install: it is absent from `latest`,
 # so anyone pulling `latest` still gets the previous version.
 if echo "$TAG" | grep -q -- '-'; then
-  headline="🧪 Experimental build — not on latest, and '9routerx update' will not offer it to a stable install."
+  headline="🧪 Experimental build — not on latest, and 'alyysha update' will not offer it to a stable install."
 else
   headline="✅ Stable release"
 fi
@@ -109,7 +109,7 @@ fi
 # No Markdown markers here on purpose: this goes out as plain text (see the
 # curl call below), so a `*` or a backtick would reach the group as a literal
 # asterisk rather than as emphasis.
-message="🚀 9routerx ${TAG}
+message="🚀 alyysha ${TAG}
 ${headline}
 "
 if [ -n "$entries" ]; then

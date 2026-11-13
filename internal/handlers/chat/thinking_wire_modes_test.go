@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -6,7 +6,7 @@ import (
 	"reflect"
 	"testing"
 
-	"9routerx/proxy/internal/thinking"
+	"alyysha/proxy/internal/thinking"
 )
 
 // TestInjectProviderThinkingDialectKeys dispositions the operator-override keys

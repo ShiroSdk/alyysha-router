@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/codexquota"
+	"alyysha/proxy/internal/codexquota"
 )
 
 func TestFetchCodexUsage_RendersBothWindows(t *testing.T) {

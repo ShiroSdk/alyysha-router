@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package middleware
 
 import (
@@ -8,10 +8,10 @@ import (
 	"os"
 	"testing"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/dbtest"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/keikey"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/dbtest"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/keikey"
 )
 
 // newHashTestRepo builds a database with the real schema and no seeded keys,

@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -9,13 +9,13 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/guardrails"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/middleware"
-	"9routerx/proxy/internal/models"
-	"9routerx/proxy/internal/observ"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/guardrails"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/middleware"
+	"alyysha/proxy/internal/models"
+	"alyysha/proxy/internal/observ"
+	"alyysha/proxy/internal/translator"
 )
 
 // resolveGuardrailEngine returns the engine for this key and model, or nil when

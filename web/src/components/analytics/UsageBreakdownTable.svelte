@@ -1,4 +1,4 @@
-<!-- 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   import Badge from '../../lib/ui/Badge.svelte'
   import Card from '../../lib/ui/Card.svelte'
@@ -153,7 +153,7 @@
     }`
   }
 
-  // TASK-9routerX-shadcn-dashboard §1: the tremor-style inline mini-bar under
+  // TASK-alyyshaX-shadcn-dashboard §1: the tremor-style inline mini-bar under
   // each numeric cell — the row's share of the column maximum, so the eye
   // reads the distribution before the numbers. Purely visual: it reads the
   // same rows the sort produces. 0 shares render nothing (a 0-value row has

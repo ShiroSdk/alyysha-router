@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package db
 
 import (
@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"strings"
 
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/models"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/models"
 )
 
 // errNoSuchApiKey signals an update that matched no row.
@@ -57,7 +57,7 @@ const apiKeyColumnsPerKey = apiKeyColumns + `,
 // table in hand carries. The levels stack: a table that answers the per-key
 // read also carries the budget columns, and a budget table also carries the
 // base ones. The level exists because the gateway runs against databases it
-// did not create — a shared 9Router Pro file may predate either set — and a
+// did not create — a shared Alyysha Pro file may predate either set — and a
 // key read must degrade to the columns the table actually has rather than
 // failing every listing.
 type apiKeySchemaLevel int

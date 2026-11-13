@@ -1,9 +1,9 @@
-<!-- 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   /**
    * Hermes per-profile configuration card.
    *
-   * Port of upstream decolua/9router
+   * Port of upstream decolua/alyysha
    * `src/app/(dashboard)/dashboard/cli-tools/components/HermesToolCard.js`
    * (PR #4660), re-expressed with Svelte 5 runes and this repo's design
    * tokens. Upstream picks models through a `ModelSelectModal` driven by the
@@ -31,7 +31,7 @@
     hermesConfigYaml,
     hermesEnvContent,
     hermesHomeDir,
-    isKnown9RouterEndpoint,
+    isKnownAlyyshaEndpoint,
     normalizeHermesEndpoint,
     profileStatus,
     type EndpointContext,
@@ -193,10 +193,10 @@
   // at, so it can hold a foreign provider URL; propagating that (and its key)
   // to every profile would be a mistake. Hence the known-endpoint guard.
   async function handleApplyAll() {
-    if (!isKnown9RouterEndpoint(effectiveEndpoint, endpointContext)) {
+    if (!isKnownAlyyshaEndpoint(effectiveEndpoint, endpointContext)) {
       message = {
         type: 'error',
-        text: `"${effectiveEndpoint}" is not a 9RouterX endpoint. Select the local, tunnel, Tailscale or a saved 9router endpoint before applying to all profiles.`,
+        text: `"${effectiveEndpoint}" is not a Alyysha Router endpoint. Select the local, tunnel, Tailscale or a saved alyysha endpoint before applying to all profiles.`,
       }
       return
     }
@@ -422,7 +422,7 @@
             type="button"
             onclick={handleApplyAll}
             disabled={applyingAll}
-            title="Set the endpoint and API key on every profile that routes through 9RouterX. Each profile keeps its own model."
+            title="Set the endpoint and API key on every profile that routes through Alyysha Router. Each profile keeps its own model."
             class="flex items-center gap-1.5 px-3 py-1.5 rounded-[10px] bg-surface-2 hover:bg-surface-3 text-text-main border border-border font-semibold text-xs disabled:opacity-50 cursor-pointer"
           >
             <Layers class="w-3.5 h-3.5" />Apply to All Profiles
@@ -431,7 +431,7 @@
         <button
           type="button"
           onclick={handleReset}
-          disabled={!settings.has9Router || resetting}
+          disabled={!settings.hasAlyysha || resetting}
           class="flex items-center gap-1.5 px-3 py-1.5 rounded-[10px] border border-border text-text-main font-semibold text-xs disabled:opacity-50 cursor-pointer"
         >
           <RotateCcw class="w-3.5 h-3.5" />Reset

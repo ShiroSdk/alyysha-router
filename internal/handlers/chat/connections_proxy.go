@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -8,8 +8,8 @@ import (
 	"strings"
 	"sync"
 
-	"9routerx/proxy/internal/log"
-	internalproxy "9routerx/proxy/internal/proxy"
+	"alyysha/proxy/internal/log"
+	internalproxy "alyysha/proxy/internal/proxy"
 )
 
 // maxProxyClients caps rotating-proxy growth: each entry pins a Transport
@@ -75,7 +75,7 @@ func (h *ChatHandler) getClientForConnection(connData *ConnectionData) (*http.Cl
 	strictProxy := connData.StrictProxy
 	// Whether the operator meant this connection to leave through a proxy at
 	// all. Upstream gates its strictProxy refusal on exactly this
-	// (decolua/9router#4333): executors such as Qoder set strictProxy to mean
+	// (decolua/alyysha#4333): executors such as Qoder set strictProxy to mean
 	// "do not replay this request directly if the proxy fails" — a replayed
 	// COSY signature answers 403 — not "a proxy must exist". With nothing
 	// configured those callers must keep working direct, so a strict flag

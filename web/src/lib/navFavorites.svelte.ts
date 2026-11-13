@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // The pinned sidebar entries, mirrored for the components outside the sidebar
 // itself — the command palette offers "pin this" next to a nav result, and the
 // sidebar draws the section. The list is a per-operator preference, so it lives
@@ -15,7 +15,7 @@ import {
 
 let pinned = $state<string[]>([])
 
-const PINNED_KEY = '9routerx-nav-pinned'
+const PINNED_KEY = 'alyysha-nav-pinned'
 
 function read(): unknown {
   if (typeof localStorage === 'undefined') return []

@@ -1,6 +1,6 @@
 //go:build integration
 
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package integration
 
 import (
@@ -13,8 +13,8 @@ import (
 
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/proxy"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/proxy"
+	"alyysha/proxy/internal/translator"
 )
 
 // A keyless live call to the OpenCode free tier.
@@ -27,7 +27,7 @@ import (
 //
 // Two consequences:
 //
-//   - It is opt-in via 9ROUTERX_LIVE_OPENCODE=1. CI never sets it, so a run
+//   - It is opt-in via ALYYSHA_LIVE_OPENCODE=1. CI never sets it, so a run
 //     without the variable skips instead of reaching the network.
 //   - A refusal from the provider is not this gateway's defect. The free tier
 //     is shared and rate limited per IP, so 403/429/5xx skip with the body
@@ -36,9 +36,9 @@ import (
 //
 // Run it with:
 //
-//	9ROUTERX_LIVE_OPENCODE=1 go test -tags=integration ./internal/integration/ \
+//	ALYYSHA_LIVE_OPENCODE=1 go test -tags=integration ./internal/integration/ \
 //	    -run TestLiveOpenCode -v
-const liveOpenCodeEnv = "9ROUTERX_LIVE_OPENCODE"
+const liveOpenCodeEnv = "ALYYSHA_LIVE_OPENCODE"
 
 func liveOpenCodeEnabled() bool {
 	switch strings.ToLower(strings.TrimSpace(os.Getenv(liveOpenCodeEnv))) {

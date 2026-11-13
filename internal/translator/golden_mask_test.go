@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package translator
 
 // golden_mask_test.go pins the PII masking output (FASE 8 task 1).
@@ -25,7 +25,7 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/guardrails"
+	"alyysha/proxy/internal/guardrails"
 )
 
 var updateGolden = flag.Bool("update-golden", false,

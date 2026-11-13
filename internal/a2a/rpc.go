@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package a2a
 
 import (
@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"time"
 
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/db"
 )
 
 // usageWindowDays is the window usage-report aggregates over. A week matches

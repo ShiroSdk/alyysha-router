@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Package gcf implements generative context folding: a lossless tabular
 // compaction for JSON arrays of objects, ported from the OmniRoute GCF
 // feature. Repeated keys collapse into one header line and every row becomes

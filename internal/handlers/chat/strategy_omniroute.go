@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -11,10 +11,10 @@ import (
 	"sync"
 	"time"
 
-	"9routerx/proxy/internal/models"
-	"9routerx/proxy/internal/pricing"
-	"9routerx/proxy/internal/resilience"
-	"9routerx/proxy/internal/routing"
+	"alyysha/proxy/internal/models"
+	"alyysha/proxy/internal/pricing"
+	"alyysha/proxy/internal/resilience"
+	"alyysha/proxy/internal/routing"
 )
 
 // strategy_omniroute.go wires the four omniroute routing strategies into the

@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -6,10 +6,10 @@ import (
 	"sync"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/middleware"
-	"9routerx/proxy/internal/observ"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/middleware"
+	"alyysha/proxy/internal/observ"
 )
 
 // Per-custom-provider capacity limits, request side — docs/provider-limits-plan.md.

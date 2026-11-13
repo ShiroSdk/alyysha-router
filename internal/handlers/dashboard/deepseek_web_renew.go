@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -7,10 +7,10 @@ import (
 	"net/http"
 	"time"
 
-	"9routerx/proxy/internal/browserlogin"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/proxy/executor"
+	"alyysha/proxy/internal/browserlogin"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/proxy/executor"
 )
 
 // The renewal of a DeepSeek Web credential.

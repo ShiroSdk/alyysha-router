@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package updater
 
 import (
@@ -52,7 +52,7 @@ func TestParityForkFallbackStaysOnConfiguredRepository(t *testing.T) {
 		githubReleasesAPI, CurrentVersion = oldAPI, oldVersion
 	})
 	digest := strings.Repeat("a", 64)
-	asset := "9routerx_" + runtime.GOOS + "_" + runtime.GOARCH
+	asset := "alyysha_" + runtime.GOOS + "_" + runtime.GOARCH
 	var base string
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
@@ -126,7 +126,7 @@ func TestParityHalfConfiguredChannelStillChecks(t *testing.T) {
 
 	t.Run("repo only", func(t *testing.T) {
 		digest := strings.Repeat("a", 64)
-		asset := "9routerx_" + runtime.GOOS + "_" + runtime.GOARCH
+		asset := "alyysha_" + runtime.GOOS + "_" + runtime.GOARCH
 		var base string
 		srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			switch r.URL.Path {

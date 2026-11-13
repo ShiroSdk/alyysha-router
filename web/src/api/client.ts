@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 export interface DatabaseStats {
   databaseSizeBytes: number
   reclaimableBytes: number
@@ -16,7 +16,7 @@ export interface PruneUsageResult {
   carriedTokens?: number
   cutoff: string
 }
-// Typed API client for the 9RouterX native dashboard
+// Typed API client for the Alyysha Router native dashboard
 
 export interface ProviderConnection {
   id: string
@@ -591,7 +591,7 @@ export interface TunnelStatusResponse {
   }
 }
 
-// --- Hermes per-profile configuration (upstream decolua/9router#4660) ---
+// --- Hermes per-profile configuration (upstream decolua/alyysha#4660) ---
 
 /** One Hermes profile as reported by `GET /api/cli-tools/hermes-profiles`. */
 export interface HermesProfile {
@@ -603,7 +603,7 @@ export interface HermesProfile {
   alias: string | null
   model: string | null
   baseUrl: string | null
-  has9Router: boolean
+  hasAlyysha: boolean
 }
 
 export interface HermesProfilesResponse {
@@ -642,7 +642,7 @@ export interface HermesSettingsResponse {
   installed: boolean
   profile?: { name: string; dir: string; isDefault: boolean }
   settings: HermesSettings | null
-  has9Router?: boolean
+  hasAlyysha?: boolean
   configPath?: string
   message?: string
 }
@@ -1219,7 +1219,7 @@ export interface CompressionAnalyticsSummary {
   roiTokensPerMs?: number
   topSavers?: CompressionTopSaver[]
 }
-/** Jailbreak: the default injected document (upstream decolua/9router parity). */
+/** Jailbreak: the default injected document (upstream decolua/alyysha parity). */
 export interface JailbreakDoc {
   prompt: string
   geminiSafety: boolean
@@ -1298,7 +1298,7 @@ export interface JailbreakMatch {
 
 export function isAuthenticated(): boolean {
   if (typeof window === 'undefined') return false
-  if (sessionStorage.getItem('9routerx_auth') === 'true' || localStorage.getItem('9routerx_auth') === 'true') {
+  if (sessionStorage.getItem('alyysha_auth') === 'true' || localStorage.getItem('alyysha_auth') === 'true') {
     return true
   }
   if (typeof document !== 'undefined' && document.cookie.includes('auth_token=')) {
@@ -1315,7 +1315,7 @@ export function isUsableAPIKey(value: string): boolean {
 
 export function getStoredAPIKey(): string {
   if (typeof localStorage === 'undefined') return ''
-  const value = (localStorage.getItem('9routerx_key') || '').trim()
+  const value = (localStorage.getItem('alyysha_key') || '').trim()
   return isUsableAPIKey(value) ? value : ''
 }
 
@@ -1407,11 +1407,11 @@ export function handleUnauthorized(path?: string) {
 
   // Clear stale local auth session tokens and invalid stored keys
   if (typeof sessionStorage !== 'undefined') {
-    sessionStorage.removeItem('9routerx_auth')
+    sessionStorage.removeItem('alyysha_auth')
   }
   if (typeof localStorage !== 'undefined') {
-    localStorage.removeItem('9routerx_auth')
-    localStorage.removeItem('9routerx_key')
+    localStorage.removeItem('alyysha_auth')
+    localStorage.removeItem('alyysha_key')
   }
 
   // Debounce multiple concurrent 401 responses
@@ -2420,13 +2420,13 @@ export const api = {
       }
     } catch {}
     try {
-      const res = await fetch('https://raw.githubusercontent.com/yanstd888/9routerx/main/CHANGELOG.md')
+      const res = await fetch('https://raw.githubusercontent.com/ShiroSdk/alyysha-router/main/CHANGELOG.md')
       if (res.ok) {
         const text = await res.text()
         if (text && text.trim().length > 0) return text
       }
     } catch {}
-    const res = await fetch('https://raw.githubusercontent.com/decolua/9router/refs/heads/master/CHANGELOG.md')
+    const res = await fetch('https://raw.githubusercontent.com/decolua/alyysha/refs/heads/master/CHANGELOG.md')
     if (!res.ok) throw new Error(`HTTP ${res.status}`)
     return await res.text()
   },
@@ -2672,7 +2672,7 @@ export const api = {
 
   // CLI Tools status
   getCliToolsStatuses: () =>
-    request<Record<string, { installed?: boolean; version?: string | null; has9Router?: boolean } | null>>(
+    request<Record<string, { installed?: boolean; version?: string | null; hasAlyysha?: boolean } | null>>(
       '/api/cli-tools/all-statuses'
     ).catch(() => ({})),
 
@@ -2685,7 +2685,7 @@ export const api = {
     request<HermesSettingsResponse>(
       `/api/cli-tools/hermes-settings${profile ? `?profile=${encodeURIComponent(profile)}` : ''}`
     ),
-  // `applyToAll` carries the endpoint to every 9router-wired profile; the
+  // `applyToAll` carries the endpoint to every alyysha-wired profile; the
   // client splits it out because the two shapes share one endpoint.
   applyHermesSettings: (payload: HermesApplyPayload) =>
     request<HermesApplyResponse>('/api/cli-tools/hermes-settings', {
@@ -2746,8 +2746,8 @@ export const api = {
       const data = await res.json()
       // The server sets the httpOnly auth_token cookie; this flag only drives
       // the client-side gate (isAuthenticated) since JS cannot read it.
-      sessionStorage.setItem('9routerx_auth', 'true')
-      localStorage.setItem('9routerx_auth', 'true')
+      sessionStorage.setItem('alyysha_auth', 'true')
+      localStorage.setItem('alyysha_auth', 'true')
       return { success: true, mustChangePassword: !!data.mustChangePassword }
     }
     let errText = 'Invalid password'
@@ -2827,8 +2827,8 @@ export const api = {
       // Server-side revocation is best-effort: if it cannot be reached the
       // local session must still be cleared and the user signed out.
     }
-    sessionStorage.removeItem('9routerx_auth')
-    localStorage.removeItem('9routerx_auth')
+    sessionStorage.removeItem('alyysha_auth')
+    localStorage.removeItem('alyysha_auth')
   },
   // Jailbreak
   getJailbreak: () => request<JailbreakDoc>('/api/jailbreak'),

@@ -1,10 +1,10 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package tray
 
 import (
 	"fmt"
 
-	"9routerx/proxy/internal/service"
+	"alyysha/proxy/internal/service"
 )
 
 // Actions is the seam the GUI layer calls. Each method is one menu item, so the

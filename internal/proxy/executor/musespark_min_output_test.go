@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
@@ -175,7 +175,7 @@ func TestNormalizeMuseSparkResponsesBodyAppliesTheFloor(t *testing.T) {
 }
 
 // TestNormalizeMuseSparkResponsesBodyHonoursTheEffortSuffix covers the second
-// half of the port: the "(level)" the client appends to the model id is 9router
+// half of the port: the "(level)" the client appends to the model id is alyysha
 // request notation and never reaches the wire, but the intent must not be lost
 // with it. Fill-only precedence — an effort the body states explicitly is left
 // exactly as the caller wrote it.

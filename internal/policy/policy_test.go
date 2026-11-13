@@ -1,12 +1,12 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package policy
 
 import (
 	"errors"
 	"testing"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/models"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/models"
 )
 
 // stubPlans is a PlanSource that answers from a map, or fails on demand.

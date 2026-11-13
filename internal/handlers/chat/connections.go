@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -15,16 +15,16 @@ import (
 	"sync/atomic"
 	"time"
 
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/models"
-	"9routerx/proxy/internal/providers"
-	internalproxy "9routerx/proxy/internal/proxy"
-	"9routerx/proxy/internal/proxy/oauth"
-	"9routerx/proxy/internal/translator"
-	"9routerx/proxy/internal/updater"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/models"
+	"alyysha/proxy/internal/providers"
+	internalproxy "alyysha/proxy/internal/proxy"
+	"alyysha/proxy/internal/proxy/oauth"
+	"alyysha/proxy/internal/translator"
+	"alyysha/proxy/internal/updater"
 )
 
 // CredentialFallbacks maps search/tool providers to the primary chat provider whose API key can be reused.
@@ -450,7 +450,7 @@ func (h *ChatHandler) getBestConnectionWithContext(ctx context.Context, provider
 			// The operator asked for traffic to keep flowing while every
 			// account is cooling down, so take the account that frees up
 			// first instead of failing the client turn outright
-			// (upstream decolua/9router PR #130).
+			// (upstream decolua/alyysha PR #130).
 			forced, until, ok := h.forceMinCooldownConnection(provider, inCooldown, excludeSet, model, settings)
 			if ok {
 				conn = forced
@@ -808,7 +808,7 @@ func (h *ChatHandler) resolveEdgeRelay(connData *ConnectionData) (relayURL, noPr
 	return relayURL, noProxy
 }
 
-// withClineIdentity stamps the 9Router client identity onto cline/clinepass
+// withClineIdentity stamps the Alyysha client identity onto cline/clinepass
 // configs (upstream buildClineHeaders). The version comes from the linked
 // binary; the registry literal cannot carry it (import cycle), so it is
 // applied here per request on the already-cloned config.

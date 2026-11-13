@@ -10,10 +10,10 @@ Issues and pull requests use templates, so pick the right one rather than openin
 a blank report:
 
 - **Bug report** — something behaves incorrectly. Include a reproduction,
-  `9routerx version`, OS, and the log excerpt around the failure.
+  `alyysha version`, OS, and the log excerpt around the failure.
 - **Feature request** — the problem you cannot solve today, the surface it
   touches, and whether upstream already has it.
-- **Upstream parity** — a behaviour `decolua/9router` has that this gateway does
+- **Upstream parity** — a behaviour `decolua/alyysha` has that this gateway does
   not; link the upstream commit or PR.
 - **Question** — configuration and usage help.
 
@@ -29,7 +29,7 @@ make vet-svelte
 
 ## Before writing code
 
-Read [`AGENTS.md`](https://github.com/yanstd888/9routerx/blob/main/AGENTS.md).
+Read [`AGENTS.md`](https://github.com/ShiroSdk/alyysha-router/blob/main/AGENTS.md).
 Provider isolation and the Go/Svelte conventions there are enforced by review.
 
 ## Branches and PRs
@@ -38,7 +38,7 @@ Every PR targets `main`. Branch from a clean `origin/main`:
 
 ```bash
 git fetch origin
-git worktree add ../9routerx-<slug> -b fix/<slug> origin/main
+git worktree add ../alyysha-<slug> -b fix/<slug> origin/main
 ```
 
 ## Changelog

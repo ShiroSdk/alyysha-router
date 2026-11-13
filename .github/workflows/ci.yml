@@ -1,4 +1,4 @@
-# 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+# Alyysha Router — built by YannClipper — https://t.me/YannClippers
 name: CI
 
 on:
@@ -285,22 +285,22 @@ jobs:
         run: go test ./... -v
 
       # The binary is built with Go's default -pgo=auto, which silently stops
-      # applying cmd/9routerx/default.pgo the moment that file is renamed,
+      # applying cmd/alyysha/default.pgo the moment that file is renamed,
       # gitignored, .dockerignore'd, or a -pgo=off flag creeps in. Nothing about
       # the build would fail — it would just quietly get slower, so the flag is
       # asserted here instead of trusted.
       - name: Build
-        run: go build -ldflags="-s -w" -o /tmp/9routerx ./cmd/9routerx/
+        run: go build -ldflags="-s -w" -o /tmp/alyysha ./cmd/alyysha/
 
       - name: Assert PGO is applied
         run: |
-          go version -m /tmp/9routerx | grep -q -- '-pgo=' || {
+          go version -m /tmp/alyysha | grep -q -- '-pgo=' || {
             echo "::error::PGO profile not applied to the release binary."
-            echo "Check that cmd/9routerx/default.pgo is committed and that"
+            echo "Check that cmd/alyysha/default.pgo is committed and that"
             echo "no build step passes -pgo=off."
             exit 1
           }
-          go version -m /tmp/9routerx | grep -- '-pgo='
+          go version -m /tmp/alyysha | grep -- '-pgo='
 
       # Every gate above is structurally blind to the DOM. `tsc` reads types,
       # `vite build` bundles, the ratchet counts diagnostics, and `go test`
@@ -310,7 +310,7 @@ jobs:
       # dropped the confirm() on delete and regenerate, and every gate stayed
       # green. This job drives the real binary in a real browser.
       - name: Build binary for E2E
-        run: go build -o 9routerx ./cmd/9routerx/
+        run: go build -o alyysha ./cmd/alyysha/
 
       - name: Install Chromium
         working-directory: web
@@ -365,7 +365,7 @@ jobs:
       # platform where systray needs no cgo or pkg-config, so the build that
       # proves the file still compiles is free here and exists nowhere else.
       - name: Build tray binary
-        run: go build -o /dev/null ./cmd/9routerx-tray/
+        run: go build -o /dev/null ./cmd/alyysha-tray/
 
   # The `test` job above runs `go test ./...` without -race, so a data race
   # could merge green and only surface on a user's machine under load. The
@@ -463,7 +463,7 @@ jobs:
         run: go test -tags=integration -race -count=1 -timeout 10m ./internal/integration/... -v
 
   # The Dockerfile was only ever built by release.yml, on a tag. Every breakage
-  # it can suffer — a .dockerignore entry that swallows cmd/9routerx/, a
+  # it can suffer — a .dockerignore entry that swallows cmd/alyysha/, a
   # go.mod bump that misses a stage, web/embed.go failing on a missing dist —
   # stayed invisible until a release, where the only fix is re-tagging. This
   # job builds the image on every PR and pushes nothing.
@@ -481,7 +481,7 @@ jobs:
           context: .
           platforms: linux/amd64
           load: true
-          tags: 9routerx:ci
+          tags: alyysha:ci
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -492,13 +492,13 @@ jobs:
       # Docker build context.
       - name: Assert PGO survived the Docker build context
         run: |
-          cid=$(docker create 9routerx:ci)
-          docker cp "$cid":/usr/local/bin/9routerx /tmp/from-image
+          cid=$(docker create alyysha:ci)
+          docker cp "$cid":/usr/local/bin/alyysha /tmp/from-image
           docker rm "$cid" >/dev/null
           go version -m /tmp/from-image | grep -q -- '-pgo=' || {
             echo "::error::PGO profile missing inside the Docker image."
             echo "Check .dockerignore for an entry that would drop"
-            echo "cmd/9routerx/default.pgo from the build context."
+            echo "cmd/alyysha/default.pgo from the build context."
             exit 1
           }
           go version -m /tmp/from-image | grep -- '-pgo='
@@ -599,12 +599,12 @@ jobs:
                 ;;
             esac
           }
-          check 9routerx-linux-amd64        linux/amd64   "x86-64"
-          check 9routerx-linux-arm64        linux/arm64   "aarch64"
-          check 9routerx-darwin-amd64       darwin/amd64  "Mach-O 64-bit x86_64"
-          check 9routerx-darwin-arm64       darwin/arm64  "Mach-O 64-bit arm64"
-          check 9routerx-windows-amd64.exe  windows/amd64 "PE32+"
-          check 9routerx-tray-windows-amd64.exe windows/amd64 "PE32+"
+          check alyysha-linux-amd64        linux/amd64   "x86-64"
+          check alyysha-linux-arm64        linux/arm64   "aarch64"
+          check alyysha-darwin-amd64       darwin/amd64  "Mach-O 64-bit x86_64"
+          check alyysha-darwin-arm64       darwin/arm64  "Mach-O 64-bit arm64"
+          check alyysha-windows-amd64.exe  windows/amd64 "PE32+"
+          check alyysha-tray-windows-amd64.exe windows/amd64 "PE32+"
           exit "$fail"
 
       # The updater verifies a download against SHA256SUMS.txt before it renames
@@ -614,9 +614,9 @@ jobs:
       - name: Assert SHA256SUMS covers every artifact
         run: |
           set -euo pipefail
-          for f in 9routerx-linux-amd64 9routerx-linux-arm64 \
-                   9routerx-darwin-amd64 9routerx-darwin-arm64 \
-                   9routerx-windows-amd64.exe 9routerx-tray-windows-amd64.exe; do
+          for f in alyysha-linux-amd64 alyysha-linux-arm64 \
+                   alyysha-darwin-amd64 alyysha-darwin-arm64 \
+                   alyysha-windows-amd64.exe alyysha-tray-windows-amd64.exe; do
             grep -q "  $f\$" SHA256SUMS.txt || {
               echo "::error::SHA256SUMS.txt has no entry for $f"
               exit 1

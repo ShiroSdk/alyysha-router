@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
@@ -6,7 +6,7 @@ import (
 	"slices"
 	"strings"
 
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/providers"
 )
 
 // Claude decides whether the thinking *text* comes back at all, not just

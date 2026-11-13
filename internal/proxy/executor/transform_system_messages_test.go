@@ -1,9 +1,9 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import "testing"
 
-// decolua/9router#4813: the Responses API has no system role, so every system
+// decolua/alyysha#4813: the Responses API has no system role, so every system
 // and developer message collapses into the single `instructions` string. The
 // old code kept only the first non-empty one and silently discarded the rest,
 // so a client sending three system messages reached the model with one of them.

@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package semanticcache
 
 import (
@@ -8,8 +8,8 @@ import (
 	"io"
 	"strings"
 
-	"9routerx/proxy/internal/fastjson"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/fastjson"
+	"alyysha/proxy/internal/translator"
 )
 
 // BuildCacheKey generates a deterministic, collision-resistant cache key

@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package db
 
 import (
@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 func setupTestDB(t testing.TB) (*sql.DB, func()) {

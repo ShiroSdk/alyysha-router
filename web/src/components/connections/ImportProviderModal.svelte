@@ -1,7 +1,7 @@
-<!-- 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
-  // Import entry point. One modal for every share form: a 9routerx:// token, a
-  // .9routerx.json file, or the original /add#… URL. The codec decides which is
+  // Import entry point. One modal for every share form: a alyysha:// token, a
+  // .alyysha.json file, or the original /add#… URL. The codec decides which is
   // which — the operator pastes whatever they were given.
   //
   // Nothing is written here: the parsed links are handed to
@@ -41,7 +41,7 @@
   function parse() {
     parseError = ''
     if (!pasted.trim()) {
-      parseError = 'Paste a share link, a 9routerx:// token, or the contents of a .9routerx.json file.'
+      parseError = 'Paste a share link, a alyysha:// token, or the contents of a .alyysha.json file.'
       return
     }
     let links: ProviderShareLink[] | null
@@ -54,7 +54,7 @@
       return
     }
     if (!links || links.length === 0) {
-      parseError = `Not a share link. Expected ${SHARE_SCHEME}…, a /add#… URL, or a .9routerx.json body.`
+      parseError = `Not a share link. Expected ${SHARE_SCHEME}…, a /add#… URL, or a .alyysha.json body.`
       return
     }
     onImport(links)
@@ -73,7 +73,7 @@
         return
       }
       if (!links || links.length === 0) {
-        fileError = `${file.name} is not a share file. Expected ${SHARE_SCHEME}…, a /add#… URL, or a .9routerx.json body.`
+        fileError = `${file.name} is not a share file. Expected ${SHARE_SCHEME}…, a /add#… URL, or a .alyysha.json body.`
         return
       }
       onImport(links)
@@ -96,7 +96,7 @@
   {#snippet children()}
     <div class="flex flex-col gap-4">
       <p class="text-sm text-text-muted">
-        Paste a share link, or drop a <span class="font-mono">.9routerx.json</span> file. You will review every
+        Paste a share link, or drop a <span class="font-mono">.alyysha.json</span> file. You will review every
         provider before anything is written.
       </p>
 
@@ -105,7 +105,7 @@
         <textarea
           bind:value={pasted}
           rows={5}
-          placeholder={'9routerx://…\n— or —\nhttps://gateway/add#prov=…'}
+          placeholder={'alyysha://…\n— or —\nhttps://gateway/add#prov=…'}
           class="w-full rounded-[10px] border border-border-subtle bg-surface-2 px-3 py-2 font-mono text-xs text-text-main placeholder:text-text-muted focus:border-brand-500/40 focus:outline-none"
         ></textarea>
       </label>
@@ -126,7 +126,7 @@
         class="rounded-[10px] border-2 border-dashed p-4 text-center transition-colors {dragging ? 'border-brand-500 bg-brand-500/5' : 'border-border-subtle bg-surface-2/40'}"
       >
         <p class="text-xs text-text-muted">
-          Drop a <span class="font-mono">.9routerx.json</span> file here, or
+          Drop a <span class="font-mono">.alyysha.json</span> file here, or
           <button type="button" onclick={() => fileInput?.click()} class="cursor-pointer text-brand-500 underline">
             browse
           </button>
@@ -134,7 +134,7 @@
         <input
           bind:this={fileInput}
           type="file"
-          accept=".json,.9routerx,application/json,text/plain"
+          accept=".json,.alyysha,application/json,text/plain"
           class="hidden"
           onchange={(e) => {
             const file = e.currentTarget.files?.[0]
@@ -147,9 +147,9 @@
       <div class="rounded-lg border border-border-subtle bg-surface-2/40 p-3 text-xs text-text-muted">
         <p class="mb-1 font-medium text-text-main">Accepted forms</p>
         <ul class="flex list-disc flex-col gap-0.5 pl-4">
-          <li><span class="font-mono">9routerx://&lt;base64url&gt;</span> — one token, best for chat</li>
+          <li><span class="font-mono">alyysha://&lt;base64url&gt;</span> — one token, best for chat</li>
           <li><span class="font-mono">/add#prov=…</span> — the original URL form</li>
-          <li><span class="font-mono">.9routerx.json</span> — for many providers or a block of keys</li>
+          <li><span class="font-mono">.alyysha.json</span> — for many providers or a block of keys</li>
         </ul>
       </div>
     </div>

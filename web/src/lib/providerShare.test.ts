@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 import { describe, expect, it } from 'bun:test'
 import {
   applyModelFilters,
@@ -276,10 +276,10 @@ const baseLink = {
   models: 'auto' as const, prefix: 'a', name: 'A', note: '', type: 'openai-compatible', apiType: 'chat',
 }
 
-describe('9routerx:// scheme', () => {
+describe('alyysha:// scheme', () => {
   it('round-trips through base64url', () => {
     const token = encodeScheme([baseLink])
-    expect(token.startsWith('9routerx://')).toBe(true)
+    expect(token.startsWith('alyysha://')).toBe(true)
     expect(decodeScheme(token)).toEqual([baseLink])
   })
 
@@ -302,26 +302,26 @@ describe('9routerx:// scheme', () => {
 
   it('rejects an empty payload', () => {
     expect(() => encodeScheme([])).toThrow(/nothing to encode/)
-    expect(() => decodeScheme('9routerx://')).toThrow(/empty/)
+    expect(() => decodeScheme('alyysha://')).toThrow(/empty/)
   })
 
   it('rejects malformed base64', () => {
-    expect(() => decodeScheme('9routerx://not-base64!!')).toThrow(/not valid base64url/)
+    expect(() => decodeScheme('alyysha://not-base64!!')).toThrow(/not valid base64url/)
   })
 
   it('re-enforces the caps on decode', () => {
     const nine = Array.from({ length: 9 }, (_, i) => ({ ...baseLink, prov: `p${i}` }))
     const b64 = btoa(JSON.stringify({ version: 1, links: nine })).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')
-    expect(() => decodeScheme('9routerx://' + b64)).toThrow(/over the 8 limit/)
+    expect(() => decodeScheme('alyysha://' + b64)).toThrow(/over the 8 limit/)
   })
 
   it('accepts a bare array without the version wrapper', () => {
     const b64 = btoa(JSON.stringify([baseLink])).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')
-    expect(decodeScheme('9routerx://' + b64)).toEqual([baseLink])
+    expect(decodeScheme('alyysha://' + b64)).toEqual([baseLink])
   })
 })
 
-describe('.9routerx.json file', () => {
+describe('.alyysha.json file', () => {
   it('round-trips', () => {
     const text = encodeShareFile([baseLink, { ...baseLink, prov: 'anthropic-compatible-b', type: 'anthropic-compatible', apiType: '' }])
     const parsed = JSON.parse(text)
@@ -370,6 +370,6 @@ describe('parseShareInput — the unified entry point', () => {
   })
 
   it('throws for a malformed scheme token rather than returning null', () => {
-    expect(() => parseShareInput('9routerx://garbage!!')).toThrow()
+    expect(() => parseShareInput('alyysha://garbage!!')).toThrow()
   })
 })

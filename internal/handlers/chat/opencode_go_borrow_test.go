@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -6,7 +6,7 @@ import (
 	json "encoding/json/v2"
 	"testing"
 
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/db"
 )
 
 // The paid go lane shares its backend account with opencode-zen: with no go

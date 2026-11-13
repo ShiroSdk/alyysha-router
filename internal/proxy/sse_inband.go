@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package proxy
 
 import (
@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"strings"
 
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 // defaultInbandErrorStatus is reported when a provider-injected error event

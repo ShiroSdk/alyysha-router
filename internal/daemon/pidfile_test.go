@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package daemon
 
 import (
@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/proc"
+	"alyysha/proxy/internal/proc"
 )
 
 // pidLine renders a claim the way writePID does.
@@ -72,7 +72,7 @@ func TestRunningPIDReportsThisProcess(t *testing.T) {
 // parse error — but it carries nothing that can be checked, and an unverifiable
 // claim is not a running daemon.
 func TestParseClaim(t *testing.T) {
-	self := "/usr/local/bin/9routerx"
+	self := "/usr/local/bin/alyysha"
 
 	tests := []struct {
 		name string
@@ -81,8 +81,8 @@ func TestParseClaim(t *testing.T) {
 	}{
 		{
 			name: "executable path with spaces is preserved",
-			raw:  "20130 C:\\Program Files\\9RouterX\\9routerx.exe\n",
-			want: claim{pid: 20130, exePath: "C:\\Program Files\\9RouterX\\9routerx.exe"},
+			raw:  "20130 C:\\Program Files\\Alyysha Router\\alyysha.exe\n",
+			want: claim{pid: 20130, exePath: "C:\\Program Files\\Alyysha Router\\alyysha.exe"},
 		},
 		{
 			name: "pid with its executable verifies",

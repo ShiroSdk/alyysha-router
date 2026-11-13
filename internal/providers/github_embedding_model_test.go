@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package providers
 
 import (
@@ -6,7 +6,7 @@ import (
 	"testing"
 )
 
-// Upstream decolua/9router#4793 (commit 51a1827e) retired the GitHub Models
+// Upstream decolua/alyysha#4793 (commit 51a1827e) retired the GitHub Models
 // inference API (models.github.ai, retired 2026-07-30) and replaced the GitHub
 // embedding catalogue entry text-embedding-3-large with text-embedding-ada-002.
 // A stale id here is not cosmetic: /v1/models serves this catalogue, so the

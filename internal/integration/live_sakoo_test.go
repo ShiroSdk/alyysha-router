@@ -1,6 +1,6 @@
 //go:build integration
 
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package integration
 
 import (
@@ -13,7 +13,7 @@ import (
 	"sync"
 	"testing"
 
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/db"
 )
 
 // sakooLiveKey returns the live key or skips the test. Every test in this file

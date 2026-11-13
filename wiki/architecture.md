@@ -13,7 +13,7 @@ section: Under the Hood
        │ http://localhost:20128/v1
        ↓
 ┌─────────────────────────────────────────────┐
-│         9RouterX (Smart Router)           │
+│         Alyysha Router (Smart Router)           │
 │  • RTK Token Saver (cut tool_result tokens) │
 │  • Format translation (OpenAI ↔ Claude)     │
 │  • Quota tracking                           │
@@ -67,4 +67,4 @@ Each combo carries its own strategy:
 
 ## Further reading
 
-Full internals: [`ARCHITECTURE.md`](https://github.com/yanstd888/9routerx/blob/main/ARCHITECTURE.md).
+Full internals: [`ARCHITECTURE.md`](https://github.com/ShiroSdk/alyysha-router/blob/main/ARCHITECTURE.md).

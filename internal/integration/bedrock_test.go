@@ -1,6 +1,6 @@
 //go:build integration
 
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package integration
 
 import (
@@ -12,7 +12,7 @@ import (
 
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/providers"
 )
 
 // bedrockEventStream builds the AWS EventStream body Bedrock's

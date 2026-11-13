@@ -1,11 +1,11 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package providers
 
 import (
 	"slices"
 	"testing"
 
-	"9routerx/proxy/internal/pricing"
+	"alyysha/proxy/internal/pricing"
 )
 
 // Upstream 2026-10-26 batch ports:

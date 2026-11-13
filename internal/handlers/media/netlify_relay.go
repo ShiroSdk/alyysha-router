@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package media
 
 // Netlify relay helpers: the relay function bundle plus the digest-deploy
@@ -35,7 +35,7 @@ import (
 	"sync"
 	"time"
 
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 var (
@@ -54,7 +54,7 @@ const (
 	netlifyFunctionName = "relay"
 	netlifyFunctionPath = "/.netlify/functions/relay"
 
-	netlifyRelayUserAgent = "9Router"
+	netlifyRelayUserAgent = "Alyysha"
 )
 
 // Digest-deployed functions run no build step, so the bundle is served by the
@@ -131,8 +131,8 @@ const netlifyRelayCode = `exports.handler = async (event) => {
 `
 
 const netlifyIndexHTML = `<!doctype html>
-<html><head><meta charset="utf-8"><title>9Router Relay</title></head>
-<body><p>9Router relay function lives at <code>/.netlify/functions/relay</code>.</p></body></html>
+<html><head><meta charset="utf-8"><title>Alyysha Relay</title></head>
+<body><p>Alyysha relay function lives at <code>/.netlify/functions/relay</code>.</p></body></html>
 `
 
 // ─── Minimal stored (uncompressed) ZIP writer ───────────────────────────

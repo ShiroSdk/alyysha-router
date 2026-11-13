@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package providers
 
 import (
@@ -25,7 +25,7 @@ const upstreamLevelsFixtureVersion = "v0.5.109"
 // resolver intentionally answers differently from the captured tag. Each entry
 // names why, so the exemption can be deleted the moment it no longer holds.
 //
-// decolua/9router#4614 hoists the provider-qualified codebuddy-cn rows above
+// decolua/alyysha#4614 hoists the provider-qualified codebuddy-cn rows above
 // the unqualified `*deepseek-v4.*` glob, which changes what
 // codebuddy-cn/deepseek-v4.1-flash resolves to: the tag's answer is the
 // generic set, the PR's is codebuddy-cn's published set.

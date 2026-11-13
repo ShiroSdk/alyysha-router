@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
@@ -11,7 +11,7 @@ import (
 
 	"github.com/google/uuid"
 
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/providers"
 )
 
 // commandcodeParamsForTest runs buildCommandcodeBody and returns payload["params"]
@@ -562,7 +562,7 @@ func TestForwardCommandcodeRetriesTransient(t *testing.T) {
 
 // Two requests with no client session must not mint a fresh threadId each:
 // the upstream prompt cache is keyed on it, and a per-request random id
-// re-cached the whole prefix on every turn (decolua/9router#5006).
+// re-cached the whole prefix on every turn (decolua/alyysha#5006).
 func TestForwardCommandcodeThreadIDStableWithoutSession(t *testing.T) {
 	var seen []string
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

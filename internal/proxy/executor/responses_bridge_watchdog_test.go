@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/translator"
 )
 
 // stalledUpstream streams the answer and its finish_reason — the two chunks a

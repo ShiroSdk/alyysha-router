@@ -1,4 +1,4 @@
-<!-- 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   import { matchMemberRow, parseMember, sameProvider } from './comboMatch'
   import type { ActiveRequestItem, RecentRequestItem } from './types'
@@ -164,7 +164,7 @@
     <div class="cf-route">
       <div class="cf-chip" data-role="router" data-state={routeState}>
         <img src="/android-chrome-192x192.png" alt="" loading="lazy" decoding="async" />
-        <span>9RouterX</span>
+        <span>Alyysha Router</span>
       </div>
       <span class="cf-route-arrow" data-state={routeState} aria-hidden="true">
         <svg viewBox="0 0 40 12" preserveAspectRatio="none">

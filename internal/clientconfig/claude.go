@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package clientconfig
 
 import (
@@ -13,7 +13,7 @@ import (
 //
 // hasCompletedOnboarding is written but deliberately absent here: it records
 // that the user finished the onboarding flow, and a reset that cleared it would
-// send them through it again for no reason connected to 9router.
+// send them through it again for no reason connected to alyysha.
 var claudeEnvKeys = []string{
 	"ANTHROPIC_BASE_URL",
 	"ANTHROPIC_AUTH_TOKEN",

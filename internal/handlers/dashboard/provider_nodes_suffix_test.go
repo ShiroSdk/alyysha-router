@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -10,7 +10,7 @@ import (
 
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/db"
 )
 
 // The provider id of a custom node is the address every model, connection and

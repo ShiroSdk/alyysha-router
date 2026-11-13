@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'

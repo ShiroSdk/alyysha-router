@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package a2a
 
 import (
@@ -11,7 +11,7 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/db"
 )
 
 func setupA2ATestRepo(t *testing.T) *db.Repo {
@@ -75,8 +75,8 @@ func TestAgentCardShape(t *testing.T) {
 	if err := json.Unmarshal(rec.Body.Bytes(), &card); err != nil {
 		t.Fatalf("unmarshal: %v", err)
 	}
-	if card.Name != "9RouterX" {
-		t.Errorf("name = %q, want 9RouterX", card.Name)
+	if card.Name != "Alyysha Router" {
+		t.Errorf("name = %q, want Alyysha Router", card.Name)
 	}
 	if card.Description == "" {
 		t.Error("description empty")

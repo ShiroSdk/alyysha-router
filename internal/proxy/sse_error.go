@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package proxy
 
 import (
@@ -10,7 +10,7 @@ import (
 
 // SSEClientFormat picks the client wire format for a terminal frame emitted
 // after HTTP 200 already went out: the status code can no longer change, so
-// an abort is reportable only in-band (upstream decolua/9router 93001213).
+// an abort is reportable only in-band (upstream decolua/alyysha 93001213).
 type SSEClientFormat uint8
 
 const (

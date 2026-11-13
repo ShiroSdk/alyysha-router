@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package thinking
 
 import (
@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/providers"
 )
 
 // apply builds a fresh body, runs Apply, and returns it.

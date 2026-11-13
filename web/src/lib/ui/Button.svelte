@@ -1,6 +1,6 @@
-<!-- 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
-  // Port of decolua/9router src/shared/components/Button.js
+  // Port of decolua/alyysha src/shared/components/Button.js
   import type { Snippet } from 'svelte'
 
   type Variant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'quiet' | 'danger' | 'success'
@@ -43,7 +43,7 @@
     ghost: 'text-text-muted hover:bg-surface-2 hover:text-text-main',
     // quiet (TASK polish §2): borderless at rest like ghost, but the hairline
     // fades in on hover so a quiet row button still reads as a button. The
-    // shadow-sm utility consumes the per-theme --9x-shadow-sm token.
+    // shadow-sm utility consumes the per-theme --ay-shadow-sm token.
     quiet:
       'text-text-muted border border-transparent hover:text-text-main hover:bg-surface-2 hover:border-border shadow-sm hover:shadow-sm',
     danger: 'bg-danger hover:bg-danger/80 text-white shadow-sm disabled:bg-surface-3 disabled:text-text-muted',

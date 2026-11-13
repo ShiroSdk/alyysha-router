@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -10,12 +10,12 @@ import (
 
 	"github.com/google/uuid"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/keikey"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/middleware"
-	"9routerx/proxy/internal/models"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/keikey"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/middleware"
+	"alyysha/proxy/internal/models"
 )
 
 // HandleGetApiKeys handles GET /api/keys.

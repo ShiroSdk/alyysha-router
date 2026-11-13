@@ -1,8 +1,8 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
-	json "9routerx/proxy/internal/fastjson"
+	json "alyysha/proxy/internal/fastjson"
 	"bytes"
 	"context"
 	"errors"
@@ -12,13 +12,13 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/middleware"
-	internalproxy "9routerx/proxy/internal/proxy"
-	"9routerx/proxy/internal/proxy/executor"
-	"9routerx/proxy/internal/thinking"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/middleware"
+	internalproxy "alyysha/proxy/internal/proxy"
+	"alyysha/proxy/internal/proxy/executor"
+	"alyysha/proxy/internal/thinking"
+	"alyysha/proxy/internal/translator"
 )
 
 // responsesEndpoint labels the client-facing endpoint in usage logs.

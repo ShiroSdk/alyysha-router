@@ -1,4 +1,4 @@
-module 9routerx/proxy
+module alyysha/proxy
 
 go 1.27
 

@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package proxy
 
 import (
@@ -14,8 +14,8 @@ import (
 	"syscall"
 	"time"
 
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/netguard"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/netguard"
 )
 
 var (

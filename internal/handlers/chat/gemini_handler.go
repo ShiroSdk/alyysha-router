@@ -1,8 +1,8 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/log"
 	"bytes"
 	"context"
 	json "encoding/json/v2"
@@ -12,14 +12,14 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/handlers/shared"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/proxy"
-	"9routerx/proxy/internal/proxy/executor"
-	"9routerx/proxy/internal/proxy/oauth"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/handlers/shared"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/proxy"
+	"alyysha/proxy/internal/proxy/executor"
+	"alyysha/proxy/internal/proxy/oauth"
+	"alyysha/proxy/internal/translator"
 )
 
 // antigravityConnData resolves a connection's data blob for the Antigravity

@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package clientconfig
 
 import (
@@ -34,8 +34,8 @@ func TestX1BytePreservation(t *testing.T) {
 		{
 			name:   "toml",
 			format: FormatTOML,
-			src:    "# head\n[model_providers.9router]\nbase_url = \"https://old/v1\" # mid\nname = \"x\"\n# tail\n",
-			edit:   Edit{KeyPath: []string{"model_providers", "9router", "base_url"}, Value: "http://localhost:20128/v1"},
+			src:    "# head\n[model_providers.alyysha]\nbase_url = \"https://old/v1\" # mid\nname = \"x\"\n# tail\n",
+			edit:   Edit{KeyPath: []string{"model_providers", "alyysha", "base_url"}, Value: "http://localhost:20128/v1"},
 			oldVal: `"https://old/v1"`,
 		},
 		{

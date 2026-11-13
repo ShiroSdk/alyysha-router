@@ -4,11 +4,11 @@ order: 1
 section: Getting Started
 ---
 
-# 9RouterX
+# Alyysha Router
 
 **Never stop coding. Save 20-40% tokens with RTK + auto-fallback to FREE & cheap AI models.**
 
-9routerx is a single Go binary that serves both the proxy APIs and the dashboard — no Node.js at runtime. This page is the entry point to the whole wiki.
+alyysha is a single Go binary that serves both the proxy APIs and the dashboard — no Node.js at runtime. This page is the entry point to the whole wiki.
 
 ## Start here
 
@@ -28,7 +28,7 @@ section: Getting Started
 | See how data is stored | [Database](database.html) |
 | Run it in production | [Operations](operations.html) |
 | Configure everything in the dashboard | [Settings](settings.html) |
-| Compare with upstream 9Router | [Parity](parity.html) |
+| Compare with upstream Alyysha | [Parity](parity.html) |
 | See what was ported, and from where | [Advanced Features](advanced-features.html) |
 | Every CLI command and env var | [CLI](cli.html) |
 | Contribute | [Contributing](contributing.html) |
@@ -37,7 +37,7 @@ section: Getting Started
 ## Running in 30 seconds
 
 ```bash
-9routerx
+alyysha
 # Dashboard: http://localhost:20128 (initial password: 123456)
 ```
 
@@ -48,7 +48,7 @@ Dashboard → Providers → connect **Kiro AI** (≈50 free credits per month) o
 ## Which version am I on?
 
 ```bash
-9routerx version
+alyysha version
 ```
 
 Some features on this site arrived in a specific release. Where that matters, the

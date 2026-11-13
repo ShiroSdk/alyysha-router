@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Parsing rules for the Console Log page.
 //
 // The server stamps every captured line with the level the logger reported
@@ -158,5 +158,5 @@ export function toPlainText(entries: ConsoleEntry[]): string {
 }
 
 export function downloadFilename(when = new Date()): string {
-  return `9routerx-console-${when.getFullYear()}${pad(when.getMonth() + 1)}${pad(when.getDate())}-${pad(when.getHours())}${pad(when.getMinutes())}${pad(when.getSeconds())}.log`
+  return `alyysha-console-${when.getFullYear()}${pad(when.getMonth() + 1)}${pad(when.getDate())}-${pad(when.getHours())}${pad(when.getMinutes())}${pad(when.getSeconds())}.log`
 }

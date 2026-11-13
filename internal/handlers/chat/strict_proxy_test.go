@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -7,8 +7,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"9routerx/proxy/internal/db"
-	internalproxy "9routerx/proxy/internal/proxy"
+	"alyysha/proxy/internal/db"
+	internalproxy "alyysha/proxy/internal/proxy"
 )
 
 // setupProxyPools gives the handler a repo that can store proxy pools and

@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package media
 
 import (
@@ -15,8 +15,8 @@ import (
 	"sync"
 	"time"
 
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 // Voice listing for the media-providers dashboard. Mirrors the Next.js

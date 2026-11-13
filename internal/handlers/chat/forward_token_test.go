@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -10,8 +10,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/db"
 )
 
 // TestForwardRequest_SingleTokenFieldOnWire asserts that an outbound

@@ -1,6 +1,6 @@
-<!-- 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
-  // Port of decolua/9router src/shared/components/Input.js
+  // Port of decolua/alyysha src/shared/components/Input.js
   let {
     label = '',
     type = 'text',
@@ -66,7 +66,7 @@
       {min}
       {max}
       bind:value
-      class="w-full py-2.5 px-3 text-sm text-text-main bg-surface-2 rounded-[10px] border border-border-subtle shadow-[var(--9x-inset-rest)] placeholder-text-muted/70 focus:outline-none focus:border-primary focus:shadow-[var(--9x-ring),var(--9x-inset-rest)] transition-[border-color,box-shadow,background-color] duration-[180ms] ease-[var(--9x-ease)] disabled:opacity-60 disabled:bg-surface-3 disabled:cursor-not-allowed text-[16px] sm:text-sm {icon ? 'pl-10' : ''} {error ? 'ring-1 ring-red-500 focus:border-red-500/60 focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--app-danger)_18%,transparent),var(--9x-inset-rest)] border-red-500/40' : ''} {inputClass}"
+      class="w-full py-2.5 px-3 text-sm text-text-main bg-surface-2 rounded-[10px] border border-border-subtle shadow-[var(--ay-inset-rest)] placeholder-text-muted/70 focus:outline-none focus:border-primary focus:shadow-[var(--ay-ring),var(--ay-inset-rest)] transition-[border-color,box-shadow,background-color] duration-[180ms] ease-[var(--ay-ease)] disabled:opacity-60 disabled:bg-surface-3 disabled:cursor-not-allowed text-[16px] sm:text-sm {icon ? 'pl-10' : ''} {error ? 'ring-1 ring-red-500 focus:border-red-500/60 focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--app-danger)_18%,transparent),var(--ay-inset-rest)] border-red-500/40' : ''} {inputClass}"
     />
   </div>
 

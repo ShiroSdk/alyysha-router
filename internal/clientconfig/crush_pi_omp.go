@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package clientconfig
 
 import (
@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-// Three clients that each keep a providers["9router"] table and disagree on
+// Three clients that each keep a providers["alyysha"] table and disagree on
 // what an empty one means. docs/specs/client-schema-matrix.md §3.5, §3.8, §3.9.
 //
 // They share the write shape and nothing else, and the shared part is two
@@ -14,7 +14,7 @@ import (
 // content would be the differences.
 
 // providerTableKey is the providers entry name crush, pi and omp all use.
-const providerTableKey = "9router"
+const providerTableKey = "alyysha"
 
 // crushContextWindow is the fallback window when the gateway could not
 // resolve the model's real one. A resolved value wins: 128000 was always a
@@ -70,7 +70,7 @@ func (a crushAdapter) Reset(opts Options) (Result, error) {
 	}}}, nil)
 }
 
-// pi merges into providers["9router"] rather than replacing it (§3.8): the
+// pi merges into providers["alyysha"] rather than replacing it (§3.8): the
 // user may have other fields on the same entry, and the matrix calls that out
 // as the thing this adapter must not break.
 const piContextWindow = 128000

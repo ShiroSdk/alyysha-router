@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package providers
 
 import (
@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/pricing"
+	"alyysha/proxy/internal/pricing"
 )
 
 // Price and lane are two different questions that share a vocabulary, and

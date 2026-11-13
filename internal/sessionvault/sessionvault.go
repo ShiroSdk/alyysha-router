@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Package sessionvault persists the browser-session credentials the
 // web-session executors (deepseek-web, gemini-web, chatgpt-web, muse-web)
 // replay against their providers, sealed with the same credential vault the
@@ -21,8 +21,8 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/vault"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/vault"
 )
 
 // sealedPrefix marks a sessionData value that carries a vault-sealed pair.

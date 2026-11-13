@@ -93,11 +93,11 @@ curl -X POST http://localhost:20128/api/tokensaver/caveman/test \
 ## Runtime flags
 
 ```bash
-./9routerx --rtk=false            # disable RTK for this run
-./9routerx --caveman=true         # enable Caveman
-./9routerx --ponytail=true        # enable Ponytail
-./9routerx --adhd=true            # enable the ADHD style
-./9routerx --no-injection-guard   # disable the injection guard
+./alyysha --rtk=false            # disable RTK for this run
+./alyysha --caveman=true         # enable Caveman
+./alyysha --ponytail=true        # enable Ponytail
+./alyysha --adhd=true            # enable the ADHD style
+./alyysha --no-injection-guard   # disable the injection guard
 ```
 
 Dashboard settings win unless a flag is passed explicitly, so a flag is the way

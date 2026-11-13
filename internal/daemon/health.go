@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package daemon
 
 import (
@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/proc"
+	"alyysha/proxy/internal/proc"
 )
 
 // Flag names and the environment marker shared by the CLI, the child argument
@@ -24,7 +24,7 @@ const (
 	// BackgroundAlias is the short form as it appears in argv.
 	BackgroundAlias = "-d"
 	// EnvBackground marks a process started as a background daemon.
-	EnvBackground = "9ROUTERX_BACKGROUND"
+	EnvBackground = "ALYYSHA_BACKGROUND"
 )
 
 // HealthPath is the endpoint Start polls; it is public and answers without a

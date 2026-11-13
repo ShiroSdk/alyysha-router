@@ -1,6 +1,6 @@
 # Security Policy
 
-9RouterX is an AI gateway: it terminates client traffic, holds provider
+Alyysha Router is an AI gateway: it terminates client traffic, holds provider
 credentials and OAuth tokens in SQLite, and exposes a dashboard plus an HTTP
 API on a known port. Vulnerabilities in auth, the proxy surface, the dashboard
 API, or the updater are treated as security issues.
@@ -10,7 +10,7 @@ API, or the updater are treated as security issues.
 **Please do not open a public GitHub issue for security reports.**
 
 1. **Preferred:** open a private vulnerability advisory on GitHub —
-   <https://github.com/yanstd888/9routerx/security/advisories/new>. Only the
+   <https://github.com/ShiroSdk/alyysha-router/security/advisories/new>. Only the
    maintainer sees the report until you choose to publish it.
 2. **Email:** `awaia89jq@gmail.com` — 
    maintainer contact for the public
@@ -18,7 +18,7 @@ API, or the updater are treated as security issues.
 
 Please include, when possible:
 
-- Affected version (`9routerx version`) and platform.
+- Affected version (`alyysha version`) and platform.
 - A minimal reproduction (curl command, config, or dashboard flow).
 - Impact assessment — what an attacker gains (auth bypass, credential
   extraction, SSRF, RCE, …).
@@ -34,7 +34,7 @@ demonstrate it.
 | Version | Supported | Notes |
 | --- | --- | --- |
 | 1.0.0 (current `main`) | Yes | Security fixes land on `main` first and ship in the next release |
-| 9router-go / pre-fork releases (≤ 1.9.15 legacy line) | No | Upstream fork history, archived in `docs/changelog/9router-go-legacy.md` |
+| alyysha-go / pre-fork releases (≤ 1.9.15 legacy line) | No | Upstream fork history, archived in `docs/changelog/alyysha-go-legacy.md` |
 
 Experimental/pre-release builds (`-exp.*`, Docker `:exp`) are supported on a
 best-effort basis — report against them only if the issue does not exist on
@@ -59,12 +59,12 @@ the latest stable release.
   guard, CVE-2026-56679).
 - Login rate limiting: 5 failed attempts lock the source; forwarded client-IP
   headers are only trusted from `TRUST_PROXY` / `TRUSTED_PROXIES` ranges (or a
-  `9ROUTERX_PEER_TOKEN`-presenting front proxy).
+  `ALYYSHA_PEER_TOKEN`-presenting front proxy).
 - Provider URLs on loopback/private ranges are rejected unless
   `ALLOW_PRIVATE_PROVIDER_URLS` is set; web-session executors are gated behind
   `ENABLE_WEB_EXECUTORS=true` (off by default).
-- The updater only fetches from `https://raw.githubusercontent.com/yanstd888/9routerx/main/version.json`
-  and GitHub Releases for `yanstd888/9routerx` — report any other URL in a
+- The updater only fetches from `https://raw.githubusercontent.com/ShiroSdk/alyysha-router/main/version.json`
+  and GitHub Releases for `ShiroSdk/alyysha-router` — report any other URL in a
   running binary as suspicious.
 
 Full hardening guidance: [`README.md`](README.md#-dashboard-login--fresh-install)

@@ -1,12 +1,12 @@
 {
   "latestVersion": "1.1.4",
-  "downloadUrl": "https://github.com/yanstd888/9routerx/releases/latest",
+  "downloadUrl": "https://github.com/ShiroSdk/alyysha-router/releases/latest",
   "downloadUrls": {
-    "linux_amd64": "https://github.com/yanstd888/9routerx/releases/download/v1.1.4/9routerx-linux-amd64",
-    "linux_arm64": "https://github.com/yanstd888/9routerx/releases/download/v1.1.4/9routerx-linux-arm64",
-    "darwin_amd64": "https://github.com/yanstd888/9routerx/releases/download/v1.1.4/9routerx-darwin-amd64",
-    "darwin_arm64": "https://github.com/yanstd888/9routerx/releases/download/v1.1.4/9routerx-darwin-arm64",
-    "windows_amd64": "https://github.com/yanstd888/9routerx/releases/download/v1.1.4/9routerx-windows-amd64.exe"
+    "linux_amd64": "https://github.com/ShiroSdk/alyysha-router/releases/download/v1.1.4/alyysha-linux-amd64",
+    "linux_arm64": "https://github.com/ShiroSdk/alyysha-router/releases/download/v1.1.4/alyysha-linux-arm64",
+    "darwin_amd64": "https://github.com/ShiroSdk/alyysha-router/releases/download/v1.1.4/alyysha-darwin-amd64",
+    "darwin_arm64": "https://github.com/ShiroSdk/alyysha-router/releases/download/v1.1.4/alyysha-darwin-arm64",
+    "windows_amd64": "https://github.com/ShiroSdk/alyysha-router/releases/download/v1.1.4/alyysha-windows-amd64.exe"
   },
   "sha256s": {
     "darwin_amd64": "79cf2cab25ff6cd11eb6d13ea092b5e89ddf01304ca256b91352b842d2143140",
@@ -16,6 +16,6 @@
     "windows_amd64": "1dcb677f493b55d36e092f044e1b0dcac03470758a49450e13b0354da5940e07"
   },
   "releaseNotes": "\n\n### Security\n\n- **Dashboard management is operator-only** — client engine keys can no longer\n  create, rotate, delete or re-policy API keys, change settings or trigger\n  updates; those routes answer `403` unless the caller holds a dashboard session\n  or the local CLI token. Two read-only metadata endpoints\n  (`/api/providers/catalog`, `/api/models/caps`) still accept an engine key.\n- **API keys are stored hashed again** — create and rotate keep only an\n  Argon2id verifier plus a SHA-256 lookup index; the secret is returned once and\n  never written to the database. Rows from the plaintext era stay revealable\n  until they are rotated, and spend accounting follows the row so quotas,\n  budgets and the ledger prune keep working across a rotation.\n- **Locality no longer trusts the Host header** — the default-password guard and\n  provider-node exceptions classify callers by socket peer (and the trusted\n  client-IP resolver for proxied logins), so a spoofed `Host: 127.0.0.1` gains\n  nothing.\n- **Updater is decompression-bomb-proof** — release archives are capped at 64\n  entries / 256 MiB per entry / 512 MiB expanded, ZIP symlinks are refused, and\n  the extracted bytes must parse as an executable for the running platform\n  (ELF / Mach-O / PE) before anything replaces the binary.\n- **Fail-closed defaults** — an enabled A2A server without a configured token\n  refuses every request; the gateway binds `127.0.0.1` unless `HOST` says\n  otherwise; key-reveal responses carry no-store headers and an audit line.\n- **Plaintext storage is announced** — without `ROUTER_MASTER_KEY`, the boot\n  log and the dashboard both say credential encryption is OFF.\n\n### Changed\n\n- **403 on operator-only routes** carries the explicit `forbidden` error code\n  instead of the quota-shaped one the status mapping produced.\n- **Budget cutoff wording** — README, wiki and the Plans dialog now say the\n  ceiling is checked when a request starts (a request already in flight can\n  overshoot slightly) instead of implying a continuous limit.\n",
-  "releaseUrl": "https://github.com/yanstd888/9routerx/releases/tag/v1.1.4",
+  "releaseUrl": "https://github.com/ShiroSdk/alyysha-router/releases/tag/v1.1.4",
   "publishedAt": "2026-11-09T16:31:29Z"
 }

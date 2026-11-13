@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
@@ -14,7 +14,7 @@ func TestQoderBuildMultipartFile(t *testing.T) {
 	data := []byte("fake-png-bytes")
 	boundary, body := qoderBuildMultipartFile(data, "photo.png", "image/png")
 
-	if !strings.HasPrefix(boundary, "----9routerQoder") {
+	if !strings.HasPrefix(boundary, "----alyyshaQoder") {
 		t.Errorf("unexpected boundary: %s", boundary)
 	}
 	bodyStr := string(body)

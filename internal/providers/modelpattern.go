@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package providers
 
 import (
@@ -25,7 +25,7 @@ func MatchModelPattern(pattern, modelID string) bool {
 // means "any model whose id mentions claude" when they write `*claude*`, and
 // the resolver's segment-local glob never reaches `anthropic/claude-sonnet`
 // because its single `*` cannot cross the `/` (#365, upstream parity with
-// decolua/9router keyAccess.js). Here `*` spans separators.
+// decolua/alyysha keyAccess.js). Here `*` spans separators.
 //
 // A pattern without `*` still matches whole-string and case-insensitively,
 // which is exactly what MatchModelPattern answers for it, so the two matchers

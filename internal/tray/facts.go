@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package tray
 
 import (
@@ -7,9 +7,9 @@ import (
 	"strconv"
 	"time"
 
-	"9routerx/proxy/internal/config"
-	"9routerx/proxy/internal/daemon"
-	"9routerx/proxy/internal/service"
+	"alyysha/proxy/internal/config"
+	"alyysha/proxy/internal/daemon"
+	"alyysha/proxy/internal/service"
 )
 
 // Gather reads the facts the state machine needs. One function so the tray

@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 
 /**
  * Passive origin canaries for the dashboard (Go counterpart:
@@ -8,17 +8,17 @@
  * sidebar footer; nothing here tracks, beacons, or reads the network.
  */
 const REPO_HOST = 'github.com/'
-const REPO_USER_A = 'yanstd'
-const REPO_USER_B = '888'
-const REPO_NAME = '9RouterX'
+const REPO_USER_A = 'Shiro'
+const REPO_USER_B = 'Sdk'
+const REPO_NAME = 'Alyysha Router'
 
 export const BRAND_REPO = `https://${REPO_HOST}${REPO_USER_A}${REPO_USER_B}/${REPO_NAME}`
 
 // Attribution line ("all source code port and modification by
-// https://github.com/yanstd888/ — https://t.me/aiclub_id"), base64-wrapped;
+// https://github.com/ShiroSdk/ — https://t.me/YannClippers"), base64-wrapped;
 // brandAttribution below is the only reader.
 const ATTRIBUTION_B64 =
-  'YWxsIHNvdXJjZSBjb2RlIHBvcnQgYW5kIG1vZGlmaWNhdGlvbiBieSBodHRwczovL2dpdGh1Yi5jb20veWFuc3RkODg4LyDigJQgaHR0cHM6Ly90Lm1lL2FpY2x1Yl9pZA=='
+  'YWxsIHNvdXJjZSBjb2RlIHBvcnQgYW5kIG1vZGlmaWNhdGlvbiBieSBodHRwczovL2dpdGh1Yi5jb20vU2hpcm9TZGsvYWx5eXNoYS1yb3V0ZXIg4oCUIGh0dHBzOi8vdC5tZS9ZYW5uQ2xpcHBlcnM='
 
 /** Decodes the wrapped attribution line; falls back to the literal itself. */
 export function brandAttribution(): string {

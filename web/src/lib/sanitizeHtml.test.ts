@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 import { describe, expect, it } from 'bun:test'
 import { isSafeUrl, sanitizeHtml } from './sanitizeHtml'
 

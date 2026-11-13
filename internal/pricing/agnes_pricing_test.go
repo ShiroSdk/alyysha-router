@@ -1,10 +1,10 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package pricing
 
 import "testing"
 
 // Port of the pricing half of upstream
-// tests/unit/agnes30-pro-model.test.js (decolua/9router#4587): the vendor's
+// tests/unit/agnes30-pro-model.test.js (decolua/alyysha#4587): the vendor's
 // agnes-30-pro doc page publishes $0.45/$0.90 per 1M with cache read
 // documented as 10% of input.
 func TestGetPricingForModel_Agnes30(t *testing.T) {

@@ -1,6 +1,6 @@
-<!-- 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
-  // Port of decolua/9router src/shared/components/Badge.js
+  // Port of decolua/alyysha src/shared/components/Badge.js
   import type { Snippet } from 'svelte'
 
   type Tone = 'default' | 'neutral' | 'primary' | 'success' | 'warning' | 'danger' | 'error' | 'info' | 'outline'

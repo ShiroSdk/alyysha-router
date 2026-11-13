@@ -1,11 +1,11 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package testingparity
 
 import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/tokensaver/antislop"
+	"alyysha/proxy/internal/tokensaver/antislop"
 )
 
 // parity_antislop_test.go pins the Anti-slop prompt to the serenhope reference
@@ -31,7 +31,7 @@ Scan your output for: blue-purple gradient washes, blur everywhere, every elemen
 // runtimeNote is the verbatim header the upstream generator writes in front of
 // the core text; level is the "(full)" / "(ultra)" intensity word.
 func runtimeNote(level string) string {
-	return "> Runtime note: this text is injected by 9Router's Anti Slop plugin. Ignore the skill's own\n" +
+	return "> Runtime note: this text is injected by Alyysha's Anti Slop plugin. Ignore the skill's own\n" +
 		"> install wizard and mode resolution - there is nothing to install, and the intensity is\n" +
 		"> already chosen (" + level + "). Do not ask which mode to use; apply the rules and continue."
 }

@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package media
 
 import (
@@ -11,11 +11,11 @@ import (
 	"io"
 	"net/http"
 
-	"9routerx/proxy/internal/handlers/chat"
-	"9routerx/proxy/internal/handlers/shared"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/usagetracker"
+	"alyysha/proxy/internal/handlers/chat"
+	"alyysha/proxy/internal/handlers/shared"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/usagetracker"
 )
 
 // MusicGenerationRequest is the request body for ElevenLabs music generation.

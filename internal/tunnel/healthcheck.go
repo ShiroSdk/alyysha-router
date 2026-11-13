@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package tunnel
 
 import (
@@ -9,7 +9,7 @@ import (
 	neturl "net/url"
 	"time"
 
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/log"
 )
 
 // Health probe timings. The quick tunnel's DNS propagates in seconds, so the
@@ -85,7 +85,7 @@ func hostFromURL(rawURL string) (string, error) {
 // The gateway serves `/health` (internal/handlers/router.go, SetupServerRouter),
 // while the upstream Next.js implementation serves `/api/health`. Both are
 // tried because this binary can sit behind a proxy that rewrites one to the
-// other, and because a tunnel created against upstream 9router points at a
+// other, and because a tunnel created against upstream alyysha points at a
 // gateway whose route table this package does not control. Probing only one of
 // them is what made a working tunnel read as dead: the process was up, the URL
 // resolved, and the probe got a 404 for a path the origin never served.

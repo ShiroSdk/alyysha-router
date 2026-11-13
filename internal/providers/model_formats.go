@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package providers
 
 import "strings"
@@ -214,7 +214,7 @@ func isOpenCodeProvider(aliasOrID string) bool {
 	return false
 }
 
-// baseModelID strips the 9router thinking suffix "model(level)" so catalog
+// baseModelID strips the alyysha thinking suffix "model(level)" so catalog
 // lookups hit the base id (open-sse config/providerModels.js findModel).
 func baseModelID(modelID string) string {
 	if idx := strings.LastIndexByte(modelID, '('); idx > 0 && strings.HasSuffix(modelID, ")") {

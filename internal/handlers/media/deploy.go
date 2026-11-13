@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package media
 
 import (
@@ -14,8 +14,8 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 const (
@@ -392,7 +392,7 @@ func (h *MediaHandler) HandleDenoDeploy(w http.ResponseWriter, r *http.Request) 
 
 	createBody, _ := json.Marshal(map[string]any{
 		"slug":   projectName,
-		"labels": map[string]any{"custom.kind": "9router-relay"},
+		"labels": map[string]any{"custom.kind": "alyysha-relay"},
 		"config": map[string]any{
 			"install": "deno install",
 			"runtime": map[string]any{"type": "dynamic", "entrypoint": "main.ts"},

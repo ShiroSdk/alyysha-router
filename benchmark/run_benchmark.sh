@@ -1,6 +1,6 @@
 #!/bin/bash
-# 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
-# Benchmark: Go proxy vs Legacy Next.js 9Router
+# Alyysha Router — built by YannClipper — https://t.me/YannClippers
+# Benchmark: Go proxy vs Legacy Next.js Alyysha
 # Uses a mock upstream server for fair, reproducible comparison.
 set -e
 
@@ -42,7 +42,7 @@ if ! command -v hey &> /dev/null; then
     fi
 fi
 
-echo -e "${BLUE}=== 9Router Benchmark: Go Proxy vs Legacy Next.js ===${NC}"
+echo -e "${BLUE}=== Alyysha Benchmark: Go Proxy vs Legacy Next.js ===${NC}"
 echo ""
 
 # Step 1: Start mock upstream
@@ -102,8 +102,8 @@ echo "  Benchmark DB ready at $BENCH_DB"
 # Step 3: Build and start Go proxy
 echo -e "${GREEN}[3/5] Building and starting Go proxy on :$GO_PORT...${NC}"
 cd "$GO_PROXY_DIR"
-go build -o /tmp/9router-bench-proxy ./cmd/9routerx/
-DATA_DIR="$BENCH_DB_DIR" PORT=$GO_PORT /tmp/9router-bench-proxy &
+go build -o /tmp/alyysha-bench-proxy ./cmd/alyysha/
+DATA_DIR="$BENCH_DB_DIR" PORT=$GO_PORT /tmp/alyysha-bench-proxy &
 GO_PID=$!
 sleep 2
 

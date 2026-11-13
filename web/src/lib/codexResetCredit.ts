@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Reset-credit presentation helpers, ported from OmniRoute's
 // src/app/(dashboard)/dashboard/usage/components/ProviderLimits/
 // CodexResetCreditsModal.tsx. Kept as pure functions so they are unit

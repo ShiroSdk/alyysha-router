@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package translator
 
 import (
@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// thinkingOverrideSuffix matches the 9router thinking override a client may
+// thinkingOverrideSuffix matches the alyysha thinking override a client may
 // append to a model id ("deepseek-v4-flash(max)"). It is stripped before a
 // model is matched against a catalog, and so before the DeepSeek check below.
 var thinkingOverrideSuffix = regexp.MustCompile(`\([^()]+\)\s*$`)

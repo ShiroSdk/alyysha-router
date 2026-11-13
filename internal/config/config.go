@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package config
 
 import (
@@ -14,15 +14,15 @@ import (
 
 	"github.com/spf13/viper"
 
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/log"
 )
 
 // DefaultPort is the port the gateway binds when PORT is unset. It lives here
 // so the validation error can name the fallback instead of a magic number.
-// It is 20128 to match the 9Router / 9router-go ecosystem default, making
-// 9routerX drop-in compatible: a client pointed at 9Router works against
-// 9routerX with zero config changes. Set PORT=888 to keep the old behavior.
+// It is 20128 to match the Alyysha / alyysha-go ecosystem default, making
+// alyyshaX drop-in compatible: a client pointed at Alyysha works against
+// alyyshaX with zero config changes. Set PORT=888 to keep the old behavior.
 const DefaultPort = 20128
 
 // Config holds the proxy gateway configuration.
@@ -95,12 +95,12 @@ func ProvideConfig(v *viper.Viper) *Config {
 }
 
 // ResolveDataDir returns the base data directory: DATA_DIR env, else the
-// value from .env, else the platform default (~/.9router, or
-// %APPDATA%/9router on Windows).
+// value from .env, else the platform default (~/.alyysha, or
+// %APPDATA%/alyysha on Windows).
 //
 // The .env read is load-bearing, not a convenience. The server resolves its
 // data dir through viper (LoadConfigFromViper), which does read .env, while
-// `9routerx status|stop|logs` runs in a separate short-lived process that
+// `alyysha status|stop|logs` runs in a separate short-lived process that
 // never boots the server. Reading only os.Getenv here meant a deployment
 // configured purely through .env — every Docker/compose setup — had the CLI
 // look at a different directory than the running daemon: status reported "not
@@ -119,11 +119,11 @@ func ResolveDataDir() string {
 			if appData == "" {
 				appData = filepath.Join(homeDir, "AppData", "Roaming")
 			}
-			return filepath.Join(appData, "9router")
+			return filepath.Join(appData, "alyysha")
 		}
-		return filepath.Join(homeDir, ".9router")
+		return filepath.Join(homeDir, ".alyysha")
 	}
-	return ".9router"
+	return ".alyysha"
 }
 
 // dataDirFromEnvFile reads DATA_DIR out of the .env next to the binary or in
@@ -197,8 +197,8 @@ func LoadConfigFromViper(v *viper.Viper) *Config {
 			dbPath = filepath.Join(dbPath, "db", "data.sqlite")
 		} else if _, err := os.Stat(filepath.Join(dbPath, "data.sqlite")); err == nil {
 			dbPath = filepath.Join(dbPath, "data.sqlite")
-		} else if _, err := os.Stat(filepath.Join(dbPath, "9router.db")); err == nil {
-			dbPath = filepath.Join(dbPath, "9router.db")
+		} else if _, err := os.Stat(filepath.Join(dbPath, "alyysha.db")); err == nil {
+			dbPath = filepath.Join(dbPath, "alyysha.db")
 		} else {
 			dbPath = filepath.Join(dbPath, "db", "data.sqlite")
 		}

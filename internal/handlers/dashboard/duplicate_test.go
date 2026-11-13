@@ -1,10 +1,10 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
 	"testing"
 
-	"9routerx/proxy/internal/models"
+	"alyysha/proxy/internal/models"
 )
 
 func TestIdentityOf_GitHub(t *testing.T) {

@@ -5,7 +5,7 @@ section: Contributing
 ---
 # Owner & Contributors
 
-9routerx is built in the open. This page lists everyone whose commit landed
+alyysha is built in the open. This page lists everyone whose commit landed
 in the repository, with the profile photo and username each person uses on
 GitHub. The list is generated from the GitHub API, so it is the same one
 GitHub shows on the repository's contributors page.
@@ -17,11 +17,11 @@ score.
 <div class="contrib-grid">
 
   <div class="contrib-card owner">
-    <img src="https://github.com/yanstd888.png?size=400" alt="Muhammad Dian" loading="lazy" decoding="async" width="88" height="88" />
+    <img src="https://github.com/ShiroSdk.png?size=400" alt="YannClipper" loading="lazy" decoding="async" width="88" height="88" />
     <div>
-      <p class="contrib-name"><a href="https://github.com/yanstd888">Muhammad Dian</a></p>
-      <p class="contrib-login">@yanstd888</p>
-      <p class="contrib-count">Maintainer of the 9RouterX fork</p>
+      <p class="contrib-name"><a href="https://github.com/ShiroSdk">YannClipper</a></p>
+      <p class="contrib-login">@ShiroSdk</p>
+      <p class="contrib-count">Maintainer of the Alyysha Router fork</p>
       <p class="contrib-count">repository owner</p>
     </div>
   </div>
@@ -31,7 +31,7 @@ score.
     <p class="contrib-name"><a href="https://github.com/luqman-v1">Luqmannul Hakim</a></p>
     <p class="contrib-login">@luqman-v1</p>
     <p class="contrib-count">Backend Engineer with Positive Mental Attitude</p>
-    <p class="contrib-count">585 commits · original 9router-go author</p>
+    <p class="contrib-count">585 commits · original alyysha-go author</p>
   </div>
 
   <div class="contrib-card">

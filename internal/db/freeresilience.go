@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package db
 
 import (
@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"time"
 
-	"9routerx/proxy/internal/freeresilience"
+	"alyysha/proxy/internal/freeresilience"
 )
 
 // freeresilience.go persists the free-tier resilience suite's state:

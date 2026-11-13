@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package proxy
 
 import (
@@ -15,7 +15,7 @@ import (
 	"strings"
 	"sync"
 
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/log"
 )
 
 // UpstreamError captures a non-200 upstream response.
@@ -66,7 +66,7 @@ func (e *UpstreamError) Error() string {
 // ErrStrictProxyRequired reports a request that was told never to leave over
 // the direct IP and could not honour that. Mirrors upstream's
 // "[ProxyFetch] Proxy required but failed (strictProxy=true)" refusal
-// (decolua/9router#4333).
+// (decolua/alyysha#4333).
 var ErrStrictProxyRequired = errors.New("proxy required but failed (strictProxy=true)")
 
 var directProxyClient = &http.Client{
@@ -135,7 +135,7 @@ func isProxyFailure(err error, resp *http.Response) bool {
 type strictProxyCtxKey struct{}
 
 // WithStrictProxy marks ctx so DoRequest refuses to replay a failed proxy
-// attempt directly (decolua/9router#4333). intended says whether a proxy was
+// attempt directly (decolua/alyysha#4333). intended says whether a proxy was
 // configured at all, and it is load-bearing: callers such as the Qoder
 // executor set strictProxy to mean "do not replay this request directly if the
 // proxy fails" — a replayed COSY signature answers 403 — not "a proxy must
@@ -264,7 +264,7 @@ func (t forbidDirectReplayTransport) RoundTrip(req *http.Request) (*http.Respons
 func (forbidDirectReplayTransport) forbidsDirectReplay() bool { return true }
 
 // ForbidDirectReplay returns a client whose requests may never be replayed
-// from the operator's real IP after a proxy refusal (decolua/9router#4333).
+// from the operator's real IP after a proxy refusal (decolua/alyysha#4333).
 func ForbidDirectReplay(client *http.Client) *http.Client {
 	clone := *client
 	clone.Transport = forbidDirectReplayTransport{base: client.Transport}
@@ -292,7 +292,7 @@ func ForbidsDirectReplay(client *http.Client) bool {
 // A proxy refusal is replayed through the direct client so one dead proxy does
 // not take the provider down with it — unless the proxy is one the operator
 // assigned, or ctx carries WithStrictProxy. Both turn that replay into an error
-// instead of publishing the operator's egress IP (decolua/9router#4333). A
+// instead of publishing the operator's egress IP (decolua/alyysha#4333). A
 // certificate verification failure gets its own single replay with verification
 // disabled, for the corporate proxies and antivirus middleboxes that re-sign
 // TLS, unless STRICT_SSL forbids it.

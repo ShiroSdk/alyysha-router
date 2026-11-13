@@ -1,14 +1,14 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/middleware"
-	"9routerx/proxy/internal/models"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/thinking"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/middleware"
+	"alyysha/proxy/internal/models"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/thinking"
 	"database/sql"
 	"errors"
 	"net/http"
@@ -354,7 +354,7 @@ func (h *ChatHandler) checkModelAccess(key *models.APIKey, modelID string) error
 // hits real quota rejections cannot tell "wrong model" from "out of quota"
 // unless the denial carries its own code. The task spec for the per-key
 // feature fixes that code; recorded as a deliberate divergence from
-// decolua/9router in the port fragment.
+// decolua/alyysha in the port fragment.
 //
 // The 503 policy failure keeps its own shape: it is not an upstream status,
 // so it carries a code of its own rather than the status-derived one.
@@ -391,7 +391,7 @@ func writeModelAccessError(w http.ResponseWriter, err error) {
 }
 
 // modelAccessDeniedMessage is the client-facing sentence for a model-access
-// denial. It reproduces upstream decolua/9router's
+// denial. It reproduces upstream decolua/alyysha's
 // `keyAccessDeniedMessage(requested)` from
 // src/shared/constants/keyAccess.js verbatim:
 //

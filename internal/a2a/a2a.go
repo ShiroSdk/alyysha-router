@@ -1,5 +1,5 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
-// Package a2a implements the Agent-to-Agent protocol surface for 9RouterX: an
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
+// Package a2a implements the Agent-to-Agent protocol surface for Alyysha Router: an
 // Agent Card served at /.well-known/agent.json and a JSON-RPC 2.0 endpoint at
 // POST /api/a2a carrying the message/send, message/stream, tasks/get,
 // tasks/list and tasks/cancel methods.
@@ -30,7 +30,7 @@ import (
 	"sync"
 	"time"
 
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/db"
 )
 
 // DefaultTaskTTL is how long a task stays queryable. Terminal tasks are swept
@@ -63,8 +63,8 @@ const (
 
 // Agent identity advertised on the Agent Card and the health skill.
 const (
-	agentName        = "9RouterX"
-	agentDescription = "9RouterX read-only gateway agent: API keys, combos, models, usage and resilience state."
+	agentName        = "Alyysha Router"
+	agentDescription = "Alyysha Router read-only gateway agent: API keys, combos, models, usage and resilience state."
 	// protocolVersion is the A2A protocol revision this surface speaks.
 	protocolVersion = "0.3"
 )

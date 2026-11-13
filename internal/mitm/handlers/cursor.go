@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package handlers
 
 import (
@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// HandleCursor intercepts Cursor IDE requests and forwards to 9router.
+// HandleCursor intercepts Cursor IDE requests and forwards to alyysha.
 func HandleCursor(w http.ResponseWriter, r *http.Request, body []byte) {
 	var reqBody map[string]any
 	if err := json.Unmarshal(body, &reqBody); err != nil {

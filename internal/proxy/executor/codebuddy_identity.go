@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
@@ -11,7 +11,7 @@ import (
 
 // CodeBuddy CN anti-ban identity.
 //
-// Port of upstream `open-sse/shared/codebuddyIdentity.js` (PR decolua/9router
+// Port of upstream `open-sse/shared/codebuddyIdentity.js` (PR decolua/alyysha
 // #3257). Tencent cross-references device fingerprints sent in /v2/report
 // telemetry; a proxied key that presents no stable identity looks like a
 // silent/bot client and gets banned. Every value here is derived

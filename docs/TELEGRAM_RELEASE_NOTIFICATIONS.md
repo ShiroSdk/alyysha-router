@@ -1,6 +1,6 @@
 # Telegram release notifications
 
-Every tagged release posts a short summary to the [AI Club Indonesia](https://t.me/aiclub_id) Telegram group/channel.
+Every tagged release posts a short summary to the [AI Club Indonesia](https://t.me/YannClippers) Telegram group/channel.
 
 ## Setup
 
@@ -75,7 +75,7 @@ TELEGRAM_BOT_TOKEN=... TELEGRAM_CHAT_ID=... \
 ## What the message looks like
 
 ```
-🚀 9RouterX v1.9.11
+🚀 Alyysha Router v1.9.11
 ✅ Stable release
 
 What's new:
@@ -84,8 +84,8 @@ What's new:
 🐛 fix(chat): error model-gated tidak mengunci seluruh akun
 … up to 10 entries
 
-Release notes: https://github.com/yanstd888/9routerx/releases/tag/v1.9.11
-    docker pull ghcr.io/yanstd888/9routerx:1.9.11
+Release notes: https://github.com/ShiroSdk/alyysha-router/releases/tag/v1.9.11
+    docker pull ghcr.io/ShiroSdk/alyysha-router:1.9.11
 ```
 
 Only headings are listed, not their bullets: the full notes live on the
@@ -126,7 +126,7 @@ To pin the notice to one topic, add its id — the number from the topic URL, or
 the last component of `t.me/c/<chat>/<topic>`:
 
 ```bash
-echo 1234 | gh secret set TELEGRAM_TOPIC_ID --repo yanstd888/9routerx
+echo 1234 | gh secret set TELEGRAM_TOPIC_ID --repo ShiroSdk/alyysha-router
 ```
 
 The script omits the field entirely when the variable is unset, so leaving it

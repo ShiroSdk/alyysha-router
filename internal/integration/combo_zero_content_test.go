@@ -1,6 +1,6 @@
 //go:build integration
 
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package integration
 
 import (
@@ -9,7 +9,7 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/db"
 )
 
 const zeroContentJSON = `{

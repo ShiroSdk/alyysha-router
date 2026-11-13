@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -14,13 +14,13 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/models"
-	"9routerx/proxy/internal/providers"
-	internalproxy "9routerx/proxy/internal/proxy"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/models"
+	"alyysha/proxy/internal/providers"
+	internalproxy "alyysha/proxy/internal/proxy"
+	"alyysha/proxy/internal/translator"
 )
 
 func isRetryableComboError(ue *upstreamError) bool {

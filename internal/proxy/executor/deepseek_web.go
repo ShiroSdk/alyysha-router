@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
@@ -15,8 +15,8 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/proxy"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/proxy"
 )
 
 // deepSeekFirstMessageFingerprint is the stable identity of a conversation

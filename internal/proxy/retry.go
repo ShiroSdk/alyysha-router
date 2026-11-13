@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package proxy
 
 import (
@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"time"
 
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/log"
 )
 
 // transientRetryPolicy is the Go form of upstream's DEFAULT_RETRY_CONFIG
@@ -46,7 +46,7 @@ func resolveSeatBudget(ctx context.Context) int {
 			return val
 		}
 	}
-	for _, envVar := range []string{"SEAT_ATTEMPT_BUDGET_MS", "9ROUTERX_SEAT_ATTEMPT_BUDGET_MS", "NINEROUTER_SEAT_ATTEMPT_BUDGET_MS"} {
+	for _, envVar := range []string{"SEAT_ATTEMPT_BUDGET_MS", "ALYYSHA_SEAT_ATTEMPT_BUDGET_MS", "NINEROUTER_SEAT_ATTEMPT_BUDGET_MS"} {
 		if val := os.Getenv(envVar); val != "" {
 			if ms, err := strconv.Atoi(val); err == nil && ms > 0 {
 				return ms

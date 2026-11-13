@@ -1,8 +1,8 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package thinking
 
 import (
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/providers"
 )
 
 // geminiLevelOutputFloor ports GEMINI_LEVEL_OUTPUT_FLOOR.

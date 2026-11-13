@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Package browserlogin captures a Google session from an isolated browser.
 //
 // The problem it solves: Google rotates the session timestamp cookie
@@ -194,7 +194,7 @@ func Run(ctx context.Context) (*Result, error) {
 			"use an Incognito window instead and paste the cookie header")
 	}
 
-	profile, err := os.MkdirTemp("", "9router-gemini-login-*")
+	profile, err := os.MkdirTemp("", "alyysha-gemini-login-*")
 	if err != nil {
 		return nil, fmt.Errorf("create the temporary browser profile: %w", err)
 	}

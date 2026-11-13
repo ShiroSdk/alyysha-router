@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Package webhooks fans gateway events out to operator-configured push
 // destinations (FASE 10.4). It generalizes the FASE 7 Telegram-only push
 // (internal/telegram, which stays untouched and is wrapped as one adapter) to
@@ -23,7 +23,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 // Event types this gateway pushes. The strings match internal/telegram's

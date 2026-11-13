@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package oauth
 
 import (
@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/db"
 )
 
 func TestHandleDeviceStart_qoderLocal(t *testing.T) {
@@ -55,7 +55,7 @@ func TestHandleDevicePoll_validation(t *testing.T) {
 
 func TestKimiHeaders_deviceId(t *testing.T) {
 	h := kimiHeaders("dev-1")
-	if h["X-Msh-Device-Id"] != "dev-1" || h["X-Msh-Platform"] != "9router" {
+	if h["X-Msh-Device-Id"] != "dev-1" || h["X-Msh-Platform"] != "alyysha" {
 		t.Errorf("bad kimi headers: %v", h)
 	}
 }

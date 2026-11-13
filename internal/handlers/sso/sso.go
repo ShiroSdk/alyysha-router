@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Package sso implements the dashboard Single Sign-On settings endpoints that
 // the profile page calls: OIDC discovery + client-secret probe, SAML
 // configuration check, and SP metadata download. These mirror the Next
@@ -20,8 +20,8 @@ import (
 
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 const (
@@ -130,7 +130,7 @@ func (h *Handler) HandleSamlTest(w http.ResponseWriter, r *http.Request) {
 	}
 
 	entryPoint := strings.TrimSpace(firstNonEmpty(body.SamlEntryPoint, handlerutil.GetString(settings, "samlEntryPoint")))
-	issuer := strings.TrimSpace(firstNonEmpty(body.SamlIssuer, handlerutil.GetString(settings, "samlIssuer"), "urn:9router:sp"))
+	issuer := strings.TrimSpace(firstNonEmpty(body.SamlIssuer, handlerutil.GetString(settings, "samlIssuer"), "urn:alyysha:sp"))
 	cert := strings.TrimSpace(firstNonEmpty(body.SamlCert, handlerutil.GetString(settings, "samlCert")))
 
 	if entryPoint == "" {
@@ -176,7 +176,7 @@ func (h *Handler) HandleSamlMetadata(w http.ResponseWriter, r *http.Request) {
 	}
 	issuer := handlerutil.GetString(settings, "samlIssuer")
 	if issuer == "" {
-		issuer = "urn:9router:sp"
+		issuer = "urn:alyysha:sp"
 	}
 	origin := publicOrigin(r)
 	acsURL := origin + samlACSPath

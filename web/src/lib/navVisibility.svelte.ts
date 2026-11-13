@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // The sidebar hide list, mirrored for the components outside the settings flow.
 // App.svelte owns the source of truth (settings.navVisibility) and pushes the
 // normalized list here; the API-key editor reads it to drop the Plan field when

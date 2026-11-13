@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package providers
 
 import (
@@ -11,9 +11,9 @@ func TestClineIdentityHeaders(t *testing.T) {
 	for k, want := range map[string]string{
 		"HTTP-Referer":     "https://cline.bot",
 		"X-Title":          "Cline",
-		"User-Agent":       "9Router/1.2.3",
+		"User-Agent":       "Alyysha/1.2.3",
 		"X-PLATFORM":       nodePlatform(),
-		"X-CLIENT-TYPE":    "9router",
+		"X-CLIENT-TYPE":    "alyysha",
 		"X-CLIENT-VERSION": "1.2.3",
 		"X-CORE-VERSION":   "1.2.3",
 		"X-IS-MULTIROOT":   "false",
@@ -30,7 +30,7 @@ func TestClineIdentityHeaders(t *testing.T) {
 	}
 	// Extra headers merge (probe Accept).
 	h = ClineIdentityHeaders("v", map[string]string{"Accept": "application/json"})
-	if h["Accept"] != "application/json" || h["User-Agent"] != "9Router/v" {
+	if h["Accept"] != "application/json" || h["User-Agent"] != "Alyysha/v" {
 		t.Fatalf("extra merge = %+v", h)
 	}
 	// Registry literals carry no stale impersonation.

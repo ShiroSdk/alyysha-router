@@ -1,4 +1,4 @@
-<!-- 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   import { api, type APIKey, type APIKeyPolicy, type Plan } from '../../api/client'
   import { Loader2, Save, X } from 'lucide-svelte'

@@ -1,8 +1,8 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/log"
 	"bytes"
 	"context"
 	"crypto/hmac"
@@ -21,10 +21,10 @@ import (
 
 	"github.com/google/uuid"
 
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/proxy"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/proxy"
+	"alyysha/proxy/internal/translator"
 )
 
 // jsonErrorBody renders an error payload as JSON.
@@ -295,7 +295,7 @@ func kiroUpstreamBody(req *Request) ([]byte, error) {
 	if _, after, ok := strings.Cut(model, "/"); ok {
 		model = after
 	}
-	// -thinking / -agentic are 9router fictions, stripped before upstream.
+	// -thinking / -agentic are alyysha fictions, stripped before upstream.
 	model = strings.TrimSuffix(model, "-thinking")
 	model = strings.TrimSuffix(model, "-agentic")
 	if idx := strings.IndexByte(model, '('); idx > 0 {
@@ -596,7 +596,7 @@ func ForwardCommandcode(w http.ResponseWriter, req *Request) error {
 	// carries its session in the body (Claude Code's metadata.user_id) or
 	// sends no session at all must not fall through to a per-request random
 	// id — that re-cached the whole prefix on every request (upstream
-	// decolua/9router#5006 measured 0 cache reads on 4.7B prompt tokens).
+	// decolua/alyysha#5006 measured 0 cache reads on 4.7B prompt tokens).
 	reqBody, err := buildCommandcodeBodyForSession(body, oreq.Model,
 		commandcodeSessionKey(body, req.SessionID, req.ConnectionID))
 	if err != nil {
@@ -1148,7 +1148,7 @@ func convertOpenAIToolsToClaude(tools []any) []any {
 
 // toolStrict resolves an explicit tool strict mode, preferring the flat
 // Responses/Codex shape and falling back to the Chat-Completions `function`
-// shape (parity with decolua/9router#4543/#4573). An absent or non-boolean
+// shape (parity with decolua/alyysha#4543/#4573). An absent or non-boolean
 // strict stays absent — the flag must never be invented.
 func toolStrict(tool, fn map[string]any) (bool, bool) {
 	if strict, ok := tool["strict"].(bool); ok {
@@ -1570,7 +1570,7 @@ func outputBudgetOf(v any) (int64, bool) {
 }
 
 // museSparkEffortSuffix returns the reasoning effort a caller encoded in the
-// model id, e.g. "muse-spark-1.3(high)". The parenthesised level is 9router
+// model id, e.g. "muse-spark-1.3(high)". The parenthesised level is alyysha
 // request notation and never part of the wire id — which is why the callers
 // strip it before dispatch — but the intent it carried is still the caller's.
 func museSparkEffortSuffix(rawModel string) string {

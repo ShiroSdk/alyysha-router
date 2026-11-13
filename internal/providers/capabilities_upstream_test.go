@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package providers
 
 import (
@@ -79,7 +79,7 @@ func TestGetCapabilitiesForModel_DeepseekV41FlashAlias(t *testing.T) {
 	}
 }
 
-// Port of upstream tests/unit/tokenharbor-free-models.test.js (decolua/9router
+// Port of upstream tests/unit/tokenharbor-free-models.test.js (decolua/alyysha
 // PR #4564): the offline seed list Token Harbor shows before a key is saved
 // must carry the rotating free tier, and the ":free" suffix must not knock an
 // id out of the family pattern that gives it its window and modalities.
@@ -168,7 +168,7 @@ func TestTokenHarborFreeDeepseekIsNotUnknown(t *testing.T) {
 }
 
 // Port of upstream tests/unit/gpt-6-context-window.test.js (89ffac5a), minus
-// the gateway rows 9routerx does not carry (Kiro 272k / Codex 272k+372k /
+// the gateway rows alyysha does not carry (Kiro 272k / Codex 272k+372k /
 // Devin CLI 200k live in this port's provider tables, not in capabilities.js).
 // The order of the tier rows is the load-bearing part: move mini/nano below
 // *gpt-5.4* and they silently report 1.05M.

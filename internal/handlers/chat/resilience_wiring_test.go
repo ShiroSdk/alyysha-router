@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -8,10 +8,10 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/promptcache"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/resilience"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/promptcache"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/resilience"
 )
 
 // resilienceTestConfig is the minimal provider config the admit path reads.
@@ -210,7 +210,7 @@ func TestResilienceDistinguishesCredentials(t *testing.T) {
 func TestResilienceProxyKeySeparatesGates(t *testing.T) {
 	direct := resilienceTestConfig()
 	pooled := resilienceTestConfig()
-	pooled.HeaderOverrides = map[string]string{"x-9router-proxy-pool": "pool-1"}
+	pooled.HeaderOverrides = map[string]string{"x-alyysha-proxy-pool": "pool-1"}
 
 	if resilienceProxyKey(direct) != "direct" {
 		t.Errorf("resilienceProxyKey(no pool) = %q, want direct", resilienceProxyKey(direct))

@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Unit abbreviation toggle (localStorage: compactUnits, default ON).
 // When enabled: ≥1e9 → B, ≥1e6 → M, ≥1e3 → K.
 // When disabled: always full thousand-separated numbers.

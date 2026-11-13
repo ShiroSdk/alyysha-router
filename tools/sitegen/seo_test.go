@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package main
 
 import (
@@ -98,7 +98,7 @@ func TestCorpusInlineCode(t *testing.T) {
 func TestStructuredData(t *testing.T) {
 	body := []byte(`<h1 id="readme">Readme</h1><h2>Frequently Asked Questions (FAQ)</h2><details><summary>Can I use &quot;quotes&quot;?</summary><p>Yes, with &lt;/script&gt; escaped.</p></details><h2>Other</h2><details><summary>Not an FAQ</summary><p>Exclude this answer.</p></details>`)
 	for _, version := range []string{"9.9.9", ""} {
-		output, err := renderPage(body, "yanstd888/9routerx", heroStats{Version: version})
+		output, err := renderPage(body, "ShiroSdk/alyysha-router", heroStats{Version: version})
 		if err != nil {
 			t.Fatal(err)
 		}

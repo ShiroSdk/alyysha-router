@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Draft helpers for a provider node's capacity limits.
 //
 // The form holds text (the shared Input component binds strings, and a date input

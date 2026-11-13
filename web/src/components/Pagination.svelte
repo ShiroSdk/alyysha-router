@@ -1,4 +1,4 @@
-<!-- 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   // Pagination for a paged list: the page label on the left, the prev/next
   // pair on the right. Both lists on the jailbreak page used to carry this
@@ -27,7 +27,7 @@
       onclick={() => onPage(Math.max(1, page - 1))}
       disabled={page <= 1}
       aria-label="Previous page"
-      class="px-3 py-1.5 bg-surface-3 border border-border-subtle shadow-[var(--9x-shadow-sm)] text-text-main text-sm font-medium disabled:opacity-40 disabled:shadow-none disabled:cursor-not-allowed"
+      class="px-3 py-1.5 bg-surface-3 border border-border-subtle shadow-[var(--ay-shadow-sm)] text-text-main text-sm font-medium disabled:opacity-40 disabled:shadow-none disabled:cursor-not-allowed"
     >
       ‹
     </button>
@@ -36,7 +36,7 @@
       onclick={() => onPage(Math.min(pageCount, page + 1))}
       disabled={page >= pageCount}
       aria-label="Next page"
-      class="px-3 py-1.5 bg-surface-3 border border-border-subtle shadow-[var(--9x-shadow-sm)] text-text-main text-sm font-medium disabled:opacity-40 disabled:shadow-none disabled:cursor-not-allowed"
+      class="px-3 py-1.5 bg-surface-3 border border-border-subtle shadow-[var(--ay-shadow-sm)] text-text-main text-sm font-medium disabled:opacity-40 disabled:shadow-none disabled:cursor-not-allowed"
     >
       ›
     </button>

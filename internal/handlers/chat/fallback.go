@@ -1,23 +1,23 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/resilience"
-	"9routerx/proxy/internal/securitylog"
-	"9routerx/proxy/internal/headroom"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/middleware"
-	"9routerx/proxy/internal/observ"
-	"9routerx/proxy/internal/providers"
-		"9routerx/proxy/internal/proxy/executor"
-		"9routerx/proxy/internal/thinking"
-		"9routerx/proxy/internal/tokensaver"
-		"9routerx/proxy/internal/tokensaver/antislop"
-		"9routerx/proxy/internal/tracing"
-	"9routerx/proxy/internal/translator"
-	"9routerx/proxy/internal/usagetracker"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/resilience"
+	"alyysha/proxy/internal/securitylog"
+	"alyysha/proxy/internal/headroom"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/middleware"
+	"alyysha/proxy/internal/observ"
+	"alyysha/proxy/internal/providers"
+		"alyysha/proxy/internal/proxy/executor"
+		"alyysha/proxy/internal/thinking"
+		"alyysha/proxy/internal/tokensaver"
+		"alyysha/proxy/internal/tokensaver/antislop"
+		"alyysha/proxy/internal/tracing"
+	"alyysha/proxy/internal/translator"
+	"alyysha/proxy/internal/usagetracker"
 	"bytes"
 	"context"
 	json "encoding/json/v2"
@@ -30,7 +30,7 @@ import (
 	"strings"
 	"time"
 
-	internalproxy "9routerx/proxy/internal/proxy"
+	internalproxy "alyysha/proxy/internal/proxy"
 )
 
 // StatusClientClosedRequest is the canonical HTTP status for client connection aborts (nginx 499).
@@ -1065,7 +1065,7 @@ func (h *ChatHandler) tryForwardWithConnection(f forwardRequestParams) error {
 		})
 	}
 
-	// Inject served route response headers (x-9router-provider, x-9router-model, etc.)
+	// Inject served route response headers (x-alyysha-provider, x-alyysha-model, etc.)
 	// before any executor or forwarding function writes headers to w.
 	injectRouteHeaders(w, provider, model, f.ComboName, f.Attempts)
 

@@ -22,7 +22,7 @@ Shows where your data lives and lets you move it in and out.
 
 | Field | What it is |
 |---|---|
-| Database location | Shown for reference: `~/.9router/db/data.sqlite`. Change it with `DATA_DIR` or `DB_PATH` — see [CLI](cli.html) |
+| Database location | Shown for reference: `~/.alyysha/db/data.sqlite`. Change it with `DATA_DIR` or `DB_PATH` — see [CLI](cli.html) |
 
 Two buttons:
 
@@ -176,7 +176,7 @@ Rename the product for anyone you share the dashboard with.
 
 | Field | Notes |
 |---|---|
-| Application name | Shown in the sidebar. Leave blank for `9routerx` |
+| Application name | Shown in the sidebar. Leave blank for `alyysha` |
 | Logo URL | An HTTPS URL, or a local absolute path such as `/logo.png` |
 | Upload image | PNG, SVG, WebP or JPEG, max 2 MB. The file is stored in the gateway's own data directory and the URL field is filled in for you |
 

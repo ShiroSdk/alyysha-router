@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"strings"
 
-	"9routerx/proxy/internal/proxy"
+	"alyysha/proxy/internal/proxy"
 )
 
 const copilotContextOverflowMsgPrefix = "Your input exceeds the context window of this model."
@@ -15,7 +15,7 @@ const ContextLengthExceededCode = "context_length_exceeded"
 
 // ForwardGithub handles GitHub Copilot requests, normalizing Copilot context overflow
 // errors (400 invalid_request_body with "Your input exceeds...") into standard
-// context_length_exceeded error codes (upstream decolua/9router PR #5280 parity).
+// context_length_exceeded error codes (upstream decolua/alyysha PR #5280 parity).
 func ForwardGithub(w http.ResponseWriter, req *Request) error {
 	err := ForwardOpenAI(w, req)
 	if err == nil {

@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package oauth
 
 import (
@@ -9,7 +9,7 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/db"
 )
 
 func seedFreebuffConnection(t *testing.T, database *sql.DB, id, data string) {

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+# Alyysha Router — built by YannClipper — https://t.me/YannClippers
 #
 # Live end-to-end check for the deepseek-web executor, driven by you, not by CI.
 #
@@ -77,7 +77,7 @@ cleanup() {
 trap cleanup EXIT
 
 echo "== building"
-go build -o "$workdir/9router" ./cmd/9routerx
+go build -o "$workdir/alyysha" ./cmd/alyysha
 
 # auth.CLIToken() derives from two files under DATA_DIR and creates them on first
 # use. Seed them before the server starts, in the exact format
@@ -95,7 +95,7 @@ PY
 echo "== starting gateway on :$PORT"
 PORT="$PORT" DATA_DIR="$workdir/data" \
   ALLOW_PRIVATE_NETWORKING=true \
-  "$workdir/9router" >"$workdir/gateway.log" 2>&1 &
+  "$workdir/alyysha" >"$workdir/gateway.log" 2>&1 &
 gw_pid=$!
 
 

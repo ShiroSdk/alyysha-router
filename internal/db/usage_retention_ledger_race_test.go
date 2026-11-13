@@ -1,11 +1,11 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package db
 
 import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 // A reset that commits while a prune is running must not be undone by the prune.

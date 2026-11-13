@@ -1,4 +1,4 @@
-# 9RouterX Native Embedded Dashboard: Build and Architecture Guide
+# Alyysha Router Native Embedded Dashboard: Build and Architecture Guide
 
 This document describes the current native Go gateway and its embedded Svelte/Vite dashboard. It is a build and operations guide, not a feature-compatibility checklist. The current release metadata is `v1.9.1`; the repository manifest tracks upstream `v0.5.85`, while the changelog separately lists `v0.5.86` parity items. Do not treat those statements as a complete upstream-parity guarantee.
 
@@ -9,7 +9,7 @@ The Go process owns the HTTP server, SQLite repository, authentication, proxy ha
 ```mermaid
 graph LR
   S[Svelte/Vite source] -->|bun run build| D[web/dist]
-  D -->|go:embed| B[9routerx executable]
+  D -->|go:embed| B[alyysha executable]
   B --> H[Go HTTP server and SQLite]
   B --> W[Embedded dashboard assets]
 ```
@@ -22,7 +22,7 @@ Install the versions used by the repository before building:
 
 - Go **1.27** (from `go.mod` and the release workflow).
 - Bun **1.4.2** (from `.github/workflows/ci.yml` and `release.yml`).
-- A writable `DATA_DIR`, or the default platform data directory (`~/.9router` on Unix-like systems, `%APPDATA%/9router` on Windows).
+- A writable `DATA_DIR`, or the default platform data directory (`~/.alyysha` on Unix-like systems, `%APPDATA%/alyysha` on Windows).
 - Configuration for `JWT_SECRET` and `INITIAL_PASSWORD` when deploying. The application can generate a JWT secret when one is not supplied, but operators should set a strong value explicitly. Do not ship a known initial password.
 - For optional release/cross-build work: the target Go toolchains and the platform-specific tools required by the selected build path. `RTK` is optional and is not required to build.
 
@@ -67,7 +67,7 @@ For a direct build, complete the frontend step first and then run:
 
 ```bash
 test -f web/dist/index.html
-go build -ldflags="-s -w -X '9routerx/proxy/internal/updater.CurrentVersion=$(cat VERSION)'" -o 9routerx ./cmd/9routerx
+go build -ldflags="-s -w -X 'alyysha/proxy/internal/updater.CurrentVersion=$(cat VERSION)'" -o alyysha ./cmd/alyysha
 ```
 
 RTK may wrap the Go command in a developer environment, but it is optional and must not obscure failures from `go build`.
@@ -77,10 +77,10 @@ RTK may wrap the Go command in a developer environment, but it is optional and m
 Configure a data directory and secrets, then start the binary:
 
 ```bash
-export DATA_DIR="$HOME/.9router"
+export DATA_DIR="$HOME/.alyysha"
 export JWT_SECRET="$(openssl rand -hex 32)" # use a persistent, protected value in deployments
 export INITIAL_PASSWORD='set-a-unique-local-password'
-PORT=20128 ./9routerx
+PORT=20128 ./alyysha
 ```
 
 The server listens on `http://localhost:20128` by default. Check both the gateway and the embedded dashboard:
@@ -100,7 +100,7 @@ Before using an existing SQLite file, verify that its schema is compatible with 
 The Dockerfile is self-contained for a normal image build: its frontend stage installs Bun dependencies and builds `web/dist`, and the Go stage downloads modules and embeds the generated assets. It still requires network access to fetch Go and Bun modules, sufficient build resources, and a valid `VERSION` argument/fallback.
 
 ```bash
-VERSION="$(cat VERSION)" docker build -t 9routerx .
+VERSION="$(cat VERSION)" docker build -t alyysha .
 ```
 
 The runtime image contains the Go binary and CA/time-zone support; it does not require a JavaScript runtime. Persistent application data must be mounted outside the container image and passed with `DATA_DIR`.

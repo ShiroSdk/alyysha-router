@@ -1,11 +1,11 @@
 # Changelog
 
-All notable changes to **9RouterX** are documented in this file. The format
+All notable changes to **Alyysha Router** are documented in this file. The format
 follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and this
 project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 Release history up to the fork point is archived in the upstream repo's
-[CHANGELOG.md](https://github.com/luqman-v1/9router-go/blob/main/CHANGELOG.md).
+[CHANGELOG.md](https://github.com/luqman-v1/alyysha-go/blob/main/CHANGELOG.md).
 
 ## [Unreleased]
 
@@ -55,7 +55,7 @@ Release history up to the fork point is archived in the upstream repo's
 ### Added
 
 - **llms.txt** — the Pages site now publishes the LLM-crawler site map at
-  `https://yanstd888.github.io/9routerx/llms.txt`: every documentation page,
+  `https://shirosdk.github.io/alyysha/llms.txt`: every documentation page,
   the registry facts (155 providers, 248 free models / 24 keyless) and the
   quick facts AI assistants need to drive the gateway.
 - **JSON-LD structured data** — the homepage carries a schema.org
@@ -64,7 +64,7 @@ Release history up to the fork point is archived in the upstream repo's
 
 ### Changed
 
-- **npm package metadata** — the `9routerx` package description and keywords
+- **npm package metadata** — the `alyysha` package description and keywords
   now describe what the gateway actually does (token saver, Claude Code /
   Cursor / Cline / Codex routing, keyless free models, MCP Server, A2A) instead
   of five generic words.
@@ -75,11 +75,11 @@ Release history up to the fork point is archived in the upstream repo's
 
 - **Releases-API fallback could replace the gateway with the tray binary** —
   caught by the v1.1.0→v1.1.1 release E2E. GitHub lists release assets
-  alphabetically, so `9routerx-tray-windows-amd64.exe` sorts before
-  `9routerx-windows-amd64.exe`, and the updater's asset matcher — which
+  alphabetically, so `alyysha-tray-windows-amd64.exe` sorts before
+  `alyysha-windows-amd64.exe`, and the updater's asset matcher — which
   substring-matches OS and arch — returned the tray. The install then
   verified cleanly (the digest was the tray's own SHA256SUMS entry) and
-  replaced `9routerx.exe` with the systray companion. The matcher now skips
+  replaced `alyysha.exe` with the systray companion. The matcher now skips
   tray assets in both its scan and its non-checksum fallback, so the fallback
   can only ever select the main binary, wherever the tray asset sits in the
   list. The manifest path was never affected: `downloadUrls` names the main
@@ -92,16 +92,16 @@ Release history up to the fork point is archived in the upstream repo's
 ### Fixed
 
 - **Tray companion name** — the Windows tray tooltip and menu header still
-  rendered the old product name ("9Router Go (Stopped)", "9Router Go (Port
+  rendered the old product name ("Alyysha Go (Stopped)", "Alyysha Go (Port
   20128)", …) on released v1.1.0 binaries. The state titles in `internal/tray`
-  now say **9RouterX** in every state (Running / Stopped / Port conflict /
-  Unknown); no user-visible "9Router Go" string remains in the tray tree.
+  now say **Alyysha Router** in every state (Running / Stopped / Port conflict /
+  Unknown); no user-visible "Alyysha Go" string remains in the tray tree.
 - **Tray and executable icons** — the tray icon and the Windows executables
-  still carried the old 9router-go artwork. `tools/icongen` (new) builds the
+  still carried the old alyysha-go artwork. `tools/icongen` (new) builds the
   multi-size `.ico` (16/24/32/48/64/128/256 px frames, 32-bit BGRA + AND
-  mask) straight from the 9RouterX logo (`web/public/logo-9routerx.png`);
-  `cmd/9routerx-tray/tray.ico` is regenerated (the go:embed'd runtime tray
-  icon) and both `9routerx.exe` and `9routerx-tray.exe` now embed it as a
+  mask) straight from the Alyysha Router logo (`web/public/logo-alyysha.png`);
+  `cmd/alyysha-tray/tray.ico` is regenerated (the go:embed'd runtime tray
+  icon) and both `alyysha.exe` and `alyysha-tray.exe` now embed it as a
   Windows resource (`rsrc_windows_amd64.syso`, generated with go-winres and
   linked automatically by `go build`), so Explorer, the taskbar and the tray
   all show the new icon. Regenerate after a logo change with `make icons`.
@@ -120,7 +120,7 @@ Release history up to the fork point is archived in the upstream repo's
 
 ### Added
 
-- **Interactive CLI menu** — bare `9routerx` on a real terminal now shows an
+- **Interactive CLI menu** — bare `alyysha` on a real terminal now shows an
   arrow-key picker (Bubble Tea + lipgloss, MIT; highlight uses the dashboard
   accent `#2f5bd3`): ↑/↓ or j/k navigate, Enter selects, q/Esc/Ctrl+C quit.
   Number keys `1`-`6` with `0` exit keep the old direct-select behaviour and
@@ -131,11 +131,11 @@ Release history up to the fork point is archived in the upstream repo's
 ### Changed
 
 - BREAKING-ish: default port 888 → 20128 for ecosystem compatibility with
-  9router / 9router-go; set `PORT=888` to keep the old behavior.
+  alyysha / alyysha-go; set `PORT=888` to keep the old behavior.
 - docs: npm install as primary install path; npm badges
 - docs: acknowledgments table with live star badges; attribution fixes (headroom source, frontend deps)
 - CLI output is emoji-free: the update notice prints as
-  `[UPDATE] v<x.y.z> available — run '9routerx update'`, success lines print
+  `[UPDATE] v<x.y.z> available — run 'alyysha update'`, success lines print
   `[OK]`, warnings print `[WARN]`.
 - Errors from menu actions (start against a busy port, failed stop) render
   inside the interactive picker instead of being lost on the redrawn screen.
@@ -144,7 +144,7 @@ Release history up to the fork point is archived in the upstream repo's
 
 ## [v1.0.0] - 2026-11-06
 
-Forked from 9router-go (luqman-v1), upstream decolua/9router — attribution and thanks.
+Forked from alyysha-go (luqman-v1), upstream decolua/alyysha — attribution and thanks.
 
 ### Added
 
@@ -163,13 +163,13 @@ Forked from 9router-go (luqman-v1), upstream decolua/9router — attribution and
 - **Config bundle** — import/export of configuration bundles.
 - **Web executors** — ChatGPT web executor and browser-based provider executors.
 - **Dashboard phase 4** — API key metrics, search/filter, bulk create, success rate and loop detection.
-- **9RouterX rebranding** — full rebrand across README, wiki, skills, and docs; binary `9routerx` (`9routerx-tray` for the tray companion); module path `9routerx/proxy`; repository `github.com/yanstd888/9routerx`; wiki `yanstd888.github.io/9routerx`.
+- **Alyysha Router rebranding** — full rebrand across README, wiki, skills, and docs; binary `alyysha` (`alyysha-tray` for the tray companion); module path `alyysha/proxy`; repository `github.com/ShiroSdk/alyysha-router`; wiki `shirosdk.github.io/alyysha`.
 
 ### Changed
 
-- **BREAKING**: environment variables are renamed from `NINEROUTER_*` / `9ROUTER_*` to the `9ROUTERX_*` prefix (e.g. `9ROUTERX_URL`, `9ROUTERX_KEY`). Migration: rename the variables in your `.env`, shell profile, and deployment manifests; legacy spellings are still accepted for one release via the `internal/envcompat` fallback with a deprecation warning, and are dropped afterwards.
-- **BREAKING**: product name `9router-go` becomes **9RouterX** — repository links now point at `github.com/yanstd888/9routerx`, the binary and CLI commands are `9routerx`, the module path is `9routerx/proxy`, and installers are fetched from `raw.githubusercontent.com/yanstd888/9routerx`.
+- **BREAKING**: environment variables are renamed from `NINEROUTER_*` / `ALYYSHA_*` to the `ALYYSHA_*` prefix (e.g. `ALYYSHA_URL`, `ALYYSHA_KEY`). Migration: rename the variables in your `.env`, shell profile, and deployment manifests; legacy spellings are still accepted for one release via the `internal/envcompat` fallback with a deprecation warning, and are dropped afterwards.
+- **BREAKING**: product name `alyysha-go` becomes **Alyysha Router** — repository links now point at `github.com/ShiroSdk/alyysha-router`, the binary and CLI commands are `alyysha`, the module path is `alyysha/proxy`, and installers are fetched from `raw.githubusercontent.com/ShiroSdk/alyysha-router`.
 - **BREAKING**: default gateway port `20130` → `888`. Migration: set `PORT=20130` in your `.env` to keep the old port.
 
-[1.1.0]: https://github.com/yanstd888/9routerx/releases/tag/v1.1.0
-[1.0.0]: https://github.com/yanstd888/9routerx/releases/tag/v1.0.0
+[1.1.0]: https://github.com/ShiroSdk/alyysha-router/releases/tag/v1.1.0
+[1.0.0]: https://github.com/ShiroSdk/alyysha-router/releases/tag/v1.0.0

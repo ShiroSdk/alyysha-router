@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -8,9 +8,9 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/freeresilience"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/freeresilience"
+	"alyysha/proxy/internal/providers"
 )
 
 // chatCompletionBody is a minimal 200 answer the second upstream serves.

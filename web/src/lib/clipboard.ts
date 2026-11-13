@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 /**
  * Copies text to the clipboard with fallback for non-secure contexts (HTTP / LAN IP).
  */

@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -11,12 +11,12 @@ import (
 
 	"golang.org/x/crypto/bcrypt"
 
-	"9routerx/proxy/internal/auth"
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/auth"
+	"alyysha/proxy/internal/db"
 )
 
 // authTestEnv pins the JWT secret and data dir so session cookies are
-// deterministic and tests never touch the real ~/.9router.
+// deterministic and tests never touch the real ~/.alyysha.
 func authTestEnv(t *testing.T) {
 	t.Helper()
 	t.Setenv("JWT_SECRET", "dashboard-auth-test-secret")

@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -10,7 +10,7 @@ import (
 	"net/url"
 	"strings"
 
-	"9routerx/proxy/internal/proxy/executor"
+	"alyysha/proxy/internal/proxy/executor"
 )
 
 // Probes for the browser-login providers, mirroring OmniRoute's

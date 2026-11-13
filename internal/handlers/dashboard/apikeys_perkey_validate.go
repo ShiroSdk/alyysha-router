@@ -1,11 +1,11 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
 	"encoding/json"
 	"fmt"
 
-	"9routerx/proxy/internal/models"
+	"alyysha/proxy/internal/models"
 )
 
 // apikeys_perkey_validate.go validates the serenhope per-key governance fields

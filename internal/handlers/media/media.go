@@ -1,17 +1,17 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package media
 
 import (
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlers/chat"
-	"9routerx/proxy/internal/handlers/shared"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/middleware"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/proxy"
-	"9routerx/proxy/internal/usagetracker"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlers/chat"
+	"alyysha/proxy/internal/handlers/shared"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/middleware"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/proxy"
+	"alyysha/proxy/internal/usagetracker"
 	"bytes"
 	"context"
 	"encoding/base64"
@@ -1546,7 +1546,7 @@ func buildSystemoneURL(override, cfgURL, cfgPath string) string {
 }
 
 // forwardGeminiEmbeddingDimensions maps incoming OpenAI "dimensions" to
-// Google Gemini's "outputDimensionality" property (upstream decolua/9router#1366 parity).
+// Google Gemini's "outputDimensionality" property (upstream decolua/alyysha#1366 parity).
 func forwardGeminiEmbeddingDimensions(body []byte) []byte {
 	var payload map[string]any
 	if err := json.Unmarshal(body, &payload); err != nil {

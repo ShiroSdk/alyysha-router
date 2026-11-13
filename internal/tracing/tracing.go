@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Package tracing provides lightweight in-process request tracing with
 // latency percentiles per provider+model, exported over an HTTP endpoint.
 // It is intentionally dependency-free (stdlib only) — swap for the full

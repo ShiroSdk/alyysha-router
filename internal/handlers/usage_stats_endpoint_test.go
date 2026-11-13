@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package handlers
 
 import (
@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/db"
 )
 
 func TestHandleUsageStats_PopulatesByEndpoint(t *testing.T) {

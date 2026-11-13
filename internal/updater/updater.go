@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Package updater handles app versioning, release update checks, safe self-updating, and background auto-update.
 package updater
 
@@ -26,22 +26,22 @@ import (
 	"sync"
 	"time"
 
-	"9routerx/proxy/internal/daemon"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/shutdown"
+	"alyysha/proxy/internal/daemon"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/shutdown"
 	"net/url"
 )
 
-// CurrentVersion is the active 9routerx application version.
-// Can be overridden at build time via -ldflags "-X 9routerx/proxy/internal/updater.CurrentVersion=1.8.8"
+// CurrentVersion is the active alyysha application version.
+// Can be overridden at build time via -ldflags "-X alyysha/proxy/internal/updater.CurrentVersion=1.8.8"
 // Default fallback is read from version.json at init if not overridden.
 var CurrentVersion = "1.1.4"
 
 // DefaultUpdateURL is the primary remote version manifest URL.
-var DefaultUpdateURL = "https://raw.githubusercontent.com/yanstd888/9routerx/main/version.json"
+var DefaultUpdateURL = "https://raw.githubusercontent.com/ShiroSdk/alyysha-router/main/version.json"
 
 // DefaultGitHubRepo is the repository for GitHub Releases API fallback.
-var DefaultGitHubRepo = "yanstd888/9routerx"
+var DefaultGitHubRepo = "ShiroSdk/alyysha-router"
 
 // pinnedManifestHost is the only host the manifest channel may ever be pointed
 // at, no matter what the environment says (anti-SSRF; see manifestURL). The
@@ -83,7 +83,7 @@ type UpdateInfo struct {
 	Source         string `json:"source,omitempty"` // "manifest" or "github_releases"
 	// Release-channel fields from the merged contract. MinVersion is the oldest
 	// release the publisher still supports; ReleaseURL is the human release
-	// page (the banner links it only when its host is github.com/yanstd888).
+	// page (the banner links it only when its host is github.com/ShiroSdk).
 	MinVersion  string `json:"minVersion,omitempty"`
 	ReleaseURL  string `json:"releaseUrl,omitempty"`
 	PublishedAt string `json:"publishedAt,omitempty"`
@@ -253,7 +253,7 @@ func isSafeRepo(s string) bool {
 // every install that reaches it, and the fallback that CAN fill the digest from
 // the release's SHA256SUMS.txt would never run. version.json ships exactly
 // three keys — downloadUrl, latestVersion, releaseNotes — so taking it on trust
-// made the checksum path unreachable in production and broke `9routerx
+// made the checksum path unreachable in production and broke `alyysha
 // update` outright. A manifest without a digest therefore falls through to the
 // GitHub Releases API, and its version metadata is used only if that fails too.
 func CheckUpdate(ctx context.Context) (*UpdateInfo, error) {
@@ -435,7 +435,7 @@ func checkGitHubReleases(ctx context.Context, apiURL string) (*UpdateInfo, error
 		return nil, err
 	}
 	req.Header.Set("Accept", "application/vnd.github.v3+json")
-	req.Header.Set("User-Agent", "9routerx/"+CurrentVersion)
+	req.Header.Set("User-Agent", "alyysha/"+CurrentVersion)
 
 	client := &http.Client{Timeout: 10 * time.Second}
 	resp, err := client.Do(req)
@@ -513,10 +513,10 @@ func archAliases(archKey string) []string {
 // matchReleaseAsset finds the best matching asset URL for target OS and
 // Architecture.
 //
-// Tray companion assets ("9routerx-tray-<os>-<arch>.exe") are never a match:
+// Tray companion assets ("alyysha-tray-<os>-<arch>.exe") are never a match:
 // they carry the same OS and arch substrings as the main binary, and GitHub
 // lists release assets alphabetically, so the tray sorts before
-// 9routerx-windows-amd64.exe — the first-cut matcher "updated" a Windows
+// alyysha-windows-amd64.exe — the first-cut matcher "updated" a Windows
 // install onto the tray binary, digest-verified against the tray's own
 // SHA256SUMS entry so nothing complained. The tray never self-updates through
 // this path, so it can never be the right answer here.
@@ -634,7 +634,7 @@ func PerformSelfUpdate(downloadURL, expectedSHA256 string) error {
 
 	// Create temporary binary file in the target directory
 	dir := filepath.Dir(execPath)
-	tmpFile, err := os.CreateTemp(dir, ".9routerx-update-*.tmp")
+	tmpFile, err := os.CreateTemp(dir, ".alyysha-update-*.tmp")
 	if err != nil {
 		return fmt.Errorf("create temp file: %w", err)
 	}
@@ -682,7 +682,7 @@ func PerformSelfUpdate(downloadURL, expectedSHA256 string) error {
 }
 
 const (
-	// A 9RouterX binary is under 100 MB, so these caps leave ample room for a
+	// A Alyysha Router binary is under 100 MB, so these caps leave ample room for a
 	// compressed binary plus its docs while bounding what a hostile or
 	// accidental archive can make the updater inflate before the digest is
 	// checked: expansion beyond them is an error, never a truncated read.
@@ -950,10 +950,10 @@ func scoreArchiveEntry(name string, content []byte) int {
 	low := strings.ToLower(name)
 
 	// Prefer entries containing the project name over generic files. The new
-	// 9routerx name and the legacy 9routerx asset names both score, so a
+	// alyysha name and the legacy alyysha asset names both score, so a
 	// release published under either convention still self-updates.
-	if strings.Contains(low, "9routerx") || strings.Contains(low, "9router_go") ||
-		strings.Contains(low, "9routerx") {
+	if strings.Contains(low, "alyysha") || strings.Contains(low, "alyysha_go") ||
+		strings.Contains(low, "alyysha") {
 		score += 10
 	}
 
@@ -1084,11 +1084,11 @@ func runCheckCycle(ctx context.Context) {
 	}
 
 	if !info.HasUpdate {
-		log.Debug("updater", "9routerx is up to date", "version", info.CurrentVersion)
+		log.Debug("updater", "alyysha is up to date", "version", info.CurrentVersion)
 		return
 	}
 
-	log.Info("updater", "NEW 9ROUTERX VERSION AVAILABLE!",
+	log.Info("updater", "NEW ALYYSHA VERSION AVAILABLE!",
 		"current", info.CurrentVersion,
 		"latest", info.LatestVersion,
 		"downloadUrl", info.DownloadURL,

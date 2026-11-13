@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 // Live catalogue resolution for the Zed provider.
@@ -11,10 +11,10 @@ package chat
 import (
 	"context"
 
-	"9routerx/proxy/internal/handlers/shared"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/models"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/handlers/shared"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/models"
+	"alyysha/proxy/internal/providers"
 )
 
 // fetchZedLiveCatalog returns the models Zed reports for this account.

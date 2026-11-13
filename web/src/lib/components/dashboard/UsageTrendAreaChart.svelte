@@ -1,4 +1,4 @@
-<!-- 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   // /* via shadcn-svelte (MIT) */ — adapted from the registry block
   // chart-area-gradient (LayerChart + Chart.Container + Chart.Tooltip), fed by

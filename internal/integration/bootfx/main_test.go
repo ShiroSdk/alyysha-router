@@ -1,6 +1,6 @@
 //go:build integration
 
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package bootfx
 
 import (
@@ -20,11 +20,11 @@ import (
 
 	"go.uber.org/fx"
 
-	"9routerx/proxy/internal/app"
-	"9routerx/proxy/internal/config"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/shutdown"
-	"9routerx/proxy/internal/updater"
+	"alyysha/proxy/internal/app"
+	"alyysha/proxy/internal/config"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/shutdown"
+	"alyysha/proxy/internal/updater"
 )
 
 // The whole package shares ONE application instance, started by TestMain and
@@ -78,7 +78,7 @@ func TestMain(m *testing.M) {
 	defer os.RemoveAll(dataDir)
 
 	// These keep config.LoadConfigFromViper and auth.CLIToken's file
-	// derivation off the developer's real ~/.9router.
+	// derivation off the developer's real ~/.alyysha.
 	env := map[string]string{
 		"DATA_DIR":         dataDir,
 		"JWT_SECRET":       "bootfx-jwt-secret",

@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	_ "9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/db"
+	_ "alyysha/proxy/internal/providers"
 )
 
 // A Kiro connection can carry BOTH an apiKey and an OAuth accessToken. Which one

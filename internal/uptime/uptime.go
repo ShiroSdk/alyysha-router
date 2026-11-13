@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Package uptime pushes a heartbeat to an Uptime Kuma (or any
 // Push-Monitor-compatible) endpoint, so an operator learns the gateway is down
 // from their monitor rather than from a CLI tool that stopped answering.
@@ -24,7 +24,7 @@ import (
 	"sync"
 	"time"
 
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/log"
 )
 
 // DefaultInterval is how often a heartbeat is pushed when the operator has not

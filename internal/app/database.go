@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package app
 
 import (
@@ -9,12 +9,12 @@ import (
 
 	"go.uber.org/fx"
 
-	"9routerx/proxy/internal/config"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/securitylog"
-	"9routerx/proxy/internal/translator"
-	"9routerx/proxy/internal/vault"
+	"alyysha/proxy/internal/config"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/securitylog"
+	"alyysha/proxy/internal/translator"
+	"alyysha/proxy/internal/vault"
 )
 
 // DatabaseModule handles database initialization and provides *sql.DB and *db.Repo.
@@ -40,7 +40,7 @@ func ProvideDatabase(lc fx.Lifecycle, cfg *config.Config) (*sql.DB, error) {
 		return nil, fmt.Errorf("database connect: %w", err)
 	}
 
-	// Upstream core schema bootstrap (fresh .9router): create the shared
+	// Upstream core schema bootstrap (fresh .alyysha): create the shared
 	// tables/indexes when absent, backfill missing columns, and seed the
 	// minimal rows. Idempotent — existing user data is never touched.
 	// Best-effort like leases below: a shared test binary may hand us a

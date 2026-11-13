@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package proxy
 
 import (
@@ -10,7 +10,7 @@ import (
 // request can serialize to different bytes on every attempt. Prefix-based
 // prompt caches upstream (DeepSeek, Anthropic, OpenAI, Kimi, ...) key on the
 // exact request bytes, so a randomized order turns the shared prefix of every
-// turn after the first into a full cache miss. The JavaScript 9router this
+// turn after the first into a full cache miss. The JavaScript alyysha this
 // project rewrites keeps insertion order and is deterministic by construction;
 // sorting restores that property here.
 var deterministicOpts = json.Deterministic(true)

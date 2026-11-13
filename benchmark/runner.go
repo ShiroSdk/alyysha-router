@@ -1,6 +1,6 @@
 //go:build ignore
 
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Benchmark runner. It measures a gateway the operator already started
 // (G05/G00 sandbox, synthetic state). It does not boot a gateway, start or
 // kill processes, or touch SQLite — a fake in-process proxy made earlier
@@ -22,7 +22,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"9routerx/proxy/internal/proxy"
+	"alyysha/proxy/internal/proxy"
 )
 
 type Config struct {
@@ -379,7 +379,7 @@ func main() {
 	}
 
 	fmt.Println("==================================================")
-	fmt.Println("9Router benchmark — measuring the real gateway")
+	fmt.Println("Alyysha benchmark — measuring the real gateway")
 	fmt.Printf("target=%s stream=%v requests=%d\n", cfg.Target, cfg.Stream, cfg.Requests)
 	fmt.Println("==================================================")
 

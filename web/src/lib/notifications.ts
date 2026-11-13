@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Port of upstream src/store/notificationStore.js (zustand) to a Svelte store.
 // Global toast notification system used across dashboard pages.
 import { writable } from 'svelte/store'

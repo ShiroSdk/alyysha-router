@@ -1,11 +1,11 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package oauth
 
 import (
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/updater"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/updater"
 	"bytes"
 	"context"
 	"encoding/base64"
@@ -47,7 +47,7 @@ func clineProvider(p string) (string, bool) {
 
 // HandleClineAuthorize returns the Cline (api.cline.bot) authorization URL with PKCE challenge.
 // GET /api/oauth/cline/authorize?provider=cline|clinepass
-// Mirrors upstream 9router: client_type=extension; the callback follows the
+// Mirrors upstream alyysha: client_type=extension; the callback follows the
 // dashboard host (override via ?redirect_uri=).
 func (h *OAuthHandler) HandleClineAuthorize(w http.ResponseWriter, r *http.Request) {
 	provider, ok := clineProvider(r.URL.Query().Get("provider"))

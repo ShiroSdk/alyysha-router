@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package testingparity
 
 import (
@@ -12,9 +12,9 @@ import (
 
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/middleware"
-	"9routerx/proxy/internal/models"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/middleware"
+	"alyysha/proxy/internal/models"
 )
 
 // parity_cost_reset_test.go ports the daily-cost-cap semantics of serenhope

@@ -1,7 +1,7 @@
-# 9RouterX — Agent & Developer Guide
+# Alyysha Router — Agent & Developer Guide
 
-> **Upstream Source of Truth**: This repository (`9RouterX`) is the high-performance Go implementation of [**decolua/9router**](https://github.com/decolua/9router).
-> The upstream reference implementation is cloned locally at `../9router`.
+> **Upstream Source of Truth**: This repository (`Alyysha Router`) is the high-performance Go implementation of [**decolua/alyysha**](https://github.com/decolua/alyysha).
+> The upstream reference implementation is cloned locally at `../alyysha`.
 > For complete codebase mapping, Golang optimization standards, Svelte 5 frontend standards, standard Go unit testing conventions, and upstream sync protocols, **ALWAYS READ `AGENTS.md`**.
 
 ## graphify

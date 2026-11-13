@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package handlers
 
 import (
@@ -16,7 +16,7 @@ var inlineImageMime = map[string]string{
 	"webp": "image/webp",
 }
 
-// HandleKiro intercepts Kiro AWS EventStream requests and forwards to 9router.
+// HandleKiro intercepts Kiro AWS EventStream requests and forwards to alyysha.
 // It preserves inline images in OpenAI MITM and removes redundant systemPrompt.
 func HandleKiro(w http.ResponseWriter, r *http.Request, body []byte) {
 	var reqBody map[string]any
@@ -25,7 +25,7 @@ func HandleKiro(w http.ResponseWriter, r *http.Request, body []byte) {
 		return
 	}
 
-	// Fix(kiro): remove redundant top-level systemPrompt field and agentMode (decolua/9router #3776 / #1892ed7)
+	// Fix(kiro): remove redundant top-level systemPrompt field and agentMode (decolua/alyysha #3776 / #1892ed7)
 	delete(reqBody, "systemPrompt")
 	delete(reqBody, "agentMode")
 	if cs, ok := reqBody["conversationState"].(map[string]any); ok {

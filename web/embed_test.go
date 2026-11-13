@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package web_test
 
 import (
@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/web"
+	"alyysha/proxy/web"
 )
 
 func TestHandler_PWAAssets(t *testing.T) {

@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 /**
  * Vendors the fonts the dashboard ships, and instances the Material Symbols
  * icon font down to the axes the UI actually uses.

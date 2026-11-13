@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package tray
 
 import (
@@ -25,7 +25,7 @@ import (
 // that called a helper named Quit would prove the helper does nothing; this one
 // fails when somebody makes the menu item do something.
 func TestTray_QuitDecoupling(t *testing.T) {
-	path := filepath.Join("..", "..", "cmd", "9routerx-tray", "gui.go")
+	path := filepath.Join("..", "..", "cmd", "alyysha-tray", "gui.go")
 	src, err := os.ReadFile(path)
 	if err != nil {
 		t.Fatalf("read %s: %v", path, err)

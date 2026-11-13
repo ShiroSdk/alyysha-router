@@ -1,9 +1,9 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package providers
 
 import "strings"
 
-// AntigravityClientProfile selects which official client identity 9router
+// AntigravityClientProfile selects which official client identity alyysha
 // presents to Google's Cloud Code / Antigravity backend.
 //
 // Google ships two clients that share the same OAuth client id and the same

@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 /**
  * The free-tier catalog: what the well-known providers give away, and under
  * which terms, ported from OmniRoute's freeModelCatalog concept.
@@ -185,7 +185,7 @@ export const FREE_TIER_CATALOG: FreeTierRow[] = [
     monthlyTokens: 0,
     freeType: 'keyless',
     tos: 'avoid',
-    notes: 'Cookie-session automation of consumer chat products. No published cap to cite, and automating the consumer UI sits outside provider TOS. 9RouterX ships these executors OFF.',
+    notes: 'Cookie-session automation of consumer chat products. No published cap to cite, and automating the consumer UI sits outside provider TOS. Alyysha Router ships these executors OFF.',
     // evidence: console-verified — this repo gates web executors behind ENABLE_WEB_EXECUTORS (executor/web_gate.go), off by default
   },
 ]

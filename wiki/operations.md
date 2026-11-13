@@ -12,18 +12,18 @@ maintenance, and the background loops that keep a deployment healthy.
 ## Docker
 
 ```bash
-docker run -d --name 9routerx --restart unless-stopped \
-  -p 20128:20128 -v "$HOME/.9router:/data" \
+docker run -d --name alyysha --restart unless-stopped \
+  -p 20128:20128 -v "$HOME/.alyysha:/data" \
   -e PORT=20128 -e DATA_DIR=/data \
   -e INITIAL_PASSWORD=your-secure-password \
-  yanstd888/9routerx:latest
+  ShiroSdk/alyysha-router:latest
 ```
 
 `docker-compose.yml` in the repository root is the same shape if you prefer
 compose.
 
 Experimental builds are marked **Pre-release** and never offered to a normal
-install; Docker Hub tags them `exp` (`yanstd888/9routerx:exp`), never `latest`.
+install; Docker Hub tags them `exp` (`ShiroSdk/alyysha-router:exp`), never `latest`.
 
 ## Tunnels
 
@@ -45,8 +45,8 @@ Tailscale in a container needs the `NET_ADMIN` capability and a TUN device — s
 ## Self-update
 
 ```bash
-9routerx update        # check and install
-9routerx version       # current version plus an update check
+alyysha update        # check and install
+alyysha version       # current version plus an update check
 ```
 
 Or from the dashboard: `POST /api/version/update` and
@@ -62,8 +62,8 @@ how this build was installed — `updater.DetectDistChannel()` classifies it:
 
 | Channel | Detected when | Banner offers |
 |---|---|---|
-| `binary` | a packaged release binary | "Update now" link to the release (only when hosted on the trusted release host), plus the per-OS asset name and sha256 when present. `9routerx update` remains the install path |
-| `npm` | installed through the npm package (`9ROUTERX_NPM_INSTALL=1`) | the `npm i -g 9routerx@latest` command with a copy button |
+| `binary` | a packaged release binary | "Update now" link to the release (only when hosted on the trusted release host), plus the per-OS asset name and sha256 when present. `alyysha update` remains the install path |
+| `npm` | installed through the npm package (`ALYYSHA_NPM_INSTALL=1`) | the `npm i -g alyysha@latest` command with a copy button |
 | `dev` | built from source with no version metadata | info line and release link only |
 
 "Skip this version" (binary and npm installs) stores the version in the browser
@@ -72,7 +72,7 @@ manifest, rate limit — degrades silently: the status endpoint answers with the
 last cached result and `stale: true`, and the cause is classified into the
 structured log and the check record. The full contract, including the pinned
 manifest host, lives in
-[`docs/updater-contract.md`](https://github.com/yanstd888/9routerx/blob/main/docs/updater-contract.md).
+[`docs/updater-contract.md`](https://github.com/ShiroSdk/alyysha-router/blob/main/docs/updater-contract.md).
 
 ## Database maintenance
 
@@ -144,5 +144,5 @@ rather than configurable. Tune the proxy in front of the gateway instead.
 
 ## Further reading
 
-- [`ARCHITECTURE.md`](https://github.com/yanstd888/9routerx/blob/main/ARCHITECTURE.md)
-- [`DATABASE.md`](https://github.com/yanstd888/9routerx/blob/main/DATABASE.md)
+- [`ARCHITECTURE.md`](https://github.com/ShiroSdk/alyysha-router/blob/main/ARCHITECTURE.md)
+- [`DATABASE.md`](https://github.com/ShiroSdk/alyysha-router/blob/main/DATABASE.md)

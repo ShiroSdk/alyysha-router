@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
@@ -12,9 +12,9 @@ import (
 	"encoding/json/jsontext"
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/proxy"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/proxy"
 )
 
 // ForwardBedrock forwards to Amazon Bedrock.

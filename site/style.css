@@ -1,6 +1,6 @@
-/* 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id */
+/* Alyysha Router — built by YannClipper — https://t.me/YannClippers */
 /*
- * 9RouterX project page + wiki.
+ * Alyysha Router project page + wiki.
  *
  * The palette is the dashboard's own glyph token set (web/src/index.css), not a
  * second invented palette: DARK is the default identity — the dashboard ships
@@ -20,57 +20,57 @@
 /* ── Design tokens — DARK (default identity) ───────────────────────────────
    Quoted from web/src/index.css, `.dark` block (the dashboard's shipped
    default):
-     --9x-bg: #0e0f11;          --9x-ink: #eceef2;
-     --9x-btn: #16181d;         --9x-accent: #3b82f6;
-     --9x-accent-ink: #0a0c10;  --9x-line: rgba(236, 238, 242, 0.1);
+     --ay-bg: #0e0f11;          --ay-ink: #eceef2;
+     --ay-btn: #16181d;         --ay-accent: #3b82f6;
+     --ay-accent-ink: #0a0c10;  --ay-line: rgba(236, 238, 242, 0.1);
      --app-bg-alt: #121316;     --app-surface-2: #1c1f25;
      --app-text-muted: #9aa0ab; --app-text-subtle: #7f8794;
      --app-primary-hover: #6ea3f8;
-     --9x-ok: #5fc58a;  --9x-err: #ff7a6b;  --9x-wait: #e0a447;
-     --9x-glass: rgba(18, 19, 22, 0.62);
-     --9x-gridline: rgba(236, 238, 242, 0.035);
-     --9x-orange: #f97316;
-     --9x-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 10px 40px rgba(0, 0, 0, 0.45);
-     --9x-shadow-lg: 0 1px 0 rgba(255, 255, 255, 0.06) inset,
+     --ay-ok: #5fc58a;  --ay-err: #ff7a6b;  --ay-wait: #e0a447;
+     --ay-glass: rgba(18, 19, 22, 0.62);
+     --ay-gridline: rgba(236, 238, 242, 0.035);
+     --ay-orange: #f97316;
+     --ay-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 10px 40px rgba(0, 0, 0, 0.45);
+     --ay-shadow-lg: 0 1px 0 rgba(255, 255, 255, 0.06) inset,
        0 6px 16px -4px rgba(0, 0, 0, 0.5),
-       0 0 24px -6px color-mix(in srgb, var(--9x-accent) 22%, transparent);
+       0 0 24px -6px color-mix(in srgb, var(--ay-accent) 22%, transparent);
    Radius scale (same in both themes, web/src/index.css):
-     --9x-radius-sm: 8px;  --9x-radius-md: 12px;
-     --9x-radius-lg: 16px; --9x-radius-pill: 999px;
-   Motion (web/src/index.css): --9x-ease: cubic-bezier(0.22, 1, 0.36, 1). */
+     --ay-radius-sm: 8px;  --ay-radius-md: 12px;
+     --ay-radius-lg: 16px; --ay-radius-pill: 999px;
+   Motion (web/src/index.css): --ay-ease: cubic-bezier(0.22, 1, 0.36, 1). */
 :root {
   color-scheme: dark;
-  --bg: #0e0f11;                        /* --9x-bg dark */
+  --bg: #0e0f11;                        /* --ay-bg dark */
   --bg-alt: #121316;                    /* --app-bg-alt dark */
-  --surface: #16181d;                   /* --app-surface dark (--9x-btn) */
+  --surface: #16181d;                   /* --app-surface dark (--ay-btn) */
   --surface-2: #1c1f25;                 /* --app-surface-2 dark */
-  --border: rgba(236, 238, 242, 0.1);   /* --9x-line dark */
+  --border: rgba(236, 238, 242, 0.1);   /* --ay-line dark */
   --border-subtle: rgba(236, 238, 242, 0.06); /* --app-border-subtle dark */
-  --text: #eceef2;                      /* --9x-ink dark */
+  --text: #eceef2;                      /* --ay-ink dark */
   --text-muted: #9aa0ab;                /* --app-text-muted dark */
   --text-subtle: #7f8794;               /* --app-text-subtle dark */
   --link: #6ea3f8;                      /* --app-primary-hover dark */
-  --link-hover: #3b82f6;                /* --9x-accent dark */
-  --brand: #3b82f6;                     /* --9x-accent dark */
+  --link-hover: #3b82f6;                /* --ay-accent dark */
+  --brand: #3b82f6;                     /* --ay-accent dark */
   /* Text on accent/danger/success fills: near-black ink, because white is only
-     3.7:1 on the electric blue (web/src/index.css --9x-accent-ink dark). */
-  --brand-ink: #0a0c10;                 /* --9x-accent-ink dark */
-  --ok: #5fc58a;                        /* --9x-ok dark */
-  --err: #ff7a6b;                       /* --9x-err dark */
-  --wait: #e0a447;                      /* --9x-wait dark */
-  --orange: #f97316;                    /* --9x-orange (both themes) */
-  --glass: rgba(18, 19, 22, 0.62);      /* --9x-glass dark */
-  --gridline: rgba(236, 238, 242, 0.035); /* --9x-gridline dark */
-  --cell: 12px;                         /* --9x-cell */
-  --shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 10px 40px rgba(0, 0, 0, 0.45); /* --9x-shadow dark */
+     3.7:1 on the electric blue (web/src/index.css --ay-accent-ink dark). */
+  --brand-ink: #0a0c10;                 /* --ay-accent-ink dark */
+  --ok: #5fc58a;                        /* --ay-ok dark */
+  --err: #ff7a6b;                       /* --ay-err dark */
+  --wait: #e0a447;                      /* --ay-wait dark */
+  --orange: #f97316;                    /* --ay-orange (both themes) */
+  --glass: rgba(18, 19, 22, 0.62);      /* --ay-glass dark */
+  --gridline: rgba(236, 238, 242, 0.035); /* --ay-gridline dark */
+  --cell: 12px;                         /* --ay-cell */
+  --shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 10px 40px rgba(0, 0, 0, 0.45); /* --ay-shadow dark */
   --shadow-lg: 0 1px 0 rgba(255, 255, 255, 0.06) inset,
     0 6px 16px -4px rgba(0, 0, 0, 0.5),
-    0 0 24px -6px color-mix(in srgb, var(--brand) 22%, transparent); /* --9x-shadow-lg dark */
-  --radius-sm: 8px;                     /* --9x-radius-sm */
-  --radius: 12px;                       /* --9x-radius-md (and shadcn --radius) */
-  --radius-lg: 16px;                    /* --9x-radius-lg */
-  --radius-pill: 999px;                 /* --9x-radius-pill */
-  --ease: cubic-bezier(0.22, 1, 0.36, 1); /* --9x-ease */
+    0 0 24px -6px color-mix(in srgb, var(--brand) 22%, transparent); /* --ay-shadow-lg dark */
+  --radius-sm: 8px;                     /* --ay-radius-sm */
+  --radius: 12px;                       /* --ay-radius-md (and shadcn --radius) */
+  --radius-lg: 16px;                    /* --ay-radius-lg */
+  --radius-pill: 999px;                 /* --ay-radius-pill */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1); /* --ay-ease */
   --font-body: "Manrope", "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text",
     system-ui, sans-serif;              /* --font-body */
   --font-headline: "Manrope", "Inter", -apple-system, BlinkMacSystemFont, system-ui,
@@ -81,16 +81,16 @@
 
 /* ── Design tokens — LIGHT (glyph light palette) ───────────────────────────
    Quoted from web/src/index.css, `:root` block:
-     --9x-bg: #f6f6f3;          --9x-ink: #16181d;
-     --9x-btn: #eceef2;         --9x-accent: #2f5bd3;
-     --9x-accent-ink: #ffffff;  --9x-line: rgba(22, 24, 29, 0.1);
+     --ay-bg: #f6f6f3;          --ay-ink: #16181d;
+     --ay-btn: #eceef2;         --ay-accent: #2f5bd3;
+     --ay-accent-ink: #ffffff;  --ay-line: rgba(22, 24, 29, 0.1);
      --app-bg-alt: #eef0f2;     --app-surface-2: #eef0f3;
      --app-text-muted: #4b525d; --app-text-subtle: #646b76;
      --app-primary-hover: #2447ad;
-     --9x-ok: #256743;  --9x-err: #b3362b;  --9x-wait: #84560c;
-     --9x-glass: rgba(250, 250, 248, 0.66);
-     --9x-gridline: rgba(22, 24, 29, 0.045);
-     --9x-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 10px 40px rgba(22, 24, 29, 0.08);
+     --ay-ok: #256743;  --ay-err: #b3362b;  --ay-wait: #84560c;
+     --ay-glass: rgba(250, 250, 248, 0.66);
+     --ay-gridline: rgba(22, 24, 29, 0.045);
+     --ay-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset, 0 10px 40px rgba(22, 24, 29, 0.08);
    Link colour note: brand-500-class accents fail 4.5:1 as text on pale paper;
    the glyph light accent #2f5bd3 lands at 5.4:1 on #f6f6f3 and its hover
    #2447ad goes darker, so both clear AA as link text. */
@@ -126,7 +126,7 @@
    default identity (the dashboard ships dark-first), the media query above is
    the OS fallback, and these class blocks are the mechanism the wiki theme
    toggle uses (`document.documentElement.classList.toggle('dark')`, key
-   `9router-theme` in web/src/components/TopBar.svelte). The class rules come
+   `alyysha-theme` in web/src/components/TopBar.svelte). The class rules come
    AFTER the media query on purpose: at equal specificity, source order picks
    the winner, so a reader's explicit choice beats the OS preference. */
 .light {
@@ -408,12 +408,12 @@ a:hover {
   letter-spacing: -0.01em;
 }
 
-/* The brand mark. The logo asset (site/logo-9routerx-128.png, resized from
-   web/public/logo-9routerx.png) has a transparent background, and a
+/* The brand mark. The logo asset (site/logo-alyysha-128.png, resized from
+   web/public/logo-alyysha.png) has a transparent background, and a
    transparent flame on the pale light theme would float without an edge —
    so it sits in a solid dark tile in BOTH themes, the way the dashboard's
    login view presents the same mark on its dark panel. #0e0f11 is the dark
-   --9x-bg value from web/src/index.css; 10px is --radius-brand. */
+   --ay-bg value from web/src/index.css; 10px is --radius-brand. */
 .wordmark-mark {
   display: grid;
   place-items: center;
@@ -444,7 +444,7 @@ a:hover {
    strip pattern; every value, word and number is this repository's own. The
    background is the dashboard's routing-map underlay — a faint graph-paper
    gridline (web/src/components/AsciiRoutingBg.svelte paints the same CSS
-   pattern with --9x-gridline and --9x-cell) — plus two slow accent auras. */
+   pattern with --ay-gridline and --ay-cell) — plus two slow accent auras. */
 
 .hero {
   position: relative;
@@ -454,9 +454,9 @@ a:hover {
 
 /* Layer 1: the gridline underlay, straight from the dashboard's background:
      background-image:
-       linear-gradient(to right, var(--9x-gridline) 1px, transparent 1px),
-       linear-gradient(to bottom, var(--9x-gridline) 1px, transparent 1px);
-     background-size: var(--9x-cell) var(--9x-cell); */
+       linear-gradient(to right, var(--ay-gridline) 1px, transparent 1px),
+       linear-gradient(to bottom, var(--ay-gridline) 1px, transparent 1px);
+     background-size: var(--ay-cell) var(--ay-cell); */
 .hero::before {
   content: "";
   position: absolute;
@@ -746,7 +746,7 @@ a:hover {
 
 /* Actions: the dashboard's button pair — a solid accent fill carrying
    near-black ink (white is only 3.7:1 on the electric blue, so dark buttons
-   carry #0a0c10 ink per --9x-accent-ink), and a ghost beside it. */
+   carry #0a0c10 ink per --ay-accent-ink), and a ghost beside it. */
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
@@ -1745,7 +1745,7 @@ h4 {
 }
 
 .colophon-finale::after {
-  content: "9RouterX";
+  content: "Alyysha Router";
   position: absolute;
   left: 50%;
   bottom: 0;

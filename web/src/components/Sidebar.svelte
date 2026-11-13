@@ -1,4 +1,4 @@
-<!-- 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   import { api, type SystemVersionInfo } from '../api/client'
   import { copyToClipboard } from '../lib/clipboard'
@@ -45,11 +45,11 @@
     navOrder?: string[]
   } = $props()
   let version = $state<string>(__APP_VERSION__ || '')
-  // Branding is locked to 9RouterX: the former white-label customization card
+  // Branding is locked to Alyysha Router: the former white-label customization card
   // was removed, so the sidebar renders fixed brand values.
-  const displayBrandName = '9RouterX'
+  const displayBrandName = 'Alyysha Router'
   const displayBrandLogo = '/android-chrome-192x192.png'
-  const INSTALL_CMD = '9routerx update'
+  const INSTALL_CMD = 'alyysha update'
   let copied = $state(false)
 
   // Which accordions are open, by id, and which labelled groups are collapsed.
@@ -61,8 +61,8 @@
   //
   // Both are persisted because an operator who folds Media Providers once means
   // it — the sidebar is the surface they arrange, not a dialog they dismiss.
-  const ACCORDION_STATE_KEY = '9routerx-nav-accordions'
-  const GROUP_STATE_KEY = '9routerx-nav-groups'
+  const ACCORDION_STATE_KEY = 'alyysha-nav-accordions'
+  const GROUP_STATE_KEY = 'alyysha-nav-groups'
   let openAccordions = $state<Set<string>>(new Set())
   let collapsedGroups = $state<Set<string>>(new Set())
   $effect(() => {
@@ -223,7 +223,7 @@
     </div>
   {/if}
 
-  <!-- Brand header: 9RouterX with the official logo asset -->
+  <!-- Brand header: Alyysha Router with the official logo asset -->
   <div class="{iconRail ? 'px-2 py-4' : 'px-6 py-4'} flex flex-col gap-2 shrink-0">
     <a
       href={TAB_ROUTES.endpoint}
@@ -252,7 +252,7 @@
       {/if}
     </a>
 
-    <!-- Update notification banner below version (matches upstream 9router) -->
+    <!-- Update notification banner below version (matches upstream alyysha) -->
     {#if updateInfo && updateInfo.hasUpdate}
       <div
         class="glyph-rail-hide flex flex-col gap-1.5 rounded-lg p-2 bg-green-500/10 dark:bg-amber-500/10 border border-green-500/30 dark:border-amber-500/30 text-green-700 dark:text-amber-400 mt-0.5 animate-in fade-in duration-200"

@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -11,11 +11,11 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/dbtest"
-	"9routerx/proxy/internal/resilience"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/dbtest"
+	"alyysha/proxy/internal/resilience"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/translator"
 	"os"
 )
 

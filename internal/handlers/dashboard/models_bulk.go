@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"strings"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 // Bulk custom-model save (docs/provider-limits-plan.md D9).

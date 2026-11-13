@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
@@ -15,8 +15,8 @@ import (
 
 	"github.com/google/uuid"
 
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/proxy"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/proxy"
 )
 
 const (
@@ -261,7 +261,7 @@ func ForwardFreebuff(w http.ResponseWriter, req *Request) error {
 	}
 
 	// client_id cloaking (CLI-shaped fingerprint): the backend logs and
-	// rate-limits per client_id, so a per-request "9router-<uuid>" brands
+	// rate-limits per client_id, so a per-request "alyysha-<uuid>" brands
 	// every call as non-CLI traffic. Reuse the account's login fingerprintId
 	// (handed down via req.ConnData), exactly like the dashboard fork; only
 	// mint a fresh random id for connections that predate the stored field.

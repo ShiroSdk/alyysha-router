@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package translator
 
 import (
@@ -125,7 +125,7 @@ func TestGeminiToolCallNameResolvesThroughThoughtSignatureSuffix(t *testing.T) {
 	if resp.Name != "read_file" {
 		t.Errorf("functionResponse name = %q, want read_file (suffixed id %q)", resp.Name, id)
 	}
-	// The suffix is a 9routerx transport encoding and must not reach Gemini,
+	// The suffix is a alyysha transport encoding and must not reach Gemini,
 	// so the response carries the id with it stripped — the same id the client
 	// sees on the functionCall half of the pair.
 	if resp.ID != geminiCleanToolCallID(id) {

@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package oauth
 
 import (
@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/models"
+	"alyysha/proxy/internal/models"
 )
 
 func TestSelectConnectionsNeedingRefresh(t *testing.T) {

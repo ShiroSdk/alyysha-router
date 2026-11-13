@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -7,9 +7,9 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/proxy/executor"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/proxy/executor"
 )
 
 // #192: an ollama.com API key was forwarded to http://localhost:11434. The

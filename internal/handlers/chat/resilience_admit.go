@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -7,8 +7,8 @@ import (
 	"encoding/hex"
 	"net/url"
 
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/resilience"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/resilience"
 )
 
 // Provider-level admission control helpers.
@@ -129,7 +129,7 @@ func resilienceProxyKey(cfg *providers.ProviderConfig) string {
 	if cfg == nil || cfg.HeaderOverrides == nil {
 		return "direct"
 	}
-	for _, k := range []string{"x-9router-proxy-pool", "X-9Router-Proxy-Pool"} {
+	for _, k := range []string{"x-alyysha-proxy-pool", "X-Alyysha-Proxy-Pool"} {
 		if v, ok := cfg.HeaderOverrides[k]; ok && v != "" {
 			return v
 		}

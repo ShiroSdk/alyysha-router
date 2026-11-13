@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package proxy
 
 import (
@@ -19,7 +19,7 @@ const (
 	DefaultOpenCodeUA = "opencode/latest/2.1.4/cli"
 
 	// DefaultOpenCodeV1UA is the pre-v2 identity kept by the keyed lanes
-	// (opencode-zen, opencode-go): upstream decolua/9router#4842 moves only
+	// (opencode-zen, opencode-go): upstream decolua/alyysha#4842 moves only
 	// the keyless free executor to v2 and leaves every keyed executor on v1.
 	DefaultOpenCodeV1UA = "opencode/1.19.4"
 
@@ -58,7 +58,7 @@ func unstableRandomBase62(n int) string {
 // The counter is pinned to 1 like the upstream CLI: upstream decodes the
 // prefix and rejects a non-small counter with 403 FreeTierError, so an
 // incrementing counter would start failing under concurrent load
-// (decolua/9router#4842 descendingTimeHex).
+// (decolua/alyysha#4842 descendingTimeHex).
 func GenerateOpenCodeSessionID() string {
 	return "ses_" + descendingTimeHex(uint64(time.Now().UnixMilli()), 1) + unstableRandomBase62(14)
 }
@@ -103,7 +103,7 @@ type opencodeStableEntry struct {
 // The free tier accounts its quota per upstream session: minting a fresh
 // x-opencode-session on every request burns through that budget and surfaces
 // as 429 FreeUsageLimitError with a growing retry-after, while the official
-// CLI reuses one long-lived session per conversation (decolua/9router
+// CLI reuses one long-lived session per conversation (decolua/alyysha
 // stableSessionId; dsh-our-free-model sessionForConversation). Executors call
 // this with a per-connection key when the client sent no session of its own.
 //
@@ -231,7 +231,7 @@ func HasValidOpenCodeVersion(ua string) bool {
 }
 
 // HasValidOpenCodeV1Version checks the pre-v2 User-Agent shape the keyed lanes
-// still speak (upstream opencode-zen at decolua/9router#4842): opencode/<major>.<minor>[.patch].
+// still speak (upstream opencode-zen at decolua/alyysha#4842): opencode/<major>.<minor>[.patch].
 func HasValidOpenCodeV1Version(ua string) bool {
 	m := opencodeV1UARegex.FindStringSubmatch(ua)
 	if len(m) < 3 {

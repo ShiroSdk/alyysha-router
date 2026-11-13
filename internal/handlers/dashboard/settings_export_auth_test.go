@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/auth"
+	"alyysha/proxy/internal/auth"
 )
 
 // The dashboard is behind a session cookie, but the backup download demanded the

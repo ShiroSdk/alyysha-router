@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package media
 
 import (
@@ -15,12 +15,12 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/handlers/chat"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/models"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/usagetracker"
+	"alyysha/proxy/internal/handlers/chat"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/models"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/usagetracker"
 )
 
 // ElevenLabs Scribe STT. The generic OpenAI-compatible multipart path is
@@ -104,7 +104,7 @@ func parseElevenLabsSTTRequest(body []byte, contentType string, modelInfo *chat.
 		return nil, fmt.Errorf("missing required field: file")
 	}
 	// model_id is the upstream model id, not the caller's provider-qualified
-	// spelling — the vendor knows nothing about 9router's "elevenlabs/…" form.
+	// spelling — the vendor knows nothing about alyysha's "elevenlabs/…" form.
 	form.Model = modelInfo.Model
 	if form.Model == "" {
 		form.Model = form.get("model")

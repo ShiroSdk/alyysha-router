@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package service
 
 import (
@@ -13,7 +13,7 @@ import (
 func TestLongWindowsTaskUsesXML(t *testing.T) {
 	stubHost(t, hostStub{goos: "windows"})
 	stubWindowsTaskUser(t, "user & account")
-	exe := `C:\Program Files\9RouterX\9routerx.exe`
+	exe := `C:\Program Files\Alyysha Router\alyysha.exe`
 	args := []string{"--data-dir=C:\\" + strings.Repeat("long data & ", 30)}
 	var createdPath string
 	stubRunFunc(t, func(name string, argv ...string) (string, error) {

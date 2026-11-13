@@ -1,10 +1,10 @@
-<!-- 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   import { onMount } from 'svelte'
   import { onRoutingBurst } from '../lib/routingBurst'
 
   /**
-   * "Live Routing Flow" background (TASK-9routerX-anim-bg).
+   * "Live Routing Flow" background (TASK-alyyshaX-anim-bg).
    *
    * One <canvas>, same seeded ASCII routing topology as the old static <pre>
    * (provider-node clusters joined by L-shaped route runs), animated in ONE
@@ -333,10 +333,10 @@
   const HEARTBEAT_STEPS = 16
 
   function refreshPalette(): void {
-    const ink = token('--9x-ink', '#eceef2')
-    const accent = token('--9x-accent', '#3b82f6')
-    // Light theme has no --9x-orange token; the brand orange is the fallback.
-    const orange = token('--9x-orange', '#f97316')
+    const ink = token('--ay-ink', '#eceef2')
+    const accent = token('--ay-accent', '#3b82f6')
+    // Light theme has no --ay-orange token; the brand orange is the fallback.
+    const orange = token('--ay-orange', '#f97316')
     const b = FLOW.baseOpacity
     const cluster: string[] = []
     for (let s = 0; s < HEARTBEAT_STEPS; s++) {
@@ -531,7 +531,7 @@
     ctx = canvas.getContext('2d')
     if (!ctx) return
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
-    const cellTok = parseFloat(token('--9x-cell', ''))
+    const cellTok = parseFloat(token('--ay-cell', ''))
     cell = Number.isFinite(cellTok) && cellTok > 4 ? cellTok : FLOW.cellFallbackPx
     setFont()
     const cols = Math.max(4, Math.ceil(w / cell))
@@ -1118,8 +1118,8 @@
     /* Faint graph-paper gridline underlay: CSS, so canvas clearRect reveals
        it for free during dirty-rect redraws. */
     background-image:
-      linear-gradient(to right, var(--9x-gridline, rgba(236, 238, 242, 0.035)) 1px, transparent 1px),
-      linear-gradient(to bottom, var(--9x-gridline, rgba(236, 238, 242, 0.035)) 1px, transparent 1px);
-    background-size: var(--9x-cell, 12px) var(--9x-cell, 12px);
+      linear-gradient(to right, var(--ay-gridline, rgba(236, 238, 242, 0.035)) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--ay-gridline, rgba(236, 238, 242, 0.035)) 1px, transparent 1px);
+    background-size: var(--ay-cell, 12px) var(--ay-cell, 12px);
   }
 </style>

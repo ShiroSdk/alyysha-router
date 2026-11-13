@@ -1,4 +1,4 @@
-# 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+# Alyysha Router — built by YannClipper — https://t.me/YannClippers
 name: Feature request
 description: Propose a new capability or an improvement to an existing one
 title: "feat: "
@@ -56,8 +56,8 @@ body:
     attributes:
       label: Upstream reference
       description: |
-        Link to a commit, PR, or issue in `decolua/9router` (or in `diegosouzapw/OmniRoute` if that is where
-        the idea comes from). Leave empty if this is original to 9RouterX.
+        Link to a commit, PR, or issue in `decolua/alyysha` (or in `diegosouzapw/OmniRoute` if that is where
+        the idea comes from). Leave empty if this is original to Alyysha Router.
     validations:
       required: false
 

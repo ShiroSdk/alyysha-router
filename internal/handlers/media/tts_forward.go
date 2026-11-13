@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package media
 
 import (
@@ -12,12 +12,12 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/handlers/chat"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/models"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/usagetracker"
+	"alyysha/proxy/internal/handlers/chat"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/models"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/usagetracker"
 )
 
 func (h *MediaHandler) forwardTTSRequest(w http.ResponseWriter, r *http.Request, body []byte) {

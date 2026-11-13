@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
@@ -12,7 +12,7 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/translator"
 )
 
 // The parity work against azrinaldi/gemini-stealth-bridge closed five gaps:

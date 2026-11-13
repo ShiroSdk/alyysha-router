@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -8,8 +8,8 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 // TestPingDoesNotRedirectToAnotherAccount pins the M1 contract: a ping pinned

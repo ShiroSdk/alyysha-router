@@ -1,9 +1,9 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package providers
 
 import "testing"
 
-// Port of upstream tests/unit/agnes30-pro-model.test.js (decolua/9router#4587),
+// Port of upstream tests/unit/agnes30-pro-model.test.js (decolua/alyysha#4587),
 // minus the registry assertions that live in registry_models.go and the pricing
 // half that lives in internal/pricing.
 //

@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package app_test
 
 import (
@@ -10,11 +10,11 @@ import (
 	"path/filepath"
 	"testing"
 
-	"9routerx/proxy/internal/app"
-	"9routerx/proxy/internal/config"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlers"
-	"9routerx/proxy/internal/shutdown"
+	"alyysha/proxy/internal/app"
+	"alyysha/proxy/internal/config"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlers"
+	"alyysha/proxy/internal/shutdown"
 	"github.com/go-chi/chi/v5"
 	"github.com/spf13/viper"
 	"github.com/urfave/cli/v2"
@@ -88,7 +88,7 @@ func TestNewCLIParams_WithContext(t *testing.T) {
 		}
 		return nil
 	}
-	_ = appCLI.Run([]string{"9router", "--rtk", "--caveman", "--ponytail", "--adhd", "--auto-update", "--no-injection-guard"})
+	_ = appCLI.Run([]string{"alyysha", "--rtk", "--caveman", "--ponytail", "--adhd", "--auto-update", "--no-injection-guard"})
 }
 
 func TestConfigModule(t *testing.T) {

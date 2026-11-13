@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 /**
  * Model filter rules for the jailbreak presets — the browser-side twin of
  * internal/db/jailbreak_keywords.go. The gateway resolves injection with the Go

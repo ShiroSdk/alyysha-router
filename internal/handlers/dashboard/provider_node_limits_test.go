@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -12,8 +12,8 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/middleware"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/middleware"
 )
 
 // nodeLimitsRequest drives one provider-node request through the real router

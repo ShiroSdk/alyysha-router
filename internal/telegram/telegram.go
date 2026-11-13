@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Package telegram pushes gateway events to a Telegram bot chat (OmniRoute
 // port). Everything here is fire-and-forget: a notification that fails must
 // never fail, or even slow down, the request that produced it.
@@ -15,7 +15,7 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 // botTokenPattern is Telegram's bot-token shape: a numeric bot id, a colon,

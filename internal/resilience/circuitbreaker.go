@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Package resilience holds provider-level admission control: a circuit breaker
 // that stops hammering a provider that is failing, and a per-account semaphore
 // that caps concurrent requests so one account cannot trigger a 429 cascade.

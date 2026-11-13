@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package media
 
 import (
@@ -148,7 +148,7 @@ func TestUpsertEnvVar_AppendsWithoutNewline(t *testing.T) {
 	}
 }
 
-func TestHas9RouterConfig_OnlyLocalCustomEndpoints(t *testing.T) {
+func TestHasAlyyshaConfig_OnlyLocalCustomEndpoints(t *testing.T) {
 	custom, other := "custom", "openrouter"
 
 	tests := []struct {
@@ -166,8 +166,8 @@ func TestHas9RouterConfig_OnlyLocalCustomEndpoints(t *testing.T) {
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			if got := has9RouterConfig(tt.provider, tt.baseURL); got != tt.want {
-				t.Fatalf("has9RouterConfig = %v, want %v", got, tt.want)
+			if got := hasAlyyshaConfig(tt.provider, tt.baseURL); got != tt.want {
+				t.Fatalf("hasAlyyshaConfig = %v, want %v", got, tt.want)
 			}
 		})
 	}

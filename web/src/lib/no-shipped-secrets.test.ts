@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 /**
  * The dashboard SPA is served to whoever can reach the gateway, so any secret
  * literal in `web/src` becomes a public credential the moment `vite build`
@@ -25,7 +25,7 @@ const SRC = resolve(import.meta.dirname, '..')
 const SOURCE_EXT = new Set(['.svelte', '.ts', '.js', '.jsx', '.tsx'])
 
 /**
- * A minted client key. 9RouterX generates `sk-` + 32 uuid hex chars, but
+ * A minted client key. Alyysha Router generates `sk-` + 32 uuid hex chars, but
  * `POST /api/keys` accepts any caller-supplied secret, so the pattern is
  * deliberately loose about length and shape. Global, because matchAll
  * requires it.
@@ -34,10 +34,10 @@ const SECRET = /sk-[A-Za-z0-9_-]{20,}/g
 
 /**
  * Values that look like a key but are labels the user replaces before use.
- * `sk-9router-local-token` is the shell-profile placeholder the env cards have
+ * `sk-alyysha-local-token` is the shell-profile placeholder the env cards have
  * always shown, so every member of that family is exempt.
  */
-const PLACEHOLDER_PREFIX = 'sk-9routerx-'
+const PLACEHOLDER_PREFIX = 'sk-alyysha-'
 
 function* walk(dir: string): Generator<string> {
   for (const entry of readdirSync(dir)) {

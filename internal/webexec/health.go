@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package webexec
 
 import (
@@ -9,9 +9,9 @@ import (
 	"sync"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/sessionvault"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/sessionvault"
 )
 
 // HealthInterval is how often the health job validates every enabled

@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -8,7 +8,7 @@ import (
 	"strings"
 	"sync"
 
-	"9routerx/proxy/internal/envcompat"
+	"alyysha/proxy/internal/envcompat"
 )
 
 var (
@@ -16,12 +16,12 @@ var (
 	routeHeadersEnabledVal  bool
 )
 
-// isRouteHeadersEnabled checks if route response headers are enabled via 9ROUTERX_ROUTE_HEADERS.
+// isRouteHeadersEnabled checks if route response headers are enabled via ALYYSHA_ROUTE_HEADERS.
 // Defaults to true. Returns false if set to "0" or "false" (case-insensitive).
 // Cached after the first lookup to avoid per-request os.Getenv overhead.
 func isRouteHeadersEnabled() bool {
 	routeHeadersEnabledOnce.Do(func() {
-		val := envcompat.Getenv("9ROUTERX_ROUTE_HEADERS", "NINEROUTER_ROUTE_HEADERS")
+		val := envcompat.Getenv("ALYYSHA_ROUTE_HEADERS", "NINEROUTER_ROUTE_HEADERS")
 		if val == "" {
 			routeHeadersEnabledVal = true
 			return
@@ -32,7 +32,7 @@ func isRouteHeadersEnabled() bool {
 	return routeHeadersEnabledVal
 }
 
-// resetRouteHeadersConfigForTesting allows unit tests to re-evaluate 9ROUTERX_ROUTE_HEADERS.
+// resetRouteHeadersConfigForTesting allows unit tests to re-evaluate ALYYSHA_ROUTE_HEADERS.
 func resetRouteHeadersConfigForTesting() {
 	routeHeadersEnabledOnce = sync.Once{}
 }
@@ -44,18 +44,18 @@ func injectRouteHeaders(w http.ResponseWriter, provider, model, combo string, at
 		return
 	}
 	if provider != "" {
-		w.Header().Set("x-9router-provider", provider)
+		w.Header().Set("x-alyysha-provider", provider)
 	}
 	if model != "" {
-		w.Header().Set("x-9router-model", model)
+		w.Header().Set("x-alyysha-model", model)
 	}
 	if combo != "" {
-		w.Header().Set("x-9router-combo", combo)
+		w.Header().Set("x-alyysha-combo", combo)
 	}
 	if attempts <= 0 {
 		attempts = 1
 	}
-	w.Header().Set("x-9router-attempts", strconv.Itoa(attempts))
+	w.Header().Set("x-alyysha-attempts", strconv.Itoa(attempts))
 }
 
 // clearRouteHeaders removes route metadata headers from w. Used when a dispatch
@@ -65,10 +65,10 @@ func clearRouteHeaders(w http.ResponseWriter) {
 		return
 	}
 	h := w.Header()
-	h.Del("x-9router-provider")
-	h.Del("x-9router-model")
-	h.Del("x-9router-combo")
-	h.Del("x-9router-attempts")
+	h.Del("x-alyysha-provider")
+	h.Del("x-alyysha-model")
+	h.Del("x-alyysha-combo")
+	h.Del("x-alyysha-attempts")
 }
 
 // attemptCount returns the number of fallback attempts recorded so far on ctx,

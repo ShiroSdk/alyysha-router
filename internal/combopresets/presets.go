@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Package combopresets builds the Cursor / Claude default combo lists the
 // dashboard offers on the Combos page (port of upstream src/lib/comboPresets.js).
 //
@@ -13,7 +13,7 @@ import (
 	"regexp"
 	"strings"
 
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/providers"
 )
 
 // ErrUnknownSource is returned by Build for anything that is not a preset

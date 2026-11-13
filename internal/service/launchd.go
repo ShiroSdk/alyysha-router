@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package service
 
 import (
@@ -8,11 +8,11 @@ import (
 	"path/filepath"
 	"strings"
 
-	"9routerx/proxy/internal/constants"
+	"alyysha/proxy/internal/constants"
 )
 
 // launchdLabel is the agent label and plist file name.
-const launchdLabel = "com.9routerx.gateway"
+const launchdLabel = "com.alyysha.gateway"
 
 func launchdPlistPath() string {
 	home, err := userHomeDir()

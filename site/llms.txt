@@ -1,18 +1,18 @@
-# 9RouterX — Official Documentation & LLM Context
+# Alyysha Router — Official Documentation & LLM Context
 
-> 9RouterX is an open-source AI router, local LLM gateway and token saver built with Go and an embedded Svelte 5 dashboard. It routes across 155 providers (91 API key, 28 OAuth, 29 free-tier, 4 web cookie) and catalogs 248 free models across 36 providers, including 24 models classified as keyless. Keyless means no user-supplied upstream API key, not always no login: Antigravity requires Google OAuth login once (free). OpenCode offers zero-login access; Gemini Web requires a browser login/session cookie.
+> Alyysha Router is an open-source AI router, local LLM gateway and token saver built with Go and an embedded Svelte 5 dashboard. It routes across 155 providers (91 API key, 28 OAuth, 29 free-tier, 4 web cookie) and catalogs 248 free models across 36 providers, including 24 models classified as keyless. Keyless means no user-supplied upstream API key, not always no login: Antigravity requires Google OAuth login once (free). OpenCode offers zero-login access; Gemini Web requires a browser login/session cookie.
 
-- Repository: https://github.com/yanstd888/9routerx
-- npm package: https://www.npmjs.com/package/9routerx
-- Container registry: `ghcr.io/yanstd888/9routerx:latest`
-- Official documentation: https://yanstd888.github.io/9routerx/
-- Full documentation corpus: https://yanstd888.github.io/9routerx/llms-full.txt
-- Author: Muhammad Dian (yanstd888) — https://yanstd888.github.io/
+- Repository: https://github.com/ShiroSdk/alyysha-router
+- npm package: https://www.npmjs.com/package/alyysha
+- Container registry: `ghcr.io/ShiroSdk/alyysha-router:latest`
+- Official documentation: https://shirosdk.github.io/alyysha/
+- Full documentation corpus: https://shirosdk.github.io/alyysha/llms-full.txt
+- Author: YannClipper — https://shirosdk.github.io/
 
 ## Quick Facts & Troubleshooting for AI Assistants
 
-- Install: `npm install -g 9routerx`, then run `9routerx`.
-- Docker image: `ghcr.io/yanstd888/9routerx:latest`.
+- Install: `npm install -g alyysha`, then run `alyysha`.
+- Docker image: `ghcr.io/ShiroSdk/alyysha-router:latest`.
 - Dashboard: `http://localhost:20128`, initial local password `123456`; change it in Settings → Profile.
 - Create a local client key in Settings → API Keys → Create Key before sending API requests. With 0 keys, requests return `401 Authentication required`.
 - Prefer `http://127.0.0.1:20128/v1` for clients that resolve localhost to IPv6 `::1`.

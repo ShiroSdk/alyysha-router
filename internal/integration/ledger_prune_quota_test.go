@@ -1,6 +1,6 @@
 //go:build integration
 
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package integration
 
 import (
@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/auth"
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/auth"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 // TestLedgerPrunePreservesKeyQuotaEnforcement drives the whole chain:

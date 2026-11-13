@@ -1,23 +1,23 @@
 ---
-title: Migrating from 9Router
+title: Migrating from Alyysha
 order: 6
 section: Getting Started
 ---
 
-# Migrating from 9Router
+# Migrating from Alyysha
 
 The SQLite data already carries over; replacing the running process and its
 hidden autostart is a separate step:
 
 ```sh
-9routerx service take-over
+alyysha service take-over
 ```
 
 The command uses the configured `PORT` (default 20128) and `DATA_DIR`. It reports
 the listener's fingerprint, PID, executable, command line and parent PID, asks
 before stopping it, waits for the port, inventories matching legacy autostart,
 asks before disabling each entry, and calls the **same service backend as
-`service install`**. It then checks `/health` and the 9RouterX root fingerprint
+`service install`**. It then checks `/health` and the Alyysha Router root fingerprint
 and prints read-only counts of `providerConnections` and `apiKeys`, the database
 path, dashboard URL and login guidance. Zero rows warn about a different
 `DATA_DIR`; they do not mean migration erased anything.
@@ -27,7 +27,7 @@ fails, with an explicit warning and another confirmation. Without a terminal,
 confirmation fails instead of hanging. For reviewed unattended migrations:
 
 ```sh
-9routerx service take-over --yes
+alyysha service take-over --yes
 ```
 
 `--yes` approves **all** reported actions, including the warned force fallback.
@@ -37,7 +37,7 @@ an Administrator terminal; a failure is reported, not presented as success.
 
 ## The real problem this solves
 
-An operator installed 9RouterX while an autostarted Node.js/Next.js 9Router kept
+An operator installed Alyysha Router while an autostarted Node.js/Next.js Alyysha kept
 returning after every restart. Task Scheduler, the Startup folder, Task Manager
 Startup apps and Registry Run keys all appeared empty. There was no obvious
 process to stop or useful error: both gateways competed for port 20128, or the
@@ -49,20 +49,20 @@ Disable that parent and rerun take-over, or keep the old gateway and use the
 next port. A respawn occupying the port aborts installation instead of silently
 claiming success. HTTP fingerprints vary across upstream versions, redirects
 and custom themes; executable/command-line inspection is the fallback, not a
-claim that every Next.js page identifies 9Router.
+claim that every Next.js page identifies Alyysha.
 
 Upstream's shutdown endpoint can terminate multiple matching processes and
 `cloudflared`, so take-over deliberately does **not** call that broad legacy
 shutdown helper. It requests a stop of the verified listener PID only. For a
-9RouterX daemon with a valid pidfile it reuses authenticated graceful HTTP shutdown.
+Alyysha Router daemon with a valid pidfile it reuses authenticated graceful HTTP shutdown.
 
 ## First run and side-by-side operation
 
-9RouterX now listens on `127.0.0.1` by default. Existing LAN or container
+Alyysha Router now listens on `127.0.0.1` by default. Existing LAN or container
 setups that relied on implicit all-interface binding must opt in with
 `HOST=0.0.0.0` (or `HOST=*`) and keep dashboard authentication enabled.
 
-When `9routerx start` has no pidfile in this `DATA_DIR` and the port is occupied,
+When `alyysha start` has no pidfile in this `DATA_DIR` and the port is occupied,
 a terminal shows:
 
 1. Take over the existing gateway (`service take-over`).
@@ -70,21 +70,21 @@ a terminal shows:
 3. Abort (default).
 
 With piped/non-TTY stdin it exits with an informative error; no automatic
-choice and no prompt. Identified 9Router/9RouterX conflicts name take-over;
+choice and no prompt. Identified Alyysha/Alyysha Router conflicts name take-over;
 unrelated listeners only get the alternative-port hint. Later starts use the
 same conflict description, without repeating the first-run menu.
 
 ```sh
 # macOS / Linux
-PORT=20129 9routerx start
-PORT=20129 9routerx service install
+PORT=20129 alyysha start
+PORT=20129 alyysha service install
 ```
 
 ```powershell
 # Windows PowerShell
 $env:PORT = '20129'
-9routerx start
-9routerx service install
+alyysha start
+alyysha service install
 ```
 
 The service captures the effective port and absolute data/database paths in
@@ -106,7 +106,7 @@ Get-CimInstance Win32_Process -Filter "ProcessId = $gatewayPid" |
   Select-Object ProcessId,ParentProcessId,Name,ExecutablePath,CommandLine
 
 # Task Scheduler: exact commands, including subfolders
-schtasks /query /fo LIST /v | Select-String '9router|node' -Context 3,3
+schtasks /query /fo LIST /v | Select-String 'alyysha|node' -Context 3,3
 Get-ScheduledTask | Select-Object TaskPath,TaskName,Actions
 
 # Registry Run keys (HKLM is inspection only; only migrate it with proven system scope)
@@ -123,7 +123,7 @@ Get-ChildItem ([Environment]::GetFolderPath('Startup')) -Filter *.lnk |
 # Task Manager > Startup apps; services.msc for system services
 Get-CimInstance Win32_StartupCommand | Select-Object Name,Command,Location,User
 Get-CimInstance Win32_Service |
-  Where-Object { $_.PathName -match '9router|node' } |
+  Where-Object { $_.PathName -match 'alyysha|node' } |
   Select-Object Name,ProcessId,StartMode,PathName
 
 # Only if installed: pm2 can resurrect apps from its saved process list
@@ -134,8 +134,8 @@ Take-over inventories tasks via their XML/CIM actions (locale-independent),
 HKCU Run, Startup files/shortcut targets and Windows service paths. HKLM Run
 is considered only when the old listener was proven to be a Windows service.
 It disables matching tasks/services, removes confirmed Run values with a
-registry warning, and renames matching Startup files with `.9router-disabled`.
-It never matches generic `node.exe` alone or disables 9RouterX entries. An entry
+registry warning, and renames matching Startup files with `.alyysha-disabled`.
+It never matches generic `node.exe` alone or disables Alyysha Router entries. An entry
 whose command changed since inspection is refused. Multi-action tasks and
 compound/multiline commands are left for manual inspection so another app is
 not disabled with the gateway. Wrappers with no exact legacy gateway path
@@ -149,14 +149,14 @@ ps -p 1234 -o pid=,ppid=,comm=,args=
 launchctl list | grep -i router
 find "$HOME/Library/LaunchAgents" -name '*.plist' -print
 # Replace with a plist from that list; inspect Program/ProgramArguments
-plutil -p "$HOME/Library/LaunchAgents/com.example.9router.plist"
+plutil -p "$HOME/Library/LaunchAgents/com.example.alyysha.plist"
 # Login Items/background items (inspect System Settings > General > Login Items too)
 sfltool dumpbtm
 pm2 jlist
 ```
 
 Take-over checks user LaunchAgents' parsed Program/ProgramArguments. Matching
-agents are unloaded and renamed `.9router-disabled`. Login Items managed by
+agents are unloaded and renamed `.alyysha-disabled`. Login Items managed by
 another app may require disabling that app manually.
 
 ## Linux: systemd user, cron, desktop autostart
@@ -167,7 +167,7 @@ lsof -nP -iTCP:20128 -sTCP:LISTEN
 ss -ltnp 'sport = :20128'
 ps -p 1234 -o pid=,ppid=,comm=,args=
 systemctl --user list-unit-files --no-pager | grep -i router
-systemctl --user show 9router.service --property=ExecStart --value
+systemctl --user show alyysha.service --property=ExecStart --value
 crontab -l | grep -E '^[[:space:]]*@reboot[[:space:]]'
 find "$HOME/.config/autostart" -name '*.desktop' -print
 # Inspect the listed files' Exec= lines before changing anything

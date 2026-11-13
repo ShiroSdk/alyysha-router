@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Usage detail panels (Activity Heatmap, Node Health) start collapsed; the
 // Settings > Display switch flips that default. Each panel can still be opened
 // on its own for the current view, so this decides the starting state only.

@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -10,7 +10,7 @@ import (
 
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/db"
 )
 
 func TestVisionAdapter_E2E_ChatCompletions_AutoSwitch(t *testing.T) {

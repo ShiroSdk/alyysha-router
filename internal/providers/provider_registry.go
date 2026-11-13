@@ -1,7 +1,7 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package providers
 
-// Code generated from the upstream 9router provider registry. DO NOT EDIT.
+// Code generated from the upstream alyysha provider registry. DO NOT EDIT.
 //
 // This is the single source of truth for provider display metadata: category,
 // auth type, icon, colour, and the per-provider feature flags the dashboard

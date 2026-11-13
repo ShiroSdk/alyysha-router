@@ -1,12 +1,12 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
 	"strings"
 
-	json "9routerx/proxy/internal/fastjson"
+	json "alyysha/proxy/internal/fastjson"
 
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/log"
 )
 
 // An image sent turns ago still rides in the history of every later request,

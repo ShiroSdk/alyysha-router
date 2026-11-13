@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Package policy resolves the effective policy for one API key: the reusable
 // plan template assigned to the key, overlaid with the key's own columns.
 //
@@ -21,8 +21,8 @@ package policy
 import (
 	"strings"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/models"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/models"
 )
 
 // PlanSource loads one plan by id. *db.Repo satisfies it.

@@ -1,12 +1,12 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/models"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/models"
 )
 
 func TestFilterConnectionsForModel_Conditions(t *testing.T) {

@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
@@ -12,15 +12,15 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/proxy"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/proxy"
+	"alyysha/proxy/internal/translator"
 )
 
 // MiniMax Code (mcode) — the credits lane. Anthropic Messages on MiniMax's
 // mavis gateway, reached with the OAuth bearer plus the per-request session
 // headers the gateway expects. Port of upstream open-sse/executors/minimax-code.js
-// (decolua/9router 85bc33ce).
+// (decolua/alyysha 85bc33ce).
 
 // quotaWordRE matches a body that says the account ran out of credits rather
 // than that its credential is bad.
@@ -205,7 +205,7 @@ func miniMaxCodeSessionID(req *Request) string {
 func randomSessionID() string {
 	var b [16]byte
 	if _, err := rand.Read(b[:]); err != nil {
-		return "9routerx-session"
+		return "alyysha-session"
 	}
 	return hex.EncodeToString(b[:])
 }

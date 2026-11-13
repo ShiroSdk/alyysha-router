@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package db
 
 import (
@@ -101,7 +101,7 @@ func (r *Repo) InsertUsageHistory(provider, model, connectionID, apiKey, endpoin
 }
 
 // UpsertUsageDaily inserts or replaces a daily usage aggregation record.
-// The data parameter should be a JSON string matching the 9routerx daily aggregation format.
+// The data parameter should be a JSON string matching the alyysha daily aggregation format.
 // NOTE: INSERT OR REPLACE is an atomic full-row replace of the pre-merged JSON
 // blob. Merging happens in-process (see handlers/chat/usage.go dailyUsageMu), so
 // concurrent writers from MULTIPLE processes can still clobber each other. This

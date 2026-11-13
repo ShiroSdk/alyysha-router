@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package oauth
 
 import (
@@ -10,7 +10,7 @@ import (
 	"net/url"
 	"strings"
 
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/providers"
 )
 
 // xaiClientID is the public OAuth client ID for xAI.

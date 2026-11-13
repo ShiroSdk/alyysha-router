@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package service
 
 import (
@@ -26,7 +26,7 @@ func TestControlDispatchesToTheInstalledBackend(t *testing.T) {
 		setHome(t)
 		redirectInitPaths(t)
 		stubHost(t, hostStub{goos: "linux", euid: 1000})
-		stubCrontab(t, renderCronLine("/usr/local/bin/9routerx", nil)+"\n")
+		stubCrontab(t, renderCronLine("/usr/local/bin/alyysha", nil)+"\n")
 		stubRun(t)
 
 		if _, err := Start(); !errors.Is(err, ErrNoSupervisor) {
@@ -88,7 +88,7 @@ func TestControlDispatchesToTheInstalledBackend(t *testing.T) {
 		stubHost(t, hostStub{goos: "linux", euid: 1000})
 		stubCrontab(t, "")
 		calls := stubRun(t)
-		writeFile(t, filepath.Join(home, "service", "9routerx", "run"), "#!/bin/sh\n")
+		writeFile(t, filepath.Join(home, "service", "alyysha", "run"), "#!/bin/sh\n")
 
 		if _, err := Start(); err != nil {
 			t.Fatalf("Start() error = %v", err)
@@ -135,9 +135,9 @@ func TestCommandLineQuotesEveryPart(t *testing.T) {
 		args []string
 		want string
 	}{
-		{"plain", "/usr/local/bin/9routerx", []string{"--rtk=true"}, "/usr/local/bin/9routerx --rtk=true"},
-		{"spaced executable", "/opt/my apps/9routerx", nil, `"/opt/my apps/9routerx"`},
-		{"empty arg", "/bin/9routerx", []string{""}, "/bin/9routerx ''"},
+		{"plain", "/usr/local/bin/alyysha", []string{"--rtk=true"}, "/usr/local/bin/alyysha --rtk=true"},
+		{"spaced executable", "/opt/my apps/alyysha", nil, `"/opt/my apps/alyysha"`},
+		{"empty arg", "/bin/alyysha", []string{""}, "/bin/alyysha ''"},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

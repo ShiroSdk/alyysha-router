@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package providers
 
 import "strings"
@@ -58,7 +58,7 @@ func CodexUpstreamModelID(model string) string {
 }
 
 // splitThinkingSuffix separates the trailing "(level)" thinking override from a
-// model id. It is a 9router request modifier, never part of the wire id.
+// model id. It is a alyysha request modifier, never part of the wire id.
 func splitThinkingSuffix(model string) (base, suffix string) {
 	if open := strings.LastIndex(model, "("); open != -1 && strings.HasSuffix(model, ")") {
 		return strings.TrimSpace(model[:open]), model[open:]

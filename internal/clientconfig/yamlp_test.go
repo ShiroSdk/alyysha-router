@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package clientconfig
 
 import (
@@ -122,7 +122,7 @@ func TestPatchYAMLRefusals(t *testing.T) {
 		{"anchored target", "k: &ank \"old\"\n",
 			Edit{KeyPath: []string{"k"}, Value: "x"}, ErrUnsupportedStructure},
 		// Nested creation used to be refused here. omp needs it: writing
-		// providers["9router"] into a file with no providers object is the
+		// providers["alyysha"] into a file with no providers object is the
 		// normal first run, and the two-level form is now written with one
 		// indent stop per element. The case moved to the success tests below
 		// rather than being deleted, so the behaviour stays pinned.

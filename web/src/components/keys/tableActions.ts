@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // The API-key row menu and its batch bar collapse seven per-row controls into
 // one trigger, so the rules the table depends on are stated once here rather
 // than re-derived in the markup.

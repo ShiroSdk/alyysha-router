@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -6,10 +6,10 @@ import (
 	"slices"
 	"strings"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/pricing"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/pricing"
+	"alyysha/proxy/internal/providers"
 )
 
 // isModelFree evaluates whether a model is free by combining the shipped

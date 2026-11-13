@@ -1,4 +1,4 @@
-# Attribution & Ownership — 9RouterX
+# Attribution & Ownership — Alyysha Router
 
 This document separates the three layers of ownership in this repository. It
 exists as good-faith evidence of where every feature came from: inherited code
@@ -6,10 +6,10 @@ is credited, ported concepts name their source, and original work is claimed.
 
 ## 1. Inherited (MIT, unchanged)
 
-The foundation of this codebase is **9router-go** by Luqmanul Hakim
-([luqman-v1/9router-go](https://github.com/luqman-v1/9router-go)) — itself a
-Go + Svelte port of **9router** by decolua
-([decolua/9router](https://github.com/decolua/9router)). All of it is MIT
+The foundation of this codebase is **alyysha-go** by Luqmanul Hakim
+([luqman-v1/alyysha-go](https://github.com/luqman-v1/alyysha-go)) — itself a
+Go + Svelte port of **alyysha** by decolua
+([decolua/alyysha](https://github.com/decolua/alyysha)). All of it is MIT
 licensed; the copyright notices are retained verbatim in [LICENSE](LICENSE)
 as that license requires.
 
@@ -18,18 +18,18 @@ provider lanes, dashboard, CLI, and the serenhope-parity ports completed
 before the fork (per-key governance, token saver, security log, notification
 feed, dashboard Fase 4). File-by-file listing is not attempted — the fork
 commit history and the archived changelog
-([docs/changelog/9router-go-legacy.md](docs/changelog/9router-go-legacy.md))
+([docs/changelog/alyysha-go-legacy.md](docs/changelog/alyysha-go-legacy.md))
 are the record.
 
 Contributors whose ported work this product still runs on, credited where it
 appears:
 
-- **arewedaks** ([arewedaks/9router-go](https://github.com/arewedaks/9router-go)) — provider catalog, resilience, prompt-injection ports (see `wiki/advanced-features.md` and the legacy changelog).
+- **arewedaks** ([arewedaks/alyysha-go](https://github.com/arewedaks/alyysha-go)) — provider catalog, resilience, prompt-injection ports (see `wiki/advanced-features.md` and the legacy changelog).
 - **QuantumNous** ([QuantumNous/new-api](https://github.com/QuantumNous/new-api)) — one referenced port in the legacy changelog.
 
-## 2. Ported & adapted (concepts from other sources, implementation rewritten for Go/9RouterX)
+## 2. Ported & adapted (concepts from other sources, implementation rewritten for Go/Alyysha Router)
 
-| Feature | Source | Location in 9RouterX |
+| Feature | Source | Location in Alyysha Router |
 |---|---|---|
 | SSRF dispatch guard + PII masking | OmniRoute (cheaper-inference) — © 2026 diegosouzapw | `internal/proxy/dispatch_guard.go`, `internal/pii/` |
 | Free-tier catalog page | OmniRoute concept | `web/src/lib/freeTierCatalog.ts`, `web/src/components/FreeTierView.svelte` |
@@ -37,7 +37,7 @@ appears:
 | 3-tier circuit breaker | OmniRoute concept + resilience upgrade | `internal/resilience/` |
 | Headroom GCF tabular compression + output styles (terse/less-code) | headroomlabs-ai/headroom — ported via the OmniRoute integration | `internal/compression/gcf/` |
 | Telegram webhook + team/tenant cost centers | OmniRoute webhooks/teams concepts | `internal/webhooks/telegram.go`, `internal/teams/` |
-| Web executors (chatgpt-web, gemini-web DOM capture/browser lease, deepseek-web PoW, muse-web) | serenhope/9router patterns | `internal/proxy/executor/*_web*.go` |
+| Web executors (chatgpt-web, gemini-web DOM capture/browser lease, deepseek-web PoW, muse-web) | serenhope/alyysha patterns | `internal/proxy/executor/*_web*.go` |
 | A2A protocol surface | Public A2A spec (Agent-to-Agent protocol) | `internal/a2a/` |
 | Webhooks multi-target (Telegram/Discord/Slack/Generic) | OmniRoute webhooks concept | `internal/webhooks/` |
 | MCP server | Public MCP spec (Anthropic) | `internal/mcpserver/` |
@@ -47,15 +47,15 @@ only the concepts and behavior contracts were ported. The `port(serenhope):`
 and `port(omniroute):` commit messages are kept in history deliberately as
 per-feature provenance.
 
-## 3. Original 9RouterX work (copyright Muhammad Dian / yanstd888)
+## 3. Original Alyysha Router work (copyright YannClipper / ShiroSdk)
 
 - **FASE 12 feature set** (original design from gap analysis, no upstream source): quality scoring, latency-aware routing, prefix clustering, anti-repeat, conversation failover, maintenance window, traffic ramp, session hygiene, request replay, anomaly detection.
 - **Free-tier live tracking** (`freeTierBudget` table, per-provider reset loop, `GET /api/free-tier/live`) — original design beyond the catalog concept.
 - **Session vault** (AES-GCM sealed webexec sessions over the vault DEK) and the **web-executor session pool** (bounded slots, sliding-window rate limit, idle reclamation, health loop).
-- **Config bundle** (`9routerx export-bundle`/`import-bundle`, `sxb1:` sealed format, idempotent import).
+- **Config bundle** (`alyysha export-bundle`/`import-bundle`, `sxb1:` sealed format, idempotent import).
 - **TLS stealth controller + mandatory alert system** (daily compliance alert, permanent dashboard banner, profile catalog).
 - **Compliance audit log v2** UI + CSV export, **notification→webhook fan-out** choke point.
-- **Full rebranding**: 9RouterX identity (name, UI, iconography), module path `9routerx/proxy`, `9ROUTERX_*` env var namespace with the one-version `internal/envcompat` fallback, fresh CHANGELOG, wiki/skills rebrand.
+- **Full rebranding**: Alyysha Router identity (name, UI, iconography), module path `alyysha/proxy`, `ALYYSHA_*` env var namespace with the one-version `internal/envcompat` fallback, fresh CHANGELOG, wiki/skills rebrand.
 - All Go implementations of every ported concept above, the test suites
   built around them (79 packages), the TASK documents, and all
   performance tuning.

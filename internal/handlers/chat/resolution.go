@@ -1,25 +1,25 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/freeresilience"
-	"9routerx/proxy/internal/handlers/shared"
-	"9routerx/proxy/internal/middleware"
-	"9routerx/proxy/internal/promptcache"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/proxy"
-	"9routerx/proxy/internal/proxy/executor"
-	"9routerx/proxy/internal/proxy/oauth"
-	"9routerx/proxy/internal/resilience"
-	"9routerx/proxy/internal/thinking"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/freeresilience"
+	"alyysha/proxy/internal/handlers/shared"
+	"alyysha/proxy/internal/middleware"
+	"alyysha/proxy/internal/promptcache"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/proxy"
+	"alyysha/proxy/internal/proxy/executor"
+	"alyysha/proxy/internal/proxy/oauth"
+	"alyysha/proxy/internal/resilience"
+	"alyysha/proxy/internal/thinking"
 	json "encoding/json/v2"
 	"fmt"
 	"net/http"
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/semanticcache"
+	"alyysha/proxy/internal/semanticcache"
 )
 
 // NewChatHandler creates a ChatHandler with the given repository and a streaming-capable HTTP client.
@@ -257,7 +257,7 @@ func (h *ChatHandler) flattenComboModels(models []string) ([]string, error) {
 }
 
 // stripModelContextMarker strips trailing [1m] marker that Claude Code appends for 1M context beta.
-// Port of decolua/9router PR #3691 (open-sse/utils/modelMarkers.js).
+// Port of decolua/alyysha PR #3691 (open-sse/utils/modelMarkers.js).
 // Claude Code sends model: "claude-opus-5[1m]" — the marker is client-side annotation, not a real model.
 // It must be stripped before combo/alias/provider lookup, while anthropic-beta header still carries the capability.
 func stripModelContextMarker(modelStr string) string {

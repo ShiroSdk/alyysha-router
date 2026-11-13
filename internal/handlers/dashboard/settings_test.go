@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -13,13 +13,13 @@ import (
 
 	"golang.org/x/crypto/bcrypt"
 
-	"9routerx/proxy/internal/auth"
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/auth"
+	"alyysha/proxy/internal/db"
 )
 
 // setupSettingsTestDB extends the shared dashboard schema with the tables the
 // backup export walks (providerNodes/proxyPools are created elsewhere in prod).
-// DATA_DIR is isolated per test so the CLI-token files never touch ~/.9router.
+// DATA_DIR is isolated per test so the CLI-token files never touch ~/.alyysha.
 func setupSettingsTestDB(t *testing.T) (*db.Repo, func()) {
 	t.Helper()
 	t.Setenv("DATA_DIR", t.TempDir())
@@ -404,7 +404,7 @@ func TestHandleImportDatabase_LegacyZipArchive(t *testing.T) {
 	payload := `{"settings":{"requireLogin":true},"providerConnections":[{"id":"conn-zip","provider":"deepseek","authType":"apikey","isActive":true,"priority":1,"apiKey":"sk-zip"}],"customModels":[]}`
 	var buf bytes.Buffer
 	zw := zip.NewWriter(&buf)
-	f, err := zw.Create("9router-backup.json")
+	f, err := zw.Create("alyysha-backup.json")
 	if err != nil {
 		t.Fatalf("create zip entry: %v", err)
 	}

@@ -1,14 +1,14 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package app
 
 import (
 	"context"
 	"strings"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlers/chat"
-	"9routerx/proxy/internal/handlers/media"
-	"9routerx/proxy/internal/modelhealth"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlers/chat"
+	"alyysha/proxy/internal/handlers/media"
+	"alyysha/proxy/internal/modelhealth"
 )
 
 // startModelHealthScheduler starts the automatic model-health loop.

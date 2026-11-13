@@ -1,11 +1,11 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package shared
 
 import (
 	"sync"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/tokensaver"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/tokensaver"
 )
 
 // TokenSaverConfig holds runtime-configurable token saver flags and levels.

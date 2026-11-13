@@ -1,4 +1,4 @@
-<!-- 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   import { onMount, tick } from 'svelte'
   import { api } from '../api/client'
@@ -120,7 +120,7 @@
     try {
       const res = await api.login(password)
       if (res.success) {
-        // Live routing flow (TASK-9routerX-anim-bg 2.5.2), wiring point 2 of
+        // Live routing flow (TASK-alyyshaX-anim-bg 2.5.2), wiring point 2 of
         // 2: a successful login submit fires a background data burst.
         routingBurst()
         if (onSuccess) {
@@ -191,11 +191,11 @@
   const passwordAvailable = $derived(authMode === 'password' || authMode === 'both' || !ssoAvailable)
 
   const version = typeof __APP_VERSION__ !== 'undefined' ? __APP_VERSION__ : ''
-  const GITHUB_URL = 'https://github.com/yanstd888/9routerx'
-  const DOCS_URL = 'https://github.com/yanstd888/9routerx/wiki'
+  const GITHUB_URL = 'https://github.com/ShiroSdk/alyysha-router'
+  const DOCS_URL = 'https://github.com/ShiroSdk/alyysha-router/wiki'
 </script>
 
-<div class="relative min-h-screen flex flex-col overflow-hidden bg-[var(--9x-bg)] text-[var(--9x-ink)]">
+<div class="relative min-h-screen flex flex-col overflow-hidden bg-[var(--ay-bg)] text-[var(--ay-ink)]">
   <!--
     ASCII routing-map background mount point (FASE UI-GLEPH, later commit).
     The background component slots into this layer — it sits behind the
@@ -208,16 +208,16 @@
   <div
     class="absolute inset-0 pointer-events-none"
     aria-hidden="true"
-    style="background-image: linear-gradient(to right, var(--9x-gridline) 1px, transparent 1px), linear-gradient(to bottom, var(--9x-gridline) 1px, transparent 1px); background-size: var(--9x-cell) var(--9x-cell);"
+    style="background-image: linear-gradient(to right, var(--ay-gridline) 1px, transparent 1px), linear-gradient(to bottom, var(--ay-gridline) 1px, transparent 1px); background-size: var(--ay-cell) var(--ay-cell);"
   ></div>
 
   <!-- Thin top header -->
   <header class="relative z-10 flex items-center justify-between px-4 sm:px-6 h-14 shrink-0">
     <div class="flex items-center gap-2.5 min-w-0">
       <img src="/android-chrome-192x192.png" alt="" class="size-6 object-contain" />
-      <span class="font-headline font-bold tracking-tight text-[15px]">9RouterX</span>
+      <span class="font-headline font-bold tracking-tight text-[15px]">Alyysha Router</span>
       {#if version}
-        <span class="hidden sm:inline font-code text-[11px] text-[var(--9x-ink)]/40">v{version}</span>
+        <span class="hidden sm:inline font-code text-[11px] text-[var(--ay-ink)]/40">v{version}</span>
       {/if}
     </div>
     <!-- Pills live top-right on every viewport (owner request: on mobile they
@@ -240,24 +240,24 @@
           <div class="gl-panel" class:gl-shake={errorMessage}>
             <!-- Lockup -->
             <div class="flex items-center gap-2.5 mb-5">
-              <img src="/android-chrome-192x192.png" alt="9RouterX" class="size-7 object-contain" />
-              <span class="font-code text-[10px] tracking-[0.18em] text-[var(--9x-ink)]/40">9R Next Go Generation</span>
+              <img src="/android-chrome-192x192.png" alt="Alyysha Router" class="size-7 object-contain" />
+              <span class="font-code text-[10px] tracking-[0.18em] text-[var(--ay-ink)]/40">Alyysha Next Gen</span>
             </div>
 
             <!-- Text-scramble decode on first appearance (spec 2.5.4); the
                  action only rewrites text node values, so the accent span
                  below survives it. -->
             <h1 class="font-headline font-light lowercase text-[clamp(24px,5vw,30px)] leading-tight mb-6 tracking-tight" use:scramble>
-              welcome back, <span class="text-[var(--9x-accent)]">&rarr;9x:</span>
+              welcome back, <span class="text-[var(--ay-accent)]">&rarr;9x:</span>
             </h1>
 
             {#if mustChange}
               <form onsubmit={handleSetNewPassword} class="flex flex-col gap-4">
-                <p class="text-sm text-[var(--9x-wait)] text-center font-code text-xs leading-relaxed">
+                <p class="text-sm text-[var(--ay-wait)] text-center font-code text-xs leading-relaxed">
                   Set a new password before accessing the dashboard remotely.
                 </p>
                 <div class="flex flex-col gap-2">
-                  <label for="login-new-password" class="text-sm font-medium text-[var(--9x-ink)]/80 font-headline">New password</label>
+                  <label for="login-new-password" class="text-sm font-medium text-[var(--ay-ink)]/80 font-headline">New password</label>
                   <input
                     id="login-new-password"
                     type="password"
@@ -292,25 +292,25 @@
                 {/if}
 
                 {#if ssoAvailable && passwordAvailable}
-                  <div class="h-px bg-[var(--9x-line)]"></div>
+                  <div class="h-px bg-[var(--ay-line)]"></div>
                 {/if}
 
                 {#if passwordAvailable}
                   <form onsubmit={handleSubmit} class="flex flex-col gap-4">
                     {#if isSsoEnabled && !ssoAvailable}
-                      <p class="text-xs text-[var(--9x-wait)] text-center font-code leading-relaxed">
+                      <p class="text-xs text-[var(--ay-wait)] text-center font-code leading-relaxed">
                         {activeSsoType === 'saml' ? 'SAML SSO' : 'OIDC'} login is enabled, but configuration is incomplete. Password login is still available for recovery.
                       </p>
                     {/if}
 
                     {#if authMode === 'both' && ssoAvailable}
-                      <p class="text-xs text-[var(--9x-ink)]/50 text-center font-code">
+                      <p class="text-xs text-[var(--ay-ink)]/50 text-center font-code">
                         Password and {activeSsoType === 'saml' ? 'SAML SSO' : 'OIDC'} login are both enabled.
                       </p>
                     {/if}
 
                     <div class="flex flex-col gap-2">
-                      <label for="login-password" class="text-sm font-medium text-[var(--9x-ink)]/80 font-headline">Password</label>
+                      <label for="login-password" class="text-sm font-medium text-[var(--ay-ink)]/80 font-headline">Password</label>
                       <div class="relative">
                         <input
                           id="login-password"
@@ -324,7 +324,7 @@
                         <button
                           type="button"
                           onclick={() => (showPassword = !showPassword)}
-                          class="absolute inset-y-0 right-0 flex items-center justify-center w-11 text-[var(--9x-ink)]/50 hover:text-[var(--9x-ink)] transition-colors cursor-pointer"
+                          class="absolute inset-y-0 right-0 flex items-center justify-center w-11 text-[var(--ay-ink)]/50 hover:text-[var(--ay-ink)] transition-colors cursor-pointer"
                           aria-label={showPassword ? 'Hide password' : 'Show password'}
                         >
                           <span class="material-symbols-outlined text-[20px]">
@@ -336,12 +336,12 @@
                         <p class="gl-error" role="alert">{errorMessage}</p>
                       {/if}
                       {#if retryAfter > 0}
-                        <p class="text-xs text-[var(--9x-wait)] font-code">
+                        <p class="text-xs text-[var(--ay-wait)] font-code">
                           Locked. Retry in <span>{retryAfter}s</span>.
                         </p>
                       {/if}
                       {#if resetHint}
-                        <p class="text-xs text-[var(--9x-ink)]/50 font-code">{resetHint}</p>
+                        <p class="text-xs text-[var(--ay-ink)]/50 font-code">{resetHint}</p>
                       {/if}
                     </div>
 
@@ -362,11 +362,11 @@
 
                     <p class="gl-kbd-hint hidden md:block" aria-hidden="true">&#8629; sign in</p>
 
-                    <p class="text-xs text-center text-[var(--9x-ink)]/50 font-code">
-                      default password is <code class="bg-[var(--9x-btn)] border border-[var(--9x-line)] px-1.5 py-0.5 rounded text-[var(--9x-ink)]">123456</code>
+                    <p class="text-xs text-center text-[var(--ay-ink)]/50 font-code">
+                      default password is <code class="bg-[var(--ay-btn)] border border-[var(--ay-line)] px-1.5 py-0.5 rounded text-[var(--ay-ink)]">123456</code>
                     </p>
                     {#if hasPassword === false}
-                      <p class="text-xs text-center text-[var(--9x-wait)] font-code">
+                      <p class="text-xs text-center text-[var(--ay-wait)] font-code">
                         Security risk: no password set. You will be asked to set one when logging in remotely.
                       </p>
                     {/if}
@@ -378,8 +378,8 @@
             {/if}
 
             <!-- Mobile: pills move under the panel; neutral line instead of the keyboard hint -->
-            <p class="md:hidden font-code text-[10px] text-[var(--9x-ink)]/40 text-center mt-4 tracking-[0.14em]">
-              9RouterX &middot; 9R Next Go Generation
+            <p class="md:hidden font-code text-[10px] text-[var(--ay-ink)]/40 text-center mt-4 tracking-[0.14em]">
+              Alyysha Router &middot; Alyysha Next Gen
             </p>
           </div>
       {/if}
@@ -387,9 +387,9 @@
 
       {#if hasPassword !== null}
         <!-- Desktop >=1024px only: infrastructure status column -->
-        <aside class="hidden lg:flex flex-col gap-2 pt-2 font-code text-[11px] text-[var(--9x-ink)]/45 shrink-0" aria-hidden="true">
-          <span class="text-[var(--9x-ink)]/60 tracking-[0.14em]">9RouterX &middot; 9R Next Go Generation</span>
-          <span>gateway &middot; <span class="text-[var(--9x-ok)]">ready</span></span>
+        <aside class="hidden lg:flex flex-col gap-2 pt-2 font-code text-[11px] text-[var(--ay-ink)]/45 shrink-0" aria-hidden="true">
+          <span class="text-[var(--ay-ink)]/60 tracking-[0.14em]">Alyysha Router &middot; Alyysha Next Gen</span>
+          <span>gateway &middot; <span class="text-[var(--ay-ok)]">ready</span></span>
           <span>region &middot; local</span>
           {#if version}<span>version &middot; v{version}</span>{/if}
         </aside>
@@ -405,12 +405,12 @@
 <style>
   /* Frosted glass panel over the ASCII background */
   .gl-panel {
-    background: var(--9x-glass);
+    background: var(--ay-glass);
     -webkit-backdrop-filter: blur(18px);
     backdrop-filter: blur(18px);
-    border: 1px solid var(--9x-line);
+    border: 1px solid var(--ay-line);
     border-radius: 16px;
-    box-shadow: var(--9x-shadow);
+    box-shadow: var(--ay-shadow);
     padding: 24px;
   }
   @media (min-width: 768px) {
@@ -427,28 +427,28 @@
     min-height: 44px;
     padding: 0 16px;
     border-radius: 999px;
-    border: 1px solid var(--9x-line);
-    background: var(--9x-btn);
-    color: var(--9x-btn-ink);
+    border: 1px solid var(--ay-line);
+    background: var(--ay-btn);
+    color: var(--ay-btn-ink);
     font-family: var(--font-code);
     font-size: 12px;
     text-decoration: none;
-    transition: background-color 0.2s var(--9x-ease), transform 0.2s var(--9x-ease);
+    transition: background-color 0.2s var(--ay-ease), transform 0.2s var(--ay-ease);
   }
   .gl-pill:hover {
-    background: var(--9x-btn-hover);
+    background: var(--ay-btn-hover);
   }
   @media (hover: hover) {
     .gl-pill:hover {
       transform: translateY(-1px);
-      box-shadow: var(--9x-shadow-sm);
+      box-shadow: var(--ay-shadow-sm);
     }
   }
   .gl-pill:active {
     transform: translateY(0) scale(0.98);
   }
   .gl-pill:focus-visible {
-    outline: 2px solid var(--9x-accent);
+    outline: 2px solid var(--ay-accent);
     outline-offset: 2px;
   }
 
@@ -461,16 +461,16 @@
     padding: 10px 12px;
     font-size: 16px;
     font-family: var(--font-code);
-    color: var(--9x-ink);
-    background: var(--9x-btn);
-    border: 1px solid var(--9x-line);
+    color: var(--ay-ink);
+    background: var(--ay-btn);
+    border: 1px solid var(--ay-line);
     border-radius: 12px;
     outline: none;
-    box-shadow: var(--9x-inset-rest);
-    transition: border-color var(--9x-transition), box-shadow var(--9x-transition);
+    box-shadow: var(--ay-inset-rest);
+    transition: border-color var(--ay-transition), box-shadow var(--ay-transition);
   }
   .gl-input::placeholder {
-    color: color-mix(in srgb, var(--9x-ink) 65%, transparent);
+    color: color-mix(in srgb, var(--ay-ink) 65%, transparent);
   }
   /* Room for the visibility toggle inside the field */
   .gl-input-trailing {
@@ -478,8 +478,8 @@
   }
   .gl-input:focus-visible {
     outline: none;
-    border-color: var(--9x-accent);
-    box-shadow: var(--9x-ring), var(--9x-inset-rest);
+    border-color: var(--ay-accent);
+    box-shadow: var(--ay-ring), var(--ay-inset-rest);
   }
 
   /* Primary button: btn surface, hover brightens and lifts 1px with the shadow
@@ -495,27 +495,27 @@
     font-family: var(--font-headline);
     font-weight: 500;
     font-size: 14px;
-    color: var(--9x-btn-ink);
-    background: var(--9x-btn);
-    border: 1px solid var(--9x-line);
+    color: var(--ay-btn-ink);
+    background: var(--ay-btn);
+    border: 1px solid var(--ay-line);
     border-radius: 12px;
     cursor: pointer;
-    transition: background-color var(--9x-transition), transform var(--9x-transition),
-      box-shadow var(--9x-transition);
+    transition: background-color var(--ay-transition), transform var(--ay-transition),
+      box-shadow var(--ay-transition);
   }
   @media (hover: hover) {
     .gl-btn:hover:not(:disabled) {
-      background: var(--9x-btn-hover);
+      background: var(--ay-btn-hover);
       transform: translateY(-1px);
-      box-shadow: var(--9x-shadow-md);
+      box-shadow: var(--ay-shadow-md);
     }
   }
   .gl-btn:active:not(:disabled) {
     transform: translateY(0) scale(0.98);
-    box-shadow: var(--9x-shadow-sm);
+    box-shadow: var(--ay-shadow-sm);
   }
   .gl-btn:focus-visible {
-    outline: 2px solid var(--9x-accent);
+    outline: 2px solid var(--ay-accent);
     outline-offset: 2px;
   }
   .gl-btn:disabled {
@@ -527,7 +527,7 @@
   .gl-kbd-hint {
     font-family: var(--font-code);
     font-size: 11px;
-    color: color-mix(in srgb, var(--9x-ink) 65%, transparent);
+    color: color-mix(in srgb, var(--ay-ink) 65%, transparent);
     text-align: center;
   }
 
@@ -535,13 +535,13 @@
   .gl-error {
     font-family: var(--font-code);
     font-size: 12px;
-    color: var(--9x-err);
+    color: var(--ay-err);
     overflow-wrap: anywhere;
   }
 
   /* Gentle shake on a failed attempt (300ms, transform only) */
   .gl-shake {
-    animation: gl-shake 0.3s var(--9x-ease);
+    animation: gl-shake 0.3s var(--ay-ease);
   }
   @keyframes gl-shake {
     0%, 100% { transform: translateX(0); }
@@ -566,7 +566,7 @@
     height: 4px;
     border-radius: 999px;
     background: currentColor;
-    animation: gl-dot-pulse 1s infinite var(--9x-ease);
+    animation: gl-dot-pulse 1s infinite var(--ay-ease);
   }
   .gl-dots i:nth-child(2) {
     animation-delay: 0.15s;

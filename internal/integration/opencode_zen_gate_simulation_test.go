@@ -1,6 +1,6 @@
 //go:build integration
 
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package integration
 
 import (
@@ -20,7 +20,7 @@ import (
 // lenient.
 //
 // The fake upstream implements the gate both in its headers and in its body,
-// using the rules recorded for the /inference gate (upstream decolua/9router
+// using the rules recorded for the /inference gate (upstream decolua/alyysha
 // #4842, probed 2026-09-18), and answers 403 FreeTierError when the outbound
 // request violates them. Driving it through the production router exercises the
 // whole pipeline: lane choice, credential swap, header fingerprinting, and body

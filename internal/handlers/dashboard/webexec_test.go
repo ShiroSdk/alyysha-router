@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -12,9 +12,9 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/sessionvault"
-	"9routerx/proxy/internal/webexec"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/sessionvault"
+	"alyysha/proxy/internal/webexec"
 )
 
 // errValidationFailed is the injected validator's verdict for the expired

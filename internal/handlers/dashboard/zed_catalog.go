@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 // Catalogue listing for the Zed provider, used by the dashboard's
@@ -14,8 +14,8 @@ import (
 	json "encoding/json/v2"
 	"fmt"
 
-	"9routerx/proxy/internal/models"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/models"
+	"alyysha/proxy/internal/providers"
 )
 
 // ZedModel is one entry of Zed's catalogue, in the shape the dashboard panel

@@ -1,27 +1,27 @@
 <div align="center">
 
-![9RouterX — Local AI Router, LLM Gateway, and Token Saver Single Binary](docs/9routerx-readme-hero-motion.gif)
+![Alyysha Router — Local AI Router, LLM Gateway, and Token Saver Single Binary](docs/alyysha-readme-hero-motion.gif)
 
-# 9RouterX — FREE AI Router & Token Saver (Single Binary)
+# Alyysha Router — FREE AI Router & Token Saver (Single Binary)
 
 **High-performance local AI gateway and OpenAI/Anthropic-compatible LLM router compiled into a single Go binary.**
 
 Cut tool-output token consumption by **20–40%**, automate multi-tier failover (**Subscription → Cheap → Free**), and route across **155 AI providers** and **248 free models** with zero Node.js runtime overhead.
 
-**9RouterX is the self-hosted 9router alternative** — one Go binary you own: per-key governance, semantic cache, and 248 free models (24 keyless) running locally on port 20128.
+**Alyysha Router is the self-hosted alyysha alternative** — one Go binary you own: per-key governance, semantic cache, and 248 free models (24 keyless) running locally on port 20128.
 
-If 9RouterX helps you, please give it a star — it helps other developers find the project.
+If Alyysha Router helps you, please give it a star — it helps other developers find the project.
 
-[![CI](https://github.com/yanstd888/9routerx/actions/workflows/ci.yml/badge.svg)](https://github.com/yanstd888/9routerx/actions/workflows/ci.yml)
-[![Release CI](https://github.com/yanstd888/9routerx/actions/workflows/release.yml/badge.svg)](https://github.com/yanstd888/9routerx/actions/workflows/release.yml)
-[![GitHub release](https://img.shields.io/github/v/release/yanstd888/9routerx?style=flat-square)](https://github.com/yanstd888/9routerx/releases)
-[![npm version](https://img.shields.io/npm/v/9routerx.svg?style=flat-square)](https://www.npmjs.com/package/9routerx)
-[![npm downloads](https://img.shields.io/npm/dm/9routerx.svg?style=flat-square)](https://www.npmjs.com/package/9routerx)
-[![GitHub downloads](https://img.shields.io/github/downloads/yanstd888/9routerx/total?style=flat-square)](https://github.com/yanstd888/9routerx/releases)
-[![Telegram Community](https://img.shields.io/badge/Telegram-%40aiclub__id-26A5E4?style=flat-square&logo=telegram)](https://t.me/aiclub_id)
-[![Source port](https://img.shields.io/badge/port-20128-2563EB?style=flat-square)](https://yanstd888.github.io/9routerx/)
+[![CI](https://github.com/ShiroSdk/alyysha-router/actions/workflows/ci.yml/badge.svg)](https://github.com/ShiroSdk/alyysha-router/actions/workflows/ci.yml)
+[![Release CI](https://github.com/ShiroSdk/alyysha-router/actions/workflows/release.yml/badge.svg)](https://github.com/ShiroSdk/alyysha-router/actions/workflows/release.yml)
+[![GitHub release](https://img.shields.io/github/v/release/ShiroSdk/alyysha-router?style=flat-square)](https://github.com/ShiroSdk/alyysha-router/releases)
+[![npm version](https://img.shields.io/npm/v/alyysha.svg?style=flat-square)](https://www.npmjs.com/package/alyysha)
+[![npm downloads](https://img.shields.io/npm/dm/alyysha.svg?style=flat-square)](https://www.npmjs.com/package/alyysha)
+[![GitHub downloads](https://img.shields.io/github/downloads/ShiroSdk/alyysha-router/total?style=flat-square)](https://github.com/ShiroSdk/alyysha-router/releases)
+[![Telegram Community](https://img.shields.io/badge/Telegram-%40YannClippers-26A5E4?style=flat-square&logo=telegram)](https://t.me/YannClippers)
+[![Source port](https://img.shields.io/badge/port-20128-2563EB?style=flat-square)](https://shirosdk.github.io/alyysha/)
 
-[Quick Start](#quick-start) • [Why 9RouterX?](#why-9routerx) • [Key Features](#key-features) • [Supported Clients](#supported-ai-coding-clients) • [Free Providers](#free-ai-providers-and-keyless-models-catalog) • [Database Sharing](#sharing-a-database-with-9router) • [Screenshots](#screenshots) • [Setup Guide](#setup-guide-summary-and-wiki-documentation) • [Comparison](#architecture-comparison) • [FAQ](#frequently-asked-questions-faq) • [Docs](#docs) • [Wiki](https://yanstd888.github.io/9routerx/)
+[Quick Start](#quick-start) • [Why Alyysha Router?](#why-alyysha) • [Key Features](#key-features) • [Supported Clients](#supported-ai-coding-clients) • [Free Providers](#free-ai-providers-and-keyless-models-catalog) • [Database Sharing](#sharing-a-database-with-alyysha) • [Screenshots](#screenshots) • [Setup Guide](#setup-guide-summary-and-wiki-documentation) • [Comparison](#architecture-comparison) • [FAQ](#frequently-asked-questions-faq) • [Docs](#docs) • [Wiki](https://shirosdk.github.io/alyysha/)
 
 **155** Providers · **28** OAuth One-Click · **29** Free-Tier · **248** Free Models (**24** Keyless) · **20–40%** Token Saved · **5** Platforms · **1** Binary
 
@@ -29,18 +29,18 @@ If 9RouterX helps you, please give it a star — it helps other developers find 
 
 ---
 
-> **What is 9RouterX?**
+> **What is Alyysha Router?**
 >
-> **9RouterX** is an open-source, self-hosted AI routing gateway, local LLM proxy, and request/response token optimizer written in Go with an embedded Svelte 5 + Vite + Tailwind 4 web dashboard (listening on default port `20128`). It exposes a unified OpenAI-compatible (`/v1/chat/completions`, `/v1/messages`, `/v1/responses`, `/v1/embeddings`, `/v1/models`) and Anthropic-compatible local proxy endpoint that connects AI coding assistants (Claude Code, Cursor, OpenAI Codex CLI, Cline, Roo Code, OpenCode, Antigravity, Gemini CLI, OpenClaw) to **155 AI providers**—comprising **91 API key services**, **28 one-click OAuth integrations**, **29 free-tier providers** (**248 cataloged free models across 36 providers**, including **24 cataloged keyless models** requiring no user-supplied upstream API key; Antigravity still requires one Google OAuth login), and **4 web cookie providers**.
+> **Alyysha Router** is an open-source, self-hosted AI routing gateway, local LLM proxy, and request/response token optimizer written in Go with an embedded Svelte 5 + Vite + Tailwind 4 web dashboard (listening on default port `20128`). It exposes a unified OpenAI-compatible (`/v1/chat/completions`, `/v1/messages`, `/v1/responses`, `/v1/embeddings`, `/v1/models`) and Anthropic-compatible local proxy endpoint that connects AI coding assistants (Claude Code, Cursor, OpenAI Codex CLI, Cline, Roo Code, OpenCode, Antigravity, Gemini CLI, OpenClaw) to **155 AI providers**—comprising **91 API key services**, **28 one-click OAuth integrations**, **29 free-tier providers** (**248 cataloged free models across 36 providers**, including **24 cataloged keyless models** requiring no user-supplied upstream API key; Antigravity still requires one Google OAuth login), and **4 web cookie providers**.
 
-## Why 9RouterX?
+## Why Alyysha Router?
 
-AI-assisted software engineering workflows suffer from fragmented monthly subscriptions, sudden upstream rate limits, runaway token billing, and bloated CLI tool context windows. 9RouterX resolves these operational bottlenecks locally at the gateway layer before your requests leave your machine:
+AI-assisted software engineering workflows suffer from fragmented monthly subscriptions, sudden upstream rate limits, runaway token billing, and bloated CLI tool context windows. Alyysha Router resolves these operational bottlenecks locally at the gateway layer before your requests leave your machine:
 
-* **Unused Monthly Quotas & Rate-Limit Interruptions → Smart 3-Tier Cascade (`Subscription → Cheap → Free`):** Stop losing unused monthly subscription credits or hitting `429 Too Many Requests` in the middle of a complex multi-file refactor. 9RouterX prioritizes your active **Subscription** tier first (via 28 one-click OAuth or 4 web cookie providers), overflows seamlessly to **Cheap API** providers (such as DeepSeek, Groq, Fireworks, or Nebius), and automatically falls back to **Free-Tier / Keyless** models (`248 free models across 36 providers`, including `24 keyless models`) when primary limits are exhausted.
+* **Unused Monthly Quotas & Rate-Limit Interruptions → Smart 3-Tier Cascade (`Subscription → Cheap → Free`):** Stop losing unused monthly subscription credits or hitting `429 Too Many Requests` in the middle of a complex multi-file refactor. Alyysha Router prioritizes your active **Subscription** tier first (via 28 one-click OAuth or 4 web cookie providers), overflows seamlessly to **Cheap API** providers (such as DeepSeek, Groq, Fireworks, or Nebius), and automatically falls back to **Free-Tier / Keyless** models (`248 free models across 36 providers`, including `24 keyless models`) when primary limits are exhausted.
 * **Verbose CLI & Tool-Call Outputs → 20–40% Token Saver Suite:** Autonomous coding agents regularly burn tens of thousands of input tokens reading raw terminal logs, directory trees, build outputs, and repetitive JSON responses. Built-in RTK compression (`internal/tokensaver`, `internal/compression`), **50+ ready-made per-tool output filters** (`git diff`, `git log`, `grep`, `ripgrep`, `docker logs`, `npm install`, `pnpm`, `cargo build`, `go test`, `terraform plan`, `kubectl`, `pytest`, and friends), GCF/tabular headroom compression (`internal/compression/gcf`, `internal/headroom`), context squeezing, and output style directives (Caveman, Ponytail, ADHD, and Anti-Slop modes) strip redundant noise before forwarding requests upstream.
 * **Uncontrolled API Spend → Per-Key Financial Governance & Guardrails:** Enforce strict daily USD spending ceilings with hard cutoffs checked when each request starts (`internal/budget`), per-key request rate limits, CIDR/IP whitelists, per-key system prompt injection, and scoped endpoint permissions (`internal/policy`, `internal/guardrails`, `internal/keikey`) before distributing local gateway keys (`sk-...`) to autonomous agents, CI pipelines, or team members.
-* **Silent Endpoint Failures & Broken Tool Calls → Active Health Probing & Auto-Repair:** Upstream LLM providers frequently return malformed JSON tool-call arguments, truncated schemas, or suffer silent latency degradation. 9RouterX repairs broken tool-call structures in transit (`tool-call repair fallback`), guards against SSRF dispatch and leaks via PII masking, and continuously tracks live endpoint health (`internal/modelhealth`, `internal/resilience`) with a 3-tier circuit breaker to bypass degraded nodes automatically.
+* **Silent Endpoint Failures & Broken Tool Calls → Active Health Probing & Auto-Repair:** Upstream LLM providers frequently return malformed JSON tool-call arguments, truncated schemas, or suffer silent latency degradation. Alyysha Router repairs broken tool-call structures in transit (`tool-call repair fallback`), guards against SSRF dispatch and leaks via PII masking, and continuously tracks live endpoint health (`internal/modelhealth`, `internal/resilience`) with a 3-tier circuit breaker to bypass degraded nodes automatically.
 * **Redundant Repeated Prompts → Semantic & Prompt Caching:** Reduce round-trip latency and API token billing through local vector-similarity semantic caching (`internal/semanticcache`) combined with automatic upstream prompt cache header passthrough (`internal/promptcache`) and zero-allocation FastJSON parsing (`internal/fastjson`).
 * **Heavy Runtime Dependencies → Single Self-Contained Go Binary:** No Node.js runtime memory bloat, no Python virtual environments, and no external PostgreSQL or Redis containers required. Everything—including the reactive Svelte 5 dashboard, SQLite storage engine, MCP server, and MITM inspector—runs from a single native binary across Linux (`x64`/`arm64`), macOS (`x64`/`arm64`), and Windows (`x64`).
 
@@ -52,7 +52,7 @@ AI-assisted software engineering workflows suffer from fragmented monthly subscr
                    http://localhost:20128/v1 (OpenAI / Anthropic / MCP / A2A)
                                            ▼
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
-│                             9RouterX Single Go Binary                               │
+│                             Alyysha Router Single Go Binary                               │
 │  ┌────────────────────────┐  ┌────────────────────────┐  ┌───────────────────────┐  │
 │  │  Governance & Policy   │→ │   Token Saver Suite    │→ │  Semantic & Prompt    │  │
 │  │  • Daily Cost Cutoff   │  │   • RTK Compression    │  │       Caching         │  │
@@ -90,36 +90,36 @@ AI-assisted software engineering workflows suffer from fragmented monthly subscr
 
 ## Quick Start
 
-Install 9RouterX, create your local gateway API key in the dashboard on port `20128`, and execute your first routed completion in 3 steps.
+Install Alyysha Router, create your local gateway API key in the dashboard on port `20128`, and execute your first routed completion in 3 steps.
 
-### 1. Install 9RouterX
+### 1. Install Alyysha Router
 
-Upgrading from 9Router? Data carries over automatically; run `9routerx service take-over` to replace the old gateway and its autostart in one step ([migration guide](wiki/migration.md)).
+Upgrading from Alyysha? Data carries over automatically; run `alyysha service take-over` to replace the old gateway and its autostart in one step ([migration guide](wiki/migration.md)).
 
 **Option A — Via npm (Recommended for Linux, macOS, and Windows):** requires Node.js **>= 18**.
 
 ```bash
-npm install -g 9routerx
+npm install -g alyysha
 ```
 
 **Option B — Via Official Installer Script (Linux / macOS / Windows):**
 
 ```bash
 # Linux & macOS
-curl -fsSL https://raw.githubusercontent.com/yanstd888/9routerx/main/install.sh | sh
+curl -fsSL https://raw.githubusercontent.com/ShiroSdk/alyysha-router/main/install.sh | sh
 
 # Windows (PowerShell)
-irm https://raw.githubusercontent.com/yanstd888/9routerx/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/ShiroSdk/alyysha-router/main/install.ps1 | iex
 ```
 
 **Option C — Prebuilt Standalone Binaries:**
 
-Download the standalone archive for `linux-x64`, `linux-arm64`, `darwin-x64`, `darwin-arm64`, or `win32-x64` directly from [GitHub Releases](https://github.com/yanstd888/9routerx/releases).
+Download the standalone archive for `linux-x64`, `linux-arm64`, `darwin-x64`, `darwin-arm64`, or `win32-x64` directly from [GitHub Releases](https://github.com/ShiroSdk/alyysha-router/releases).
 
 ### 2. Start & Create API Key
 
 ```bash
-9routerx
+alyysha
 # Dashboard: http://localhost:20128 (Default password: 123456 — change in Settings → Profile)
 # Next: Settings → API Keys → Create Key → copy your key (sk-...)
 ```
@@ -138,77 +138,77 @@ curl http://127.0.0.1:20128/v1/chat/completions \
   -d '{
     "model": "oc/big-pickle",
     "messages": [
-      {"role": "user", "content": "Verify 9RouterX local gateway on port 20128 in one sentence."}
+      {"role": "user", "content": "Verify Alyysha Router local gateway on port 20128 in one sentence."}
     ]
   }'
 ```
 
 ### Keep the Terminal Free (Background Mode)
 
-Run 9RouterX as a background daemon without tying up an active terminal session:
+Run Alyysha Router as a background daemon without tying up an active terminal session:
 
 ```bash
-9routerx start          # launch in background (writes DATA_DIR/run/gateway.pid)
-9routerx status         # check running PID and active port
-9routerx restart        # restart background instance
-9routerx logs -n 100    # tail the last 100 lines of DATA_DIR/run/gateway.log
-9routerx stop           # stop the background daemon
+alyysha start          # launch in background (writes DATA_DIR/run/gateway.pid)
+alyysha status         # check running PID and active port
+alyysha restart        # restart background instance
+alyysha logs -n 100    # tail the last 100 lines of DATA_DIR/run/gateway.log
+alyysha stop           # stop the background daemon
 ```
 
 * **PID & Logs:** Background state is stored in `DATA_DIR/run/gateway.pid` and daemon output is written to `DATA_DIR/run/gateway.log`.
-* **Windows Note:** On Windows, `9routerx stop` uses `TerminateProcess` (which skips graceful in-flight drain). For a graceful drain on Windows, trigger **Shutdown** from the web dashboard or use `9routerx restart`.
+* **Windows Note:** On Windows, `alyysha stop` uses `TerminateProcess` (which skips graceful in-flight drain). For a graceful drain on Windows, trigger **Shutdown** from the web dashboard or use `alyysha restart`.
 
 ### Running with Docker (GHCR)
 
-Run 9RouterX in a container with persistent SQLite storage mounted on port `20128`:
+Run Alyysha Router in a container with persistent SQLite storage mounted on port `20128`:
 
 ```bash
 docker run -d \
-  --name 9routerx \
+  --name alyysha \
   --restart unless-stopped \
   -p 20128:20128 \
-  -v ~/.9router:/data \
+  -v ~/.alyysha:/data \
   -e DATA_DIR=/data \
-  ghcr.io/yanstd888/9routerx:latest
+  ghcr.io/ShiroSdk/alyysha-router:latest
 ```
 
-* **Experimental Builds:** To test bleeding-edge commits from the experimental branch, pull `ghcr.io/yanstd888/9routerx:exp` (`docker pull ghcr.io/yanstd888/9routerx:exp`). Experimental workflow builds only publish to the `exp` tag and never overwrite `latest`.
+* **Experimental Builds:** To test bleeding-edge commits from the experimental branch, pull `ghcr.io/ShiroSdk/alyysha-router:exp` (`docker pull ghcr.io/ShiroSdk/alyysha-router:exp`). Experimental workflow builds only publish to the `exp` tag and never overwrite `latest`.
 
 ### Install Alternatives & Build from Source
 
-**Release binary:** download from [GitHub Releases](https://github.com/yanstd888/9routerx/releases/latest) and verify against `SHA256SUMS.txt`.
+**Release binary:** download from [GitHub Releases](https://github.com/ShiroSdk/alyysha-router/releases/latest) and verify against `SHA256SUMS.txt`.
 
-**Experimental builds:** unpublished work ships as experimental builds — GitHub Releases marks them **Pre-release** (so `9routerx update` keeps pointing at stable), and GHCR tags them `exp` (`ghcr.io/yanstd888/9routerx:exp`), never `latest`. Opt in only to help shake out bugs.
+**Experimental builds:** unpublished work ships as experimental builds — GitHub Releases marks them **Pre-release** (so `alyysha update` keeps pointing at stable), and GHCR tags them `exp` (`ghcr.io/ShiroSdk/alyysha-router:exp`), never `latest`. Opt in only to help shake out bugs.
 
-**Build from source:** prerequisites Go 1.27 and Bun 1.x (dashboard is embedded into the binary, so build web first) — then `make build`. Full flags and steps: [wiki — installation](https://yanstd888.github.io/9routerx/installation.html).
+**Build from source:** prerequisites Go 1.27 and Bun 1.x (dashboard is embedded into the binary, so build web first) — then `make build`. Full flags and steps: [wiki — installation](https://shirosdk.github.io/alyysha/installation.html).
 
-**Start on boot:** autostart/service installation is documented in the wiki — [installation](https://yanstd888.github.io/9routerx/installation.html).
+**Start on boot:** autostart/service installation is documented in the wiki — [installation](https://shirosdk.github.io/alyysha/installation.html).
 
-## Sharing a Database with 9Router
+## Sharing a Database with Alyysha
 
-9RouterX is engineered as a drop-in compatible upgrade for existing **9Router** and **9router-go** installations. It listens on the exact same default port (`20128`) and opens the same `DATA_DIR/db/data.sqlite` database—meaning your configured **providers, OAuth connections, combos, client API keys, and usage history carry over automatically without migration**.
+Alyysha Router is engineered as a drop-in compatible upgrade for existing **Alyysha** and **alyysha-go** installations. It listens on the exact same default port (`20128`) and opens the same `DATA_DIR/db/data.sqlite` database—meaning your configured **providers, OAuth connections, combos, client API keys, and usage history carry over automatically without migration**.
 
 | Deployment Mode | Default `DATA_DIR` / SQLite Database Path |
 | :--- | :--- |
-| **Linux / macOS (Native)** | `~/.9router` (opens `~/.9router/db/data.sqlite`) |
-| **Windows (Native)** | `%APPDATA%\9router` (opens `%APPDATA%\9router\db\data.sqlite`) |
-| **Docker Container** | Mount host `~/.9router:/data` with `-e DATA_DIR=/data` |
+| **Linux / macOS (Native)** | `~/.alyysha` (opens `~/.alyysha/db/data.sqlite`) |
+| **Windows (Native)** | `%APPDATA%\alyysha` (opens `%APPDATA%\alyysha\db\data.sqlite`) |
+| **Docker Container** | Mount host `~/.alyysha:/data` with `-e DATA_DIR=/data` |
 
-* **Caveat:** Do not run both 9Router and 9RouterX against the same SQLite file simultaneously. Stop the old process first (or back up `data.sqlite` before switching) so only one binary holds the SQLite write lock.
+* **Caveat:** Do not run both Alyysha and Alyysha Router against the same SQLite file simultaneously. Stop the old process first (or back up `data.sqlite` before switching) so only one binary holds the SQLite write lock.
 
 ## Screenshots
 
 Every screen ships in dark and light themes, at desktop and mobile widths. The
 full gallery — with per-page commentary — lives on the wiki's
-[**Screenshots**](https://yanstd888.github.io/9routerx/screenshots.html) page.
+[**Screenshots**](https://shirosdk.github.io/alyysha/screenshots.html) page.
 
 | | Dark | Light |
 |---|---|---|
-| **Providers** — connect AI providers and manage custom OpenAI/Anthropic-compatible endpoints | ![Providers view, dark theme — the provider catalog and connection list in the 9RouterX dashboard](docs/screenshots/providers.png) | ![Providers view, light theme — the same provider catalog and connection list in light mode](docs/screenshots/providers-light.png) |
+| **Providers** — connect AI providers and manage custom OpenAI/Anthropic-compatible endpoints | ![Providers view, dark theme — the provider catalog and connection list in the Alyysha Router dashboard](docs/screenshots/providers.png) | ![Providers view, light theme — the same provider catalog and connection list in light mode](docs/screenshots/providers-light.png) |
 
 ## Supported AI Coding Clients
 
-9RouterX works out of the box with any OpenAI-compatible, Anthropic-compatible, MCP, or A2A client:
+Alyysha Router works out of the box with any OpenAI-compatible, Anthropic-compatible, MCP, or A2A client:
 
 * **Claude Code** (`@anthropic-ai/claude-code`)
 * **OpenAI Codex CLI**
@@ -258,7 +258,7 @@ export GEMINI_API_KEY="sk-YOUR-KEY"
 
 ## Free AI Providers and Keyless Models Catalog
 
-9RouterX includes a built-in catalog of **248 free models across 36 providers** (verified in `freemodels.go`), featuring **24 cataloged keyless models** (`antigravity`, `opencode`, `blackbox`) without a user-supplied upstream API key. Antigravity requires Google OAuth login once (free); OpenCode offers zero-login access. Gemini Web requires a browser login/session cookie.
+Alyysha Router includes a built-in catalog of **248 free models across 36 providers** (verified in `freemodels.go`), featuring **24 cataloged keyless models** (`antigravity`, `opencode`, `blackbox`) without a user-supplied upstream API key. Antigravity requires Google OAuth login once (free); OpenCode offers zero-login access. Gemini Web requires a browser login/session cookie.
 
 ### Supported Free Quota Regimes
 
@@ -313,7 +313,7 @@ export GEMINI_API_KEY="sk-YOUR-KEY"
 
 ## Provider Categories Breakdown (155 Providers)
 
-9RouterX organizes its **155 supported providers** into four distinct authentication architectures:
+Alyysha Router organizes its **155 supported providers** into four distinct authentication architectures:
 
 1. **91 API Key Providers:** Standard bearer token providers including OpenAI, Anthropic, Google Gemini, Groq, DeepSeek, Fireworks, Mistral, Cohere, Cerebras, SambaNova, NVIDIA NIM, OpenRouter, xAI, Together AI, Perplexity, Hyperbolic, Nebius, Cloudflare Workers AI, and 70+ global and regional inference platforms.
 2. **28 One-Click OAuth Providers:** Authenticate directly from the web dashboard without manually copying static tokens:
@@ -331,7 +331,7 @@ You can register any custom OpenAI-compatible or Anthropic-compatible upstream s
 
 ## Embedded Dashboard Overview
 
-9RouterX compiles a reactive **Svelte 5 + Vite + Tailwind 4** management interface (built with `shadcn-svelte`, `bits-ui`, and `layerchart`) directly into the Go binary at `http://localhost:20128` (default password: `123456`):
+Alyysha Router compiles a reactive **Svelte 5 + Vite + Tailwind 4** management interface (built with `shadcn-svelte`, `bits-ui`, and `layerchart`) directly into the Go binary at `http://localhost:20128` (default password: `123456`):
 
 * **Token Saver & Compression Analytics:** Monitor real-time 20–40% token reduction ratios, RTK compression metrics, **50+ ready-made per-tool output filters**, GCF/tabular headroom stats, output style directives (`Caveman`, `Ponytail`, `ADHD`, `Anti-Slop`), context squeezer activity, and semantic cache hit rates.
 * **Connections & 1-Click OAuth Manager:** Dual-column cookie input with auto-split paste parser for Gemini Web and Grok Web session cookies. Configure all 155 providers, trigger browser OAuth flows for 28 providers, import Kiro `external_idp` JSON credentials, inspect live model health latency, and assemble multi-tier combo routing presets (`fallback`, `round-robin`, `sticky`, `capacity`, `fusion`).
@@ -339,23 +339,23 @@ You can register any custom OpenAI-compatible or Anthropic-compatible upstream s
 
 ## Setup Guide Summary and Wiki Documentation
 
-For advanced deployment and module configuration, refer to the [**Official 9RouterX Documentation & Wiki**](https://yanstd888.github.io/9routerx/):
+For advanced deployment and module configuration, refer to the [**Official Alyysha Router Documentation & Wiki**](https://shirosdk.github.io/alyysha/):
 
-* [**Installation, Background CLI & Docker Guide**](https://yanstd888.github.io/9routerx/installation.html) — Custom port configuration (default `20128`), daemon commands (`start`/`stop`/`restart`/`status`/`logs`), autostart on boot, desktop tray mode, and GHCR containers.
-* [**Combo Routing & 3-Tier Failover**](https://yanstd888.github.io/9routerx/) — Setting up `Subscription → Cheap → Free` cascades plus `fallback`, `round-robin`, `sticky`, `capacity`, and `fusion` strategies.
-* [**Token Saver, RTK Compression & 50+ Tool Filters**](https://yanstd888.github.io/9routerx/) — Tuning compression aggressiveness, per-tool CLI output filters, GCF tabular compression, Caveman/Ponytail/ADHD directives, anti-slop rules, and tool-call repair.
-* [**Key Governance, Budgets & Alerts**](https://yanstd888.github.io/9routerx/) — Configuring daily USD cost cutoffs, plan templates, SSRF/PII guards, multi-target webhooks, and Telegram bot notifications.
-* [**MCP Server, A2A, MITM & TLS Stealth**](https://yanstd888.github.io/9routerx/) — Connecting Model Context Protocol clients, Agent-to-Agent workflows, inspecting traffic on `http://localhost:20128`, and syncing encrypted configuration bundles.
+* [**Installation, Background CLI & Docker Guide**](https://shirosdk.github.io/alyysha/installation.html) — Custom port configuration (default `20128`), daemon commands (`start`/`stop`/`restart`/`status`/`logs`), autostart on boot, desktop tray mode, and GHCR containers.
+* [**Combo Routing & 3-Tier Failover**](https://shirosdk.github.io/alyysha/) — Setting up `Subscription → Cheap → Free` cascades plus `fallback`, `round-robin`, `sticky`, `capacity`, and `fusion` strategies.
+* [**Token Saver, RTK Compression & 50+ Tool Filters**](https://shirosdk.github.io/alyysha/) — Tuning compression aggressiveness, per-tool CLI output filters, GCF tabular compression, Caveman/Ponytail/ADHD directives, anti-slop rules, and tool-call repair.
+* [**Key Governance, Budgets & Alerts**](https://shirosdk.github.io/alyysha/) — Configuring daily USD cost cutoffs, plan templates, SSRF/PII guards, multi-target webhooks, and Telegram bot notifications.
+* [**MCP Server, A2A, MITM & TLS Stealth**](https://shirosdk.github.io/alyysha/) — Connecting Model Context Protocol clients, Agent-to-Agent workflows, inspecting traffic on `http://localhost:20128`, and syncing encrypted configuration bundles.
 
 ## Architecture Comparison
 
-Factual comparison between **9RouterX**, upstream **9router-go**, and the original **9Router (Next.js)**:
+Factual comparison between **Alyysha Router**, upstream **alyysha-go**, and the original **Alyysha (Next.js)**:
 
-| Capability / Metric | **9RouterX** (This Repository) | **9router-go** (Upstream Port) | **9Router** (Original Next.js) |
+| Capability / Metric | **Alyysha Router** (This Repository) | **alyysha-go** (Upstream Port) | **Alyysha** (Original Next.js) |
 | :--- | :--- | :--- | :--- |
 | **Runtime Binary** | **Single Native Go Binary** | Single Native Go Binary | Node.js + Next.js Runtime |
 | **Default Port** | **`20128`** | `20128` | `20128` |
-| **Database Compatibility** | **Drop-in `DATA_DIR/db/data.sqlite` sharing** | `DATA_DIR/db/data.sqlite` | `~/.9router/db/data.sqlite` |
+| **Database Compatibility** | **Drop-in `DATA_DIR/db/data.sqlite` sharing** | `DATA_DIR/db/data.sqlite` | `~/.alyysha/db/data.sqlite` |
 | **Embedded Dashboard** | **Svelte 5 + Vite + Tailwind 4 (`shadcn-svelte` + `layerchart`)** | Embedded Web UI | Next.js React Web App |
 | **Supported Providers** | **155 Providers (91 API · 28 OAuth · 29 Free · 4 Cookie)** | Core Provider Subset | Core JS Providers |
 | **Cataloged Free Models** | **248 Free Models across 36 Providers (24 Keyless)** | Static Subset | Manual Configuration |
@@ -368,53 +368,53 @@ Factual comparison between **9RouterX**, upstream **9router-go**, and the origin
 ## Frequently Asked Questions (FAQ)
 
 <details>
-<summary><strong>1. Does 9RouterX support Claude Code, Cursor, Codex, and Cline?</strong></summary>
+<summary><strong>1. Does Alyysha Router support Claude Code, Cursor, Codex, and Cline?</strong></summary>
 
-Yes. 9RouterX exposes both Anthropic-compatible (`http://localhost:20128`) and OpenAI-compatible (`http://localhost:20128/v1`) endpoints, alongside built-in MCP Server and A2A protocol support. You can connect Claude Code, Cursor, OpenAI Codex CLI, Cline, Roo Code, OpenCode, OpenClaw (use explicit IPv4 `http://127.0.0.1:20128`), Antigravity, and Gemini CLI directly to port `20128`.
+Yes. Alyysha Router exposes both Anthropic-compatible (`http://localhost:20128`) and OpenAI-compatible (`http://localhost:20128/v1`) endpoints, alongside built-in MCP Server and A2A protocol support. You can connect Claude Code, Cursor, OpenAI Codex CLI, Cline, Roo Code, OpenCode, OpenClaw (use explicit IPv4 `http://127.0.0.1:20128`), Antigravity, and Gemini CLI directly to port `20128`.
 </details>
 
 <details>
-<summary><strong>2. Is 9RouterX free, and how do the 24 keyless models work?</strong></summary>
+<summary><strong>2. Is Alyysha Router free, and how do the 24 keyless models work?</strong></summary>
 
-Yes. 9RouterX is free and open-source software (MIT License) that runs locally as a single binary with no proxy markup fees. It ships with **29 free-tier providers** and **248 cataloged free models across 36 providers**, including **24 cataloged keyless models** (`antigravity`, `opencode`, `blackbox`) without a user-supplied upstream API key. Antigravity (for example `antigravity/gemini-3.7-flash-medium`) requires a Google OAuth login once, which is free. Use `oc/big-pickle` from OpenCode for a zero-login test. Create a local 9RouterX gateway key in Settings → API Keys → Create Key (`http://localhost:20128`, default password `123456`) before making API requests; 0 keys returns `401 Authentication required`.
+Yes. Alyysha Router is free and open-source software (MIT License) that runs locally as a single binary with no proxy markup fees. It ships with **29 free-tier providers** and **248 cataloged free models across 36 providers**, including **24 cataloged keyless models** (`antigravity`, `opencode`, `blackbox`) without a user-supplied upstream API key. Antigravity (for example `antigravity/gemini-3.7-flash-medium`) requires a Google OAuth login once, which is free. Use `oc/big-pickle` from OpenCode for a zero-login test. Create a local Alyysha Router gateway key in Settings → API Keys → Create Key (`http://localhost:20128`, default password `123456`) before making API requests; 0 keys returns `401 Authentication required`.
 </details>
 
 <details>
-<summary><strong>3. How is 9RouterX different from LiteLLM or OpenRouter?</strong></summary>
+<summary><strong>3. How is Alyysha Router different from LiteLLM or OpenRouter?</strong></summary>
 
-* **Versus OpenRouter:** OpenRouter is a cloud intermediary that adds per-token markup fees and routes prompts through external third-party servers. 9RouterX runs **100% locally on your machine** as a single binary with zero markup.
-* **Versus LiteLLM:** LiteLLM requires a Python environment; advanced budget/usage tracking needs external databases (PostgreSQL/Redis). **9RouterX** compiles a full AI gateway, **Svelte 5 dashboard**, **20–40% Token Saver suite (with 50+ per-tool filters)**, **semantic cache**, **per-key USD budget cutoffs checked at request start**, and **28 one-click OAuth flows** into a **single zero-dependency Go binary** backed by an embedded SQLite file.
+* **Versus OpenRouter:** OpenRouter is a cloud intermediary that adds per-token markup fees and routes prompts through external third-party servers. Alyysha Router runs **100% locally on your machine** as a single binary with zero markup.
+* **Versus LiteLLM:** LiteLLM requires a Python environment; advanced budget/usage tracking needs external databases (PostgreSQL/Redis). **Alyysha Router** compiles a full AI gateway, **Svelte 5 dashboard**, **20–40% Token Saver suite (with 50+ per-tool filters)**, **semantic cache**, **per-key USD budget cutoffs checked at request start**, and **28 one-click OAuth flows** into a **single zero-dependency Go binary** backed by an embedded SQLite file.
 </details>
 
 <details>
 <summary><strong>4. How does the 20–40% Token Saver work without breaking code generation?</strong></summary>
 
-AI coding agents consume massive context windows when reading CLI outputs, directory listings, and tool responses. 9RouterX's `tokensaver` and `compression` modules apply RTK compression, **50+ ready-made per-tool output filters** (`git diff`, `grep`, `docker logs`, `npm install`, `terraform plan`), GCF tabular headroom compression, context squeezing, output style directives (`Caveman`, `Ponytail`, `ADHD`), and anti-slop rules to tool outputs in transit—cutting 20–40% of token volume while repairing malformed JSON tool calls automatically.
+AI coding agents consume massive context windows when reading CLI outputs, directory listings, and tool responses. Alyysha Router's `tokensaver` and `compression` modules apply RTK compression, **50+ ready-made per-tool output filters** (`git diff`, `grep`, `docker logs`, `npm install`, `terraform plan`), GCF tabular headroom compression, context squeezing, output style directives (`Caveman`, `Ponytail`, `ADHD`), and anti-slop rules to tool outputs in transit—cutting 20–40% of token volume while repairing malformed JSON tool calls automatically.
 </details>
 
 <details>
-<summary><strong>5. Can I migrate from 9Router or 9router-go without losing my keys and combos?</strong></summary>
+<summary><strong>5. Can I migrate from Alyysha or alyysha-go without losing my keys and combos?</strong></summary>
 
-Yes. 9RouterX shares the exact same default port (`20128`) and SQLite database schema (`DATA_DIR/db/data.sqlite`). Stop your existing 9Router instance and start 9RouterX—all providers, OAuth connections, combos, client API keys, and usage statistics carry over immediately without migration scripts.
+Yes. Alyysha Router shares the exact same default port (`20128`) and SQLite database schema (`DATA_DIR/db/data.sqlite`). Stop your existing Alyysha instance and start Alyysha Router—all providers, OAuth connections, combos, client API keys, and usage statistics carry over immediately without migration scripts.
 </details>
 
 <details>
 <summary><strong>6. What happens when my primary AI subscription hits a rate limit?</strong></summary>
 
-When a request hits a `429` rate limit, quota exhaustion, or upstream `5xx` error, 9RouterX's `resilience` circuit breaker and `modelhealth` probes automatically cascade the request through your configured combo tier (**Subscription OAuth → Cheap API Key → Free-Tier / Keyless**) without dropping your active coding session.
+When a request hits a `429` rate limit, quota exhaustion, or upstream `5xx` error, Alyysha Router's `resilience` circuit breaker and `modelhealth` probes automatically cascade the request through your configured combo tier (**Subscription OAuth → Cheap API Key → Free-Tier / Keyless**) without dropping your active coding session.
 </details>
 
 <details>
-<summary><strong>7. How do I run 9RouterX in the background or update to the latest release?</strong></summary>
+<summary><strong>7. How do I run Alyysha Router in the background or update to the latest release?</strong></summary>
 
-Use the built-in daemon commands: `9routerx start`, `9routerx status`, `9routerx restart`, `9routerx logs -n 100`, and `9routerx stop`. To update, run `npm install -g 9routerx@latest`, `9routerx update`, or pull the latest GHCR container (`ghcr.io/yanstd888/9routerx:latest`).
+Use the built-in daemon commands: `alyysha start`, `alyysha status`, `alyysha restart`, `alyysha logs -n 100`, and `alyysha stop`. To update, run `npm install -g alyysha@latest`, `alyysha update`, or pull the latest GHCR container (`ghcr.io/ShiroSdk/alyysha-router:latest`).
 </details>
 
 ## Contributing
 
 Issues and pull requests use templates, so pick the right one rather than opening a blank report:
 
-- **Bug report** — something behaves incorrectly. Include a reproduction, `9routerx version`, OS, and the log excerpt around the failure.
+- **Bug report** — something behaves incorrectly. Include a reproduction, `alyysha version`, OS, and the log excerpt around the failure.
 - **Feature request** — the problem you cannot solve today, the surface it touches, and whether upstream already has it.
 - **Question** — configuration and usage help.
 
@@ -422,21 +422,21 @@ PRs follow the checks CI runs: `go vet ./...`, `go test -count=1 ./...`, `make t
 
 ## Docs
 
-**Full documentation, searchable:** [**9routerx Wiki**](https://yanstd888.github.io/9routerx/) — installation, usage, API reference, dashboard, providers, governance, architecture, database, CLI, and a screenshot gallery. Every page supports `?q=` search and `#section` deep links.
+**Full documentation, searchable:** [**alyysha Wiki**](https://shirosdk.github.io/alyysha/) — installation, usage, API reference, dashboard, providers, governance, architecture, database, CLI, and a screenshot gallery. Every page supports `?q=` search and `#section` deep links.
 
 Repository references:
 
 - [`ARCHITECTURE.md`](ARCHITECTURE.md) — routing, providers, runtime layout
 - [`DATABASE.md`](DATABASE.md) — SQLite schema & operator contract
-- [`CHANGELOG.md`](CHANGELOG.md) — release history. Work merged since the last tag lives in `.changes/` fragments and is folded in at the next release; the dashboard's changelog modal shows both. Check what you are running with `9routerx version`.
+- [`CHANGELOG.md`](CHANGELOG.md) — release history. Work merged since the last tag lives in `.changes/` fragments and is folded in at the next release; the dashboard's changelog modal shows both. Check what you are running with `alyysha version`.
 
 ## Acknowledgments
 
-| Repository | Stars | Contribution to 9RouterX |
+| Repository | Stars | Contribution to Alyysha Router |
 |---|---|---|
-| [decolua/9router](https://github.com/decolua/9router) | ![stars](https://img.shields.io/github/stars/decolua/9router?style=social) | the original Next.js gateway & dashboard that 9RouterX preserves compatibility with (same SQLite data dir, no-migration upgrade path) |
-| [luqman-v1/9router-go](https://github.com/luqman-v1/9router-go) | ![stars](https://img.shields.io/github/stars/luqman-v1/9router-go?style=social) | the Go + Svelte port 9RouterX continues from; gateway core, provider lanes, CLI |
-| [serenhope/9router](https://github.com/serenhope/9router) | ![stars](https://img.shields.io/github/stars/serenhope/9router?style=social) | per-key governance, token-saver suite, security log, web executors, dashboard features ported into 9RouterX |
+| [decolua/alyysha](https://github.com/decolua/alyysha) | ![stars](https://img.shields.io/github/stars/decolua/alyysha?style=social) | the original Next.js gateway & dashboard that Alyysha Router preserves compatibility with (same SQLite data dir, no-migration upgrade path) |
+| [luqman-v1/alyysha-go](https://github.com/luqman-v1/alyysha-go) | ![stars](https://img.shields.io/github/stars/luqman-v1/alyysha-go?style=social) | the Go + Svelte port Alyysha Router continues from; gateway core, provider lanes, CLI |
+| [serenhope/alyysha](https://github.com/serenhope/alyysha) | ![stars](https://img.shields.io/github/stars/serenhope/alyysha?style=social) | per-key governance, token-saver suite, security log, web executors, dashboard features ported into Alyysha Router |
 | [cheaper-inference/OmniRoute](https://github.com/cheaper-inference/OmniRoute) | ![stars](https://img.shields.io/github/stars/cheaper-inference/OmniRoute?style=social) | SSRF dispatch guard + PII masking, routing strategies, circuit breaker, multi-target webhooks, Tremor-style data-viz patterns |
 | [router-for-me/CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI) | ![stars](https://img.shields.io/github/stars/router-for-me/CLIProxyAPI?style=social) | Kiro `external_idp` auth JSON importer (port of their auth format, see `internal/handlers/oauth/kiro_external_idp.go`) |
 | [rtk-ai/rtk](https://github.com/rtk-ai/rtk) | ![stars](https://img.shields.io/github/stars/rtk-ai/rtk?style=social) | the request-side token-compression concept behind the RTK Token Saver (20-40% input savings) |
@@ -447,16 +447,16 @@ Repository references:
 | [miqdadbadjuber/anti-slop](https://github.com/miqdadbadjuber/anti-slop) | ![stars](https://img.shields.io/github/stars/miqdadbadjuber/anti-slop?style=social) | antislop injector rules bundled in `internal/tokensaver/antislop` with their original text and attribution preserved |
 | [huntabyte/shadcn-svelte](https://github.com/huntabyte/shadcn-svelte) | ![stars](https://img.shields.io/github/stars/huntabyte/shadcn-svelte?style=social) | the dashboard component layer (chart, table, tooltip, separator via bits-ui + layerchart) |
 
-9RouterX stands on this lineage — thank you to the upstream maintainers and their communities for the gateway, the port, and the ideas this project builds on. The complete three-layer ownership inventory (inherited / ported / original) lives in [ATTRIBUTION.md](ATTRIBUTION.md), and everyone whose commit landed in the repository is credited on the wiki's [**Owner & Contributors**](https://yanstd888.github.io/9routerx/team.html) page.
+Alyysha Router stands on this lineage — thank you to the upstream maintainers and their communities for the gateway, the port, and the ideas this project builds on. The complete three-layer ownership inventory (inherited / ported / original) lives in [ATTRIBUTION.md](ATTRIBUTION.md), and everyone whose commit landed in the repository is credited on the wiki's [**Owner & Contributors**](https://shirosdk.github.io/alyysha/team.html) page.
 
 ## License
 
-MIT License — see [`LICENSE`](https://github.com/yanstd888/9routerx/blob/main/LICENSE).
+MIT License — see [`LICENSE`](https://github.com/ShiroSdk/alyysha-router/blob/main/LICENSE).
 
 ---
 
 ## Attribution
 
-**9RouterX — all source code port and modification by [yanstd888](https://github.com/yanstd888/) — [t.me/aiclub_id](https://t.me/aiclub_id).**
+**Alyysha Router — all source code port and modification by [ShiroSdk](https://github.com/ShiroSdk/) — [t.me/YannClippers](https://t.me/YannClippers).**
 
-This repository is an independent Go + Svelte port of [9Router](https://github.com/decolua/9router) (MIT); all port and modification work is by Muhammad Dian (yanstd888). Re-hosting this code without the LICENSE copyright notice and this attribution violates the MIT license terms. For the full file-by-file ownership breakdown, see [`ATTRIBUTION.md`](ATTRIBUTION.md).
+This repository is an independent Go + Svelte port of [Alyysha](https://github.com/decolua/alyysha) (MIT); all port and modification work is by YannClipper. Re-hosting this code without the LICENSE copyright notice and this attribution violates the MIT license terms. For the full file-by-file ownership breakdown, see [`ATTRIBUTION.md`](ATTRIBUTION.md).

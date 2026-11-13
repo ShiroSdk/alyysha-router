@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -12,7 +12,7 @@ import (
 
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/proxy/executor"
+	"alyysha/proxy/internal/proxy/executor"
 )
 
 // Timing-focused live e2e for antigravity gemini-3.8-flash-high. The existing
@@ -21,7 +21,7 @@ import (
 // first byte lands, how the events spread out (a streamed answer or one big
 // dump at the end), and how long the thinking phase holds the stream.
 //
-// Same gate as the other live tests: 9ROUTERX_LIVE_TESTS=1, make test-live.
+// Same gate as the other live tests: ALYYSHA_LIVE_TESTS=1, make test-live.
 func TestLiveE2E_Gemini38_FlashHigh_Timing(t *testing.T) {
 	repo, cleanup := getRealUserDB(t)
 	defer cleanup()

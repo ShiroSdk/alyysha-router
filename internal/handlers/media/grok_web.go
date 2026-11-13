@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package media
 
 import (
@@ -9,8 +9,8 @@ import (
 
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/handlers/chat"
-	"9routerx/proxy/internal/proxy/executor"
+	"alyysha/proxy/internal/handlers/chat"
+	"alyysha/proxy/internal/proxy/executor"
 )
 
 // Grok Imagine's media lane, ported from upstream

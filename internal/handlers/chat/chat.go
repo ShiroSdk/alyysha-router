@@ -1,18 +1,18 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
-	"9routerx/proxy/internal/changelogfrag"
-	json "9routerx/proxy/internal/fastjson"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/middleware"
-	"9routerx/proxy/internal/promptcache"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/semanticcache"
-	"9routerx/proxy/internal/thinking"
-	"9routerx/proxy/internal/translator"
-	"9routerx/proxy/internal/updater"
+	"alyysha/proxy/internal/changelogfrag"
+	json "alyysha/proxy/internal/fastjson"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/middleware"
+	"alyysha/proxy/internal/promptcache"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/semanticcache"
+	"alyysha/proxy/internal/thinking"
+	"alyysha/proxy/internal/translator"
+	"alyysha/proxy/internal/updater"
 	"bytes"
 	"context"
 	"errors"
@@ -548,8 +548,8 @@ func (h *ChatHandler) HandleChangelog(w http.ResponseWriter, r *http.Request) {
 	}
 
 	urls := []string{
-		"https://raw.githubusercontent.com/yanstd888/9routerx/main/CHANGELOG.md",
-		"https://raw.githubusercontent.com/decolua/9router/refs/heads/master/CHANGELOG.md",
+		"https://raw.githubusercontent.com/ShiroSdk/alyysha-router/main/CHANGELOG.md",
+		"https://raw.githubusercontent.com/decolua/alyysha/refs/heads/master/CHANGELOG.md",
 	}
 	client := &http.Client{Timeout: 5 * time.Second}
 	for _, u := range urls {
@@ -626,7 +626,7 @@ func (h *ChatHandler) HandleTriggerUpdate(w http.ResponseWriter, r *http.Request
 	if !info.HasUpdate {
 		handlerutil.WriteJSON(w, http.StatusOK, map[string]any{
 			"status":  "up_to_date",
-			"message": "9RouterX is already on the latest version",
+			"message": "Alyysha Router is already on the latest version",
 			"version": info.CurrentVersion,
 		})
 		return

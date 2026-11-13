@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -13,11 +13,11 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/proxy/executor"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/proxy/executor"
+	"alyysha/proxy/internal/translator"
 )
 
 // setupHandlerForForward wires a ChatHandler to a temp DB (no connections needed for forward tests).

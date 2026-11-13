@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package clientconfig
 
 import (
@@ -229,7 +229,7 @@ func TestOmpWritesModelLimitsEntry(t *testing.T) {
 	// omp merges into an existing providers table; the YAML patcher splices
 	// into a document, so the file starts from the shape a previous connect
 	// (or the client itself) leaves behind.
-	writeFixture(t, path, "providers:\n  \"9router\":\n    baseUrl: http://old\n")
+	writeFixture(t, path, "providers:\n  \"alyysha\":\n    baseUrl: http://old\n")
 	opts := Options{
 		Home: home, BaseURL: "http://h:1", APIKey: "k", Model: "glm/glm-5.3",
 		ModelLimits: map[string]ModelLimits{"glm/glm-5.3": {ContextWindow: 200000, MaxOutput: 32000}},
@@ -255,7 +255,7 @@ func TestOmpWritesModelLimitsEntry(t *testing.T) {
 func TestOmpWithoutLimitsKeepsPreviousShape(t *testing.T) {
 	home := t.TempDir()
 	path := ompPaths(home).Files[0].Path
-	writeFixture(t, path, "providers:\n  \"9router\":\n    baseUrl: http://old\n")
+	writeFixture(t, path, "providers:\n  \"alyysha\":\n    baseUrl: http://old\n")
 	if _, err := newOmpAdapter().Apply(Options{Home: home, BaseURL: "http://h:1", APIKey: "k", Model: "m"}); err != nil {
 		t.Fatalf("Apply: %v", err)
 	}

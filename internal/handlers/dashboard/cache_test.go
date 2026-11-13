@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/semanticcache"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/semanticcache"
+	"alyysha/proxy/internal/translator"
 	"github.com/go-chi/chi/v5"
 )
 

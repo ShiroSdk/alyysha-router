@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Package vault implements envelope encryption for provider credentials.
 //
 // A random data-encryption key (DEK) encrypts the secret; the master key —
@@ -35,7 +35,7 @@ import (
 	"os"
 	"strings"
 
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/log"
 )
 
 // MasterKeyEnv names the base64 32-byte key-encryption key.

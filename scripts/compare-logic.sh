@@ -1,13 +1,13 @@
 #!/bin/bash
-# 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+# Alyysha Router — built by YannClipper — https://t.me/YannClippers
 set -e
 
 # Point these at your local checkouts (no defaults on purpose: the original
 # hard-coded a maintainer's home directory, which leaked personal paths).
-GO_DIR="${GO_DIR:?set GO_DIR to your 9RouterX checkout}"
-JS_DIR="${JS_DIR:?set JS_DIR to your upstream 9Router checkout}"
+GO_DIR="${GO_DIR:?set GO_DIR to your Alyysha Router checkout}"
+JS_DIR="${JS_DIR:?set JS_DIR to your upstream Alyysha checkout}"
 
-echo "=== 9router Logic Comparison (Go vs Next.js) ==="
+echo "=== alyysha Logic Comparison (Go vs Next.js) ==="
 
 echo ""
 echo "--- 1. COMBO STRATEGIES ---"

@@ -1,4 +1,4 @@
-<!-- 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   import { onMount } from 'svelte'
   import { notifications } from '../../lib/notifications'
@@ -709,7 +709,7 @@
               onclick={toggleRoundRobin}
               class="relative inline-flex shrink-0 cursor-pointer rounded-full border transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-brand-500/30 {isRoundRobin
                 ? 'border-transparent bg-brand-500 shadow-[inset_0_1px_3px_rgba(0,0,0,0.25)]'
-                : 'border-border-subtle bg-surface-3 shadow-[var(--9x-inset-rest)]'} w-11 h-6"
+                : 'border-border-subtle bg-surface-3 shadow-[var(--ay-inset-rest)]'} w-11 h-6"
             >
               <span class="pointer-events-none inline-block rounded-full bg-white shadow-sm transform transition duration-200 ease-in-out {isRoundRobin ? 'translate-x-5' : 'translate-x-0.5'} size-5 mt-0.5"></span>
             </button>

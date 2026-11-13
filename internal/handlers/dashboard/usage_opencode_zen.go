@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 // OpenCode Zen quota — GET https://opencode.ai/zen/v1/usage
@@ -15,7 +15,7 @@ import (
 	"net/http"
 	"strings"
 
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/providers"
 )
 
 // openCodeZenUsageURL is the provider default (registry). openCodeZenUsageURLFor

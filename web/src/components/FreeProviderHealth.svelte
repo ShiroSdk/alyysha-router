@@ -1,4 +1,4 @@
-<!-- 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   // Free Provider Health: what the free-tier fallback chain sees, per
   // provider. A provider the chain would skip (cooling) shows red with the

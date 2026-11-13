@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
@@ -10,8 +10,8 @@ import (
 
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/proxy"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/proxy"
+	"alyysha/proxy/internal/translator"
 )
 
 // ForwardGeminiWeb routes a chat completion to gemini.google.com.

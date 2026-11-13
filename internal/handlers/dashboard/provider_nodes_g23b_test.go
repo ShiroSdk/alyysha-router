@@ -1,11 +1,11 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
 	"net/http"
 	"testing"
 
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/providers"
 )
 
 // The G23b spec (docs/superpowers/specs/2026-10-19-mmf-selfhosted-spec.md §7)

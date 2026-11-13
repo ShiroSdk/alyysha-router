@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package translator
 
 import (
@@ -693,7 +693,7 @@ func TestTranslateOpenAIToGemini_CarriesToolCallIDs(t *testing.T) {
 }
 
 func TestTranslateOpenAIToGemini_ToolCallIDDropsThoughtSigSuffix(t *testing.T) {
-	// The __ts__<sig> suffix is 9routerx's private transport for thought
+	// The __ts__<sig> suffix is alyysha's private transport for thought
 	// signatures. It must not reach the wire nor break call/response pairing.
 	openaiJSON := []byte(`{
 		"model": "gemini-3.8-flash",

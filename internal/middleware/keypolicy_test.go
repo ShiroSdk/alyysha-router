@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package middleware
 
 import (
@@ -11,8 +11,8 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/models"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/models"
 )
 
 // keypolicy_test.go covers the serenhope per-key budget gates

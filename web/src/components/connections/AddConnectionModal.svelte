@@ -1,4 +1,4 @@
-<!-- 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   // Port of upstream src/app/(dashboard)/dashboard/providers/[id]/AddApiKeyModal.js
   // Single/Bulk add, credential label per provider, Check (validate) button,
@@ -46,13 +46,13 @@
 
   // Field styling mirrors upstream shared Input/Select (bg-surface-2, rounded
   // 10px), with the depth treatment from the polish pass: inset rest shadow and
-  // an accent focus ring drawn from the theme tokens (--9x-inset-rest/--9x-ring).
+  // an accent focus ring drawn from the theme tokens (--ay-inset-rest/--ay-ring).
   const labelCls = 'block text-sm font-medium text-text-main mb-1.5'
   const inputCls =
-    'w-full py-2.5 px-3 text-sm text-text-main bg-surface-2 rounded-[10px] border border-transparent shadow-[var(--9x-inset-rest)] placeholder:text-text-muted focus:outline-none focus:border-primary focus:shadow-[var(--9x-ring),var(--9x-inset-rest)] transition-[border-color,box-shadow,background-color] duration-[180ms] ease-[var(--9x-ease)]'
+    'w-full py-2.5 px-3 text-sm text-text-main bg-surface-2 rounded-[10px] border border-transparent shadow-[var(--ay-inset-rest)] placeholder:text-text-muted focus:outline-none focus:border-primary focus:shadow-[var(--ay-ring),var(--ay-inset-rest)] transition-[border-color,box-shadow,background-color] duration-[180ms] ease-[var(--ay-ease)]'
   const selectWrapCls = 'relative'
   const selectCls =
-    'w-full py-2.5 px-3 pr-10 text-sm text-text-main bg-surface-2 border border-transparent rounded-[10px] appearance-none shadow-[var(--9x-inset-rest)] focus:outline-none focus:border-primary focus:shadow-[var(--9x-ring),var(--9x-inset-rest)] transition-[border-color,box-shadow,background-color] duration-[180ms] ease-[var(--9x-ease)]'
+    'w-full py-2.5 px-3 pr-10 text-sm text-text-main bg-surface-2 border border-transparent rounded-[10px] appearance-none shadow-[var(--ay-inset-rest)] focus:outline-none focus:border-primary focus:shadow-[var(--ay-ring),var(--ay-inset-rest)] transition-[border-color,box-shadow,background-color] duration-[180ms] ease-[var(--ay-ease)]'
 
   // Provider-specific branches (upstream AddApiKeyModal).
   let catalogItem = $derived(PROVIDER_CATALOG.find((p) => p.id === providerId))

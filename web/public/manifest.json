@@ -1,6 +1,6 @@
 {
-  "name": "9RouterX - High-Throughput AI Gateway",
-  "short_name": "9RouterX",
+  "name": "Alyysha Router - High-Throughput AI Gateway",
+  "short_name": "Alyysha Router",
   "description": "High-throughput AI gateway & infrastructure router in Go",
   "start_url": "/",
   "scope": "/",

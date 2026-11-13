@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package providers
 
 import (
@@ -15,7 +15,7 @@ import (
 	"sync"
 	"time"
 
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/log"
 )
 
 const (
@@ -92,7 +92,7 @@ var (
 	syncStateMu   sync.Mutex
 )
 
-// ProviderAliases maps 9router provider IDs to models.dev provider IDs for limit resolution.
+// ProviderAliases maps alyysha provider IDs to models.dev provider IDs for limit resolution.
 var ProviderAliases = map[string]string{
 	"glm":           "zai",
 	"glm-cn":        "zhipuai",

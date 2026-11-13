@@ -1,13 +1,13 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
-	json "9routerx/proxy/internal/fastjson"
+	json "alyysha/proxy/internal/fastjson"
 	"net/http"
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/constants"
+	"alyysha/proxy/internal/constants"
 )
 
 // bypassResponse represents a fake response for bypassed requests.

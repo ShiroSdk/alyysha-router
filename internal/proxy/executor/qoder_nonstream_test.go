@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
@@ -10,8 +10,8 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/proxy"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/proxy"
 )
 
 // qoderTestServer answers with the given raw SSE body, and accepts any path

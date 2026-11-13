@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package proxy
 
 import (
@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/shutdown"
+	"alyysha/proxy/internal/shutdown"
 )
 
 // TestStallReaderAbortsOnShutdown verifies that starting shutdown closes the

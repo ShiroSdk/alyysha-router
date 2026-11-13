@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -13,7 +13,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
-	"9routerx/proxy/internal/fetchgate"
+	"alyysha/proxy/internal/fetchgate"
 )
 
 // usageFetchGap is the floor these tests assert on. The production gate is

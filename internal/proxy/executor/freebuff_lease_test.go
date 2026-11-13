@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/providers"
 )
 
 // memLeaseStore is an in-memory LeaseStore for tests (two instances simulate

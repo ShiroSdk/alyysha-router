@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package tunnel
 
 import (
@@ -20,13 +20,13 @@ import (
 	"sync"
 	"time"
 
-	"9routerx/proxy/internal/config"
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/config"
+	"alyysha/proxy/internal/log"
 )
 
 // The upstream Node implementation downloads cloudflared into
 // `<DATA_DIR>/bin/cloudflared`. This binary resolves the same data dir, so the
-// path is shared on purpose: an operator who ran upstream 9router and then
+// path is shared on purpose: an operator who ran upstream alyysha and then
 // switched here must not download a second 30 MB binary, and a binary the
 // operator placed there by hand must be used rather than replaced.
 const (

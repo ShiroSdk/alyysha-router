@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -9,7 +9,7 @@ import (
 )
 
 // The 403 a client receives when its key may not use the requested model is a
-// WIRE CONTRACT. Upstream decolua/9router derives the whole envelope from the
+// WIRE CONTRACT. Upstream decolua/alyysha derives the whole envelope from the
 // status (ERROR_TYPES[403] = {permission_error, insufficient_quota}); this
 // gateway keeps upstream's type and message but carries the code
 // "model_not_allowed" (port(serenhope) TASK-1.1), so a client can tell "wrong

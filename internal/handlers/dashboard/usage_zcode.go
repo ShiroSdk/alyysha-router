@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -347,7 +347,7 @@ func zcodeDeviceMid(deviceID string) string {
 	}
 	// Deterministic UUID v4 shape from a fixed seed: same answer on every
 	// panel open, no stored state.
-	const seed = "9router-zcode-billing"
+	const seed = "alyysha-zcode-billing"
 	sum := sha256.Sum256([]byte(seed))
 	lo := binary.BigEndian.Uint64(sum[8:])
 	return fmt.Sprintf("%08x-%04x-4%03x-%04x-%012x",

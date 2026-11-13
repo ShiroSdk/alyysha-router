@@ -1,6 +1,6 @@
-<!-- 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
-  // Custom checkbox (TASK-9routerX-ui-polish §2): tick pops in with a 120ms
+  // Custom checkbox (TASK-alyyshaX-ui-polish §2): tick pops in with a 120ms
   // scale from 0.6 to 1. adapted from uiverse.io/sssynk/tall-octopus-55 (MIT),
   // repainted to the theme tokens — every color here is a variable, so the box
   // follows dark and light without a second component.
@@ -90,15 +90,15 @@
     flex: none;
     width: 16px;
     height: 16px;
-    border-radius: var(--9x-radius-sm);
+    border-radius: var(--ay-radius-sm);
     background: var(--app-surface-2);
     border: 1px solid var(--app-border);
-    box-shadow: var(--9x-inset-rest);
+    box-shadow: var(--ay-inset-rest);
     color: transparent;
     transition:
-      background-color var(--9x-transition),
-      border-color var(--9x-transition),
-      box-shadow var(--9x-transition);
+      background-color var(--ay-transition),
+      border-color var(--ay-transition),
+      box-shadow var(--ay-transition);
   }
 
   /* The check pops: scale .6 -> 1 in 120ms (spec §2 checkboxes/radio). */
@@ -108,8 +108,8 @@
     transform: scale(0.6);
     opacity: 0;
     transition:
-      transform 120ms var(--9x-ease),
-      opacity 120ms var(--9x-ease);
+      transform 120ms var(--ay-ease),
+      opacity 120ms var(--ay-ease);
   }
   .x9-check-input:checked + .x9-check-box {
     background: var(--check-tone, var(--app-primary));
@@ -117,7 +117,7 @@
     /* The tick strokes with currentColor: fill-level ink, the same token the
        glyph buttons use on accent/danger/success fills (readable in both
        themes — white on the deep light accent, near-black on the dark one). */
-    color: var(--9x-accent-ink);
+    color: var(--ay-accent-ink);
   }
   .x9-check-input:checked + .x9-check-box svg {
     transform: scale(1);

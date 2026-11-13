@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
@@ -10,7 +10,7 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/proxy"
+	"alyysha/proxy/internal/proxy"
 )
 
 // ForwardCodebuddyCNWithTelemetry is the codebuddy-cn executor entry that wraps
@@ -21,7 +21,7 @@ import (
 // The telemetry is fire-and-forget and fail-open: it runs in detached
 // goroutines with a hard 5s timeout per send, never adds latency to the chat
 // request, and never changes its outcome. This is the direct Go port of
-// upstream `CodeBuddyExecutor.execute()` in PR decolua/9router #3257.
+// upstream `CodeBuddyExecutor.execute()` in PR decolua/alyysha #3257.
 func ForwardCodebuddyCNWithTelemetry(w http.ResponseWriter, req *Request) error {
 	if req == nil || req.Provider != "codebuddy-cn" {
 		return ForwardCodebuddyCN(w, req)

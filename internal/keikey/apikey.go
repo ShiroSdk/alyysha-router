@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Package keikey hashes, verifies and masks client API keys.
 //
 // Keys are never stored in plaintext: the apiKeys table keeps an argon2id
@@ -16,7 +16,7 @@ import (
 	"fmt"
 	"strings"
 
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/handlerutil"
 	"golang.org/x/crypto/argon2"
 )
 

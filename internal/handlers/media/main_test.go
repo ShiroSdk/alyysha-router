@@ -1,11 +1,11 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package media
 
 import (
 	"os"
 	"testing"
 
-	"9routerx/proxy/internal/testnet"
+	"alyysha/proxy/internal/testnet"
 )
 
 // ALLOW_PRIVATE_NETWORKING lets the handler tests reach their own httptest

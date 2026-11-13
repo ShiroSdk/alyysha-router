@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -9,7 +9,7 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/updater"
+	"alyysha/proxy/internal/updater"
 )
 
 // fakeCheckOutcome builds the engine answer a test wants, without any network.
@@ -53,7 +53,7 @@ func TestHandleUpdateCheck_ServesWithoutFetching(t *testing.T) {
 		CurrentVersion: "1.9.16",
 		LatestVersion:  "1.9.17",
 		HasUpdate:      true,
-		ReleaseURL:     "https://github.com/yanstd888/9RouterX/releases/tag/v1.9.17",
+		ReleaseURL:     "https://github.com/ShiroSdk/alyysha-router/releases/tag/v1.9.17",
 		SHA256:         "aa11",
 		Source:         "manifest",
 	}, true)

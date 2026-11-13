@@ -1,6 +1,6 @@
-<!-- 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
-  // Port of 9router src/app/(dashboard)/dashboard/providers/[id]/
+  // Port of alyysha src/app/(dashboard)/dashboard/providers/[id]/
   // AutoPingScheduleModal.js (Next.js) to the Go dashboard's Svelte components.
   //
   // One control, three modes, because the settings key has two independent

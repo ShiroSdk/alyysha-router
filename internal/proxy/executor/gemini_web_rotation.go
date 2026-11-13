@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
@@ -9,9 +9,9 @@ import (
 	"sync"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/models"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/models"
 )
 
 // The background rotation of a Gemini Web session.

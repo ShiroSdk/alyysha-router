@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package service
 
 import (
@@ -7,12 +7,12 @@ import (
 	"path/filepath"
 	"strings"
 
-	"9routerx/proxy/internal/constants"
+	"alyysha/proxy/internal/constants"
 )
 
 // openRCServicePath is the service script location on OpenRC hosts. It is a
 // var so tests can redirect the system-owned path onto a temp dir.
-var openRCServicePath = "/etc/init.d/9routerx"
+var openRCServicePath = "/etc/init.d/alyysha"
 
 // openRCName is the service name OpenRC knows: the basename of the script in
 // /etc/init.d, which is what rc-update and rc-service take. Deriving it from
@@ -26,21 +26,21 @@ func openRCName() string {
 // supervised service directory and its /var/service activation symlink. They
 // are vars so tests can exercise the root branch without privileges.
 var (
-	runitSystemDir  = "/etc/sv/9routerx"
-	runitSystemLink = "/var/service/9routerx"
+	runitSystemDir  = "/etc/sv/alyysha"
+	runitSystemLink = "/var/service/alyysha"
 )
 
 // renderOpenRCScript renders the OpenRC service script. It supervises the
-// gateway directly instead of forking a `9routerx start` daemon, so there
+// gateway directly instead of forking a `alyysha start` daemon, so there
 // is exactly one supervisor and one pid file owner.
 func renderOpenRCScript(exe string, args []string) string {
 	return "#!/sbin/openrc-run\n" +
-		"# 9routerx gateway — managed by `9routerx service install/uninstall`.\n" +
-		"description=\"9routerx AI API proxy gateway\"\n" +
+		"# alyysha gateway — managed by `alyysha service install/uninstall`.\n" +
+		"description=\"alyysha AI API proxy gateway\"\n" +
 		"command=" + quoteArg(exe) + "\n" +
 		"command_args=\"" + openRCArgs(args) + "\"\n" +
 		"command_background=\"yes\"\n" +
-		"pidfile=\"/run/9routerx.pid\"\n" +
+		"pidfile=\"/run/alyysha.pid\"\n" +
 		"depend() {\n" +
 		"\tneed net\n" +
 		"\tafter firewall\n" +
@@ -109,7 +109,7 @@ func runitServiceDir() string {
 	if err != nil {
 		return ""
 	}
-	return filepath.Join(home, "service", "9routerx")
+	return filepath.Join(home, "service", "alyysha")
 }
 
 // runitTarget is the argument sv takes: the service name under the system
@@ -125,7 +125,7 @@ func runitTarget() string {
 // process in the foreground.
 func renderRunitRun(exe string, args []string) string {
 	return "#!/bin/sh\n" +
-		"# 9routerx gateway — managed by `9routerx service install/uninstall`.\n" +
+		"# alyysha gateway — managed by `alyysha service install/uninstall`.\n" +
 		"exec " + commandLine(exe, args) + "\n"
 }
 

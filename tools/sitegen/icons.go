@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package main
 
 import "strings"
@@ -106,11 +106,11 @@ func iconSVG(name string) string {
 
 // headingIcons maps every current README section id to its inline icon.
 var headingIcons = map[string]string{
-	"why-9routerx":                                "help-circle",
+	"why-alyysha":                                "help-circle",
 	"system-architecture":                         "layers",
 	"key-features":                                "lightbulb",
 	"quick-start":                                 "zap",
-	"sharing-a-database-with-9router":             "database",
+	"sharing-a-database-with-alyysha":             "database",
 	"screenshots":                                 "camera",
 	"supported-ai-coding-clients":                 "monitor",
 	"free-ai-providers-and-keyless-models-catalog":   "gift",

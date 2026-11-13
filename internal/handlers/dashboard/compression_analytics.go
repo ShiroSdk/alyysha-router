@@ -1,12 +1,12 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
 	"net/http"
 	"time"
 
-	"9routerx/proxy/internal/analyticsrange"
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/analyticsrange"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 // HandleGetCompressionAnalytics handles GET /api/analytics/compression.

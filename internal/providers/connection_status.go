@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package providers
 
 import (
@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-// Connection status vocabulary, mirroring the upstream Next.js 9router
+// Connection status vocabulary, mirroring the upstream Next.js alyysha
 // connection lifecycle (`src/sse/services/auth.js`):
 //
 //	active          -> a request succeeded, or the account recovered

@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package handlers
 
 import (
@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/auth"
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/auth"
+	"alyysha/proxy/internal/db"
 
 	"github.com/go-chi/chi/v5"
 )

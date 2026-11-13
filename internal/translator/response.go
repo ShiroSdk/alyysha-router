@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package translator
 
 import (
@@ -415,7 +415,7 @@ func TranslateOpenAIToClaude(openaiResp []byte) ([]byte, *OpenAIUsage, error) {
 		})
 	}
 
-	// Tool calls — don't fallback to ID when Function.Name is empty (see decolua/9router#2077, #3685)
+	// Tool calls — don't fallback to ID when Function.Name is empty (see decolua/alyysha#2077, #3685)
 	// Using call_ ID as tool name causes "No such tool available: call_..." in Claude Code.
 	for _, tc := range msg.ToolCalls {
 		if tc.Function == nil || tc.Function.Name == "" {
@@ -754,7 +754,7 @@ func TranslateOpenAIToClaudeStreamSession(sessionKey string, openaiChunk []byte)
 			if _, exists := state.ToolCalls[idx]; exists {
 				// Already have this tool, skip block creation, just buffer arguments below
 			} else {
-				// New tool — don't fallback to ID when Function.Name is empty (decolua/9router#2077)
+				// New tool — don't fallback to ID when Function.Name is empty (decolua/alyysha#2077)
 				if tc.Function == nil || tc.Function.Name == "" {
 					continue
 				}

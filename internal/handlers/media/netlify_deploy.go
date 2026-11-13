@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package media
 
 // Netlify relay deploy endpoint (upstream
@@ -17,8 +17,8 @@ import (
 	"net/http"
 	"strings"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 // POST /api/proxy-pools/netlify-deploy

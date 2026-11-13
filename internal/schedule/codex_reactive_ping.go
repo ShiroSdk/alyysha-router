@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package schedule
 
 import (
@@ -53,7 +53,7 @@ type CodexUsageFetcher func(ctx context.Context, account CodexAccount) (*CodexUs
 type CodexPingSender func(ctx context.Context, account CodexAccount) error
 
 // CodexReactiveScheduler executes reactive quota pings for Codex accounts based on sliding resetAt windows.
-// Parity with serenhope/9router quotaAutoPing.js.
+// Parity with serenhope/alyysha quotaAutoPing.js.
 type CodexReactiveScheduler struct {
 	mu           sync.Mutex
 	running      bool

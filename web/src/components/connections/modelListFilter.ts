@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Pure search / filter / sort logic for the provider model lists.
 //
 // Two lists share this pipeline: the registered-provider grid (built-in

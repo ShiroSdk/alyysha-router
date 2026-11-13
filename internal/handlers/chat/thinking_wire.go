@@ -1,12 +1,12 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
 	"context"
 
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/thinking"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/thinking"
+	"alyysha/proxy/internal/translator"
 	json "encoding/json/v2"
 	"strings"
 )

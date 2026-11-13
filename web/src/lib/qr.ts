@@ -1,8 +1,8 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 /**
  * Minimal QR encoder (byte mode, versions 1–10, error-correction level M).
  *
- * Exists so the share modal can render a QR for a `9router://` token without
+ * Exists so the share modal can render a QR for a `alyysha://` token without
  * adding a runtime dependency to the bundle (§6.F: a new dependency has to pay
  * for itself, and a QR encoder used by one modal does not).
  *

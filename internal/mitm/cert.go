@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package mitm
 
 import (
@@ -128,8 +128,8 @@ func generateRootCA() (*x509.Certificate, crypto.PrivateKey, error) {
 	template := &x509.Certificate{
 		SerialNumber: serial,
 		Subject: pkix.Name{
-			CommonName:   "9router MITM Root CA",
-			Organization: []string{"9router"},
+			CommonName:   "alyysha MITM Root CA",
+			Organization: []string{"alyysha"},
 		},
 		NotBefore:             now.Add(-24 * time.Hour),
 		NotAfter:              now.Add(caValidity),
@@ -178,7 +178,7 @@ func installRootCA(certPath string) error {
 	case "darwin":
 		return exec.Command("sudo", "security", "add-trusted-cert", "-d", "-r", "trustRoot", "-k", "/Library/Keychains/System.keychain", certPath).Run()
 	case "linux":
-		dest := "/usr/local/share/ca-certificates/9router-mitm-root.crt"
+		dest := "/usr/local/share/ca-certificates/alyysha-mitm-root.crt"
 		if err := exec.Command("sudo", "cp", certPath, dest).Run(); err != nil {
 			return err
 		}
@@ -188,7 +188,7 @@ func installRootCA(certPath string) error {
 		if err != nil {
 			return fmt.Errorf("unsupported platform: %s", runtime.GOOS)
 		}
-		fmt.Fprintf(os.Stderr, "[mitm] Install root CA manually:\n  cp %s %s/.9router-mitm-root.crt\n", certPath, currentUser.HomeDir)
+		fmt.Fprintf(os.Stderr, "[mitm] Install root CA manually:\n  cp %s %s/.alyysha-mitm-root.crt\n", certPath, currentUser.HomeDir)
 		return nil
 	}
 }

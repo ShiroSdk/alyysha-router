@@ -1,8 +1,8 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
-	json "9routerx/proxy/internal/fastjson"
+	json "alyysha/proxy/internal/fastjson"
 	"bytes"
 	"context"
 	"fmt"
@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/shutdown"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/shutdown"
 )
 
 type fusionAnswer struct {

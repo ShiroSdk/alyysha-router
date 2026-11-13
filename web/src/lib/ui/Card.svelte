@@ -1,6 +1,6 @@
-<!-- 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
-  // Port of decolua/9router src/shared/components/Card.js
+  // Port of decolua/alyysha src/shared/components/Card.js
   import type { Snippet } from 'svelte'
 
   let {

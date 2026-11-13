@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package oauth
 
 import (
@@ -11,12 +11,12 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
 )
 
 // authcodeConfig describes a plain OAuth2 authorization_code provider
-// (no PKCE). Mirrors upstream 9router provider modules.
+// (no PKCE). Mirrors upstream alyysha provider modules.
 type authcodeConfig struct {
 	providers    []string
 	clientID     string

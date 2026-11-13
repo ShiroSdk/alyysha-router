@@ -1,4 +1,4 @@
-<!-- 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   import { notifications } from '../lib/notifications'
   import {
@@ -123,7 +123,7 @@
 
         <div class="p-3 rounded-lg bg-bg border border-border space-y-1 font-code text-xs">
           <div class="text-[10px] text-text-muted uppercase">Default Database Location</div>
-          <div class="text-info font-semibold">~/.9router/db/data.sqlite</div>
+          <div class="text-info font-semibold">~/.alyysha/db/data.sqlite</div>
           <div class="text-[10px] text-text-subtle pt-1">SQLite WAL • Configurable with DB_PATH or DATA_DIR</div>
           <div class="text-[10px] text-text-subtle pt-1">No automatic versioned schema migration; initialize a fresh database from a compatible upstream schema.</div>
         </div>
@@ -265,9 +265,9 @@
       </div>
 
       <p class="font-body text-xs text-text-muted">
-        Ask the 9RouterX release feed once per dashboard session and every 6 hours in the background
+        Ask the Alyysha Router release feed once per dashboard session and every 6 hours in the background
         (UPDATE_CHECK_INTERVAL). Off stops the version banner; installing updates stays a manual
-        <code class="font-code text-info">9routerx update</code>.
+        <code class="font-code text-info">alyysha update</code>.
       </p>
     </div>
 

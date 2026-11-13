@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
@@ -25,14 +25,14 @@ var commandcodeWorkingDir = func() string {
 	return "/"
 }()
 
-// commandcodeProjectSlug falls back to "9routerx" when the working dir
+// commandcodeProjectSlug falls back to "alyysha" when the working dir
 // slugifies to nothing (cwd "/" in a container): upstream rejects an empty
 // x-project-slug with 400.
 var commandcodeProjectSlug = func() string {
 	if s := commandcodeSlugify(commandcodeWorkingDir); s != "" {
 		return s
 	}
-	return "9routerx"
+	return "alyysha"
 }()
 
 var (
@@ -66,7 +66,7 @@ func commandcodeSlugify(v string) string {
 // threadId/x-session-id pair. The upstream prompt cache is keyed on that
 // identity: the official CLI mints ONE uuid per conversation and reuses it for
 // every turn, and a fresh id per request kept cache reads at 0 across ~27k
-// requests on the upstream side (decolua/9router#5006). So the chain below
+// requests on the upstream side (decolua/alyysha#5006). So the chain below
 // always ends in something conversation-stable — never a per-request random:
 //
 //  1. the client's session headers (req.SessionID: x-claude-code-session-id,

@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 /**
  * The provider artwork in `public/providers/` is rendered at 32×32
  * (`size-8 object-contain` in CliToolsView), so anything larger than that is

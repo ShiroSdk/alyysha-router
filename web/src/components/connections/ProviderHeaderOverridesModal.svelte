@@ -1,7 +1,7 @@
-<!-- 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   // Per-provider outbound header overrides (issue #101 part 4, upstream
-  // decolua/9router v0.5.95 b3cf3fde). Upstream calls this CustomConfigCard.
+  // decolua/alyysha v0.5.95 b3cf3fde). Upstream calls this CustomConfigCard.
   import { api } from '../../api/client'
   import type { ProviderOverridesResponse } from '../../api/client'
   import { headerNameError, headerValueError } from './headerOverrideValidation'

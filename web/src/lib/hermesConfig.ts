@@ -1,10 +1,10 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 /**
  * Pure logic behind the Hermes per-profile card.
  *
  * Kept out of `HermesToolCard.svelte` because all of it is unit-testable
  * without a DOM, and because two of the pieces (the yaml builder and the
- * "is this a 9router endpoint" guard) have to agree with the Go handlers
+ * "is this a alyysha endpoint" guard) have to agree with the Go handlers
  * under `internal/handlers/media/` — both sides rewrite `~/.hermes/config.yaml`.
  */
 
@@ -19,7 +19,7 @@ export interface HermesProfileSummary {
   displayName: string | null
   command: string
   baseUrl: string | null
-  has9Router: boolean
+  hasAlyysha: boolean
 }
 
 export interface HermesSelectionMap {
@@ -69,7 +69,7 @@ export function normalizeHermesEndpoint(raw: string, localOrigin: string): strin
  * points at and can hold a foreign provider URL (openrouter, ...) whose key
  * would then be written into every other profile.
  */
-export function isKnown9RouterEndpoint(raw: string, ctx: EndpointContext): boolean {
+export function isKnownAlyyshaEndpoint(raw: string, ctx: EndpointContext): boolean {
   const value = raw.trim()
   if (!value) return false
   const candidates = [ctx.localOrigin, ctx.tunnelUrl, ctx.tailscaleUrl, ...(ctx.publicEndpoints ?? [])]
@@ -91,10 +91,10 @@ export function hermesHomeDir(profileName: string): string {
 
 /**
  * Three-state status for the dot next to a profile button, matching the rule
- * the backend uses when it flags a profile as 9router-wired.
+ * the backend uses when it flags a profile as alyysha-wired.
  */
 export function profileStatus(p: HermesProfileSummary, ctx: EndpointContext): HermesProfileStatus {
-  if (p.has9Router || (p.baseUrl && isKnown9RouterEndpoint(p.baseUrl, ctx))) return 'configured'
+  if (p.hasAlyysha || (p.baseUrl && isKnownAlyyshaEndpoint(p.baseUrl, ctx))) return 'configured'
   if (p.baseUrl) return 'other'
   return 'not_configured'
 }

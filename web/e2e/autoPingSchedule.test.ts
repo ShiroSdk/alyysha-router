@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 /**
  * The auto-ping schedule editor: before this existed the schedule could only be
  * written by PUTting a raw settings blob, so the dashboard offered a "on reset"

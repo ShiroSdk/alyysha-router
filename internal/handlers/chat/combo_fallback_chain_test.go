@@ -1,15 +1,15 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
-	"9routerx/proxy/internal/resilience"
+	"alyysha/proxy/internal/resilience"
 	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/db"
 )
 
 func TestComboFallbackChain_Success(t *testing.T) {
@@ -59,8 +59,8 @@ func TestComboFallbackChain_Success(t *testing.T) {
 	if !strings.Contains(rec.Body.String(), "fallback answered") {
 		t.Errorf("unexpected body: %s", rec.Body.String())
 	}
-	if comboHeader := rec.Header().Get("x-9router-combo"); comboHeader != "fallback-combo" {
-		t.Errorf("expected x-9router-combo header to be fallback-combo, got %q", comboHeader)
+	if comboHeader := rec.Header().Get("x-alyysha-combo"); comboHeader != "fallback-combo" {
+		t.Errorf("expected x-alyysha-combo header to be fallback-combo, got %q", comboHeader)
 	}
 }
 
@@ -209,7 +209,7 @@ func TestComboFallbackChain_MultiFallback_A_to_B_to_C(t *testing.T) {
 	if !strings.Contains(rec.Body.String(), "answered by combo C") {
 		t.Errorf("unexpected body: %s", rec.Body.String())
 	}
-	if comboHeader := rec.Header().Get("x-9router-combo"); comboHeader != "combo-c" {
-		t.Errorf("expected x-9router-combo header to be combo-c, got %q", comboHeader)
+	if comboHeader := rec.Header().Get("x-alyysha-combo"); comboHeader != "combo-c" {
+		t.Errorf("expected x-alyysha-combo header to be combo-c, got %q", comboHeader)
 	}
 }

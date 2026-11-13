@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
@@ -12,8 +12,8 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/proxy"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/proxy"
 )
 
 func TestFreebuff_EnsureMarker(t *testing.T) {
@@ -197,13 +197,13 @@ func TestForwardFreebuff_FullCycle(t *testing.T) {
 				if meta["freebuff_instance_id"] != "fb-inst-999" {
 					t.Errorf("expected freebuff_instance_id fb-inst-999, got %v", meta["freebuff_instance_id"])
 				}
-				// client_id cloaking: bare "9router-" branding must never leak
+				// client_id cloaking: bare "alyysha-" branding must never leak
 				// upstream; default requests carry an unbranded random id.
 				clientID, _ := meta["client_id"].(string)
 				if clientID == "" {
 					t.Errorf("expected non-empty client_id")
 				}
-				if strings.HasPrefix(clientID, "9router-") {
+				if strings.HasPrefix(clientID, "alyysha-") {
 					t.Errorf("client_id must not carry router branding, got %v", clientID)
 				}
 			}

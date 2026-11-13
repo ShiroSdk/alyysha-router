@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package service
 
 import (
@@ -8,25 +8,25 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/daemon"
+	"alyysha/proxy/internal/daemon"
 )
 
 func TestLegacyPathMatching(t *testing.T) {
-	p := daemon.ProcessInfo{Executable: "C:/node/node.exe", CommandLine: `"C:/node/node.exe" "C:/apps/9router/server.js"`}
+	p := daemon.ProcessInfo{Executable: "C:/node/node.exe", CommandLine: `"C:/node/node.exe" "C:/apps/alyysha/server.js"`}
 	for _, tc := range []struct {
 		command string
 		want    bool
 	}{
-		{`"C:/node/node.exe" "C:/apps/9router/server.js"`, true},
-		{`"C:\node\node.exe" "C:\apps\9router\server.js"`, true},
+		{`"C:/node/node.exe" "C:/apps/alyysha/server.js"`, true},
+		{`"C:\node\node.exe" "C:\apps\alyysha\server.js"`, true},
 		{`C:/node/node.exe C:/other/app.js`, false},
 		{`C:/node/node.exe`, false},
-		{`C:/apps/9routerx/server.js`, false},
-		{`C:/apps/9router/server.js.bak`, false},
-		{`C:/node/node.exe C:/apps/9router/server.js && C:/foreign.exe`, false},
-		{`C:/node/node.exe C:/apps/9router/server.js &`, true},
-		{"C:/node/node.exe C:/apps/9router/server.js\nC:/foreign.exe", false},
-		{`C:/apps/9router/server.js --tag=9routerx`, false},
+		{`C:/apps/alyysha/server.js`, false},
+		{`C:/apps/alyysha/server.js.bak`, false},
+		{`C:/node/node.exe C:/apps/alyysha/server.js && C:/foreign.exe`, false},
+		{`C:/node/node.exe C:/apps/alyysha/server.js &`, true},
+		{"C:/node/node.exe C:/apps/alyysha/server.js\nC:/foreign.exe", false},
+		{`C:/apps/alyysha/server.js --tag=alyysha`, false},
 	} {
 		t.Run(tc.command, func(t *testing.T) {
 			if got := MatchLegacyCommand(tc.command, p); got != tc.want {
@@ -51,7 +51,7 @@ func TestWindowsLegacyReadOnlyThenChangedEntryRefused(t *testing.T) {
 	}
 	before := legacyCommand
 	defer func() { legacyCommand = before }()
-	p := daemon.ProcessInfo{PID: 123, CommandLine: `C:/node/node.exe C:/apps/9router/server.js`}
+	p := daemon.ProcessInfo{PID: 123, CommandLine: `C:/node/node.exe C:/apps/alyysha/server.js`}
 	e := LegacyEntry{Kind: LegacyTask, Name: "old-router", Command: p.CommandLine, Snapshot: "old XML"}
 	writes := 0
 	legacyCommand = func(name string, args ...string) (string, error) {
@@ -77,7 +77,7 @@ func TestWindowsLegacyReadOnlyThenChangedEntryRefused(t *testing.T) {
 	}
 }
 func TestRefuseHKLMWithoutProvenScope(t *testing.T) {
-	p := daemon.ProcessInfo{CommandLine: `node.exe C:/apps/9router/server.js`}
+	p := daemon.ProcessInfo{CommandLine: `node.exe C:/apps/alyysha/server.js`}
 	e := LegacyEntry{Kind: LegacyRegistry, Name: "old", Path: `HKLM\Software\Microsoft\Windows\CurrentVersion\Run`, Command: p.CommandLine}
 	if err := DisableLegacy(e, p); err == nil || !strings.Contains(err.Error(), "proven system scope") {
 		t.Fatalf("unproven HKLM write: %v", err)

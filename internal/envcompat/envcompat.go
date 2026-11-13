@@ -1,7 +1,7 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Package envcompat resolves renamed environment variables with a one-version
-// deprecation fallback: the 9ROUTERX_ name wins, the pre-rename name
-// (9ROUTERX_* / 9ROUTER_*) still answers when the new one is unset, with a
+// deprecation fallback: the ALYYSHA_ name wins, the pre-rename name
+// (ALYYSHA_* / ALYYSHA_*) still answers when the new one is unset, with a
 // warning so an operator knows to migrate. The fallback exists so an upgrade
 // never breaks a running deployment's .env or systemd unit; the warning exists
 // so the break is announced, not silent. Remove this package when the

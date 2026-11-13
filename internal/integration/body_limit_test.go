@@ -1,6 +1,6 @@
 //go:build integration
 
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package integration
 
 import (
@@ -9,7 +9,7 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/middleware"
+	"alyysha/proxy/internal/middleware"
 )
 
 // bodyOf returns a JSON payload of exactly n bytes by padding the prompt field.

@@ -1,4 +1,4 @@
-<!-- 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script module lang="ts">
   import type { ResolvedPickerExtras } from './pickerExtras'
   let cachedPickerExtras: ResolvedPickerExtras | null = null

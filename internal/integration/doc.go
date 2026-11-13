@@ -1,6 +1,6 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Package integration holds the feature-level integration suite for
-// 9routerx.
+// alyysha.
 //
 // The tests here boot the real HTTP stack — the same chi router, middleware
 // chain, handlers, SQLite schema and provider dispatch that the binary serves

@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package middleware
 
 import (
@@ -8,12 +8,12 @@ import (
 	"sync"
 	"time"
 
-	"9routerx/proxy/internal/auth"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/models"
-	"9routerx/proxy/internal/observ"
-	"9routerx/proxy/internal/securitylog"
+	"alyysha/proxy/internal/auth"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/models"
+	"alyysha/proxy/internal/observ"
+	"alyysha/proxy/internal/securitylog"
 )
 
 // keypolicy_requests.go is the per-interval request cap of the serenhope

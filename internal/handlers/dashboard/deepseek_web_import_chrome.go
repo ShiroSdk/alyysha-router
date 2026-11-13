@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -8,9 +8,9 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/browsercookies"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/browsercookies"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
 )
 
 // The import of a DeepSeek Web credential from a browser that is already

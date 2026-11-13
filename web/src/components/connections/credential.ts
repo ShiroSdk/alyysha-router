@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 import { api, type ProviderConnection } from '../../api/client'
 
 /**
@@ -7,7 +7,7 @@ import { api, type ProviderConnection } from '../../api/client'
  * The stored key never reaches the browser: the server ships a mask
  * (`apiKeyMasked`) instead, and the modal doubles it as the input's
  * placeholder, so an empty field honestly means "keep the key already stored".
- * Upstream parity: decolua/9router EditConnectionModal (same rule, same
+ * Upstream parity: decolua/alyysha EditConnectionModal (same rule, same
  * "leave blank" hint).
  */
 

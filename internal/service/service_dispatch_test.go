@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package service
 
 import (
@@ -53,7 +53,7 @@ func TestInstallDispatchesToEveryBackend(t *testing.T) {
 			override: string(BackendRunit),
 			wantBack: BackendRunit,
 			wantFile: func(_ *testing.T, home string) string {
-				return filepath.Join(home, "service", "9routerx", "run")
+				return filepath.Join(home, "service", "alyysha", "run")
 			},
 		},
 		{
@@ -62,7 +62,7 @@ func TestInstallDispatchesToEveryBackend(t *testing.T) {
 			override: string(BackendCron),
 			wantBack: BackendCron,
 			wantFile: func(_ *testing.T, home string) string {
-				return filepath.Join(home, ".config", "autostart", "9routerx.desktop")
+				return filepath.Join(home, ".config", "autostart", "alyysha.desktop")
 			},
 		},
 		{
@@ -120,7 +120,7 @@ func TestUninstallRemovesEveryBackendItFinds(t *testing.T) {
 	home := setHome(t)
 	redirectInitPaths(t)
 	stubHost(t, hostStub{goos: "linux", euid: 1000})
-	stubCrontab(t, renderCronLine("/usr/local/bin/9routerx", nil)+"\n")
+	stubCrontab(t, renderCronLine("/usr/local/bin/alyysha", nil)+"\n")
 	stubRun(t)
 
 	writeFile(t, filepath.Join(home, ".config", "systemd", "user", unitName), "[Unit]\n")
@@ -190,7 +190,7 @@ func TestStatusReportsTheInstalledBackend(t *testing.T) {
 		stubHost(t, hostStub{goos: "linux", euid: 1000})
 		stubCrontab(t, "")
 		stubRun(t)
-		writeFile(t, filepath.Join(home, "service", "9routerx", "run"), "#!/bin/sh\n")
+		writeFile(t, filepath.Join(home, "service", "alyysha", "run"), "#!/bin/sh\n")
 
 		info, ok := Status()
 		if !ok || info.Backend != BackendRunit {
@@ -202,7 +202,7 @@ func TestStatusReportsTheInstalledBackend(t *testing.T) {
 		setHome(t)
 		redirectInitPaths(t)
 		stubHost(t, hostStub{goos: "linux", euid: 1000})
-		stubCrontab(t, renderCronLine("/usr/local/bin/9routerx", nil)+"\n")
+		stubCrontab(t, renderCronLine("/usr/local/bin/alyysha", nil)+"\n")
 		stubRun(t)
 
 		info, ok := Status()

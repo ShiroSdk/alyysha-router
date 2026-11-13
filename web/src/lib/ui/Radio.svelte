@@ -1,6 +1,6 @@
-<!-- 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
-  // Custom radio (TASK-9routerX-ui-polish §2): the dot pops in with the same
+  // Custom radio (TASK-alyyshaX-ui-polish §2): the dot pops in with the same
   // 120ms scale the checkbox uses. adapted from uiverse.io/sssynk/tall-octopus-55
   // (MIT) — the same tick-pop family, round. Every color is a theme token, so
   // dark and light come from the same component.
@@ -74,10 +74,10 @@
     border-radius: 999px;
     background: var(--app-surface-2);
     border: 1px solid var(--app-border);
-    box-shadow: var(--9x-inset-rest);
+    box-shadow: var(--ay-inset-rest);
     transition:
-      border-color var(--9x-transition),
-      box-shadow var(--9x-transition);
+      border-color var(--ay-transition),
+      box-shadow var(--ay-transition);
   }
 
   /* The dot pops: scale .6 -> 1 in 120ms (spec §2). */
@@ -89,8 +89,8 @@
     transform: scale(0.6);
     opacity: 0;
     transition:
-      transform 120ms var(--9x-ease),
-      opacity 120ms var(--9x-ease);
+      transform 120ms var(--ay-ease),
+      opacity 120ms var(--ay-ease);
   }
   .x9-radio-input:checked + .x9-radio-box {
     border-color: var(--app-primary);

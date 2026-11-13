@@ -28,11 +28,11 @@ RUN --mount=type=cache,target=/go/pkg/mod \
     VERSION=${VERSION:-$(cat VERSION 2>/dev/null || cat version.json | sed -n 's/.*"latestVersion": *"\([^"]*\)".*/\1/p')} && \
     echo "Building version $VERSION for ${TARGETOS:-linux}/${TARGETARCH:-amd64} on $BUILDPLATFORM" && \
     CGO_ENABLED=0 GOOS=${TARGETOS:-linux} GOARCH=${TARGETARCH:-amd64} \
-    go build -ldflags="-s -w -X '9routerx/proxy/internal/updater.CurrentVersion=${VERSION}'" -o 9routerx ./cmd/9routerx/
+    go build -ldflags="-s -w -X 'alyysha/proxy/internal/updater.CurrentVersion=${VERSION}'" -o alyysha ./cmd/alyysha/
 
 # Stage 3: Minimal runtime image for target platform
 FROM alpine:3.21
 RUN apk add --no-cache ca-certificates tzdata
-COPY --from=builder /app/9routerx /usr/local/bin/9routerx
+COPY --from=builder /app/alyysha /usr/local/bin/alyysha
 EXPOSE 20128
-ENTRYPOINT ["9routerx"]
+ENTRYPOINT ["alyysha"]

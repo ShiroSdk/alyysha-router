@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -13,17 +13,17 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/detection"
-	"9routerx/proxy/internal/handlers/shared"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/middleware"
-	"9routerx/proxy/internal/observ"
-	"9routerx/proxy/internal/pricing"
-	"9routerx/proxy/internal/translator"
-	"9routerx/proxy/internal/usagetracker"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/detection"
+	"alyysha/proxy/internal/handlers/shared"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/middleware"
+	"alyysha/proxy/internal/observ"
+	"alyysha/proxy/internal/pricing"
+	"alyysha/proxy/internal/translator"
+	"alyysha/proxy/internal/usagetracker"
 )
 
 // shouldLogRequestDetail checks if request detail logging is enabled by settings.

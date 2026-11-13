@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package db
 
 import (
@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/analyticsrange"
+	"alyysha/proxy/internal/analyticsrange"
 )
 
 func TestCompressionAnalytics_InsertAndSummary(t *testing.T) {

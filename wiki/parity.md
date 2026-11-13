@@ -10,7 +10,7 @@ Both projects share the same database and schema. What differs is the runtime.
 
 ## Comparison
 
-| | 9RouterX | 9Router (upstream) |
+| | Alyysha Router | Alyysha (upstream) |
 |---|---|---|
 | Runtime | Single Go binary | Node.js + Next.js |
 | Dashboard | Embedded Svelte 5 | React 19 |
@@ -27,7 +27,7 @@ Both projects share the same database and schema. What differs is the runtime.
   ProviderNodes, Usage, Auth.
 - Combo expansion, model fallback, account rotation, and strike-breaker quota
   handling.
-- SQLite database compatibility (`~/.9router/db/data.sqlite`).
+- SQLite database compatibility (`~/.alyysha/db/data.sqlite`).
 
 Both projects share the same database and schema, so a connection you add in
 either dashboard shows up in the other. The supported setup is one active writer.
@@ -35,7 +35,7 @@ either dashboard shows up in the other. The supported setup is one active writer
 ## What version am I running?
 
 ```bash
-9routerx version
+alyysha version
 ```
 
 The dashboard's changelog modal shows both `CHANGELOG.md` and any fragment merged
@@ -52,7 +52,7 @@ since the last tag, so what you read there is current even between releases.
 
 ## Go-only features
 
-Some features exist only in 9RouterX and do not collide with upstream:
+Some features exist only in Alyysha Router and do not collide with upstream:
 
 - Per-custom-provider limits (RPM/TPM/concurrency/quota/expiry)
 - Per-API-key rate limiting with a FIFO queue
@@ -65,8 +65,8 @@ Some features exist only in 9RouterX and do not collide with upstream:
 
 ## Further reading
 
-- Remaining parity work: [`docs/PARITY-REMAINING.md`](https://github.com/yanstd888/9routerx/blob/main/docs/PARITY-REMAINING.md)
-- Upstream: [decolua/9router](https://github.com/decolua/9router)
+- Remaining parity work: [`docs/PARITY-REMAINING.md`](https://github.com/ShiroSdk/alyysha-router/blob/main/docs/PARITY-REMAINING.md)
+- Upstream: [decolua/alyysha](https://github.com/decolua/alyysha)
 
 For the KeiRouter port specifically — what was taken, what was skipped, and what
 was never attempted — see [Advanced Features](advanced-features.html).

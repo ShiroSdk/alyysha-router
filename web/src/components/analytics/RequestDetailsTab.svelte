@@ -1,4 +1,4 @@
-<!-- 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   import { RefreshCw, X } from 'lucide-svelte'
   import Badge from '../../lib/ui/Badge.svelte'

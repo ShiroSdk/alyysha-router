@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Credential sealing (F-5).
 //
 // A connection's secrets live in two places at once: `data` holds the JSON
@@ -22,9 +22,9 @@ import (
 	"fmt"
 	"slices"
 
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/models"
-	"9routerx/proxy/internal/vault"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/models"
+	"alyysha/proxy/internal/vault"
 )
 
 // The three sealed column pairs on providerConnections.

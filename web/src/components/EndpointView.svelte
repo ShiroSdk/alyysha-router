@@ -1,4 +1,4 @@
-<!-- 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   import { onMount } from 'svelte'
   import { notifications } from '../lib/notifications'
@@ -855,7 +855,7 @@
       const res = await api.createApiKey({ name: newKeyName.trim() })
       if (res.key) {
         newlyCreatedKey = res.key
-        localStorage.setItem('9routerx_key', res.key)
+        localStorage.setItem('alyysha_key', res.key)
         newKeyName = ''
         isCreateKeyOpen = false
         await loadStatus()
@@ -908,7 +908,7 @@
       bulkKeyResults = created
       // The last key minted is the one the snippets and the session use, so a
       // batch leaves the dashboard pointed at a credential that exists.
-      localStorage.setItem('9routerx_key', created[created.length - 1].key)
+      localStorage.setItem('alyysha_key', created[created.length - 1].key)
       bulkKeyText = ''
       await loadStatus()
       onRefresh?.()
@@ -928,7 +928,7 @@
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = '9routerx-api-keys.txt'
+    a.download = 'alyysha-api-keys.txt'
     a.click()
     URL.revokeObjectURL(url)
   }

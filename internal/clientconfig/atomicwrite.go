@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package clientconfig
 
 import (
@@ -10,8 +10,8 @@ import (
 	"path/filepath"
 	"time"
 
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/log"
 )
 
 // hooks collects the I/O seams a test needs to fail mid-operation.

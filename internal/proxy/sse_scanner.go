@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package proxy
 
 import (
@@ -17,7 +17,7 @@ import (
 // that event. A broken chat upstream can then stall — no usage trailer, no
 // [DONE], connection held open — and the deferral has to give up eventually or
 // the client waits forever. Mirrors upstream's PENDING_COMPLETION_FLUSH_MS
-// (decolua/9router fbcaa282 + 7111db35).
+// (decolua/alyysha fbcaa282 + 7111db35).
 //
 // A package var, not a const, so a test can drive the bound without sleeping
 // through it.

@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package oauth
 
 import (
@@ -13,8 +13,8 @@ import (
 	"syscall"
 	"time"
 
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
 )
 
 // Codex's public OAuth client (app_EMoamEEZ73f0CkXaXp7hrann, the Codex CLI) has

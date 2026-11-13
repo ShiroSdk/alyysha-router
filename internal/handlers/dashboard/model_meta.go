@@ -1,12 +1,12 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
 	"net/http"
 	"strings"
 
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/providers"
 )
 
 // ModelMeta is everything the combo editor's sort dropdown needs about one

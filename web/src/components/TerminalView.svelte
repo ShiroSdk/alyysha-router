@@ -1,4 +1,4 @@
-<!-- 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   // Console Log page. Owns the authenticated SSE transport, the server log
   // level, and the buffer window; ConsoleLogStream owns how rows are read.

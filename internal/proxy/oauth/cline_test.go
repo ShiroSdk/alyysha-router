@@ -1,9 +1,9 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package oauth
 
 import (
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/updater"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/updater"
 	"context"
 	"net/http"
 	"net/http/httptest"
@@ -61,11 +61,11 @@ func TestRefreshCline(t *testing.T) {
 	if res.ExpiresIn != 7200 {
 		t.Errorf("expected expiresIn 7200, got: %d", res.ExpiresIn)
 	}
-	if capturedUA != "9Router/"+updater.CurrentVersion {
-		t.Errorf("expected User-Agent '9Router/%s', got: %s", updater.CurrentVersion, capturedUA)
+	if capturedUA != "Alyysha/"+updater.CurrentVersion {
+		t.Errorf("expected User-Agent 'Alyysha/%s', got: %s", updater.CurrentVersion, capturedUA)
 	}
-	if capturedClientType != "9router" {
-		t.Errorf("expected X-CLIENT-TYPE '9router', got: %s", capturedClientType)
+	if capturedClientType != "alyysha" {
+		t.Errorf("expected X-CLIENT-TYPE 'alyysha', got: %s", capturedClientType)
 	}
 
 	// Verify clinepass is registered in oauth registry

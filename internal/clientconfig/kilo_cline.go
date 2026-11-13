@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package clientconfig
 
 // Kilo Code and Cline CLI. docs/specs/client-schema-matrix.md §3.6, §3.7.
@@ -43,11 +43,11 @@ func (a kiloAdapter) Reset(opts Options) (Result, error) {
 	if err != nil {
 		return Result{}, err
 	}
-	// auth["9router"] is a leftover from an earlier schema this adapter never
+	// auth["alyysha"] is a leftover from an earlier schema this adapter never
 	// wrote; §3.6 records it as part of what reset removes.
 	return applyPlans([]FilePlan{{File: paths.Files[0], Edits: []Edit{
 		{KeyPath: []string{"auth", kiloProviderKey}, Delete: true},
-		{KeyPath: []string{"auth", "9router"}, Delete: true},
+		{KeyPath: []string{"auth", "alyysha"}, Delete: true},
 	}}}, nil)
 }
 

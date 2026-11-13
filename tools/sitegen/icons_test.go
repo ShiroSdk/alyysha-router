@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package main
 
 import (
@@ -28,7 +28,7 @@ func renderReadme(t *testing.T) string {
 	if _, err := os.Stat(readme); err != nil {
 		t.Skipf("repository README not found from %s: %v", cwdOrError(), err)
 	}
-	body, err := renderMarkdown(readme, t.TempDir(), "yanstd888/9routerx")
+	body, err := renderMarkdown(readme, t.TempDir(), "ShiroSdk/alyysha-router")
 	if err != nil {
 		t.Fatalf("renderMarkdown: %v", err)
 	}

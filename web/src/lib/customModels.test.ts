@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Guards the "Import from /models" regression: the server refuses an id that
 // already addresses a model alias or a combo with a typed 409, and the import
 // loop awaited every save inside one try/catch — so the first refusal threw past

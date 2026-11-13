@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -17,8 +17,8 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/proxy"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/proxy"
 )
 
 // Provider usage fetchers for GET /api/usage/{connectionId}.
@@ -196,7 +196,7 @@ var usageHTTPClient = &http.Client{Transport: proxy.NewFallbackTransport(http.De
 // usageUserAgent is sent when a fetcher does not set its own, so a request does
 // not announce Go's default "Go-http-client/1.1" to WAF-fronted hosts. Fetchers
 // that already set one (grok-cli, antigravity) keep theirs.
-const usageUserAgent = "9RouterX"
+const usageUserAgent = "Alyysha Router"
 
 func usageDo(ctx context.Context, method, rawURL string, headers map[string]string, body []byte) (int, http.Header, []byte, error) {
 	ctx, cancel := context.WithTimeout(ctx, usageHTTPTimeout)

@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
@@ -10,10 +10,10 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/proxy"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/proxy"
+	"alyysha/proxy/internal/translator"
 )
 
 // geminiStream replays a live Gemini-native SSE body as OpenAI chunks.

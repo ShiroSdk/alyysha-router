@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package db
 
 import (
@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"time"
 
-	"9routerx/proxy/internal/models"
+	"alyysha/proxy/internal/models"
 )
 
 // providerNodeColumns is the shared column list for every providerNodes read.

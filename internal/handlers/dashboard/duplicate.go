@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -6,8 +6,8 @@ import (
 	"encoding/json"
 	"strings"
 
-	"9routerx/proxy/internal/models"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/models"
+	"alyysha/proxy/internal/providers"
 )
 
 // Duplicate connection detection.

@@ -1,4 +1,4 @@
-# 9RouterX Updater Contract — handoff to the release-publishing agent (Bagian B)
+# Alyysha Router Updater Contract — handoff to the release-publishing agent (Bagian B)
 
 This document is the single source of truth for the version feed that
 `internal/updater` consumes and the dashboard banner (Bagian A, this repo)
@@ -17,13 +17,13 @@ repository, workflow, or npm package was created or pushed.
 Published at the hard-coded primary channel:
 
 ```
-https://raw.githubusercontent.com/yanstd888/9routerx/main/version.json
+https://raw.githubusercontent.com/ShiroSdk/alyysha-router/main/version.json
 ```
 
 with fallback to the GitHub Releases API:
 
 ```
-https://api.github.com/repos/yanstd888/9routerx/releases/latest
+https://api.github.com/repos/ShiroSdk/alyysha-router/releases/latest
 ```
 
 Both hosts are compiled-in constants (`internal/updater/updater.go`,
@@ -39,12 +39,12 @@ The manifest merges two generations of keys — all are accepted:
 {
   "version": "0.6.0",
   "minVersion": "0.5.0",
-  "releaseUrl": "https://github.com/yanstd888/9RouterX/releases/tag/v0.6.0",
+  "releaseUrl": "https://github.com/ShiroSdk/alyysha-router/releases/tag/v0.6.0",
   "notes": "ringkasan singkat",
   "publishedAt": "2026-11-07T00:00:00Z",
 
   "latestVersion": "0.6.0",
-  "downloadUrl": "https://github.com/yanstd888/9RouterX/releases/latest",
+  "downloadUrl": "https://github.com/ShiroSdk/alyysha-router/releases/latest",
   "sha256": "<hex sha256 of the platform asset>",
   "releaseNotes": "optional longer notes"
 }
@@ -58,7 +58,7 @@ The manifest merges two generations of keys — all are accepted:
 | `downloadUrls` | optional | `checkManifest` | map keyed `"<goos>_<goarch>"` with a `"default"` fallback |
 | `releaseNotes` / `notes` | optional | banner | either spelling; `releaseNotes` wins |
 | `minVersion` | optional | banner (informational) | oldest release still supported |
-| `releaseUrl` | optional | banner | **only linked when its host is github.com/yanstd888** (client-side `releaseUrlTrust`, server never follows it) |
+| `releaseUrl` | optional | banner | **only linked when its host is github.com/ShiroSdk** (client-side `releaseUrlTrust`, server never follows it) |
 | `publishedAt` | optional | debug dump | ISO 8601 |
 
 The Releases API fallback fills `tag_name`, `body`, `assets` (and reads the
@@ -74,11 +74,11 @@ The banner shows the asset the operator's browser should download, from
 
 | User-Agent platform | Asset name |
 |---|---|
-| Windows | `9routerx_windows_amd64.exe` |
-| macOS (`Macintosh`/`Mac OS X`) | `9routerx_darwin_arm64.tar.gz` |
-| everything else (Linux/Android/X11, unknown) | `9routerx_linux_amd64.tar.gz` |
+| Windows | `alyysha_windows_amd64.exe` |
+| macOS (`Macintosh`/`Mac OS X`) | `alyysha_darwin_arm64.tar.gz` |
+| everything else (Linux/Android/X11, unknown) | `alyysha_linux_amd64.tar.gz` |
 
-Convention: `9routerx_{goos}_{goarch}` + platform suffix (`.exe` on Windows,
+Convention: `alyysha_{goos}_{goarch}` + platform suffix (`.exe` on Windows,
 `.tar.gz` elsewhere). Bagian B must name release assets exactly like this —
 the server-side matcher (`matchReleaseAsset`) also substring-matches
 `{goos}` + arch aliases (`amd64/x86_64/x64`, `arm64/aarch64`) inside asset
@@ -105,7 +105,7 @@ auto-apply cycle (`StartBackgroundCheck`), both writing the same cache.
 
 `updater.DetectDistChannel()` classifies the build (first match wins):
 
-1. `9ROUTERX_NPM_INSTALL=1` in the environment → **npm**. Bagian B's npm
+1. `ALYYSHA_NPM_INSTALL=1` in the environment → **npm**. Bagian B's npm
    package bin wrapper must export this before exec'ing the Go binary.
 2. `CurrentVersion` empty or `-dev`-suffixed → **dev** (no version metadata).
 3. Executable path inside the Go build cache (`go run`) → **dev**.
@@ -115,13 +115,13 @@ Banner behavior per channel (`web/src/components/UpdateBanner.svelte`):
 
 - **binary** — "Update now" opens `releaseUrl` (only if trusted, §1) and the
   banner shows the per-OS asset name + `sha256` when present. No
-  auto-download; `9routerx update` remains the install path.
-- **npm** — static monospace command `npm i -g 9routerx@latest` + copy
-  button. The package name **`9routerx`** is fixed in
+  auto-download; `alyysha update` remains the install path.
+- **npm** — static monospace command `npm i -g alyysha@latest` + copy
+  button. The package name **`alyysha`** is fixed in
   `updateBanner.ts` (`NPM_PACKAGE_CMD`); Bagian B publishes under that name.
 - **dev** — info line + release link only (no skip button).
 - "Skip this version" (binary/npm) stores the version in
-  `localStorage["9routerx.update.skipped"]`; skipped or equal/older versions
+  `localStorage["alyysha.update.skipped"]`; skipped or equal/older versions
   render no banner.
 
 ## 5. Failure behavior (the graceful matrix, mocked in
@@ -142,7 +142,7 @@ version that no longer exists anywhere.
 **1. GitHub Release + tag** (the binary/self-update channel):
 
 ```sh
-gh release delete vX.Y.Z --repo yanstd888/9routerx --cleanup-tag --yes
+gh release delete vX.Y.Z --repo ShiroSdk/alyysha-router --cleanup-tag --yes
 ```
 
 `--cleanup-tag` removes the git tag with it (equivalently
@@ -151,7 +151,7 @@ gh release delete vX.Y.Z --repo yanstd888/9routerx --cleanup-tag --yes
 desired "no update offered" state.
 
 **2. Rewind the manifest** (`version.json` on `main` is what
-`9routerx update` and the banner poll first — deleting the release does not
+`alyysha update` and the banner poll first — deleting the release does not
 touch it):
 
 ```sh
@@ -162,23 +162,23 @@ Until this is pushed, every install still sees the bad version as "latest"
 from raw.githubusercontent.com even though its release page is gone — never
 skip this step.
 
-**3. npm** (wrapper `9routerx` + platform packages
-`@yanstd888/9routerx-<os>-<arch>`):
+**3. npm** (wrapper `alyysha` + platform packages
+`@ShiroSdk/alyysha-router-<os>-<arch>`):
 
 - Within 72h of publish: `npm unpublish --force <pkg>@<version>` per package.
   After an unpublish, npm blocks republishing the same version for 24h —
   roll the version instead of retrying the same number.
 - Past the 72h window unpublish is refused by npm policy: deprecate instead —
   `npm deprecate <pkg>@<version> "broken; upgrade to X.Y.Z"`. Deprecation
-  surfaces a warning on install and keeps `npm i -g 9routerx@latest` working.
+  surfaces a warning on install and keeps `npm i -g alyysha@latest` working.
 - The wrapper pins its `optionalDependencies` to exact versions, so a broken
   platform package is fixed by publishing `<patch+1>` of that one package and
   a wrapper release pinning it — no need to unpublish anything.
 
-**4. Docker** (`ghcr.io/yanstd888/9routerx`): tags are mutable — rebuild from the
+**4. Docker** (`ghcr.io/ShiroSdk/alyysha-router`): tags are mutable — rebuild from the
 previous good tag and push to overwrite `:latest`/`:1.Y`/`:1.Y.Z`
 (the release workflow's docker job does this on any re-tag), or delete the
-single bad tag in the GitHub package page (Packages → 9routerx).
+single bad tag in the GitHub package page (Packages → alyysha).
 
 **Drill record:** the test release (`v0.0.0-test.1` pattern, spec §5.1/§5.5)
 is deleted the same way after E2E passes: `gh release delete --cleanup-tag`,
@@ -189,5 +189,5 @@ manifest untouched (test versions never enter `version.json`).
 *Bagian A (this repo): channel detection, check scheduler, banner UI, debug
 endpoint, tests, screenshots (`audit-screens-updater/`, local-only). Bagian B
 owns: creating the GitHub repo + version.json + releases with the asset names
-above, the npm package + wrapper that sets `9ROUTERX_NPM_INSTALL=1`, and any
+above, the npm package + wrapper that sets `ALYYSHA_NPM_INSTALL=1`, and any
 release automation.*

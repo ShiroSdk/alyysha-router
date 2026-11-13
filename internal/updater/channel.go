@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package updater
 
 import (
@@ -7,7 +7,7 @@ import (
 	"sync"
 )
 
-// DistChannel names how this 9routerx build reached the machine it runs on.
+// DistChannel names how this alyysha build reached the machine it runs on.
 // The update banner speaks a different sentence per channel — a binary gets a
 // download link, an npm install gets the upgrade command, a source build gets
 // neither and points at the release page — so the detection has to be decided
@@ -19,7 +19,7 @@ const (
 	// release ldflags). The default when nothing marks the build otherwise.
 	ChannelBinary DistChannel = "binary"
 	// ChannelNpm is an install through the npm distribution. The npm package's
-	// bin wrapper exports 9ROUTERX_NPM_INSTALL=1 before exec'ing the same Go
+	// bin wrapper exports ALYYSHA_NPM_INSTALL=1 before exec'ing the same Go
 	// binary, so the process can tell how it was launched.
 	ChannelNpm DistChannel = "npm"
 	// ChannelDev is a build straight from source with no version metadata:
@@ -31,7 +31,7 @@ const (
 // npmInstallMarker is the env var the npm package's bin wrapper sets so the
 // process can recognise an npm install. Documented in docs/updater-contract.md;
 // Bagian B ships the wrapper that writes it.
-const npmInstallMarker = "9ROUTERX_NPM_INSTALL"
+const npmInstallMarker = "ALYYSHA_NPM_INSTALL"
 
 // DetectDistChannel classifies this process. The decision is made once and
 // cached: the executable path does not change under a running process.
@@ -46,7 +46,7 @@ var (
 // the reason it was classified that way (surfaced by /api/update/debug).
 //
 // Heuristic, first match wins (documented in docs/updater-contract.md):
-//  1. 9ROUTERX_NPM_INSTALL=1 in the environment — set by the npm bin wrapper
+//  1. ALYYSHA_NPM_INSTALL=1 in the environment — set by the npm bin wrapper
 //     — means npm.
 //  2. A CurrentVersion that is empty or stamped "-dev" means a source build
 //     without version metadata, so dev.

@@ -1,6 +1,6 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 
-// Package brand holds the passive origin canaries for 9RouterX: a small,
+// Package brand holds the passive origin canaries for Alyysha Router: a small,
 // self-contained record of where this tree came from. Nothing here phones
 // home, crashes, or degrades anything. The package is deliberately not
 // imported by the running app — it exists so a human (or
@@ -26,7 +26,7 @@ var markedFiles []byte // sorted repo-relative paths of every layer-1 marked fil
 
 // buildEpoch is stamped at release time via:
 //
-//	go build -ldflags "-X 9routerx/proxy/internal/brand.buildEpoch=<unix>"
+//	go build -ldflags "-X alyysha/proxy/internal/brand.buildEpoch=<unix>"
 //
 // Untagged developer builds keep the empty default — which is itself part of
 // the fingerprint (a build without the injection is distinguishable from one
@@ -39,16 +39,16 @@ var buildEpoch = ""
 // vault}. Joined only at runtime.
 const (
 	fragHost  = "github.com/"
-	fragUserA = "yanstd"
-	fragUserB = "888"
-	fragName  = "9RouterX"
+	fragUserA = "Shiro"
+	fragUserB = "Sdk"
+	fragName  = "Alyysha Router"
 )
 
 // Attribution line, base64-wrapped so text-level scrubbing cannot remove it
 // together with the plain headers; decodeAttribution below is the only
 // reader. (Content: "all source code port and modification by
-// https://github.com/yanstd888/ — https://t.me/aiclub_id".)
-const attributionB64 = "YWxsIHNvdXJjZSBjb2RlIHBvcnQgYW5kIG1vZGlmaWNhdGlvbiBieSBodHRwczovL2dpdGh1Yi5jb20veWFuc3RkODg4LyDigJQgaHR0cHM6Ly90Lm1lL2FpY2x1Yl9pZA=="
+// https://github.com/ShiroSdk/ — https://t.me/YannClippers".)
+const attributionB64 = "YWxsIHNvdXJjZSBjb2RlIHBvcnQgYW5kIG1vZGlmaWNhdGlvbiBieSBodHRwczovL2dpdGh1Yi5jb20vU2hpcm9TZGsvYWx5eXNoYS1yb3V0ZXIg4oCUIGh0dHBzOi8vdC5tZS9ZYW5uQ2xpcHBlcnM="
 
 // Origin is the passive provenance record for this tree.
 type Origin struct {

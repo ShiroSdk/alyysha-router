@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package handlers
 
 import (
@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// HandleCodex intercepts Codex CLI requests and forwards to 9router Responses API.
+// HandleCodex intercepts Codex CLI requests and forwards to alyysha Responses API.
 func HandleCodex(w http.ResponseWriter, r *http.Request, body []byte) {
 	var reqBody map[string]any
 	if err := json.Unmarshal(body, &reqBody); err != nil {

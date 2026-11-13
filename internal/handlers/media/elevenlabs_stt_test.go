@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package media
 
 import (
@@ -13,8 +13,8 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/providers"
 )
 
 // elevenLabsUpstream is a fake Scribe endpoint that records the forwarded

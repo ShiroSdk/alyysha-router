@@ -1,4 +1,4 @@
-<!-- 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   import { onDestroy, onMount, untrack } from 'svelte'
   import { notifications } from '../lib/notifications'
@@ -615,7 +615,7 @@
       const a = document.createElement('a')
       const stamp = new Date().toISOString().replace(/[.:]/g, '-')
       a.href = url
-      a.download = `9routerx-backup-${stamp}.json`
+      a.download = `alyysha-backup-${stamp}.json`
       document.body.appendChild(a)
       a.click()
       setTimeout(() => {
@@ -817,7 +817,7 @@
             Default Database Location
           </div>
           <div class="font-mono text-xs text-text-main font-semibold">
-            ~/.9router/db/data.sqlite
+            ~/.alyysha/db/data.sqlite
           </div>
           <div class="text-[11px] text-text-muted pt-1">
             The Go server opens the configured SQLite database in WAL mode. DB_PATH or DATA_DIR may select a different location.
@@ -1052,7 +1052,7 @@
                 id="saml-issuer"
                 type="text"
                 bind:value={samlIssuer}
-                placeholder="https://9routerx.local"
+                placeholder="https://alyysha.local"
                 class="w-full px-3 py-1.5 rounded-lg bg-bg border border-border text-xs font-mono text-text-main"
               />
             </div>

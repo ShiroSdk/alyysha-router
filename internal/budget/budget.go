@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Package budget enforces a per-period spend ceiling for one API key.
 //
 // It is the enforcement half of the F-2 work: the plans table and the
@@ -27,7 +27,7 @@ import (
 	"fmt"
 	"time"
 
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 // Period is one budget window. The four values are the ones the plans table

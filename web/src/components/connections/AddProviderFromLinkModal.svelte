@@ -1,4 +1,4 @@
-<!-- 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   // Receiver side of a provider share link. Nothing is written until the
   // operator presses Add — a link is untrusted input, not an instruction.

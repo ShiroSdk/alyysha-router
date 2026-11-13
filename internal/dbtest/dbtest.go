@@ -1,14 +1,14 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dbtest
 
 import (
 	"database/sql"
 	"fmt"
 
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/db"
 )
 
-// SchemaStatements returns all CREATE TABLE statements used by 9routerx tests.
+// SchemaStatements returns all CREATE TABLE statements used by alyysha tests.
 // Matches the canonical schema shared with the Next.js dashboard.
 func SchemaStatements() []string {
 	return []string{

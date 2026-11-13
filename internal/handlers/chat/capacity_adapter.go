@@ -1,13 +1,13 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
 	"slices"
 	"strings"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/providers"
 )
 
 // Capacity Adapter — global fallback pools of models per input-modality
@@ -19,7 +19,7 @@ import (
 // none of the original models can handle the request — so this never overrides
 // a combo that already has a member covering the capability.
 //
-// Port of open-sse/services/capacityAdapter.js (upstream decolua/9router).
+// Port of open-sse/services/capacityAdapter.js (upstream decolua/alyysha).
 
 // adapterCapabilityKeys is the ordered capability set a pool can be declared for.
 // The order is upstream's CAPABILITY_KEYS and is load-bearing: it is the

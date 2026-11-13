@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package antislop
 
 import (
@@ -7,7 +7,7 @@ import (
 	"strings"
 	"sync"
 
-	"9routerx/proxy/internal/tokensaver"
+	"alyysha/proxy/internal/tokensaver"
 )
 
 //go:embed src/*.md
@@ -36,7 +36,7 @@ var (
 )
 
 func modeNote(level string) string {
-	return fmt.Sprintf(`> Runtime note: this text is injected by 9Router's Anti Slop plugin. Ignore the skill's own
+	return fmt.Sprintf(`> Runtime note: this text is injected by Alyysha's Anti Slop plugin. Ignore the skill's own
 > install wizard and mode resolution - there is nothing to install, and the intensity is
 > already chosen (%s). Do not ask which mode to use; apply the rules and continue.`, level)
 }

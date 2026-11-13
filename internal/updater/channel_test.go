@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package updater
 
 import (
@@ -16,8 +16,8 @@ import (
 // metadata, then a `go run` build-cache executable, then the packaged-binary
 // default.
 func TestDetectChannel_Matrix(t *testing.T) {
-	okExec := func() (string, error) { return "/opt/9routerx/bin/9routerx", nil }
-	goRunExec := func() (string, error) { return "/tmp/go-build123456/b001/exe/9routerx", nil }
+	okExec := func() (string, error) { return "/opt/alyysha/bin/alyysha", nil }
+	goRunExec := func() (string, error) { return "/tmp/go-build123456/b001/exe/alyysha", nil }
 	failedExec := func() (string, error) { return "", errors.New("no executable") }
 
 	tests := []struct {
@@ -29,8 +29,8 @@ func TestDetectChannel_Matrix(t *testing.T) {
 		whyContain string
 	}{
 		{"packaged release binary", "1.9.16", okExec, false, ChannelBinary, "packaged"},
-		{"npm marker wins over everything", "1.9.16", okExec, true, ChannelNpm, "9ROUTERX_NPM_INSTALL"},
-		{"npm marker wins over a dev version", "", goRunExec, true, ChannelNpm, "9ROUTERX_NPM_INSTALL"},
+		{"npm marker wins over everything", "1.9.16", okExec, true, ChannelNpm, "ALYYSHA_NPM_INSTALL"},
+		{"npm marker wins over a dev version", "", goRunExec, true, ChannelNpm, "ALYYSHA_NPM_INSTALL"},
 		{"empty version means no version metadata", "", okExec, false, ChannelDev, "version metadata"},
 		{"-dev suffix means source build", "1.9.17-dev", okExec, false, ChannelDev, "-dev"},
 		{"go run executable is a source build", "1.9.16", goRunExec, false, ChannelDev, "go run"},

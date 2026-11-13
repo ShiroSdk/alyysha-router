@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package media
 
 import (
@@ -8,9 +8,9 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlers/chat"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlers/chat"
+	"alyysha/proxy/internal/providers"
 )
 
 func TestHandleSearch_AntigravityFailoverOnValidationRequired(t *testing.T) {

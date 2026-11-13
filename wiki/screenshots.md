@@ -14,7 +14,7 @@ every shot. Nothing here shows a real key, account, or upstream URL.
 
 Each page was captured in **dark and light themes**, at **desktop (1280px)** and
 **mobile (390px)** widths. Click any image to open the file under
-[`docs/screenshots/`](https://github.com/yanstd888/9routerx/tree/main/docs/screenshots).
+[`docs/screenshots/`](https://github.com/ShiroSdk/alyysha-router/tree/main/docs/screenshots).
 
 ## Providers
 

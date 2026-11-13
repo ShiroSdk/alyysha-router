@@ -1,6 +1,6 @@
-# 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+# Alyysha Router — built by YannClipper — https://t.me/YannClippers
 name: Bug report
-description: Something in 9RouterX behaves incorrectly — routing, proxying, dashboard, or build
+description: Something in Alyysha Router behaves incorrectly — routing, proxying, dashboard, or build
 title: "bug: "
 labels: ["bug"]
 body:
@@ -9,8 +9,8 @@ body:
       value: |
         Thanks for filing a bug. The short version: **what did you expect, and what happened instead?**
 
-        Before you open: search the [open issues](https://github.com/yanstd888/9routerx/issues?q=is%3Aissue%20state%3Aopen)
-        and the [`CHANGELOG.md`](https://github.com/yanstd888/9routerx/blob/main/CHANGELOG.md) — fixed bugs are often already listed there.
+        Before you open: search the [open issues](https://github.com/ShiroSdk/alyysha-router/issues?q=is%3Aissue%20state%3Aopen)
+        and the [`CHANGELOG.md`](https://github.com/ShiroSdk/alyysha-router/blob/main/CHANGELOG.md) — fixed bugs are often already listed there.
 
   - type: textarea
     id: summary
@@ -55,7 +55,7 @@ body:
     attributes:
       label: Logs
       description: |
-        Output of `9routerx logs` around the failure, or the **Translator → Console Logs** tab in the dashboard.
+        Output of `alyysha logs` around the failure, or the **Translator → Console Logs** tab in the dashboard.
         Redact API keys, OAuth tokens, and cookies.
       render: shell
     validations:
@@ -65,7 +65,7 @@ body:
     id: version
     attributes:
       label: Version
-      description: Output of `9routerx version`, or the release tag.
+      description: Output of `alyysha version`, or the release tag.
       placeholder: v1.9.9
     validations:
       required: true

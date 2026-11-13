@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package media
 
 import (
@@ -66,26 +66,26 @@ func TestCLIDetectors_HasAllToolIDs(t *testing.T) {
 	}
 }
 
-func TestCLIDetectors_ClaudeHas9Router(t *testing.T) {
+func TestCLIDetectors_ClaudeHasAlyysha(t *testing.T) {
 	t.Run("env ANTHROPIC_BASE_URL", func(t *testing.T) {
 		t.Setenv("ANTHROPIC_BASE_URL", "http://127.0.0.1:20130/v1")
-		t.Setenv("9ROUTERX_URL", "")
-		if !claudeHas9Router() {
-			t.Fatal("expected claudeHas9Router to be true when ANTHROPIC_BASE_URL is set")
+		t.Setenv("ALYYSHA_URL", "")
+		if !claudeHasAlyysha() {
+			t.Fatal("expected claudeHasAlyysha to be true when ANTHROPIC_BASE_URL is set")
 		}
 	})
 
-	t.Run("env 9ROUTERX_URL", func(t *testing.T) {
+	t.Run("env ALYYSHA_URL", func(t *testing.T) {
 		t.Setenv("ANTHROPIC_BASE_URL", "")
-		t.Setenv("9ROUTERX_URL", "http://127.0.0.1:20130")
-		if !claudeHas9Router() {
-			t.Fatal("expected claudeHas9Router to be true when 9ROUTERX_URL is set")
+		t.Setenv("ALYYSHA_URL", "http://127.0.0.1:20130")
+		if !claudeHasAlyysha() {
+			t.Fatal("expected claudeHasAlyysha to be true when ALYYSHA_URL is set")
 		}
 	})
 
 	t.Run("settings.json with ANTHROPIC_BASE_URL", func(t *testing.T) {
 		t.Setenv("ANTHROPIC_BASE_URL", "")
-		t.Setenv("9ROUTERX_URL", "")
+		t.Setenv("ALYYSHA_URL", "")
 		tmpHome := t.TempDir()
 		t.Setenv("HOME", tmpHome)
 		// Windows resolves the home directory from USERPROFILE first and only
@@ -102,14 +102,14 @@ func TestCLIDetectors_ClaudeHas9Router(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		if !claudeHas9Router() {
-			t.Fatal("expected claudeHas9Router to be true from ~/.claude/settings.json")
+		if !claudeHasAlyysha() {
+			t.Fatal("expected claudeHasAlyysha to be true from ~/.claude/settings.json")
 		}
 	})
 
 	t.Run("settings.json with jsonc comments", func(t *testing.T) {
 		t.Setenv("ANTHROPIC_BASE_URL", "")
-		t.Setenv("9ROUTERX_URL", "")
+		t.Setenv("ALYYSHA_URL", "")
 		tmpHome := t.TempDir()
 		t.Setenv("HOME", tmpHome)
 		// Windows resolves the home directory from USERPROFILE first and only
@@ -122,7 +122,7 @@ func TestCLIDetectors_ClaudeHas9Router(t *testing.T) {
 			t.Fatal(err)
 		}
 		content := `{
-			// custom endpoint for 9router
+			// custom endpoint for alyysha
 			"env": {
 				"ANTHROPIC_BASE_URL": "http://127.0.0.1:20130/v1",
 			}
@@ -131,14 +131,14 @@ func TestCLIDetectors_ClaudeHas9Router(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		if !claudeHas9Router() {
-			t.Fatal("expected claudeHas9Router to be true from JSONC settings.json")
+		if !claudeHasAlyysha() {
+			t.Fatal("expected claudeHasAlyysha to be true from JSONC settings.json")
 		}
 	})
 
 	t.Run("unconfigured reports false", func(t *testing.T) {
 		t.Setenv("ANTHROPIC_BASE_URL", "")
-		t.Setenv("9ROUTERX_URL", "")
+		t.Setenv("ALYYSHA_URL", "")
 		tmpHome := t.TempDir()
 		t.Setenv("HOME", tmpHome)
 		t.Setenv("USERPROFILE", tmpHome)
@@ -152,13 +152,13 @@ func TestCLIDetectors_ClaudeHas9Router(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		if claudeHas9Router() {
-			t.Fatal("expected claudeHas9Router to be false when unconfigured")
+		if claudeHasAlyysha() {
+			t.Fatal("expected claudeHasAlyysha to be false when unconfigured")
 		}
 	})
 }
 
-func TestCLIToolsHandler_AllStatuses_CarriesHas9Router(t *testing.T) {
+func TestCLIToolsHandler_AllStatuses_CarriesHasAlyysha(t *testing.T) {
 	t.Setenv("ANTHROPIC_BASE_URL", "http://127.0.0.1:20130/v1")
 	tmpBin := t.TempDir()
 	fakeClaude := filepath.Join(tmpBin, "claude")
@@ -176,19 +176,19 @@ func TestCLIToolsHandler_AllStatuses_CarriesHas9Router(t *testing.T) {
 		t.Fatalf("status = %d, want 200", rec.Code)
 	}
 	body := rec.Body.String()
-	if !strings.Contains(body, `"has9Router":true`) && !strings.Contains(body, `"has9Router": true`) {
-		t.Fatalf("expected all-statuses response to carry has9Router, got %s", body)
+	if !strings.Contains(body, `"hasAlyysha":true`) && !strings.Contains(body, `"hasAlyysha": true`) {
+		t.Fatalf("expected all-statuses response to carry hasAlyysha, got %s", body)
 	}
 
 	// When binary is not on PATH (like in a CI runner) but tool is configured in env,
-	// it must still report installed: true and has9Router: true.
+	// it must still report installed: true and hasAlyysha: true.
 	t.Run("without binary on PATH but configured in env", func(t *testing.T) {
 		t.Setenv("PATH", t.TempDir()) // empty PATH
 		t.Setenv("ANTHROPIC_BASE_URL", "http://127.0.0.1:20130/v1")
 		recEmptyPath := httptest.NewRecorder()
 		h.HandleAllStatuses(recEmptyPath, httptest.NewRequest(http.MethodGet, "/api/cli-tools/all-statuses", nil))
-		if !strings.Contains(recEmptyPath.Body.String(), `"has9Router":true`) && !strings.Contains(recEmptyPath.Body.String(), `"has9Router": true`) {
-			t.Fatalf("expected has9Router true even without binary in PATH, got %s", recEmptyPath.Body.String())
+		if !strings.Contains(recEmptyPath.Body.String(), `"hasAlyysha":true`) && !strings.Contains(recEmptyPath.Body.String(), `"hasAlyysha": true`) {
+			t.Fatalf("expected hasAlyysha true even without binary in PATH, got %s", recEmptyPath.Body.String())
 		}
 	})
 }

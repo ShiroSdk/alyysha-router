@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package handlers
 
 import (
@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 // Usage log export.
@@ -63,12 +63,12 @@ func HandleUsageExport(repo *db.Repo) http.HandlerFunc {
 		stamp := time.Now().UTC().Format("2006-01-02")
 		if format == "csv" {
 			w.Header().Set("Content-Type", "text/csv; charset=utf-8")
-			w.Header().Set("Content-Disposition", fmt.Sprintf(`attachment; filename="9routerx-usage-%s.csv"`, stamp))
+			w.Header().Set("Content-Disposition", fmt.Sprintf(`attachment; filename="alyysha-usage-%s.csv"`, stamp))
 			writeUsageCSV(w, r, repo, since)
 			return
 		}
 		w.Header().Set("Content-Type", "application/json")
-		w.Header().Set("Content-Disposition", fmt.Sprintf(`attachment; filename="9routerx-usage-%s.json"`, stamp))
+		w.Header().Set("Content-Disposition", fmt.Sprintf(`attachment; filename="alyysha-usage-%s.json"`, stamp))
 		writeUsageJSON(w, r, repo, since)
 	}
 }

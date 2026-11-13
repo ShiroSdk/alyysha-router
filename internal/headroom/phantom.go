@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package headroom
 
 import (
@@ -28,7 +28,7 @@ const (
 	DefaultMinShrinkRatio = 0.05
 
 	// HeadroomPhantomWarningText is the upstream warning message emitted when phantom savings is detected.
-	// Updated from "reported token delta, but outbound JSON shrank <5%" in decolua/9router#4855.
+	// Updated from "reported token delta, but outbound JSON shrank <5%" in decolua/alyysha#4855.
 	HeadroomPhantomWarningText = "reported token delta, but messages and outbound JSON shrank <5%"
 )
 

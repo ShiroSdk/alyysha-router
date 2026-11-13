@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package oauth
 
 import (
@@ -18,7 +18,7 @@ import (
 	"runtime"
 	"strings"
 
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 var (
@@ -34,7 +34,7 @@ func (h *OAuthHandler) HandleMimoAuthorize(w http.ResponseWriter, r *http.Reques
 	if keyName == "" {
 		hn, _ := os.Hostname()
 		sum := sha256.Sum256([]byte(runtime.GOOS + "-" + hn))
-		keyName = fmt.Sprintf("9router-xmd-%x", sum[:4])
+		keyName = fmt.Sprintf("alyysha-xmd-%x", sum[:4])
 	}
 	priv, err := ecdh.X25519().GenerateKey(rand.Reader)
 	if err != nil {

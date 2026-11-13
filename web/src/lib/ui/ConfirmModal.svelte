@@ -1,6 +1,6 @@
-<!-- 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
-  // Port of decolua/9router src/shared/components/Modal.js ConfirmModal
+  // Port of decolua/alyysha src/shared/components/Modal.js ConfirmModal
   import Button from './Button.svelte'
   import Modal from './Modal.svelte'
 

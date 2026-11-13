@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package proc
 
 import (
@@ -57,7 +57,7 @@ func TestSameExecutable(t *testing.T) {
 	}{
 		{name: "identical paths", a: self, b: self, want: true},
 		{name: "trailing separator resolves to the same file", a: self, b: self + string(os.PathSeparator), want: true},
-		{name: "different binaries", a: self, b: "/some/other/9routerx", want: false},
+		{name: "different binaries", a: self, b: "/some/other/alyysha", want: false},
 		{name: "an empty path never matches", a: "", b: self, want: false},
 		{name: "two empty paths never match", a: "", b: "", want: false},
 	}
@@ -75,7 +75,7 @@ func TestSameExecutable(t *testing.T) {
 // that as "unverified" rather than trusting a recycled PID.
 func TestExecutable_DeadProcessHasNoPath(t *testing.T) {
 	child := exec.Command(os.Args[0], "-test.run=TestProcSleepHelper")
-	child.Env = append(os.Environ(), "9ROUTERX_PROC_HELPER=1")
+	child.Env = append(os.Environ(), "ALYYSHA_PROC_HELPER=1")
 	if err := child.Start(); err != nil {
 		t.Fatalf("start helper: %v", err)
 	}

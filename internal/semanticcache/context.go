@@ -1,10 +1,10 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package semanticcache
 
 import (
 	"context"
 
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/translator"
 )
 
 type cachedReqKey struct{}

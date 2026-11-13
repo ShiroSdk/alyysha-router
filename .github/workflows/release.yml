@@ -1,4 +1,4 @@
-# 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+# Alyysha Router — built by YannClipper — https://t.me/YannClippers
 name: Release
 
 on:
@@ -13,11 +13,11 @@ permissions:
 
 env:
   # Docker Hub repository — the OPTIONAL bonus channel. The primary container
-  # channel is GHCR (ghcr.io/<owner>/9routerx, pushed with the built-in
-  # GITHUB_TOKEN, no secrets). The image moved with the 9RouterX rebrand from
-  # the fork's luqmenul/9routerx to the owner's yanstd888/9routerx; the push
+  # channel is GHCR (ghcr.io/<owner>/alyysha, pushed with the built-in
+  # GITHUB_TOKEN, no secrets). The image moved with the Alyysha Router rebrand from
+  # the fork's luqmenul/alyysha to the owner's ShiroSdk/alyysha-router; the push
   # below is best-effort and never reddens the workflow.
-  DOCKERHUB_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/9routerx
+  DOCKERHUB_IMAGE: ${{ secrets.DOCKERHUB_USERNAME }}/alyysha
 
 jobs:
   # The release channel is derived from the tag and nothing else — not the
@@ -99,7 +99,7 @@ jobs:
             *-*)
               CHANNEL=experimental
               PRERELEASE=true
-              # version.json is the manifest `9routerx update` polls from the
+              # version.json is the manifest `alyysha update` polls from the
               # main branch, and checkManifest offers whatever it names. An
               # experimental version sitting in it is pushed to every install,
               # so this has to fail the release rather than warn.
@@ -268,12 +268,12 @@ jobs:
             # the whole script. The heredoc terminator only looks unindented
             # after GitHub removes the common prefix.
             cat > /tmp/notes.md <<BANNER
-          > **Experimental build.** Not published to \`latest\`, and \`9routerx update\`
+          > **Experimental build.** Not published to \`latest\`, and \`alyysha update\`
           > will not offer it to an install running a stable release. Track it
           > explicitly:
           >
           > \`\`\`sh
-          > docker pull ghcr.io/${{ github.repository_owner }}/9routerx:${GITHUB_REF_NAME#v}
+          > docker pull ghcr.io/${{ github.repository_owner }}/alyysha:${GITHUB_REF_NAME#v}
           > \`\`\`
           >
           > Issues found here are still worth reporting — but check the stable
@@ -300,10 +300,10 @@ jobs:
           retention-days: 1
           if-no-files-found: error
 
-      # Asset names stay 9routerx-* on purpose: `make cross` builds
-      # CROSS_BIN=9routerx, install.sh/install.ps1 download those asset
+      # Asset names stay alyysha-* on purpose: `make cross` builds
+      # CROSS_BIN=alyysha, install.sh/install.ps1 download those asset
       # names, and the updater's archive scoring matches them. The in-repo
-      # rename to 9routerx only changed the local dev binary (BINARY_NAME) and
+      # rename to alyysha only changed the local dev binary (BINARY_NAME) and
       # the installed file name — not the published release artifacts.
       - name: Upload binaries to release
         # Manual dispatches from main have no tag: skip the release upload
@@ -317,12 +317,12 @@ jobs:
           # string output of the channel job.
           prerelease: ${{ needs.channel.outputs.prerelease == 'true' }}
           files: |
-            9routerx-linux-amd64
-            9routerx-linux-arm64
-            9routerx-darwin-amd64
-            9routerx-darwin-arm64
-            9routerx-windows-amd64.exe
-            9routerx-tray-windows-amd64.exe
+            alyysha-linux-amd64
+            alyysha-linux-arm64
+            alyysha-darwin-amd64
+            alyysha-darwin-arm64
+            alyysha-windows-amd64.exe
+            alyysha-tray-windows-amd64.exe
             SHA256SUMS.txt
           body_path: /tmp/notes.md
           generate_release_notes: false
@@ -330,7 +330,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # version.json on main is the manifest every install polls
-      # (raw.githubusercontent.com/<owner>/9routerx/main/version.json). Since
+      # (raw.githubusercontent.com/<owner>/alyysha/main/version.json). Since
       # #72 made the digest mandatory, a manifest without one is a dead end:
       # CheckUpdate refuses to answer from it whenever it advertises an update,
       # and the install then rides on the Releases API fallback — which returned
@@ -367,11 +367,11 @@ jobs:
             digest="${line%%  *}"
             name="${line##*  }"
             case "$name" in
-              9routerx-linux-amd64)       key="linux_amd64" ;;
-              9routerx-linux-arm64)       key="linux_arm64" ;;
-              9routerx-darwin-amd64)      key="darwin_amd64" ;;
-              9routerx-darwin-arm64)      key="darwin_arm64" ;;
-              9routerx-windows-amd64.exe) key="windows_amd64" ;;
+              alyysha-linux-amd64)       key="linux_amd64" ;;
+              alyysha-linux-arm64)       key="linux_arm64" ;;
+              alyysha-darwin-amd64)      key="darwin_amd64" ;;
+              alyysha-darwin-arm64)      key="darwin_arm64" ;;
+              alyysha-windows-amd64.exe) key="windows_amd64" ;;
               *) continue ;;
             esac
             # The manifest digest is what PerformSelfUpdate verifies the
@@ -393,11 +393,11 @@ jobs:
           # up (checkManifest), so a manifest install downloads the real asset
           # instead of the releases/latest page the flat downloadUrl holds.
           DOWNLOAD_URLS_JSON=$(jq -n --arg base "$ASSET_BASE" '{
-            linux_amd64:   ($base + "9routerx-linux-amd64"),
-            linux_arm64:   ($base + "9routerx-linux-arm64"),
-            darwin_amd64:  ($base + "9routerx-darwin-amd64"),
-            darwin_arm64:  ($base + "9routerx-darwin-arm64"),
-            windows_amd64: ($base + "9routerx-windows-amd64.exe")
+            linux_amd64:   ($base + "alyysha-linux-amd64"),
+            linux_arm64:   ($base + "alyysha-linux-arm64"),
+            darwin_amd64:  ($base + "alyysha-darwin-amd64"),
+            darwin_arm64:  ($base + "alyysha-darwin-arm64"),
+            windows_amd64: ($base + "alyysha-windows-amd64.exe")
           }')
 
           jq -n \
@@ -457,8 +457,8 @@ jobs:
           exit 1
 
   docker:
-    # GHCR is the primary container channel (upstream decolua/9router parity:
-    # ghcr.io/<owner>/9routerx). It needs no secrets — the built-in GITHUB_TOKEN
+    # GHCR is the primary container channel (upstream decolua/alyysha parity:
+    # ghcr.io/<owner>/alyysha). It needs no secrets — the built-in GITHUB_TOKEN
     # plus `permissions: packages: write` below always suffice, so the job is
     # gated on the tag only, never on the has_dockerhub probe. The Docker Hub
     # push survives as an optional bonus behind that probe, and every bonus
@@ -488,14 +488,14 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      # The owner expression keeps the path honest: ghcr.io/yanstd888/9routerx,
+      # The owner expression keeps the path honest: ghcr.io/ShiroSdk/alyysha-router,
       # never a hard-coded username and never a doubled owner prefix
       # (metadata-action leaves a fully-qualified image reference as-is).
       - name: Extract metadata (GHCR)
         id: meta
         uses: docker/metadata-action@v6
         with:
-          images: ghcr.io/${{ github.repository_owner }}/9routerx
+          images: ghcr.io/${{ github.repository_owner }}/alyysha
           tags: ${{ needs.channel.outputs.docker_tags }}
 
       - name: Build and push (GHCR)

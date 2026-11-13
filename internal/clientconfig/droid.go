@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package clientconfig
 
 import (
@@ -18,7 +18,7 @@ import (
 // droidMarker prefixes the `id` of every entry this adapter owns. Ownership is
 // keyed on the id rather than the model, so a user whose model has the same
 // name keeps their own entry.
-const droidMarker = "custom:9Router"
+const droidMarker = "custom:Alyysha"
 
 // droidMaxOutputTokens is the ceiling the schema matrix records for Droid. It
 // is fixed there rather than derived because Droid reads it to decide how much
@@ -84,7 +84,7 @@ func droidEntryJSON(opts Options) json.RawMessage {
 		Index:           0,
 		BaseURL:         withV1(opts.BaseURL),
 		APIKey:          opts.APIKey,
-		DisplayName:     "9Router",
+		DisplayName:     "Alyysha",
 		MaxOutputTokens: droidMaxOutputTokens,
 		Provider:        "openai",
 	})

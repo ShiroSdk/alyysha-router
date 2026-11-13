@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -11,17 +11,17 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/constants"
-	json "9routerx/proxy/internal/fastjson"
-	"9routerx/proxy/internal/guardrails"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/providers"
-	internalproxy "9routerx/proxy/internal/proxy"
-	"9routerx/proxy/internal/proxy/executor"
-	"9routerx/proxy/internal/semanticcache"
-	"9routerx/proxy/internal/shutdown"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/constants"
+	json "alyysha/proxy/internal/fastjson"
+	"alyysha/proxy/internal/guardrails"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/providers"
+	internalproxy "alyysha/proxy/internal/proxy"
+	"alyysha/proxy/internal/proxy/executor"
+	"alyysha/proxy/internal/semanticcache"
+	"alyysha/proxy/internal/shutdown"
+	"alyysha/proxy/internal/translator"
 )
 
 // forwardRequest sends the request to the upstream provider and streams/pipes the response.
@@ -320,7 +320,7 @@ func (h *ChatHandler) handleStreamResponse(ctx context.Context, w http.ResponseW
 	}
 
 	sessionKey := translator.NewSessionKey("stream")
-	// Seed with requested model so message_start echoes client's model (decolua/9router#3693)
+	// Seed with requested model so message_start echoes client's model (decolua/alyysha#3693)
 	if reqModel := translator.RequestedModelFromContext(ctx); reqModel != "" {
 		translator.SeedStreamState(sessionKey, reqModel)
 	}
@@ -384,7 +384,7 @@ func (h *ChatHandler) handleStreamResponse(ctx context.Context, w http.ResponseW
 }
 
 // sseToClaudeJSON aggregates OpenAI SSE chunks into a single chat.completion JSON for forced-SSE handling.
-// Port of executor/codebuddy.go sseToOpenAIJSON for chatCore forced-SSE fix (decolua/9router#3683).
+// Port of executor/codebuddy.go sseToOpenAIJSON for chatCore forced-SSE fix (decolua/alyysha#3683).
 func sseToClaudeJSON(raw []byte) ([]byte, bool) {
 	var chunks []map[string]any
 	var streamErr map[string]any

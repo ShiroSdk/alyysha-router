@@ -1,4 +1,4 @@
-<!-- 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
   // Share a provider as one link. The codec is web/src/lib/providerShare.ts; the
   // Parameter contract: the provider share URL design, §5 (see ATTRIBUTION.md).
@@ -268,14 +268,14 @@
     setTimeout(() => (copied = false), 1500)
   }
 
-  /** Downloads the current links as a `.9routerx.json` file. */
+  /** Downloads the current links as a `.alyysha.json` file. */
   function downloadFile() {
     if (!fileBody) return
     const blob = new Blob([fileBody], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
     a.href = url
-    a.download = '9routerx-providers.json'
+    a.download = 'alyysha-providers.json'
     a.click()
     URL.revokeObjectURL(url)
   }
@@ -284,7 +284,7 @@
    * Renders a QR code for the scheme token, lazily and without a dependency.
    *
    * The QR encoder is imported on first use: it is a few kilobytes of pure
-   * logic, and a modal that is never switched to the 9routerx:// form should not
+   * logic, and a modal that is never switched to the alyysha:// form should not
    * pay for it. Cached per token, so re-rendering the same token is free.
    */
   const qrCache = new Map<string, string>()
@@ -317,7 +317,7 @@
   {#snippet children()}
     <div class="flex flex-col gap-4">
       <p class="text-sm text-text-muted">
-        Build a link that adds {providerName || providerId} on another 9RouterX instance.
+        Build a link that adds {providerName || providerId} on another Alyysha Router instance.
       </p>
 
       <!-- Scope -->
@@ -543,7 +543,7 @@
       <div class="flex flex-col gap-1.5">
         <div class="flex flex-wrap items-center gap-2">
           <span class="text-sm font-medium text-text-main">Share as</span>
-          {#each [{ v: 'url', l: 'URL' }, { v: 'scheme', l: '9routerx://' }, { v: 'file', l: '.9routerx.json' }] as opt (opt.v)}
+          {#each [{ v: 'url', l: 'URL' }, { v: 'scheme', l: 'alyysha://' }, { v: 'file', l: '.alyysha.json' }] as opt (opt.v)}
             <button
               type="button"
               onclick={() => (outputFormat = opt.v as typeof outputFormat)}
@@ -594,7 +594,7 @@
         {#if shownOutputTier === 'refuse' && outputFormat === 'url'}
           <p class="rounded-lg border border-error/40 bg-error/10 p-3 text-xs text-text-main">
             This URL would be {shownOutput.length} characters, which no client can carry reliably. Use the
-            <strong>9routerx://</strong> token or download a <strong>.9routerx.json</strong> file instead.
+            <strong>alyysha://</strong> token or download a <strong>.alyysha.json</strong> file instead.
           </p>
         {/if}
       </div>

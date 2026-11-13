@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package syncbundle
 
 import (
@@ -11,8 +11,8 @@ import (
 
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/vault"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/vault"
 )
 
 // setupRepo opens a fresh temp-file database the way every db-backed test in
@@ -208,7 +208,7 @@ func TestImportDoesNotClobberLiveAuthSecrets(t *testing.T) {
 
 func TestMissingMasterKeyFailsClosed(t *testing.T) {
 	t.Setenv(vault.MasterKeyEnv, "")
-	plain := []byte(`{"version":1,"gateway":"9RouterX"}`)
+	plain := []byte(`{"version":1,"gateway":"Alyysha Router"}`)
 	if _, err := Encrypt(plain); err == nil {
 		t.Fatalf("Encrypt without a master key must fail, not write a plaintext secret file")
 	}
@@ -225,7 +225,7 @@ func TestMissingMasterKeyFailsClosed(t *testing.T) {
 
 func TestTamperedCiphertextFails(t *testing.T) {
 	setTestMasterKey(t)
-	plain := []byte(`{"version":1,"gateway":"9RouterX","settings":{"rtkEnabled":true}}`)
+	plain := []byte(`{"version":1,"gateway":"Alyysha Router","settings":{"rtkEnabled":true}}`)
 	blob, err := Encrypt(plain)
 	if err != nil {
 		t.Fatalf("Encrypt: %v", err)
@@ -243,7 +243,7 @@ func TestImportWrongVersionAndGateway(t *testing.T) {
 		name   string
 		bundle string
 	}{
-		{"future version", `{"version":99,"gateway":"9RouterX"}`},
+		{"future version", `{"version":99,"gateway":"Alyysha Router"}`},
 		{"foreign gateway", `{"version":1,"gateway":"OtherGateway"}`},
 	}
 	repo := setupRepo(t)

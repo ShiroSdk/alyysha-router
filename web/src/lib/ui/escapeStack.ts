@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // Escape closes only the most recently opened dialog.
 //
 // Every dialog used to register its own document keydown listener, so with a

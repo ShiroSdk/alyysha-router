@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 /**
  * The search palette runs its query only when the operator asks for it.
  *
@@ -99,7 +99,7 @@ describe('Pinned entries', () => {
 
     await page.locator('ul[role="listbox"] li button[title*="Pin"]').first().click()
     await page.waitForTimeout(300)
-    expect(await page.evaluate(() => localStorage.getItem('9routerx-nav-pinned'))).toContain(
+    expect(await page.evaluate(() => localStorage.getItem('alyysha-nav-pinned'))).toContain(
       'analytics'
     )
 

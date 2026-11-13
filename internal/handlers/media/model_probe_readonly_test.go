@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 // A dashboard model probe reaches the media handlers with a probe-tagged
 // context and must observe production state without changing it. The failure
 // path already refused to lock accounts on a probe; the success path had the
@@ -15,9 +15,9 @@ import (
 
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlers/chat"
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlers/chat"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 // setupNvidiaTTS seeds one nvidia connection pointed at mock and returns the

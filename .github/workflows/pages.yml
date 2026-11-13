@@ -1,7 +1,7 @@
-# 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+# Alyysha Router — built by YannClipper — https://t.me/YannClippers
 name: Deploy site
 
-# The project page (https://yanstd888.github.io/9routerx) is the README plus
+# The project page (https://shirosdk.github.io/alyysha) is the README plus
 # a redirect stub, so it is regenerated on every push that can change either
 # one. Nothing else in this workflow is allowed to fail silently: a broken link
 # rewrite or a missing screenshot has to fail here rather than ship.

@@ -1,6 +1,6 @@
-<!-- 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — built by YannClipper — https://t.me/YannClippers -->
 <script lang="ts">
-  // Port of decolua/9router src/shared/components/Modal.js
+  // Port of decolua/alyysha src/shared/components/Modal.js
   import type { Snippet } from 'svelte'
   import { pushEscapeHandler } from './escapeStack'
 

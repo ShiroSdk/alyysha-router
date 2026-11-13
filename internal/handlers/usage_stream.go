@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package handlers
 
 import (
@@ -6,10 +6,10 @@ import (
 	"net/http"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/shutdown"
-	"9routerx/proxy/internal/usagetracker"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/shutdown"
+	"alyysha/proxy/internal/usagetracker"
 )
 
 const usagePingInterval = 25 * time.Second

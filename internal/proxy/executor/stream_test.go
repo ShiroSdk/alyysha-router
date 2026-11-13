@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package executor
 
 import (
@@ -10,7 +10,7 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/proxy"
+	"alyysha/proxy/internal/proxy"
 )
 
 func parseToolCalls(t *testing.T, sse string) (id string, idx int) {

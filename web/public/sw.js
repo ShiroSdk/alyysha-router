@@ -1,6 +1,6 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
-// 9routerx Service Worker
-const CACHE_NAME = '9routerx-static-v3'
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
+// alyysha Service Worker
+const CACHE_NAME = 'alyysha-static-v3'
 
 self.addEventListener('install', () => {
   self.skipWaiting()

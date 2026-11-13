@@ -1,13 +1,13 @@
-# 9RouterX npm distribution (TASK-9routerX-updater-B §3).
+# Alyysha Router npm distribution (TASK-alyyshaX-updater-B §3).
 #
 # Platform binaries are wrapped as SCOPED packages under the maintainer's npm
-# account: `@<npmuser>/9routerx-<os>-<arch>`, with <npmuser> resolved at
+# account: `@<npmuser>/alyysha-<os>-<arch>`, with <npmuser> resolved at
 # publish time via `npm whoami` (never hard-coded — the account owns the
 # scope, and scoped names under the publishing account bypass npm's spam
 # detection, which E403'd the unscoped dash-heavy names on the first 1.0.0
-# attempt). The main `9routerx` wrapper declares them as optionalDependencies
+# attempt). The main `alyysha` wrapper declares them as optionalDependencies
 # (the esbuild/turbo pattern — no postinstall downloads) and its bin launcher
-# resolves the right one at runtime, execs it with `9ROUTERX_NPM_INSTALL=1`
+# resolves the right one at runtime, execs it with `ALYYSHA_NPM_INSTALL=1`
 # so the Go binary classifies the install as the npm channel
 # (internal/updater/channel.go, docs/updater-contract.md §4).
 #
@@ -72,7 +72,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release download "${RELEASE_TAG}" --pattern "9routerx-${{ matrix.os }}-${{ matrix.arch }}${{ matrix.ext }}*" --clobber
+          gh release download "${RELEASE_TAG}" --pattern "alyysha-${{ matrix.os }}-${{ matrix.arch }}${{ matrix.ext }}*" --clobber
           ls -la
 
       # Probe, don't gate on `secrets.` inside `if:` (unrecognized named-value
@@ -110,17 +110,17 @@ jobs:
             echo "::error::tag ${RELEASE_TAG} does not yield an npm semver version (${VERSION}). Dispatch with -f tag=vX.Y.Z."
             exit 1
           fi
-          PKGDIR="pkg/@${SCOPE}/9routerx-${{ matrix.npm_os }}-${{ matrix.npm_arch }}"
+          PKGDIR="pkg/@${SCOPE}/alyysha-${{ matrix.npm_os }}-${{ matrix.npm_arch }}"
           mkdir -p "${PKGDIR}/bin"
-          BIN="9routerx${{ matrix.ext }}"
+          BIN="alyysha${{ matrix.ext }}"
           if [ "${{ matrix.ext }}" = ".exe" ]; then
-            cp "9routerx-${{ matrix.os }}-${{ matrix.arch }}${{ matrix.ext }}" "${PKGDIR}/bin/${BIN}"
+            cp "alyysha-${{ matrix.os }}-${{ matrix.arch }}${{ matrix.ext }}" "${PKGDIR}/bin/${BIN}"
           else
-            chmod +x "9routerx-${{ matrix.os }}-${{ matrix.arch }}"
-            cp "9routerx-${{ matrix.os }}-${{ matrix.arch }}" "${PKGDIR}/bin/${BIN}"
+            chmod +x "alyysha-${{ matrix.os }}-${{ matrix.arch }}"
+            cp "alyysha-${{ matrix.os }}-${{ matrix.arch }}" "${PKGDIR}/bin/${BIN}"
           fi
           SCOPE="${SCOPE}" VERSION="${VERSION}" node -e "
-            const p = { name: '@' + process.env.SCOPE + '/9routerx-${{ matrix.npm_os }}-${{ matrix.npm_arch }}', version: process.env.VERSION, description: '9RouterX binary (${{ matrix.os }}/${{ matrix.arch }})', os: ['${{ matrix.npm_os }}'], cpu: ['${{ matrix.npm_arch }}'], license: 'MIT', repository: { type: 'git', url: 'git+https://github.com/yanstd888/9routerx.git' }, author: 'Muhammad Dian (yanstd888)', files: ['bin'], publishConfig: { access: 'public' } };
+            const p = { name: '@' + process.env.SCOPE + '/alyysha-${{ matrix.npm_os }}-${{ matrix.npm_arch }}', version: process.env.VERSION, description: 'Alyysha Router binary (${{ matrix.os }}/${{ matrix.arch }})', os: ['${{ matrix.npm_os }}'], cpu: ['${{ matrix.npm_arch }}'], license: 'MIT', repository: { type: 'git', url: 'git+https://github.com/ShiroSdk/alyysha-router.git' }, author: 'YannClipper', files: ['bin'], publishConfig: { access: 'public' } };
             require('fs').writeFileSync('${PKGDIR}/package.json', JSON.stringify(p, null, 2) + '\n');
           "
           cat "${PKGDIR}/package.json"
@@ -132,9 +132,9 @@ jobs:
         run: |
           set -euo pipefail
           SCOPE="${{ steps.creds.outputs.scope }}"
-          NAME="@${SCOPE}/9routerx-${{ matrix.npm_os }}-${{ matrix.npm_arch }}"
+          NAME="@${SCOPE}/alyysha-${{ matrix.npm_os }}-${{ matrix.npm_arch }}"
           VERSION="${RELEASE_TAG#v}"
-          cd "pkg/@${SCOPE}/9routerx-${{ matrix.npm_os }}-${{ matrix.npm_arch }}"
+          cd "pkg/@${SCOPE}/alyysha-${{ matrix.npm_os }}-${{ matrix.npm_arch }}"
           if npm view "${NAME}@${VERSION}" version 2>/dev/null; then
             echo "::notice::${NAME}@${VERSION} is already on the registry — skipping publish (idempotent re-run, no E409)."
             exit 0
@@ -188,21 +188,21 @@ jobs:
             echo "::error::tag ${RELEASE_TAG} does not yield an npm semver version (${VERSION}). Dispatch with -f tag=vX.Y.Z."
             exit 1
           fi
-          mkdir -p pkg/9routerx/bin
+          mkdir -p pkg/alyysha/bin
           SCOPE="${SCOPE}" VERSION="${VERSION}" node -e '
             const scope = process.env.SCOPE;
             const v = process.env.VERSION;
-            const plat = (os, a) => "@" + scope + "/9routerx-" + os + "-" + a;
-            const p = { name: "9routerx", version: v, description: "Single-binary Go AI router, local LLM gateway & token saver (20-40% RTK compression). Route Claude Code, Cursor, Cline & Codex across 155 providers, 28 OAuth & 248 free models (24 keyless).", bin: { "9routerx": "bin/launcher.js" }, files: ["bin"], optionalDependencies: { [plat("win32", "x64")]: v, [plat("linux", "x64")]: v, [plat("linux", "arm64")]: v, [plat("darwin", "x64")]: v, [plat("darwin", "arm64")]: v }, license: "MIT", repository: { type: "git", url: "git+https://github.com/yanstd888/9routerx.git" }, author: "Muhammad Dian (yanstd888)", keywords: ["9routerx","9router","ai-router","llm-gateway","ai-gateway","ai-proxy","token-saver","prompt-compression","claude-code","claude-code-proxy","cursor-proxy","cline","opencode","codex","openai-compatible","anthropic-compatible","free-ai-api","keyless-llm","mcp-server","a2a","semantic-cache","litellm-alternative","openrouter-alternative"], engines: { node: ">=18" }, publishConfig: { access: "public" } };
-            require("fs").writeFileSync("pkg/9routerx/package.json", JSON.stringify(p, null, 2) + "\n");
+            const plat = (os, a) => "@" + scope + "/alyysha-" + os + "-" + a;
+            const p = { name: "alyysha", version: v, description: "Single-binary Go AI router, local LLM gateway & token saver (20-40% RTK compression). Route Claude Code, Cursor, Cline & Codex across 155 providers, 28 OAuth & 248 free models (24 keyless).", bin: { "alyysha": "bin/launcher.js" }, files: ["bin"], optionalDependencies: { [plat("win32", "x64")]: v, [plat("linux", "x64")]: v, [plat("linux", "arm64")]: v, [plat("darwin", "x64")]: v, [plat("darwin", "arm64")]: v }, license: "MIT", repository: { type: "git", url: "git+https://github.com/ShiroSdk/alyysha-router.git" }, author: "YannClipper", keywords: ["alyysha","alyysha","ai-router","llm-gateway","ai-gateway","ai-proxy","token-saver","prompt-compression","claude-code","claude-code-proxy","cursor-proxy","cline","opencode","codex","openai-compatible","anthropic-compatible","free-ai-api","keyless-llm","mcp-server","a2a","semantic-cache","litellm-alternative","openrouter-alternative"], engines: { node: ">=18" }, publishConfig: { access: "public" } };
+            require("fs").writeFileSync("pkg/alyysha/package.json", JSON.stringify(p, null, 2) + "\n");
           '
           # The launcher embeds the scope resolved above (@NPM_SCOPE@) so it
           # can resolve the platform binary package installed as an
-          # optionalDependency, and sets 9ROUTERX_NPM_INSTALL=1 — the marker
+          # optionalDependency, and sets ALYYSHA_NPM_INSTALL=1 — the marker
           # the Go updater reads to classify this install as the npm channel
           # (docs/updater-contract.md §4; the key is quoted because a leading
           # digit is not a valid JS identifier).
-          cat > pkg/9routerx/bin/launcher.js <<'EOF'
+          cat > pkg/alyysha/bin/launcher.js <<'EOF'
           #!/usr/bin/env node
           'use strict';
           const { platform, arch } = process;
@@ -213,37 +213,37 @@ jobs:
           };
           const t = (map[platform] || {})[arch];
           if (!t) {
-            console.error('9RouterX: unsupported platform ' + platform + '/' + arch);
+            console.error('Alyysha Router: unsupported platform ' + platform + '/' + arch);
             process.exit(1);
           }
-          const pkg = '@NPM_SCOPE@/9routerx-' + t;
+          const pkg = '@NPM_SCOPE@/alyysha-' + t;
           const ext = platform === 'win32' ? '.exe' : '';
           let bin;
           try {
             const root = require.resolve(pkg + '/package.json');
-            bin = require('path').join(require('path').dirname(root), 'bin', '9routerx' + ext);
+            bin = require('path').join(require('path').dirname(root), 'bin', 'alyysha' + ext);
           } catch (err) {
-            console.error('9RouterX: the platform binary package ' + pkg + ' was not installed (' + (err.code || err.message) + ').');
-            console.error('Reinstall with: npm i -g 9routerx');
+            console.error('Alyysha Router: the platform binary package ' + pkg + ' was not installed (' + (err.code || err.message) + ').');
+            console.error('Reinstall with: npm i -g alyysha');
             process.exit(1);
           }
           const { spawnSync } = require('child_process');
           const r = spawnSync(bin, process.argv.slice(2), {
             stdio: 'inherit',
-            env: Object.assign({}, process.env, { '9ROUTERX_NPM_INSTALL': '1' }),
+            env: Object.assign({}, process.env, { 'ALYYSHA_NPM_INSTALL': '1' }),
           });
           if (r.error) {
-            console.error('9RouterX: failed to launch ' + bin + ' (' + r.error.message + ').');
+            console.error('Alyysha Router: failed to launch ' + bin + ' (' + r.error.message + ').');
             process.exit(1);
           }
           process.exit(r.status === null ? 1 : r.status);
           EOF
-          sed -i "s/@NPM_SCOPE@/@${SCOPE}/" pkg/9routerx/bin/launcher.js
-          node --check pkg/9routerx/bin/launcher.js
+          sed -i "s/@NPM_SCOPE@/@${SCOPE}/" pkg/alyysha/bin/launcher.js
+          node --check pkg/alyysha/bin/launcher.js
           echo "--- launcher.js ---"
-          cat pkg/9routerx/bin/launcher.js
+          cat pkg/alyysha/bin/launcher.js
           echo "--- package.json ---"
-          cat pkg/9routerx/package.json
+          cat pkg/alyysha/package.json
 
       - name: Publish main wrapper package (idempotent)
         if: steps.creds.outputs.has_creds == 'true'
@@ -251,9 +251,9 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NODE_AUTH_TOKEN }}
         run: |
           set -euo pipefail
-          NAME="9routerx"
+          NAME="alyysha"
           VERSION="${RELEASE_TAG#v}"
-          cd pkg/9routerx
+          cd pkg/alyysha
           if npm view "${NAME}@${VERSION}" version 2>/dev/null; then
             echo "::notice::${NAME}@${VERSION} is already on the registry — skipping publish (idempotent re-run, no E409)."
             exit 0

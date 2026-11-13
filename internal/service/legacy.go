@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package service
 
 import (
@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/daemon"
+	"alyysha/proxy/internal/daemon"
 )
 
 type LegacyKind string
@@ -62,7 +62,7 @@ func legacyPaths(p daemon.ProcessInfo) []string {
 		token = normalizedLegacyPath(token)
 		lower := strings.ToLower(token)
 		absolute := strings.HasPrefix(token, "/") || (len(token) > 2 && token[1] == ':' && token[2] == '/')
-		if absolute && strings.Contains(lower, "9router") && !strings.Contains(lower, "9routerx") {
+		if absolute && strings.Contains(lower, "alyysha") && !strings.Contains(lower, "alyysha") {
 			paths = append(paths, token)
 		}
 	}
@@ -71,7 +71,7 @@ func legacyPaths(p daemon.ProcessInfo) []string {
 
 // MatchLegacyCommand never matches a generic node executable alone or any X entry.
 func MatchLegacyCommand(command string, p daemon.ProcessInfo) bool {
-	if strings.Contains(strings.ToLower(command), "9routerx") {
+	if strings.Contains(strings.ToLower(command), "alyysha") {
 		return false
 	}
 	if strings.ContainsAny(strings.TrimSpace(command), "\r\n") {
@@ -135,7 +135,7 @@ func legacyPM2Entries() ([]LegacyEntry, []string) {
 	}
 	var entries []LegacyEntry
 	for _, app := range apps {
-		if app.ID == nil || *app.ID < 0 || strings.Contains(strings.ToLower(app.Name), "9routerx") {
+		if app.ID == nil || *app.ID < 0 || strings.Contains(strings.ToLower(app.Name), "alyysha") {
 			continue
 		}
 		command := quoteArg(strings.ReplaceAll(app.Env.Path, "\\", "/"))
@@ -191,9 +191,9 @@ func disableLegacyEntry(e LegacyEntry) error {
 		if _, err := legacyCommand("launchctl", "unload", "-w", e.Path); err != nil {
 			return err
 		}
-		return os.Rename(e.Path, e.Path+".9router-disabled")
+		return os.Rename(e.Path, e.Path+".alyysha-disabled")
 	case LegacyFile:
-		return os.Rename(e.Path, e.Path+".9router-disabled")
+		return os.Rename(e.Path, e.Path+".alyysha-disabled")
 	case LegacyCron:
 		return disableLegacyCron(e)
 	}
@@ -211,7 +211,7 @@ func disableLegacyCron(e LegacyEntry) error {
 	lines := strings.Split(out, "\n")
 	for i, line := range lines {
 		if line == e.Command {
-			lines[i] = "# disabled by 9routerx take-over: " + line
+			lines[i] = "# disabled by alyysha take-over: " + line
 		}
 	}
 	return writeCrontab(strings.Join(lines, "\n"))

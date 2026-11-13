@@ -1,6 +1,6 @@
 //go:build integration
 
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package integration
 
 import (
@@ -66,7 +66,7 @@ func TestRestrictedKeyDeniedOnEveryMediaEndpoint(t *testing.T) {
 				t.Fatalf("POST %s = %d, want 403 (body: %s)", ep.path, res.Status, truncate(res.Body))
 			}
 			// The wire contract is upstream's whole body, not just the
-			// status: upstream decolua/9router refuses with
+			// status: upstream decolua/alyysha refuses with
 			// errorResponse(FORBIDDEN, keyAccessDeniedMessage(requested)),
 			// so the message is that exact sentence with the model quoted.
 			want := `This API key is not allowed to use model "denied-model"`

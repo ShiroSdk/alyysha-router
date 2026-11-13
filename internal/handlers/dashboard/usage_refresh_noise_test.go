@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/models"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/proxy/oauth"
+	"alyysha/proxy/internal/models"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/proxy/oauth"
 )
 
 // The three regressions the merged PR #83 produced on a real account set:

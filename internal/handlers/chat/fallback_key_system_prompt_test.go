@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/middleware"
-	"9routerx/proxy/internal/models"
+	"alyysha/proxy/internal/middleware"
+	"alyysha/proxy/internal/models"
 )
 
 // fallback_key_system_prompt_test.go pins the handler-level wiring of the

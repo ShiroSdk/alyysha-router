@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package antislop
 
 import (
@@ -22,7 +22,7 @@ func TestGetPrompt(t *testing.T) {
 		if len(full) < 40000 {
 			t.Errorf("full len = %d, want >= 40000", len(full))
 		}
-		if !strings.Contains(full, "Runtime note: this text is injected by 9Router's Anti Slop plugin") {
+		if !strings.Contains(full, "Runtime note: this text is injected by Alyysha's Anti Slop plugin") {
 			t.Errorf("full prompt missing runtime mode note")
 		}
 		if !strings.Contains(full, "## What This Is") {

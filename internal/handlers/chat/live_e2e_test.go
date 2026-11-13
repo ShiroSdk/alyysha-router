@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package chat
 
 import (
@@ -14,8 +14,8 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/proxy/executor"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/proxy/executor"
 	_ "modernc.org/sqlite"
 )
 
@@ -33,7 +33,7 @@ func getRealUserDB(t *testing.T) (*db.Repo, func()) {
 	if err != nil {
 		t.Skip("cannot get user home dir")
 	}
-	dbPath := filepath.Join(home, ".9router", "db", "data.sqlite")
+	dbPath := filepath.Join(home, ".alyysha", "db", "data.sqlite")
 	if _, err := os.Stat(dbPath); os.IsNotExist(err) {
 		t.Skipf("real db not found at %s", dbPath)
 	}

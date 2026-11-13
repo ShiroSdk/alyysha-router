@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package app
 
 import (
@@ -15,25 +15,25 @@ import (
 
 	"go.uber.org/fx"
 
-	"9routerx/proxy/internal/a2a"
-	"9routerx/proxy/internal/config"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/freeresilience"
-	"9routerx/proxy/internal/handlers/chat"
-	appLog "9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/mcpserver"
-	"9routerx/proxy/internal/notifications"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/proxy"
-	"9routerx/proxy/internal/proxy/executor"
-	"9routerx/proxy/internal/proxy/oauth"
-	"9routerx/proxy/internal/schedule"
-	"9routerx/proxy/internal/shutdown"
-	"9routerx/proxy/internal/tlsstealth"
-	"9routerx/proxy/internal/updater"
-	"9routerx/proxy/internal/uptime"
-	"9routerx/proxy/internal/webexec"
-	"9routerx/proxy/internal/webhooks"
+	"alyysha/proxy/internal/a2a"
+	"alyysha/proxy/internal/config"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/freeresilience"
+	"alyysha/proxy/internal/handlers/chat"
+	appLog "alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/mcpserver"
+	"alyysha/proxy/internal/notifications"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/proxy"
+	"alyysha/proxy/internal/proxy/executor"
+	"alyysha/proxy/internal/proxy/oauth"
+	"alyysha/proxy/internal/schedule"
+	"alyysha/proxy/internal/shutdown"
+	"alyysha/proxy/internal/tlsstealth"
+	"alyysha/proxy/internal/updater"
+	"alyysha/proxy/internal/uptime"
+	"alyysha/proxy/internal/webexec"
+	"alyysha/proxy/internal/webhooks"
 )
 
 // ServerModule provides *http.Server and manages its lifecycle and background tasks.
@@ -216,7 +216,7 @@ func ProvideServer(p ServerParams) *http.Server {
 			mcpSrv := mcpserver.NewMCPServer(p.Repo)
 			mcpSrv.RunStdio(shutdown.Context())
 
-			log.Printf("9RouterX Proxy (%s) starting on port %d", updater.CurrentVersion, p.Config.Port)
+			log.Printf("Alyysha Router Proxy (%s) starting on port %d", updater.CurrentVersion, p.Config.Port)
 
 			go func() {
 				if err := server.ListenAndServe(); err != nil && err != http.ErrServerClosed {
@@ -224,7 +224,7 @@ func ProvideServer(p ServerParams) *http.Server {
 				}
 			}()
 
-			fmt.Fprintf(os.Stdout, "\n  🚀 9RouterX Proxy (%s) on %s\n\n", updater.CurrentVersion, addr)
+			fmt.Fprintf(os.Stdout, "\n  🚀 Alyysha Router Proxy (%s) on %s\n\n", updater.CurrentVersion, addr)
 			log.Printf("Server is ready to handle requests at %s", addr)
 			return nil
 		},

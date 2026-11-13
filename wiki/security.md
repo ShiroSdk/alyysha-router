@@ -6,7 +6,7 @@ section: Using the Gateway
 
 # Security
 
-9routerx holds provider credentials, client API keys, and the prompts that pass
+alyysha holds provider credentials, client API keys, and the prompts that pass
 through it. This page covers every control that protects them.
 
 ## Dashboard authentication
@@ -121,7 +121,7 @@ notification feed and over webhooks.
 ## Session and CLI tokens
 
 Dashboard sessions live in `internal/auth/session.go`; the local CLI token that
-lets `9routerx` talk to its own daemon lives in `internal/auth/clitoken.go`.
+lets `alyysha` talk to its own daemon lives in `internal/auth/clitoken.go`.
 The CLI token is what makes destructive operations work from a terminal without a
 browser session.
 

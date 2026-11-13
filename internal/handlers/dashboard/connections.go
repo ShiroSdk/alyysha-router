@@ -1,12 +1,12 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — built by YannClipper — https://t.me/YannClippers
 package dashboard
 
 import (
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/middleware"
-	"9routerx/proxy/internal/models"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/updater"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/middleware"
+	"alyysha/proxy/internal/models"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/updater"
 	"context"
 	json "encoding/json/v2"
 	"errors"
@@ -44,7 +44,7 @@ func (h *DashboardHandler) HandleGetConnections(w http.ResponseWriter, r *http.R
 }
 
 // HandleGetProvidersClient handles GET /api/providers and GET /api/providers/client.
-// Mirrors upstream 9router providers/client route: usage-eligible connections
+// Mirrors upstream alyysha providers/client route: usage-eligible connections
 // only, with provider/accountStatus filters, priority|provider sort, and
 // page/pageSize pagination plus providerOptions and totals.
 func (h *DashboardHandler) HandleGetProvidersClient(w http.ResponseWriter, r *http.Request) {
@@ -963,7 +963,7 @@ func mergeMapField(target map[string]any, key string, source map[string]any) {
 
 // HandleExportProviderKeys handles GET /api/providers/{id}/export-keys.
 // Returns all stored connections for a given provider with unmasked raw credentials.
-// Matches upstream decolua/9router#4889 exportProviderKeys contract.
+// Matches upstream decolua/alyysha#4889 exportProviderKeys contract.
 //
 // The response is raw secret material, so the caller must be a dashboard
 // session or the local CLI token — the same rule HandleGetApiKeys applies to
@@ -1259,7 +1259,7 @@ func (h *DashboardHandler) writeConnectionModels(w http.ResponseWriter, r *http.
 	// Cline / ClinePass. The full catalogue is published at /api/v1/models; the
 	// subscription namespace lives only on the recommended feed, so the two are
 	// resolved separately and kept disjoint — advertising a cline-pass/* id on the
-	// free connection gets a 403 ENTITLEMENT_ERROR. Both take the 9Router identity
+	// free connection gets a 403 ENTITLEMENT_ERROR. Both take the Alyysha identity
 	// headers plus the WorkOS bearer for OAuth connections.
 	if isClineFamily(conn.Provider) {
 		token := connData.AccessToken
@@ -1270,7 +1270,7 @@ func (h *DashboardHandler) writeConnectionModels(w http.ResponseWriter, r *http.
 			handlerutil.WriteJSONError(w, http.StatusUnauthorized, "no valid token found")
 			return
 		}
-		// OAuth connections present the 9Router identity plus the WorkOS bearer
+		// OAuth connections present the Alyysha identity plus the WorkOS bearer
 		// (upstream buildModelListHeaders); API-key connections send only
 		// Accept + Authorization.
 		var headers map[string]string
