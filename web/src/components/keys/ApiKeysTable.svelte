@@ -194,6 +194,9 @@
   // response that minted it. Those responses are held here for as long as the
   // page lives, which is the one-time window the operator gets to copy it.
   const oneTimeSecrets = $state(new Map<string, string>())
+  // Keys mid-reveal-fetch, so a double click does not fire the request twice
+  // and the eye can show a spinner instead of looking dead.
+  const revealingIds = $state(new Set<string>())
   function secretOf(k: APIKey): string {
     return oneTimeSecrets.get(k.id) ?? k.key ?? ''
   }
@@ -204,7 +207,10 @@
     'This key is stored hashed. Its secret cannot be shown — rotate the key to get a new one.'
 
   function isRevealable(k: APIKey): boolean {
-    return secretOf(k) !== ''
+    // A key reveals when the server says it can: either the row still holds
+    // legacy plaintext (`k.key`) or it was created with revealable=true and
+    // keeps a Vault-sealed copy the /reveal endpoint can open.
+    return !!k.revealable
   }
 
   // What the cell renders. Revealed, it is the plaintext; hidden, it is the
@@ -225,7 +231,7 @@
   // secret was hashed away) has nothing to copy. Falling back to the mask would
   // put an unusable string on the clipboard silently, so it is reported instead.
   async function handleCopy(k: APIKey) {
-    const secret = secretOf(k)
+    const secret = await ensureSecret(k)
     if (!secret) {
       notifications.error(
         'The full key for this entry is not stored, so it cannot be copied. Regenerate it to get a usable secret.',
@@ -233,6 +239,28 @@
       return
     }
     await copy(secret, k.id)
+  }
+
+  // Resolves a key's plaintext, fetching and caching it from /reveal when the
+  // row carries a sealed copy rather than inline plaintext. Returns '' when the
+  // secret is unrecoverable (hash-only row). Idempotent per key: the fetch
+  // result is cached, so copy and reveal share one request.
+  async function ensureSecret(k: APIKey): Promise<string> {
+    const cached = oneTimeSecrets.get(k.id) ?? k.key ?? ''
+    if (cached) return cached
+    if (!k.revealable) return ''
+    if (revealingIds.has(k.id)) return ''
+    revealingIds.add(k.id)
+    try {
+      const res = await api.revealApiKey(k.id)
+      oneTimeSecrets.set(k.id, res.key)
+      return res.key
+    } catch {
+      notifications.error('This key could not be revealed — it may not be stored recoverably. Rotate it to get a new one.')
+      return ''
+    } finally {
+      revealingIds.delete(k.id)
+    }
   }
 
   // The mask keeps the secret's exact length.
@@ -272,24 +300,33 @@
   // twice does not leave a stale timer that hides it mid-read.
   const REVEAL_MS = 5000
   let revealTimers = new Map<string, ReturnType<typeof setTimeout>>()
-  function toggleShow(id: string) {
+  async function toggleShow(k: APIKey) {
+    const id = k.id
     const next = new Set(shownKeyIds)
     if (next.has(id)) {
       next.delete(id)
       clearRevealTimer(id)
-    } else {
-      next.add(id)
-      clearRevealTimer(id)
-      revealTimers.set(
-        id,
-        setTimeout(() => {
-          const after = new Set(shownKeyIds)
-          after.delete(id)
-          shownKeyIds = after
-          revealTimers.delete(id)
-        }, REVEAL_MS),
-      )
+      shownKeyIds = next
+      return
     }
+    // A sealed key (revealable, no inline plaintext) needs its ciphertext
+    // opened before there is anything to show. Fetch first, so the eye does not
+    // open onto an empty cell if the request fails.
+    if (!secretOf(k)) {
+      const secret = await ensureSecret(k)
+      if (!secret) return
+    }
+    next.add(id)
+    clearRevealTimer(id)
+    revealTimers.set(
+      id,
+      setTimeout(() => {
+        const after = new Set(shownKeyIds)
+        after.delete(id)
+        shownKeyIds = after
+        revealTimers.delete(id)
+      }, REVEAL_MS),
+    )
     shownKeyIds = next
   }
   function clearRevealTimer(id: string) {
@@ -448,7 +485,7 @@
       // is the operator's one chance to copy it.
       if (res.key) {
         oneTimeSecrets.set(k.id, res.key)
-        if (!shownKeyIds.has(k.id)) toggleShow(k.id)
+        if (!shownKeyIds.has(k.id)) await toggleShow(k)
       }
       notifications.success(
         `New secret for "${keyLabel(k)}" is shown once. Copy it now — it cannot be revealed again.`,
@@ -864,7 +901,7 @@
         {#if isRevealable(k)}
           <button
             type="button"
-            onclick={() => toggleShow(k.id)}
+            onclick={() => toggleShow(k)}
             class="shrink-0 ml-auto p-1 rounded-md text-text-muted hover:text-text-main hover:bg-surface-2 transition-colors cursor-pointer"
             aria-label={shown ? `Hide key ${keyLabel(k)}` : `Show key ${keyLabel(k)}`}
             title={shown ? 'Hide key' : 'Show key'}

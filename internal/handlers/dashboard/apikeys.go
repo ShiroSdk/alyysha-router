@@ -72,6 +72,14 @@ func (h *DashboardHandler) HandleGetApiKeys(w http.ResponseWriter, r *http.Reque
 		usage = map[string]int{}
 	}
 
+	// Which keys carry a sealed copy that can be opened — one query for the
+	// whole list rather than a reveal probe per row.
+	revealable, revealErr := h.Repo.ApiKeysRevealableSet()
+	if revealErr != nil {
+		log.Warn("apikeys", "reveal probe for the key list failed; reporting none revealable", "error", revealErr)
+		revealable = map[string]bool{}
+	}
+
 	sanitized := make([]map[string]any, 0, len(keys))
 	for _, k := range keys {
 		if k == nil {
@@ -99,10 +107,11 @@ func (h *DashboardHandler) HandleGetApiKeys(w http.ResponseWriter, r *http.Reque
 			// "what may this key call".
 			"access": access,
 			"id":     k.ID, "key": secret, "keyDisplay": apiKeyDisplay(k), "name": k.Name,
-			// A hash-only row has no plaintext left, so the dashboard must offer
-			// no reveal control for it. Legacy rows keep their plaintext for the
-			// transition period and stay revealable here.
-			"revealable": !db.IsHashedKeyRow(k),
+			// A key reveals when it carries a sealed plaintext copy (opted in
+			// at create time) or still holds legacy plaintext under a
+			// privileged caller. Hash-only rows have nothing to open, so the
+			// dashboard offers no reveal control for them.
+			"revealable": revealable[k.ID] || (privileged && !db.IsHashedKeyRow(k)),
 			"machineId": k.MachineID, "isActive": k.IsActive, "createdAt": k.CreatedAt,
 			// The governance columns belong in the list, not only behind a
 			// per-key fetch: the dashboard has to tell a constrained key from
@@ -231,10 +240,12 @@ func stringOrEmpty(v *string) string {
 // HandleCreateApiKey handles POST /api/keys.
 // Creates new apiKey (generates uuid if empty, or key if empty sk-...).
 //
-// The secret is returned exactly once, in this response, and stored only as an
-// argon2id verifier plus a mask: a later listing cannot reveal it. That is the
-// trade-off issue #199 reversed and this policy reinstates deliberately — an
-// operator who loses the value rotates the key, they do not read it back.
+// The secret is stored as an argon2id verifier plus a mask. By default it is
+// NOT revealable — the trade-off issue #199 reversed and this policy keeps on
+// purpose: an operator who loses the value rotates the key. Passing
+// `revealable: true` opts a key into keeping a Vault-sealed copy of its
+// plaintext so the dashboard can show it again; on a vault-less install the
+// row degrades to the ordinary hash-only shape and stays unrevealable.
 func (h *DashboardHandler) HandleCreateApiKey(w http.ResponseWriter, r *http.Request) {
 	body, err := io.ReadAll(r.Body)
 	if err != nil {
@@ -244,10 +255,11 @@ func (h *DashboardHandler) HandleCreateApiKey(w http.ResponseWriter, r *http.Req
 	defer r.Body.Close()
 
 	var req struct {
-		ID        string `json:"id"`
-		Key       string `json:"key"`
-		Name      string `json:"name"`
-		MachineID string `json:"machineId"`
+		ID         string `json:"id"`
+		Key        string `json:"key"`
+		Name       string `json:"name"`
+		MachineID  string `json:"machineId"`
+		Revealable bool   `json:"revealable"`
 	}
 	if len(body) > 0 {
 		if err := json.Unmarshal(body, &req); err != nil {
@@ -284,17 +296,31 @@ func (h *DashboardHandler) HandleCreateApiKey(w http.ResponseWriter, r *http.Req
 	// and the operator-facing fields are what an auditor needs.
 	h.recordAudit(r, AuditActionCreateKey, req.ID, nil, map[string]any{
 		"id": req.ID, "name": req.Name, "machineId": req.MachineID,
+		"revealable": req.Revealable,
 	})
-	if err := h.Repo.CreateHashedApiKey(req.ID, verifier, keikey.LookupHash(req.Key), display, req.Name, req.MachineID); err != nil {
-		handlerutil.WriteJSONError(w, http.StatusInternalServerError, err.Error())
+	var createErr error
+	if req.Revealable {
+		createErr = h.Repo.CreateRevealableApiKey(req.ID, verifier, keikey.LookupHash(req.Key), display, req.Name, req.MachineID, req.Key)
+	} else {
+		createErr = h.Repo.CreateHashedApiKey(req.ID, verifier, keikey.LookupHash(req.Key), display, req.Name, req.MachineID)
+	}
+	if createErr != nil {
+		handlerutil.WriteJSONError(w, http.StatusInternalServerError, createErr.Error())
 		return
+	}
+	// revealable in the response reflects what the row can actually do: a
+	// vault-less install keeps the secret unrecoverable even when it was asked
+	// for, so the UI does not offer a reveal control that would fail.
+	revealable := false
+	if req.Revealable {
+		revealable, _ = h.Repo.ApiKeyRevealable(req.ID)
 	}
 
 	handlerutil.WriteJSON(w, http.StatusOK, map[string]any{
 		"status":     "ok",
 		"id":         req.ID,
 		"key":        req.Key,
-		"revealable": false,
+		"revealable": revealable,
 	})
 }
 

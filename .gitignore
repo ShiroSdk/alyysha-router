@@ -146,3 +146,6 @@ __pycache__/
 
 # No-emoji icon audit screenshots (local evidence only)
 /audit-screens-noemoji/
+
+# Go build output (67MB binary, do not track)
+/alyysha

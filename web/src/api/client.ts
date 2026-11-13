@@ -1816,6 +1816,13 @@ export const api = {
       method: 'POST',
     }),
   /**
+   * Opens a key's Vault-sealed plaintext. Only keys created with
+   * revealable=true carry one; a hash-only key answers 404, which is the
+   * signal to rotate rather than an error to surface loudly.
+   */
+  revealApiKey: (id: string) =>
+    request<{ id: string; key: string }>(`/api/keys/${encodeURIComponent(id)}/reveal`),
+  /**
    * Clears a key's spent token budget (#365). The server stamps the usage mark
    * the budget is measured from, so the key starts over while its history stays
    * intact, and the response carries the spend it now has (0).

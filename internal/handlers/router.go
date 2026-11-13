@@ -338,6 +338,11 @@ func SetupDashboardRoutes(r chi.Router, repo *db.Repo, chatH *chat.ChatHandler) 
 	// registration turned the visibility toggle into a silent no-op.
 	r.Get("/api/keys/{id}/hidden-models", dashH.HandleGetApiKeyHiddenModels)
 	r.Put("/api/keys/{id}/hidden-models", dashH.HandleSetApiKeyHiddenModels)
+	// API-key reveal: a key created with revealable=true keeps a Vault-sealed
+	// copy of its plaintext that this opens for a dashboard-privileged caller.
+	// Registered on the real server (not only the tests-only table) for the
+	// same reason hidden-models is — a route added to one alone 404s.
+	r.Get("/api/keys/{id}/reveal", dashH.HandleRevealApiKey)
 	r.Put("/api/keys/{id}", dashH.HandleUpdateApiKey)
 	r.Get("/api/plans", dashH.HandleListPlans)
 	r.Post("/api/plans", dashH.HandleCreatePlan)

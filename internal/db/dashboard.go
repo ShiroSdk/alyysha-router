@@ -292,6 +292,97 @@ func (r *Repo) CreateHashedApiKey(id, keyHash, lookupHash, keyDisplay, name, mac
 	return nil
 }
 
+// CreateRevealableApiKey inserts a hashed key that ALSO keeps a Vault-sealed
+// copy of its plaintext, so the dashboard can show it again. The verifier
+// still governs request authentication — reveal changes nothing about how the
+// key is checked — and the sealed columns stay empty on a vault-less install,
+// where the row degrades to the ordinary hash-only shape.
+func (r *Repo) CreateRevealableApiKey(id, keyHash, lookupHash, keyDisplay, name, machineID, plaintext string) error {
+	if err := r.CreateHashedApiKey(id, keyHash, lookupHash, keyDisplay, name, machineID); err != nil {
+		return err
+	}
+	v := r.Vault()
+	if v == nil || plaintext == "" {
+		return nil // no vault: row stays hash-only, no reveal
+	}
+	wrapped, ciphertext, err := v.Seal(plaintext)
+	if err != nil {
+		return fmt.Errorf("create revealable api key %s: seal: %w", id, err)
+	}
+	if _, err := r.db.Exec(
+		`UPDATE apiKeys SET revealWrappedDEK = ?, revealCiphertext = ? WHERE id = ?`,
+		wrapped, ciphertext, id,
+	); err != nil {
+		return fmt.Errorf("create revealable api key %s: store sealed copy: %w", id, err)
+	}
+	return nil
+}
+
+// ApiKeysRevealableSet returns the set of key ids that carry a sealed copy
+// that can be opened. One query for the whole list, so the dashboard listing
+// does not pay a reveal probe per row.
+func (r *Repo) ApiKeysRevealableSet() (map[string]bool, error) {
+	out := map[string]bool{}
+	rows, err := r.db.QueryContext(context.Background(),
+		`SELECT id FROM apiKeys WHERE revealWrappedDEK != '' AND revealCiphertext != ''`)
+	if err != nil {
+		return nil, fmt.Errorf("api keys revealable set: %w", err)
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var id string
+		if err := rows.Scan(&id); err != nil {
+			return nil, fmt.Errorf("api keys revealable set: scan: %w", err)
+		}
+		out[id] = true
+	}
+	return out, rows.Err()
+}
+
+// ApiKeyRevealable reports whether a key carries a sealed copy that can be
+// opened. It reads only the two reveal columns, so it never touches the
+// schema-level scan and works on every schema.
+func (r *Repo) ApiKeyRevealable(id string) (bool, error) {
+	var wrapped, ciphertext string
+	err := r.db.QueryRowContext(context.Background(),
+		`SELECT revealWrappedDEK, revealCiphertext FROM apiKeys WHERE id = ? LIMIT 1`, id,
+	).Scan(&wrapped, &ciphertext)
+	if errors.Is(err, sql.ErrNoRows) {
+		return false, nil
+	}
+	if err != nil {
+		return false, fmt.Errorf("api key revealable %s: %w", id, err)
+	}
+	return wrapped != "" && ciphertext != "", nil
+}
+
+// RevealApiKey returns the plaintext of a revealable key. A hash-only key has
+// nothing to open and answers not-found rather than a partial value.
+func (r *Repo) RevealApiKey(id string) (string, error) {
+	var wrapped, ciphertext string
+	err := r.db.QueryRowContext(context.Background(),
+		`SELECT revealWrappedDEK, revealCiphertext FROM apiKeys WHERE id = ? LIMIT 1`, id,
+	).Scan(&wrapped, &ciphertext)
+	if errors.Is(err, sql.ErrNoRows) {
+		return "", errNoSuchApiKey
+	}
+	if err != nil {
+		return "", fmt.Errorf("reveal api key %s: %w", id, err)
+	}
+	if wrapped == "" || ciphertext == "" {
+		return "", errNoSuchApiKey
+	}
+	v := r.Vault()
+	if v == nil {
+		return "", fmt.Errorf("reveal api key %s: vault disabled", id)
+	}
+	plaintext, err := v.Open(wrapped, ciphertext)
+	if err != nil {
+		return "", fmt.Errorf("reveal api key %s: open: %w", id, err)
+	}
+	return plaintext, nil
+}
+
 // DeleteApiKey deletes a client API key by its ID.
 func (r *Repo) DeleteApiKey(id string) error {
 	_, err := r.db.Exec(`DELETE FROM apiKeys WHERE id = ?`, id)

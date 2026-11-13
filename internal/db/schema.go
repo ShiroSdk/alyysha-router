@@ -468,6 +468,15 @@ var goOnlyColumns = [][3]string{
 	// not exist. The global hide list lives in the settings blob
 	// (hiddenModels), not in a column.
 	{"apiKeys", "hiddenModels", "TEXT DEFAULT ''"},
+	// API-key reveal (#Kovak / issue 199 follow-up). A key created with
+	// revealable=true keeps a Vault-sealed copy of its plaintext so the
+	// dashboard can show it again, instead of only an argon2id verifier that
+	// can never be reversed. Both columns stay empty on hash-only keys, which
+	// is the fail-closed default. Sealed like providerConnections: the
+	// wrappedDEK is the Vault-wrapped data key, the ciphertext is
+	// base64(nonce || sealed plaintext). Empty pair = not revealable.
+	{"apiKeys", "revealWrappedDEK", "TEXT DEFAULT ''"},
+	{"apiKeys", "revealCiphertext", "TEXT DEFAULT ''"},
 }
 
 // keiRouterTables are Go-only tables for KeiRouter port features.
