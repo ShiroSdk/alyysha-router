@@ -9,13 +9,13 @@
     "windows_amd64": "https://github.com/yanstd888/9routerx/releases/download/v1.2.2/9routerx-windows-amd64.exe"
   },
   "sha256s": {
-    "darwin_amd64": "28f2b86c5d3ef687ebcb6b0361502df5d1031ec18357ba598d4e79b4f4337716",
-    "darwin_arm64": "dfb641e86313904f17d0b43fce49171be9fd9439ffbc813b59f7e95abdbf2327",
-    "linux_amd64": "c825541ea0096d40a8ca456105e93aba9d59cd060223dbc3f3f1a35049d8fe0d",
-    "linux_arm64": "29f91e0fa53789502b1c683ff336099a125e52fec79441d1c12439bcb8afc94c",
-    "windows_amd64": "524f5b78f24d4c8f127d81c408c180370d72ee29fec0bf47f74ab0c60f036ddd"
+    "darwin_amd64": "c0acc5c51764328caef8ddb1e160078ad3f9d6a5383e194e7715ba5978022a16",
+    "darwin_arm64": "318e9fe5941b8ed8c992a6b1a8c354a7bd62fda5d5544b1f85f5f789dd66fa89",
+    "linux_amd64": "e5d29e2f8a244131549b39195280d17e448d46832a775903085efa7fff7e7efa",
+    "linux_arm64": "e434d30f8910b095f8b7dab992d0597d9bdb1f85bf7707b6db862d3b17377977",
+    "windows_amd64": "bc666ba91a4ecd978f00b7c3d7b4929258ce1b9f1ca3fe1f190cd325714953a0"
   },
-  "releaseNotes": "\n\n### Added\n\n- **Three-way comparison docs** — a `9RouterX vs 9Router vs OmniRoute` section in the\n  README (facts-first table with live-checked star counts, on-paper wording where no\n  public benchmark exists) and a matching wiki page with the OmniRoute column.\n\n### Fixed\n\n- **Usage analytics batch** — the period picker no longer locks up while the 5-second\n  usage polls run; request-details pagination uses one page size everywhere and resets\n  on a period switch (a stale page no longer strands an empty list); the usage chart\n  falls back to raw usage history when the daily rollup is empty (tokens, cost and the\n  all-time window span), so the chart no longer draws zeros next to real data; buckets\n  that carry totals without a model split render as a single series; the Est. Cost card\n  renders a compact amount (`Rp 25,3 rb`, `$25.3K`) instead of truncating, with the full\n  figure on hover.\n- **Usage stats fallback** — day+ windows (7d/30d/60d/90d/all/custom Nd) recompute from\n  raw history when the `usageDaily` rollup carries nothing, so the stats cards agree\n  with the chart instead of reading zero. A populated rollup still wins; an empty\n  window stays empty.\n- **Test stability** — the elevenlabs voices test stubs its upstream URL instead of\n  calling the real API; the CI test job runs with outbound network sealed\n  (`ROUTERX_BLOCK_NET=1`), so an un-stubbed upstream fails with an explicit message;\n  the bootfx integration test polls briefly for asynchronously written usage rows;\n  real-upstream smoke tests get a `//go:build network` tag run weekly instead of on\n  every push.\n\n### Notes\n\n- The Details tab reads `requestDetails` after the retention pruner has kept the newest\n  5,000 rows, so very long windows report the retained total rather than everything the\n  ledger ever wrote; `usageHistory` retention is separate.\n- \"Today\" on the dashboard is the server's local calendar day (local midnight), not a\n  UTC day — comparisons against a UTC-range SQL query will differ by the UTC offset.\n",
-  "releaseUrl": "https://github.com/yanstd888/9routerx/releases/tag/v1.2.1",
-  "publishedAt": "2026-11-14T16:24:07Z"
+  "releaseNotes": "\n\n### Fixed\n\n- **Usage page froze on real data** — a 30-day window whose live data carried a real\n  `other` model family inside the top six, plus smaller families below the cutoff,\n  produced two chart series named `other` once the tail fold ran. The duplicate key\n  crashed the chart render mid-update, which froze every reactive update on the page:\n  the period picker and the section menu stopped responding until a hard reload, and\n  the remembered period made it look permanently stuck on Last 30 days. Both the\n  analytics trend chart and the overview usage chart now merge the tail total into the\n  existing `other` entry instead of pushing a second one.\n",
+  "releaseUrl": "https://github.com/yanstd888/9routerx/releases/tag/v1.2.2",
+  "publishedAt": "2026-11-14T17:51:14Z"
 }
