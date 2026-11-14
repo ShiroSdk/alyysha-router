@@ -383,6 +383,28 @@ func (r *Repo) RevealApiKey(id string) (string, error) {
 	return plaintext, nil
 }
 
+// SealApiKeyReveal stores (or replaces) a Vault-sealed copy of a key's
+// plaintext so the dashboard can reveal it. Used by rotate to make every
+// rotated key recoverable. A vault-less install leaves the row hash-only and
+// reports the error so the caller can log it.
+func (r *Repo) SealApiKeyReveal(id, plaintext string) error {
+	v := r.Vault()
+	if v == nil || plaintext == "" {
+		return fmt.Errorf("seal api key reveal %s: vault disabled", id)
+	}
+	wrapped, ciphertext, err := v.Seal(plaintext)
+	if err != nil {
+		return fmt.Errorf("seal api key reveal %s: seal: %w", id, err)
+	}
+	if _, err := r.db.Exec(
+		`UPDATE apiKeys SET revealWrappedDEK = ?, revealCiphertext = ? WHERE id = ?`,
+		wrapped, ciphertext, id,
+	); err != nil {
+		return fmt.Errorf("seal api key reveal %s: store: %w", id, err)
+	}
+	return nil
+}
+
 // DeleteApiKey deletes a client API key by its ID.
 func (r *Repo) DeleteApiKey(id string) error {
 	_, err := r.db.Exec(`DELETE FROM apiKeys WHERE id = ?`, id)

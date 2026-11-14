@@ -356,17 +356,24 @@ func (h *DashboardHandler) HandleRotateApiKey(w http.ResponseWriter, r *http.Req
 		handlerutil.WriteJSONError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
+	// Every rotation opts the key into reveal: the fresh secret is sealed like
+	// at create, so the operator can always read it back from the dashboard.
+	// This is what makes a hash-only key recoverable without losing its id,
+	// policy and usage history. Seal failure is non-fatal — the row stays
+	// hash-only and the plaintext is still shown once in this response.
+	if err := h.Repo.SealApiKeyReveal(id, plaintext); err != nil {
+		log.Warn("apikeys", "rotate: seal new secret for reveal failed", "error", err, "apiKeyId", id)
+	}
 	// The old key is live in the auth cache for its TTL; without this the
 	// leaked secret keeps working after the operator rotated it away.
 	keikey.DefaultAuthCache().InvalidateByID(id)
 
-	// The replacement is handed back once, like a create: the row keeps only a
-	// verifier, so this is the only moment the operator can copy it.
+	stillRevealable, _ := h.Repo.ApiKeyRevealable(id)
 	handlerutil.WriteJSON(w, http.StatusOK, map[string]any{
 		"status":     "ok",
 		"id":         id,
 		"key":        plaintext,
-		"revealable": false,
+		"revealable": stillRevealable,
 	})
 }
 
