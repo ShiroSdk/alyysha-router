@@ -75,6 +75,16 @@ func retryTransientUpstream(
 		return resp, err
 	}
 
+	// Zero-retry dedup: this body just failed transiently moments ago and a
+	// retry ladder against the same upstream is a cost the first run already
+	// paid. The fallback chain still proceeds.
+	if hash, ok := RetryBodyHashFrom(ctx); ok {
+		if reason, seen := BodyRecentlyFailed([]byte(hash)); seen {
+			log.Debug("retry", "retry ladder skipped by body dedup", "reason", reason, "status", ue.StatusCode)
+			return resp, err
+		}
+	}
+
 	policy, retryable := transientRetryPolicy[ue.StatusCode]
 	for attempt := 1; retryable && attempt <= policy.attempts; attempt++ {
 		elapsed := time.Since(startTime).Milliseconds()
@@ -98,6 +108,13 @@ func retryTransientUpstream(
 			return resp, err
 		}
 		_, retryable = transientRetryPolicy[ue.StatusCode]
+	}
+	if errors.As(err, &ue) {
+		if _, retryable := transientRetryPolicy[ue.StatusCode]; retryable {
+			if hash, ok := RetryBodyHashFrom(ctx); ok {
+				RecordTransientBodyFailure([]byte(hash))
+			}
+		}
 	}
 	return resp, err
 }

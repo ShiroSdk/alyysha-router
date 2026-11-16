@@ -4,18 +4,18 @@ package chat
 import (
 	"9routerx/proxy/internal/db"
 	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/resilience"
-	"9routerx/proxy/internal/securitylog"
 	"9routerx/proxy/internal/headroom"
 	"9routerx/proxy/internal/log"
 	"9routerx/proxy/internal/middleware"
 	"9routerx/proxy/internal/observ"
 	"9routerx/proxy/internal/providers"
-		"9routerx/proxy/internal/proxy/executor"
-		"9routerx/proxy/internal/thinking"
-		"9routerx/proxy/internal/tokensaver"
-		"9routerx/proxy/internal/tokensaver/antislop"
-		"9routerx/proxy/internal/tracing"
+	"9routerx/proxy/internal/proxy/executor"
+	"9routerx/proxy/internal/resilience"
+	"9routerx/proxy/internal/securitylog"
+	"9routerx/proxy/internal/thinking"
+	"9routerx/proxy/internal/tokensaver"
+	"9routerx/proxy/internal/tokensaver/antislop"
+	"9routerx/proxy/internal/tracing"
 	"9routerx/proxy/internal/translator"
 	"9routerx/proxy/internal/usagetracker"
 	"bytes"
@@ -73,10 +73,19 @@ func (h *ChatHandler) handleAccountFallback(
 	translateResponse bool,
 	endpoint string,
 ) error {
-	if FallbackAttemptRecorderFrom(ctx) == nil {
-		ctx = WithFallbackAttemptRecorder(ctx, NewFallbackAttemptRecorder())
-	}
 	body = repairToolCallIDsInJSON(body)
+	if FallbackAttemptRecorderFrom(ctx) == nil {
+		// The configured attempt caps (exact > provider > global) minus what
+		// this body already spent recently bound the ladder; exhausted means
+		// the budget was burned moments ago and the ladder is skipped whole.
+		budget, exhausted := fallbackAttemptBudget(body, provider)
+		rec := NewFallbackAttemptRecorderWithCap(budget)
+		ctx = WithFallbackAttemptRecorder(ctx, rec)
+		if exhausted {
+			log.Warn("fallback", "attempt budget exhausted for this body; ladder skipped", "provider", provider)
+			return fmt.Errorf("attempt budget exhausted for %s/%s (retry caps)", provider, model)
+		}
+	}
 	if pinnedConnectionID != "" {
 		connObj, connData, err := h.getBestConnectionWithContext(ctx, provider, pinnedConnectionID, nil, model)
 		if err != nil {
@@ -230,6 +239,14 @@ func (h *ChatHandler) handleAccountFallback(
 		// to a different account (force fallback), and the usage row, the logs
 		// and the exclusion below must all name the account that was dialled.
 		log.Debug("fallback", "connection", "conn", connObj.ID, "candidate", c.ID)
+		// The configured provider cap cuts candidates whose provider already
+		// spent its attempts for this body.
+		if caps := resolvedRetryAttemptCaps(); caps.provider > 0 &&
+			internalproxy.BodyProviderAttemptsSpent(body, provider) >= caps.provider {
+			log.Debug("fallback", "provider attempt cap reached; candidate skipped", "provider", provider, "candidate", c.ID)
+			continue
+		}
+		internalproxy.RecordBodyAttempts(body, provider, 1)
 		attemptStart := time.Now()
 		if err := h.tryForwardWithConnection(forwardRequestParams{
 			Ctx: ctx, W: w, Provider: provider, Model: model,
@@ -692,26 +709,26 @@ func (h *ChatHandler) tryForwardWithConnection(f forwardRequestParams) error {
 	upstreamClaude := isAnthropic || servesClaudeMessages(provider, providerCfg)
 	compressStart := time.Now()
 	pipedBody, origTokens, savedTokens, savedPct := h.applyTokenSavers(ctx, body, claudeNative)
-		compressDurMs := int(time.Since(compressStart).Milliseconds())
-		if compressDurMs <= 0 {
-			compressDurMs = 1
-		}
+	compressDurMs := int(time.Since(compressStart).Milliseconds())
+	if compressDurMs <= 0 {
+		compressDurMs = 1
+	}
 
-		// Context squeezer concern (port(serenhope) TASK-2.2):
-		// When enabled on the connection (contextSqueezer == true), trim
-		// conversation history to fit the target model's declared context window.
-		if connData != nil && connData.ProviderSpecificData != nil {
-			if sq, ok := connData.ProviderSpecificData["contextSqueezer"].(bool); ok && sq {
-				cw, _ := h.declaredTokenLimitsFor(provider, model)
-				if cw > 0 {
-					if squeezed, changed, _ := translator.SqueezeContextRequestBody(pipedBody, translator.SqueezeOptions{ContextWindow: cw}); changed {
-						pipedBody = squeezed
-					}
+	// Context squeezer concern (port(serenhope) TASK-2.2):
+	// When enabled on the connection (contextSqueezer == true), trim
+	// conversation history to fit the target model's declared context window.
+	if connData != nil && connData.ProviderSpecificData != nil {
+		if sq, ok := connData.ProviderSpecificData["contextSqueezer"].(bool); ok && sq {
+			cw, _ := h.declaredTokenLimitsFor(provider, model)
+			if cw > 0 {
+				if squeezed, changed, _ := translator.SqueezeContextRequestBody(pipedBody, translator.SqueezeOptions{ContextWindow: cw}); changed {
+					pipedBody = squeezed
 				}
 			}
 		}
+	}
 
-		var claudeToolMap map[string]string
+	var claudeToolMap map[string]string
 	if upstreamClaude {
 		if !claudeNative {
 			// Raw OpenAI-format body would be invalid at the Messages API:
@@ -913,17 +930,17 @@ func (h *ChatHandler) tryForwardWithConnection(f forwardRequestParams) error {
 		pipedBody = normalizeChatTokenFields(pipedBody)
 	}
 
-		// Strict pattern validation: strip regex lookarounds and malformed patterns
-		// that OpenAI, DeepSeek, and strict JSON Schema validators reject with HTTP 400.
-		if !claudeNative && !upstreamClaude {
-			pipedBody = sanitizeOutboundToolSchemas(pipedBody, provider)
-		}
+	// Strict pattern validation: strip regex lookarounds and malformed patterns
+	// that OpenAI, DeepSeek, and strict JSON Schema validators reject with HTTP 400.
+	if !claudeNative && !upstreamClaude {
+		pipedBody = sanitizeOutboundToolSchemas(pipedBody, provider)
+	}
 
-		// Tool call fallback (port(serenhope) TASK-2.3):
-		// Repair malformed tool arguments, close truncated JSON, drop orphaned results.
-		if repaired, did := translator.RepairToolPayloadBytes(pipedBody); did {
-			pipedBody = repaired
-		}
+	// Tool call fallback (port(serenhope) TASK-2.3):
+	// Repair malformed tool arguments, close truncated JSON, drop orphaned results.
+	if repaired, did := translator.RepairToolPayloadBytes(pipedBody); did {
+		pipedBody = repaired
+	}
 
 	start := time.Now()
 	metrics := &streamMetrics{}
@@ -1149,63 +1166,63 @@ func (h *ChatHandler) tryForwardWithConnection(f forwardRequestParams) error {
 				retryReq.Release()
 			} else if providerCfg.IsGeminiNative() {
 				fwdErr = h.forwardGeminiNativeRequest(ctx, w, provider, providerCfg, apiKey, connectionID, pipedBody, isStream, translateResponse, metrics, httpClient)
-				} else {
-					fwdErr = h.forwardRequest(ctx, w, providerCfg, apiKey, pipedBody, isStream, translateResponse, metrics, httpClient, provider, upstreamClaude, claudeNative)
-				}
+			} else {
+				fwdErr = h.forwardRequest(ctx, w, providerCfg, apiKey, pipedBody, isStream, translateResponse, metrics, httpClient, provider, upstreamClaude, claudeNative)
 			}
 		}
+	}
 
-		// Tool call fallback (port(serenhope) TASK-2.3):
-		// When upstream rejects the tool schema/payload with a 400/404/422/500,
-		// escalate through degradation levels (1: drop tool_choice/strict, 2: strip fragile keywords,
-		// 3: remove tools and inline history into prose) so the conversation succeeds.
-		var ueTool *upstreamError
-		if errors.As(fwdErr, &ueTool) && translator.IsToolCallRejection(ueTool.StatusCode, string(ueTool.Body)) {
-			for lvl := 1; lvl <= translator.ToolFallbackMaxLevel; lvl++ {
-				degraded, did := translator.DegradeToolPayloadBytes(pipedBody, lvl)
-				if !did {
-					break
-				}
-				log.Info("fallback", "tool rejection detected; retrying with degraded tool schema", "provider", provider, "level", lvl)
-				var retryErr error
-				if exec := executor.Get(provider); exec != nil {
-					retryReq := &executor.Request{
-						Ctx:            ctx,
-						Client:         httpClient,
-						Config:         providerCfg,
-						Provider:       provider,
-						APIKey:         apiKey,
-						Body:           degraded,
-						IsStream:       isStream,
-						ClaudeClient:   endpoint == "/v1/v1/messages" || endpoint == "/v1/messages",
-						UpstreamClaude: upstreamClaude,
-					}
-					if connData != nil && len(connData.ProviderSpecificData) > 0 {
-						retryReq.ConnData = connData.ProviderSpecificData
-					}
-					if h.Repo != nil {
-						retryReq.Leases = h.Repo
-					}
-					retryErr = exec(w, retryReq)
-					retryReq.Release()
-				} else if providerCfg.IsGeminiNative() {
-					retryErr = h.forwardGeminiNativeRequest(ctx, w, provider, providerCfg, apiKey, connectionID, degraded, isStream, translateResponse, metrics, httpClient)
-				} else {
-					retryErr = h.forwardRequest(ctx, w, providerCfg, apiKey, degraded, isStream, translateResponse, metrics, httpClient, provider, upstreamClaude, claudeNative)
-				}
-				if retryErr == nil {
-					fwdErr = nil
-					pipedBody = degraded
-					break
-				}
-				var nextUE *upstreamError
-				if !errors.As(retryErr, &nextUE) || !translator.IsToolCallRejection(nextUE.StatusCode, string(nextUE.Body)) {
-					fwdErr = retryErr
-					break
-				}
-				fwdErr = retryErr
+	// Tool call fallback (port(serenhope) TASK-2.3):
+	// When upstream rejects the tool schema/payload with a 400/404/422/500,
+	// escalate through degradation levels (1: drop tool_choice/strict, 2: strip fragile keywords,
+	// 3: remove tools and inline history into prose) so the conversation succeeds.
+	var ueTool *upstreamError
+	if errors.As(fwdErr, &ueTool) && translator.IsToolCallRejection(ueTool.StatusCode, string(ueTool.Body)) {
+		for lvl := 1; lvl <= translator.ToolFallbackMaxLevel; lvl++ {
+			degraded, did := translator.DegradeToolPayloadBytes(pipedBody, lvl)
+			if !did {
+				break
 			}
+			log.Info("fallback", "tool rejection detected; retrying with degraded tool schema", "provider", provider, "level", lvl)
+			var retryErr error
+			if exec := executor.Get(provider); exec != nil {
+				retryReq := &executor.Request{
+					Ctx:            ctx,
+					Client:         httpClient,
+					Config:         providerCfg,
+					Provider:       provider,
+					APIKey:         apiKey,
+					Body:           degraded,
+					IsStream:       isStream,
+					ClaudeClient:   endpoint == "/v1/v1/messages" || endpoint == "/v1/messages",
+					UpstreamClaude: upstreamClaude,
+				}
+				if connData != nil && len(connData.ProviderSpecificData) > 0 {
+					retryReq.ConnData = connData.ProviderSpecificData
+				}
+				if h.Repo != nil {
+					retryReq.Leases = h.Repo
+				}
+				retryErr = exec(w, retryReq)
+				retryReq.Release()
+			} else if providerCfg.IsGeminiNative() {
+				retryErr = h.forwardGeminiNativeRequest(ctx, w, provider, providerCfg, apiKey, connectionID, degraded, isStream, translateResponse, metrics, httpClient)
+			} else {
+				retryErr = h.forwardRequest(ctx, w, providerCfg, apiKey, degraded, isStream, translateResponse, metrics, httpClient, provider, upstreamClaude, claudeNative)
+			}
+			if retryErr == nil {
+				fwdErr = nil
+				pipedBody = degraded
+				break
+			}
+			var nextUE *upstreamError
+			if !errors.As(retryErr, &nextUE) || !translator.IsToolCallRejection(nextUE.StatusCode, string(nextUE.Body)) {
+				fwdErr = retryErr
+				break
+			}
+			fwdErr = retryErr
 		}
+	}
 
 	// Codex answers an exhausted 5h/7d window with a 429 carrying
 	// usage_limit_reached and the exact reset. Caching it lets the next
@@ -1508,19 +1525,19 @@ func (h *ChatHandler) applyTokenSavers(ctx context.Context, body []byte, claudeN
 			out = next
 		}
 	}
-		if h.TokenSaver.ADHDEnabled() {
-			prompt := tokensaver.GetADHDPrompt(h.TokenSaver.ADHDLevel())
+	if h.TokenSaver.ADHDEnabled() {
+		prompt := tokensaver.GetADHDPrompt(h.TokenSaver.ADHDLevel())
+		if next, did := inject(out, prompt); did {
+			out = next
+		}
+	}
+	if lvl := h.TokenSaver.AntislopLevel(); lvl != "" && lvl != "off" {
+		if prompt := antislop.GetPrompt(lvl); prompt != "" {
 			if next, did := inject(out, prompt); did {
 				out = next
 			}
 		}
-		if lvl := h.TokenSaver.AntislopLevel(); lvl != "" && lvl != "off" {
-			if prompt := antislop.GetPrompt(lvl); prompt != "" {
-				if next, did := inject(out, prompt); did {
-					out = next
-				}
-			}
-		}
+	}
 	// Headroom runs after the in-process savers and before the global prompt, so
 	// it never sees the prompt this process is about to add.
 	//

@@ -297,6 +297,9 @@ func ForbidsDirectReplay(client *http.Client) bool {
 // disabled, for the corporate proxies and antivirus middleboxes that re-sign
 // TLS, unless STRICT_SSL forbids it.
 func DoRequest(ctx context.Context, client *http.Client, method, url string, headers map[string]string, body []byte) (*http.Response, error) {
+	if body != nil {
+		ctx = WithRetryBodyHash(ctx, RetryBodyHash(body))
+	}
 	return retryTransientUpstream(ctx, func(c context.Context) (*http.Response, error) {
 		return doRequestOnce(c, client, method, url, headers, body)
 	})

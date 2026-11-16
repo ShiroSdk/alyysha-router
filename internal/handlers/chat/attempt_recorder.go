@@ -23,12 +23,34 @@ type FallbackAttempt struct {
 type FallbackAttemptRecorder struct {
 	mu       sync.Mutex
 	attempts []FallbackAttempt
+	cap      int
 }
 
 func NewFallbackAttemptRecorder() *FallbackAttemptRecorder {
+	return NewFallbackAttemptRecorderWithCap(maxFallbackAttempts)
+}
+
+// NewFallbackAttemptRecorderWithCap bounds how many attempts the recorder
+// keeps; the fallback loop treats an exhausted recorder as "the configured
+// budget is spent" and stops walking candidates.
+func NewFallbackAttemptRecorderWithCap(cap0 int) *FallbackAttemptRecorder {
+	if cap0 < 0 {
+		cap0 = 0
+	}
 	return &FallbackAttemptRecorder{
 		attempts: make([]FallbackAttempt, 0, maxFallbackAttempts),
+		cap:      cap0,
 	}
+}
+
+// Exhausted reports whether the recorder's configured budget is spent.
+func (r *FallbackAttemptRecorder) Exhausted() bool {
+	if r == nil {
+		return false
+	}
+	r.mu.Lock()
+	defer r.mu.Unlock()
+	return len(r.attempts) >= r.cap
 }
 
 func (r *FallbackAttemptRecorder) Record(attempt FallbackAttempt) {
@@ -37,7 +59,7 @@ func (r *FallbackAttemptRecorder) Record(attempt FallbackAttempt) {
 	}
 	r.mu.Lock()
 	defer r.mu.Unlock()
-	if len(r.attempts) >= maxFallbackAttempts {
+	if len(r.attempts) >= r.cap {
 		return
 	}
 	r.attempts = append(r.attempts, attempt)

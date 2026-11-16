@@ -129,6 +129,7 @@ func (h *DashboardHandler) HandleUpdateSettings(w http.ResponseWriter, r *http.R
 	// normalized here: a cost surface must never read a NaN rate (currency.go).
 	applyDisplayCurrencyUpdate(updates)
 	applyClaudeWebEnabledUpdate(updates)
+	applyRetryAttemptCapsUpdate(updates)
 
 	// Auto-ping schedules are merged against the stored value rather than
 	// written through: a client that sends only `connections` would otherwise
@@ -1376,4 +1377,34 @@ func applyClaudeWebEnabledUpdate(updates map[string]any) {
 		return
 	}
 	delete(updates, "claudeWebEnabled")
+}
+
+// applyRetryAttemptCapsUpdate normalizes the retry.attempt_caps payload
+// (exact/provider/global attempt caps) and applies it live. Absent or
+// malformed keys are dropped so a hand edit cannot poison the ladder.
+func applyRetryAttemptCapsUpdate(updates map[string]any) {
+	raw, present := updates["retry"]
+	if !present {
+		return
+	}
+	delete(updates, "retry")
+	capsMap, ok := raw.(map[string]any)
+	if !ok {
+		return
+	}
+	ac, ok := capsMap["attempt_caps"].(map[string]any)
+	if !ok {
+		return
+	}
+	exact := nonNegInt(ac["exact"])
+	provider := nonNegInt(ac["provider"])
+	global := nonNegInt(ac["global"])
+	chat.SetRetryAttemptCaps(exact, provider, global)
+}
+
+func nonNegInt(v any) int {
+	if f, ok := v.(float64); ok && f > 0 {
+		return int(f)
+	}
+	return 0
 }

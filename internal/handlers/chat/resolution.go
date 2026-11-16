@@ -27,12 +27,26 @@ import (
 func NewChatHandler(repo *db.Repo, ts ...*shared.TokenSaverConfig) *ChatHandler {
 	executor.RegisterAll()
 	oauth.RegisterAll()
-	// claude-web is opt-in: restore the operator's stored toggle so a restart
-	// keeps the lane enabled only when it was explicitly enabled. The env var
-	// overrides this inside the gate itself.
-	// Tests build handlers with a nil repo; no store, no restore.
+	// Restore the operator-stored runtime switches so a restart keeps them:
+	// the retry attempt caps and the opt-in claude-web toggle. Tests build
+	// handlers with a nil repo; no store, nothing to restore.
 	if repo != nil {
 		if stored, err := repo.GetSettingsRaw(); err == nil && stored != nil {
+			if capsRaw, ok := stored["retry"].(map[string]any); ok {
+				if ac, ok := capsRaw["attempt_caps"].(map[string]any); ok {
+					exact, provider, global := 0, 0, 0
+					if v, ok := ac["exact"].(float64); ok {
+						exact = int(v)
+					}
+					if v, ok := ac["provider"].(float64); ok {
+						provider = int(v)
+					}
+					if v, ok := ac["global"].(float64); ok && v > 0 {
+						global = int(v)
+					}
+					SetRetryAttemptCaps(exact, provider, global)
+				}
+			}
 			if v, ok := stored["claudeWebEnabled"].(bool); ok {
 				executor.SetClaudeWebEnabled(v)
 			}
