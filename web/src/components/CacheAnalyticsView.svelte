@@ -203,7 +203,10 @@
   $effect(() => {
     if (autoRefresh) {
       if (!refreshTimer) {
-        refreshTimer = setInterval(refreshAll, 15000)
+        refreshTimer = setInterval(() => {
+          if (typeof document !== 'undefined' && document.hidden) return
+          refreshAll()
+        }, 15000)
       }
     } else {
       if (refreshTimer) {

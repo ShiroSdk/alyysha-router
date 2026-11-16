@@ -61,7 +61,10 @@
 
   $effect(() => {
     void load()
-    const timer = setInterval(() => void load(), POLL_MS)
+    const timer = setInterval(() => {
+      if (typeof document !== 'undefined' && document.hidden) return
+      void load()
+    }, POLL_MS)
     return () => clearInterval(timer)
   })
 

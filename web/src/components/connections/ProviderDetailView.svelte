@@ -188,6 +188,7 @@
 
   onMount(() => {
     const timer = setInterval(() => {
+      if (typeof document !== 'undefined' && document.hidden) return
       currentTime = Date.now()
     }, 1000)
     return () => {

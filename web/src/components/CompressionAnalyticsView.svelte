@@ -113,6 +113,7 @@
     if (autoRefresh) {
       if (!refreshTimer) {
         refreshTimer = setInterval(() => {
+          if (typeof document !== 'undefined' && document.hidden) return
           loadData()
         }, 15000)
       }

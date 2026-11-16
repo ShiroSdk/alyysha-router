@@ -96,7 +96,10 @@
 
   onMount(() => {
     loadNotifications()
-    const timer = setInterval(loadNotifications, 30000)
+    const timer = setInterval(() => {
+      if (typeof document !== 'undefined' && document.hidden) return
+      loadNotifications()
+    }, 30000)
 
     function handleClickOutside(event: MouseEvent) {
       if (isOpen && dropdownRef && !dropdownRef.contains(event.target as Node)) {

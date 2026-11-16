@@ -56,7 +56,10 @@
 
   $effect(() => {
     void loadLive()
-    const timer = setInterval(() => void loadLive(), LIVE_POLL_MS)
+    const timer = setInterval(() => {
+      if (typeof document !== 'undefined' && document.hidden) return
+      void loadLive()
+    }, LIVE_POLL_MS)
     return () => clearInterval(timer)
   })
 
