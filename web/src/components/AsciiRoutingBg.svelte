@@ -2,6 +2,7 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import { onRoutingBurst } from '../lib/routingBurst'
+  import { backgroundAnimation } from '../lib/backgroundAnim.svelte'
 
   /**
    * "Live Routing Flow" background (TASK-9routerX-anim-bg).
@@ -366,6 +367,9 @@
   let cssH = 0
   let dpr = 1
   let reduced = false
+  // Operator preference from the settings panel: static = one painted
+  // frame, no loop — the same path reduced motion takes.
+  let frozen = false
   let mobileMq: MediaQueryList | null = null
   let reducedMq: MediaQueryList | null = null
   let raf = 0
@@ -620,8 +624,8 @@
 
   // ---- frame ----
   function frame(ts: number): void {
-    if (disposed || reduced || document.hidden) {
-      raf = 0 // loop stays cancelled while hidden/reduced; resume re-arms it
+    if (disposed || reduced || frozen || document.hidden) {
+      raf = 0 // loop stays cancelled while hidden/reduced/frozen; resume re-arms it
       return
     }
     raf = requestAnimationFrame(frame)
@@ -994,7 +998,7 @@
 
   // ---- loop control ----
   function startLoop(): void {
-    if (disposed || raf !== 0 || reduced || !paintedOnce) return
+    if (disposed || raf !== 0 || reduced || frozen || !paintedOnce) return
     lastRender = 0
     raf = requestAnimationFrame(frame)
   }
@@ -1064,7 +1068,7 @@
     const onReducedChange = () => {
       reduced = reducedMq?.matches ?? false
       stopLoop()
-      if (!reduced) startLoop()
+      if (!reduced && !frozen) startLoop()
       else fullDraw()
     }
     reducedMq.addEventListener('change', onReducedChange)
@@ -1075,6 +1079,19 @@
       else startLoop()
     }
     document.addEventListener('visibilitychange', onVis)
+
+    // The settings toggle reruns this effect: static stops the loop and
+    // leaves the last painted frame, auto resumes where reduced motion
+    // allows it.
+    $effect(() => {
+      frozen = backgroundAnimation() === 'static'
+      if (frozen || reduced) {
+        stopLoop()
+        if (paintedOnce) fullDraw()
+      } else {
+        startLoop()
+      }
+    })
 
     window.addEventListener('pointermove', onPointerMove, { passive: true })
     window.addEventListener('touchmove', onTouchMove, { passive: true })

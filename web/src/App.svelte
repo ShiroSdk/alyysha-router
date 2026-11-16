@@ -44,6 +44,7 @@
   import { setHiddenNavEntries } from './lib/navVisibility.svelte'
   import { loadPinnedNavEntries } from './lib/navFavorites.svelte'
   import { setDisplayCurrency } from './lib/currency.svelte'
+  import { setBackgroundAnimation } from './lib/backgroundAnim.svelte'
   import { applyAnimationLevel } from './lib/displayPrefs'
 
   let activeTab = $state<ActiveTab>(
@@ -187,6 +188,7 @@
       // Every cost surface reads the display currency from the store, so it is
       // pushed in wherever the settings land.
       setDisplayCurrency(settingsRes.displayCurrency)
+      setBackgroundAnimation(settingsRes.backgroundAnimation)
     } finally {
       settingsLoaded = true
       isLoading = false

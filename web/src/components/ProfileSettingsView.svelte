@@ -106,6 +106,17 @@
     requireLoginKnown = typeof value === 'boolean'
     requireLogin = typeof value === 'boolean' ? value : true
   }
+
+  // Routing background: auto (animated) or static (one painted frame).
+  let backgroundAnimation = $state<'auto' | 'static'>('auto')
+  let backgroundAnimationKnown = $state(false)
+  let backgroundAnimationEdited = false
+
+  function hydrateBackgroundAnimation(value: unknown) {
+    if (backgroundAnimationEdited) return
+    backgroundAnimationKnown = value === 'static' || value === 'auto'
+    backgroundAnimation = value === 'static' ? 'static' : 'auto'
+  }
   let sessionTimeout = $state('24h')
   let enableObservability = $state(false)
   let observabilityMode = $state<'full' | 'errors_only' | 'off'>('full')
@@ -311,6 +322,7 @@
   $effect(() => {
     if (settings) {
       untrack(() => hydrateRequireLogin(settings.requireLogin))
+      untrack(() => hydrateBackgroundAnimation(settings.backgroundAnimation))
       enableObservability = !!settings.enableObservability
       if (settings.observabilityMode === 'full' || settings.observabilityMode === 'errors_only' || settings.observabilityMode === 'off') {
         observabilityMode = settings.observabilityMode
@@ -356,6 +368,7 @@
       const s = await api.getSettings()
       if (s) {
         hydrateRequireLogin(s.requireLogin)
+        hydrateBackgroundAnimation(s.backgroundAnimation)
         enableObservability = !!s.enableObservability
         if (s.sessionTimeout) sessionTimeout = String(s.sessionTimeout)
         if (s.fallbackStrategy) fallbackStrategy = String(s.fallbackStrategy)
@@ -506,6 +519,7 @@
         // unknown requireLogin stays out of the payload so the backend keeps
         // its enforce-login default instead of receiving an explicit false.
         ...(requireLoginKnown ? { requireLogin } : {}),
+        ...(backgroundAnimationKnown ? { backgroundAnimation } : {}),
         sessionTimeout,
         enableObservability,
         observabilityMode,
@@ -1365,6 +1379,26 @@
           <Sliders class="w-4 h-4 text-brand-500" />
           <h2 class="text-sm font-bold text-text-main">Display</h2>
         </div>
+      </div>
+
+      <div class="flex items-center justify-between gap-3">
+        <div>
+          <p class="font-semibold text-text-main text-xs">Background animation</p>
+          <p class="text-[11px] text-text-subtle">
+            Static freezes the routing map into one painted frame — saves CPU and battery on
+            phones. Auto keeps the live animation.
+          </p>
+        </div>
+        <Toggle
+          checked={backgroundAnimation === 'static'}
+          size="sm"
+          label="Freeze background animation"
+          onChange={(val) => {
+            backgroundAnimation = val ? 'static' : 'auto'
+            backgroundAnimationKnown = true
+            backgroundAnimationEdited = true
+          }}
+        />
       </div>
 
       <div class="flex items-center justify-between gap-3">
