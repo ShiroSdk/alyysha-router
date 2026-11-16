@@ -500,6 +500,10 @@ Repository references:
 
 9RouterX stands on this lineage — thank you to the upstream maintainers and their communities for the gateway, the port, and the ideas this project builds on. The complete three-layer ownership inventory (inherited / ported / original) lives in [ATTRIBUTION.md](ATTRIBUTION.md), and everyone whose commit landed in the repository is credited on the wiki's [**Owner & Contributors**](https://yanstd888.github.io/9routerx/team.html) page.
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/chart?repos=yanstd888/9routerx&type=date&legend=top-left)](https://www.star-history.com/?repos=yanstd888%2F9routerx&type=date&legend=top-left)
+
 ## License
 
 MIT License — see [`LICENSE`](https://github.com/yanstd888/9routerx/blob/main/LICENSE).
