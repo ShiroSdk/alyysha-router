@@ -9,13 +9,13 @@
     "windows_amd64": "https://github.com/yanstd888/9routerx/releases/download/v1.3.0/9routerx-windows-amd64.exe"
   },
   "sha256s": {
-    "darwin_amd64": "c0acc5c51764328caef8ddb1e160078ad3f9d6a5383e194e7715ba5978022a16",
-    "darwin_arm64": "318e9fe5941b8ed8c992a6b1a8c354a7bd62fda5d5544b1f85f5f789dd66fa89",
-    "linux_amd64": "e5d29e2f8a244131549b39195280d17e448d46832a775903085efa7fff7e7efa",
-    "linux_arm64": "e434d30f8910b095f8b7dab992d0597d9bdb1f85bf7707b6db862d3b17377977",
-    "windows_amd64": "bc666ba91a4ecd978f00b7c3d7b4929258ce1b9f1ca3fe1f190cd325714953a0"
+    "darwin_amd64": "b8ebd8f598a714580fdd036f8816ab4133398af12ead008f7bbaefdc5b490ba8",
+    "darwin_arm64": "ed1af604b430103ae9f44c202f686fa4cb50ca9b685f15e635130d3bf3b881a8",
+    "linux_amd64": "ec112293c83235a9273ba4042dabe75556aadb2899fba07727129b6e5919d7f5",
+    "linux_arm64": "288f040a42a19991cfedb50a85938fa15672395c697900b1e3a8012af4125f59",
+    "windows_amd64": "739d23152c38ab94516b1534b3bf832113b7d886be3551743903370f2c2118ec"
   },
-  "releaseNotes": "\n\n### Fixed\n\n- **Usage page froze on real data** \u2014 a 30-day window whose live data carried a real\n  `other` model family inside the top six, plus smaller families below the cutoff,\n  produced two chart series named `other` once the tail fold ran. The duplicate key\n  crashed the chart render mid-update, which froze every reactive update on the page:\n  the period picker and the section menu stopped responding until a hard reload, and\n  the remembered period made it look permanently stuck on Last 30 days. Both the\n  analytics trend chart and the overview usage chart now merge the tail total into the\n  existing `other` entry instead of pushing a second one.\n",
+  "releaseNotes": "\n\n### Added\n- **Claude Web (unofficial, opt-in)** — provider `claude-web` untuk claude.ai lewat sessionKey browser. Nonaktif secara default: butuh `CLAUDE_WEB_ENABLED=true` atau toggle di bagian Web Cookie Providers. Melanggar ToS Anthropic dan bisa berhenti kapan saja; tidak ada jaminan dukungan.\n\n### Changed\n- **Dashboard dimuat per tab** — view besar (Endpoint, Token Saver, Jailbreak, Quota Tracker, Analytics, CLI Tools) sekarang di-lazy-load, jadi bundle awal tidak lagi membawa seluruh dashboard.\n\n### Fixed\n- **Tabel lebar di mobile** — tabel 540-850px kini scroll di dalam kartunya sendiri, kolom sekunder disembunyikan di layar kecil sehingga halaman tidak lagi melebar.\n- **Polling saat tab tidak aktif** — semua timer view berhenti menghitung ketika tab browser disembunyikan.\n",
   "releaseUrl": "https://github.com/yanstd888/9routerx/releases/tag/v1.3.0",
-  "publishedAt": "2026-11-14T17:51:14Z"
+  "publishedAt": "2026-11-16T18:45:35Z"
 }
