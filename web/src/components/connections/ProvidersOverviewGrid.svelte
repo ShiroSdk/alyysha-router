@@ -60,9 +60,18 @@
   // 4. API Key Providers
   let apikeyProviders = $derived(
     PROVIDER_CATALOG
-      .filter((p) => isChatProvider(p) && !p.hidden && (p.category === 'apikey' || p.category === 'webCookie') && matchesSearch(p.name, searchQuery, p.id, p.alias) && matchesFilter(getProviderStats(connections, p.id, providerAuthTypes(p, ['apikey', 'api_key'])), statusFilter))
+      .filter((p) => isChatProvider(p) && !p.hidden && (p.category === 'apikey') && matchesSearch(p.name, searchQuery, p.id, p.alias) && matchesFilter(getProviderStats(connections, p.id, providerAuthTypes(p, ['apikey', 'api_key'])), statusFilter))
       .map((p) => ({ ...p, stats: getProviderStats(connections, p.id, providerAuthTypes(p, ['apikey', 'api_key'])) }))
       .sort((a, b) => (b.stats.connected > 0 ? 1 : 0) - (a.stats.connected > 0 ? 1 : 0) || a.name.localeCompare(b.name))
+  )
+
+  // 5. Web Cookie Providers — the lane providers that authenticate with a
+  // browser session cookie. Always rendered so the operator sees the category
+  // exists; opt-in lanes carry the disabled flag from the catalog.
+  let webCookieProviders = $derived(
+    PROVIDER_CATALOG.filter((p) => isChatProvider(p) && !p.hidden && p.category === 'webCookie' && matchesSearch(p.name, searchQuery, p.id, p.alias) && matchesFilter(getProviderStats(connections, p.id), statusFilter))
+      .map((p) => ({ ...p, stats: getProviderStats(connections, p.id) }))
+      .sort((a, b) => a.name.localeCompare(b.name))
   )
 
   let visibleApikeyProviders = $derived(
@@ -214,4 +223,36 @@
       {/if}
     </div>
   {/if}
+  <!-- 5. Web Cookie Providers -->
+  <div class="flex flex-col gap-4">
+    <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+      <h2 class="text-lg sm:text-xl font-semibold leading-tight text-text-main">Web Cookie Providers</h2>
+      <span class="text-xs text-text-muted">browser-session lanes; some are opt-in</span>
+    </div>
+    {#if webCookieProviders.length === 0}
+      <p class="text-xs text-text-subtle">No web-cookie providers in the catalog.</p>
+    {:else}
+      <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
+        {#each webCookieProviders as p (p.id)}
+          <div class="relative">
+            {#if p.optInDisabled}
+              <span
+                class="absolute right-2 top-2 z-10 rounded-full bg-surface-2 text-text-muted font-semibold px-2 py-0.5 text-[10px]"
+                title="disabled — enable via the Web Cookie Providers dashboard toggle / CLAUDE_WEB_ENABLED"
+              >
+                disabled — enable via dashboard toggle / CLAUDE_WEB_ENABLED
+              </span>
+            {/if}
+            <ProviderCard
+              id={p.id}
+              name={p.name}
+              stats={p.stats}
+              onClick={() => onSelectProvider(p.id)}
+              onToggleAll={(active) => onToggleAll(p.id, active)}
+            />
+          </div>
+        {/each}
+      </div>
+    {/if}
+  </div>
 </div>

@@ -37,6 +37,11 @@ type ProviderMeta struct {
 	ModelsFetcher      *Fetcher `json:"modelsFetcher,omitempty"`
 	Regions            []Region `json:"regions,omitempty"`
 	DefaultRegion      string   `json:"defaultRegion,omitempty"`
+
+	// OptInDisabled is set per response by the catalog handler, never at
+	// registration: the opt-in lanes stay listed with the flag on while their
+	// gate is off, so the operator can see the lane exists.
+	OptInDisabled bool `json:"optInDisabled,omitempty"`
 }
 
 // Fetcher is the upstream registry modelsFetcher: a public catalog the

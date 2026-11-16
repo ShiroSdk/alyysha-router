@@ -49,6 +49,7 @@ export interface ProviderCatalogItem {
   passthroughModels?: boolean
   /** Upstream registry credentialForm: which credential form the dashboard renders. */
   credentialForm?: string
+  optInDisabled?: boolean
   /**
    * Upstream registry apiKeyOptionalWith: the providerSpecificData field that stands in
    * for an API key, so the create and validate routes accept an empty key rather than

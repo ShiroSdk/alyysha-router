@@ -33,21 +33,18 @@ func (h *DashboardHandler) HandleGetProviderCatalog(w http.ResponseWriter, r *ht
 		Count     int                      `json:"count"`
 		Providers []providers.ProviderMeta `json:"providers"`
 	}
-	// claude-web is opt-in and unofficial: while disabled it disappears from
-	// the catalog entirely, so it can neither be browsed nor connected to.
+	// claude-web is opt-in and unofficial: it stays in the catalog so the
+	// operator can see the lane exists, flagged optInDisabled while the gate
+	// is off — the dashboard badge and the executor's 403 gate carry the
+	// refusal.
 	claudeWebLive := executor.ClaudeWebEnabled()
 	sections := make([]section, 0, len(providers.CategoryOrder))
 	for _, cat := range providers.CategoryOrder {
 		metas := byCategory[cat]
-		if !claudeWebLive {
-			filtered := make([]providers.ProviderMeta, 0, len(metas))
-			for _, meta := range metas {
-				if meta.ID == "claude-web" {
-					continue
-				}
-				filtered = append(filtered, meta)
+		for i := range metas {
+			if metas[i].ID == "claude-web" {
+				metas[i].OptInDisabled = !claudeWebLive
 			}
-			metas = filtered
 		}
 		sections = append(sections, section{
 			Key:       string(cat),
