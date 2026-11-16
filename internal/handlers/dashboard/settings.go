@@ -24,6 +24,7 @@ import (
 	"9routerx/proxy/internal/handlers/chat"
 	"9routerx/proxy/internal/handlerutil"
 	"9routerx/proxy/internal/proxy"
+	"9routerx/proxy/internal/proxy/executor"
 	"9routerx/proxy/internal/thinking"
 	"9routerx/proxy/internal/updater"
 )
@@ -127,6 +128,7 @@ func (h *DashboardHandler) HandleUpdateSettings(w http.ResponseWriter, r *http.R
 	// Display currency stores a code plus a rate table, so the payload is
 	// normalized here: a cost surface must never read a NaN rate (currency.go).
 	applyDisplayCurrencyUpdate(updates)
+	applyClaudeWebEnabledUpdate(updates)
 
 	// Auto-ping schedules are merged against the stored value rather than
 	// written through: a client that sends only `connections` would otherwise
@@ -1359,4 +1361,19 @@ func (h *DashboardHandler) ImportDatabaseJSON(ctx context.Context, data []byte) 
 	delete(payload, "password")
 	_, err := h.importDatabase(ctx, payload, false)
 	return err
+}
+
+// applyClaudeWebEnabledUpdate coerces the opt-in claude-web toggle to a
+// boolean and applies it live: the executor's gate reads the runtime value,
+// so the toggle takes effect without a restart. Absent means untouched.
+func applyClaudeWebEnabledUpdate(updates map[string]any) {
+	raw, present := updates["claudeWebEnabled"]
+	if !present {
+		return
+	}
+	if v, ok := raw.(bool); ok {
+		executor.SetClaudeWebEnabled(v)
+		return
+	}
+	delete(updates, "claudeWebEnabled")
 }

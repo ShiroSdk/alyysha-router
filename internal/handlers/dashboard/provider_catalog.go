@@ -6,6 +6,7 @@ import (
 
 	"9routerx/proxy/internal/handlerutil"
 	"9routerx/proxy/internal/providers"
+	"9routerx/proxy/internal/proxy/executor"
 )
 
 // HandleGetProviderCatalog serves the provider registry the dashboard renders
@@ -32,9 +33,22 @@ func (h *DashboardHandler) HandleGetProviderCatalog(w http.ResponseWriter, r *ht
 		Count     int                      `json:"count"`
 		Providers []providers.ProviderMeta `json:"providers"`
 	}
+	// claude-web is opt-in and unofficial: while disabled it disappears from
+	// the catalog entirely, so it can neither be browsed nor connected to.
+	claudeWebLive := executor.ClaudeWebEnabled()
 	sections := make([]section, 0, len(providers.CategoryOrder))
 	for _, cat := range providers.CategoryOrder {
 		metas := byCategory[cat]
+		if !claudeWebLive {
+			filtered := make([]providers.ProviderMeta, 0, len(metas))
+			for _, meta := range metas {
+				if meta.ID == "claude-web" {
+					continue
+				}
+				filtered = append(filtered, meta)
+			}
+			metas = filtered
+		}
 		sections = append(sections, section{
 			Key:       string(cat),
 			Label:     providers.GetCategoryLabel(cat),

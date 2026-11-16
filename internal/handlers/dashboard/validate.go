@@ -465,6 +465,8 @@ func validateProviderKey(ctx context.Context, provider string, cfg providers.Pro
 		return validateOutcome{valid: valid, supported: true, message: message}
 	case "perplexity-web":
 		return validatePerplexityWeb(ctx, apiKey)
+	case "claude-web":
+		return validateClaudeWeb(ctx, apiKey)
 	case "deepseek-web":
 		return validateDeepSeekWeb(ctx, apiKey, psd)
 	case "gemini-web":
@@ -905,6 +907,37 @@ func validatePerplexityWeb(ctx context.Context, apiKey string) validateOutcome {
 // executor package (qoder_endpoints.go, qoder_catalog.go, qoder_credentials.go)
 // because chat needs them too: model_config comes from the same COSY-signed
 // model list. The dashboard and chat share one copy rather than drifting apart.
+
+// validateClaudeWeb probes claude.ai with the pasted sessionKey cookie: a
+// light authenticated GET. 401/403 means the cookie is stale; a Cloudflare
+// challenge means it was copied from another browser.
+func validateClaudeWeb(ctx context.Context, apiKey string) validateOutcome {
+	cookie := executor.ClaudeWebCookieHeader(apiKey)
+	if cookie == "" || executor.ClaudeWebSessionKey(apiKey) == "" {
+		return validateOutcome{valid: false, supported: true,
+			message: "Paste the sessionKey cookie value from a logged-in claude.ai browser (DevTools -> Application -> Cookies -> sessionKey)"}
+	}
+	headers := map[string]string{
+		"Accept":     "application/json",
+		"Cookie":     cookie,
+		"Origin":     "https://claude.ai",
+		"Referer":    "https://claude.ai/chat",
+		"User-Agent": executor.ClaudeWebUserAgent(),
+	}
+	status, body, err := validateProbeDo(ctx, http.MethodGet, "https://claude.ai/api/organizations", headers, nil)
+	if err != nil {
+		return validateOutcome{supported: true, message: err.Error()}
+	}
+	if status == http.StatusUnauthorized || status == http.StatusForbidden {
+		if executor.ClaudeIsCloudflareChallenge(string(body)) {
+			return validateOutcome{supported: true,
+				message: "Cloudflare challenge — re-copy the sessionKey from a logged-in claude.ai browser on this machine"}
+		}
+		return validateOutcome{supported: true,
+			message: "Invalid or expired sessionKey cookie — re-copy it from claude.ai DevTools -> Application -> Cookies"}
+	}
+	return validateOutcome{valid: true, supported: true}
+}
 
 func validateQoder(ctx context.Context, provider, apiKey string, psd map[string]any) validateOutcome {
 	ep := executor.QoderEndpointsFor(provider)
