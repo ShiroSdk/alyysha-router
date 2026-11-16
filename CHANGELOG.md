@@ -14,6 +14,21 @@ Release history up to the fork point is archived in the upstream repo's
   the pending-fragment splice now lands under this Unreleased heading instead
   of above the file title.
 
+## [v1.4.0] - 2026-11-17
+
+### Added
+- **Zero-retry dedup + attempt caps** — a body that just failed a transient status is remembered (LRU 512, TTL 5 menit); request berikutnya dengan body sama melewati retry ladder langsung ke fallback, dan cap attempt fallback kini bertingkat exact > provider > global lewat `retry.attempt_caps`. Semua default = perilaku lama.
+- **Context window guard** — kandidat fallback yang window-nya tidak muat estimasi prompt (chars/4, tanpa tokenizer) di-skip dan rantai lanjut ke provider berikutnya; `fallback.context_guard` = skip (default) | truncate | off.
+- **Budget downgrade** — `budget.breach_mode` = reject (default) | downgrade: breach tidak langsung 402 melainkan reroute ke model termurah yang lolos context guard, dengan header `X-Budget-Downgraded`; 402 generik hanya saat tidak ada kandidat.
+- **Routing explain** — `GET /api/routing-explain?limit=N` (ring 200 entri in-memory) + panel dashboard menampilkan kandidat yang dipertimbangkan dan alasannya.
+- **Health radar** — agregasi p50/p95/uptime 24 jam per provider (tabel freeProviderRadar), tie-breaker fallback gabungan health+latency di bawah urutan config, kolom p50/uptime di panel Free Provider Health.
+- **Recovery notification** — provider yang keluar dari cooldown menghasilkan notifikasi recovery dengan dedupe key `<provider>#recovery`.
+- **Account blacklist TTL** — `accounts.blacklist_ttl` (menit; 0 = perilaku lama) memarkir koneksi 401/403/402 dari rotasi sesuai TTL operator.
+- **Web Cookie Providers section** — kategori lane cookie tampil sebagai seksi sendiri di halaman Providers; claude-web tetap terlihat dengan badge disabled saat gate-nya off.
+
+### Changed
+- **Auto-prune dead keys** — koneksi yang menjawab 401/403/402 ditandai `disabledReason` + timestamp (badge merah di daftar koneksi); sweep berkala melepasnya dari pool aktif setelah `keys.autoprune_ttl` (0 = sweep off).
+
 ## [v1.3.0] - 2026-11-17
 
 ### Added
