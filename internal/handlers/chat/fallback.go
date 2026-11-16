@@ -400,7 +400,17 @@ func (h *ChatHandler) handleAccountFallback(
 					log.Warn("fallback", "record connection error failed", "conn", connObj.ID, "error", recErr)
 				}
 			} else {
+				// A credential-failure blacklist (accounts.blacklist_ttl): a
+				// dead key is out of the pool for the operator's stated TTL
+				// instead of the classification cooldown, which a 401 can
+				// satisfy in seconds. 0 keeps the computed cooldown.
 				until := time.Now().UTC().Add(time.Duration(cooldownSec) * time.Second)
+				if accountsBlacklistTTLActive() &&
+					(ue.StatusCode == http.StatusUnauthorized || ue.StatusCode == http.StatusForbidden || ue.StatusCode == http.StatusPaymentRequired) {
+					until = accountsBlacklistUntil(time.Now().UTC())
+					log.Warn("fallback", "blacklisted for the configured TTL", "conn", connObj.ID,
+						"status", ue.StatusCode, "until", until.Format(time.RFC3339))
+				}
 				if lockErr := h.Repo.LockConnectionRateLimit(connObj.ID, until, classification.NewBackoffLevel, ue.StatusCode, errorText); lockErr != nil {
 					log.Warn("fallback", "rate limit lock failed", "conn", connObj.ID, "error", lockErr)
 				}

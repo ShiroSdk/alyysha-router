@@ -56,6 +56,11 @@ func NewChatHandler(repo *db.Repo, ts ...*shared.TokenSaverConfig) *ChatHandler 
 					SetContextGuardMode(mode)
 				}
 			}
+			if raw, ok := stored["accounts"].(map[string]any); ok {
+				if ttl, ok := raw["blacklist_ttl"].(float64); ok {
+					SetAccountsBlacklistTTL(int(ttl))
+				}
+			}
 			if raw, ok := stored["budget"].(map[string]any); ok {
 				if mode, ok := raw["breach_mode"].(string); ok {
 					budget.SetBreachMode(mode)
