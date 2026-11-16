@@ -134,13 +134,12 @@ func (r *Repo) GetProviderConnectionByName(provider, authType, name string) (*mo
 		return nil, nil
 	}
 	var conn models.ProviderConnection
-	err := r.db.QueryRow(
+	row := r.db.QueryRow(
 		`SELECT `+providerConnectionColumns+` FROM providerConnections
 		 WHERE provider = ? AND authType = ? AND name = ? LIMIT 1`,
 		provider, authType, name,
-	).Scan(&conn.ID, &conn.Provider, &conn.AuthType, &conn.Name, &conn.Email,
-		&conn.Priority, &conn.IsActive, &conn.Data, &conn.LastUsedAt, &conn.ConsecutiveUseCount,
-		&conn.CreatedAt, &conn.UpdatedAt)
+	)
+	err := scanConnection(row.Scan, &conn)
 	if err == sql.ErrNoRows {
 		return nil, nil
 	}
