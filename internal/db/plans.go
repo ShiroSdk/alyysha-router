@@ -180,6 +180,48 @@ func (r *Repo) SetApiKeyPlan(keyID, planID string) error {
 	return nil
 }
 
+// SetApiKeyPlanBulk applies one plan to many keys inside a single
+// transaction: any failure rolls the whole batch back, so partial application
+// is impossible. The error names the key that failed.
+func (r *Repo) SetApiKeyPlanBulk(keyIDs []string, planID string) (int, error) {
+	if r == nil || r.db == nil {
+		return 0, fmt.Errorf("plans: bulk apply: nil repo")
+	}
+	if len(keyIDs) == 0 {
+		return 0, fmt.Errorf("plans: bulk apply: no keys given")
+	}
+	tx, err := r.db.Begin()
+	if err != nil {
+		return 0, fmt.Errorf("plans: bulk apply begin: %w", err)
+	}
+	committed := false
+	defer func() {
+		if !committed {
+			_ = tx.Rollback()
+		}
+	}()
+	applied := 0
+	for _, keyID := range keyIDs {
+		if keyID == "" {
+			return 0, fmt.Errorf("plans: bulk apply: empty key id in batch")
+		}
+		res, err := tx.Exec(`UPDATE apiKeys SET planId = ? WHERE id = ?`, planID, keyID) //nolint:noctx
+		if err != nil {
+			return 0, fmt.Errorf("plans: bulk apply key %s: %w", keyID, err)
+		}
+		n, _ := res.RowsAffected()
+		if n == 0 {
+			return 0, fmt.Errorf("plans: bulk apply: key %s not found", keyID)
+		}
+		applied++
+	}
+	if err := tx.Commit(); err != nil {
+		return 0, fmt.Errorf("plans: bulk apply commit: %w", err)
+	}
+	committed = true
+	return applied, nil
+}
+
 // UpdatePlan modifies an existing plan's mutable fields.
 func (r *Repo) UpdatePlan(p Plan) error {
 	if r == nil || r.db == nil || p.ID == "" {

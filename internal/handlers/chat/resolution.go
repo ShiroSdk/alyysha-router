@@ -2,6 +2,7 @@
 package chat
 
 import (
+	"9routerx/proxy/internal/budget"
 	"9routerx/proxy/internal/db"
 	"9routerx/proxy/internal/freeresilience"
 	"9routerx/proxy/internal/handlers/shared"
@@ -53,6 +54,11 @@ func NewChatHandler(repo *db.Repo, ts ...*shared.TokenSaverConfig) *ChatHandler 
 			if raw, ok := stored["fallback"].(map[string]any); ok {
 				if mode, ok := raw["context_guard"].(string); ok {
 					SetContextGuardMode(mode)
+				}
+			}
+			if raw, ok := stored["budget"].(map[string]any); ok {
+				if mode, ok := raw["breach_mode"].(string); ok {
+					budget.SetBreachMode(mode)
 				}
 			}
 		}

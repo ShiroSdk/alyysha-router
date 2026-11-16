@@ -191,3 +191,55 @@ func TestIsValidPlanPeriod(t *testing.T) {
 		}
 	}
 }
+
+// TestSetApiKeyPlanBulkRollback pins the bulk apply: every key changes or the
+// batch rolls back — one missing key id must leave the earlier keys untouched.
+func TestSetApiKeyPlanBulkRollback(t *testing.T) {
+	repo := openEphemeralSchemaDB(t)
+	for _, id := range []string{"b1", "b2", "b3"} {
+		if err := repo.CreateApiKey(id, "sk-bulk-"+id, "Bulk", "m1"); err != nil {
+			t.Fatalf("CreateApiKey %s: %v", id, err)
+		}
+	}
+	if err := repo.CreatePlan(Plan{ID: "bulk-team", TenantID: "default", Name: "Bulk Team", Period: PlanPeriodMonthly}); err != nil {
+		t.Fatalf("CreatePlan: %v", err)
+	}
+
+	applied, err := repo.SetApiKeyPlanBulk([]string{"b1", "b2", "b3"}, "bulk-team")
+	if err != nil {
+		t.Fatalf("bulk apply: %v", err)
+	}
+	if applied != 3 {
+		t.Errorf("applied = %d, want 3", applied)
+	}
+	for _, id := range []string{"b1", "b2", "b3"} {
+		key, err := repo.GetApiKeyByID(id)
+		if err != nil {
+			t.Fatalf("GetApiKeyByID %s: %v", id, err)
+		}
+		if key.PlanID == nil || *key.PlanID != "bulk-team" {
+			t.Errorf("%s.PlanID = %v, want bulk-team", id, key.PlanID)
+		}
+	}
+
+	// One absent key rolls the whole batch back: k-plan stays on b2.
+	if err := repo.SetApiKeyPlan("b2", ""); err != nil {
+		t.Fatalf("reset b2 plan: %v", err)
+	}
+	if _, err := repo.SetApiKeyPlanBulk([]string{"b1", "absent-key", "b3"}, "bulk-team"); err == nil {
+		t.Fatal("bulk apply with an absent key must fail")
+	}
+	for _, id := range []string{"b1", "b3"} {
+		key, err := repo.GetApiKeyByID(id)
+		if err != nil {
+			t.Fatalf("GetApiKeyByID %s after rollback: %v", id, err)
+		}
+		if key.PlanID == nil || *key.PlanID != "bulk-team" {
+			t.Errorf("%s.PlanID = %v after rollback, want bulk-team from the first apply", id, key.PlanID)
+		}
+	}
+	key2, _ := repo.GetApiKeyByID("b2")
+	if key2.PlanID != nil && *key2.PlanID != "" {
+		t.Errorf("b2.PlanID = %v, want empty (the failed batch rolled back)", key2.PlanID)
+	}
+}

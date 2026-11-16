@@ -19,6 +19,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 
 	"9routerx/proxy/internal/auth"
+	"9routerx/proxy/internal/budget"
 	"9routerx/proxy/internal/config"
 	"9routerx/proxy/internal/db"
 	"9routerx/proxy/internal/handlers/chat"
@@ -131,6 +132,7 @@ func (h *DashboardHandler) HandleUpdateSettings(w http.ResponseWriter, r *http.R
 	applyClaudeWebEnabledUpdate(updates)
 	applyRetryAttemptCapsUpdate(updates)
 	applyContextGuardUpdate(updates)
+	applyBudgetBreachModeUpdate(updates)
 
 	// Auto-ping schedules are merged against the stored value rather than
 	// written through: a client that sends only `connections` would otherwise
@@ -1427,4 +1429,23 @@ func applyContextGuardUpdate(updates map[string]any) {
 		return
 	}
 	chat.SetContextGuardMode(mode)
+}
+
+// applyBudgetBreachModeUpdate normalizes budget.breach_mode (reject |
+// downgrade) and applies it live to the middleware's gate.
+func applyBudgetBreachModeUpdate(updates map[string]any) {
+	raw, present := updates["budget"]
+	if !present {
+		return
+	}
+	delete(updates, "budget")
+	b, ok := raw.(map[string]any)
+	if !ok {
+		return
+	}
+	mode, ok := b["breach_mode"].(string)
+	if !ok {
+		return
+	}
+	budget.SetBreachMode(mode)
 }

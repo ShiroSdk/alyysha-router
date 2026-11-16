@@ -1063,6 +1063,14 @@ func budgetCheck(w http.ResponseWriter, r *http.Request, apiKey *models.APIKey, 
 	}
 	log.Warn("rate limit", "budget exhausted", "key", apiKey.ID, "axis", d.Axis,
 		"spendMicros", d.Spend.Micros, "spendTokens", d.Spend.Tokens)
+	// Downgrade mode does not refuse here: the decision rides the request and
+	// the chat handler reroutes to the cheapest healthy model, answering the
+	// same generic 402 only when nothing fits.
+	if budget.BreachMode() == budget.BreachModeDowngrade {
+		observ.IncRateLimitReject("budget_downgrade_"+d.Axis, apiKey.ID)
+		*r = *r.WithContext(budget.WithBudgetDowngrade(r.Context(), d))
+		return false
+	}
 	observ.IncRateLimitReject("budget_"+d.Axis, apiKey.ID)
 	rejectBudgetExhausted(w, d)
 	return true

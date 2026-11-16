@@ -25,6 +25,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"sync/atomic"
 	"time"
 
 	"9routerx/proxy/internal/handlerutil"
@@ -237,3 +238,51 @@ func FormatMicros(micros int64) string {
 // so a caller holding a raw key does not have to import the handler utility to
 // ask the same question the engine asks.
 func Masked(rawKey string) string { return handlerutil.MaskAPIKey(rawKey) }
+
+// Breach mode: what happens when a key's budget refuses. "reject" (default)
+// answers the generic 402 the middleware has always written; "downgrade"
+// marks the decision on the request so the chat handler reroutes to the
+// cheapest healthy model instead, and only answers 402 when nothing fits.
+const (
+	BreachModeReject    = "reject"
+	BreachModeDowngrade = "downgrade"
+)
+
+var breachMode atomic.Value // string
+
+// SetBreachMode applies the stored setting; unknown values read as reject.
+func SetBreachMode(mode string) {
+	if mode == BreachModeDowngrade {
+		breachMode.Store(BreachModeDowngrade)
+		return
+	}
+	breachMode.Store(BreachModeReject)
+}
+
+// BreachMode reports the configured behavior. Reads at call time.
+func BreachMode() string {
+	if v, ok := breachMode.Load().(string); ok && v != "" {
+		return v
+	}
+	return BreachModeReject
+}
+
+// downgradeCtxKey carries a refused Decision into the chat handler for the
+// downgrade reroute.
+type downgradeCtxKey struct{}
+
+// WithBudgetDowngrade marks a refused budget on the request so the chat
+// handler reroutes to the cheapest healthy model.
+func WithBudgetDowngrade(ctx context.Context, d Decision) context.Context {
+	return context.WithValue(ctx, downgradeCtxKey{}, d)
+}
+
+// BudgetDowngradeFrom returns the refused decision a middleware attached,
+// and whether one is present.
+func BudgetDowngradeFrom(ctx context.Context) (Decision, bool) {
+	if ctx == nil {
+		return Decision{}, false
+	}
+	d, ok := ctx.Value(downgradeCtxKey{}).(Decision)
+	return d, ok
+}

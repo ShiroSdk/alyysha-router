@@ -74,6 +74,15 @@ func (h *ChatHandler) handleAccountFallback(
 	endpoint string,
 ) error {
 	body = repairToolCallIDsInJSON(body)
+	// Budget breach downgrade: a refused decision marked by the middleware
+	// reroutes this turn to the cheapest healthy model on the provider, or
+	// answers the same generic 402 when nothing fits.
+	if newBody, handled := applyBudgetDowngrade(ctx, w, body, provider, model); handled {
+		if w.Header().Get("X-Budget-Downgraded") == "" {
+			return nil // the generic 402 was written; the contract holds
+		}
+		body = newBody
+	}
 	if FallbackAttemptRecorderFrom(ctx) == nil {
 		// The configured attempt caps (exact > provider > global) minus what
 		// this body already spent recently bound the ladder; exhausted means
