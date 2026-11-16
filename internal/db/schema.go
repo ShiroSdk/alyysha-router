@@ -356,6 +356,8 @@ func coreSchema() []tableDef {
 var goOnlyColumns = [][3]string{
 	{"providerConnections", "lastUsedAt", "TEXT"},
 	{"providerConnections", "consecutiveUseCount", "INTEGER DEFAULT 0"},
+	{"providerConnections", "disabledReason", "TEXT DEFAULT ''"},
+	{"providerConnections", "disabledAt", "TEXT DEFAULT ''"},
 	// F-5 Credential Vault: sealed credential columns
 	{"providerConnections", "secretWrappedDEK", "TEXT DEFAULT ''"},
 	{"providerConnections", "secretCiphertext", "TEXT DEFAULT ''"},

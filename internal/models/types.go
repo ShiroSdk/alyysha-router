@@ -29,6 +29,8 @@ type ProviderConnection struct {
 	// rotation survives a restart and behaves the same in every process.
 	LastUsedAt          *string `json:"lastUsedAt,omitempty"`
 	ConsecutiveUseCount *int    `json:"consecutiveUseCount,omitempty"`
+	DisabledReason string `json:"disabledReason,omitempty"`
+	DisabledAt      string `json:"disabledAt,omitempty"`
 	CreatedAt           string  `json:"createdAt"`
 	UpdatedAt           string  `json:"updatedAt"`
 }

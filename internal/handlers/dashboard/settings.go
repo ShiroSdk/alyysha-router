@@ -134,6 +134,7 @@ func (h *DashboardHandler) HandleUpdateSettings(w http.ResponseWriter, r *http.R
 	applyContextGuardUpdate(updates)
 	applyBudgetBreachModeUpdate(updates)
 	applyAccountsBlacklistTTLUpdate(updates)
+	applyKeysAutopruneTTLUpdate(updates)
 
 	// Auto-ping schedules are merged against the stored value rather than
 	// written through: a client that sends only `connections` would otherwise
@@ -1465,5 +1466,22 @@ func applyAccountsBlacklistTTLUpdate(updates map[string]any) {
 	}
 	if ttl, ok := a["blacklist_ttl"].(float64); ok {
 		chat.SetAccountsBlacklistTTL(int(ttl))
+	}
+}
+
+// applyKeysAutopruneTTLUpdate normalizes keys.autoprune_ttl (minutes; 0
+// disables the sweep) and applies it live.
+func applyKeysAutopruneTTLUpdate(updates map[string]any) {
+	raw, present := updates["accounts"]
+	if !present {
+		return
+	}
+	delete(updates, "accounts")
+	a, ok := raw.(map[string]any)
+	if !ok {
+		return
+	}
+	if ttl, ok := a["autoprune_ttl"].(float64); ok {
+		chat.SetKeysAutopruneTTL(int(ttl))
 	}
 }

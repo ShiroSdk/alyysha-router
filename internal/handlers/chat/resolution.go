@@ -2,6 +2,8 @@
 package chat
 
 import (
+	"context"
+
 	"9routerx/proxy/internal/budget"
 	"9routerx/proxy/internal/db"
 	"9routerx/proxy/internal/freeresilience"
@@ -59,6 +61,9 @@ func NewChatHandler(repo *db.Repo, ts ...*shared.TokenSaverConfig) *ChatHandler 
 			if raw, ok := stored["accounts"].(map[string]any); ok {
 				if ttl, ok := raw["blacklist_ttl"].(float64); ok {
 					SetAccountsBlacklistTTL(int(ttl))
+				}
+				if ttl, ok := raw["autoprune_ttl"].(float64); ok {
+					SetKeysAutopruneTTL(int(ttl))
 				}
 			}
 			if raw, ok := stored["budget"].(map[string]any); ok {
@@ -125,7 +130,7 @@ func NewChatHandler(repo *db.Repo, ts ...*shared.TokenSaverConfig) *ChatHandler 
 			return regime
 		})
 	}
-	return &ChatHandler{
+	h := &ChatHandler{
 		Repo: repo,
 		Client: &http.Client{
 			Transport: transport,
@@ -139,6 +144,10 @@ func NewChatHandler(repo *db.Repo, ts ...*shared.TokenSaverConfig) *ChatHandler 
 		stickyState:     make(map[string]*comboStickyState),
 		SessionAffinity: NewSessionAffinityStore(10000, 2*time.Hour),
 	}
+	// The auto-prune sweep (F13) lives for the process lifetime; the TTL gate
+	// inside each tick keeps it inert until the operator configures it.
+	StartKeysAutopruneSweep(context.Background(), h, time.Minute)
+	return h
 }
 
 // SetRateLimiter attaches the process-wide rate limiter so the metering path

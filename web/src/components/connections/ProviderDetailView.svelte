@@ -3835,6 +3835,12 @@
                       <p class="truncate text-xs text-text-muted">{formatEmailLabel(secondaryConnLabel(conn), $emailPrivacy)}</p>
                     {/if}
                     <div class="mt-1 flex min-w-0 flex-wrap items-center gap-1.5 sm:gap-2">
+                      {#if conn.disabledReason}
+                        <span
+                          class="inline-flex items-center rounded-full bg-red-500/10 text-red-400 font-semibold px-2 py-0.5 text-[10px]"
+                          title={conn.disabledReason}>pruned: {conn.disabledReason.slice(0, 40)}</span
+                        >
+                      {/if}
                       {#if connBadge === 'queued'}
                         <span
                           class="inline-flex items-center gap-1.5 rounded-full font-semibold bg-surface-2 text-text-muted px-2 py-0.5 text-[10px]"

@@ -414,6 +414,14 @@ func (h *ChatHandler) handleAccountFallback(
 				if lockErr := h.Repo.LockConnectionRateLimit(connObj.ID, until, classification.NewBackoffLevel, ue.StatusCode, errorText); lockErr != nil {
 					log.Warn("fallback", "rate limit lock failed", "conn", connObj.ID, "error", lockErr)
 				}
+				// Auto-prune marking (F13): the credential failure is stamped
+				// on the connection for the sweep and the dashboard badge.
+				if ue.StatusCode == http.StatusUnauthorized || ue.StatusCode == http.StatusForbidden || ue.StatusCode == http.StatusPaymentRequired {
+					if err := h.Repo.MarkConnectionDisabledReason(connObj.ID,
+						fmt.Sprintf("upstream %d: %s", ue.StatusCode, strings.TrimSpace(errorText)), time.Now()); err != nil {
+						log.Warn("fallback", "mark disabled reason failed", "conn", connObj.ID, "error", err)
+					}
+				}
 				h.getSessionAffinity().EvictConnection(connObj.ID)
 			}
 			log.Warn("fallback", "connection locked", append([]any{

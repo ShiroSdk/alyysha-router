@@ -26,6 +26,9 @@ export interface ProviderConnection {
   email: string | null
   priority: number | null
   isActive: number // 1 or 0
+  /** Credential-failure marking from the auto-prune path (F13). */
+  disabledReason?: string
+  disabledAt?: string
   data: string // JSON string
   createdAt: string
   updatedAt: string
@@ -308,6 +311,8 @@ export interface FreeProviderHealthRow {
   recent429: number
   recent403: number
   p95LatencyMs: number
+  p50LatencyMs: number
+  uptimePct: number
   regime?: string
   freeModels: number
 }

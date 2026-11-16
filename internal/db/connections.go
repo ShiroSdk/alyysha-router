@@ -6,6 +6,7 @@ import (
 	"database/sql"
 	json "encoding/json/v2"
 	"fmt"
+	"time"
 
 	"9routerx/proxy/internal/models"
 )
@@ -13,7 +14,7 @@ import (
 // providerConnectionColumns is the single column list every connection read
 // selects, so a schema addition lands in one place instead of three literals
 // that have to stay in step by hand.
-const providerConnectionColumns = `id, provider, authType, name, email, priority, isActive, data, lastUsedAt, consecutiveUseCount, createdAt, updatedAt`
+const providerConnectionColumns = `id, provider, authType, name, email, priority, isActive, data, lastUsedAt, consecutiveUseCount, createdAt, updatedAt, disabledReason, disabledAt`
 
 // connectionSortOrder mirrors the JavaScript ordering: rows with no priority sort
 // last, ties break on the most recently updated row.
@@ -27,6 +28,7 @@ func scanConnection(scan func(dest ...any) error, conn *models.ProviderConnectio
 		&conn.ID, &conn.Provider, &conn.AuthType, &conn.Name, &conn.Email,
 		&conn.Priority, &conn.IsActive, &conn.Data, &conn.LastUsedAt, &conn.ConsecutiveUseCount,
 		&conn.CreatedAt, &conn.UpdatedAt,
+		&conn.DisabledReason, &conn.DisabledAt,
 	)
 }
 
@@ -279,4 +281,44 @@ func (r *Repo) listProviderConnections(query string, args []any) ([]*models.Prov
 		return nil, err
 	}
 	return connections, nil
+}
+
+// MarkConnectionDisabledReason stamps why a connection is out of the active
+// pool (the credential-failure auto-prune path) and deactivates it.
+func (r *Repo) MarkConnectionDisabledReason(connID, reason string, now time.Time) error {
+	if r == nil || r.db == nil || connID == "" {
+		return fmt.Errorf("connections: mark disabled: nil repo or empty id")
+	}
+	_, err := r.db.Exec(
+		`UPDATE providerConnections
+		 SET disabledReason = ?, disabledAt = ?, isActive = 0
+		 WHERE id = ?`,
+		reason, now.UTC().Format(time.RFC3339), connID) //nolint:noctx
+	if err != nil {
+		return fmt.Errorf("connections: mark disabled %s: %w", connID, err)
+	}
+	return nil
+}
+
+// GetConnectionsDisabledBefore lists connection ids deactivated for a
+// credential failure earlier than the cutoff — the auto-prune sweep's input.
+func (r *Repo) GetConnectionsDisabledBefore(cutoff time.Time) ([]string, error) {
+	rows, err := r.db.Query(
+		`SELECT id FROM providerConnections
+		 WHERE isActive = 0 AND disabledReason != '' AND disabledAt != ''
+		 AND disabledAt <= ?`,
+		cutoff.UTC().Format(time.RFC3339)) //nolint:noctx
+	if err != nil {
+		return nil, fmt.Errorf("connections: disabled before %s: %w", cutoff.UTC().Format(time.RFC3339), err)
+	}
+	defer rows.Close()
+	var out []string
+	for rows.Next() {
+		var id string
+		if err := rows.Scan(&id); err != nil {
+			return nil, fmt.Errorf("connections: disabled before: scan: %w", err)
+		}
+		out = append(out, id)
+	}
+	return out, rows.Err()
 }
