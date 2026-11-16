@@ -8,20 +8,19 @@
 
 Cut tool-output token consumption by **20–40%**, automate multi-tier failover (**Subscription → Cheap → Free**), and route across **155 AI providers** and **248 free models** with zero Node.js runtime overhead.
 
-**9RouterX is the self-hosted 9router alternative** — one Go binary you own: per-key governance, semantic cache, and 248 free models (24 keyless) running locally on port 20128.
+**9RouterX is the self-hosted 9Router & LiteLLM alternative** — one native Go binary you own: per-key financial governance, semantic cache, and 248 free models (24 keyless) running locally on port `20128`.
 
-If 9RouterX helps you, please give it a star — it helps other developers find the project.
+If 9RouterX helps your workflow, please give the repository a star — it helps other developers discover the project.
 
 [![CI](https://github.com/yanstd888/9routerx/actions/workflows/ci.yml/badge.svg)](https://github.com/yanstd888/9routerx/actions/workflows/ci.yml)
 [![Release CI](https://github.com/yanstd888/9routerx/actions/workflows/release.yml/badge.svg)](https://github.com/yanstd888/9routerx/actions/workflows/release.yml)
-[![GitHub release](https://img.shields.io/github/v/release/yanstd888/9routerx?style=flat-square)](https://github.com/yanstd888/9routerx/releases)
-[![npm version](https://img.shields.io/npm/v/9routerx.svg?style=flat-square)](https://www.npmjs.com/package/9routerx)
-[![npm downloads](https://img.shields.io/npm/dm/9routerx.svg?style=flat-square)](https://www.npmjs.com/package/9routerx)
-[![GitHub downloads](https://img.shields.io/github/downloads/yanstd888/9routerx/total?style=flat-square)](https://github.com/yanstd888/9routerx/releases)
+[![npm version](https://img.shields.io/npm/v/9routerx.svg?style=flat-square&logo=npm)](https://www.npmjs.com/package/9routerx)
+[![npm downloads](https://img.shields.io/npm/dm/9routerx.svg?style=flat-square&label=downloads&color=22c55e)](https://www.npmjs.com/package/9routerx)
+[![GHCR Container](https://img.shields.io/badge/GHCR-yanstd888%2F9routerx-2496ED?style=flat-square&logo=github&logoColor=white)](https://github.com/yanstd888/9routerx/pkgs/container/9routerx)
+[![Container & Binary Pulls](https://img.shields.io/github/downloads/yanstd888/9routerx/total?style=flat-square&logo=docker&logoColor=blue&label=Docker%20pulls&color=0ea5e9)](https://github.com/yanstd888/9routerx/pkgs/container/9routerx)
 [![Telegram Community](https://img.shields.io/badge/Telegram-%40aiclub__id-26A5E4?style=flat-square&logo=telegram)](https://t.me/aiclub_id)
-[![Source port](https://img.shields.io/badge/port-20128-2563EB?style=flat-square)](https://yanstd888.github.io/9routerx/)
 
-[Quick Start](#quick-start) • [Why 9RouterX?](#why-9routerx) • [Key Features](#key-features) • [Supported Clients](#supported-ai-coding-clients) • [Free Providers](#free-ai-providers-and-keyless-models-catalog) • [Database Sharing](#sharing-a-database-with-9router) • [Screenshots](#screenshots) • [Setup Guide](#setup-guide-summary-and-wiki-documentation) • [Comparison](#9routerx-vs-9router-vs-omniroute) • [Architecture Comparison](#architecture-comparison) • [FAQ](#frequently-asked-questions-faq) • [Docs](#docs) • [Wiki](https://yanstd888.github.io/9routerx/)
+[Quick Start](#quick-start) • [Why 9RouterX?](#why-9routerx) • [Comparison](#9routerx-vs-9router-vs-omniroute) • [Key Features](#key-features) • [Supported Clients](#supported-ai-coding-clients) • [Free Providers](#free-ai-providers-and-keyless-models-catalog) • [Database Sharing](#sharing-a-database-with-9router) • [Screenshots](#screenshots) • [Setup Guide](#setup-guide-summary-and-wiki-documentation) • [Architecture Matrix](#architecture-comparison) • [FAQ](#frequently-asked-questions-faq) • [Docs](#docs) • [Wiki](https://yanstd888.github.io/9routerx/)
 
 **155** Providers · **28** OAuth One-Click · **29** Free-Tier · **248** Free Models (**24** Keyless) · **20–40%** Token Saved · **5** Platforms · **1** Binary
 
@@ -31,52 +30,57 @@ If 9RouterX helps you, please give it a star — it helps other developers find 
 
 > **What is 9RouterX?**
 >
-> **9RouterX** is an open-source, self-hosted AI routing gateway, local LLM proxy, and request/response token optimizer written in Go with an embedded Svelte 5 + Vite + Tailwind 4 web dashboard (listening on default port `20128`). It exposes a unified OpenAI-compatible (`/v1/chat/completions`, `/v1/messages`, `/v1/responses`, `/v1/embeddings`, `/v1/models`) and Anthropic-compatible local proxy endpoint that connects AI coding assistants (Claude Code, Cursor, OpenAI Codex CLI, Cline, Roo Code, OpenCode, Antigravity, Gemini CLI, OpenClaw) to **155 AI providers**—comprising **91 API key services**, **28 one-click OAuth integrations**, **29 free-tier providers** (**248 cataloged free models across 36 providers**, including **24 cataloged keyless models** requiring no user-supplied upstream API key; Antigravity still requires one Google OAuth login), and **4 web cookie providers**.
+> **9RouterX** is an open-source, self-hosted AI routing gateway, local LLM API proxy, and request/response token optimizer written in Go with an embedded Svelte 5 + Vite + Tailwind 4 web dashboard (listening on default port `20128`). It exposes a unified OpenAI-compatible (`/v1/chat/completions`, `/v1/messages`, `/v1/responses`, `/v1/embeddings`, `/v1/models`), Anthropic-compatible, Ollama-compatible, MCP Server, and A2A local endpoint that connects AI coding assistants (Claude Code, Cursor, OpenAI Codex CLI, Cline, Roo Code, OpenCode, Antigravity, Gemini CLI, OpenClaw) to **155 AI providers**—comprising **91 API key services**, **28 one-click OAuth integrations**, **29 free-tier providers** (**248 cataloged free models across 36 providers**, including **24 cataloged keyless models** requiring no user-supplied upstream API key; Antigravity requires one Google OAuth login), and **4 web cookie providers**.
 
 ## Why 9RouterX?
 
-AI-assisted software engineering workflows suffer from fragmented monthly subscriptions, sudden upstream rate limits, runaway token billing, and bloated CLI tool context windows. 9RouterX resolves these operational bottlenecks locally at the gateway layer before your requests leave your machine:
+AI-assisted software engineering workflows suffer from fragmented monthly subscriptions, sudden upstream rate limits, runaway token billing, and bloated CLI tool context windows. 9RouterX resolves these operational bottlenecks locally at the gateway layer before requests leave your machine:
 
 * **Unused Monthly Quotas & Rate-Limit Interruptions → Smart 3-Tier Cascade (`Subscription → Cheap → Free`):** Stop losing unused monthly subscription credits or hitting `429 Too Many Requests` in the middle of a complex multi-file refactor. 9RouterX prioritizes your active **Subscription** tier first (via 28 one-click OAuth or 4 web cookie providers), overflows seamlessly to **Cheap API** providers (such as DeepSeek, Groq, Fireworks, or Nebius), and automatically falls back to **Free-Tier / Keyless** models (`248 free models across 36 providers`, including `24 keyless models`) when primary limits are exhausted.
-* **Verbose CLI & Tool-Call Outputs → 20–40% Token Saver Suite:** Autonomous coding agents regularly burn tens of thousands of input tokens reading raw terminal logs, directory trees, build outputs, and repetitive JSON responses. Built-in RTK compression (`internal/tokensaver`, `internal/compression`), **50+ ready-made per-tool output filters** (`git diff`, `git log`, `grep`, `ripgrep`, `docker logs`, `npm install`, `pnpm`, `cargo build`, `go test`, `terraform plan`, `kubectl`, `pytest`, and friends), GCF/tabular headroom compression (`internal/compression/gcf`, `internal/headroom`), context squeezing, and output style directives (Caveman, Ponytail, ADHD, and Anti-Slop modes) strip redundant noise before forwarding requests upstream.
+* **Verbose CLI & Tool-Call Outputs → 20–40% Token Saver Suite:** Autonomous coding agents regularly burn tens of thousands of input tokens reading raw terminal logs, directory trees, build outputs, and repetitive JSON responses. Built-in RTK compression (`internal/tokensaver`, `internal/compression`), **50+ ready-made per-tool output filters** (`git diff`, `git log`, `grep`, `ripgrep`, `docker logs`, `npm install`, `pnpm`, `cargo build`, `go test`, `terraform plan`, `kubectl`, `pytest`, and friends), GCF/tabular headroom compression (`internal/compression/gcf`, `internal/headroom`), context squeezing, and output style directives (`Caveman`, `Ponytail`, `ADHD`, and `Anti-Slop` modes) strip redundant noise before forwarding requests upstream.
 * **Uncontrolled API Spend → Per-Key Financial Governance & Guardrails:** Enforce strict daily USD spending ceilings with hard cutoffs checked when each request starts (`internal/budget`), per-key request rate limits, CIDR/IP whitelists, per-key system prompt injection, and scoped endpoint permissions (`internal/policy`, `internal/guardrails`, `internal/keikey`) before distributing local gateway keys (`sk-...`) to autonomous agents, CI pipelines, or team members.
 * **Silent Endpoint Failures & Broken Tool Calls → Active Health Probing & Auto-Repair:** Upstream LLM providers frequently return malformed JSON tool-call arguments, truncated schemas, or suffer silent latency degradation. 9RouterX repairs broken tool-call structures in transit (`tool-call repair fallback`), guards against SSRF dispatch and leaks via PII masking, and continuously tracks live endpoint health (`internal/modelhealth`, `internal/resilience`) with a 3-tier circuit breaker to bypass degraded nodes automatically.
-* **Redundant Repeated Prompts → Semantic & Prompt Caching:** Reduce round-trip latency and API token billing through local vector-similarity semantic caching (`internal/semanticcache`) combined with automatic upstream prompt cache header passthrough (`internal/promptcache`) and zero-allocation FastJSON parsing (`internal/fastjson`).
+* **Redundant Repeated Prompts → Semantic, Prompt & Sticky TTL Caching:** Reduce round-trip latency and API token billing through local vector-similarity semantic caching (`internal/semanticcache`), automatic upstream prompt cache header passthrough (`internal/promptcache`), **cache-aware sticky TTL routing** (saving up to ~90% on cached input reads), and zero-allocation FastJSON parsing (`internal/fastjson`).
 * **Heavy Runtime Dependencies → Single Self-Contained Go Binary:** No Node.js runtime memory bloat, no Python virtual environments, and no external PostgreSQL or Redis containers required. Everything—including the reactive Svelte 5 dashboard, SQLite storage engine, MCP server, and MITM inspector—runs from a single native binary across Linux (`x64`/`arm64`), macOS (`x64`/`arm64`), and Windows (`x64`).
 
 ## 9RouterX vs 9Router vs OmniRoute
 
-9RouterX is a Go port of 9Router (decolua) that grew its own feature set, and sits in the same self-hosted gateway space as OmniRoute (cheaper-inference). Everything in the table below is a verifiable fact — where a claim has no public benchmark behind it, it is marked *on paper* rather than given a number. Star counts were checked live on **Nov 14, 2026** and move constantly; judge the projects by the feature rows, not the star rows.
+9RouterX is an independent Go + Svelte 5 evolution of 9Router (`decolua/9router` and `luqman-v1/9router-go`) that expanded its own enterprise governance and token-saving architecture, sitting in the same self-hosted gateway space as OmniRoute (`cheaper-inference/OmniRoute`). Every row in the table below states a verifiable fact—where an architectural trait has no standardized public benchmark behind it, it is explicitly labeled *On paper* rather than given a synthetic number. Star counts were checked live on **Nov 14, 2026**; evaluate each gateway by its operational requirements and feature rows.
 
-| Metric | **9RouterX** (this repo) | **9Router** (decolua) | **OmniRoute** (cheaper-inference) |
+| Metric / Capability | **9RouterX** (This Repo) | **9Router** (`decolua`) | **OmniRoute** (`cheaper-inference`) |
 | :--- | :--- | :--- | :--- |
-| GitHub stars (Nov 14, 2026) | 68 | 32,422 | 87,366 |
-| Language / runtime | Go, single native binary + Svelte 5 dashboard | JavaScript / Node.js + Next.js | TypeScript / Node.js |
-| Install | One native binary (~48 MB linux-amd64), zero runtime dependencies | `npm i -g 9router` (6 deps, requires Node.js) | npm (~105 deps) / Docker / pnpm |
-| Providers | 155 (91 API · 28 OAuth · 29 free · 4 cookie) | 40+ | 375–380 (150+ free) |
-| Free models | 248 across 36 providers (24 keyless) | 100+ | 1,400+ models, ~1.62B free tokens/mo |
-| Dashboard | Svelte 5 + Vite + Tailwind 4, embedded (1 dashboard dependency) | Next.js React app | Desktop / PWA |
-| Database | Embedded SQLite, drop-in schema-compatible | Same SQLite schema | SQLite |
-| Usage under heavy traffic | *On paper:* a compiled native process — one process for the gateway, the dashboard and the SQLite engine, no V8 heap or GC pauses growing with the request queue. No public benchmark yet; measure on your workload. | *On paper:* Node.js runtime (V8 + event loop); sustained throughput depends on the Node version and warm-up state | *On paper:* Node.js runtime, same caveats |
-| Latency profile | *On paper:* no cold-start tax after boot; hot paths are allocation-conscious Go | *On paper:* first-request warm-up on the Node side | *On paper:* first-request warm-up on the Node side |
+| **GitHub Stars (Nov 14, 2026)** | 68 | 32,422 | 87,366 |
+| **Language / Runtime** | **Go, single native binary + Svelte 5 dashboard** | JavaScript / Node.js + Next.js | TypeScript / Node.js |
+| **Installation Footprint** | **One native binary (~48 MB linux-amd64), zero runtime dependencies** | `npm i -g 9router` (6 deps, requires Node.js runtime) | npm (~105 deps) / Docker / pnpm |
+| **Supported Providers** | **155** (`91 API` · `28 OAuth` · `29 free` · `4 cookie`) | 40+ | 375–380 (150+ free) |
+| **Cataloged Free Models** | **248 across 36 providers (24 keyless)** | 100+ | 1,400+ models (~1.62B free tokens/mo) |
+| **Embedded Dashboard** | **Svelte 5 + Vite + Tailwind 4, embedded in binary** | Next.js React web app | Desktop / PWA |
+| **Database Engine** | **Embedded SQLite, drop-in schema-compatible** | Same SQLite schema | SQLite |
+| **Behavior Under Heavy Traffic** | *On paper:* a compiled native Go process—one process for the gateway, dashboard, and SQLite engine, with no V8 heap or GC pauses growing with the request queue. Measure on your own workload. | *On paper:* Node.js runtime (V8 + single-threaded event loop); sustained throughput depends on Node version and warm-up state. | *On paper:* Node.js runtime, same event-loop and V8 heap considerations. |
+| **Latency Profile** | *On paper:* zero cold-start tax after boot; hot request paths use allocation-conscious Go routines and FastJSON. | *On paper:* first-request warm-up on the Node/Next.js side. | *On paper:* first-request warm-up on the Node side. |
 
-### What 9RouterX adds on top of 9Router
+### What 9RouterX Adds on Top of 9Router
 
-9RouterX started as a Go port of 9Router and then built its own layer on top. Against upstream 9Router, this repository adds: **full per-key governance** (daily USD cutoffs, request limits, IP whitelists, plan templates, PII masking — vs basic key auth), a **semantic cache + prompt cache** layer (vs passthrough), the **Token Saver suite** (20–40% RTK compression, 50+ per-tool output filters, GCF headroom compression, context squeezer, tool-call repair — vs not included), a **catalog of 248 free models across 36 providers (24 keyless)**, and the **MCP server, A2A, TLS stealth, MITM inspector, multi-target webhooks, Telegram bot and Vault** modules. Both share the same SQLite schema — an existing 9Router database drops straight into 9RouterX.
+9RouterX preserves 100% SQLite database compatibility with upstream 9Router while adding a dedicated optimization and security stack:
+* **Full Per-Key Governance:** Daily USD hard cutoffs checked at request start, per-key rate limits, IP whitelists, reusable plan templates, SSRF dispatch protection, and PII masking (versus basic key authentication).
+* **Token Saver Suite:** 20–40% RTK compression, 50+ per-tool CLI output filters, GCF/tabular headroom compression, context squeezer, output style directives (`Caveman`, `Ponytail`, `ADHD`, `Anti-Slop`), and automated tool-call repair fallback.
+* **Multi-Layer Caching & Resilience:** Semantic cache + prompt cache passthrough + cache-aware sticky TTL routing, windowed-LRU rotation, auto-prune for dead credentials, and burn-in account recovery.
+* **Expanded Free & Keyless Catalog:** 248 free models across 36 providers (including 24 keyless models).
+* **Advanced Protocols & Ops Modules:** Built-in MCP Server, A2A protocol, TLS stealth fingerprinting, MITM traffic inspector, multi-target webhooks, Telegram bot alerts, encrypted credential Vault, and one-command service migration (`9routerx service take-over`).
 
-### Where OmniRoute is bigger
+### Where OmniRoute is Bigger
 
-OmniRoute's catalog is larger, stated plainly: roughly 375–380 providers (150+ of them free), 1,400+ models, a pooled ~1.62B free tokens/month allowance, 20 routing strategies, and quota-aware fallback. That breadth is their strength. Where 9RouterX differs: it ships as **one Go binary with zero runtime dependencies** (vs an npm install pulling ~105 packages), stays light enough for **small self-hosted machines**, offers **deeper per-key financial governance**, and embeds the **Svelte 5 dashboard in the same binary**. Compare features against what you host — neither replaces the other.
+OmniRoute's upstream catalog is larger, stated plainly: roughly 375–380 providers (150+ of them free), 1,400+ models, a pooled ~1.62B free tokens/month allowance, 20 routing strategies, and quota-aware fallback. That catalog breadth is their core strength. Where **9RouterX** differs: it ships as **one compiled Go binary with zero runtime dependencies** (versus an npm installation pulling ~105 packages), stays lightweight enough for **small self-hosted VPS instances or edge hardware**, enforces **granular per-key financial governance and RTK/GCF tool compression**, and embeds the **Svelte 5 dashboard directly inside the binary**. Compare features against your infrastructure requirements—neither replaces the other.
 
-### Go + Svelte vs a Node stack
+### Go + Svelte 5 vs a Node.js Stack
 
-The architecture choice shows up in operations, not in synthetic benchmarks (*on paper throughout — no public benchmark; measure on your own workload*):
+The architectural difference manifests in day-to-day operations (*on paper throughout — measure on your own workload*):
 
-- **Distribution:** one native binary per platform (`linux-x64`, `linux-arm64`, `win32-x64`, `darwin-x64`, `darwin-arm64`) vs `npm install` bringing the Node runtime and `node_modules` with it.
-- **Cold start:** the Go gateway serves its first request right after boot; a Node service warms up its runtime and module graph first.
-- **Baseline memory:** Go processes of comparable scope typically idle lower than Node processes — actual numbers depend on traffic shape and cache sizes.
-- **Sustained load:** no V8 GC pauses or event-loop saturation on the gateway side; the traffic pattern that queues a Node event loop is handled by Go goroutines.
-- **Updates:** a self-update swaps one binary (`9routerx update`); a Node project updates through its package manager and restarts.
+* **Single-File Distribution:** One native executable per platform (`linux-x64`, `linux-arm64`, `win32-x64`, `darwin-x64`, `darwin-arm64`) versus `npm install` pulling a Node.js runtime dependency tree and `node_modules`.
+* **Instant Cold Start:** The compiled Go gateway serves its first completion request immediately upon process boot without waiting for JIT/module graph warm-up.
+* **Predictable Memory Footprint:** Compiled Go services of comparable scope typically idle with a smaller resident memory footprint than Node.js/Next.js servers.
+* **Concurrency Under Load:** Concurrent streaming connections are multiplexed across lightweight Go goroutines rather than competing on a single-threaded V8 event loop.
+* **Atomic Self-Updates:** Updating swaps a single binary (`9routerx update` or container image pull) without rebuilding local package trees.
 
 ## System Architecture
 
@@ -91,14 +95,14 @@ The architecture choice shows up in operations, not in synthetic benchmarks (*on
 │  │  Governance & Policy   │→ │   Token Saver Suite    │→ │  Semantic & Prompt    │  │
 │  │  • Daily Cost Cutoff   │  │   • RTK Compression    │  │       Caching         │  │
 │  │  • Rate Limit / IP WL  │  │   • 50+ Tool Filters   │  │  • Vector Similarity  │  │
-│  │  • Guardrails & Vault  │  │   • GCF / Headroom     │  │  • Prompt Passthrough │  │
+│  │  • Guardrails & Vault  │  │   • GCF / Headroom     │  │  • Sticky TTL (~90%)  │  │
 │  │  • PII Mask / SSRF Grd │  │   • Tool-Call Repair   │  │  • FastJSON Engine    │  │
 │  └────────────────────────┘  └────────────────────────┘  └───────────────────────┘  │
 │                                           │                                         │
 │                                           ▼                                         │
 │  ┌───────────────────────────────────────────────────────────────────────────────┐  │
 │  │          Smart Combo Router & Resilience Engine (Model Health Probes)         │  │
-│  │     Strategies: Fallback │ Round-Robin │ Sticky │ Least-Used │ Capacity       │  │
+│  │   Strategies: Fallback │ Round-Robin │ Sticky TTL │ Capacity │ Fusion │ Auto  │  │
 │  └───────────────┬────────────────────────┬────────────────────────┬─────────────┘  │
 └──────────────────┼────────────────────────┼────────────────────────┼────────────────┘
                    ▼                        ▼                        ▼
@@ -111,18 +115,25 @@ The architecture choice shows up in operations, not in synthetic benchmarks (*on
 
 | Feature Group | Capabilities & Internal Modules |
 | :--- | :--- |
-| **Routing & Fallback** | **Auto 3-Tier Fallback** (`Subscription → Cheap → Free`), **Combo Routing** (`fallback`, `round-robin`, `sticky`, `capacity`, `fusion` via `internal/routing`, `internal/combos` & `internal/combopresets`), multi-account round-robin load balancing, active **Model Health** probing (`internal/modelhealth`), and 3-stage circuit-breaker resilience (`internal/resilience`). |
+| **Routing & Fallback** | **Auto 3-Tier Fallback** (`Subscription → Cheap → Free`), **Combo Routing** (`fallback`, `round-robin`, `sticky`, `capacity`, `fusion`, `cache-optimized`, `auto`, `quota-weighted`, `reset-aware` via `internal/routing`, `internal/combos` & `internal/combopresets`), multi-account round-robin load balancing, active **Model Health** probing (`internal/modelhealth`), and 3-stage circuit-breaker resilience (`internal/resilience`). |
 | **Token Saver Suite** | **20–40% tool-output token savings** (`internal/tokensaver`, `internal/compression`), **RTK Compression**, **50+ ready-made per-tool output filters** (for `git diff`, `grep`, `docker logs`, `npm install`, `terraform plan`, and friends), **GCF/Tabular Headroom** (`internal/compression/gcf`, `internal/headroom`), **Context Squeezer** for long histories, **Output Style Directives** (`Caveman`, `Ponytail`, `ADHD`), **Anti-Slop Injector** (`internal/tokensaver/antislop`), and automated **Tool-Call Repair Fallback**. |
 | **Governance per Key** | **Daily Cost Ceiling + Hard Cutoff** (`internal/budget`, checked per request), per-key request rate limits, **IP Whitelist**, per-key custom system prompts, granular endpoint permissions, reusable **Plan Templates** (`internal/policy`, `internal/guardrails`, `internal/keikey`), SSRF dispatch protection, PII masking, encrypted credential storage (`internal/vault`, `internal/sessionvault`), and audit logs (`internal/securitylog`). |
-| **Providers & Auth** | **155 total providers**: **91 API Key** providers, **28 One-Click OAuth** integrations, **29 Free-Tier** providers, and **4 Web Cookie** providers (`internal/browsercookies`, `internal/browserlogin`). Supports custom OpenAI-/Anthropic-compatible base URLs, custom HTTP headers, Kiro `external_idp` JSON auth import, per-key proxy pools, and Codex quota tracking (`internal/codexquota`). |
+| **Providers & Auth** | **155 total providers**: **91 API Key** providers, **28 One-Click OAuth** integrations, **29 Free-Tier** providers, and **4 Web Cookie** providers (`internal/browsercookies`, `internal/browserlogin`). Supports custom OpenAI-/Anthropic-compatible base URLs, custom HTTP headers, Kiro `external_idp` JSON auth import, dual-column cookie paste parser (Gemini/Grok Web), per-key proxy pools, and Codex quota tracking (`internal/codexquota`). |
 | **Free Tier & Keyless** | **29 free-tier providers** (23 `CategoryFreeTier` + 6 `CategoryFree`) and **248 free models cataloged across 36 providers**, including **24 cataloged keyless models** without a user-supplied upstream API key (`antigravity`, `opencode`, `blackbox`); Antigravity requires Google OAuth login once. Tracks daily, monthly, credit, one-time, and uncapped quota regimes automatically. |
-| **Cache & Performance** | **Semantic Cache** (`internal/semanticcache`) for vector-matched query deduplication, upstream **Prompt Cache** optimization (`internal/promptcache`), and high-throughput **FastJSON** serialization (`internal/fastjson`). |
+| **Cache & Performance** | **Semantic Cache** (`internal/semanticcache`) for vector-matched query deduplication, upstream **Prompt Cache** optimization (`internal/promptcache`), **Cache-Aware Sticky TTL** (reduces cached input costs by up to ~90%), and high-throughput **FastJSON** serialization (`internal/fastjson`). |
 | **Observability** | **Extended Logging + Payload Inspector**, custom usage analytics windows (`12h`, `14d`, custom date ranges), Tremor-inspired data visualizations (`bits-ui` + `layerchart`), distributed **Tracing** (`internal/tracing`, `internal/observ`), **Uptime** monitoring (`internal/uptime`), **Security Log**, multi-target **Webhooks + Notifications** (`internal/notifications`), and **Telegram Bot** alerts (`internal/telegram`). |
-| **Infra & Extras** | **Single Go Binary** across 5 OS/arch targets, background daemon CLI (`start`/`stop`/`restart`/`status`/`logs`), Docker container (`ghcr.io`), desktop **Tray App**, built-in **Tunnel** (`internal/tunnel`), self-**Updater** (`internal/updater`), encrypted **Sync Bundle** backup/restore (`internal/syncbundle`), **TLS Stealth** (`internal/tlsstealth`), **MITM Traffic Inspection** (`internal/mitm`), **MCP Server** (`internal/mcpserver`), **A2A Protocol** (`internal/a2a`), and **Media TTS/STT**. |
+| **Infra & Extras** | **Single Go Binary** across 5 OS/arch targets, background daemon CLI (`start`/`stop`/`restart`/`status`/`logs`), one-command migration (`9routerx service take-over`), Docker container (`ghcr.io`), desktop **Tray App**, built-in **Tunnel** (`internal/tunnel`), self-**Updater** (`internal/updater`), encrypted **Sync Bundle** backup/restore (`internal/syncbundle`), **TLS Stealth** (`internal/tlsstealth`), **MITM Traffic Inspection** (`internal/mitm`), **MCP Server** (`internal/mcpserver`), **A2A Protocol** (`internal/a2a`), and **Media TTS/STT**. |
 
-**Catatan fitur resilensi & hemat biaya v1.2 (semua default OFF — konservatif):**
+### v1.2 Cost & Resilience Controls (Conservative Opt-In Defaults)
 
-**Cache-aware sticky TTL** — combo routing can pin to a `ttl` mode where the same account stays hot for a configurable window (default 5 min for Claude-like caches, up to 60 min for Gemini), matching vendor prompt-cache windows so cached tokens are reused instead of re-billed — **up to ~90% input-cost reduction on cache hits** (vendor cache-read pricing, e.g. Claude bills cached input at ~10% of normal input price; savings depend on provider cache policy and workload repetition). **Windowed-LRU** (`ROTATION_WINDOW=N`) restricts round-robin selection to the top N candidates to prevent pool-wide burn-in. **Auto-prune** (`AUTOPRUNE_ENABLED`, default OFF + dry-run) deactivates connections after consecutive permanent credential failures (401/403-banned/402). **Burn-in protection** (`BURNIN_ENABLED`, default OFF) walks struggling accounts through a suspect → heal (1-in-5 throttle) → rescue (out of rotation) cycle. All defaults are conservative — every feature ships OFF until explicitly enabled.
+All advanced v1.2 cost-reduction and account-protection mechanisms ship **disabled (`OFF`) by default** to guarantee predictable baseline behavior until explicitly enabled by the operator:
+
+| Control Feature | Environment / Config Flag | Default | Operational Impact |
+| :--- | :--- | :---: | :--- |
+| **Cache-Aware Sticky TTL** | Combo strategy `ttl` mode (`5m` Claude default, up to `60m` Gemini) | `OFF` | Pins consecutive requests to the same warm upstream account within the vendor's prompt-cache window so cached prefixes are reused instead of re-billed—delivering **up to ~90% input-cost reduction on cache hits** (e.g., Anthropic bills cached reads at ~10% of standard input pricing). |
+| **Windowed-LRU Rotation** | `ROTATION_WINDOW=N` | `OFF` | Restricts round-robin selection to the top `N` active candidate connections to prevent pool-wide rate-limit burn-in across large account pools. |
+| **Dead-Credential Auto-Prune** | `AUTOPRUNE_ENABLED` (supports dry-run mode) | `OFF` | Automatically deactivates upstream connections after consecutive permanent credential failures (`401 Unauthorized`, `403 Banned`, `402 Payment Required`). |
+| **Account Burn-In Protection** | `BURNIN_ENABLED` | `OFF` | Guides degraded accounts through an automated **Suspect → Heal (1-in-5 request throttle) → Rescue (temporary rotation quarantine)** recovery cycle. |
 
 ## Quick Start
 
@@ -130,9 +141,9 @@ Install 9RouterX, create your local gateway API key in the dashboard on port `20
 
 ### 1. Install 9RouterX
 
-Upgrading from 9Router? Data carries over automatically; run `9routerx service take-over` to replace the old gateway and its autostart in one step ([migration guide](wiki/migration.md)).
+> **Upgrading from 9Router?** Your existing SQLite data carries over automatically. Run `9routerx service take-over` to replace the legacy gateway process and its system autostart service in a single step (see the [Installation & Migration Guide](https://yanstd888.github.io/9routerx/installation.html)).
 
-**Option A — Via npm (Recommended for Linux, macOS, and Windows):** requires Node.js **>= 18**.
+**Option A — Via npm (Recommended for Linux, macOS, and Windows; requires Node.js >= 18 for wrapper install only):**
 
 ```bash
 npm install -g 9routerx
@@ -142,10 +153,10 @@ npm install -g 9routerx
 
 ```bash
 # Linux & macOS
-curl -fsSL https://raw.githubusercontent.com/yanstd888/9routerx/main/install.sh | sh
+curl -fsSL [https://raw.githubusercontent.com/yanstd888/9routerx/main/install.sh](https://raw.githubusercontent.com/yanstd888/9routerx/main/install.sh) | sh
 
 # Windows (PowerShell)
-irm https://raw.githubusercontent.com/yanstd888/9routerx/main/install.ps1 | iex
+irm [https://raw.githubusercontent.com/yanstd888/9routerx/main/install.ps1](https://raw.githubusercontent.com/yanstd888/9routerx/main/install.ps1) | iex
 ```
 
 **Option C — Prebuilt Standalone Binaries:**
@@ -163,12 +174,12 @@ Download the standalone archive for `linux-x64`, `linux-arm64`, `darwin-x64`, `d
 * **Default Login:** First login uses the default compatibility password `123456`. Change it immediately in **Settings → Profile**.
 * **Gateway Auth Note:** `RequireApiKey` (`internal/middleware/auth.go`) validates client keys against your local SQLite database (`0 keys configured = 401 Authentication required`). Always create at least one gateway API key (`sk-...`) in **Settings → API Keys** before sending requests.
 
-### 3. Send Your First Request (OpenCode, No Upstream Login)
+### 3. Send Your First Request (OpenCode Keyless, Zero Upstream Login)
 
-Once you have created your local gateway key (`sk-YOUR-KEY`), test with `oc/big-pickle` from OpenCode Free without an upstream login. For `antigravity/gemini-3.7-flash-medium`, sign in with Google through Antigravity once first (free); no user-supplied upstream API key is needed.
+Once you have created your local gateway key (`sk-YOUR-KEY`), test immediately with `oc/big-pickle` from OpenCode Free without any upstream login. To test `antigravity/gemini-3.7-flash-medium`, sign in with Google through Antigravity once first (free); no user-supplied upstream API key is needed.
 
 ```bash
-curl http://127.0.0.1:20128/v1/chat/completions \
+curl [http://127.0.0.1:20128/v1/chat/completions](http://127.0.0.1:20128/v1/chat/completions) \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer sk-YOUR-KEY" \
   -d '{
@@ -184,11 +195,13 @@ curl http://127.0.0.1:20128/v1/chat/completions \
 Run 9RouterX as a background daemon without tying up an active terminal session:
 
 ```bash
-9routerx start          # launch in background (writes DATA_DIR/run/gateway.pid)
-9routerx status         # check running PID and active port
-9routerx restart        # restart background instance
-9routerx logs -n 100    # tail the last 100 lines of DATA_DIR/run/gateway.log
-9routerx stop           # stop the background daemon
+9routerx start               # launch in background (writes DATA_DIR/run/gateway.pid)
+9routerx status              # check running PID and active port
+9routerx restart             # restart background instance
+9routerx logs -n 100         # tail the last 100 lines of DATA_DIR/run/gateway.log
+9routerx stop                # stop the background daemon
+9routerx service take-over   # migrate from legacy 9Router service & take over autostart
+9routerx version             # print running binary version & build metadata
 ```
 
 * **PID & Logs:** Background state is stored in `DATA_DIR/run/gateway.pid` and daemon output is written to `DATA_DIR/run/gateway.log`.
@@ -230,7 +243,7 @@ docker run -d \
 | **Windows (Native)** | `%APPDATA%\9router` (opens `%APPDATA%\9router\db\data.sqlite`) |
 | **Docker Container** | Mount host `~/.9router:/data` with `-e DATA_DIR=/data` |
 
-* **Caveat:** Do not run both 9Router and 9RouterX against the same SQLite file simultaneously. Stop the old process first (or back up `data.sqlite` before switching) so only one binary holds the SQLite write lock.
+* **Caveat:** Do not run both 9Router and 9RouterX against the same SQLite file simultaneously. Stop the old process first (or run `9routerx service take-over` / back up `data.sqlite` before switching) so only one binary holds the SQLite write lock.
 
 ## Screenshots
 
@@ -244,7 +257,7 @@ full gallery — with per-page commentary — lives on the wiki's
 
 ## Supported AI Coding Clients
 
-9RouterX works out of the box with any OpenAI-compatible, Anthropic-compatible, MCP, or A2A client:
+9RouterX works out of the box with any OpenAI-compatible, Anthropic-compatible, Responses API, Ollama-compatible, MCP, or A2A client:
 
 * **Claude Code** (`@anthropic-ai/claude-code`)
 * **OpenAI Codex CLI**
@@ -270,7 +283,7 @@ claude
 ### Example 2: Codex / OpenCode / OpenClaw (Explicit IPv4 `127.0.0.1`)
 
 ```bash
-export OPENAI_BASE_URL="http://127.0.0.1:20128/v1"
+export OPENAI_BASE_URL="[http://127.0.0.1:20128/v1](http://127.0.0.1:20128/v1)"
 export OPENAI_API_KEY="sk-YOUR-KEY"
 ```
 
@@ -279,7 +292,7 @@ export OPENAI_API_KEY="sk-YOUR-KEY"
 ```json
 {
   "apiProvider": "openai-compatible",
-  "openAiBaseUrl": "http://127.0.0.1:20128/v1",
+  "openAiBaseUrl": "[http://127.0.0.1:20128/v1](http://127.0.0.1:20128/v1)",
   "openAiApiKey": "sk-YOUR-KEY",
   "openAiModelId": "oc/big-pickle"
 }
@@ -288,7 +301,7 @@ export OPENAI_API_KEY="sk-YOUR-KEY"
 ### Example 4: Gemini CLI / Custom Anthropic-Compatible Clients
 
 ```bash
-export GEMINI_API_BASE_URL="http://127.0.0.1:20128/v1"
+export GEMINI_API_BASE_URL="[http://127.0.0.1:20128/v1](http://127.0.0.1:20128/v1)"
 export GEMINI_API_KEY="sk-YOUR-KEY"
 ```
 
@@ -315,7 +328,7 @@ export GEMINI_API_KEY="sk-YOUR-KEY"
 | `kilo-gateway` | 12 | — | Free gateway tier (`recurring-daily`) |
 | `fireworks` | 10 | — | Initial / recurring free inference credits (`one-time-initial`) |
 | `antigravity` | 9 | 9 | **Free after Google OAuth login once; no user-supplied upstream API key (e.g. `gemini-3.7-flash-high/medium/low`)** |
-| `opencode` | 9 | 9 | **Keyless (`keyless` — zero upstream setup)** |
+| `opencode` | 9 | 9 | **Keyless (`keyless` — zero upstream setup, e.g. `oc/big-pickle`)** |
 | `cloudflare-ai` | 9 | — | Recurring daily free Workers AI neurons (`recurring-daily`) |
 | `qoder` | 9 | — | One-click OAuth free coding tier (`recurring-daily` / `recurring-monthly`) |
 | `opencode-zen` | 9 | — | Free developer coding tier (`recurring-daily`) |
@@ -355,7 +368,7 @@ export GEMINI_API_KEY="sk-YOUR-KEY"
 2. **28 One-Click OAuth Providers:** Authenticate directly from the web dashboard without manually copying static tokens:
    `antigravity`, `claude`, `cline`, `clinepass`, `codebuddy-cn`, `codebuddy-intl`, `codex`, `cursor`, `github`, `gitlab`, `glm-cn`, `grok-cli`, `iflow`, `jina-reader`, `kilocode`, `kimi`, `llm7`, `minimax-code-global`, `muse`, `qoder`, `qoder-cn`, `runcrate`, `topaz`, `voyage-ai`, `xai`, `xiaomi-mimo`, `zcode`, `zed`.
 3. **29 Free-Tier Providers:** Dedicated zero-cost provider configurations (**23 `CategoryFreeTier` + 6 `CategoryFree`**) engineered for automated fallback routing when paid quotas expire.
-4. **4 Web Cookie Providers:** Session-authenticated browser integrations powered by the internal `browsercookies` and `browserlogin` encrypted vault modules.
+4. **4 Web Cookie Providers:** Session-authenticated browser integrations powered by the internal `browsercookies` and `browserlogin` encrypted vault modules, featuring a dual-column cookie input with an auto-split paste parser for Gemini Web and Grok Web session cookies.
 
 ### Adding a Custom Provider
 
@@ -370,22 +383,23 @@ You can register any custom OpenAI-compatible or Anthropic-compatible upstream s
 9RouterX compiles a reactive **Svelte 5 + Vite + Tailwind 4** management interface (built with `shadcn-svelte`, `bits-ui`, and `layerchart`) directly into the Go binary at `http://localhost:20128` (default password: `123456`):
 
 * **Token Saver & Compression Analytics:** Monitor real-time 20–40% token reduction ratios, RTK compression metrics, **50+ ready-made per-tool output filters**, GCF/tabular headroom stats, output style directives (`Caveman`, `Ponytail`, `ADHD`, `Anti-Slop`), context squeezer activity, and semantic cache hit rates.
-* **Connections & 1-Click OAuth Manager:** Dual-column cookie input with auto-split paste parser for Gemini Web and Grok Web session cookies. Configure all 155 providers, trigger browser OAuth flows for 28 providers, import Kiro `external_idp` JSON credentials, inspect live model health latency, and assemble multi-tier combo routing presets (`fallback`, `round-robin`, `sticky`, `capacity`, `fusion`).
+* **Connections & 1-Click OAuth Manager:** Dual-column cookie input with auto-split paste parser for Gemini Web and Grok Web session cookies. Configure all 155 providers, trigger browser OAuth flows for 28 providers, import Kiro `external_idp` JSON credentials, inspect live model health latency, and assemble multi-tier combo routing presets (`fallback`, `round-robin`, `sticky`, `capacity`, `fusion`, `cache-optimized`, `auto`, `quota-weighted`, `reset-aware`).
 * **Per-Key Governance & Custom Usage Ranges:** Issue client API keys (`sk-...`) with daily USD cutoffs enforced at request start, request rate limits, IP whitelists, and custom system prompts; inspect Tremor-style usage charts across `12h`, `14d`, or custom date ranges; and inspect full request/response JSON payloads in the Extended Logging & Payload Inspector.
 
 ## Setup Guide Summary and Wiki Documentation
 
 For advanced deployment and module configuration, refer to the [**Official 9RouterX Documentation & Wiki**](https://yanstd888.github.io/9routerx/):
 
-* [**Installation, Background CLI & Docker Guide**](https://yanstd888.github.io/9routerx/installation.html) — Custom port configuration (default `20128`), daemon commands (`start`/`stop`/`restart`/`status`/`logs`), autostart on boot, desktop tray mode, and GHCR containers.
-* [**Combo Routing & 3-Tier Failover**](https://yanstd888.github.io/9routerx/) — Setting up `Subscription → Cheap → Free` cascades plus `fallback`, `round-robin`, `sticky`, `capacity`, and `fusion` strategies.
+* [**Installation, Background CLI & Docker Guide**](https://yanstd888.github.io/9routerx/installation.html) — Custom port configuration (default `20128`), daemon commands (`start`/`stop`/`restart`/`status`/`logs`), one-step `9routerx service take-over`, autostart on boot, desktop tray mode, and GHCR containers.
+* [**Client Setup Guide**](https://yanstd888.github.io/9routerx/client-setup.html) — Ready-to-copy snippets for Claude Code, Cursor, Codex CLI, Cline, OpenCode, and OpenClaw.
+* [**Combo Routing & 3-Tier Failover**](https://yanstd888.github.io/9routerx/) — Setting up `Subscription → Cheap → Free` cascades plus `fallback`, `round-robin`, `sticky` (with cache-aware TTL), `capacity`, and `fusion` strategies.
 * [**Token Saver, RTK Compression & 50+ Tool Filters**](https://yanstd888.github.io/9routerx/) — Tuning compression aggressiveness, per-tool CLI output filters, GCF tabular compression, Caveman/Ponytail/ADHD directives, anti-slop rules, and tool-call repair.
 * [**Key Governance, Budgets & Alerts**](https://yanstd888.github.io/9routerx/) — Configuring daily USD cost cutoffs, plan templates, SSRF/PII guards, multi-target webhooks, and Telegram bot notifications.
 * [**MCP Server, A2A, MITM & TLS Stealth**](https://yanstd888.github.io/9routerx/) — Connecting Model Context Protocol clients, Agent-to-Agent workflows, inspecting traffic on `http://localhost:20128`, and syncing encrypted configuration bundles.
 
 ## Architecture Comparison
 
-Factual comparison between **9RouterX**, upstream **9router-go**, and the original **9Router (Next.js)**:
+Factual capability matrix comparing **9RouterX**, upstream **9router-go**, and the original **9Router (Next.js)**:
 
 | Capability / Metric | **9RouterX** (This Repository) | **9router-go** (Upstream Port) | **9Router** (Original Next.js) |
 | :--- | :--- | :--- | :--- |
@@ -393,11 +407,12 @@ Factual comparison between **9RouterX**, upstream **9router-go**, and the origin
 | **Default Port** | **`20128`** | `20128` | `20128` |
 | **Database Compatibility** | **Drop-in `DATA_DIR/db/data.sqlite` sharing** | `DATA_DIR/db/data.sqlite` | `~/.9router/db/data.sqlite` |
 | **Embedded Dashboard** | **Svelte 5 + Vite + Tailwind 4 (`shadcn-svelte` + `layerchart`)** | Embedded Web UI | Next.js React Web App |
-| **Supported Providers** | **155 Providers (91 API · 28 OAuth · 29 Free · 4 Cookie)** | Core Provider Subset | Core JS Providers |
+| **Supported Providers** | **155 Providers (`91 API` · `28 OAuth` · `29 Free` · `4 Cookie`)** | Core Provider Subset | Core JS Providers |
 | **Cataloged Free Models** | **248 Free Models across 36 Providers (24 Keyless)** | Static Subset | Manual Configuration |
 | **Token Saver Suite** | **20–40% RTK Compression, 50+ Tool Filters, GCF Headroom, Context Squeezer, Tool Repair** | Not Included | Not Included |
 | **Per-Key Governance** | **Daily Cost Cutoff, Request Limits, IP Whitelist, Plan Templates, PII Masking** | Basic Key Auth | Basic Key Auth |
-| **Caching Layer** | **Semantic Cache + Prompt Cache + FastJSON** | Passthrough | Passthrough |
+| **Caching Layer** | **Semantic Cache + Prompt Cache + Sticky TTL (~90% Read Savings) + FastJSON** | Passthrough | Passthrough |
+| **Resilience Controls** | **3-Tier Circuit Breaker, Windowed-LRU, Auto-Prune, Burn-In Protection** | Basic Failover | Basic Failover |
 | **Advanced Modules** | **MCP Server, A2A, TLS Stealth, MITM Inspector, Multi-Target Webhooks, Telegram Bot, Vault** | Core Proxy Routing | Core Proxy Routing |
 | **Supported Platforms** | **5 Platforms** (`linux-x64`, `linux-arm64`, `win32-x64`, `darwin-x64`, `darwin-arm64`) | Go Target Builds | Requires Node.js Environment |
 
@@ -406,7 +421,7 @@ Factual comparison between **9RouterX**, upstream **9router-go**, and the origin
 <details>
 <summary><strong>1. Does 9RouterX support Claude Code, Cursor, Codex, and Cline?</strong></summary>
 
-Yes. 9RouterX exposes both Anthropic-compatible (`http://localhost:20128`) and OpenAI-compatible (`http://localhost:20128/v1`) endpoints, alongside built-in MCP Server and A2A protocol support. You can connect Claude Code, Cursor, OpenAI Codex CLI, Cline, Roo Code, OpenCode, OpenClaw (use explicit IPv4 `http://127.0.0.1:20128`), Antigravity, and Gemini CLI directly to port `20128`.
+Yes. 9RouterX exposes Anthropic-compatible (`http://localhost:20128`), OpenAI-compatible (`http://localhost:20128/v1`), Responses API, and Ollama-compatible endpoints, alongside built-in MCP Server and A2A protocol support. You can connect Claude Code, Cursor, OpenAI Codex CLI, Cline, Roo Code, OpenCode, OpenClaw (use explicit IPv4 `http://127.0.0.1:20128`), Antigravity, and Gemini CLI directly to port `20128`.
 </details>
 
 <details>
@@ -431,7 +446,7 @@ AI coding agents consume massive context windows when reading CLI outputs, direc
 <details>
 <summary><strong>5. Can I migrate from 9Router or 9router-go without losing my keys and combos?</strong></summary>
 
-Yes. 9RouterX shares the exact same default port (`20128`) and SQLite database schema (`DATA_DIR/db/data.sqlite`). Stop your existing 9Router instance and start 9RouterX—all providers, OAuth connections, combos, client API keys, and usage statistics carry over immediately without migration scripts.
+Yes. 9RouterX shares the exact same default port (`20128`) and SQLite database schema (`DATA_DIR/db/data.sqlite`). Run `9routerx service take-over` (or stop your existing 9Router instance and start 9RouterX)—all providers, OAuth connections, combos, client API keys, and usage statistics carry over immediately without migration scripts.
 </details>
 
 <details>
