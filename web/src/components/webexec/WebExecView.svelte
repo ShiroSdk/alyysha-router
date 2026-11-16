@@ -6,6 +6,7 @@
   import Toggle from '../../lib/ui/Toggle.svelte'
   import { TriangleAlert, RefreshCw } from 'lucide-svelte'
   import { api, type WebExecStatus, type WebExecCheckResult } from '../../api/client'
+  import { reloadProviderCatalog } from '../../lib/providers'
   import { t } from '../../lib/i18n.svelte'
   import { notifications } from '../../lib/notifications'
 
@@ -41,6 +42,9 @@
     try {
       await api.updateSettings({ claudeWebEnabled: enabled })
       claudeWebOn = enabled
+      // The served catalog changes with the gate: refresh it so the Providers
+      // tab shows (or hides) claude-web without a page reload.
+      void reloadProviderCatalog().catch(() => {})
       notifications.success(enabled
         ? 'Claude Web enabled — the provider appears in the catalog while the toggle (or CLAUDE_WEB_ENABLED) stays on.'
         : 'Claude Web disabled — the provider is hidden from the catalog and rejected at dispatch.')

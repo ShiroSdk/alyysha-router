@@ -114,6 +114,17 @@ let inflight: Promise<void> | null = null
 export async function loadProviderCatalog(): Promise<void> {
   if (loaded) return
   if (inflight) return inflight
+  return reloadProviderCatalog()
+}
+
+/**
+ * Refetches the catalog even when it was already loaded. The claude-web
+ * toggle changes the served set live (the gate filters the endpoint), so the
+ * toggle calls this after saving — otherwise the in-memory copy would keep
+ * hiding the provider until a full page reload.
+ */
+export async function reloadProviderCatalog(): Promise<void> {
+  loaded = false
   inflight = (async () => {
     const res = await fetch('/api/providers/catalog')
     if (!res.ok) throw new Error(`provider catalog: HTTP ${res.status}`)
