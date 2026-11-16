@@ -12,28 +12,15 @@
     type ProviderNode,
     type Settings
   } from './api/client'
-  import AnalyticsView from './components/analytics/AnalyticsView.svelte'
-  import CliToolsView from './components/CliToolsView.svelte'
-  import CombosView from './components/combos/CombosView.svelte'
-  import ConnectionsView from './components/connections/ConnectionsView.svelte'
   import AddProviderFromLinkModal from './components/connections/AddProviderFromLinkModal.svelte'
   import ImportProviderModal from './components/connections/ImportProviderModal.svelte'
   import { parseProviderShareHash, type ProviderShareLink } from './lib/providerShare'
   import OAuthCallbackView from './components/connections/OAuthCallbackView.svelte'
-  import EndpointView from './components/EndpointView.svelte'
   import LoginView from './components/LoginView.svelte'
-  import MediaKindView from './components/media/MediaKindView.svelte'
-  import MediaProviderDetail from './components/media/MediaProviderDetail.svelte'
-  import ProxyPoolsView from './components/ProxyPoolsView.svelte'
-  import ProfileSettingsView from './components/ProfileSettingsView.svelte'
-  import MediaWebView from './components/media/MediaWebView.svelte'
-  import QuotaTrackerView from './components/QuotaTrackerView.svelte'
   import SkillsView from './components/SkillsView.svelte'
   import FreeTierView from './components/FreeTierView.svelte'
   import WebExecView from './components/webexec/WebExecView.svelte'
   import WebhookTargetsView from './components/notifications/WebhookTargetsView.svelte'
-  import SettingsView from './components/SettingsView.svelte'
-  import SecurityPanel from './components/security/SecurityPanel.svelte'
   import SecurityLogView from './components/security/SecurityLogView.svelte'
   import AuditLogView from './components/security/AuditLogView.svelte'
   import PlansView from './components/plans/PlansView.svelte'
@@ -42,12 +29,11 @@
   import UpdateBanner from './components/UpdateBanner.svelte'
   import type { SystemVersionInfo } from './api/client'
   import Toasts from './lib/ui/Toasts.svelte'
+  import LazyView from './lib/ui/LazyView.svelte'
   import { notifications } from './lib/notifications'
   import TerminalView from './components/TerminalView.svelte'
-  import TokenSaverView from './components/TokenSaverView.svelte'
   import TlsStealthBanner from './components/TlsStealthBanner.svelte'
   import CredentialVaultBanner from './components/CredentialVaultBanner.svelte'
-  import JailbreakView from './components/JailbreakView.svelte'
   import TopBar from './components/TopBar.svelte'
   import CommandPalette from './components/CommandPalette.svelte'
   import AsciiRoutingBg from './components/AsciiRoutingBg.svelte'
@@ -615,211 +601,116 @@
             </div>
           {:else}
             {#if activeTab === 'endpoint'}
-              <EndpointView {apiKeys} {settings} onRefresh={loadData} navigate={(tab) => navigate(tab)} />
+              <LazyView load={() => import('./components/EndpointView.svelte')} {apiKeys} {settings} onRefresh={loadData} navigate={(tab: ActiveTab) => navigate(tab)} />
             {:else if activeTab === 'connections'}
-              <ConnectionsView
-                {connections}
-                {providerNodes}
-                onRefresh={loadData}
-                bind:selectedProviderId
-                onSelectProvider={(id) => navigate('connections', false, id)}
-                onBackToOverview={() => navigate('connections', false, null)}
-                onImport={() => (isImportOpen = true)}
-              />
+              {#await import('./components/connections/ConnectionsView.svelte')}
+                <div class="flex min-h-[60vh] items-center justify-center text-text-muted">
+                  <Loader2 class="w-6 h-6 animate-spin text-brand-500" aria-hidden="true" />
+                </div>
+              {:then mod}
+                {@const View = mod.default}
+                <View
+                  {connections}
+                  {providerNodes}
+                  onRefresh={loadData}
+                  bind:selectedProviderId
+                  onSelectProvider={(id) => navigate('connections', false, id)}
+                  onBackToOverview={() => navigate('connections', false, null)}
+                  onImport={() => (isImportOpen = true)}
+                />
+              {/await}
             {:else if activeTab === 'combos'}
-              <CombosView {combos} {connections} {providerNodes} onRefresh={loadData} bind:isCreatingOpen={isCreateComboOpen} />
+              {#await import('./components/combos/CombosView.svelte')}
+                <div class="flex min-h-[60vh] items-center justify-center text-text-muted">
+                  <Loader2 class="w-6 h-6 animate-spin text-brand-500" aria-hidden="true" />
+                </div>
+              {:then mod}
+                {@const View = mod.default}
+                <View {combos} {connections} {providerNodes} onRefresh={loadData} bind:isCreatingOpen={isCreateComboOpen} />
+              {/await}
             {:else if activeTab === 'analytics' || activeTab === 'usage-cache' || activeTab === 'usage-compression'}
               <!-- Cache and Compression Analytics are Usage sections (#200);
                    AnalyticsView renders all four sections under one header. -->
-              <AnalyticsView {connections} {providerNodes} tab={activeTab} onNavigate={(next) => navigate(next)} />
+              <LazyView load={() => import('./components/analytics/AnalyticsView.svelte')} {connections} {providerNodes} tab={activeTab} onNavigate={(next: ActiveTab) => navigate(next)} />
             {:else if activeTab === 'quota'}
-              <QuotaTrackerView {connections} />
+              <LazyView load={() => import('./components/QuotaTrackerView.svelte')} {connections} />
             {:else if activeTab === 'token-saver'}
-              <TokenSaverView {settings} onRefresh={loadData} />
+              <LazyView load={() => import('./components/TokenSaverView.svelte')} {settings} onRefresh={loadData} />
             {:else if activeTab === 'cli-tools'}
-              <CliToolsView {apiKeys} onRefresh={loadData} />
+              <LazyView load={() => import('./components/CliToolsView.svelte')} {apiKeys} onRefresh={loadData} />
             {:else if activeTab === 'media-embedding'}
               {#if selectedMedia && selectedMediaCatalogItem}
-                <MediaProviderDetail
-                  provider={selectedMediaCatalogItem}
-                  kind="embedding"
-                  {connections}
-                  {apiKeys}
-                  {settings}
-                  onBack={() => {
-                    selectedMedia = null
-                    navigate('media-embedding')
-                  }}
-                  onRefresh={loadData}
-                />
+                <LazyView load={() => import('./components/media/MediaProviderDetail.svelte')} provider={selectedMediaCatalogItem} kind="embedding" {connections} {apiKeys} {settings} onBack={() => {
+                  selectedMedia = null
+                  navigate('media-embedding')
+                }} onRefresh={loadData} />
               {:else}
-                <MediaKindView
-                  kind="embedding"
-                  {connections}
-                  {apiKeys}
-                  {settings}
-                  {combos}
-                  onRefresh={loadData}
-                  onSelectProvider={(k, id) => navigateMediaProvider(k, id)}
-                />
+                <LazyView load={() => import('./components/media/MediaKindView.svelte')} kind="embedding" {connections} {apiKeys} {settings} {combos} onRefresh={loadData} onSelectProvider={(k: string, id: string) => navigateMediaProvider(k, id)} />
               {/if}
             {:else if activeTab === 'media-image'}
               {#if selectedMedia && selectedMediaCatalogItem}
-                <MediaProviderDetail
-                  provider={selectedMediaCatalogItem}
-                  kind="image"
-                  {connections}
-                  {apiKeys}
-                  {settings}
-                  onBack={() => {
-                    selectedMedia = null
-                    navigate('media-image')
-                  }}
-                  onRefresh={loadData}
-                />
+                <LazyView load={() => import('./components/media/MediaProviderDetail.svelte')} provider={selectedMediaCatalogItem} kind="image" {connections} {apiKeys} {settings} onBack={() => {
+                  selectedMedia = null
+                  navigate('media-image')
+                }} onRefresh={loadData} />
               {:else}
-                <MediaKindView
-                  kind="image"
-                  {connections}
-                  {apiKeys}
-                  {settings}
-                  {combos}
-                  onRefresh={loadData}
-                  onSelectProvider={(k, id) => navigateMediaProvider(k, id)}
-                />
+                <LazyView load={() => import('./components/media/MediaKindView.svelte')} kind="image" {connections} {apiKeys} {settings} {combos} onRefresh={loadData} onSelectProvider={(k: string, id: string) => navigateMediaProvider(k, id)} />
               {/if}
             {:else if activeTab === 'media-tts'}
               {#if selectedMedia && selectedMediaCatalogItem}
-                <MediaProviderDetail
-                  provider={selectedMediaCatalogItem}
-                  kind="tts"
-                  {connections}
-                  {apiKeys}
-                  {settings}
-                  onBack={() => {
-                    selectedMedia = null
-                    navigate('media-tts')
-                  }}
-                  onRefresh={loadData}
-                />
+                <LazyView load={() => import('./components/media/MediaProviderDetail.svelte')} provider={selectedMediaCatalogItem} kind="tts" {connections} {apiKeys} {settings} onBack={() => {
+                  selectedMedia = null
+                  navigate('media-tts')
+                }} onRefresh={loadData} />
               {:else}
-                <MediaKindView
-                  kind="tts"
-                  {connections}
-                  {apiKeys}
-                  {settings}
-                  {combos}
-                  onRefresh={loadData}
-                  onSelectProvider={(k, id) => navigateMediaProvider(k, id)}
-                />
+                <LazyView load={() => import('./components/media/MediaKindView.svelte')} kind="tts" {connections} {apiKeys} {settings} {combos} onRefresh={loadData} onSelectProvider={(k: string, id: string) => navigateMediaProvider(k, id)} />
               {/if}
             {:else if activeTab === 'media-stt'}
               {#if selectedMedia && selectedMediaCatalogItem}
-                <MediaProviderDetail
-                  provider={selectedMediaCatalogItem}
-                  kind="stt"
-                  {connections}
-                  {apiKeys}
-                  {settings}
-                  onBack={() => {
-                    selectedMedia = null
-                    navigate('media-stt')
-                  }}
-                  onRefresh={loadData}
-                />
+                <LazyView load={() => import('./components/media/MediaProviderDetail.svelte')} provider={selectedMediaCatalogItem} kind="stt" {connections} {apiKeys} {settings} onBack={() => {
+                  selectedMedia = null
+                  navigate('media-stt')
+                }} onRefresh={loadData} />
               {:else}
-                <MediaKindView
-                  kind="stt"
-                  {connections}
-                  {apiKeys}
-                  {settings}
-                  {combos}
-                  onRefresh={loadData}
-                  onSelectProvider={(k, id) => navigateMediaProvider(k, id)}
-                />
+                <LazyView load={() => import('./components/media/MediaKindView.svelte')} kind="stt" {connections} {apiKeys} {settings} {combos} onRefresh={loadData} onSelectProvider={(k: string, id: string) => navigateMediaProvider(k, id)} />
               {/if}
             {:else if activeTab === 'media-video'}
               {#if selectedMedia && selectedMediaCatalogItem}
-                <MediaProviderDetail
-                  provider={selectedMediaCatalogItem}
-                  kind="video"
-                  {connections}
-                  {apiKeys}
-                  {settings}
-                  onBack={() => {
-                    selectedMedia = null
-                    navigate('media-video')
-                  }}
-                  onRefresh={loadData}
-                />
+                <LazyView load={() => import('./components/media/MediaProviderDetail.svelte')} provider={selectedMediaCatalogItem} kind="video" {connections} {apiKeys} {settings} onBack={() => {
+                  selectedMedia = null
+                  navigate('media-video')
+                }} onRefresh={loadData} />
               {:else}
-                <MediaKindView
-                  kind="video"
-                  {connections}
-                  {apiKeys}
-                  {settings}
-                  {combos}
-                  onRefresh={loadData}
-                  onSelectProvider={(k, id) => navigateMediaProvider(k, id)}
-                />
+                <LazyView load={() => import('./components/media/MediaKindView.svelte')} kind="video" {connections} {apiKeys} {settings} {combos} onRefresh={loadData} onSelectProvider={(k: string, id: string) => navigateMediaProvider(k, id)} />
               {/if}
             {:else if activeTab === 'media-systemone'}
               {#if selectedMedia && selectedMediaCatalogItem}
-                <MediaProviderDetail
-                  provider={selectedMediaCatalogItem}
-                  kind={selectedMedia.kind as any}
-                  {connections}
-                  {apiKeys}
-                  {settings}
-                  onBack={() => {
-                    selectedMedia = null
-                    navigate('media-systemone')
-                  }}
-                  onRefresh={loadData}
-                />
+                <LazyView load={() => import('./components/media/MediaProviderDetail.svelte')} provider={selectedMediaCatalogItem} kind={selectedMedia.kind as any} {connections} {apiKeys} {settings} onBack={() => {
+                  selectedMedia = null
+                  navigate('media-systemone')
+                }} onRefresh={loadData} />
               {:else}
-                <MediaKindView
-                  kind="systemone"
-                  {connections}
-                  {apiKeys}
-                  {settings}
-                  {combos}
-                  onRefresh={loadData}
-                  onSelectProvider={(k, id) => navigateMediaProvider(k, id)}
-                />
+                <LazyView load={() => import('./components/media/MediaKindView.svelte')} kind="systemone" {connections} {apiKeys} {settings} {combos} onRefresh={loadData} onSelectProvider={(k: string, id: string) => navigateMediaProvider(k, id)} />
               {/if}
             {:else if activeTab === 'media-web'}
               {#if selectedMedia && selectedMediaCatalogItem}
-                <MediaProviderDetail
-                  provider={selectedMediaCatalogItem}
-                  kind={selectedMedia.kind as any}
-                  {connections}
-                  {apiKeys}
-                  {settings}
-                  onBack={() => {
-                    selectedMedia = null
-                    navigate('media-web')
-                  }}
-                  onRefresh={loadData}
-                />
+                <LazyView load={() => import('./components/media/MediaProviderDetail.svelte')} provider={selectedMediaCatalogItem} kind={selectedMedia.kind as any} {connections} {apiKeys} {settings} onBack={() => {
+                  selectedMedia = null
+                  navigate('media-web')
+                }} onRefresh={loadData} />
               {:else}
-                <MediaWebView
-                  {connections}
-                  {combos}
-                  onRefresh={loadData}
-                  onSelectProvider={(kind, id) => navigateMediaProvider(kind, id)}
-                />
+                <LazyView load={() => import('./components/media/MediaWebView.svelte')} {connections} {combos} onRefresh={loadData} onSelectProvider={(kind: string, id: string) => navigateMediaProvider(kind, id)} />
               {/if}
             {:else if activeTab === 'proxy-pools'}
-              <ProxyPoolsView />
+              <LazyView load={() => import('./components/ProxyPoolsView.svelte')} />
             {:else if activeTab === 'skills'}
               <SkillsView />
             {:else if activeTab === 'console-log' || activeTab === 'terminal'}
               <TerminalView />
             {:else if activeTab === 'settings'}
-              <ProfileSettingsView {settings} onRefresh={loadData} />
+              <LazyView load={() => import('./components/ProfileSettingsView.svelte')} {settings} onRefresh={loadData} />
             {:else if activeTab === 'security'}
-              <SecurityPanel />
+              <LazyView load={() => import('./components/security/SecurityPanel.svelte')} />
             {:else if activeTab === 'security-log'}
               <SecurityLogView />
             {:else if activeTab === 'audit-log'}
@@ -827,7 +718,7 @@
             {:else if activeTab === 'plans'}
               <PlansView />
             {:else if activeTab === 'jailbreak'}
-              <JailbreakView />
+              <LazyView load={() => import('./components/JailbreakView.svelte')} />
             {:else if activeTab === 'free-tier'}
               <FreeTierView />
             {:else if activeTab === 'webexec'}
