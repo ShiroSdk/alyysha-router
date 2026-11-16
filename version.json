@@ -9,13 +9,13 @@
     "windows_amd64": "https://github.com/yanstd888/9routerx/releases/download/v1.4.0/9routerx-windows-amd64.exe"
   },
   "sha256s": {
-    "darwin_amd64": "b8ebd8f598a714580fdd036f8816ab4133398af12ead008f7bbaefdc5b490ba8",
-    "darwin_arm64": "ed1af604b430103ae9f44c202f686fa4cb50ca9b685f15e635130d3bf3b881a8",
-    "linux_amd64": "ec112293c83235a9273ba4042dabe75556aadb2899fba07727129b6e5919d7f5",
-    "linux_arm64": "288f040a42a19991cfedb50a85938fa15672395c697900b1e3a8012af4125f59",
-    "windows_amd64": "739d23152c38ab94516b1534b3bf832113b7d886be3551743903370f2c2118ec"
+    "darwin_amd64": "949e4f4f8f1bdff3d85a1cd6f30a926476ee1ba511924891ec575a5b3dec8973",
+    "darwin_arm64": "1a97691e93a9a0b661b053487f2389385d0eade4c3637b3e638c7d8c8cd46902",
+    "linux_amd64": "9d71e7026285340811bcf155a70ac2efd41c72fba118cf0f6ce4f89403bba92a",
+    "linux_arm64": "9cc6bd265ca74147e0a9b45df7f36559a430cc5bef6304a0ec03151ad0ad8803",
+    "windows_amd64": "369db3456728d73b5ea67ad586006aca13edbdb2d0c3d7c994235977e3dacb4a"
   },
-  "releaseNotes": "\n\n### Added\n- **Claude Web (unofficial, opt-in)** — provider `claude-web` untuk claude.ai lewat sessionKey browser. Nonaktif secara default: butuh `CLAUDE_WEB_ENABLED=true` atau toggle di bagian Web Cookie Providers. Melanggar ToS Anthropic dan bisa berhenti kapan saja; tidak ada jaminan dukungan.\n\n### Changed\n- **Dashboard dimuat per tab** — view besar (Endpoint, Token Saver, Jailbreak, Quota Tracker, Analytics, CLI Tools) sekarang di-lazy-load, jadi bundle awal tidak lagi membawa seluruh dashboard.\n\n### Fixed\n- **Tabel lebar di mobile** — tabel 540-850px kini scroll di dalam kartunya sendiri, kolom sekunder disembunyikan di layar kecil sehingga halaman tidak lagi melebar.\n- **Polling saat tab tidak aktif** — semua timer view berhenti menghitung ketika tab browser disembunyikan.\n",
-  "releaseUrl": "https://github.com/yanstd888/9routerx/releases/tag/v1.3.0",
-  "publishedAt": "2026-11-16T18:45:35Z"
+  "releaseNotes": "\n\n### Added\n- **Zero-retry dedup + attempt caps** — a body that just failed a transient status is remembered (LRU 512, TTL 5 menit); request berikutnya dengan body sama melewati retry ladder langsung ke fallback, dan cap attempt fallback kini bertingkat exact > provider > global lewat `retry.attempt_caps`. Semua default = perilaku lama.\n- **Context window guard** — kandidat fallback yang window-nya tidak muat estimasi prompt (chars/4, tanpa tokenizer) di-skip dan rantai lanjut ke provider berikutnya; `fallback.context_guard` = skip (default) | truncate | off.\n- **Budget downgrade** — `budget.breach_mode` = reject (default) | downgrade: breach tidak langsung 402 melainkan reroute ke model termurah yang lolos context guard, dengan header `X-Budget-Downgraded`; 402 generik hanya saat tidak ada kandidat.\n- **Routing explain** — `GET /api/routing-explain?limit=N` (ring 200 entri in-memory) + panel dashboard menampilkan kandidat yang dipertimbangkan dan alasannya.\n- **Health radar** — agregasi p50/p95/uptime 24 jam per provider (tabel freeProviderRadar), tie-breaker fallback gabungan health+latency di bawah urutan config, kolom p50/uptime di panel Free Provider Health.\n- **Recovery notification** — provider yang keluar dari cooldown menghasilkan notifikasi recovery dengan dedupe key `<provider>#recovery`.\n- **Account blacklist TTL** — `accounts.blacklist_ttl` (menit; 0 = perilaku lama) memarkir koneksi 401/403/402 dari rotasi sesuai TTL operator.\n- **Web Cookie Providers section** — kategori lane cookie tampil sebagai seksi sendiri di halaman Providers; claude-web tetap terlihat dengan badge disabled saat gate-nya off.\n\n### Changed\n- **Auto-prune dead keys** — koneksi yang menjawab 401/403/402 ditandai `disabledReason` + timestamp (badge merah di daftar koneksi); sweep berkala melepasnya dari pool aktif setelah `keys.autoprune_ttl` (0 = sweep off).\n",
+  "releaseUrl": "https://github.com/yanstd888/9routerx/releases/tag/v1.4.0",
+  "publishedAt": "2026-11-16T21:07:45Z"
 }
