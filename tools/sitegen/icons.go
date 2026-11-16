@@ -120,6 +120,7 @@ var headingIcons = map[string]string{
 	"9routerx-vs-9router-vs-omniroute":             "arrow-left-right",
 	"architecture-comparison":                      "compass",
 	"claude-web-unofficial-opt-in":                 "cloud",
+	"star-history":                                 "activity",
 	"frequently-asked-questions-faq":               "help-circle",
 	"contributing":                                 "users",
 	"docs":                                         "book-open",
