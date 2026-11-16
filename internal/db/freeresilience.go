@@ -302,3 +302,56 @@ func (r *Repo) LatestFreeTierRecoveryEvents(limit int) ([]FreeTierRecoveryEvent,
 	}
 	return out, nil
 }
+
+// SaveFreeProviderRadar persists the health-radar aggregation (one JSON row
+// per provider), rewritten on the scheduler's flush pass.
+func (r *Repo) SaveFreeProviderRadar(rows []freeresilience.RadarRow, now time.Time) error {
+	if len(rows) == 0 {
+		return nil
+	}
+	nowStr := now.UTC().Format(time.RFC3339)
+	for _, row := range rows {
+		if row.Provider == "" {
+			continue
+		}
+		blob, err := json.Marshal(row)
+		if err != nil {
+			return fmt.Errorf("save free provider radar %s: %w", row.Provider, err)
+		}
+		if _, err := r.db.Exec(
+			`INSERT INTO freeProviderRadar (provider, radar, updatedAt)
+			 VALUES (?, ?, ?)
+			 ON CONFLICT(provider) DO UPDATE SET radar = excluded.radar, updatedAt = excluded.updatedAt`,
+			row.Provider, string(blob), nowStr,
+		); err != nil {
+			return fmt.Errorf("save free provider radar %s: %w", row.Provider, err)
+		}
+	}
+	return nil
+}
+
+// LoadFreeProviderRadar reads the persisted radar rows back.
+func (r *Repo) LoadFreeProviderRadar() (map[string]freeresilience.RadarRow, error) {
+	rows, err := r.db.Query(`SELECT provider, radar FROM freeProviderRadar`)
+	if err != nil {
+		return nil, fmt.Errorf("load free provider radar: %w", err)
+	}
+	defer rows.Close()
+	out := map[string]freeresilience.RadarRow{}
+	for rows.Next() {
+		var provider, blob string
+		if err := rows.Scan(&provider, &blob); err != nil {
+			return nil, fmt.Errorf("load free provider radar: scan: %w", err)
+		}
+		if blob == "" {
+			continue
+		}
+		var row freeresilience.RadarRow
+		if err := json.Unmarshal([]byte(blob), &row); err != nil {
+			continue
+		}
+		out[provider] = row
+	}
+	return out, rows.Err()
+}
+

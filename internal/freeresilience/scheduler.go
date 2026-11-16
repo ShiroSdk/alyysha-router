@@ -42,6 +42,7 @@ func StartScheduler(ctx context.Context, tracker *Tracker, interval time.Duratio
 					log.Printf("[freeresilience] %d provider(s) rejoined rotation: %v", len(rejoined), rejoined)
 				}
 				tracker.FlushHealth()
+				tracker.FlushRadar()
 			}
 		}
 	}()

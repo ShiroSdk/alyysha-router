@@ -21,6 +21,8 @@ type ProviderHealthResponse struct {
 	Recent429      int     `json:"recent429"`
 	Recent403      int     `json:"recent403"`
 	P95LatencyMs   float64 `json:"p95LatencyMs"`
+	P50LatencyMs   float64 `json:"p50LatencyMs"`
+	UptimePct      float64 `json:"uptimePct"`
 	Regime         string  `json:"regime,omitempty"`
 	FreeModels     int     `json:"freeModels"`
 }
@@ -69,6 +71,8 @@ func (h *DashboardHandler) HandleGetProvidersHealth(w http.ResponseWriter, r *ht
 			Recent429:      row.RecentRate429,
 			Recent403:      row.Recent403,
 			P95LatencyMs:   row.P95LatencyMs,
+			P50LatencyMs:   row.P50LatencyMs,
+			UptimePct:      row.UptimePct,
 			Regime:         row.Regime,
 			FreeModels:     counts[row.Provider],
 		}

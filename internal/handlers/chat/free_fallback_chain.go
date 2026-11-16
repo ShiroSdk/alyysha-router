@@ -111,7 +111,10 @@ func (h *ChatHandler) freeFallbackCandidates(failedProvider, model string, exclu
 			addEligible(pid)
 		}
 	}
-	return freeresilience.OrderCandidates(h.FreeResilience.FallbackConfig().Order, eligible, h.FreeResilience.HealthScore)
+	// The tie-breaker is the combined health score: success rate blended
+	// with p50 latency, so among proven providers the faster one ranks first.
+	// The operator's configured order still wins above all of this.
+	return freeresilience.OrderCandidates(h.FreeResilience.FallbackConfig().Order, eligible, h.FreeResilience.CombinedHealthScore)
 }
 
 // paidFallbackCandidates lists paid providers that serve the model — the last

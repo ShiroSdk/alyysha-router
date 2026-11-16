@@ -138,7 +138,8 @@
           <tr class="text-text-muted border-b border-border-subtle">
             <th scope="col" class="py-2 pr-3 font-medium">Provider</th>
             <th scope="col" class="py-2 pr-3 font-medium">Success (24h)</th>
-            <th scope="col" class="py-2 pr-3 font-medium hidden md:table-cell">p95 latency</th>
+            <th scope="col" class="py-2 pr-3 font-medium hidden md:table-cell">p50 / p95</th>
+            <th scope="col" class="py-2 pr-3 font-medium hidden md:table-cell">Uptime</th>
             <th scope="col" class="py-2 pr-3 font-medium hidden md:table-cell">429 / 403</th>
             <th scope="col" class="py-2 pr-3 font-medium hidden lg:table-cell">Regime</th>
             <th scope="col" class="py-2 font-medium">Status</th>
@@ -158,7 +159,12 @@
               </td>
               <td class="py-2 pr-3 font-mono text-text-main whitespace-nowrap">{rateLabel(row)}</td>
               <td class="py-2 pr-3 font-mono text-text-muted whitespace-nowrap hidden md:table-cell">
+                {row.p50LatencyMs > 0 ? `${Math.round(row.p50LatencyMs)}` : '—'}
+                /
                 {row.p95LatencyMs > 0 ? `${Math.round(row.p95LatencyMs)} ms` : '—'}
+              </td>
+              <td class="py-2 pr-3 font-mono text-text-muted whitespace-nowrap hidden md:table-cell">
+                {row.uptimePct >= 0 ? `${Math.round(row.uptimePct)}%` : '—'}
               </td>
               <td class="py-2 pr-3 font-mono text-text-muted whitespace-nowrap hidden md:table-cell">
                 {row.recent429} / {row.recent403}

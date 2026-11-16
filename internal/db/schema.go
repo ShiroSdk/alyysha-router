@@ -743,6 +743,14 @@ var keiRouterTables = []tableDef{
 			{"updatedAt", "TEXT NOT NULL DEFAULT ''"},
 		},
 	},
+	{
+		name: "freeProviderRadar",
+		columns: [][2]string{
+			{"provider", "TEXT PRIMARY KEY"},
+			{"radar", "TEXT NOT NULL DEFAULT '{}'"},
+			{"updatedAt", "TEXT NOT NULL DEFAULT ''"},
+		},
+	},
 }
 
 // usageLedgerTables are Go-only tables backing the ledger retention in

@@ -37,6 +37,8 @@ type ProviderHealth struct {
 	RecentRate429  int     `json:"recent429"`                  // in window
 	Recent403      int     `json:"recent403"`                  // in window
 	P95LatencyMs   float64 `json:"p95LatencyMs"`
+	P50LatencyMs   float64 `json:"p50LatencyMs"`
+	UptimePct      float64 `json:"uptimePct"`
 	Regime         string  `json:"regime,omitempty"`
 	SuccessRatePct float64 `json:"successRatePct"` // convenience for the UI
 }
@@ -346,6 +348,8 @@ func (t *Tracker) healthOf(provider string, now time.Time, regimeOf RegimeFunc) 
 		h.RecentRate429 = r429
 		h.Recent403 = r403
 		h.P95LatencyMs = percentile95(latencies)
+		h.P50LatencyMs = percentileOf(latencies, 0.50)
+		h.UptimePct = h.SuccessRatePct
 		if h.Status == "" && len(ring) >= 5 && h.SuccessRate < 0.7 {
 			h.Status = "flaky"
 		}
