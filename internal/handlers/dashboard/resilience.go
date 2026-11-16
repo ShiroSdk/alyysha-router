@@ -3,7 +3,9 @@ package dashboard
 
 import (
 	"net/http"
+	"strconv"
 
+	"9routerx/proxy/internal/handlers/chat"
 	"9routerx/proxy/internal/handlerutil"
 	"9routerx/proxy/internal/resilience"
 )
@@ -87,3 +89,18 @@ func (h *DashboardHandler) HandleResetResilience(w http.ResponseWriter, r *http.
 // field below is what the two endpoints read, and a build that drops the import
 // should fail here rather than at the call site.
 var _ = resilience.DefaultController
+
+// HandleGetRoutingExplain serves GET /api/routing-explain?limit=N: the newest
+// routing decisions the fallback chain recorded, for the dashboard panel.
+// The store is an in-memory ring (200 entries) — disposable observability.
+func (h *DashboardHandler) HandleGetRoutingExplain(w http.ResponseWriter, r *http.Request) {
+	limit := 20
+	if raw := r.URL.Query().Get("limit"); raw != "" {
+		if n, err := strconv.Atoi(raw); err == nil && n > 0 && n <= 100 {
+			limit = n
+		}
+	}
+	handlerutil.WriteJSON(w, http.StatusOK, map[string]any{
+		"entries": chat.RoutingExplainSnapshot(limit),
+	})
+}

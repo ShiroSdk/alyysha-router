@@ -2144,6 +2144,7 @@ export const api = {
 
   // Settings
   getSettings: () => request<Settings>('/api/settings'),
+  getRoutingExplain: () => request<{ entries: Array<{ timestamp: string; provider: string; model: string; connectionId?: string; statusCode?: number; reason: string; outcome: string; latencyMs?: number }> }>('/api/routing-explain?limit=20'),
   updateSettings: (settings: Partial<Settings> | Record<string, unknown>) =>
     request<{ success: boolean }>('/api/settings', {
       method: 'PUT',

@@ -89,6 +89,7 @@ func (h *ChatHandler) handleAccountFallback(
 		// the budget was burned moments ago and the ladder is skipped whole.
 		budget, exhausted := fallbackAttemptBudget(body, provider)
 		rec := NewFallbackAttemptRecorderWithCap(budget)
+		defer RoutingExplainFromRecorder(rec)
 		ctx = WithFallbackAttemptRecorder(ctx, rec)
 		if exhausted {
 			log.Warn("fallback", "attempt budget exhausted for this body; ladder skipped", "provider", provider)

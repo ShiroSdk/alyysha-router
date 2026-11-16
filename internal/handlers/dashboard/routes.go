@@ -182,6 +182,7 @@ func RegisterRoutes(r chi.Router, h *DashboardHandler) {
 		r.Get("/plans/{id}", h.HandleGetPlan)
 		r.Put("/plans/{id}", h.HandleUpdatePlan)
 		r.Delete("/plans/{id}", h.HandleDeletePlan)
+		r.Post("/plans/{id}/apply-keys", h.HandleApplyPlanToKeys)
 		r.Get("/plans/{id}/keys", h.HandlePlanKeys)
 
 		// Teams: tenant cost centers (OmniRoute port) and the per-key billing
@@ -305,6 +306,7 @@ func RegisterRoutes(r chi.Router, h *DashboardHandler) {
 
 		// Cache Analytics & Management
 		r.Get("/resilience", h.HandleGetResilience)
+		r.Get("/routing-explain", h.HandleGetRoutingExplain)
 		r.Post("/resilience/reset", h.HandleResetResilience)
 		r.Get("/cache", h.HandleGetCache)
 		r.Delete("/cache", h.HandleDeleteCache)

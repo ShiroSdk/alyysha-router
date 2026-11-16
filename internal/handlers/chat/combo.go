@@ -692,7 +692,9 @@ func (h *ChatHandler) comboEntrySendable(modelInfo *ModelInfo, excludeIDs []stri
 // their history is trimmed to their context window before forwarding.
 func (h *ChatHandler) handleComboFallback(ctx context.Context, w http.ResponseWriter, body []byte, comboModels []string, strategy string, isStream bool, translateResponse bool, comboName string, stickyLimit int, adapterModels ...string) {
 	if FallbackAttemptRecorderFrom(ctx) == nil {
-		ctx = WithFallbackAttemptRecorder(ctx, NewFallbackAttemptRecorder())
+		rec := NewFallbackAttemptRecorder()
+		defer RoutingExplainFromRecorder(rec)
+		ctx = WithFallbackAttemptRecorder(ctx, rec)
 	}
 	cw := newCommittedResponseWriter(w)
 	cw.stream = isStream
@@ -1167,7 +1169,9 @@ func (h *ChatHandler) handleComboFallbackWithVisited(ctx context.Context, cw *co
 // their history is trimmed to their context window before forwarding.
 func (h *ChatHandler) handleMessagesComboFallback(ctx context.Context, w http.ResponseWriter, translatedReq map[string]any, comboModels []string, strategy string, isStream bool, comboName string, stickyLimit int, adapterModels ...string) {
 	if FallbackAttemptRecorderFrom(ctx) == nil {
-		ctx = WithFallbackAttemptRecorder(ctx, NewFallbackAttemptRecorder())
+		rec := NewFallbackAttemptRecorder()
+		defer RoutingExplainFromRecorder(rec)
+		ctx = WithFallbackAttemptRecorder(ctx, rec)
 	}
 	cw := newCommittedResponseWriter(w)
 	cw.stream = isStream
