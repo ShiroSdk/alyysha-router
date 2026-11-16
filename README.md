@@ -416,6 +416,19 @@ Factual capability matrix comparing **9RouterX**, upstream **9router-go**, and t
 | **Advanced Modules** | **MCP Server, A2A, TLS Stealth, MITM Inspector, Multi-Target Webhooks, Telegram Bot, Vault** | Core Proxy Routing | Core Proxy Routing |
 | **Supported Platforms** | **5 Platforms** (`linux-x64`, `linux-arm64`, `win32-x64`, `darwin-x64`, `darwin-arm64`) | Go Target Builds | Requires Node.js Environment |
 
+## Claude Web (Unofficial, Opt-in)
+
+9RouterX can also drive claude.ai's web interface with the `sessionKey` browser cookie through a provider named `claude-web`. **It is disabled by default and it is not part of the free-tier catalog.** Enable it with `CLAUDE_WEB_ENABLED=true` or the toggle in Dashboard → Web Cookie Providers; `CLAUDE_WEB_ENABLED=false` is the operator kill-switch that always wins.
+
+Be clear about what this lane is before enabling it:
+
+- It violates [Anthropic's terms of service](https://www.anthropic.com/legal/consumer-terms) — the account you paste the cookie from risks restriction or ban.
+- It is unofficial and unverified against a live session: claude.ai can change or remove the endpoints at any time, and when it breaks there is no support and no fix on any schedule.
+- The session key is a full-account credential: it never leaves the gateway except inside the Cookie header, but anyone with dashboard access can read the stored connection, so treat it like a password.
+- Usage is estimated locally (characters per token); claude.ai reports no counts on this lane.
+
+If you enable it anyway: paste the `sessionKey` cookie from a logged-in claude.ai browser into the connection's API-key field, keep the toggle on, and point your client's model at `claude-web`.
+
 ## Frequently Asked Questions (FAQ)
 
 <details>
