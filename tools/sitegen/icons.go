@@ -119,6 +119,7 @@ var headingIcons = map[string]string{
 	"setup-guide-summary-and-wiki-documentation":   "settings",
 	"9routerx-vs-9router-vs-omniroute":             "arrow-left-right",
 	"architecture-comparison":                      "compass",
+	"claude-web-unofficial-opt-in":                 "cloud",
 	"frequently-asked-questions-faq":               "help-circle",
 	"contributing":                                 "users",
 	"docs":                                         "book-open",
