@@ -206,6 +206,21 @@ func (h *ChatHandler) handleAccountFallback(
 		ctx = internalproxy.WithSeatBudget(ctx, seatBudgetMs)
 	}
 
+	// Context-aware rotation guard (fallback.context_guard): a provider whose
+	// window cannot hold the estimated prompt is skipped whole — the combo
+	// chain moves to the next provider instead of erroring mid-turn. "off"
+	// keeps the old path untouched.
+	if mode := currentContextGuardMode(); mode != "off" {
+		if newBody, action, reason := contextGuardDecision(mode, model, len(allConns), body); action == "skip" {
+			log.Warn("fallback", "context guard skipped provider", "provider", provider, "model", model, "reason", reason)
+			observ.IncFallback(provider, model, observ.FallbackReasonContextGuard)
+			return fmt.Errorf("context guard: %s", reason)
+		} else if action == "truncate" {
+			log.Warn("fallback", "context guard truncated the body for the only candidate", "provider", provider, "model", model, "reason", reason)
+			body = newBody
+		}
+	}
+
 	var excludeIDs []string
 	// Pools already refused by an OpenCode free-tier gate in this turn. The
 	// resolver filters them out, so the retry walks to the next egress instead

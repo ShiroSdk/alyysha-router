@@ -26,6 +26,7 @@ const (
 	FallbackReasonUpstreamError = "upstream_error"
 	FallbackReasonNoConnection  = "no_connection"
 	FallbackReasonUnhealthy     = "unhealthy"
+	FallbackReasonContextGuard = "context_guard"
 )
 
 // Metrics owns one registry and the collectors registered in it.

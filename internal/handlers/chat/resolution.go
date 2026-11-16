@@ -50,6 +50,11 @@ func NewChatHandler(repo *db.Repo, ts ...*shared.TokenSaverConfig) *ChatHandler 
 			if v, ok := stored["claudeWebEnabled"].(bool); ok {
 				executor.SetClaudeWebEnabled(v)
 			}
+			if raw, ok := stored["fallback"].(map[string]any); ok {
+				if mode, ok := raw["context_guard"].(string); ok {
+					SetContextGuardMode(mode)
+				}
+			}
 		}
 	}
 	cfg := &shared.TokenSaverConfig{}

@@ -130,6 +130,7 @@ func (h *DashboardHandler) HandleUpdateSettings(w http.ResponseWriter, r *http.R
 	applyDisplayCurrencyUpdate(updates)
 	applyClaudeWebEnabledUpdate(updates)
 	applyRetryAttemptCapsUpdate(updates)
+	applyContextGuardUpdate(updates)
 
 	// Auto-ping schedules are merged against the stored value rather than
 	// written through: a client that sends only `connections` would otherwise
@@ -1407,4 +1408,23 @@ func nonNegInt(v any) int {
 		return int(f)
 	}
 	return 0
+}
+
+// applyContextGuardUpdate normalizes the fallback.context_guard setting
+// (skip | truncate | off) and applies it live.
+func applyContextGuardUpdate(updates map[string]any) {
+	raw, present := updates["fallback"]
+	if !present {
+		return
+	}
+	delete(updates, "fallback")
+	fb, ok := raw.(map[string]any)
+	if !ok {
+		return
+	}
+	mode, ok := fb["context_guard"].(string)
+	if !ok {
+		return
+	}
+	chat.SetContextGuardMode(mode)
 }
