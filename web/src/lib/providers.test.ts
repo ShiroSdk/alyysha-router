@@ -124,7 +124,10 @@ describe('providers & media separation', () => {
   it('carries upstream display links (website/notice) for all registry providers', () => {
     // No upstream registry counterpart (Go-only entries), or no display link
     // upstream by design (mimo-free, mmf, opencode).
-    const exempt = new Set(['freebuff', 'kimi-coding', 'mimo-free', 'mmf', 'opencode'])
+    // mimocode is a hidden duplicate registration of mimo-free (same wire
+    // alias mmf, same models fetcher) — the alias dedup drops one of the pair
+    // at render time, and neither carries an upstream display link by design.
+    const exempt = new Set(['freebuff', 'kimi-coding', 'mimo-free', 'mmf', 'mimocode', 'opencode'])
     for (const p of PROVIDER_CATALOG) {
       if (exempt.has(p.id)) continue
       assert.ok(
