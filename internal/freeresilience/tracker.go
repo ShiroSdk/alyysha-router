@@ -522,3 +522,13 @@ func mathCeil(v float64) float64 {
 func math2Round(v float64) float64 {
 	return float64(int(v*10+0.5)) / 10
 }
+
+// Store returns the persistence backend behind the tracker (nil when the
+// tracker is in-memory only). The scheduler uses it for the optional
+// capability interfaces — radar persistence, recovery notifications.
+func (t *Tracker) Store() RecoveryStore {
+	if t == nil {
+		return nil
+	}
+	return t.store
+}

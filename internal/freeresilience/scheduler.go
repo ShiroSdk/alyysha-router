@@ -40,6 +40,15 @@ func StartScheduler(ctx context.Context, tracker *Tracker, interval time.Duratio
 			case <-ticker.C:
 				if rejoined := tracker.ExpireCooldowns(); len(rejoined) > 0 {
 					log.Printf("[freeresilience] %d provider(s) rejoined rotation: %v", len(rejoined), rejoined)
+					// The recovery ride-along: the operator's configured order
+					// already prefers these providers again on the next
+					// request, and a fresh failure re-cools them with a
+					// longer window (the attempts counter scales it). The
+					// notification makes the recovery visible.
+					if notifier, ok := tracker.Store().(RecoveryNotifier); ok {
+						created := NotifyRecovery(ctx, notifier, rejoined, time.Now())
+						log.Printf("[freeresilience] %d recovery notification(s) created", len(created))
+					}
 				}
 				tracker.FlushHealth()
 				tracker.FlushRadar()
