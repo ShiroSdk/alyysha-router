@@ -405,6 +405,8 @@ export interface Settings {
   updateCheckEnabled?: boolean
   /** Dashboard security & SSO (profile page, Next parity). */
   requireLogin?: boolean
+  /** Opt-in unofficial claude.ai lane (CLAUDE_WEB_ENABLED / toggle). */
+  claudeWebEnabled?: boolean
   hasPassword?: boolean
   authMode?: string
   ssoType?: string

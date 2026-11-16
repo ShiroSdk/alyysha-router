@@ -30,9 +30,12 @@ func NewChatHandler(repo *db.Repo, ts ...*shared.TokenSaverConfig) *ChatHandler 
 	// claude-web is opt-in: restore the operator's stored toggle so a restart
 	// keeps the lane enabled only when it was explicitly enabled. The env var
 	// overrides this inside the gate itself.
-	if stored, err := repo.GetSettingsRaw(); err == nil && stored != nil {
-		if v, ok := stored["claudeWebEnabled"].(bool); ok {
-			executor.SetClaudeWebEnabled(v)
+	// Tests build handlers with a nil repo; no store, no restore.
+	if repo != nil {
+		if stored, err := repo.GetSettingsRaw(); err == nil && stored != nil {
+			if v, ok := stored["claudeWebEnabled"].(bool); ok {
+				executor.SetClaudeWebEnabled(v)
+			}
 		}
 	}
 	cfg := &shared.TokenSaverConfig{}

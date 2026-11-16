@@ -7,6 +7,7 @@
   import { TriangleAlert, RefreshCw } from 'lucide-svelte'
   import { api, type WebExecStatus, type WebExecCheckResult } from '../../api/client'
   import { t } from '../../lib/i18n.svelte'
+  import { notifications } from '../../lib/notifications'
 
   // FASE 10.0 web-executor dashboard. The pool and its 15-minute health job
   // live server-side (internal/webexec); this view draws one card per provider
@@ -17,6 +18,38 @@
   let rows = $state<WebExecStatus[]>([])
   let loaded = $state(false)
   let failed = $state(false)
+
+  // claude-web is the one opt-in lane in this section: OFF until the env var
+  // or this toggle says otherwise, because the provider violates Claude's
+  // terms of service. The toggle writes the stored setting and applies live.
+  let claudeWebOn = $state(false)
+  let claudeWebLoaded = $state(false)
+  let claudeWebSaving = $state(false)
+
+  async function loadClaudeWeb() {
+    try {
+      const s = await api.getSettings()
+      claudeWebOn = s?.claudeWebEnabled === true
+      claudeWebLoaded = true
+    } catch {
+      claudeWebLoaded = true
+    }
+  }
+
+  async function toggleClaudeWeb(enabled: boolean) {
+    claudeWebSaving = true
+    try {
+      await api.updateSettings({ claudeWebEnabled: enabled })
+      claudeWebOn = enabled
+      notifications.success(enabled
+        ? 'Claude Web enabled — the provider appears in the catalog while the toggle (or CLAUDE_WEB_ENABLED) stays on.'
+        : 'Claude Web disabled — the provider is hidden from the catalog and rejected at dispatch.')
+    } catch {
+      notifications.error('Failed to update the Claude Web toggle.')
+    } finally {
+      claudeWebSaving = false
+    }
+  }
 
   // One in-flight/test result per provider, keyed the way the endpoints
   // address them. A failed session is a 200 with ok=false, so the error badge
@@ -39,6 +72,7 @@
 
   $effect(() => {
     void load()
+    void loadClaudeWeb()
     const timer = setInterval(() => {
       if (typeof document !== 'undefined' && document.hidden) return
       void load()
@@ -121,6 +155,30 @@
       </p>
     </div>
   </div>
+
+    <Card padding="md" class="space-y-3">
+    <div class="flex items-center justify-between gap-3">
+      <div>
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-[18px] text-brand-500">cloud</span>
+          <p class="font-semibold text-text-main text-sm">Claude Web (Unofficial)</p>
+          <Badge tone={claudeWebOn ? 'success' : 'neutral'} size="sm">{claudeWebOn ? 'enabled' : 'off'}</Badge>
+        </div>
+        <p class="text-[11px] text-text-subtle mt-1">
+          Opt-in claude.ai lane via the sessionKey browser cookie. Unofficial — violates Claude's terms of service, may break
+          or be rate limited anytime, and the account risks a ban. Off by default; CLAUDE_WEB_ENABLED=true is the operator
+          kill-switch and always wins over this toggle.
+        </p>
+      </div>
+      <Toggle
+        checked={claudeWebOn}
+        size="sm"
+        disabled={!claudeWebLoaded || claudeWebSaving}
+        label="Enable claude-web"
+        onChange={(v) => toggleClaudeWeb(v)}
+      />
+    </div>
+  </Card>
 
   <Card>
     <div class="flex items-center justify-between gap-3">
