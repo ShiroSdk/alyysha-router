@@ -14,6 +14,18 @@ Release history up to the fork point is archived in the upstream repo's
   the pending-fragment splice now lands under this Unreleased heading instead
   of above the file title.
 
+## [v1.3.0] - 2026-11-17
+
+### Added
+- **Claude Web (unofficial, opt-in)** — provider `claude-web` untuk claude.ai lewat sessionKey browser. Nonaktif secara default: butuh `CLAUDE_WEB_ENABLED=true` atau toggle di bagian Web Cookie Providers. Melanggar ToS Anthropic dan bisa berhenti kapan saja; tidak ada jaminan dukungan.
+
+### Changed
+- **Dashboard dimuat per tab** — view besar (Endpoint, Token Saver, Jailbreak, Quota Tracker, Analytics, CLI Tools) sekarang di-lazy-load, jadi bundle awal tidak lagi membawa seluruh dashboard.
+
+### Fixed
+- **Tabel lebar di mobile** — tabel 540-850px kini scroll di dalam kartunya sendiri, kolom sekunder disembunyikan di layar kecil sehingga halaman tidak lagi melebar.
+- **Polling saat tab tidak aktif** — semua timer view berhenti menghitung ketika tab browser disembunyikan.
+
 ## [v1.2.2] - 2026-11-15
 
 ### Fixed
