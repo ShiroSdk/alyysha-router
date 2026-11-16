@@ -572,7 +572,7 @@
         No recorded top compression runs yet.
       </div>
     {:else}
-      <div class="overflow-x-auto">
+      <div class="overflow-x-auto -mx-5 px-5">
         <table class="glyph-table w-full text-left text-xs min-w-[850px]">
           <thead>
             <tr class="border-b border-border text-text-muted">

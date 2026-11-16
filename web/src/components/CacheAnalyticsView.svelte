@@ -499,7 +499,7 @@
           No provider prompt cache data recorded yet.
         </div>
       {:else}
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto -mx-5 px-5">
           <table class="glyph-table w-full text-left text-xs min-w-[540px]">
             <thead>
               <tr class="border-b border-border text-text-muted">
@@ -557,14 +557,14 @@
           No model prompt cache data recorded yet.
         </div>
       {:else}
-        <div class="overflow-x-auto">
+        <div class="overflow-x-auto -mx-5 px-5">
           <table class="w-full text-left text-xs min-w-[540px]">
             <thead>
               <tr class="border-b border-border text-text-muted">
                 <th class="py-2.5 px-3 font-semibold">Model</th>
                 <th class="py-2.5 px-3 font-semibold text-right">Cached / Total Req</th>
                 <th class="py-2.5 px-3 font-semibold text-right">Cached Tokens</th>
-                <th class="py-2.5 px-3 font-semibold text-right">Creation Tokens</th>
+                <th class="py-2.5 px-3 font-semibold text-right hidden md:table-cell">Creation Tokens</th>
                 <th class="py-2.5 px-3 font-semibold text-right">Hit Rate</th>
               </tr>
             </thead>
@@ -580,7 +580,7 @@
                   <td class="py-2.5 px-3 text-right text-cyan-400 font-mono font-medium">
                     {row.cachedTokens.toLocaleString()}
                   </td>
-                  <td class="py-2.5 px-3 text-right text-purple-400 font-mono font-medium">
+                  <td class="py-2.5 px-3 text-right text-purple-400 font-mono font-medium hidden md:table-cell">
                     {row.cacheCreationTokens.toLocaleString()}
                   </td>
                   <td class="py-2.5 px-3 text-right font-medium text-emerald-500">
