@@ -14,6 +14,20 @@ Release history up to the fork point is archived in the upstream repo's
   the pending-fragment splice now lands under this Unreleased heading instead
   of above the file title.
 
+## [v1.5.0] - 2026-11-18
+
+### Added
+- **Cross-provider session affinity** — `routing.session_affinity` (off default | combo | global) binds native client sessions (Claude Code, Codex) to the connection that served them through a persistent lease with the vendor's prompt-cache window TTL (Claude 5m, Gemini 60m, others 30m).
+- **Connect command** — `9routerx connect <client>` patches the named AI client's config to point at this gateway. Dry-run shows the diff without writing; the real run backs up and writes atomically. A hooks-shaped payload is refused (CVE-2026-108593 guard). A dashboard Connect card drives the same patcher.
+- **Savings Ledger** — one USD figure aggregating prompt-cache and compression savings for the window, with a per-source breakdown and top-5 list. Compression USD is computed per model from the pricing table at the input rate.
+- **TOTP 2FA + backup codes** — the dashboard login can require a six-digit authenticator code (±90s skew) with ten bcrypt-hashed one-time backup codes. `9routerx reset-2fa` clears the enrollment after a dashboard-password confirmation.
+- **Settings history + rollback** — every write snapshots changed keys (old/new/source) into a settingsHistory table capped at 100 per key. GET /api/settings/history and POST /api/settings/history/{id}/rollback. Credential keys are masked in both images and their rollback is refused.
+- **JSON schema guardrail** — a custom pattern named json_schema validates buffered responses against a JSON Schema document; mismatches produce findings at the policy's action. Streaming responses skip schema validation.
+- **Hermes adapter** — the tenth clientconfig adapter writes the gateway endpoint and credential into ~/.hermes/config.yaml.
+
+### Fixed
+- **muse-web provider registered** — the executor, alias and models were in place but the registry entry was missing, making the provider unreachable from every catalog surface.
+
 ## [v1.4.0] - 2026-11-17
 
 ### Added
