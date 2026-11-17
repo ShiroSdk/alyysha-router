@@ -849,6 +849,7 @@ func SetupServerRouter(r chi.Router, repo *db.Repo, ts *TokenSaverConfig) *chat.
 	r.Group(func(r chi.Router) {
 		r.Use(middleware.RequireDashboardAuth(repo))
 		r.Get("/api/cli-tools/all-statuses", media.NewCLIToolsHandler().HandleAllStatuses)
+		r.Post("/api/cli-tools/connect", dashboard.NewDashboardHandler(repo, ts).HandleConnectClient)
 		// Hermes configuration is per-profile and writes into ~/.hermes on the
 		// operator's disk, so it belongs to the dashboard group: the SPA reaches
 		// it with the session cookie, never an engine API key.

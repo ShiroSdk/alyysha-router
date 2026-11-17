@@ -82,6 +82,7 @@ func main() {
 			},
 		},
 		Commands: []*cli.Command{
+			newConnectCommand(),
 			{
 				Name:  "version",
 				Usage: "Display version details and check for updates",

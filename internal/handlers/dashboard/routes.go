@@ -183,6 +183,7 @@ func RegisterRoutes(r chi.Router, h *DashboardHandler) {
 		r.Put("/plans/{id}", h.HandleUpdatePlan)
 		r.Delete("/plans/{id}", h.HandleDeletePlan)
 		r.Post("/plans/{id}/apply-keys", h.HandleApplyPlanToKeys)
+		r.Post("/cli-tools/connect", h.HandleConnectClient)
 		r.Get("/plans/{id}/keys", h.HandlePlanKeys)
 
 		// Teams: tenant cost centers (OmniRoute port) and the per-key billing

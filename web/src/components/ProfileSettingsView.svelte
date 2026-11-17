@@ -18,6 +18,7 @@
     Zap
   } from 'lucide-svelte'
   import Card from '../lib/ui/Card.svelte'
+  import ConnectClientCard from './settings/ConnectClientCard.svelte'
   import Toggle from '../lib/ui/Toggle.svelte'
   import Modal from '../lib/ui/Modal.svelte'
   import Button from '../lib/ui/Button.svelte'
@@ -812,6 +813,8 @@
     onchange={handleSettingsInput}
     onclick={handleSettingsInput}
   >
+
+    <ConnectClientCard />
 
     <!-- SECTION 1: Runtime Storage -->
     <Card padding="md" class="space-y-4">
