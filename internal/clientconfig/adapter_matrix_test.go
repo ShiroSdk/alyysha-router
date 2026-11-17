@@ -22,6 +22,8 @@ func fixtureFor(id string) string {
 		return "# user comment\nkeep_me = \"yes\"\n"
 	case "omp":
 		return "# user comment\nkeepMe: \"yes\"\n"
+	case "hermes":
+		return "log_level: info\n"
 	}
 	return ""
 }
@@ -137,8 +139,8 @@ func TestAdapterS3RefusesMalformed(t *testing.T) {
 // aliases are checked rather than assumed.
 func TestRegistry(t *testing.T) {
 	ids := IDs()
-	if len(ids) != 9 {
-		t.Fatalf("got %d adapters, want 9 (matrix §1.1)", len(ids))
+	if len(ids) != 10 {
+		t.Fatalf("got %d adapters, want 10 (matrix §1.1 + hermes)", len(ids))
 	}
 	for _, a := range []string{"claude-code", "claudecode", "factory", "kilocode", "pi-coding-agent", "oh-my-pi"} {
 		if _, err := Resolve(a); err != nil {
@@ -152,8 +154,8 @@ func TestRegistry(t *testing.T) {
 	if err != nil {
 		t.Fatalf("ResolveAll(all): %v", err)
 	}
-	if len(all) != 9 {
-		t.Errorf(`"all" expanded to %d, want 9`, len(all))
+	if len(all) != 10 {
+		t.Errorf(`"all" expanded to %d, want 10`, len(all))
 	}
 	dup, err := ResolveAll([]string{"claude", "claude-code", "claude"})
 	if err != nil {

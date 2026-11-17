@@ -25,10 +25,13 @@ var adapterFactories = []func() Adapter{
 	newClineAdapter,
 	newPiAdapter,
 	newOmpAdapter,
+
+	func() Adapter { return hermesAdapter{baseAdapter: baseAdapter{id: "hermes"}} },
 }
 
 // adapterAliases maps every accepted spelling to its canonical id.
 var adapterAliases = map[string]string{
+	"hermes":          "hermes",
 	"claude":          "claude",
 	"claude-code":     "claude",
 	"claudecode":      "claude",
