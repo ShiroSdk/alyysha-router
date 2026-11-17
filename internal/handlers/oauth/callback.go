@@ -118,13 +118,13 @@ ol li{margin:4px 0}
   $("copy").addEventListener("click",function(){
     if(!codeEl.value)return;
     navigator.clipboard.writeText(codeEl.value).then(
-      function(){flash($("copy"),"Tersalin!")},
-      function(){codeEl.select();document.execCommand("copy");flash($("copy"),"Tersalin!")});
+      function(){flash($("copy"),"Copied!")},
+      function(){codeEl.select();document.execCommand("copy");flash($("copy"),"Copied!")});
   });
   $("copied-url").addEventListener("click",function(){
     navigator.clipboard.writeText(location.href).then(
-      function(){flash($("copied-url"),"URL tersalin!")},
-      function(){flash($("copied-url"),"Gagal — copy manual dari address bar")});
+      function(){flash($("copied-url"),"URL copied!")},
+      function(){flash($("copied-url"),"Copy failed — copy it manually from the address bar")});
   });
 })();
 </script>
