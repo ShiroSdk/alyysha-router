@@ -95,6 +95,7 @@ export const PROVIDER_ID_TO_ALIAS: Record<string, string> = {
   "mistral": "mistral",
   "mmf": "mmf",
   "muse": "muse",
+  "muse-web": "mweb",
   "nan": "nan",
   "tinyfish": "tinyfish",
   "morph": "morph",
@@ -3291,6 +3292,24 @@ export const BUILTIN_MODELS_BY_PROVIDER: Record<string, ProviderModel[]> = {
     {
       "id": "mimo-auto",
       "name": "MiMo Auto"
+    }
+  ],
+  "muse-web": [
+    {
+      "id": "ernie-4.0",
+      "name": "ERNIE 4.0"
+    },
+    {
+      "id": "ernie-3.5",
+      "name": "ERNIE 3.5"
+    },
+    {
+      "id": "muse-spark",
+      "name": "Muse Spark"
+    },
+    {
+      "id": "auto",
+      "name": "Auto"
     }
   ],
   "muse": [
