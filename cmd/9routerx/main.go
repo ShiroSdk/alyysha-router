@@ -83,6 +83,7 @@ func main() {
 		},
 		Commands: []*cli.Command{
 			newConnectCommand(),
+			newReset2FACommand(),
 			{
 				Name:  "version",
 				Usage: "Display version details and check for updates",
