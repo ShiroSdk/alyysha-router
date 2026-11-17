@@ -29,13 +29,22 @@ func (r *Repo) updateSettings(merge func(existing map[string]any) error) error {
 	if err != nil {
 		return fmt.Errorf("update settings: %w", err)
 	}
+	// Settings history (E3): snapshot the pre-merge state BEFORE the merge
+	// mutates it, so the diff lands per changed key.
+	before := make(map[string]any, len(existing))
+	for k, v := range existing {
+		before[k] = v
+	}
+
 	if err := merge(existing); err != nil {
 		return err
 	}
+
 	b, err := json.Marshal(existing)
 	if err != nil {
 		return fmt.Errorf("marshal settings data: %w", err)
 	}
+	r.recordSettingsHistoryDiff(before, existing)
 	// The write carries no request context: a settings save that is cancelled
 	// with the caller leaves the operator with a half-applied change, and the
 	// statement itself is atomic.

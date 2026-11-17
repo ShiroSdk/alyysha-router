@@ -183,6 +183,8 @@ func RegisterRoutes(r chi.Router, h *DashboardHandler) {
 		r.Put("/plans/{id}", h.HandleUpdatePlan)
 		r.Delete("/plans/{id}", h.HandleDeletePlan)
 		r.Post("/plans/{id}/apply-keys", h.HandleApplyPlanToKeys)
+		r.Get("/settings/history", h.HandleGetSettingsHistory)
+		r.Post("/settings/history/{id}/rollback", h.HandleRollbackSettingsKey)
 		r.Post("/cli-tools/connect", h.HandleConnectClient)
 		r.Get("/plans/{id}/keys", h.HandlePlanKeys)
 

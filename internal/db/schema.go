@@ -746,6 +746,17 @@ var keiRouterTables = []tableDef{
 		},
 	},
 	{
+		name: "settingsHistory",
+		columns: [][2]string{
+			{"id", "INTEGER PRIMARY KEY AUTOINCREMENT"},
+			{"key", "TEXT NOT NULL"},
+			{"oldValue", "TEXT NOT NULL DEFAULT ''"},
+			{"newValue", "TEXT NOT NULL DEFAULT ''"},
+			{"source", "TEXT NOT NULL DEFAULT ''"},
+			{"at", "TEXT NOT NULL"},
+		},
+	},
+	{
 		name: "freeProviderRadar",
 		columns: [][2]string{
 			{"provider", "TEXT PRIMARY KEY"},
