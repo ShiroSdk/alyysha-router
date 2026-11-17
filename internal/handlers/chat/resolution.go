@@ -71,6 +71,11 @@ func NewChatHandler(repo *db.Repo, ts ...*shared.TokenSaverConfig) *ChatHandler 
 					budget.SetBreachMode(mode)
 				}
 			}
+			if raw, ok := stored["routing"].(map[string]any); ok {
+				if mode, ok := raw["session_affinity"].(string); ok {
+					SetSessionAffinityMode(mode)
+				}
+			}
 		}
 	}
 	cfg := &shared.TokenSaverConfig{}

@@ -185,6 +185,9 @@ func GetString(m map[string]any, key string) string {
 // SessionHeaderKeys defines the client request header keys that carry session IDs in priority order.
 var SessionHeaderKeys = []string{
 	"x-claude-code-session-id",
+	// Claude Code's native header; the metadata.user_id body field is read
+	// separately by the chat handler (headers are cheaper to probe).
+	"anthropic-session-id",
 	"x-session-id",
 	"session-id",
 	"session_id",

@@ -178,3 +178,24 @@ func LeaseKey(parts ...string) string {
 	sum := sha256.Sum256([]byte(strings.Join(parts, "::")))
 	return fmt.Sprintf("%x", sum)
 }
+
+// UpsertLease writes a lease last-write-wins: unlike AcquireLease it does not
+// care who holds it. The session-affinity layer uses this — a session rebinds
+// to a new connection whenever the old one leaves rotation.
+func (r *Repo) UpsertLease(scope, key, value string, ttl time.Duration) error {
+	if r == nil || r.db == nil {
+		return fmt.Errorf("leases: upsert: nil repo")
+	}
+	now := time.Now().UTC()
+	exp := now.Add(ttl)
+	_, err := r.db.Exec(
+		`INSERT INTO upstream_leases (scope, key, value, expires_at, updated_at)
+		 VALUES (?, ?, ?, ?, ?)
+		 ON CONFLICT(scope, key) DO UPDATE SET value = excluded.value, expires_at = excluded.expires_at, updated_at = excluded.updated_at`,
+		scope, key, value, exp.Format(time.RFC3339), now.Format(time.RFC3339),
+	)
+	if err != nil {
+		return fmt.Errorf("upsert lease %s/%s: %w", scope, key, err)
+	}
+	return nil
+}

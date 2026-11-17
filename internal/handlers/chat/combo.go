@@ -696,6 +696,7 @@ func (h *ChatHandler) handleComboFallback(ctx context.Context, w http.ResponseWr
 		defer RoutingExplainFromRecorder(rec)
 		ctx = WithFallbackAttemptRecorder(ctx, rec)
 	}
+	ctx = WithComboDispatch(ctx, comboName)
 	cw := newCommittedResponseWriter(w)
 	cw.stream = isStream
 	cw.responsesClient = translator.IsResponsesClient(ctx)
@@ -1173,6 +1174,7 @@ func (h *ChatHandler) handleMessagesComboFallback(ctx context.Context, w http.Re
 		defer RoutingExplainFromRecorder(rec)
 		ctx = WithFallbackAttemptRecorder(ctx, rec)
 	}
+	ctx = WithComboDispatch(ctx, comboName)
 	cw := newCommittedResponseWriter(w)
 	cw.stream = isStream
 	cw.responsesClient = translator.IsResponsesClient(ctx)

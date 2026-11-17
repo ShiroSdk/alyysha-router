@@ -133,6 +133,7 @@ func (h *DashboardHandler) HandleUpdateSettings(w http.ResponseWriter, r *http.R
 	applyRetryAttemptCapsUpdate(updates)
 	applyContextGuardUpdate(updates)
 	applyBudgetBreachModeUpdate(updates)
+	applySessionAffinityUpdate(updates)
 	applyAccountsBlacklistTTLUpdate(updates)
 	applyKeysAutopruneTTLUpdate(updates)
 
@@ -1483,5 +1484,22 @@ func applyKeysAutopruneTTLUpdate(updates map[string]any) {
 	}
 	if ttl, ok := a["autoprune_ttl"].(float64); ok {
 		chat.SetKeysAutopruneTTL(int(ttl))
+	}
+}
+
+// applySessionAffinityUpdate normalizes routing.session_affinity (off |
+// combo | global) and applies it live.
+func applySessionAffinityUpdate(updates map[string]any) {
+	raw, present := updates["routing"]
+	if !present {
+		return
+	}
+	delete(updates, "routing")
+	rt, ok := raw.(map[string]any)
+	if !ok {
+		return
+	}
+	if mode, ok := rt["session_affinity"].(string); ok {
+		chat.SetSessionAffinityMode(mode)
 	}
 }

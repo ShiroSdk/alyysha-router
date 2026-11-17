@@ -231,6 +231,13 @@ func (h *ChatHandler) handleAccountFallback(
 		}
 	}
 
+	// Cross-provider session affinity (B1): the lease binds the session to the
+	// connection that served it, ahead of the rotation strategy so the vendor
+	// prompt cache keeps hitting. Off by default.
+	if reordered := h.applySessionLeaseAffinity(ctx, allConns, provider); len(reordered) == len(allConns) {
+		allConns = reordered
+	}
+
 	var excludeIDs []string
 	// Pools already refused by an OpenCode free-tier gate in this turn. The
 	// resolver filters them out, so the retry walks to the next egress instead
@@ -287,6 +294,9 @@ func (h *ChatHandler) handleAccountFallback(
 			resilience.AutoPruneRecord(connObj.ID, 200, nil)
 			// Burn-in: a success may clear or step down the burn-in state.
 			resilience.BurninRecord(connObj.ID, 200)
+			if sessionID := handlerutil.GetSessionID(ctx); sessionID != "" && sessionAffinityApplies(ctx) {
+				h.bindSessionLease(ctx, provider, sessionID, connObj.ID)
+			}
 			if sessionID := handlerutil.GetSessionID(ctx); sessionID != "" && affinityEligible {
 				h.getSessionAffinity().Bind(provider, model, sessionID, connObj.ID)
 			}
