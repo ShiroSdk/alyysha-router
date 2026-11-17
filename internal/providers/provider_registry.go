@@ -1862,6 +1862,18 @@ var ProviderRegistry = map[string]ProviderMeta{
 		ServiceKinds: []string{"llm"},
 		Website:      "https://grok.com",
 	},
+	"muse-web": {
+		ID:           "muse-web",
+		Name:         "Baidu Muse Web (Free)",
+		Alias:        "mweb",
+		Category:     CategoryWebCookie,
+		AuthType:     "cookie",
+		Color:        "#2932E1",
+		Icon:         "translate",
+		AuthHint:     "Paste your BDUSS cookie value from yiyan.baidu.com",
+		ServiceKinds: []string{"llm"},
+		Website:      "https://yiyan.baidu.com",
+	},
 	// Unofficial, opt-in only (CLAUDE_WEB_ENABLED=true or the dashboard
 	// toggle): violates Anthropic ToS, may break anytime. Deliberately kept
 	// out of the free-tier headline; the dashboard hides it while disabled.
