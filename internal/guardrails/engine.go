@@ -3,6 +3,7 @@ package guardrails
 
 import (
 	"regexp"
+	"strings"
 )
 
 // Engine applies a resolved policy to text. It holds no state, so it is safe
@@ -17,6 +18,12 @@ type Engine struct {
 	customDetectors []detector
 	// customReplacements maps detector name to a custom replacement string.
 	customReplacements map[string]string
+	// jsonSchemas holds the compiled JSON-schema nodes from custom patterns
+	// named "json_schema" (the schema document travels in the Regex field).
+	// Only enforced on buffered responses; a stream is already on the wire
+	// before the whole answer exists to validate, so blocking there would
+	// truncate a response the client half-received.
+	jsonSchemas []*jsonSchemaNode
 }
 
 // NewEngine builds an engine from a policy's detector names and action.
@@ -34,6 +41,12 @@ func NewEngineWithCustom(detectors []string, action Action, customPatterns []Cus
 		e.customDetectors = make([]detector, 0, len(customPatterns))
 		e.customReplacements = make(map[string]string)
 		for _, cp := range customPatterns {
+			if cp.Name == "json_schema" {
+				if node, err := parseSchemaNode(cp.Regex); err == nil {
+					e.jsonSchemas = append(e.jsonSchemas, node)
+				}
+				continue
+			}
 			if cp.Regex == "" {
 				continue
 			}
@@ -156,6 +169,18 @@ func (e *Engine) ScanJSON(payload any) (any, *Decision) {
 	}
 
 	out := walk(payload)
+
+	// JSON-schema detection: a mismatch is a finding at the configured action.
+	for _, node := range e.jsonSchemas {
+		if mismatches := schemaValidate(node, payload, ""); len(mismatches) > 0 {
+			worst = StrictestAction(worst, e.action)
+			all = append(all, Finding{
+				Detector: "json_schema",
+				Entity:   strings.Join(mismatches, "; "),
+			})
+		}
+	}
+
 	if len(all) == 0 {
 		return out, &Decision{Action: ActionAllow}
 	}
