@@ -6,6 +6,7 @@
     Check,
     Download,
     Key,
+    KeySquare,
     Laptop,
     Loader2,
     PanelLeft,
@@ -23,7 +24,7 @@
   import Modal from '../lib/ui/Modal.svelte'
   import Button from '../lib/ui/Button.svelte'
   import Input from '../lib/ui/Input.svelte'
-  import { api, getAuthHeaders, responseErrorMessage, type DatabaseStats, type Settings } from '../api/client'
+  import { api, getAuthHeaders, responseErrorMessage, type DashboardToken, type DatabaseStats, type Settings } from '../api/client'
   import { isCompactUnitsEnabled, isProviderTogglePersistent, setCompactUnits, setProviderTogglePersistent } from '../lib/compactNumber'
   import {
     isAdvancedSettingsVisible,
@@ -126,6 +127,16 @@
   let usageHistoryRetentionDays = $state<number>(0)
   let dbStats = $state<DatabaseStats | null>(null)
   let dbStatsError = $state<string | null>(null)
+
+  // Dashboard access tokens (N5 RBAC): scoped bearer credentials for
+  // scripting callers. The minted plaintext is shown once, in a copyable
+  // field, and never travels through the list again.
+  let dashboardTokens = $state<DashboardToken[]>([])
+  let mintTokenName = $state('')
+  let mintTokenScope = $state<'admin' | 'write' | 'read'>('read')
+  let mintedToken = $state('')
+  let isMintingToken = $state(false)
+  let tokenError = $state<string | null>(null)
   let isPruning = $state(false)
   let isPruningUsage = $state(false)
   let isVacuuming = $state(false)
@@ -407,6 +418,7 @@
     // until something asks for them. Without this the operator has to press a
     // button that is not on the page yet in order to see the page.
     loadDbStats()
+    loadDashboardTokens()
   })
 
   /** Fills the suffix with the code-integrity rule. The prefix keeps whatever the operator wrote:
@@ -700,6 +712,48 @@
     }
   }
 
+  async function loadDashboardTokens() {
+    try {
+      const res = await api.listDashboardTokens()
+      dashboardTokens = (res.tokens || []).filter((t) => !t.revokedAt)
+      tokenError = null
+    } catch (err) {
+      // The card renders its form even when the list fails: a 403 on an
+      // engine-key caller must not take the mint form down with it.
+      tokenError = err instanceof Error ? err.message : String(err)
+    }
+  }
+
+  async function handleMintToken() {
+    if (!mintTokenName.trim()) {
+      notifications.error('Give the token a name first.')
+      return
+    }
+    try {
+      isMintingToken = true
+      const res = await api.mintDashboardToken({ name: mintTokenName.trim(), scope: mintTokenScope })
+      mintedToken = res.token
+      mintTokenName = ''
+      notifications.success(`Token "${res.name}" minted. Copy it now — it is shown only once.`)
+      await loadDashboardTokens()
+    } catch (err) {
+      notifications.error(`Failed to mint token: ${err instanceof Error ? err.message : String(err)}`)
+    } finally {
+      isMintingToken = false
+    }
+  }
+
+  async function handleRevokeToken(id: string, name: string) {
+    if (!confirm(`Revoke token "${name}"? Callers using it will be refused immediately.`)) return
+    try {
+      await api.revokeDashboardToken(id)
+      notifications.success(`Token "${name}" revoked.`)
+      await loadDashboardTokens()
+    } catch (err) {
+      notifications.error(`Failed to revoke: ${err instanceof Error ? err.message : String(err)}`)
+    }
+  }
+
   async function loadDbStats() {
     try {
       dbStats = await api.getDatabaseStats()
@@ -878,6 +932,102 @@
           </button>
         </div>
       </div>
+    </Card>
+
+    <!-- SECTION: Access tokens. Scoped bearer credentials for scripting
+         callers (N5 RBAC): admin is the session's equal, write covers the
+         management API, read is GET-only observability. The minted plaintext
+         is shown exactly once. -->
+    <Card padding="md" class="space-y-4">
+      <div class="flex items-center gap-2 pb-2 border-b border-border">
+        <KeySquare class="w-4 h-4 text-brand-500" />
+        <h2 class="text-sm font-bold text-text-main">Access Tokens</h2>
+      </div>
+      <p class="text-xs text-text-muted">
+        Scoped tokens for scripts and CI. <code class="text-[11px]">admin</code> grants everything;
+        <code class="text-[11px]">write</code> covers the management API but not shutdown, backups or key exports;
+        <code class="text-[11px]">read</code> is GET-only. Send as the
+        <code class="text-[11px]">x-9r-access-token</code> header.
+      </p>
+      <div class="flex flex-wrap items-center gap-2">
+        <input
+          type="text"
+          placeholder="Token name (e.g. ci-deploy)"
+          bind:value={mintTokenName}
+          class="min-w-48 flex-1 rounded-lg border border-border bg-surface px-3 py-1.5 text-sm text-text-main focus:outline-none focus:border-brand-500"
+        />
+        <select
+          bind:value={mintTokenScope}
+          class="rounded-lg border border-border bg-surface px-2.5 py-1.5 text-sm text-text-main focus:outline-none focus:border-brand-500"
+        >
+          <option value="read">read</option>
+          <option value="write">write</option>
+          <option value="admin">admin</option>
+        </select>
+        <button
+          type="button"
+          onclick={handleMintToken}
+          disabled={isMintingToken}
+          class="inline-flex items-center gap-1.5 rounded-lg bg-brand-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-brand-500 disabled:opacity-50 transition-colors"
+        >
+          {#if isMintingToken}
+            <Loader2 class="w-4 h-4 animate-spin" />
+          {:else}
+            <KeySquare class="w-4 h-4" />
+          {/if}
+          Mint token
+        </button>
+      </div>
+      {#if mintedToken}
+        <div class="rounded-lg border border-amber-500/40 bg-amber-500/5 p-3">
+          <p class="text-xs font-medium text-amber-600 dark:text-amber-400 mb-1.5">
+            Copy this token now — it is never shown again.
+          </p>
+          <div class="flex items-center gap-2">
+            <code class="flex-1 overflow-x-auto rounded bg-surface px-2.5 py-1.5 text-xs text-text-main select-all">{mintedToken}</code>
+            <button
+              type="button"
+              onclick={() => {
+                navigator.clipboard?.writeText(mintedToken)
+                notifications.success('Token copied to clipboard.')
+              }}
+              class="rounded-lg border border-border px-2.5 py-1.5 text-xs text-text-main hover:bg-surface-2 transition-colors"
+            >
+              Copy
+            </button>
+            <button
+              type="button"
+              onclick={() => (mintedToken = '')}
+              class="rounded-lg px-2.5 py-1.5 text-xs text-text-muted hover:text-text-main transition-colors"
+            >
+              Dismiss
+            </button>
+          </div>
+        </div>
+      {/if}
+      {#if tokenError}
+        <p class="text-xs text-red-500" role="alert">{tokenError}</p>
+      {/if}
+      {#if dashboardTokens.length === 0}
+        <p class="text-xs text-text-muted">No live tokens.</p>
+      {:else}
+        <div class="space-y-1.5">
+          {#each dashboardTokens as t (t.id)}
+            <div class="flex items-center gap-2 rounded-lg border border-border px-3 py-2">
+              <span class="text-sm text-text-main">{t.name}</span>
+              <span class="rounded bg-surface-2 px-1.5 py-0.5 text-[11px] font-medium text-text-muted">{t.scope}</span>
+              <span class="text-[11px] text-text-muted">minted {t.createdAt?.slice(0, 10)}</span>
+              <button
+                type="button"
+                onclick={() => handleRevokeToken(t.id, t.name)}
+                class="ml-auto rounded px-2 py-1 text-xs text-red-500 hover:bg-red-500/10 transition-colors"
+              >
+                Revoke
+              </button>
+            </div>
+          {/each}
+        </div>
+      {/if}
     </Card>
 
     <!-- SECTION 2: Security & Master Password -->

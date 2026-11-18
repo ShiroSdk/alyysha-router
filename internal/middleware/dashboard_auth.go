@@ -138,6 +138,13 @@ func dashboardEngineCredential(w http.ResponseWriter, r *http.Request, repo *db.
 func RequireDashboardSessionAuth(repo *db.Repo) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			// N5: an access token's scope is checked first and is final. The
+			// security-log and notification surfaces here are observability,
+			// which is exactly what a read token exists for; its writes stay
+			// fail-closed inside the scope check.
+			if requireDashboardAccessToken(repo, w, r, false, next) {
+				return
+			}
 			if auth.SessionValid(r) || auth.ValidCLIToken(r.Header.Get(auth.CLITokenHeader)) {
 				next.ServeHTTP(w, r)
 				return
@@ -195,6 +202,12 @@ func CallerIsDashboardPrivileged(repo *db.Repo, r *http.Request) bool {
 func RequireAdminAuth(repos ...*db.Repo) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			// N5: only the admin scope rides past this gate — shutdown,
+			// self-update and the health reset are the surfaces a narrower
+			// token exists to be refused at.
+			if len(repos) > 0 && requireDashboardAccessToken(repos[0], w, r, true, next) {
+				return
+			}
 			if auth.SessionValid(r) ||
 				auth.ValidCLIToken(r.Header.Get(auth.CLITokenHeader)) ||
 				allowsPasswordHeader(r.URL.Path) && r.Header.Get(DashboardPasswordHeader) != "" {
@@ -212,6 +225,14 @@ func RequireAdminAuth(repos ...*db.Repo) func(http.Handler) http.Handler {
 func RequireDashboardAuth(repo *db.Repo) func(http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			// N5: the access token's scope decides the management API —
+			// admin everywhere, write minus the destructive and secret
+			// surfaces, read GET-only. A presented token that is unknown or
+			// out of scope stops here; it never falls through to the
+			// anonymous no-login path.
+			if requireDashboardAccessToken(repo, w, r, false, next) {
+				return
+			}
 			if auth.SessionValid(r) || auth.ValidCLIToken(r.Header.Get(auth.CLITokenHeader)) {
 				next.ServeHTTP(w, r)
 				return

@@ -29,8 +29,8 @@ type ProviderConnection struct {
 	// rotation survives a restart and behaves the same in every process.
 	LastUsedAt          *string `json:"lastUsedAt,omitempty"`
 	ConsecutiveUseCount *int    `json:"consecutiveUseCount,omitempty"`
-	DisabledReason string `json:"disabledReason,omitempty"`
-	DisabledAt      string `json:"disabledAt,omitempty"`
+	DisabledReason      string  `json:"disabledReason,omitempty"`
+	DisabledAt          string  `json:"disabledAt,omitempty"`
 	CreatedAt           string  `json:"createdAt"`
 	UpdatedAt           string  `json:"updatedAt"`
 }
@@ -140,6 +140,18 @@ type Combo struct {
 	// periods) and only matters while the ceiling is armed.
 	BudgetLimitMicros int64  `json:"budgetLimitMicros,omitempty"`
 	BudgetPeriod      string `json:"budgetPeriod,omitempty"`
+}
+
+// DashboardToken is one operator-minted dashboard access token (N5 RBAC).
+// The hashes never leave the database: ListDashboardTokens projects the
+// public fields only, and the plaintext is shown exactly once, at mint time.
+type DashboardToken struct {
+	ID         string `json:"id"`
+	Name       string `json:"name"`
+	Scope      string `json:"scope"`
+	CreatedAt  string `json:"createdAt"`
+	LastUsedAt string `json:"lastUsedAt,omitempty"`
+	RevokedAt  string `json:"revokedAt,omitempty"`
 }
 
 // KV represents a scoped key-value store entry.

@@ -61,6 +61,17 @@ export interface Combo {
   budgetPeriod?: string
 }
 
+/** One operator-minted dashboard access token (N5 RBAC). The plaintext is
+ * shown once at mint time and never stored in a form the list can read. */
+export interface DashboardToken {
+  id: string
+  name: string
+  scope: 'admin' | 'write' | 'read'
+  createdAt: string
+  lastUsedAt?: string
+  revokedAt?: string
+}
+
 /** One smart-select rule: a pattern plus the membership it currently owns. */
 export interface SmartRule {
   id: string
@@ -2180,6 +2191,18 @@ export const api = {
       }
     ),
   getDatabaseStats: () => request<DatabaseStats>('/api/settings/database/stats'),
+  // Dashboard access tokens (N5 RBAC). The mint response carries the
+  // plaintext exactly once; the list never includes it.
+  listDashboardTokens: () => request<{ tokens: DashboardToken[] }>('/api/dashboard-tokens'),
+  mintDashboardToken: (payload: { name: string; scope: string }) =>
+    request<{ id: string; name: string; scope: string; token: string; header: string }>('/api/dashboard-tokens', {
+      method: 'POST',
+      body: JSON.stringify(payload),
+    }),
+  revokeDashboardToken: (id: string) =>
+    request<{ status: string; id: string }>(`/api/dashboard-tokens/${encodeURIComponent(id)}`, {
+      method: 'DELETE',
+    }),
   pruneDatabase: () =>
     request<{ success: boolean; pruned: number }>('/api/settings/database/prune', {
       method: 'POST',

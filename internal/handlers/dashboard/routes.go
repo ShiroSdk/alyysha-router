@@ -316,6 +316,13 @@ func RegisterRoutes(r chi.Router, h *DashboardHandler) {
 		r.Get("/cache/entries", h.HandleGetCacheEntries)
 		r.Delete("/cache/entries", h.HandleDeleteCacheEntry)
 
+		// Dashboard access tokens (N5 RBAC): mint, list and revoke scoped
+		// bearer credentials for scripting callers. Minting itself demands
+		// the admin caller class, checked in the handler.
+		r.Get("/dashboard-tokens", h.HandleListDashboardTokens)
+		r.Post("/dashboard-tokens", h.HandleMintDashboardToken)
+		r.Delete("/dashboard-tokens/{id}", h.HandleRevokeDashboardToken)
+
 		// Compression Analytics
 		r.Get("/analytics/compression", h.HandleGetCompressionAnalytics)
 		r.Get("/savings/summary", h.HandleGetSavingsSummary)

@@ -773,6 +773,24 @@ var keiRouterTables = []tableDef{
 	},
 }
 
+// dashboardTokens backs the operator-minted access tokens (N5 RBAC): each row
+// is one bearer credential with a scope (admin | write | read) hashed the same
+// way the engine keys are, so a scripting caller can hold a narrow grant
+// instead of the dashboard session itself.
+var dashboardTokensTable = tableDef{
+	name: "dashboardTokens",
+	columns: [][2]string{
+		{"id", "TEXT PRIMARY KEY"},
+		{"name", "TEXT NOT NULL"},
+		{"lookupHash", "TEXT UNIQUE NOT NULL"},
+		{"tokenHash", "TEXT NOT NULL"},
+		{"scope", "TEXT NOT NULL DEFAULT 'read'"},
+		{"createdAt", "TEXT NOT NULL"},
+		{"lastUsedAt", "TEXT DEFAULT ''"},
+		{"revokedAt", "TEXT DEFAULT ''"},
+	},
+}
+
 // usageLedgerTables are Go-only tables backing the ledger retention in
 // usage_retention_ledger.go. They are declared apart from keiRouterTables
 // because they are not a ported feature: they exist so an opt-in prune of the
@@ -998,6 +1016,9 @@ func EnsureKeiRouterTables(db *sql.DB) error {
 		if err := ensureTable(db, t); err != nil {
 			return err
 		}
+	}
+	if err := ensureTable(db, dashboardTokensTable); err != nil {
+		return err
 	}
 	// The default plan is part of the table's shape, not operator data: every
 	// path that creates the plans table also guarantees the row exists, so a
