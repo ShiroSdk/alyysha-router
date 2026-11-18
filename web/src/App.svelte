@@ -606,7 +606,7 @@
               <span class="font-code text-xs">Connecting to 9RouterX Localhost Gateway (:20128)...</span>
             </div>
           {:else}
-            {#if showOnboarding}
+            {#if showOnboarding && activeTab === 'endpoint'}
               {#await import('./components/OnboardingWizard.svelte')}
                 <div class="rounded-xl border border-border p-4 mb-6 animate-pulse h-24" aria-hidden="true"></div>
               {:then mod}
