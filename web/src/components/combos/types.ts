@@ -46,7 +46,10 @@ export const COMBO_STRATEGIES = [
   { value: 'capacity', label: 'Capacity — prefer free tiers' },
   { value: 'smart', label: 'Smart Router — System One' },
   { value: 'fusion', label: 'Fusion — panel + judge' },
-  { value: 'tokenmaxxing', label: 'Tokenmaxxing — quota-aware' }
+  { value: 'tokenmaxxing', label: 'Tokenmaxxing — quota-aware' },
+  { value: 'cache-optimized', label: 'Cache-optimized — maximize cached tokens' },
+  { value: 'auto', label: 'Auto — 5-factor selection' },
+  { value: 'reset-aware', label: 'Reset-aware — prefer quota reset timing' }
 ] as const
 
 /**
