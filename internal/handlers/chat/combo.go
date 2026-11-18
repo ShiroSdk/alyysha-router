@@ -789,6 +789,12 @@ func (h *ChatHandler) handleComboFallbackWithVisited(ctx context.Context, cw *co
 		// pass itself takes out of reach stops counting as the last one.
 		lastTried := newComboLastTried(h, models)
 
+		// N9: a fallback that crosses a model family changes tokenizer,
+		// prompt cache and capability set mid-ladder. The boundary is
+		// recorded once per pass on the explain panel, so a surprise mix is
+		// visible exactly where the operator is looking when it fires.
+		recordFamilyBoundaries(comboName, models)
+
 		for i, entry := range models {
 			modelInfo := h.resolveModelEntry(entry)
 			if modelInfo == nil {

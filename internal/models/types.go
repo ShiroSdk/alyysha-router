@@ -134,6 +134,12 @@ type Combo struct {
 	// own. The dashboard badges them so an operator can tell a managed member
 	// from one they pinned by hand.
 	AutoMembers []string `json:"autoMembers,omitempty"`
+	// Families is derived, never stored (N9): the distinct model families in
+	// ladder order. CrossFamily flags a ladder that mixes them — fallbacks
+	// that cross a family behave differently (tokenizer, prompt cache,
+	// capability set), and the editor surfaces that before it bites.
+	Families    []string `json:"families,omitempty"`
+	CrossFamily bool     `json:"crossFamily,omitempty"`
 	// BudgetLimitMicros is the combo's spend ceiling for one budget period,
 	// in USD micros; zero means unbounded, which is every combo written
 	// before the feature. BudgetPeriod names the window (budget package

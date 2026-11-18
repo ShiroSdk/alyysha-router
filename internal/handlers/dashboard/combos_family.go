@@ -6,11 +6,11 @@ import (
 	json "encoding/json/v2"
 	"fmt"
 	"net/http"
-	"regexp"
 	"sort"
 	"strings"
 
 	"9routerx/proxy/internal/handlerutil"
+	"9routerx/proxy/internal/models"
 	"9routerx/proxy/internal/providers"
 )
 
@@ -141,22 +141,6 @@ func isEmbeddingModel(modelID string) bool {
 	return strings.Contains(m, "embedding")
 }
 
-// versionToken matches a generation marker: "4.6", "3.1", "2", "v2.5".
-var versionToken = regexp.MustCompile(`^v?\d+(\.\d+)*$`)
-
-// letterDigitToken matches a mid-name generation marker such as kimi-"k2.6" or
-// minimax-"m3". It is only stripped when it is not the first token: a leading
-// token is the model line itself, so "o1" and "o3-mini" survive intact.
-var letterDigitToken = regexp.MustCompile(`^[a-z]\d+(\.\d+)*$`)
-
-// familyFlagWords are capability/lifecycle markers, not identity: stripping
-// them lets "gemini-3.1-flash-preview" and "gemini-3-flash-preview" meet in the
-// family "gemini-flash".
-var familyFlagWords = map[string]bool{
-	"preview": true, "exp": true, "experimental": true,
-	"beta": true, "latest": true, "free": true, "auto": true,
-}
-
 // appendUnique adds id only when it is not already in members, so the same
 // model reaching a family via the catalog and a custom entry is not listed twice.
 func appendUnique(members []string, id string) []string {
@@ -178,37 +162,11 @@ func splitAliasModel(aliasModel string) (alias, model string) {
 	return aliasModel[:slash], aliasModel[slash+1:]
 }
 
-// modelFamily collapses a model id to the family every version of that model
-// shares, across providers. Tokens that are generation numbers or lifecycle
-// flags are dropped; size and role words (sonnet, opus, mini, flash, pro,
-// codex...) are kept, so "claude-sonnet-4.6" from cc and "claude-sonnet-4.5"
-// from claude both become "claude-sonnet" and land in one combo.
+// modelFamily delegates to the shared family function: the auto-combo
+// grouping, the combo editor's cross-family flag and the dispatch-time
+// boundary records must all agree on what a family is.
 func modelFamily(modelID string) string {
-	lower := strings.ToLower(modelID)
-
-	// Drop a free-tier marker ("model:free") so free and paid versions group.
-	lower = strings.TrimSuffix(lower, ":free")
-
-	parts := strings.Split(lower, "-")
-	kept := make([]string, 0, len(parts))
-	for i, p := range parts {
-		if p == "" {
-			continue
-		}
-		if versionToken.MatchString(p) || familyFlagWords[p] {
-			continue
-		}
-		if i > 0 && letterDigitToken.MatchString(p) {
-			continue
-		}
-		kept = append(kept, p)
-	}
-	if len(kept) == 0 {
-		// Nothing identifiable (e.g. a pure version id); keep the original so
-		// the model is not silently merged into an empty family.
-		return lower
-	}
-	return strings.Join(kept, "-")
+	return models.ModelFamily(modelID)
 }
 
 // autoFamilyComboID is the stable id of one family's generated combo, so

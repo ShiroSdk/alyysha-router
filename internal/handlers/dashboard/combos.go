@@ -57,6 +57,10 @@ func (h *DashboardHandler) HandleGetCombos(w http.ResponseWriter, r *http.Reques
 		}
 		combo.AutoMembers = smart.AutoMembers(rules)
 	}
+	for _, combo := range combos {
+		members, _ := comboModels(combo.Models)
+		combo.Families, combo.CrossFamily = models.ComboFamilies(members)
+	}
 	handlerutil.WriteJSON(w, http.StatusOK, combos)
 }
 
@@ -146,7 +150,18 @@ func (h *DashboardHandler) HandleCreateCombo(w http.ResponseWriter, r *http.Requ
 	// the members the patterns selected rather than an empty list.
 	h.reconcileSmartCombosBestEffort(r.Context(), "combo created")
 
-	handlerutil.WriteJSON(w, http.StatusOK, map[string]any{"status": "ok", "id": req.ID})
+	resp := map[string]any{"status": "ok", "id": req.ID}
+	// N9: a ladder that mixes model families is legal — mixed fallbacks are a
+	// real strategy — but the response says so, because a cross-family step
+	// behaves differently from a same-family one and the operator should see
+	// that at the moment they build it, not the first time it fires.
+	families, cross := models.ComboFamilies(modelIDs)
+	if cross {
+		resp["families"] = families
+		resp["crossFamily"] = true
+		resp["warning"] = "combo mixes model families (" + strings.Join(families, " -> ") + "); cross-family fallbacks change tokenizer, prompt cache and capabilities mid-ladder"
+	}
+	handlerutil.WriteJSON(w, http.StatusOK, resp)
 }
 
 // HandleUpdateCombo handles PUT /api/combos/{id}.
@@ -292,7 +307,15 @@ func (h *DashboardHandler) HandleUpdateCombo(w http.ResponseWriter, r *http.Requ
 	// the new patterns select instead of waiting for the next model write.
 	h.reconcileSmartCombosBestEffort(r.Context(), "combo updated")
 
-	handlerutil.WriteJSON(w, http.StatusOK, map[string]any{"status": "ok", "id": id})
+	resp := map[string]any{"status": "ok", "id": id}
+	updateMembers, _ := comboModels(modelsJSON)
+	families, cross := models.ComboFamilies(updateMembers)
+	if cross {
+		resp["families"] = families
+		resp["crossFamily"] = true
+		resp["warning"] = "combo mixes model families (" + strings.Join(families, " -> ") + "); cross-family fallbacks change tokenizer, prompt cache and capabilities mid-ladder"
+	}
+	handlerutil.WriteJSON(w, http.StatusOK, resp)
 }
 
 // autoFreeComboKind marks a combo that the dashboard auto-generates from the
