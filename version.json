@@ -9,13 +9,13 @@
     "windows_amd64": "https://github.com/yanstd888/9routerx/releases/download/v1.5.1/9routerx-windows-amd64.exe"
   },
   "sha256s": {
-    "darwin_amd64": "6a3c0c4020d9eb50f2f47d4f7fa755c1be2cf20c12d848434f8bbba894fe7a5b",
-    "darwin_arm64": "beab5784ad3f0691c43ecdce027656cfe1727eb839df8dbacbb99e31cdcba27d",
-    "linux_amd64": "07bb06de516a35558b820033b673b01cd18853dd7f9904e69f177562803fe6e4",
-    "linux_arm64": "74c5c1f17856458796f21638882a7f6393ecd0c1ae861888c431c26c848b96db",
-    "windows_amd64": "433e438cdd95f489187856510b2ed453d1e359ac656b88e3db11b46ac0fbecf8"
+    "darwin_amd64": "755c515a0ef96ae9d1c66346abdca598015758e7f55ce94ce4995c663830bcf8",
+    "darwin_arm64": "f0f3c0f79b74f3532caa27155be28396dbda088856d7470c1e08f5adb37164f9",
+    "linux_amd64": "81ce3bb5d051c2517033e2aa3dd8f73759ca437309ac2ecc66618e184c8a9640",
+    "linux_arm64": "84e2ab49e4cac081cae5478917e435747def2e704f3fe0352d16aa86c60ce67f",
+    "windows_amd64": "d18e5253b5aacf8c96574f5cfe9a6c46c7afd958655d99d07e788a7ed0de12b2"
   },
-  "releaseNotes": "\n\n### Added\n- **Cross-provider session affinity** — `routing.session_affinity` (off default | combo | global) binds native client sessions (Claude Code, Codex) to the connection that served them through a persistent lease with the vendor's prompt-cache window TTL (Claude 5m, Gemini 60m, others 30m).\n- **Connect command** — `9routerx connect <client>` patches the named AI client's config to point at this gateway. Dry-run shows the diff without writing; the real run backs up and writes atomically. A hooks-shaped payload is refused (CVE-2026-108593 guard). A dashboard Connect card drives the same patcher.\n- **Savings Ledger** — one USD figure aggregating prompt-cache and compression savings for the window, with a per-source breakdown and top-5 list. Compression USD is computed per model from the pricing table at the input rate.\n- **TOTP 2FA + backup codes** — the dashboard login can require a six-digit authenticator code (±90s skew) with ten bcrypt-hashed one-time backup codes. `9routerx reset-2fa` clears the enrollment after a dashboard-password confirmation.\n- **Settings history + rollback** — every write snapshots changed keys (old/new/source) into a settingsHistory table capped at 100 per key. GET /api/settings/history and POST /api/settings/history/{id}/rollback. Credential keys are masked in both images and their rollback is refused.\n- **JSON schema guardrail** — a custom pattern named json_schema validates buffered responses against a JSON Schema document; mismatches produce findings at the policy's action. Streaming responses skip schema validation.\n- **Hermes adapter** — the tenth clientconfig adapter writes the gateway endpoint and credential into ~/.hermes/config.yaml.\n\n### Fixed\n- **muse-web provider registered** — the executor, alias and models were in place but the registry entry was missing, making the provider unreachable from every catalog surface.\n",
-  "releaseUrl": "https://github.com/yanstd888/9routerx/releases/tag/v1.5.0",
-  "publishedAt": "2026-11-17T21:40:51Z"
+  "releaseNotes": "\n\n### Added\n- **Combo strategies exposed** — `cache-optimized`, `auto` (5-factor) and `reset-aware` now selectable from the dashboard combo dropdown; the backend supported them but the UI never offered the choice.\n- **Audit log hash-chain** — every audit entry carries sha256(prevHash + canonical) binding it to the chain. GET /api/audit/verify walks the log and reports the first tampered row.\n- **Burn-rate analytics** — GET /api/burn-rate returns the 24-hour sliding token and cost burn rate, with budget projections for keys with an armed daily cost limit.\n- **gzip unwrap** — upstream responses that force `Content-Encoding: gzip` despite an identity request are transparently decoded before parsing.\n",
+  "releaseUrl": "https://github.com/yanstd888/9routerx/releases/tag/v1.5.1",
+  "publishedAt": "2026-11-18T16:18:23Z"
 }
