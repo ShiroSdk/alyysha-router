@@ -161,6 +161,9 @@ func RegisterRoutes(r chi.Router, h *DashboardHandler) {
 		r.Put("/proxy-pools/{id}", h.HandleUpdateProxyPool)
 		r.Delete("/proxy-pools/{id}", h.HandleDeleteProxyPool)
 		r.Post("/proxy-pools/{id}/test", h.HandleTestProxyPool)
+		// N14: bulk ingest + probe (mirrored in the real router — a route
+		// added to one table alone 404s on the other).
+		r.Post("/proxy-pools/{id}/harvest", h.HandleHarvestProxyPool)
 
 		// API Keys
 		r.Get("/keys", h.HandleGetApiKeys)

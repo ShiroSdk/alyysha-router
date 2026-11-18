@@ -345,6 +345,8 @@ func SetupDashboardRoutes(r chi.Router, repo *db.Repo, chatH *chat.ChatHandler) 
 	r.Put("/api/proxy-pools/{id}", dashH.HandleUpdateProxyPool)
 	r.Delete("/api/proxy-pools/{id}", dashH.HandleDeleteProxyPool)
 	r.Post("/api/proxy-pools/{id}/test", dashH.HandleTestProxyPool)
+	// N14: bulk ingest + probe, keeping the alive entries.
+	r.Post("/api/proxy-pools/{id}/harvest", dashH.HandleHarvestProxyPool)
 
 	// Relay deploy endpoints. Dashboard reads/writes, not engine traffic: the
 	// SPA reaches them with its session cookie, exactly like the pool CRUD

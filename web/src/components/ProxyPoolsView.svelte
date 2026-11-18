@@ -80,6 +80,10 @@
   let importing = $state(false)
   let deploying = $state(false)
   let testingId = $state<string | null>(null)
+  // N14 harvest: one inline panel at a time, keyed by pool id.
+  let harvestPoolId = $state<string | null>(null)
+  let harvestText = $state('')
+  let harvestBusy = $state(false)
   let selectedIds = $state<string[]>([])
   let healthChecking = $state(false)
   let healthProgress = $state({ current: 0, total: 0 })
@@ -315,6 +319,31 @@
           notifications.error('Failed to delete proxy pool')
         }
       },
+    }
+  }
+
+  async function handleHarvest(poolId: string) {
+    const lines = harvestText
+      .split(/\n/)
+      .map((l) => l.trim())
+      .filter((l) => l.length > 0)
+    if (lines.length === 0) {
+      notifications.error('Paste at least one proxy URL, one per line.')
+      return
+    }
+    harvestBusy = true
+    try {
+      const res = await api.harvestProxyPool(poolId, { proxies: lines })
+      notifications.success(
+        `Harvest: ${res.added} ingested, ${res.alive} alive, ${res.dropped} dropped (pool now ${res.poolSize}).`
+      )
+      harvestPoolId = null
+      harvestText = ''
+      await fetchProxyPools()
+    } catch (e) {
+      notifications.error(`Harvest failed: ${e instanceof Error ? e.message : String(e)}`)
+    } finally {
+      harvestBusy = false
     }
   }
 
@@ -1090,6 +1119,18 @@
                 />
                 <button
                   type="button"
+                  onclick={() => {
+                    harvestPoolId = harvestPoolId === pool.id ? null : pool.id
+                    harvestText = ''
+                  }}
+                  class="p-2 rounded hover:bg-black/5 dark:hover:bg-white/5 text-text-muted hover:text-primary cursor-pointer"
+                  title="Harvest proxies (bulk add + probe)"
+                  aria-label="Harvest proxies"
+                >
+                  <span class="material-symbols-outlined text-[18px]">download</span>
+                </button>
+                <button
+                  type="button"
                   onclick={() => handleTest(pool.id)}
                   class="p-2 rounded hover:bg-black/5 dark:hover:bg-white/5 text-text-muted hover:text-primary cursor-pointer disabled:opacity-50"
                   title="Test proxy"
@@ -1119,6 +1160,39 @@
                   <span class="material-symbols-outlined text-[18px]">delete</span>
                 </button>
               </div>
+              {#if harvestPoolId === pool.id}
+                <div class="mt-3 rounded-lg border border-border bg-surface-2 p-3 space-y-2">
+                  <label class="text-xs font-medium text-text-main" for="harvest-{pool.id}">
+                    Harvest — paste proxy URLs, one per line; the pool probes them and keeps the alive ones
+                  </label>
+                  <textarea
+                    id="harvest-{pool.id}"
+                    bind:value={harvestText}
+                    rows={4}
+                    class="w-full rounded-lg border border-border bg-surface px-2.5 py-2 text-xs font-code text-text-main focus:outline-none focus:border-brand-500"
+                    placeholder="http://user:pass@host:port
+http://host:port
+..."
+                  ></textarea>
+                  <div class="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onclick={() => handleHarvest(pool.id)}
+                      disabled={harvestBusy}
+                      class="rounded-lg bg-brand-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-brand-500 disabled:opacity-50 transition-colors"
+                    >
+                      {harvestBusy ? 'Probing…' : 'Ingest & probe'}
+                    </button>
+                    <button
+                      type="button"
+                      onclick={() => (harvestPoolId = null)}
+                      class="rounded-lg px-2.5 py-1.5 text-xs text-text-muted hover:text-text-main transition-colors"
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              {/if}
             </div>
           {/each}
         </div>

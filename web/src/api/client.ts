@@ -2692,6 +2692,12 @@ export const api = {
       `/api/proxy-pools/${encodeURIComponent(id)}/test`,
       { method: 'POST' }
     ),
+  // N14 harvest: bulk ingest + probe, keeping the alive entries.
+  harvestProxyPool: (id: string, payload: { proxies: string[]; probe?: boolean; dropDead?: boolean }) =>
+    request<{ added: number; alive: number; dropped: number; poolSize: number; results: { url: string; status: string }[] }>(
+      `/api/proxy-pools/${encodeURIComponent(id)}/harvest`,
+      { method: 'POST', body: JSON.stringify(payload) }
+    ),
   deployVercelRelay: (payload: { vercelToken: string; projectName?: string }) =>
     request<{ success?: boolean; proxyUrl?: string; deployUrl?: string; error?: string }>('/api/proxy-pools/vercel-deploy', {
       method: 'POST',
