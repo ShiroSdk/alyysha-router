@@ -6,6 +6,20 @@ import (
 	"strings"
 )
 
+// ScanPIIText runs the personal-data detectors over text and returns the
+// findings with their offsets. It is the one exported window into this
+// package's patterns, built for the PII vault: the vault tokenizes the
+// matched spans (slicing the caller's own text by Start/End) and restores
+// them on the way back out, so the model never sees the raw values while the
+// client's view stays intact. The findings deliberately carry no matched
+// text — the caller holds it already.
+func ScanPIIText(text string) []Finding {
+	if text == "" {
+		return nil
+	}
+	return run(piiDetectors, text)
+}
+
 // detector is one compiled pattern plus how to name and grade its matches.
 type detector struct {
 	name     string

@@ -9,6 +9,7 @@ import (
 	"9routerx/proxy/internal/freeresilience"
 	"9routerx/proxy/internal/handlers/shared"
 	"9routerx/proxy/internal/middleware"
+	"9routerx/proxy/internal/piivault"
 	"9routerx/proxy/internal/promptcache"
 	"9routerx/proxy/internal/providers"
 	"9routerx/proxy/internal/proxy"
@@ -82,6 +83,9 @@ func NewChatHandler(repo *db.Repo, ts ...*shared.TokenSaverConfig) *ChatHandler 
 				}
 				if n, ok := raw["tool_loop_threshold"].(float64); ok {
 					SetToolLoopThreshold(int(n))
+				}
+				if mode, ok := raw["pii_vault"].(string); ok {
+					piivault.SetMode(mode)
 				}
 			}
 		}

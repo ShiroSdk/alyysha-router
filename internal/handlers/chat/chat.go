@@ -7,6 +7,7 @@ import (
 	"9routerx/proxy/internal/handlerutil"
 	"9routerx/proxy/internal/log"
 	"9routerx/proxy/internal/middleware"
+	"9routerx/proxy/internal/piivault"
 	"9routerx/proxy/internal/promptcache"
 	"9routerx/proxy/internal/providers"
 	"9routerx/proxy/internal/semanticcache"
@@ -88,6 +89,13 @@ func (h *ChatHandler) HandleChatCompletions(w http.ResponseWriter, r *http.Reque
 	}
 
 	ctx := handlerutil.WithSessionID(r.Context(), handlerutil.ExtractSessionID(r))
+	// N6 PII vault: with the vault armed, personal data in the request is
+	// replaced with deterministic placeholders before the body reaches any
+	// routing, caching or provider path, and the outbound lanes restore the
+	// originals. Both lanes read the session from the context.
+	if tokenized, changed := piivault.Tokenize(handlerutil.GetSessionID(ctx), body); changed {
+		body = tokenized
+	}
 	// Provider-scope limit state travels with the request: what one attempt
 	// learns (this provider is full) must steer the next one, and must not
 	// outlive the request (docs/provider-limits-plan.md D7).
@@ -302,6 +310,15 @@ func (h *ChatHandler) HandleMessages(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	defer r.Body.Close()
+
+	// N6 PII vault: the raw Claude-format body is tokenized before parsing so
+	// everything downstream — the parsed map, the serialized upstream body,
+	// the cache — inherits the placeholders. The outbound lanes restore them.
+	if sessionID := handlerutil.ExtractSessionID(r); sessionID != "" {
+		if tokenized, changed := piivault.Tokenize(sessionID, body); changed {
+			body = tokenized
+		}
+	}
 
 	var reqBody struct {
 		Model  string `json:"model"`

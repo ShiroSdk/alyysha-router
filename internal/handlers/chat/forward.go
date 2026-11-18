@@ -16,6 +16,7 @@ import (
 	"9routerx/proxy/internal/guardrails"
 	"9routerx/proxy/internal/handlerutil"
 	"9routerx/proxy/internal/log"
+	"9routerx/proxy/internal/piivault"
 	"9routerx/proxy/internal/providers"
 	internalproxy "9routerx/proxy/internal/proxy"
 	"9routerx/proxy/internal/proxy/executor"
@@ -212,6 +213,7 @@ func (h *ChatHandler) handleClaudeUpstreamStream(ctx context.Context, w http.Res
 	state := &translator.ClaudeToOpenAIStreamState{Model: translator.RequestedModelFromContext(ctx)}
 	var toolLoopAcc toolLoopStreamAcc
 	toolLoopAcc.armed = toolLoopMode() != "off"
+	piiDetokU := piivault.NewDetokenizer(handlerutil.GetSessionID(ctx))
 	done := false
 	err := internalproxy.ScanStream(upstream, func(payload []byte) {
 		if done {
@@ -230,6 +232,12 @@ func (h *ChatHandler) handleClaudeUpstreamStream(ctx context.Context, w http.Res
 			return
 		}
 		toolLoopAcc.Feed(out)
+		if piiDetokU != nil {
+			out = piiDetokU.Push(out)
+			if len(out) == 0 {
+				return
+			}
+		}
 		if metrics.TTFT == 0 {
 			metrics.TTFT = time.Since(startTime).Milliseconds()
 		}
@@ -255,6 +263,15 @@ func (h *ChatHandler) handleClaudeUpstreamStream(ctx context.Context, w http.Res
 			done = true
 		}
 	})
+	if piiDetokU != nil {
+		if tail := piiDetokU.Flush(); len(tail) > 0 {
+			_, _ = metrics.ResponseBuf.Write(tail)
+			_, _ = hw.Write(tail)
+			if flusher != nil {
+				flusher.Flush()
+			}
+		}
+	}
 	if state.Usage != nil {
 		translator.SetUsage(ctx, state.Usage)
 	}
@@ -312,6 +329,9 @@ func (h *ChatHandler) handleStreamResponse(ctx context.Context, w http.ResponseW
 	// panel like log mode records it.
 	var toolLoopAcc toolLoopStreamAcc
 	toolLoopAcc.armed = toolLoopMode() != "off"
+	// N6 PII vault: the restore walks the raw OpenAI frames; a token the
+	// model emitted across a frame boundary completes on the next push.
+	piiDetok := piivault.NewDetokenizer(handlerutil.GetSessionID(ctx))
 
 	if !translate {
 		// Passthrough still repairs id-less tool-call fragments: a provider
@@ -336,6 +356,14 @@ func (h *ChatHandler) handleStreamResponse(ctx context.Context, w http.ResponseW
 					}
 				}
 			}
+			if piiDetok != nil {
+				payload = piiDetok.Push(payload)
+				if len(payload) == 0 {
+					// The whole frame is a held-back token fragment; it rides
+					// the next push or the flush below.
+					return
+				}
+			}
 			if metrics.TTFT == 0 {
 				metrics.TTFT = time.Since(startTime).Milliseconds()
 			}
@@ -352,6 +380,17 @@ func (h *ChatHandler) handleStreamResponse(ctx context.Context, w http.ResponseW
 		})
 		if err != nil {
 			return err
+		}
+		if piiDetok != nil {
+			if tail := piiDetok.Flush(); len(tail) > 0 {
+				frame := append([]byte("data: "), tail...)
+				frame = append(frame, '\n', '\n')
+				metrics.ResponseBuf.Write(frame)
+				_, _ = hw.Write(frame)
+				if flusher != nil {
+					flusher.Flush()
+				}
+			}
 		}
 		return nil
 	}
@@ -377,6 +416,7 @@ func (h *ChatHandler) handleStreamResponse(ctx context.Context, w http.ResponseW
 		translator.ClearStreamState(sessionKey)
 	}()
 	finished := false
+	piiDetokT := piivault.NewDetokenizer(handlerutil.GetSessionID(ctx))
 	err := internalproxy.ScanStream(upstream, func(chunk []byte) {
 		toolLoopAcc.Feed(chunk)
 		translated, err := translator.TranslateOpenAIToClaudeStreamSession(sessionKey, chunk)
@@ -386,6 +426,12 @@ func (h *ChatHandler) handleStreamResponse(ctx context.Context, w http.ResponseW
 		}
 		if translated == nil {
 			return
+		}
+		if piiDetokT != nil {
+			translated = piiDetokT.Push(translated)
+			if len(translated) == 0 {
+				return
+			}
 		}
 		if bytes.Contains(translated, []byte("[DONE]")) {
 			finished = true
@@ -399,6 +445,15 @@ func (h *ChatHandler) handleStreamResponse(ctx context.Context, w http.ResponseW
 			flusher.Flush()
 		}
 	})
+	if piiDetokT != nil {
+		if tail := piiDetokT.Flush(); len(tail) > 0 {
+			metrics.ResponseBuf.Write(tail)
+			hw.Write(tail)
+			if flusher != nil {
+				flusher.Flush()
+			}
+		}
+	}
 	// A shutdown abort cuts the stream mid-way. End it with the same terminator
 	// a natural finish emits, so the client sees a clean [DONE] instead of a
 	// truncated stream (the stall reader already closed the upstream body).
@@ -640,6 +695,13 @@ func (h *ChatHandler) handleJSONResponse(ctx context.Context, w http.ResponseWri
 	if toolLoopInspectBuffered(ctx, body) == "break" {
 		writeToolLoopBreak(w, translate)
 		return nil
+	}
+
+	// N6 PII vault: placeholders the model echoed back are restored to the
+	// originals before the client sees the answer, whatever format the
+	// client speaks — the substitution is byte-level and JSON-safe.
+	if d := piivault.NewDetokenizer(handlerutil.GetSessionID(ctx)); d != nil {
+		body = d.Push(body)
 	}
 
 	// A /v1/responses client on a Chat Completions upstream needs the answer in

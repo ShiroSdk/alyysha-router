@@ -24,6 +24,7 @@ import (
 	"9routerx/proxy/internal/db"
 	"9routerx/proxy/internal/handlers/chat"
 	"9routerx/proxy/internal/handlerutil"
+	"9routerx/proxy/internal/piivault"
 	"9routerx/proxy/internal/proxy"
 	"9routerx/proxy/internal/proxy/executor"
 	"9routerx/proxy/internal/thinking"
@@ -1534,5 +1535,8 @@ func applyToolLoopWatchUpdate(updates map[string]any) {
 	}
 	if n, ok := c["tool_loop_threshold"].(float64); ok {
 		chat.SetToolLoopThreshold(int(n))
+	}
+	if mode, ok := c["pii_vault"].(string); ok {
+		piivault.SetMode(mode)
 	}
 }
