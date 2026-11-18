@@ -14,6 +14,19 @@ Release history up to the fork point is archived in the upstream repo's
   the pending-fragment splice now lands under this Unreleased heading instead
   of above the file title.
 
+## [v1.5.2] - 2026-11-19
+
+### Added
+- **Tool-loop watchdog** — `chat.tool_loop_watch` (off default | log | break) tracks tool-call signatures per session across requests; a response repeating the same call past `chat.tool_loop_threshold` (default 3) is logged and recorded on the explain panel, or withheld behind a clean 429 the agent can read. A break keeps the session record: a retry that changes nothing breaks again immediately, only a different call resets.
+- **Combo spending ceiling** — a combo can carry `budgetLimitUsd` + `budgetPeriod` (daily | weekly | monthly | total), enforced once per dispatch before the member ladder is walked. Breach follows the budget breach mode: reject answers the generic 402; downgrade restricts the ladder to the cheapest priced member and flags it with `X-Budget-Downgraded`. The combo editor grows the field.
+- **Fair-share admission** — under account-queue contention the freed slot goes to the client key that has been served the least (rolling in-memory ledger fed by the usage logger), with skip-credit aging so nobody starves past their timeout. Zero shares drain in the exact FIFO order the queue always ran.
+- **Scoped dashboard access tokens** — mint `admin` | `write` | `read` bearer tokens (x-9r-access-token header) for scripting callers instead of sharing the dashboard session. Enforced per route and method, failing closed: an unknown, revoked or out-of-scope token never degrades to the anonymous path. Plaintext shown once at mint; stored under the engine-key hashing. Managed from the profile page.
+
+### Fixed
+- **Settings restart-loss** — the section normalizers (context guard, budget breach mode, session affinity, account TTLs, retry caps) applied their value live and then refused to persist it, so every one of those toggles silently reverted on the next restart. They now keep the section in the stored blob; only malformed payloads are stripped.
+- **Shipped-but-404 dashboard routes** — thirteen routes existed only in the tests-only route table: the resilience panel and its reset, routing explain, the savings summary and burn rate (both shipped 404 in v1.5.1), settings history and rollback, plans apply-keys, tunnel repair, and the custom-model wildcard delete. All mounted on the real server now; the live smoke gate caught the first one and the route audit found the rest.
+- **elevenlabs voices test** — the test stubbed the media package var while calling the chat handler, which reads the provider registry: it hit the real api.elevenlabs.io and only passed with network. It stubs the registry entry now.
+
 ## [v1.5.1] - 2026-11-18
 
 ### Added
