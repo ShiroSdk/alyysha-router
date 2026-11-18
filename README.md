@@ -12,6 +12,7 @@ Cut tool-output token consumption by **20–40%**, automate multi-tier failover 
 
 If 9RouterX helps your workflow, please give the repository a star — it helps other developers discover the project.
 
+<a href="https://trendshift.io/repositories/348263?utm_source=trendshift-badge&amp;utm_medium=badge&amp;utm_campaign=badge-trendshift-348263" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/348263/daily?language=Go" alt="yanstd888%2F9routerx | Trendshift" width="250" height="55"/></a> <br>
 [![CI](https://github.com/yanstd888/9routerx/actions/workflows/ci.yml/badge.svg)](https://github.com/yanstd888/9routerx/actions/workflows/ci.yml)
 [![Release CI](https://github.com/yanstd888/9routerx/actions/workflows/release.yml/badge.svg)](https://github.com/yanstd888/9routerx/actions/workflows/release.yml)
 [![npm version](https://img.shields.io/npm/v/9routerx.svg?style=flat-square&logo=npm)](https://www.npmjs.com/package/9routerx)
