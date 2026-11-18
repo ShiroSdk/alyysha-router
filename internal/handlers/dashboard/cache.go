@@ -26,6 +26,7 @@ type CacheStatsResponse struct {
 	SemanticCache semanticcache.Stats      `json:"semanticCache"`
 	PromptCache   *db.PromptCacheMetrics   `json:"promptCache"`
 	Trend         []db.CacheTrendPoint     `json:"trend"`
+	HitRates      CacheHitRatesResponse    `json:"hitRates"`
 	Idempotency   IdempotencyStatsResponse `json:"idempotency"`
 	Config        CacheConfigResponse      `json:"config"`
 }
@@ -47,6 +48,37 @@ func (h *DashboardHandler) getSemanticCache() *semanticcache.Cache {
 		return h.SemanticCache
 	}
 	return semanticcache.New(semanticcache.Config{Enabled: false}, nil)
+}
+
+// CacheHitRatesResponse is the N18a telemetry block: one place that answers
+// "what did the caches actually return" without the operator deriving a
+// percentage from two counters in different shapes.
+type CacheHitRatesResponse struct {
+	// PromptCachePct is the share of requests in the window that the ledger
+	// shows carrying cached or cache-creation tokens — the upstream
+	// prompt-cache hit, as a percentage with one decimal.
+	PromptCachePct float64 `json:"promptCachePct"`
+	// SemanticPct is the semantic cache's process-lifetime hit share.
+	SemanticPct    float64 `json:"semanticPct"`
+	SemanticHits   int64   `json:"semanticHits"`
+	SemanticMisses int64   `json:"semanticMisses"`
+}
+
+// promptCacheHitRate folds the ledger counters into one percentage. A window
+// with no requests reads as zero, not as NaN.
+func promptCacheHitRate(m *db.PromptCacheMetrics) float64 {
+	if m == nil || m.TotalRequests == 0 {
+		return 0
+	}
+	return float64(m.RequestsWithCacheControl) * 100 / float64(m.TotalRequests)
+}
+
+// semanticHitRate is the same fold for the semantic cache counters.
+func semanticHitRate(hits, misses int64) float64 {
+	if hits+misses == 0 {
+		return 0
+	}
+	return float64(hits) * 100 / float64(hits+misses)
 }
 
 // HandleGetCache returns aggregated prompt cache metrics, hourly trend, and
@@ -91,10 +123,21 @@ func (h *DashboardHandler) HandleGetCache(w http.ResponseWriter, r *http.Request
 		return
 	}
 
+	// N18a: the hit rates the two caches actually achieved, in one block so
+	// a glance answers "is the cache earning its latency". The prompt-cache
+	// rate is the share of requests the ledger shows carrying cached or
+	// cache-creation tokens; the semantic rate is the process-lifetime
+	// hits over attempts.
 	resp := CacheStatsResponse{
 		SemanticCache: semanticStats,
 		PromptCache:   promptMetrics,
 		Trend:         trend,
+		HitRates: CacheHitRatesResponse{
+			PromptCachePct: promptCacheHitRate(promptMetrics),
+			SemanticPct:    semanticHitRate(semanticStats.Hits, semanticStats.Misses),
+			SemanticHits:   semanticStats.Hits,
+			SemanticMisses: semanticStats.Misses,
+		},
 		Idempotency: IdempotencyStatsResponse{
 			ActiveKeys: 0,
 			WindowMs:   5000,

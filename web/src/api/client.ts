@@ -2191,6 +2191,13 @@ export const api = {
       }
     ),
   getDatabaseStats: () => request<DatabaseStats>('/api/settings/database/stats'),
+  // N18b arena: run one prompt against several combo members side by side.
+  runArena: (payload: { prompt: string; members: string[]; maxTokens?: number }) =>
+    request<{ results: { member: string; model?: string; content?: string; latencyMs?: number; tokens?: number; error?: string; skipped?: string }[]; ranAt: string }>(
+      '/api/arena/run',
+      { method: 'POST', body: JSON.stringify(payload) }
+    ),
+
   // N13 onboarding + doctor: the first-run tour reads this and the health
   // check surfaces it on demand.
   getOnboardingStatus: () =>

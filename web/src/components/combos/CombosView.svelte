@@ -9,7 +9,6 @@
     getComboModels,
     INHERIT_STRATEGY,
     parseCapacityAdapterSettings,
-    resolveComboStrategy,
     updateComboStrategy,
     updateFirstTokenGrace,
     updateFirstTokenTimeout,
@@ -397,6 +396,61 @@
   // Applying the rules on demand covers what no model write announces: a
   // catalogue sync that published new models, or a restore.
   let isReconciling = $state(false)
+
+  // N18b arena: one prompt against up to six combo members, answered in a
+  // grid so a model choice can be compared on real output.
+  let arenaPrompt = $state('')
+  let arenaMembers = $state<string[]>([])
+  let arenaRunning = $state(false)
+  let arenaResults = $state<
+    { member: string; model?: string; content?: string; latencyMs?: number; tokens?: number; error?: string; skipped?: string }[]
+  >([])
+  let arenaError = $state('')
+
+  const arenaCandidates = $derived.by(() => {
+    const seen = new Set<string>()
+    const out: string[] = []
+    for (const combo of combos) {
+      for (const m of getComboModels(combo)) {
+        if (!seen.has(m)) {
+          seen.add(m)
+          out.push(m)
+        }
+      }
+    }
+    return out
+  })
+
+  function toggleArenaMember(member: string) {
+    const at = arenaMembers.indexOf(member)
+    if (at >= 0) {
+      arenaMembers = arenaMembers.filter((m) => m !== member)
+    } else if (arenaMembers.length < 6) {
+      arenaMembers = [...arenaMembers, member]
+    }
+  }
+
+  async function runArena() {
+    if (!arenaPrompt.trim()) {
+      notifications.error('Write the prompt first.')
+      return
+    }
+    if (arenaMembers.length === 0) {
+      notifications.error('Pick at least one member to compare.')
+      return
+    }
+    arenaRunning = true
+    arenaError = ''
+    arenaResults = []
+    try {
+      const res = await api.runArena({ prompt: arenaPrompt.trim(), members: arenaMembers })
+      arenaResults = res.results
+    } catch (e) {
+      arenaError = e instanceof Error ? e.message : String(e)
+    } finally {
+      arenaRunning = false
+    }
+  }
   let reconcileNote = $state('')
   async function handleReconcile() {
     isReconciling = true
@@ -632,6 +686,85 @@
       {/if}
     </div>
   {/if}
+
+  <!-- Model arena (N18b): one prompt against up to six combo members. -->
+  <div class="mb-6 rounded-xl border border-border bg-surface">
+    <button
+      type="button"
+      class="w-full flex items-center gap-2 px-4 py-3 text-left"
+      onclick={() => (arenaResults = [])}
+      aria-expanded={arenaResults.length > 0 || arenaRunning}
+    >
+      <span class="material-symbols-outlined text-[18px] text-brand-500">compare_arrows</span>
+      <span class="text-sm font-bold">Model arena</span>
+      <span class="text-xs text-text-muted">— run one prompt against several members side by side</span>
+    </button>
+    <div class="px-4 pb-4 space-y-3">
+      <textarea
+        rows={2}
+        bind:value={arenaPrompt}
+        placeholder="Ask every selected member the same thing…"
+        class="w-full rounded-lg border border-border bg-surface-2 px-3 py-2 text-sm text-text-main focus:outline-none focus:border-brand-500"
+      ></textarea>
+      {#if arenaCandidates.length === 0}
+        <p class="text-xs text-text-muted">Combo members appear here once a combo has models.</p>
+      {:else}
+        <div class="flex flex-wrap gap-1.5">
+          {#each arenaCandidates as candidate (candidate)}
+            <button
+              type="button"
+              onclick={() => toggleArenaMember(candidate)}
+              class="rounded-full border px-2.5 py-1 text-[11px] font-medium transition-colors cursor-pointer {arenaMembers.includes(candidate)
+                ? 'border-brand-500 bg-brand-500/10 text-brand-500'
+                : 'border-border text-text-muted hover:text-text-main'}"
+            >
+              {candidate}
+            </button>
+          {/each}
+        </div>
+      {/if}
+      <div class="flex items-center gap-2">
+        <button
+          type="button"
+          onclick={runArena}
+          disabled={arenaRunning || arenaMembers.length === 0}
+          class="rounded-lg bg-brand-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-brand-500 disabled:opacity-50 transition-colors"
+        >
+          {arenaRunning ? 'Running…' : `Run on ${arenaMembers.length} member${arenaMembers.length === 1 ? '' : 's'}`}
+        </button>
+        {#if arenaMembers.length > 0}
+          <span class="text-[11px] text-text-muted">{arenaMembers.length}/6 selected</span>
+        {/if}
+      </div>
+      {#if arenaError}
+        <p class="text-xs text-red-500" role="alert">{arenaError}</p>
+      {/if}
+      {#if arenaResults.length > 0}
+        <div class="grid gap-3 md:grid-cols-2">
+          {#each arenaResults as res (res.member)}
+            <div class="rounded-lg border border-border bg-surface-2 p-3 space-y-1">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-bold text-text-main">{res.member}</span>
+                {#if res.latencyMs}
+                  <span class="text-[11px] text-text-muted">{res.latencyMs}ms</span>
+                {/if}
+                {#if res.tokens}
+                  <span class="text-[11px] text-text-muted">{res.tokens} tok</span>
+                {/if}
+              </div>
+              {#if res.skipped}
+                <p class="text-[11px] text-amber-500">skipped — {res.skipped}</p>
+              {:else if res.error}
+                <p class="text-[11px] text-red-500">{res.error}</p>
+              {:else}
+                <p class="text-xs text-text-main whitespace-pre-wrap">{res.content}</p>
+              {/if}
+            </div>
+          {/each}
+        </div>
+      {/if}
+    </div>
+  </div>
 
   <!-- Combos List -->
   {#if llmCombos.length === 0}

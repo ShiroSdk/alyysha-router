@@ -273,6 +273,8 @@ func SetupDashboardRoutes(r chi.Router, repo *db.Repo, chatH *chat.ChatHandler) 
 	// class, checked in the handler.
 	// N13: the doctor and the first-run state the tour reads.
 	r.Get("/api/doctor", dashH.HandleGetDoctor)
+	// N18b: the model comparison arena.
+	r.Post("/api/arena/run", dashH.HandleArenaRun)
 	r.Get("/api/onboarding/status", dashH.HandleGetOnboardingStatus)
 	r.Post("/api/onboarding/complete", dashH.HandlePostOnboardingComplete)
 
