@@ -136,6 +136,7 @@ func (h *DashboardHandler) HandleUpdateSettings(w http.ResponseWriter, r *http.R
 	applySessionAffinityUpdate(updates)
 	applyAccountsBlacklistTTLUpdate(updates)
 	applyKeysAutopruneTTLUpdate(updates)
+	applyToolLoopWatchUpdate(updates)
 
 	// Auto-ping schedules are merged against the stored value rather than
 	// written through: a client that sends only `connections` would otherwise
@@ -1510,5 +1511,28 @@ func applySessionAffinityUpdate(updates map[string]any) {
 	}
 	if mode, ok := rt["session_affinity"].(string); ok {
 		chat.SetSessionAffinityMode(mode)
+	}
+}
+
+// applyToolLoopWatchUpdate normalizes chat.tool_loop_watch (off | log |
+// break) and chat.tool_loop_threshold (consecutive repeats before the
+// watchdog intervenes) and applies them live. The chat section stays in the
+// payload so the boot-time restore finds it, like every section normalizer
+// above.
+func applyToolLoopWatchUpdate(updates map[string]any) {
+	raw, present := updates["chat"]
+	if !present {
+		return
+	}
+	c, ok := raw.(map[string]any)
+	if !ok {
+		delete(updates, "chat")
+		return
+	}
+	if mode, ok := c["tool_loop_watch"].(string); ok {
+		chat.SetToolLoopWatch(mode)
+	}
+	if n, ok := c["tool_loop_threshold"].(float64); ok {
+		chat.SetToolLoopThreshold(int(n))
 	}
 }

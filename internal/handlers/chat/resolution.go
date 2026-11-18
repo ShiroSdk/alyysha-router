@@ -76,6 +76,14 @@ func NewChatHandler(repo *db.Repo, ts ...*shared.TokenSaverConfig) *ChatHandler 
 					SetSessionAffinityMode(mode)
 				}
 			}
+			if raw, ok := stored["chat"].(map[string]any); ok {
+				if mode, ok := raw["tool_loop_watch"].(string); ok {
+					SetToolLoopWatch(mode)
+				}
+				if n, ok := raw["tool_loop_threshold"].(float64); ok {
+					SetToolLoopThreshold(int(n))
+				}
+			}
 		}
 	}
 	cfg := &shared.TokenSaverConfig{}

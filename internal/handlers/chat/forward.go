@@ -210,6 +210,8 @@ func (h *ChatHandler) handleClaudeUpstreamStream(ctx context.Context, w http.Res
 	// A Messages stream that omits `model` still has to echo one back, and the
 	// model the client asked for is the value that is actually true.
 	state := &translator.ClaudeToOpenAIStreamState{Model: translator.RequestedModelFromContext(ctx)}
+	var toolLoopAcc toolLoopStreamAcc
+	toolLoopAcc.armed = toolLoopMode() != "off"
 	done := false
 	err := internalproxy.ScanStream(upstream, func(payload []byte) {
 		if done {
@@ -227,8 +229,20 @@ func (h *ChatHandler) handleClaudeUpstreamStream(ctx context.Context, w http.Res
 		if len(out) == 0 {
 			return
 		}
+		toolLoopAcc.Feed(out)
 		if metrics.TTFT == 0 {
 			metrics.TTFT = time.Since(startTime).Milliseconds()
+		}
+		if bytes.Contains(out, []byte("[DONE]")) {
+			if toolLoopCheck(handlerutil.GetSessionID(ctx), toolLoopAcc.Signature()) == "break" {
+				errFrame := append([]byte("data: "), toolLoopBreakJSON()...)
+				errFrame = append(errFrame, '\n', '\n')
+				metrics.ResponseBuf.Write(errFrame)
+				_, _ = hw.Write(errFrame)
+				if flusher != nil {
+					flusher.Flush()
+				}
+			}
 		}
 		_, _ = metrics.ResponseBuf.Write(out)
 		if _, werr := hw.Write(out); werr != nil {
@@ -290,6 +304,15 @@ func (h *ChatHandler) handleStreamResponse(ctx context.Context, w http.ResponseW
 	defer hw.Close()
 	flusher := internalproxy.WriteSSEHeaders(hw)
 
+	// Tool-loop watchdog (N2): tool-call deltas are scored as they flow.
+	// The passthrough lane can still intercept the terminator; the Claude
+	// translate lane cannot - by the time the signature is known the
+	// message_stop has already been translated and written - so a break on
+	// that lane degrades to the log intervention, recorded on the explain
+	// panel like log mode records it.
+	var toolLoopAcc toolLoopStreamAcc
+	toolLoopAcc.armed = toolLoopMode() != "off"
+
 	if !translate {
 		// Passthrough still repairs id-less tool-call fragments: a provider
 		// opening a new tool-call index without an id aborts strict
@@ -298,6 +321,20 @@ func (h *ChatHandler) handleStreamResponse(ctx context.Context, w http.ResponseW
 		err := internalproxy.ScanStream(upstream, func(payload []byte) {
 			if patched, changed := toolFill.Fill(payload); changed {
 				payload = patched
+			}
+			toolLoopAcc.Feed(payload)
+			if string(bytes.TrimSpace(payload)) == "[DONE]" {
+				// The signature is only known once the deltas have settled, so a
+				// break lands as an error frame ahead of the terminator.
+				if toolLoopCheck(handlerutil.GetSessionID(ctx), toolLoopAcc.Signature()) == "break" {
+					errFrame := append([]byte("data: "), toolLoopBreakJSON()...)
+					errFrame = append(errFrame, '\n', '\n')
+					metrics.ResponseBuf.Write(errFrame)
+					_, _ = hw.Write(errFrame)
+					if flusher != nil {
+						flusher.Flush()
+					}
+				}
 			}
 			if metrics.TTFT == 0 {
 				metrics.TTFT = time.Since(startTime).Milliseconds()
@@ -341,6 +378,7 @@ func (h *ChatHandler) handleStreamResponse(ctx context.Context, w http.ResponseW
 	}()
 	finished := false
 	err := internalproxy.ScanStream(upstream, func(chunk []byte) {
+		toolLoopAcc.Feed(chunk)
 		translated, err := translator.TranslateOpenAIToClaudeStreamSession(sessionKey, chunk)
 		if err != nil {
 			log.Error("stream", "translate error", "error", err)
@@ -593,6 +631,16 @@ func (h *ChatHandler) handleJSONResponse(ctx context.Context, w http.ResponseWri
 		return guardrailBlockedError()
 	}
 	body = filtered
+
+	// Tool-loop watchdog (N2): the last point a buffered answer can still be
+	// withheld. A break replaces the model's repeat with a clean 429 the agent
+	// can read, in the client's own error shape, and reports the request as
+	// handled - the intervention is the gateway's own decision, not an
+	// upstream failure the fallback ladder should retry.
+	if toolLoopInspectBuffered(ctx, body) == "break" {
+		writeToolLoopBreak(w, translate)
+		return nil
+	}
 
 	// A /v1/responses client on a Chat Completions upstream needs the answer in
 	// the Responses shape; translate marks a Claude client, which it is not.
