@@ -13,6 +13,10 @@ func TestAuditChainIntact(t *testing.T) {
 		t.Fatalf("ensure columns: %v", err)
 	}
 	ctx := context.Background()
+	// Clear any bootstrap audit entries so the chain starts fresh.
+	if _, err := repo.RawDB().Exec(`DELETE FROM auditLog`); err != nil {
+		t.Fatal(err)
+	}
 	for i := 0; i < 5; i++ {
 		entry := AuditLogEntry{
 			Actor:  "test",
@@ -43,6 +47,9 @@ func TestAuditChainTamperDetection(t *testing.T) {
 		t.Fatalf("ensure columns: %v", err)
 	}
 	ctx := context.Background()
+	if _, err := repo.RawDB().Exec(`DELETE FROM auditLog`); err != nil {
+		t.Fatal(err)
+	}
 	for i := 0; i < 3; i++ {
 		entry := AuditLogEntry{Actor: "test", Action: "write"}
 		if err := repo.RecordAuditChainEntry(ctx, entry); err != nil {

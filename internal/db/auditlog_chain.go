@@ -36,7 +36,7 @@ func auditChainHash(prevHash, ts, actor, action, target, ip string) string {
 // Additive-only; entries written before the migration have empty hashes and
 // start the chain fresh.
 func EnsureAuditChainColumns(db interface {
-	Exec(string, ...any) (interface{ }, error)
+	Exec(string, ...any) (interface{}, error)
 }) error {
 	return nil
 }
@@ -68,11 +68,11 @@ func (r *Repo) RecordAuditChainEntry(ctx context.Context, entry AuditLogEntry) e
 
 // AuditChainStatus is the verify endpoint's response.
 type AuditChainStatus struct {
-	Total     int64  `json:"total"`
-	Intact    bool   `json:"intact"`
-	BrokenAt  string `json:"brokenAt,omitempty"`
-	BrokenID  int64  `json:"brokenId,omitempty"`
-	LastHash  string `json:"lastHash,omitempty"`
+	Total    int64  `json:"total"`
+	Intact   bool   `json:"intact"`
+	BrokenAt string `json:"brokenAt,omitempty"`
+	BrokenID int64  `json:"brokenId,omitempty"`
+	LastHash string `json:"lastHash,omitempty"`
 }
 
 // VerifyAuditChain walks the whole log and verifies every link.
@@ -81,7 +81,6 @@ func (r *Repo) VerifyAuditChain(ctx context.Context) (AuditChainStatus, error) {
 	rows, err := r.db.QueryContext(ctx,
 		`SELECT id, timestamp, actor, action, target, ip, prevHash, entryHash
 		 FROM auditLog
-		 WHERE prevHash != '' AND entryHash != ''
 		 ORDER BY id ASC`)
 	if err != nil {
 		return status, fmt.Errorf("audit chain: query: %w", err)
@@ -96,9 +95,13 @@ func (r *Repo) VerifyAuditChain(ctx context.Context) (AuditChainStatus, error) {
 		if err := rows.Scan(&id, &ts, &actor, &action, &target, &ip, &rowPrev, &rowHash); err != nil {
 			return status, fmt.Errorf("audit chain: scan: %w", err)
 		}
+		if rowPrev == "" && rowHash == "" {
+			// Pre-migration entry: no chain data, skip but keep walking.
+			continue
+		}
 		status.Total++
 		if first {
-			prevHash = ""
+			prevHash = rowPrev
 			first = false
 		}
 		expected := auditChainHash(prevHash, ts, actor, action, target, ip)
