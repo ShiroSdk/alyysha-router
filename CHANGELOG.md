@@ -14,6 +14,14 @@ Release history up to the fork point is archived in the upstream repo's
   the pending-fragment splice now lands under this Unreleased heading instead
   of above the file title.
 
+## [v1.5.1] - 2026-11-18
+
+### Added
+- **Combo strategies exposed** — `cache-optimized`, `auto` (5-factor) and `reset-aware` now selectable from the dashboard combo dropdown; the backend supported them but the UI never offered the choice.
+- **Audit log hash-chain** — every audit entry carries sha256(prevHash + canonical) binding it to the chain. GET /api/audit/verify walks the log and reports the first tampered row.
+- **Burn-rate analytics** — GET /api/burn-rate returns the 24-hour sliding token and cost burn rate, with budget projections for keys with an armed daily cost limit.
+- **gzip unwrap** — upstream responses that force `Content-Encoding: gzip` despite an identity request are transparently decoded before parsing.
+
 ## [v1.5.0] - 2026-11-18
 
 ### Added
