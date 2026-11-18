@@ -14,6 +14,14 @@ Release history up to the fork point is archived in the upstream repo's
   the pending-fragment splice now lands under this Unreleased heading instead
   of above the file title.
 
+## [v1.5.4] - 2026-11-19
+
+### Added
+- **Proxy pool harvest** — POST /api/proxy-pools/{id}/harvest ingests a batch of candidate proxies (up to 500), normalizes and deduplicates them, probes the new entries concurrently through the same dual-target probe the test button uses, and writes back only the survivors. Relay pools ingest without probing. The pool card grows a Harvest panel: paste, ingest & probe, one summary line.
+- **Least-known-good provider strategy (lkgp)** — the combo ladder reorders by each member provider's ledger workload: the provider that has served the least in the last hour goes first, spreading traffic across the ladder. A failed read keeps the stored order; same-provider members keep their relative order.
+- **Cache hit-rate telemetry** — GET /api/cache answers a hitRates block: the prompt-cache share of requests carrying cached tokens in the window, and the semantic cache's process-lifetime hit share.
+- **Model arena** — POST /api/arena/run runs one prompt against up to six combo members side by side; the combos view grows the arena panel with member pills and a results grid (output, latency, tokens). API-key and compatible connections dispatch directly; OAuth and web-cookie members are reported as skipped with the reason.
+
 ## [v1.5.3] - 2026-11-19
 
 ### Added
