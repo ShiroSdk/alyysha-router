@@ -308,9 +308,17 @@ func TestHandleAudioVoices_elevenlabs(t *testing.T) {
 	}))
 	defer upstream.Close()
 
-	origVoicesURL := elevenVoicesURL
-	elevenVoicesURL = upstream.URL + "/v1/voices"
-	defer func() { elevenVoicesURL = origVoicesURL }()
+	// ChatHandler.HandleAudioVoices resolves the listing endpoint from the
+	// provider registry, not from the media package vars, so the stub has to
+	// replace the registry entry the handler actually reads. (The old stub
+	// pointed the media var at the fake upstream while this test kept calling
+	// the chat handler — the request went to the real api.elevenlabs.io and
+	// the test only passed when the network answered.)
+	origProvider := providers.KnownProviders["elevenlabs"]
+	withStubURL := origProvider
+	withStubURL.VoicesURL = upstream.URL
+	providers.KnownProviders["elevenlabs"] = withStubURL
+	defer func() { providers.KnownProviders["elevenlabs"] = origProvider }()
 
 	handler := chat.NewChatHandler(nil)
 	req := httptest.NewRequest("GET", "/v1/audio/voices?provider=elevenlabs", nil)
