@@ -60,6 +60,17 @@ type Repo struct {
 	// quotaResetId readers use for a database the additive pass never reached.
 	usageTeamColOnce sync.Once
 	usageTeamCol     bool
+	// usageComboColOnce/usageComboCol cache whether usageHistory carries the
+	// combo budget attribution column (comboName). The insert stamps it when
+	// present and drops the stamp when not, the same degradation the
+	// billingTeamId column uses on a schema the additive pass never reached.
+	usageComboColOnce sync.Once
+	usageComboCol     bool
+	// combosBudgetOnce/combosBudgetCols cache whether the combos table
+	// carries the N3 spending-ceiling columns; every combos read picks its
+	// column list by the answer instead of failing on a hand-built fixture.
+	combosBudgetOnce sync.Once
+	combosBudgetCols bool
 }
 
 // cachedSettings is one parsed settings row and the row content it was

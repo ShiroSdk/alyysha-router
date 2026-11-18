@@ -353,15 +353,21 @@
     models: string[],
     matchRules: SmartRule[],
     timeoutMs: number,
-    graceMs: number | undefined
+    graceMs: number | undefined,
+    budgetUsd: number | null,
+    budgetPeriod: string
   ) {
     isSavingCombo = true
     comboSaveError = ''
     try {
+      // The ceiling is always written (empty = clear): the modal seeds the
+      // stored value, so an untouched save is a no-op and a cleared input
+      // genuinely removes the ceiling.
+      const budgetLimitUsd = budgetUsd == null ? 0 : budgetUsd
       if (editingCombo) {
-        await api.updateCombo(editingCombo.id, { name, models, matchRules })
+        await api.updateCombo(editingCombo.id, { name, models, matchRules, budgetLimitUsd, budgetPeriod })
       } else {
-        await api.createCombo({ name, models, strategy: 'fallback', matchRules })
+        await api.createCombo({ name, models, strategy: 'fallback', matchRules, budgetLimitUsd, budgetPeriod })
       }
       // Strategies are keyed by combo name, so the timeout and grace are
       // written under the saved name, in one patch, and only when they differ
@@ -699,6 +705,8 @@
     saveError={comboSaveError}
     responseTimeoutMs={editingCombo ? comboStrategies[editingCombo.name]?.firstTokenTimeoutMs ?? 0 : 0}
     responseGraceMs={editingCombo ? comboStrategies[editingCombo.name]?.firstTokenGraceMs : undefined}
+    budgetLimitUsd={editingCombo?.budgetLimitMicros ? editingCombo.budgetLimitMicros / 1_000_000 : undefined}
+    budgetPeriodSeed={editingCombo?.budgetPeriod || 'monthly'}
     onClose={closeModal}
     onSave={handleSaveCombo}
     onOpenModelPicker={() => openModelPicker('combo')}

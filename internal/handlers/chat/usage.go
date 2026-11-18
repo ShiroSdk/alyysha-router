@@ -369,11 +369,15 @@ func (h *ChatHandler) logUsage(ctx context.Context, info *UsageLogInfo, usage *t
 	usageConnID, usageAPIKey, usageEndpoint := info.ConnectionID, info.APIKey, info.Endpoint
 	usagePrompt, usageCompletion := usage.PromptTokens, usage.CompletionTokens
 	usageTotal := totalTokens
+	// N3: the combo the request walked, stamped on the ledger row so the
+	// combo budget's spend read sees it. Read before the enqueue: the
+	// closure must not depend on the request context outliving the response.
+	usageCombo := comboDispatchFrom(ctx)
 	enqueueUsageWrite(func() {
 		if repo == nil {
 			return
 		}
-		if err := repo.InsertUsageHistory(usageProvider, usageModel, usageConnID, maskAPIKey(usageAPIKey), usageEndpoint, usagePrompt, usageCompletion, cost, "success", usageTotal, metaJSON, tokensJSON, clientKey, billingTeamID); err != nil {
+		if err := repo.InsertUsageHistory(usageProvider, usageModel, usageConnID, maskAPIKey(usageAPIKey), usageEndpoint, usagePrompt, usageCompletion, cost, "success", usageTotal, metaJSON, tokensJSON, clientKey, billingTeamID, usageCombo); err != nil {
 			log.Error("usage", "insert failed", "error", err)
 		}
 		// FASE 10.1 free-tier tracking: the same tokens the ledger row books are

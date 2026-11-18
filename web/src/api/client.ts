@@ -55,6 +55,10 @@ export interface Combo {
   matchRules?: string
   /** Derived server-side: the members the rules currently own. */
   autoMembers?: string[]
+  /** N3 spending ceiling in USD micros; absent/0 = unbounded. */
+  budgetLimitMicros?: number
+  /** Budget window the ceiling is measured over. */
+  budgetPeriod?: string
 }
 
 /** One smart-select rule: a pattern plus the membership it currently owns. */
@@ -1743,7 +1747,7 @@ export const api = {
     const res = await request<any>('/api/combos')
     return Array.isArray(res) ? res : (res.combos || [])
   },
-  createCombo: (payload: { id?: string; name: string; kind?: string; models: string | string[]; strategy?: string; matchRules?: SmartRule[] }) =>
+  createCombo: (payload: { id?: string; name: string; kind?: string; models: string | string[]; strategy?: string; matchRules?: SmartRule[]; budgetLimitUsd?: number; budgetPeriod?: string }) =>
     request<{ success: boolean; id: string }>('/api/combos', {
       method: 'POST',
       body: JSON.stringify(payload),

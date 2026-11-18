@@ -6,6 +6,7 @@ import (
 	"database/sql"
 	"errors"
 	"fmt"
+	"strings"
 	"time"
 )
 
@@ -68,36 +69,78 @@ func (r *Repo) GetUsageDaily(dateKey string) (string, error) {
 // the insert must lose the attribution rather than the row (the same
 // pre-#365 convention the quotaResetId readers use). The probe is cached, so
 // the hot path pays one branch after the first insert.
+// The variadic attribution, positional because it grew and every caller
+// passes it positionally: [0] clientKey, [1] billingTeamId, [2] comboName
+// (the N3 combo budget stamp, written only when the request walked a combo
+// and the column exists).
 func (r *Repo) InsertUsageHistory(provider, model, connectionID, apiKey, endpoint string, promptTokens, completionTokens int, cost float64, status string, totalTokens int, meta string, tokensJSON string, clientKey ...string) error {
 	attributedTo := ""
 	billingTeam := ""
+	comboName := ""
 	if len(clientKey) > 0 {
 		attributedTo = clientKey[0]
 	}
 	if len(clientKey) > 1 {
 		billingTeam = clientKey[1]
 	}
-	timestamp := time.Now().UTC().Format(time.RFC3339)
-	if !r.usageTeamColumnPresent() {
-		_, err := r.db.Exec(
-			`INSERT INTO usageHistory (timestamp, provider, model, connectionId, apiKey, clientKey, endpoint, promptTokens, completionTokens, cost, status, tokens, meta)
-			 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-			timestamp, provider, model, connectionID, apiKey, attributedTo, endpoint, promptTokens, completionTokens, cost, status, tokensJSON, meta,
-		)
-		if err != nil {
-			return fmt.Errorf("insert usage history: %w", err)
-		}
-		return nil
+	if len(clientKey) > 2 {
+		comboName = clientKey[2]
 	}
+	timestamp := time.Now().UTC().Format(time.RFC3339)
+	// The optional columns assemble the statement: the probes are cached, so
+	// the hot path pays two branches after the first insert, and a schema
+	// missing either column still records the row with that attribution
+	// dropped rather than losing the row to a failed insert.
+	cols := []string{"timestamp", "provider", "model", "connectionId", "apiKey", "clientKey",
+		"endpoint", "promptTokens", "completionTokens", "cost", "status", "tokens", "meta"}
+	vals := []any{timestamp, provider, model, connectionID, apiKey, attributedTo,
+		endpoint, promptTokens, completionTokens, cost, status, tokensJSON, meta}
+	if r.usageTeamColumnPresent() {
+		cols = append(cols, "billingTeamId")
+		vals = append(vals, billingTeam)
+	}
+	if comboName != "" && r.usageComboColumnPresent() {
+		cols = append(cols, "comboName")
+		vals = append(vals, comboName)
+	}
+	placeholders := strings.TrimSuffix(strings.Repeat("?,", len(cols)), ",")
 	_, err := r.db.Exec(
-		`INSERT INTO usageHistory (timestamp, provider, model, connectionId, apiKey, clientKey, endpoint, promptTokens, completionTokens, cost, status, tokens, meta, billingTeamId)
-		 VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-		timestamp, provider, model, connectionID, apiKey, attributedTo, endpoint, promptTokens, completionTokens, cost, status, tokensJSON, meta, billingTeam,
+		`INSERT INTO usageHistory (`+strings.Join(cols, ", ")+`) VALUES (`+placeholders+`)`,
+		vals...,
 	)
 	if err != nil {
 		return fmt.Errorf("insert usage history: %w", err)
 	}
 	return nil
+}
+
+// usageComboColumnPresent reports whether usageHistory carries the comboName
+// column, probed once per Repo (the same shape as usageTeamColumnPresent).
+func (r *Repo) usageComboColumnPresent() bool {
+	if r == nil || r.db == nil {
+		return false
+	}
+	r.usageComboColOnce.Do(func() {
+		rows, err := r.db.QueryContext(context.Background(), `PRAGMA table_info(usageHistory)`)
+		if err != nil {
+			return
+		}
+		defer func() { _ = rows.Close() }()
+		for rows.Next() {
+			var cid int
+			var name, ctype string
+			var notNull, pk int
+			var dflt sql.NullString
+			if err := rows.Scan(&cid, &name, &ctype, &notNull, &dflt, &pk); err != nil {
+				return
+			}
+			if name == "comboName" {
+				r.usageComboCol = true
+				return
+			}
+		}
+	})
+	return r.usageComboCol
 }
 
 // UpsertUsageDaily inserts or replaces a daily usage aggregation record.

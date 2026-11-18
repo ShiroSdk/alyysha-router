@@ -46,13 +46,19 @@
     responseTimeoutMs?: number
     /** Stored grace (ms) after a timeout; undefined = default. */
     responseGraceMs?: number
+    /** Stored spending ceiling (USD); undefined = none. */
+    budgetLimitUsd?: number
+    /** Stored budget window; only meaningful with a ceiling. */
+    budgetPeriodSeed?: string
     /** `graceMs` undefined means "use the default" and clears the stored value. */
     onSave: (
       name: string,
       models: string[],
       matchRules: SmartRule[],
       timeoutMs: number,
-      graceMs: number | undefined
+      graceMs: number | undefined,
+      budgetUsd: number | null,
+      budgetPeriod: string
     ) => Promise<void> | void
     onOpenModelPicker: () => void
     onUpdateModels: (models: string[]) => void
@@ -66,6 +72,8 @@
     saveError = '',
     responseTimeoutMs = 0,
     responseGraceMs = undefined,
+    budgetLimitUsd = undefined,
+    budgetPeriodSeed = 'monthly',
     onClose,
     onSave,
     onOpenModelPicker,
@@ -79,6 +87,18 @@
   let timeoutMs = $derived(secondsToTimeoutMs(timeoutInput))
   let graceInput = $state<string | number | null>(graceMsToSeconds(responseGraceMs))
   let graceMs = $derived(graceSecondsToMs(graceInput))
+  // Spending ceiling: empty = unbounded. The period select is disabled while
+  // no ceiling is armed, mirroring how the grace input depends on the timeout.
+  let budgetInput = $state<string | number | null>(budgetLimitUsd != null ? String(budgetLimitUsd) : '')
+  let budgetUsd = $derived(
+    budgetInput === '' || budgetInput === null ? null : Number(budgetInput)
+  )
+  let budgetPeriod = $state(budgetPeriodSeed)
+  let budgetError = $derived(
+    budgetUsd !== null && (!Number.isFinite(budgetUsd) || budgetUsd < 0)
+      ? 'Enter 0 or more USD, or leave empty for unbounded'
+      : ''
+  )
   let graceError = $derived(
     graceMs === null
       ? `Enter 0–${MAX_FIRST_TOKEN_TIMEOUT_SECONDS} seconds, or leave empty for the default`
@@ -341,7 +361,8 @@
   function handleSave() {
     if (!validateModalName(modalName)) return
     if (timeoutMs === null || graceMs === null) return
-    onSave(modalName.trim(), models, rules, timeoutMs, graceMs)
+    if (budgetUsd !== null && (!Number.isFinite(budgetUsd) || budgetUsd < 0)) return
+    onSave(modalName.trim(), models, rules, timeoutMs, graceMs, budgetUsd, budgetPeriod)
   }
 
   function moveModel(idx: number, delta: number) {
@@ -444,6 +465,45 @@
       </p>
       {#if graceError}
         <p class="mt-1 text-xs text-red-500" role="alert">{graceError}</p>
+      {/if}
+    </div>
+
+    <!-- Spending ceiling: an enforcement control like the timeout, so it
+         sits beside the other per-combo controls rather than the member
+         list it does not affect. -->
+    <div class="rounded-lg border border-border bg-surface-2 p-3">
+      <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-[18px] text-brand-500">payments</span>
+        <label for="combo-budget-limit" class="text-sm font-medium">Spending ceiling</label>
+        <div class="ml-auto flex items-center gap-1.5">
+          <input
+            id="combo-budget-limit"
+            type="number"
+            min="0"
+            step="any"
+            placeholder="Off"
+            bind:value={budgetInput}
+            class="w-24 rounded-lg border bg-surface px-2.5 py-1.5 text-sm text-text-main focus:outline-none focus:border-brand-500 {budgetError ? 'border-red-500' : 'border-border'}"
+          />
+          <select
+            id="combo-budget-period"
+            bind:value={budgetPeriod}
+            disabled={budgetUsd === null || budgetUsd <= 0}
+            class="rounded-lg border border-border bg-surface px-2 py-1.5 text-sm text-text-main focus:outline-none focus:border-brand-500 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            <option value="daily">daily</option>
+            <option value="weekly">weekly</option>
+            <option value="monthly">monthly</option>
+            <option value="total">total</option>
+          </select>
+        </div>
+      </div>
+      <p class="mt-1.5 text-xs text-text-muted">
+        Once the period's spend attributed to this combo crosses the ceiling, new requests stop — or downgrade to
+        this combo's cheapest member, per the budget breach mode. Leave empty for unbounded.
+      </p>
+      {#if budgetError}
+        <p class="mt-1 text-xs text-red-500" role="alert">{budgetError}</p>
       {/if}
     </div>
     <!-- Smart rules: the source of membership, so it sits above the list it

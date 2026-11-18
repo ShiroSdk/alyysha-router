@@ -697,6 +697,12 @@ func (h *ChatHandler) handleComboFallback(ctx context.Context, w http.ResponseWr
 		ctx = WithFallbackAttemptRecorder(ctx, rec)
 	}
 	ctx = WithComboDispatch(ctx, comboName)
+	// N3: the combo's own ceiling is scored once per dispatch, before the
+	// ladder is walked — a refusal must not spend the members it refuses.
+	comboModels, blocked := h.comboBudgetGate(ctx, w, comboName, comboModels)
+	if blocked {
+		return
+	}
 	cw := newCommittedResponseWriter(w)
 	cw.stream = isStream
 	cw.responsesClient = translator.IsResponsesClient(ctx)
@@ -1175,6 +1181,11 @@ func (h *ChatHandler) handleMessagesComboFallback(ctx context.Context, w http.Re
 		ctx = WithFallbackAttemptRecorder(ctx, rec)
 	}
 	ctx = WithComboDispatch(ctx, comboName)
+	// N3: the same ceiling as the Chat Completions lane, before the ladder.
+	comboModels, blocked := h.comboBudgetGate(ctx, w, comboName, comboModels)
+	if blocked {
+		return
+	}
 	cw := newCommittedResponseWriter(w)
 	cw.stream = isStream
 	cw.responsesClient = translator.IsResponsesClient(ctx)

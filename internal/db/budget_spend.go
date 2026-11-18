@@ -38,6 +38,39 @@ const budgetSpendQuery = `SELECT
 FROM usageHistory
 WHERE (clientKey = ? OR apiKey = ? OR apiKey = ?)`
 
+// comboBudgetSpendQuery sums cost and tokens attributed to one combo inside
+// a window. The comboName stamp is written by InsertUsageHistory when the
+// request walked a combo (WithComboDispatch), so the sum answers the same
+// ledger the key budget reads. The stamp column is probed (idx_uh_combo_ts
+// serves the pair) — a database the additive pass never reached fails the
+// read, and the engine's fail-open turns that into "no budget measured"
+// rather than a refusal.
+const comboBudgetSpendQuery = `SELECT
+  COALESCE(SUM(CAST(ROUND(COALESCE(cost, 0.0) * 1000000) AS INTEGER)), 0),
+  COALESCE(SUM(COALESCE(promptTokens,0) + COALESCE(completionTokens,0)), 0)
+FROM usageHistory
+WHERE comboName = ?`
+
+// SpendForComboSince returns the combo's cost and token spend since the
+// given timestamp floor. An empty since reads the whole ledger. A combo with
+// no history is zero spend, not an error — that is a fresh combo.
+func (r *Repo) SpendForComboSince(ctx context.Context, comboName, since string) (budget.Spend, error) {
+	if r == nil || r.db == nil || comboName == "" {
+		return budget.Spend{}, nil
+	}
+	query := comboBudgetSpendQuery
+	args := []any{comboName}
+	if since != "" {
+		query += ` AND timestamp >= ?`
+		args = append(args, since)
+	}
+	var s budget.Spend
+	if err := r.db.QueryRowContext(ctx, query, args...).Scan(&s.Micros, &s.Tokens); err != nil {
+		return budget.Spend{}, fmt.Errorf("budget spend for combo: %w", err)
+	}
+	return s, nil
+}
+
 // SpendForKeySince returns the key's cost and token spend since the given
 // timestamp floor. An empty since reads the whole ledger.
 //

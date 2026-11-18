@@ -360,6 +360,11 @@ var goOnlyColumns = [][3]string{
 	{"providerConnections", "disabledAt", "TEXT DEFAULT ''"},
 	{"auditLog", "prevHash", "TEXT DEFAULT ''"},
 	{"auditLog", "entryHash", "TEXT DEFAULT ''"},
+	// N3 combo spending budget: the ceiling lives on the combo row, the
+	// attribution on the usage rows the ledger already holds.
+	{"combos", "budgetLimitMicros", "INTEGER DEFAULT 0"},
+	{"combos", "budgetPeriod", "TEXT DEFAULT ''"},
+	{"usageHistory", "comboName", "TEXT DEFAULT ''"},
 	// F-5 Credential Vault: sealed credential columns
 	{"providerConnections", "secretWrappedDEK", "TEXT DEFAULT ''"},
 	{"providerConnections", "secretCiphertext", "TEXT DEFAULT ''"},
@@ -868,6 +873,11 @@ var supersededIndexes = []string{
 // column and carrying the timestamp bounds the scan to the team's own rows.
 var deferredIndexes = []string{
 	"CREATE INDEX IF NOT EXISTS idx_uh_billing_team ON usageHistory(billingTeamId, timestamp)",
+	// N3: the combo budget spend read matches comboName and a timestamp
+	// floor, so the pair is answered from one index. Deferred because the
+	// comboName column is Go-only and does not exist when the table is first
+	// ensured.
+	"CREATE INDEX IF NOT EXISTS idx_uh_combo_ts ON usageHistory(comboName, timestamp)",
 }
 
 // EnsureCoreSchema creates the upstream core tables/indexes when absent,

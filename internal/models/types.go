@@ -134,6 +134,12 @@ type Combo struct {
 	// own. The dashboard badges them so an operator can tell a managed member
 	// from one they pinned by hand.
 	AutoMembers []string `json:"autoMembers,omitempty"`
+	// BudgetLimitMicros is the combo's spend ceiling for one budget period,
+	// in USD micros; zero means unbounded, which is every combo written
+	// before the feature. BudgetPeriod names the window (budget package
+	// periods) and only matters while the ceiling is armed.
+	BudgetLimitMicros int64  `json:"budgetLimitMicros,omitempty"`
+	BudgetPeriod      string `json:"budgetPeriod,omitempty"`
 }
 
 // KV represents a scoped key-value store entry.

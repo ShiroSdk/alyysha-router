@@ -6,11 +6,13 @@ import (
 	json "encoding/json/v2"
 	"fmt"
 	"io"
+	"math"
 	"net/http"
 	"slices"
 	"sort"
 	"strings"
 
+	"9routerx/proxy/internal/budget"
 	"9routerx/proxy/internal/combos/smart"
 	"9routerx/proxy/internal/handlerutil"
 	"9routerx/proxy/internal/log"
@@ -75,6 +77,11 @@ func (h *DashboardHandler) HandleCreateCombo(w http.ResponseWriter, r *http.Requ
 		Models     any    `json:"models"`
 		Strategy   string `json:"strategy"`
 		MatchRules any    `json:"matchRules"`
+		// BudgetLimitUsd is the N3 spending ceiling in USD; a pointer so an
+		// absent field leaves the stored ceiling alone on update. Zero
+		// clears it.
+		BudgetLimitUsd *float64 `json:"budgetLimitUsd"`
+		BudgetPeriod   string   `json:"budgetPeriod"`
 	}
 	if err := json.Unmarshal(body, &req); err != nil {
 		handlerutil.WriteJSONError(w, http.StatusBadRequest, "invalid JSON")
@@ -123,6 +130,12 @@ func (h *DashboardHandler) HandleCreateCombo(w http.ResponseWriter, r *http.Requ
 		handlerutil.WriteJSONError(w, http.StatusInternalServerError, err.Error())
 		return
 	}
+	if req.BudgetLimitUsd != nil {
+		if status, msg := h.setComboBudgetFromRequest(req.ID, *req.BudgetLimitUsd, req.BudgetPeriod); status != 0 {
+			handlerutil.WriteJSONError(w, status, msg)
+			return
+		}
+	}
 	if rulesJSON != "" {
 		if err := h.Repo.SetComboRules(r.Context(), req.ID, rulesJSON); err != nil {
 			handlerutil.WriteJSONError(w, http.StatusInternalServerError, err.Error())
@@ -158,6 +171,11 @@ func (h *DashboardHandler) HandleUpdateCombo(w http.ResponseWriter, r *http.Requ
 		Models     any    `json:"models"`
 		Strategy   string `json:"strategy"`
 		MatchRules any    `json:"matchRules"`
+		// BudgetLimitUsd is the N3 spending ceiling in USD; a pointer so an
+		// absent field leaves the stored ceiling alone, the same partial
+		// update the other fields follow. Zero clears it.
+		BudgetLimitUsd *float64 `json:"budgetLimitUsd"`
+		BudgetPeriod   string   `json:"budgetPeriod"`
 	}
 	if err := json.Unmarshal(body, &req); err != nil {
 		handlerutil.WriteJSONError(w, http.StatusBadRequest, "invalid JSON")
@@ -257,6 +275,12 @@ func (h *DashboardHandler) HandleUpdateCombo(w http.ResponseWriter, r *http.Requ
 	if err := h.Repo.UpdateCombo(id, name, kind, modelsJSON, strategy); err != nil {
 		handlerutil.WriteJSONError(w, http.StatusInternalServerError, err.Error())
 		return
+	}
+	if req.BudgetLimitUsd != nil {
+		if status, msg := h.setComboBudgetFromRequest(id, *req.BudgetLimitUsd, req.BudgetPeriod); status != 0 {
+			handlerutil.WriteJSONError(w, status, msg)
+			return
+		}
 	}
 	if hasRules {
 		if err := h.Repo.SetComboRules(r.Context(), id, rulesJSON); err != nil {
@@ -481,4 +505,28 @@ func (h *DashboardHandler) HandleDeleteCombo(w http.ResponseWriter, r *http.Requ
 	}
 
 	handlerutil.WriteJSON(w, http.StatusOK, map[string]any{"status": "ok", "id": id})
+}
+
+// setComboBudgetFromRequest validates and stores the N3 combo ceiling from a
+// create/update payload: the limit arrives in USD and is stored as micros,
+// the period must be one the budget engine resolves. The status is 0 when
+// the write succeeded; a non-positive limit clears the ceiling.
+func (h *DashboardHandler) setComboBudgetFromRequest(id string, limitUsd float64, period string) (int, string) {
+	if limitUsd < 0 {
+		return http.StatusBadRequest, "budgetLimitUsd must not be negative"
+	}
+	micros := int64(math.Round(limitUsd * 1_000_000))
+	if micros > 0 {
+		switch period {
+		case budget.PeriodDaily, budget.PeriodWeekly, budget.PeriodMonthly, budget.PeriodTotal:
+		default:
+			return http.StatusBadRequest, "budgetPeriod must be daily, weekly, monthly or total"
+		}
+	} else {
+		period = ""
+	}
+	if err := h.Repo.SetComboBudget(id, micros, period); err != nil {
+		return http.StatusInternalServerError, err.Error()
+	}
+	return 0, ""
 }
