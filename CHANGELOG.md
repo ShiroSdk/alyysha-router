@@ -14,6 +14,15 @@ Release history up to the fork point is archived in the upstream repo's
   the pending-fragment splice now lands under this Unreleased heading instead
   of above the file title.
 
+## [v1.5.3] - 2026-11-19
+
+### Added
+- **PII vault with streaming detokenize** — `chat.pii_vault=on` replaces personal data in inbound requests with deterministic placeholders (`[PII:EMAIL_ADDRESS:ab12cd34]`) before the model or provider sees it, and restores the originals on the way back out — buffered answers and streamed frames alike, with a carry buffer for tokens the model emits across a frame boundary. Deterministic per value, so the conversation stays consistent; the mapping is memory-only and ages out.
+- **Remote auto-backup** — each backup can leave the machine: a Telegram bot document upload or a GitHub contents-API write, best-effort, with the outcome on the same status row. The auto-backup scheduler also actually started at boot now — it existed but was never wired, so the schedule never fired.
+- **Browser login for grok-web, perplexity-web and claude-web** — the throwaway-browser sign-in flow is parameterized into per-provider recipes (page, cookie domain, required cookie names) and three more providers run it. CDP reads HttpOnly cookies, so no DevTools needed.
+- **Model-family grouping and cross-family flagging** — the family definition lives in one shared function; GET /api/combos derives `families` + `crossFamily`, create/update responses warn on a mixed ladder, and dispatch records each boundary crossing on the routing-explain panel. The boundary is the model line: gpt→gpt-mini is not a crossing, gpt→claude is.
+- **Onboarding tour + doctor** — a first-run card with the three setup steps checked live, a health-check button, and a dismissal persisted in the settings blob; GET /api/doctor answers named, graded checks (database, login posture, connections, keys, backup destination) with fix hints.
+
 ## [v1.5.2] - 2026-11-19
 
 ### Added
