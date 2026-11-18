@@ -49,7 +49,8 @@ export const COMBO_STRATEGIES = [
   { value: 'tokenmaxxing', label: 'Tokenmaxxing — quota-aware' },
   { value: 'cache-optimized', label: 'Cache-optimized — maximize cached tokens' },
   { value: 'auto', label: 'Auto — 5-factor selection' },
-  { value: 'reset-aware', label: 'Reset-aware — prefer quota reset timing' }
+  { value: 'reset-aware', label: 'Reset-aware — prefer quota reset timing' },
+  { value: 'lkgp', label: 'Least-known-good — spread traffic across providers' }
 ] as const
 
 /**

@@ -143,6 +143,39 @@ func (r *Repo) usageComboColumnPresent() bool {
 	return r.usageComboCol
 }
 
+// ProviderUsageCounts counts each provider's ledger rows since the given
+// timestamp floor (empty = whole ledger). One grouped read over the
+// timestamp index — the LKGP strategy's ordering signal, read once per
+// dispatch like the combo budget's spend read. A provider with no rows is
+// simply absent from the map, which reads as zero.
+func (r *Repo) ProviderUsageCounts(ctx context.Context, since string) (map[string]int64, error) {
+	if r == nil || r.db == nil {
+		return map[string]int64{}, nil
+	}
+	query := `SELECT COALESCE(provider, ''), COUNT(*) FROM usageHistory`
+	args := []any{}
+	if since != "" {
+		query += ` WHERE timestamp >= ?`
+		args = append(args, since)
+	}
+	query += ` GROUP BY provider`
+	rows, err := r.db.QueryContext(ctx, query, args...)
+	if err != nil {
+		return nil, fmt.Errorf("provider usage counts: %w", err)
+	}
+	defer rows.Close()
+	out := map[string]int64{}
+	for rows.Next() {
+		var provider string
+		var count int64
+		if err := rows.Scan(&provider, &count); err != nil {
+			return nil, fmt.Errorf("provider usage counts: scan: %w", err)
+		}
+		out[provider] = count
+	}
+	return out, rows.Err()
+}
+
 // UpsertUsageDaily inserts or replaces a daily usage aggregation record.
 // The data parameter should be a JSON string matching the 9routerx daily aggregation format.
 // NOTE: INSERT OR REPLACE is an atomic full-row replace of the pre-merged JSON

@@ -2,6 +2,7 @@
 package chat
 
 import (
+	"9routerx/proxy/internal/log"
 	"context"
 	"crypto/rand"
 	"math"
@@ -274,6 +275,54 @@ func (h *ChatHandler) applyQuotaWeightedRouting(ctx context.Context, models []st
 	out = append(out, models[winner])
 	out = append(out, models[:winner]...)
 	out = append(out, models[winner+1:]...)
+	return out
+}
+
+// applyLKGPRouting orders the ladder by each member provider's recent
+// known-good workload: the provider that has served the LEAST in the window
+// goes first, so traffic spreads across the ladder instead of hammering the
+// first healthy entry until it trips. The window is one hour; a provider
+// with no rows reads as zero, which is the most-deserving rank. Members of
+// the same provider keep their relative order (a stable sort by count), so
+// the operator's per-provider member order survives the re-rank. The read
+// is one grouped query per dispatch, the same cost the combo budget's spend
+// read accepted.
+func (h *ChatHandler) applyLKGPRouting(ctx context.Context, models []string) []string {
+	if h.Repo == nil || len(models) <= 1 {
+		return models
+	}
+	window := time.Now().UTC().Add(-time.Hour).Format(time.RFC3339)
+	counts, err := h.Repo.ProviderUsageCounts(ctx, window)
+	if err != nil {
+		// A failed read is the neutral answer: keep the stored order rather
+		// than guess at load the ledger did not report.
+		log.Warn("lkgp", "usage counts read failed, keeping stored order", "error", err)
+		return models
+	}
+	type scored struct {
+		model  string
+		byLine string
+		count  int64
+	}
+	scoredModels := make([]scored, 0, len(models))
+	for _, m := range models {
+		prefix, _, ok := strings.Cut(m, "/")
+		provider := ""
+		if ok {
+			provider = resolveProviderAlias(prefix)
+		}
+		scoredModels = append(scoredModels, scored{model: m, byLine: m, count: counts[provider]})
+	}
+	sort.SliceStable(scoredModels, func(i, j int) bool {
+		if scoredModels[i].count != scoredModels[j].count {
+			return scoredModels[i].count < scoredModels[j].count
+		}
+		return false // equal counts: the stored order stands
+	})
+	out := make([]string, 0, len(scoredModels))
+	for _, s := range scoredModels {
+		out = append(out, s.model)
+	}
 	return out
 }
 

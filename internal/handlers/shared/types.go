@@ -18,7 +18,7 @@ type ModelInfo struct {
 	Model        string
 	ConnectionID string   // optional — set when the resolver already found a connection
 	ComboModels  []string // non-empty when resolved from a combo; each entry is "provider/model"
-	Strategy     string   // combo routing strategy: "fallback", "round-robin", "sticky", "fusion", "cache-optimized", "auto", "quota-weighted", "reset-aware"
+	Strategy     string   // combo routing strategy: "fallback", "round-robin", "sticky", "fusion", "cache-optimized", "auto", "quota-weighted", "reset-aware", "lkgp"
 	StickyLimit  int      // sticky round-robin: consecutive requests per model before rotating (default 1)
 	JudgeModel   string   // optional judge model for fusion strategy
 }

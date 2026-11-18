@@ -742,6 +742,8 @@ func (h *ChatHandler) handleComboFallbackWithVisited(ctx context.Context, cw *co
 		models = h.applyQuotaWeightedRouting(ctx, comboModels)
 	} else if strategy == "reset-aware" {
 		models = h.applyResetAwareRouting(ctx, comboModels)
+	} else if strategy == "lkgp" {
+		models = h.applyLKGPRouting(ctx, comboModels)
 	} else if h.comboRespectsStoredOrder(comboName) {
 		models = slices.Clone(comboModels)
 	} else {
