@@ -104,6 +104,52 @@ type Result struct {
 	UserAgent string
 }
 
+// Recipe describes one provider's web sign-in (N12): the page to open, the
+// cookie domain the session lives on, and the cookie names that must exist
+// before the flow can call the operator signed in. The gemini flow is the
+// zero-recipe default: Run() runs the Gemini recipe for compatibility with
+// every caller that predates the parameterization.
+type Recipe struct {
+	// Name labels the temp browser profile and the logs.
+	Name string
+	// URL is the page the throwaway browser opens.
+	URL string
+	// CookieDomain is the domain suffix the session cookies live on.
+	CookieDomain string
+	// Required are the cookie names a signed-in session must carry; CDP's
+	// Network.getAllCookies reads HttpOnly cookies too, which is what makes
+	// the HttpOnly session tokens reachable here at all.
+	Required []string
+}
+
+// Recipes for the providers the dashboard offers browser login for.
+var (
+	RecipeGemini = Recipe{
+		Name:         "gemini",
+		URL:          GeminiAppURL,
+		CookieDomain: "google.com",
+		Required:     []string{"__Secure-1PSID", "__Secure-1PSIDTS"},
+	}
+	RecipeGrokWeb = Recipe{
+		Name:         "grok-web",
+		URL:          "https://grok.com/",
+		CookieDomain: "grok.com",
+		Required:     []string{"sso"},
+	}
+	RecipePerplexityWeb = Recipe{
+		Name:         "perplexity-web",
+		URL:          "https://www.perplexity.ai/",
+		CookieDomain: "perplexity.ai",
+		Required:     []string{"__Secure-next-auth.session-token"},
+	}
+	RecipeClaudeWeb = Recipe{
+		Name:         "claude-web",
+		URL:          "https://claude.ai/",
+		CookieDomain: "claude.ai",
+		Required:     []string{"sessionKey"},
+	}
+)
+
 // FindBrowser locates a browser this flow can drive.
 //
 // The list is the reference bridge's: Chrome, Chromium, Brave and Edge, in
@@ -179,7 +225,16 @@ func platformBrowserPaths() []string {
 // that could rotate the session afterwards, which is the whole point: a
 // session taken from a browser that keeps running is a session that expires
 // and a sign-out that looks unexplained.
+// Run runs the Gemini sign-in — the flow this package was built around, and
+// the zero-recipe default every pre-recipe caller keeps.
 func Run(ctx context.Context) (*Result, error) {
+	return RunRecipe(ctx, RecipeGemini)
+}
+
+// RunRecipe opens a throwaway browser on the recipe's page, waits for the
+// operator to sign in, and answers with the captured session once every
+// required cookie exists.
+func RunRecipe(ctx context.Context, recipe Recipe) (*Result, error) {
 	binary := FindBrowser()
 	if binary == "" {
 		return nil, ErrNoBrowser
@@ -194,7 +249,7 @@ func Run(ctx context.Context) (*Result, error) {
 			"use an Incognito window instead and paste the cookie header")
 	}
 
-	profile, err := os.MkdirTemp("", "9router-gemini-login-*")
+	profile, err := os.MkdirTemp("", "9router-"+recipe.Name+"-login-*")
 	if err != nil {
 		return nil, fmt.Errorf("create the temporary browser profile: %w", err)
 	}
@@ -214,7 +269,7 @@ func Run(ctx context.Context) (*Result, error) {
 		"--no-first-run",
 		"--no-default-browser-check",
 		"--new-window",
-		GeminiAppURL,
+		recipe.URL,
 	)
 	command.Env = displayEnv
 	if err := command.Start(); err != nil {
@@ -244,7 +299,7 @@ func Run(ctx context.Context) (*Result, error) {
 		case <-exited:
 			return nil, ErrNoSignIn
 		case <-ticker.C:
-			result, ok := readSession(ctx, port)
+			result, ok := readSessionFor(ctx, port, recipe)
 			if ok {
 				return result, nil
 			}
@@ -272,11 +327,12 @@ func freePort() (int, error) {
 // established when the timestamp cookie and the session id are both there.
 // Anything less is an anonymous page, and an anonymous page is not a
 // credential.
-func readSession(ctx context.Context, port int) (*Result, bool) {
+func readSessionFor(ctx context.Context, port int, recipe Recipe) (*Result, bool) {
 	callCtx, cancel := context.WithTimeout(ctx, 2*time.Second)
 	defer cancel()
 
-	userAgent, webSocketURL := browserEndpoint(callCtx, port, "https://gemini.google.com/")
+	site := recipe.CookieDomain
+	userAgent, webSocketURL := browserEndpoint(callCtx, port, siteURLFor(recipe))
 	if webSocketURL == "" {
 		return nil, false
 	}
@@ -301,7 +357,7 @@ func readSession(ctx context.Context, port int) (*Result, bool) {
 	seen := map[string]string{}
 	parts := make([]string, 0, 16)
 	for _, cookie := range payload.Cookies {
-		if !strings.HasSuffix(cookie.Domain, "google.com") || cookie.Name == "" || cookie.Value == "" {
+		if !strings.HasSuffix(cookie.Domain, site) || cookie.Name == "" || cookie.Value == "" {
 			continue
 		}
 		if _, exists := seen[cookie.Name]; exists {
@@ -310,10 +366,24 @@ func readSession(ctx context.Context, port int) (*Result, bool) {
 		seen[cookie.Name] = cookie.Value
 		parts = append(parts, cookie.Name+"="+cookie.Value)
 	}
-	if seen["__Secure-1PSID"] == "" || seen["__Secure-1PSIDTS"] == "" {
-		return nil, false
+	for _, required := range recipe.Required {
+		if seen[required] == "" {
+			return nil, false
+		}
 	}
 	return &Result{CookieHeader: strings.Join(parts, "; "), UserAgent: userAgent}, true
+}
+
+// siteURLFor is the site prefix the page list is narrowed by: the scheme and
+// host the sign-in page lives on.
+func siteURLFor(recipe Recipe) string {
+	return strings.TrimSuffix(recipe.URL, "/")
+}
+
+// readSession is the Gemini-shaped session read every pre-recipe caller and
+// test keeps using.
+func readSession(ctx context.Context, port int) (*Result, bool) {
+	return readSessionFor(ctx, port, RecipeGemini)
 }
 
 // browserEndpoint reads the browser's debugging endpoint.

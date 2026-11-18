@@ -192,6 +192,10 @@ func SetupDashboardRoutes(r chi.Router, repo *db.Repo, chatH *chat.ChatHandler) 
 	// real server.
 	r.Get("/api/providers/catalog", dashH.HandleGetProviderCatalog)
 	r.Post("/api/providers/gemini-web/browser-login", dashH.HandleGeminiWebBrowserLogin)
+	// N12: the same throwaway-browser flow for three more cookie providers.
+	r.Post("/api/providers/grok-web/browser-login", dashH.HandleGrokWebBrowserLogin)
+	r.Post("/api/providers/perplexity-web/browser-login", dashH.HandlePerplexityWebBrowserLogin)
+	r.Post("/api/providers/claude-web/browser-login", dashH.HandleClaudeWebBrowserLogin)
 	r.Post("/api/providers/gemini-web/import-chrome", dashH.HandleGeminiWebImportChrome)
 	r.Post("/api/providers/deepseek-web/browser-login", dashH.HandleDeepSeekWebBrowserLogin)
 	r.Post("/api/providers/deepseek-web/import-chrome", dashH.HandleDeepSeekWebImportChrome)
