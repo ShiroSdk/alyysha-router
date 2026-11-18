@@ -271,6 +271,11 @@ func SetupDashboardRoutes(r chi.Router, repo *db.Repo, chatH *chat.ChatHandler) 
 	// Dashboard access tokens (N5 RBAC): mint, list and revoke scoped bearer
 	// credentials for scripting callers. Minting demands the admin caller
 	// class, checked in the handler.
+	// N13: the doctor and the first-run state the tour reads.
+	r.Get("/api/doctor", dashH.HandleGetDoctor)
+	r.Get("/api/onboarding/status", dashH.HandleGetOnboardingStatus)
+	r.Post("/api/onboarding/complete", dashH.HandlePostOnboardingComplete)
+
 	r.Get("/api/dashboard-tokens", dashH.HandleListDashboardTokens)
 	r.Post("/api/dashboard-tokens", dashH.HandleMintDashboardToken)
 	r.Delete("/api/dashboard-tokens/{id}", dashH.HandleRevokeDashboardToken)

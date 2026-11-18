@@ -95,6 +95,10 @@
   let pendingAddLinks = $state<ProviderShareLink[]>([])
   let isImportOpen = $state(false)
   let requireLogin = $state(false)
+
+  // N13: the first-run setup card renders itself and decides from the
+  // onboarding status whether to show; the flag only controls the chunk load.
+  let showOnboarding = $state(true)
   // Set by onLogout and consumed by the LoginView mount: without it, an
   // open-dashboard install (requireLogin=false) auto-resumes the session the
   // moment the login view mounts, undoing the logout redirect.
@@ -602,6 +606,13 @@
               <span class="font-code text-xs">Connecting to 9RouterX Localhost Gateway (:20128)...</span>
             </div>
           {:else}
+            {#if showOnboarding}
+              {#await import('./components/OnboardingWizard.svelte')}
+                <div class="rounded-xl border border-border p-4 mb-6 animate-pulse h-24" aria-hidden="true"></div>
+              {:then mod}
+                <mod.default />
+              {/await}
+            {/if}
             {#if activeTab === 'endpoint'}
               <LazyView load={() => import('./components/EndpointView.svelte')} {apiKeys} {settings} onRefresh={loadData} navigate={(tab: ActiveTab) => navigate(tab)} />
             {:else if activeTab === 'connections'}

@@ -2191,6 +2191,14 @@ export const api = {
       }
     ),
   getDatabaseStats: () => request<DatabaseStats>('/api/settings/database/stats'),
+  // N13 onboarding + doctor: the first-run tour reads this and the health
+  // check surfaces it on demand.
+  getOnboardingStatus: () =>
+    request<{ hasConnection: boolean; activeConns: number; hasKey: boolean; activeKeys: number; loginRequired: boolean; dismissed: boolean; complete: boolean }>('/api/onboarding/status'),
+  completeOnboarding: () => request<{ status: string }>('/api/onboarding/complete', { method: 'POST' }),
+  getDoctor: () =>
+    request<{ status: string; checkedAt: string; checks: { name: string; status: string; detail?: string; fixHint?: string }[] }>('/api/doctor'),
+
   // Dashboard access tokens (N5 RBAC). The mint response carries the
   // plaintext exactly once; the list never includes it.
   listDashboardTokens: () => request<{ tokens: DashboardToken[] }>('/api/dashboard-tokens'),
