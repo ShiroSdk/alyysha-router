@@ -129,7 +129,7 @@
         disabled={finishing}
         class="rounded-lg bg-brand-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-brand-500 disabled:opacity-50 transition-colors"
       >
-        Done — don't show again
+        Got it — don't ask again
       </button>
     </div>
 
