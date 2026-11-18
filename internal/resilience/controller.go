@@ -2,6 +2,7 @@
 package resilience
 
 import (
+	"9routerx/proxy/internal/fairshare"
 	"context"
 	"time"
 )
@@ -75,6 +76,22 @@ func (c *Controller) Reserve(ctx context.Context, provider, accountKey, proxyHas
 	if err != nil {
 		// The slot was refused, which is not a provider failure: the breaker
 		// must not be charged for this account's queue being full.
+		return nil, false
+	}
+	return release, true
+}
+
+// ReserveForKey is Reserve with the client key's fair-share weight attached
+// (N4). Under contention the account's freed slot goes to the waiting request
+// whose client key has been served the least recently; with no shares in the
+// ledger the drain is the FIFO order Reserve always ran. The breaker is
+// consulted first, exactly as Reserve does.
+func (c *Controller) ReserveForKey(ctx context.Context, provider, accountKey, proxyHash, clientKey string) (func(), bool) {
+	if d := c.Admit(provider, accountKey, proxyHash); !d.Allowed {
+		return nil, false
+	}
+	release, err := AcquireWeighted(ctx, SemaphoreKey(provider, accountKey, proxyHash), c.Semaphore, fairshare.Share(clientKey))
+	if err != nil {
 		return nil, false
 	}
 	return release, true

@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"sync"
+	"sync/atomic"
 	"time"
 )
 
@@ -47,7 +48,30 @@ func SemaphoreKey(provider, accountKey, proxyHash string) string {
 
 type waiter struct {
 	ready chan func()
+	// share is the client key's recent consumption (N4 fair-share). Zero —
+	// the default for every unweighted caller — means "served the least", so
+	// a semaphore whose waiters carry no shares drains in exactly the FIFO
+	// order it always did.
+	share float64
+	// seq is the arrival sequence, the deterministic tie-break that makes
+	// equal shares drain FIFO.
+	seq uint64
+	// credit grows each time a drain passes this waiter over for a lighter
+	// one, and is subtracted from its share when the next slot is handed out.
+	// Without it a heavy consumer that keeps losing to newly-arrived light
+	// consumers could starve past its timeout; with it every skipped waiter
+	// eventually wins a slot.
+	credit float64
 }
+
+// semaphoreSeq stamps arrival order for the tie-break.
+var semaphoreSeq atomic.Uint64
+
+// skipCredit is the share-worth of tokens a waiter is forgiven each time a
+// drain passes it over. Roughly one skipped slot buys back a thousand-token
+// request's share; the exact scale only needs to make aging outrun the
+// arrival rate of lighter waiters.
+const skipCredit = 1000
 
 type gate struct {
 	mu             sync.Mutex
@@ -128,7 +152,7 @@ func Acquire(ctx context.Context, key string, opts SemaphoreOptions) (func(), er
 		g.mu.Unlock()
 		return nil, fmt.Errorf("%w: queue full for %q", ErrSemaphoreCapacity, key)
 	}
-	w := &waiter{ready: make(chan func(), 1)}
+	w := &waiter{ready: make(chan func(), 1), seq: semaphoreSeq.Add(1)}
 	g.queue = append(g.queue, w)
 	g.mu.Unlock()
 
@@ -143,6 +167,58 @@ func Acquire(ctx context.Context, key string, opts SemaphoreOptions) (func(), er
 		}
 		// The slot was granted in the same instant the timer fired: honour it
 		// rather than leaking a reservation.
+		return <-w.ready, nil
+	case <-ctx.Done():
+		if g.removeWaiter(w) {
+			return nil, ctx.Err()
+		}
+		return <-w.ready, nil
+	}
+}
+
+// AcquireWeighted reserves a slot on behalf of a client key whose recent
+// consumption is share (N4). Under contention the freed slot goes to the
+// waiter that has been served the least, so a burst from one heavy key
+// cannot hold every slot while a light key waits behind it. With no shares
+// in play the drain is the same FIFO Acquire has always run.
+func AcquireWeighted(ctx context.Context, key string, opts SemaphoreOptions, share float64) (func(), error) {
+	if opts.MaxConcurrency <= 0 {
+		return func() {}, nil
+	}
+	if opts.Timeout <= 0 {
+		opts.Timeout = defaultTimeout
+	}
+	g := gateFor(key, opts.MaxConcurrency)
+	// The fast path and queue-full checks must behave exactly like Acquire;
+	// only the drain order differs. Take the gate lock once here and fall
+	// through to the same park the unweighted path uses.
+	g.mu.Lock()
+	blocked := !g.blockedUntil.IsZero() && time.Now().Before(g.blockedUntil)
+	if !blocked && g.running < g.maxConcurrency {
+		g.running++
+		g.mu.Unlock()
+		return makeRelease(key, g), nil
+	}
+	if opts.MaxQueueSize <= 0 {
+		opts.MaxQueueSize = defaultMaxQueueSize
+	}
+	if len(g.queue) >= opts.MaxQueueSize {
+		g.mu.Unlock()
+		return nil, fmt.Errorf("%w: queue full for %q", ErrSemaphoreCapacity, key)
+	}
+	w := &waiter{ready: make(chan func(), 1), share: share, seq: semaphoreSeq.Add(1)}
+	g.queue = append(g.queue, w)
+	g.mu.Unlock()
+
+	timer := time.NewTimer(opts.Timeout)
+	defer timer.Stop()
+	select {
+	case release := <-w.ready:
+		return release, nil
+	case <-timer.C:
+		if g.removeWaiter(w) {
+			return nil, fmt.Errorf("%w: timed out after %s for %q", ErrSemaphoreCapacity, opts.Timeout, key)
+		}
 		return <-w.ready, nil
 	case <-ctx.Done():
 		if g.removeWaiter(w) {
@@ -191,8 +267,28 @@ func drain(key string, g *gate) {
 			g.mu.Unlock()
 			return
 		}
-		w := g.queue[0]
-		g.queue = g.queue[1:]
+		// Fair-share selection (N4): under contention the slot goes to the
+		// waiter that has been served the least, aged by the credits it has
+		// earned waiting. Zero shares make the minimum the earliest arrival,
+		// which is the FIFO order this queue has always had — so a deployment
+		// that never weighted a waiter behaves byte for byte as before.
+		best := 0
+		if len(g.queue) > 1 {
+			bestShare := g.queue[0].share - g.queue[0].credit
+			for i := 1; i < len(g.queue); i++ {
+				s := g.queue[i].share - g.queue[i].credit
+				if s < bestShare || (s == bestShare && g.queue[i].seq < g.queue[best].seq) {
+					best = i
+				}
+			}
+		}
+		for i := range g.queue {
+			if i != best {
+				g.queue[i].credit += skipCredit
+			}
+		}
+		w := g.queue[best]
+		g.queue = append(g.queue[:best], g.queue[best+1:]...)
 		g.running++
 		g.mu.Unlock()
 		// A waiter that timed out removes itself from the queue under the same

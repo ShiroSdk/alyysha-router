@@ -7,6 +7,8 @@ import (
 	"encoding/hex"
 	"net/url"
 
+	"9routerx/proxy/internal/db"
+	"9routerx/proxy/internal/middleware"
 	"9routerx/proxy/internal/providers"
 	"9routerx/proxy/internal/resilience"
 )
@@ -40,6 +42,18 @@ func (h *ChatHandler) resilienceAdmit(ctx context.Context, provider string, cfg 
 	}
 	account := resilienceAccountKey(cfg, h.apiKeyForResilience(cfg))
 	proxy := resilienceProxyKey(cfg)
+	// N4 fair-share: the caller's identity rides the admission so a
+	// contended account slot goes to the client key that has been served the
+	// least. A request without an authenticated caller (health probes, the
+	// dashboard's own diagnostics) reserves unweighted, which is the FIFO
+	// order.
+	if caller := middleware.AuthenticatedApiKeyFromContext(ctx); caller != nil {
+		release, ok := h.Resilience.ReserveForKey(ctx, providers.ResolveAlias(provider), account, proxy, db.LedgerMask(caller))
+		if !ok {
+			return nil, false
+		}
+		return release, true
+	}
 	release, ok := h.Resilience.Reserve(ctx, providers.ResolveAlias(provider), account, proxy)
 	if !ok {
 		return nil, false

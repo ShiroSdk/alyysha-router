@@ -16,6 +16,7 @@ import (
 	"9routerx/proxy/internal/constants"
 	"9routerx/proxy/internal/db"
 	"9routerx/proxy/internal/detection"
+	"9routerx/proxy/internal/fairshare"
 	"9routerx/proxy/internal/handlers/shared"
 	"9routerx/proxy/internal/handlerutil"
 	"9routerx/proxy/internal/log"
@@ -353,6 +354,10 @@ func (h *ChatHandler) logUsage(ctx context.Context, info *UsageLogInfo, usage *t
 	if caller := middleware.AuthenticatedApiKeyFromContext(ctx); caller != nil {
 		clientKey = db.LedgerMask(caller)
 		callerID = caller.ID
+		// N4 fair-share: the tokens this response served count toward the
+		// key's rolling share, which the account semaphore's admission reads
+		// under contention. Failures serve nothing and are not credited.
+		fairshare.Add(clientKey, int64(totalTokens))
 		// Tenant cost centers (FASE 7): the row is stamped with the team the
 		// key belonged to AT REQUEST TIME — re-pointing a key to another team
 		// must never rewrite history. Best-effort by the read's own contract:
