@@ -319,5 +319,6 @@ func RegisterRoutes(r chi.Router, h *DashboardHandler) {
 		// Compression Analytics
 		r.Get("/analytics/compression", h.HandleGetCompressionAnalytics)
 		r.Get("/savings/summary", h.HandleGetSavingsSummary)
+		r.Get("/burn-rate", h.HandleGetBurnRate)
 	})
 }
