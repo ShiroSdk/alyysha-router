@@ -2,20 +2,20 @@
   "latestVersion": "1.5.2",
   "downloadUrl": "https://github.com/yanstd888/9routerx/releases/latest",
   "downloadUrls": {
-    "linux_amd64": "https://github.com/yanstd888/9routerx/releases/download/v1.5.1/9routerx-linux-amd64",
-    "linux_arm64": "https://github.com/yanstd888/9routerx/releases/download/v1.5.1/9routerx-linux-arm64",
-    "darwin_amd64": "https://github.com/yanstd888/9routerx/releases/download/v1.5.1/9routerx-darwin-amd64",
-    "darwin_arm64": "https://github.com/yanstd888/9routerx/releases/download/v1.5.1/9routerx-darwin-arm64",
-    "windows_amd64": "https://github.com/yanstd888/9routerx/releases/download/v1.5.1/9routerx-windows-amd64.exe"
+    "linux_amd64": "https://github.com/yanstd888/9routerx/releases/download/v1.5.2/9routerx-linux-amd64",
+    "linux_arm64": "https://github.com/yanstd888/9routerx/releases/download/v1.5.2/9routerx-linux-arm64",
+    "darwin_amd64": "https://github.com/yanstd888/9routerx/releases/download/v1.5.2/9routerx-darwin-amd64",
+    "darwin_arm64": "https://github.com/yanstd888/9routerx/releases/download/v1.5.2/9routerx-darwin-arm64",
+    "windows_amd64": "https://github.com/yanstd888/9routerx/releases/download/v1.5.2/9routerx-windows-amd64.exe"
   },
   "sha256s": {
-    "darwin_amd64": "755c515a0ef96ae9d1c66346abdca598015758e7f55ce94ce4995c663830bcf8",
-    "darwin_arm64": "f0f3c0f79b74f3532caa27155be28396dbda088856d7470c1e08f5adb37164f9",
-    "linux_amd64": "81ce3bb5d051c2517033e2aa3dd8f73759ca437309ac2ecc66618e184c8a9640",
-    "linux_arm64": "84e2ab49e4cac081cae5478917e435747def2e704f3fe0352d16aa86c60ce67f",
-    "windows_amd64": "d18e5253b5aacf8c96574f5cfe9a6c46c7afd958655d99d07e788a7ed0de12b2"
+    "darwin_amd64": "9a219d43da22afa7e3ec7d972dcf5dda1ec1de994dd71fe05852e1424910dd45",
+    "darwin_arm64": "e8d91c128dde4d425e90fa31e7d60c16e828230f5a036f544d05cfc5db18954a",
+    "linux_amd64": "ce9cb132f6ed65bad138d0874365338fc1109309f2c8318e9dbaa7c4e1e4b738",
+    "linux_arm64": "97b90965fb0f3751a4a855bbed36f9c3fa1184fa64acc8797f4a6833596cb35a",
+    "windows_amd64": "c27fff751decd32a0e895fb8e6f587a928506ae54693395e84b8a15ee774189c"
   },
-  "releaseNotes": "\n\n### Added\n- **Combo strategies exposed** — `cache-optimized`, `auto` (5-factor) and `reset-aware` now selectable from the dashboard combo dropdown; the backend supported them but the UI never offered the choice.\n- **Audit log hash-chain** — every audit entry carries sha256(prevHash + canonical) binding it to the chain. GET /api/audit/verify walks the log and reports the first tampered row.\n- **Burn-rate analytics** — GET /api/burn-rate returns the 24-hour sliding token and cost burn rate, with budget projections for keys with an armed daily cost limit.\n- **gzip unwrap** — upstream responses that force `Content-Encoding: gzip` despite an identity request are transparently decoded before parsing.\n",
-  "releaseUrl": "https://github.com/yanstd888/9routerx/releases/tag/v1.5.1",
-  "publishedAt": "2026-11-18T16:18:23Z"
+  "releaseNotes": "\n\n### Added\n- **Tool-loop watchdog** — `chat.tool_loop_watch` (off default | log | break) tracks tool-call signatures per session across requests; a response repeating the same call past `chat.tool_loop_threshold` (default 3) is logged and recorded on the explain panel, or withheld behind a clean 429 the agent can read. A break keeps the session record: a retry that changes nothing breaks again immediately, only a different call resets.\n- **Combo spending ceiling** — a combo can carry `budgetLimitUsd` + `budgetPeriod` (daily | weekly | monthly | total), enforced once per dispatch before the member ladder is walked. Breach follows the budget breach mode: reject answers the generic 402; downgrade restricts the ladder to the cheapest priced member and flags it with `X-Budget-Downgraded`. The combo editor grows the field.\n- **Fair-share admission** — under account-queue contention the freed slot goes to the client key that has been served the least (rolling in-memory ledger fed by the usage logger), with skip-credit aging so nobody starves past their timeout. Zero shares drain in the exact FIFO order the queue always ran.\n- **Scoped dashboard access tokens** — mint `admin` | `write` | `read` bearer tokens (x-9r-access-token header) for scripting callers instead of sharing the dashboard session. Enforced per route and method, failing closed: an unknown, revoked or out-of-scope token never degrades to the anonymous path. Plaintext shown once at mint; stored under the engine-key hashing. Managed from the profile page.\n\n### Fixed\n- **Settings restart-loss** — the section normalizers (context guard, budget breach mode, session affinity, account TTLs, retry caps) applied their value live and then refused to persist it, so every one of those toggles silently reverted on the next restart. They now keep the section in the stored blob; only malformed payloads are stripped.\n- **Shipped-but-404 dashboard routes** — thirteen routes existed only in the tests-only route table: the resilience panel and its reset, routing explain, the savings summary and burn rate (both shipped 404 in v1.5.1), settings history and rollback, plans apply-keys, tunnel repair, and the custom-model wildcard delete. All mounted on the real server now; the live smoke gate caught the first one and the route audit found the rest.\n- **elevenlabs voices test** — the test stubbed the media package var while calling the chat handler, which reads the provider registry: it hit the real api.elevenlabs.io and only passed with network. It stubs the registry entry now.\n",
+  "releaseUrl": "https://github.com/yanstd888/9routerx/releases/tag/v1.5.2",
+  "publishedAt": "2026-11-18T17:57:58Z"
 }
