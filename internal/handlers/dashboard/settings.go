@@ -1385,6 +1385,15 @@ func applyClaudeWebEnabledUpdate(updates map[string]any) {
 	delete(updates, "claudeWebEnabled")
 }
 
+// The section normalizers below keep their section in the payload after
+// applying it live: the boot-time restores in NewChatHandler read these same
+// sections from the stored blob, so a normalizer that stripped its section
+// would lose the setting on every restart. Only a payload that is not the
+// expected shape is stripped, and only so garbage never reaches the store.
+// (The delete-first shape these used to have was a silent restart-loss trap:
+// the toggle took effect immediately, then vanished on the next boot because
+// the restore read a section the PUT path had just refused to persist.)
+
 // applyRetryAttemptCapsUpdate normalizes the retry.attempt_caps payload
 // (exact/provider/global attempt caps) and applies it live. Absent or
 // malformed keys are dropped so a hand edit cannot poison the ladder.
@@ -1393,9 +1402,9 @@ func applyRetryAttemptCapsUpdate(updates map[string]any) {
 	if !present {
 		return
 	}
-	delete(updates, "retry")
 	capsMap, ok := raw.(map[string]any)
 	if !ok {
+		delete(updates, "retry")
 		return
 	}
 	ac, ok := capsMap["attempt_caps"].(map[string]any)
@@ -1422,9 +1431,9 @@ func applyContextGuardUpdate(updates map[string]any) {
 	if !present {
 		return
 	}
-	delete(updates, "fallback")
 	fb, ok := raw.(map[string]any)
 	if !ok {
+		delete(updates, "fallback")
 		return
 	}
 	mode, ok := fb["context_guard"].(string)
@@ -1441,9 +1450,9 @@ func applyBudgetBreachModeUpdate(updates map[string]any) {
 	if !present {
 		return
 	}
-	delete(updates, "budget")
 	b, ok := raw.(map[string]any)
 	if !ok {
+		delete(updates, "budget")
 		return
 	}
 	mode, ok := b["breach_mode"].(string)
@@ -1460,9 +1469,9 @@ func applyAccountsBlacklistTTLUpdate(updates map[string]any) {
 	if !present {
 		return
 	}
-	delete(updates, "accounts")
 	a, ok := raw.(map[string]any)
 	if !ok {
+		delete(updates, "accounts")
 		return
 	}
 	if ttl, ok := a["blacklist_ttl"].(float64); ok {
@@ -1477,9 +1486,9 @@ func applyKeysAutopruneTTLUpdate(updates map[string]any) {
 	if !present {
 		return
 	}
-	delete(updates, "accounts")
 	a, ok := raw.(map[string]any)
 	if !ok {
+		delete(updates, "accounts")
 		return
 	}
 	if ttl, ok := a["autoprune_ttl"].(float64); ok {
@@ -1494,9 +1503,9 @@ func applySessionAffinityUpdate(updates map[string]any) {
 	if !present {
 		return
 	}
-	delete(updates, "routing")
 	rt, ok := raw.(map[string]any)
 	if !ok {
+		delete(updates, "routing")
 		return
 	}
 	if mode, ok := rt["session_affinity"].(string); ok {
