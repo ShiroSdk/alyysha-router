@@ -247,6 +247,30 @@ func SetupDashboardRoutes(r chi.Router, repo *db.Repo, chatH *chat.ChatHandler) 
 	// Compression Analytics
 	r.Get("/api/analytics/compression", dashH.HandleGetCompressionAnalytics)
 
+	// Resilience panel + routing explain + savings + burn rate + settings
+	// history + plans apply + tunnel repair + custom-model wildcard delete +
+	// dashboard access tokens. Every one of these existed only in
+	// dashboard.RegisterRoutes — the table the unit tests mount — so the
+	// panels shipped 404 on the real server (the smoke gate caught the first
+	// one; the route audit found the rest).
+	r.Get("/api/resilience", dashH.HandleGetResilience)
+	r.Post("/api/resilience/reset", dashH.HandleResetResilience)
+	r.Get("/api/routing-explain", dashH.HandleGetRoutingExplain)
+	r.Get("/api/savings/summary", dashH.HandleGetSavingsSummary)
+	r.Get("/api/burn-rate", dashH.HandleGetBurnRate)
+	r.Get("/api/settings/history", dashH.HandleGetSettingsHistory)
+	r.Post("/api/settings/history/{id}/rollback", dashH.HandleRollbackSettingsKey)
+	r.Post("/api/plans/{id}/apply-keys", dashH.HandleApplyPlanToKeys)
+	r.Post("/api/tunnel/repair-origin", dashH.HandleTunnelRepairOrigin)
+	r.Delete("/api/models/custom/*", dashH.HandleDeleteCustomModel)
+
+	// Dashboard access tokens (N5 RBAC): mint, list and revoke scoped bearer
+	// credentials for scripting callers. Minting demands the admin caller
+	// class, checked in the handler.
+	r.Get("/api/dashboard-tokens", dashH.HandleListDashboardTokens)
+	r.Post("/api/dashboard-tokens", dashH.HandleMintDashboardToken)
+	r.Delete("/api/dashboard-tokens/{id}", dashH.HandleRevokeDashboardToken)
+
 	// Jailbreak: agent prompt presets + per-model binding. Registered here and in
 	// dashboard.RegisterRoutes (a tests-only table); a route added there alone
 	// 404s on the real server — the same trap as the per-node limits pair.
