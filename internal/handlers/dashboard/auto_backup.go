@@ -34,7 +34,7 @@ func (h *DashboardHandler) HandleGetAutoBackup(w http.ResponseWriter, r *http.Re
 	items, _ := bm.ListBackups(cfg.Destination)
 
 	handlerutil.WriteJSON(w, http.StatusOK, map[string]any{
-		"config":  cfg,
+		"config":  sanitizeAutoBackupConfig(cfg),
 		"status":  status,
 		"backups": items,
 	})
@@ -55,6 +55,15 @@ func (h *DashboardHandler) HandlePatchAutoBackup(w http.ResponseWriter, r *http.
 		IntervalHours *int    `json:"intervalHours"`
 		Retention     *int    `json:"retention"`
 		Destination   *string `json:"destination"`
+		Remote        *struct {
+			Kind          string  `json:"kind"`
+			TelegramToken *string `json:"telegramToken"`
+			TelegramChat  *string `json:"telegramChat"`
+			GithubToken   *string `json:"githubToken"`
+			GithubRepo    *string `json:"githubRepo"`
+			GithubBranch  *string `json:"githubBranch"`
+			GithubPath    *string `json:"githubPath"`
+		} `json:"remote"`
 	}
 	if len(body) > 0 {
 		if err := json.Unmarshal(body, &patch); err != nil {
@@ -80,6 +89,41 @@ func (h *DashboardHandler) HandlePatchAutoBackup(w http.ResponseWriter, r *http.
 	if patch.Destination != nil {
 		cfg.Destination = strings.TrimSpace(*patch.Destination)
 	}
+	// N8: the remote block merges — credential fields the caller omitted
+	// keep their stored values, so a UI toggle for the kind does not wipe
+	// the bot token the operator pasted yesterday.
+	if patch.Remote != nil {
+		r := patch.Remote
+		switch strings.ToLower(strings.TrimSpace(r.Kind)) {
+		case "", db.RemoteKindTelegram, db.RemoteKindGithub:
+			cfg.Remote.Kind = strings.ToLower(strings.TrimSpace(r.Kind))
+		default:
+			handlerutil.WriteJSONError(w, http.StatusBadRequest, "remote.kind must be empty, telegram or github")
+			return
+		}
+		if r.TelegramToken != nil {
+			cfg.Remote.TelegramToken = strings.TrimSpace(*r.TelegramToken)
+		}
+		if r.TelegramChat != nil {
+			cfg.Remote.TelegramChat = strings.TrimSpace(*r.TelegramChat)
+		}
+		if r.GithubToken != nil {
+			cfg.Remote.GithubToken = strings.TrimSpace(*r.GithubToken)
+		}
+		if r.GithubRepo != nil {
+			cfg.Remote.GithubRepo = strings.TrimSpace(*r.GithubRepo)
+		}
+		if r.GithubBranch != nil {
+			cfg.Remote.GithubBranch = strings.TrimSpace(*r.GithubBranch)
+		}
+		if r.GithubPath != nil {
+			cfg.Remote.GithubPath = strings.TrimSpace(*r.GithubPath)
+		}
+		if cfg.Remote.Kind != "" && !cfg.RemoteArmed() {
+			handlerutil.WriteJSONError(w, http.StatusBadRequest, "remote credentials incomplete for kind "+cfg.Remote.Kind)
+			return
+		}
+	}
 
 	if err := h.Repo.SetAutoBackupConfig(ctx, cfg); err != nil {
 		handlerutil.WriteJSONError(w, http.StatusInternalServerError, err.Error())
@@ -88,9 +132,30 @@ func (h *DashboardHandler) HandlePatchAutoBackup(w http.ResponseWriter, r *http.
 
 	status, _ := h.Repo.GetAutoBackupStatus(ctx)
 	handlerutil.WriteJSON(w, http.StatusOK, map[string]any{
-		"config": cfg,
+		"config": sanitizeAutoBackupConfig(cfg),
 		"status": status,
 	})
+}
+
+// sanitizeAutoBackupConfig strips the remote credentials from a config
+// bound for a response body: the tokens never travel back out, and the UI
+// learns only whether one is stored.
+func sanitizeAutoBackupConfig(cfg db.AutoBackupConfig) map[string]any {
+	return map[string]any{
+		"enabled":       cfg.Enabled,
+		"intervalHours": cfg.IntervalHours,
+		"retention":     cfg.Retention,
+		"destination":   cfg.Destination,
+		"remote": map[string]any{
+			"kind":             cfg.Remote.Kind,
+			"telegramChat":     cfg.Remote.TelegramChat,
+			"githubRepo":       cfg.Remote.GithubRepo,
+			"githubBranch":     cfg.Remote.GithubBranch,
+			"githubPath":       cfg.Remote.GithubPath,
+			"hasTelegramToken": cfg.Remote.TelegramToken != "",
+			"hasGithubToken":   cfg.Remote.GithubToken != "",
+		},
+	}
 }
 
 // HandlePostAutoBackup handles POST /api/settings/auto-backup (actions: backup, restore, delete).

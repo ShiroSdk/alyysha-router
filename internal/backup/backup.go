@@ -130,12 +130,17 @@ func (m *Manager) CreateBackup(ctx context.Context, jsonExporter func(context.Co
 	}
 	_ = m.repo.SetAutoBackupStatus(ctx, status)
 
-	return &BackupResult{
+	result := &BackupResult{
 		SQLitePath: sqliteFile,
 		JSONPath:   jsonFile,
 		CreatedAt:  now,
 		SizeBytes:  totalBytes,
-	}, nil
+	}
+	// N8: the off-host copy rides the same call the local backup rode, so
+	// the manual button and the schedule push alike. A failed push records
+	// its own status and never fails the durable local file.
+	m.PushRemote(ctx, cfg, result)
+	return result, nil
 }
 
 // rotateBackups prunes oldest backup files beyond the retention count.
@@ -239,6 +244,27 @@ func (m *Manager) Start(jsonExporter func(context.Context) ([]byte, error)) {
 func (m *Manager) Stop() {
 	close(m.stopCh)
 	<-m.doneCh
+}
+
+// StartOnContext is Start bound to a shutdown context: the ticker exits when
+// the context does, so a caller that owns no Stop() hook — the boot path's
+// scheduler helpers — still terminates the goroutine cleanly. Reaching the
+// first tick immediately is deliberate: a gateway that was off for a while
+// owes its backup the moment it is up, not an hour later.
+func (m *Manager) StartOnContext(ctx context.Context, jsonExporter func(context.Context) ([]byte, error)) {
+	go func() {
+		ticker := time.NewTicker(1 * time.Hour)
+		defer ticker.Stop()
+		m.tick(jsonExporter)
+		for {
+			select {
+			case <-ctx.Done():
+				return
+			case <-ticker.C:
+				m.tick(jsonExporter)
+			}
+		}
+	}()
 }
 
 func (m *Manager) tick(jsonExporter func(context.Context) ([]byte, error)) {

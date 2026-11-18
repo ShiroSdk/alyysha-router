@@ -16,10 +16,12 @@ import (
 	"go.uber.org/fx"
 
 	"9routerx/proxy/internal/a2a"
+	"9routerx/proxy/internal/backup"
 	"9routerx/proxy/internal/config"
 	"9routerx/proxy/internal/db"
 	"9routerx/proxy/internal/freeresilience"
 	"9routerx/proxy/internal/handlers/chat"
+	"9routerx/proxy/internal/handlers/dashboard"
 	appLog "9routerx/proxy/internal/log"
 	"9routerx/proxy/internal/mcpserver"
 	"9routerx/proxy/internal/notifications"
@@ -210,6 +212,12 @@ func ProvideServer(p ServerParams) *http.Server {
 
 			notifScanner = notifications.NewScanner(p.Repo)
 			notifScanner.Start()
+			// N8: the auto-backup scheduler. It existed but was never started
+			// at boot — the dashboard's manual button worked, the schedule
+			// never fired. The exporter runs against a handler bound to the
+			// same repo; the ticker exits with the shutdown context.
+			backupH := dashboard.NewDashboardHandler(p.Repo)
+			backup.NewManager(p.Repo).StartOnContext(shutdown.Context(), backupH.ExportDatabaseJSON)
 			// MCP server (stdio for IDE integrations). The HTTP endpoint is
 			// mounted on the router above; the stdio lane serves tools to
 			// Claude Desktop / Cursor processes.

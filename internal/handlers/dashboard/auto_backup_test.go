@@ -6,6 +6,7 @@ import (
 	json "encoding/json/v2"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 
 	"9routerx/proxy/internal/backup"
@@ -99,4 +100,54 @@ func TestAutoBackupDashboardEndpoints(t *testing.T) {
 			t.Fatalf("delete status = %d, want 200: %s", delRec.Code, delRec.Body.String())
 		}
 	})
+}
+
+// TestAutoBackupRemoteSanitized proves the credentials never travel back out:
+// the response carries the has-token flags, never the tokens themselves, and
+// a PATCH that changes only the kind keeps the stored tokens.
+func TestAutoBackupRemoteSanitized(t *testing.T) {
+	repo, cleanup := setupTestDB(t)
+	defer cleanup()
+	h := NewDashboardHandler(repo, nil)
+	ctx := t.Context()
+
+	_ = repo.SetAutoBackupConfig(ctx, db.AutoBackupConfig{
+		Remote: db.AutoBackupRemote{
+			Kind: db.RemoteKindTelegram, TelegramToken: "SECRET-TG", TelegramChat: "42",
+		},
+	})
+
+	req := httptest.NewRequest(http.MethodGet, "/api/settings/auto-backup", nil)
+	rec := httptest.NewRecorder()
+	h.HandleGetAutoBackup(rec, req)
+	if rec.Code != http.StatusOK {
+		t.Fatalf("get = %d", rec.Code)
+	}
+	body := rec.Body.String()
+	if strings.Contains(body, "SECRET-TG") {
+		t.Error("telegram token leaked in GET response")
+	}
+	if !strings.Contains(body, `"hasTelegramToken":true`) {
+		t.Error("hasTelegramToken flag missing")
+	}
+
+	// A PATCH that only changes the kind keeps the stored token, so a UI
+	// toggle does not wipe the credential pasted yesterday.
+	patch := `{"remote":{"kind":"telegram","telegramChat":"43"}}`
+	req = httptest.NewRequest(http.MethodPatch, "/api/settings/auto-backup", strings.NewReader(patch))
+	rec = httptest.NewRecorder()
+	h.HandlePatchAutoBackup(rec, req)
+	if rec.Code != http.StatusOK {
+		t.Fatalf("patch = %d: %s", rec.Code, rec.Body.String())
+	}
+	if strings.Contains(rec.Body.String(), "SECRET-TG") {
+		t.Error("telegram token leaked in PATCH response")
+	}
+	cfg, _ := repo.GetAutoBackupConfig(ctx)
+	if cfg.Remote.TelegramToken != "SECRET-TG" {
+		t.Errorf("stored token lost on partial patch: %+v", cfg.Remote)
+	}
+	if cfg.Remote.TelegramChat != "43" {
+		t.Errorf("chat not updated: %+v", cfg.Remote)
+	}
 }

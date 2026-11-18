@@ -16,10 +16,42 @@ const autoBackupScope = "autoBackup"
 
 // AutoBackupConfig configures automatic database backups.
 type AutoBackupConfig struct {
-	Enabled       bool   `json:"enabled"`
-	IntervalHours int    `json:"intervalHours"` // e.g. 24 (daily)
-	Retention     int    `json:"retention"`     // number of backup snapshots to keep, default 7
-	Destination   string `json:"destination"`   // directory to save backups in, empty = default dataDir/backups
+	Enabled       bool             `json:"enabled"`
+	IntervalHours int              `json:"intervalHours"` // e.g. 24 (daily)
+	Retention     int              `json:"retention"`     // number of backup snapshots to keep, default 7
+	Destination   string           `json:"destination"`   // directory to save backups in, empty = default dataDir/backups
+	Remote        AutoBackupRemote `json:"remote"`        // N8: where the backup is also pushed, empty kind = local only
+}
+
+// AutoBackupRemote configures the off-host copy of each backup. The
+// credentials live in the same kv row as the rest of the config — the
+// dashboard sanitizes them on read, and a kv-table dump is already inside
+// the thing being backed up.
+type AutoBackupRemote struct {
+	Kind          string `json:"kind"`                    // "" (local only) | "telegram" | "github"
+	TelegramToken string `json:"telegramToken,omitempty"` // bot token
+	TelegramChat  string `json:"telegramChat,omitempty"`  // destination chat id
+	GithubToken   string `json:"githubToken,omitempty"`   // PAT with contents:write
+	GithubRepo    string `json:"githubRepo,omitempty"`    // owner/name
+	GithubBranch  string `json:"githubBranch,omitempty"`  // default "main"
+	GithubPath    string `json:"githubPath,omitempty"`    // default backups/9routerx-backup.json
+}
+
+// RemoteKinds are the remote destinations a backup can be pushed to.
+const (
+	RemoteKindTelegram = "telegram"
+	RemoteKindGithub   = "github"
+)
+
+// RemoteArmed reports whether the remote block names a usable destination.
+func (c AutoBackupConfig) RemoteArmed() bool {
+	switch c.Remote.Kind {
+	case RemoteKindTelegram:
+		return c.Remote.TelegramToken != "" && c.Remote.TelegramChat != ""
+	case RemoteKindGithub:
+		return c.Remote.GithubToken != "" && c.Remote.GithubRepo != ""
+	}
+	return false
 }
 
 // AutoBackupStatus holds the status and timestamp of the last backup attempt.
@@ -29,6 +61,12 @@ type AutoBackupStatus struct {
 	LastBackupBytes int64  `json:"lastBackupBytes,omitempty"`
 	LastStatus      string `json:"lastStatus,omitempty"` // "success" or "error"
 	LastError       string `json:"lastError,omitempty"`
+	// N8: the off-host push rides the same status row, so one glance answers
+	// "did the backup actually leave this machine".
+	LastRemoteKind   string `json:"lastRemoteKind,omitempty"`
+	LastRemoteAt     string `json:"lastRemoteAt,omitempty"`
+	LastRemoteStatus string `json:"lastRemoteStatus,omitempty"` // "success" or "error"
+	LastRemoteError  string `json:"lastRemoteError,omitempty"`
 }
 
 // DefaultAutoBackupConfig returns sensible defaults (daily backup, keep 7 snapshots).
