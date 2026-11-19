@@ -3403,7 +3403,7 @@
           <button
             type="button"
             onclick={openAddKeyModal}
-            class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] bg-brand-500 hover:bg-brand-600 text-white shadow-sm h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
+            class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] bg-brand-500 hover:bg-brand-600 text-white shadow-sm h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
           >
             <span class="material-symbols-outlined text-[18px]">add</span>
             Add API Key
@@ -3411,7 +3411,7 @@
           <button
             type="button"
             onclick={() => (showExportKeysModal = true)}
-            class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] bg-surface-2 hover:bg-surface-3 text-text-main border border-border h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
+            class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] bg-surface-2 hover:bg-surface-3 text-text-main border border-border h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
           >
             <span class="material-symbols-outlined text-[18px]">download</span>
             Export Keys
@@ -3419,7 +3419,7 @@
           <button
             type="button"
             onclick={() => (showShareProviderModal = true)}
-            class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] bg-surface-2 hover:bg-surface-3 text-text-main border border-border h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
+            class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] bg-surface-2 hover:bg-surface-3 text-text-main border border-border h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
           >
             <span class="material-symbols-outlined text-[18px]">link</span>
             Share
@@ -3427,7 +3427,7 @@
           <button
             type="button"
             onclick={() => (showEditNodeModal = true)}
-            class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] bg-surface-2 hover:bg-surface-3 text-text-main border border-border h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
+            class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] bg-surface-2 hover:bg-surface-3 text-text-main border border-border h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
           >
             <span class="material-symbols-outlined text-[18px]">edit</span>
             Edit
@@ -3435,7 +3435,7 @@
           <button
             type="button"
             onclick={() => handleDeleteProviderNode(selectedNode!.id)}
-            class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] bg-surface-2 hover:bg-surface-3 text-text-main border border-border h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
+            class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] bg-surface-2 hover:bg-surface-3 text-text-main border border-border h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
           >
             <span class="material-symbols-outlined text-[18px]">delete</span>
             Delete
@@ -3553,7 +3553,7 @@
           <button
             type="button"
             onclick={handleDeleteSelected}
-            class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] bg-red-500/10 hover:bg-red-500/20 text-red-600 dark:text-red-400 border border-red-500/30 h-7 px-3 text-xs rounded-[8px]"
+            class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] bg-red-500/10 hover:bg-red-500/20 text-red-600 dark:text-red-400 border border-red-500/30 h-7 px-3 text-xs rounded-[8px]"
           >
             <span class="material-symbols-outlined text-[18px]">delete</span>
             Delete Selected ({selectedConnIds.length})
@@ -3564,7 +3564,7 @@
           <button
             type="button"
             onclick={() => (showApplyProxyModal = true)}
-            class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed bg-surface-2 hover:bg-surface-3 text-text-main border border-border h-7 px-3 text-xs rounded-[8px]"
+            class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed bg-surface-2 hover:bg-surface-3 text-text-main border border-border h-7 px-3 text-xs rounded-[8px]"
           >
             <span class="material-symbols-outlined text-[18px]">lan</span>
             Apply Proxy
@@ -3575,7 +3575,7 @@
           type="button"
           onclick={runOneByOneTest}
           disabled={isTestingOneByOne || providerConnections.length === 0}
-          class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed bg-surface-2 hover:bg-surface-3 text-text-main border border-border h-7 px-3 text-xs rounded-[8px]"
+          class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed bg-surface-2 hover:bg-surface-3 text-text-main border border-border h-7 px-3 text-xs rounded-[8px]"
         >
           <span class="material-symbols-outlined text-[18px] {isTestingOneByOne ? 'animate-spin text-primary' : ''}">sync</span>
           {isTestingOneByOne ? 'Testing Connection One-by-One...' : 'Test Connection One-by-One'}
@@ -3586,7 +3586,7 @@
             type="button"
             onclick={stopOneByOneTest}
             disabled={isStoppingOneByOne}
-            class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed bg-transparent hover:bg-surface-2 text-text-muted hover:text-text-main h-7 px-3 text-xs rounded-[8px]"
+            class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] disabled:opacity-50 disabled:cursor-not-allowed bg-transparent hover:bg-surface-2 text-text-muted hover:text-text-main h-7 px-3 text-xs rounded-[8px]"
           >
             <span class="material-symbols-outlined text-[18px]">stop</span>
             {isStoppingOneByOne ? 'Stopping...' : 'Stop'}
@@ -3705,7 +3705,7 @@
             type="button"
             onclick={startFreebuffFlow}
             disabled={isAuthorizingFreebuff}
-            class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] bg-brand-500 hover:bg-brand-600 text-white shadow-sm h-8 px-4 text-xs rounded-[8px]"
+            class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] bg-brand-500 hover:bg-brand-600 text-white shadow-sm h-8 px-4 text-xs rounded-[8px]"
           >
             <span class="material-symbols-outlined text-[18px]">vpn_key</span>
             {isAuthorizingFreebuff ? 'Polling Authorization...' : 'Authorize Freebuff CLI'}
@@ -3714,7 +3714,7 @@
           <button
             type="button"
             onclick={handleAddConnectionClick}
-            class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] bg-brand-500 hover:bg-brand-600 text-white shadow-sm h-8 px-4 text-xs rounded-[8px]"
+            class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] bg-brand-500 hover:bg-brand-600 text-white shadow-sm h-8 px-4 text-xs rounded-[8px]"
           >
             <span class="material-symbols-outlined text-[18px]">login</span>
             Connect Google Account
@@ -3723,7 +3723,7 @@
           <button
             type="button"
             onclick={handleAddConnectionClick}
-            class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] bg-brand-500 hover:bg-brand-600 text-white shadow-sm h-8 px-4 text-xs rounded-[8px]"
+            class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] bg-brand-500 hover:bg-brand-600 text-white shadow-sm h-8 px-4 text-xs rounded-[8px]"
           >
             <span class="material-symbols-outlined text-[18px]">login</span>
             Connect Kiro
@@ -3732,7 +3732,7 @@
           <button
             type="button"
             onclick={handleAddConnectionClick}
-            class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] bg-surface-2 hover:bg-surface-3 text-text-main border border-border h-8 px-4 text-xs rounded-[8px]"
+            class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] bg-surface-2 hover:bg-surface-3 text-text-main border border-border h-8 px-4 text-xs rounded-[8px]"
           >
             <span class="material-symbols-outlined text-[18px]">lock</span>
             {oauthButtonLabel}
@@ -3740,7 +3740,7 @@
           <button
             type="button"
             onclick={openAddKeyModal}
-            class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] bg-brand-500 hover:bg-brand-600 text-white shadow-sm h-8 px-4 text-xs rounded-[8px]"
+            class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] bg-brand-500 hover:bg-brand-600 text-white shadow-sm h-8 px-4 text-xs rounded-[8px]"
           >
             <span class="material-symbols-outlined text-[18px]">key</span>
             {apiKeyButtonLabel}
@@ -3749,7 +3749,7 @@
           <button
             type="button"
             onclick={handleAddConnectionClick}
-            class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] bg-brand-500 hover:bg-brand-600 text-white shadow-sm h-8 px-4 text-xs rounded-[8px]"
+            class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] bg-brand-500 hover:bg-brand-600 text-white shadow-sm h-8 px-4 text-xs rounded-[8px]"
           >
             <span class="material-symbols-outlined text-[18px]">add</span>
             Add Connection
@@ -4151,7 +4151,7 @@
           type="button"
           onclick={startFreebuffFlow}
           disabled={isAuthorizingFreebuff}
-          class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] bg-brand-500 hover:bg-brand-600 text-white shadow-sm h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
+          class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] bg-brand-500 hover:bg-brand-600 text-white shadow-sm h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
         >
           <span class="material-symbols-outlined text-[18px]">vpn_key</span>
           {isAuthorizingFreebuff ? 'Polling Authorization...' : 'Authorize Freebuff CLI'}
@@ -4160,7 +4160,7 @@
         <button
           type="button"
           onclick={handleAddConnectionClick}
-          class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] bg-brand-500 hover:bg-brand-600 text-white shadow-sm h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
+          class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] bg-brand-500 hover:bg-brand-600 text-white shadow-sm h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
         >
           <span class="material-symbols-outlined text-[18px]">login</span>
           Connect Kiro
@@ -4169,7 +4169,7 @@
         <button
           type="button"
           onclick={handleAddConnectionClick}
-          class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] bg-surface-2 hover:bg-surface-3 text-text-main border border-border h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
+          class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] bg-surface-2 hover:bg-surface-3 text-text-main border border-border h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
         >
           <span class="material-symbols-outlined text-[18px]">lock</span>
           {oauthButtonLabel}
@@ -4177,7 +4177,7 @@
         <button
           type="button"
           onclick={openAddKeyModal}
-          class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] bg-brand-500 hover:bg-brand-600 text-white shadow-sm h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
+          class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] bg-brand-500 hover:bg-brand-600 text-white shadow-sm h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
         >
           <span class="material-symbols-outlined text-[18px]">key</span>
           {apiKeyButtonLabel}
@@ -4186,7 +4186,7 @@
         <button
           type="button"
           onclick={handleAddConnectionClick}
-          class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] bg-brand-500 hover:bg-brand-600 text-white shadow-sm h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
+          class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] bg-brand-500 hover:bg-brand-600 text-white shadow-sm h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
         >
           <span class="material-symbols-outlined text-[18px]">add</span>
           Add
@@ -4196,7 +4196,7 @@
         <button
           type="button"
           onclick={() => (showExportKeysModal = true)}
-          class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] bg-surface-2 hover:bg-surface-3 text-text-main border border-border h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
+          class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] bg-surface-2 hover:bg-surface-3 text-text-main border border-border h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
         >
           <span class="material-symbols-outlined text-[18px]">download</span>
           Export Keys
@@ -4204,7 +4204,7 @@
         <button
           type="button"
           onclick={() => (showShareProviderModal = true)}
-          class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] bg-surface-2 hover:bg-surface-3 text-text-main border border-border h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
+          class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] bg-surface-2 hover:bg-surface-3 text-text-main border border-border h-7 px-3 text-xs rounded-[8px] w-full sm:w-auto"
         >
           <span class="material-symbols-outlined text-[18px]">link</span>
           Share
@@ -4257,7 +4257,7 @@
             type="button"
             onclick={handleAddCompatibleModel}
             disabled={!newCompatibleModel.trim() || isAddingCompatibleModel}
-            class="inline-flex h-8 items-center justify-center gap-1.5 rounded-[8px] bg-brand-500 px-3 text-xs font-semibold text-white shadow-sm transition-all duration-150 ease-out hover:bg-brand-600 active:scale-[0.97] disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
+            class="inline-flex h-8 items-center justify-center gap-1.5 rounded-[8px] bg-brand-500 px-3 text-xs font-semibold text-white shadow-sm transition-[color,background-color,border-color,transform] duration-150 ease-out hover:bg-brand-600 active:scale-[0.97] disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed"
           >
             <span class="material-symbols-outlined text-[16px]">add</span>
             {isAddingCompatibleModel ? 'Adding...' : 'Add'}
@@ -4510,7 +4510,7 @@
         <button
           type="button"
           onclick={handleToggleAllModels}
-          class="inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 ease-out cursor-pointer active:scale-[0.97] bg-surface-2 hover:bg-surface-3 text-text-main border border-border h-7 px-3 text-xs rounded-[8px]"
+          class="inline-flex items-center justify-center gap-2 font-semibold transition-[color,background-color,border-color,transform] duration-150 ease-out cursor-pointer active:scale-[0.97] bg-surface-2 hover:bg-surface-3 text-text-main border border-border h-7 px-3 text-xs rounded-[8px]"
         >
           <span class="material-symbols-outlined text-[18px]">block</span>
           {allDisabled ? 'Enable All' : 'Disable All'}
