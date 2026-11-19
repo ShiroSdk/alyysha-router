@@ -6,7 +6,7 @@ section: Using the Gateway
 
 # Providers
 
-9RouterX supports 155 providers (91 API key, 28 OAuth, 29 free-tier, 4 web cookie)
+9RouterX supports 155 providers (91 API key, 28 OAuth, 29 free-tier, 6 web cookie)
 and catalogs 248 free models across 36 providers, including 24 cataloged keyless
 models. Antigravity requires one Google OAuth login (free); OpenCode offers
 zero-login access, while Gemini Web needs a browser session cookie. Every provider is **isolated
@@ -52,10 +52,18 @@ Some web providers have no OAuth endpoint at all. Two paths:
 - **Gemini Web** (`/api/providers/gemini-web/browser-login`) and
   **DeepSeek Web** (`/api/providers/deepseek-web/browser-login`) open a browser,
   wait for the sign-in, and read the session out.
-- **Import from a signed-in browser** (`/api/providers/{gemini,deepseek}-web/import-chrome`)
-  reads the browser's own cookie store. **Close the browser first** — a browser
-  that is still open rotates the same session from the other side and the two
-  renewals cancel each other out, which signs the account out.
+- **Generic web-login** (`/api/providers/{id}/browser-login`) serves every
+  other provider with a web-login config: grok-web, perplexity-web,
+  chatgpt-web and muse-web (Baidu Yiyan). Persistent browser profiles live
+  under `<DATA_DIR>/browser-profiles/<provider>/` (0700, never exported or
+  backed up) so re-logins stay warm; `POST /api/providers/{id}/reset-profile`
+  wipes one. On a displayless Linux host, a persistent-profile login launches
+  against an Xvfb virtual display automatically (install `xvfb` first).
+- **Import from a signed-in browser** (`/api/providers/{gemini,deepseek}-web/import-chrome`,
+  plus the generic `/api/providers/{id}/import-chrome`) reads the browser's own
+  cookie store. **Close the browser first** — a browser that is still open
+  rotates the same session from the other side and the two renewals cancel
+  each other out, which signs the account out.
 
 Renew a DeepSeek session with
 `POST /api/connections/{id}/renew-deepseek`.
