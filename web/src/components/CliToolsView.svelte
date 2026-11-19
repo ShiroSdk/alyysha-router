@@ -695,7 +695,7 @@
         role="button"
         tabindex="0"
         onclick={() => (selectedTool = tool)}
-        onkeydown={(e) => e.key === 'Enter' && (selectedTool = tool)}
+        onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && (selectedTool = tool)}
         class="group p-4 rounded-xl bg-surface border border-border hover:border-brand-500/40 hover:shadow-lg transition cursor-pointer flex flex-col justify-between space-y-3"
       >
         <div class="space-y-2">

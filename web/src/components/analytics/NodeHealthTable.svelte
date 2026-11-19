@@ -91,6 +91,9 @@
           <tr
             class="hover:bg-surface-2/60 transition-colors cursor-pointer"
             onclick={() => toggle(node.provider)}
+            onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && toggle(node.provider)}
+            role="button"
+            tabindex="0"
             aria-expanded={open}
           >
             <td class="py-2.5 px-3 min-w-0">

@@ -218,6 +218,9 @@
             <tr
               class="hover:bg-surface-2 transition-colors cursor-pointer"
               onclick={() => openDetail(item)}
+              onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && openDetail(item)}
+              role="button"
+              tabindex="0"
             >
               <td class="py-3 px-4">
                 <span
