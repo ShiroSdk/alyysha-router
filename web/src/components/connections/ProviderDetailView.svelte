@@ -4403,6 +4403,7 @@
                     <button
                       type="button"
                       onclick={() => copyCompatibleModel(row.id)}
+                      aria-label="Copy model id"
                       class="p-0.5 hover:bg-sidebar rounded text-text-muted hover:text-primary cursor-pointer"
                     >
                       <span class="material-symbols-outlined text-sm">{copiedModelId === row.id ? 'check' : 'content_copy'}</span>
@@ -4417,6 +4418,7 @@
                         type="button"
                         onclick={() => handleTestCompatibleModel(row.id)}
                         disabled={isTestingRow}
+                        aria-label="Test compatible model"
                         class="p-0.5 hover:bg-sidebar rounded text-text-muted hover:text-primary transition-colors cursor-pointer"
                       >
                         <span class="material-symbols-outlined text-sm" style={isTestingRow ? 'animation: spin 1s linear infinite' : undefined}>
