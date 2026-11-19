@@ -28,13 +28,6 @@ func TestHandler_PWAAssets(t *testing.T) {
 			expectedHeaderPart: "application/manifest+json",
 		},
 		{
-			name:               "serves manifest.json with JSON or text Content-Type",
-			targetPath:         "/manifest.json",
-			expectedStatus:     http.StatusOK,
-			expectedHeaderKey:  "Content-Type",
-			expectedHeaderPart: "application/json",
-		},
-		{
 			name:               "serves sw.js with no-cache and javascript Content-Type",
 			targetPath:         "/sw.js",
 			expectedStatus:     http.StatusOK,

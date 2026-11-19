@@ -718,7 +718,9 @@ func SetupServerRouter(r chi.Router, repo *db.Repo, ts *TokenSaverConfig) *chat.
 	r.HandleFunc("/icons.svg", webH.ServeHTTP)
 	r.HandleFunc("/sw.js", webH.ServeHTTP)
 	r.HandleFunc("/manifest.webmanifest", webH.ServeHTTP)
-	r.HandleFunc("/manifest.json", webH.ServeHTTP)
+	// The dead duplicate manifest.json alias was removed with A8: the file no
+	// longer exists in the embedded dist, so the route 404'd anyway. Clients
+	// that want the manifest use /manifest.webmanifest (index.html links it).
 	r.HandleFunc("/api/hello", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		if r.Method != http.MethodHead {
