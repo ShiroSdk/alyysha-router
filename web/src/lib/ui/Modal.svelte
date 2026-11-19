@@ -52,6 +52,42 @@
     if (!isOpen) return
     return pushEscapeHandler(() => onClose?.())
   })
+
+  // Focus management (C4): the panel takes focus on open and Tab cycles
+  // inside it — without the trap, Tab leaves the dialog and the operator's
+  // next keystrokes land on the page behind the scrim.
+  let panelEl: HTMLElement | undefined = $state()
+  $effect(() => {
+    if (!isOpen || !panelEl) return
+    const previous = document.activeElement as HTMLElement | null
+    panelEl.focus()
+    return () => previous?.focus?.()
+  })
+  function trapTab(event: KeyboardEvent) {
+    if (event.key !== 'Tab' || !panelEl) return
+    const focusables = Array.from(
+      panelEl.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      ),
+    ).filter((el) => el.offsetParent !== null || el === document.activeElement)
+    if (focusables.length === 0) {
+      event.preventDefault()
+      panelEl.focus()
+      return
+    }
+    const first = focusables[0]
+    const last = focusables[focusables.length - 1]
+    const active = document.activeElement
+    if (event.shiftKey) {
+      if (active === first || !panelEl.contains(active)) {
+        event.preventDefault()
+        last.focus()
+      }
+    } else if (active === last) {
+      event.preventDefault()
+      first.focus()
+    }
+  }
 </script>
 
 {#if isOpen}
@@ -65,6 +101,11 @@
     ></div>
 
     <div
+      bind:this={panelEl}
+      role="dialog"
+      aria-modal="true"
+      tabindex="-1"
+      onkeydown={trapTab}
       class="glyph-modal relative w-full bg-surface border border-border-subtle rounded-[14px] shadow-[var(--shadow-elev)] fade-in {sizes[size]} {klass}"
     >
       {#if title || showTrafficLights}
