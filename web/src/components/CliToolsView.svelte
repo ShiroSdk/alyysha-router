@@ -640,7 +640,7 @@
       <button
         type="button"
         onclick={() => (activeCategory = 'all')}
-        class="flex-1 sm:flex-initial px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer {activeCategory === 'all'
+        class="flex-1 sm:flex-initial whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer {activeCategory === 'all'
           ? 'bg-surface text-brand-500 shadow-sm'
           : 'text-text-muted hover:text-text-main'}"
       >
@@ -649,7 +649,7 @@
       <button
         type="button"
         onclick={() => (activeCategory = 'cli')}
-        class="flex-1 sm:flex-initial px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer {activeCategory === 'cli'
+        class="flex-1 sm:flex-initial whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer {activeCategory === 'cli'
           ? 'bg-surface text-brand-500 shadow-sm'
           : 'text-text-muted hover:text-text-main'}"
       >
@@ -658,7 +658,7 @@
       <button
         type="button"
         onclick={() => (activeCategory = 'ide')}
-        class="flex-1 sm:flex-initial px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer {activeCategory === 'ide'
+        class="flex-1 sm:flex-initial whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer {activeCategory === 'ide'
           ? 'bg-surface text-brand-500 shadow-sm'
           : 'text-text-muted hover:text-text-main'}"
       >
@@ -667,7 +667,7 @@
       <button
         type="button"
         onclick={() => (activeCategory = 'mitm')}
-        class="flex-1 sm:flex-initial px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer {activeCategory === 'mitm'
+        class="flex-1 sm:flex-initial whitespace-nowrap px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer {activeCategory === 'mitm'
           ? 'bg-surface text-brand-500 shadow-sm'
           : 'text-text-muted hover:text-text-main'}"
       >
