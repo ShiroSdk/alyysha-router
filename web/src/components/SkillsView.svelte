@@ -179,7 +179,7 @@
           <a
             href={getSkillBlobUrl(skill.id)}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             class="text-[11px] text-text-muted hover:text-brand-500 mt-2 inline-flex items-center gap-1 break-all transition-colors"
           >
             <span>{rawUrl}</span>
@@ -214,7 +214,7 @@
       <a
         href={`${githubRepoUrl}/tree/${branch}/${baseFolder}`}
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         class="text-sm font-medium text-brand-500 hover:text-brand-600 hover:underline inline-flex items-center gap-1.5 transition-colors"
       >
         <span>View on GitHub</span>

@@ -934,7 +934,7 @@ f6e5d4c3b2a1   redis:7-alpine "docker-entrypoint.s…"   2 hours ago     Up 2 ho
             <a
               href="https://github.com/rtk-ai/rtk"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               class="text-xs font-normal text-primary underline hover:opacity-80"
             >
               (RTK)
@@ -1324,7 +1324,7 @@ f6e5d4c3b2a1   redis:7-alpine "docker-entrypoint.s…"   2 hours ago     Up 2 ho
             <a
               href="https://github.com/headroomlabs-ai/headroom"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               class="text-xs font-normal text-primary underline hover:opacity-80"
             >
               (Headroom)
@@ -1460,7 +1460,7 @@ f6e5d4c3b2a1   redis:7-alpine "docker-entrypoint.s…"   2 hours ago     Up 2 ho
             <a
               href="https://github.com/JuliusBrussee/caveman"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               class="text-xs font-normal text-primary underline hover:opacity-80"
             >
               (Caveman)
@@ -1759,7 +1759,7 @@ f6e5d4c3b2a1   redis:7-alpine "docker-entrypoint.s…"   2 hours ago     Up 2 ho
             <a
               href="https://github.com/DietrichGebert/ponytail"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               class="text-xs font-normal text-primary underline hover:opacity-80"
             >
               (Ponytail)
@@ -1827,7 +1827,7 @@ f6e5d4c3b2a1   redis:7-alpine "docker-entrypoint.s…"   2 hours ago     Up 2 ho
             <a
               href="https://github.com/ayghri/i-have-adhd"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               class="text-xs font-normal text-primary underline hover:opacity-80"
             >
               (Action-First)
@@ -1895,7 +1895,7 @@ f6e5d4c3b2a1   redis:7-alpine "docker-entrypoint.s…"   2 hours ago     Up 2 ho
             <a
               href="https://github.com/miqdadbadjuber/anti-slop"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               class="text-xs font-normal text-primary underline hover:opacity-80"
             >
               (Rules for AI Coding Agents)
@@ -2008,7 +2008,7 @@ f6e5d4c3b2a1   redis:7-alpine "docker-entrypoint.s…"   2 hours ago     Up 2 ho
       <a
         href="/api/headroom/proxy/dashboard"
         target="_blank"
-        rel="noreferrer"
+        rel="noopener noreferrer"
         class="w-full rounded border border-border px-4 py-2 text-center text-sm hover:bg-surface-2 transition-colors text-text-main block font-medium"
       >
         Open Headroom Dashboard
