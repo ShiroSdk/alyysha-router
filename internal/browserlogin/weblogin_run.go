@@ -49,8 +49,23 @@ func RunProvider(ctx context.Context, providerID string) (*WebLoginResult, error
 	}
 	displayEnv := resolveDisplayEnv()
 	if runtime.GOOS == "linux" && !envNamesDisplay(displayEnv) {
-		return nil, errors.New("this machine has no display, so the browser cannot be opened; " +
-			"use an Incognito window instead and paste the credential manually")
+		// D: a displayless Linux host can still run a web-login when the
+		// provider's profile is persistent — a warm session needs no human
+		// typing. A provider the operator must sign in to interactively
+		// (gemini-web) stays refused: an invisible browser cannot be signed
+		// in to.
+		if !cfg.PersistentProfile {
+			return nil, errors.New("this machine has no display, so the browser cannot be opened; " +
+				"use an Incognito window instead and paste the credential manually")
+		}
+		display, stop, derr := ensureVirtualDisplay(ctx)
+		if derr != nil {
+			return nil, derr
+		}
+		if display != "" {
+			displayEnv = displayEnvWithVirtual(displayEnv, display)
+			defer stop()
+		}
 	}
 
 	// Profile discipline (C): persistent-profile providers keep their
