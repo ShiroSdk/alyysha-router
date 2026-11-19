@@ -78,7 +78,7 @@ const COMPARATORS: Record<
 
 export function sortProxyPools(pools: ProxyPool[], option: PoolSortOption): ProxyPool[] {
   if (option === 'default') return pools
-  return [...pools].sort(COMPARATORS[option])
+  return pools.toSorted(COMPARATORS[option])
 }
 
 export function poolStatusCounts(pools: ProxyPool[]): {

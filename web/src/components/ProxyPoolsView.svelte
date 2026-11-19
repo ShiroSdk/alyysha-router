@@ -100,7 +100,7 @@
   // never-tested pools keep backend order below.
   // Array.prototype.sort is stable, so ties preserve fetch order.
   function sortPools(pools: ProxyPool[]): ProxyPool[] {
-    return [...pools].sort((a, b) => {
+    return pools.toSorted((a, b) => {
       const at = a.lastTestedAt ? Date.parse(a.lastTestedAt) || 0 : 0
       const bt = b.lastTestedAt ? Date.parse(b.lastTestedAt) || 0 : 0
       if (at !== 0 || bt !== 0) return bt - at

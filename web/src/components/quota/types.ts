@@ -137,7 +137,7 @@ export function sortVisibleConnections<T extends ProviderConnectionLike>(
   quotaSortMode: string,
 ): T[] {
   if (providerFilter === 'codex' && quotaSortMode !== 'default') {
-    return [...connections].sort((a, b) => {
+    return connections.toSorted((a, b) => {
       const remainingA = getConnectionQuotaRemaining(a, quotaData)
       const remainingB = getConnectionQuotaRemaining(b, quotaData)
       const remainingDiff =
@@ -158,7 +158,7 @@ export function sortVisibleConnections<T extends ProviderConnectionLike>(
     return resetTimes.length > 0 ? Math.min(...resetTimes) : Number.POSITIVE_INFINITY
   }
 
-  return [...connections].sort((a, b) => {
+  return connections.toSorted((a, b) => {
     const expiryDiff = getEarliestResetTime(a) - getEarliestResetTime(b)
     if (expiryDiff !== 0) return expiryDiff
     return (

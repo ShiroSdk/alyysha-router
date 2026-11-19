@@ -27,7 +27,7 @@
   // sorted in, but the table hides it on small viewports via the regime
   // column rather than dropping it.
   const visible = $derived(
-    [...rows].sort((a, b) => {
+    rows.toSorted((a, b) => {
       const rank = (s: string) => (s === 'cooling' ? 0 : s === 'flaky' ? 1 : 2)
       if (rank(a.status) !== rank(b.status)) return rank(a.status) - rank(b.status)
       return a.provider.localeCompare(b.provider)

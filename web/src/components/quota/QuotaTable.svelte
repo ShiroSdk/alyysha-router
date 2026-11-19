@@ -52,12 +52,12 @@
   // it never displaces a row whose percentage is actually known.
   let sortedQuotas = $derived.by<RowQuota[]>(() => {
     if (sortMode === 'remaining-asc') {
-      return [...normalizedQuotas].sort(
+      return normalizedQuotas.toSorted(
         (a, b) => (a.remainingPct ?? -1) - (b.remainingPct ?? -1) || a.name.localeCompare(b.name),
       )
     }
     if (sortMode === 'remaining-desc') {
-      return [...normalizedQuotas].sort(
+      return normalizedQuotas.toSorted(
         (a, b) => (b.remainingPct ?? -1) - (a.remainingPct ?? -1) || a.name.localeCompare(b.name),
       )
     }

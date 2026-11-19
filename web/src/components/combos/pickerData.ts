@@ -325,7 +325,7 @@ export function resolveFilteredGroups(
       if (models.length === 0) return null
 
       // Sort models alphabetically; stable display avoids sudden layout shift and freezing on click
-      const sorted = [...models].sort((a, b) => a.name.localeCompare(b.name))
+      const sorted = models.toSorted((a, b) => a.name.localeCompare(b.name))
 
       return {
         ...group,
