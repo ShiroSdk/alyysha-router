@@ -1024,7 +1024,7 @@
       placeProviderPanel()
     }
     window.addEventListener('resize', repositionProviderPanel)
-    window.addEventListener('scroll', repositionProviderPanel, true)
+    window.addEventListener('scroll', repositionProviderPanel, { capture: true, passive: true })
 
     return () => {
       stopTimers()

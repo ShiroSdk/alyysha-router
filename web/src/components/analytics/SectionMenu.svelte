@@ -80,7 +80,7 @@
     document.addEventListener('click', handleDocClick)
     document.addEventListener('keydown', onKeydown)
     window.addEventListener('resize', reposition)
-    window.addEventListener('scroll', reposition, true)
+    window.addEventListener('scroll', reposition, { capture: true, passive: true })
     return () => {
       document.removeEventListener('click', handleDocClick)
       document.removeEventListener('keydown', onKeydown)
