@@ -221,7 +221,7 @@
     <div class="w-full max-w-md rounded-2xl border border-border bg-surface p-6 shadow-xl space-y-4">
       <div class="flex items-center justify-between">
         <h3 class="text-base font-semibold text-text-main">Create {creatingKind === 'webSearch' ? 'Web Search' : 'Web Fetch'} Combo</h3>
-        <button onclick={() => (creatingKind = null)} class="text-text-muted hover:text-text-main cursor-pointer"><X class="w-5 h-5" /></button>
+        <button onclick={() => (creatingKind = null)} aria-label="Close combo creation" class="text-text-muted hover:text-text-main cursor-pointer"><X class="w-5 h-5" /></button>
       </div>
       <div>
         <label for="new-combo-name" class="block text-xs font-medium text-text-muted mb-1">Combo Name</label>
@@ -240,7 +240,7 @@
     <div class="w-full max-w-lg rounded-2xl border border-border bg-surface p-6 shadow-xl space-y-4 max-h-[90vh] overflow-y-auto">
       <div class="flex items-center justify-between">
         <h3 class="text-base font-semibold text-text-main">Manage Combo</h3>
-        <button onclick={() => (managingCombo = null)} class="text-text-muted hover:text-text-main cursor-pointer"><X class="w-5 h-5" /></button>
+        <button onclick={() => (managingCombo = null)} aria-label="Close combo manager" class="text-text-muted hover:text-text-main cursor-pointer"><X class="w-5 h-5" /></button>
       </div>
       <div>
         <label for="edit-combo-name" class="block text-xs font-medium text-text-muted mb-1">Combo Name</label>

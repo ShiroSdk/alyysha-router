@@ -826,6 +826,7 @@
 
         <button
           type="button"
+          aria-label="Close tool details"
           onclick={() => (selectedTool = null)}
           class="text-text-muted hover:text-text-main cursor-pointer"
         >

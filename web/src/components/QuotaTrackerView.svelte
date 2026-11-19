@@ -1349,6 +1349,7 @@
                         <button
                           type="button"
                           onclick={() => copyArn(profileArn, conn.id)}
+                          aria-label="Copy profile ARN"
                           title={profileArn}
                           class="inline-flex max-w-full items-center gap-1 rounded-full border border-border-subtle px-2 py-0.5 text-[10px] text-text-muted transition-colors hover:text-primary cursor-pointer"
                         >
