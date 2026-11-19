@@ -469,7 +469,7 @@
     border-radius: 12px;
     outline: none;
     box-shadow: var(--9x-inset-rest);
-    transition: border-color var(--9x-transition), box-shadow var(--9x-transition);
+    transition: border-color var(--9x-transition);
   }
   .gl-input::placeholder {
     color: color-mix(in srgb, var(--9x-ink) 65%, transparent);
