@@ -2,8 +2,10 @@
 // 9routerx Service Worker
 const CACHE_NAME = '9routerx-static-v3'
 
-self.addEventListener('install', () => {
-  self.skipWaiting()
+self.addEventListener('install', (event) => {
+  // waitUntil keeps the install event alive until skipWaiting resolves —
+  // without it the browser may terminate the worker before the call lands.
+  event.waitUntil(self.skipWaiting())
 })
 
 self.addEventListener('activate', (event) => {
