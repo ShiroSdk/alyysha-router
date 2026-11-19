@@ -118,7 +118,7 @@
     'deepseek-web': 'DeepSeek',
     'gemini-web': 'Gemini',
     'chatgpt-web': 'ChatGPT',
-    'muse-web': 'Muse',
+    'muse-web': 'Baidu Yiyan',
   }
 
   function providerLabel(provider: string): string {
