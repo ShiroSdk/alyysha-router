@@ -75,6 +75,8 @@
      make those dead for its 4-5s lifetime — the cards take the clicks, the
      layer between and around them lets them through. -->
 <div
+  aria-live="polite"
+  role="status"
   class="pointer-events-none fixed bottom-4 left-4 right-4 sm:left-auto sm:right-4 sm:w-[min(92vw,380px)] z-[80] flex flex-col gap-2"
 >
   {#each $notifications as n (n.id)}
