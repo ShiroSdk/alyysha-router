@@ -714,7 +714,7 @@
                       const fallback = img.nextElementSibling as HTMLElement
                       if (fallback) fallback.style.display = 'flex'
                     }}
-                    loading="lazy"
+                    fetchpriority="high"
                     decoding="async"
                   />
                   <div
