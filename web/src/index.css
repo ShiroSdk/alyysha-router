@@ -159,6 +159,9 @@
   --app-text-main: #16181d; /* --9x-ink */
   --app-text-muted: #4b525d;
   --app-text-subtle: #646b76;
+  /* Input field edges sit on surface-2 and need 3:1 against it (Gate 40):
+     the muted text token clears the threshold against surface-2. */
+  --9x-field-line: var(--app-text-muted);
   --app-primary: #2f5bd3; /* --9x-accent */
   --app-primary-hover: #2447ad;
   --app-danger: #b3362b; /* --9x-err */
@@ -312,6 +315,8 @@
   --app-text-muted: #9aa0ab;
   /* One step lighter than the original #6f7683: subtle text must clear
      4.5:1 on the lightest surface it sits on (surface-2, the inputs). */
+  /* Input field edges sit on surface-2 and need 3:1 against it (Gate 40). */
+  --9x-field-line: var(--app-text-muted);
   --app-text-subtle: #7f8794;
   --app-primary: #3b82f6; /* --9x-accent */
   --app-primary-hover: #6ea3f8;
@@ -2078,6 +2083,17 @@ aside.glyph-sidebar {
 
 /* Reduced motion: the sheet slides, the bars ease, the buttons lift — all of
    it goes still when the operator asked for no motion. */
+/* Input fields drawn on surface-2 need their edge a step off the surface
+   they sit on: the default hairline (--9x-line at 10% alpha) measured
+   1.16:1 against surface-2, under the 3:1 field-edge threshold (Gate 40).
+   The muted-text token clears it in both themes. Specificity beats the
+   Tailwind border utility these elements also carry. */
+input.bg-surface-2,
+select.bg-surface-2,
+textarea.bg-surface-2 {
+  border-color: var(--9x-field-line);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .glyph-modal {
     animation: none;
