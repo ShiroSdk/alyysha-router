@@ -383,6 +383,7 @@
               type="button"
               onclick={() => toggleAccordion(entry.id)}
               aria-expanded={isOpen}
+              aria-label={entry.label}
               title={iconRail ? undefined : entry.label}
               data-tip={entry.label}
               class="w-full flex items-center {iconRail
@@ -431,6 +432,7 @@
             <a
               href={TAB_ROUTES[entry.id]}
               onclick={(e) => handleNav(entry.id, e)}
+              aria-label={entry.label}
               title={iconRail ? undefined : entry.label}
               data-tip={entry.label}
               class="flex items-center {iconRail
