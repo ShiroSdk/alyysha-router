@@ -81,6 +81,11 @@ func RegisterAll() {
 	// browser Cookie header and answers NDJSON, not an OpenAI stream — the
 	// shared passthrough cannot express the handshake or the wire shape.
 	Register("grok-web", func() Executor { return ForwardGrokWeb })
+	// perplexity-web talks perplexity.ai's schematized SSE ask endpoint with a
+	// __Secure-next-auth.session-token cookie: one POST answers a structured
+	// event stream (pro-search steps, plan goals, markdown diffs) that the
+	// executor folds into an OpenAI reply.
+	Register("perplexity-web", func() Executor { return ForwardPerplexityWeb })
 	// claude-web drives claude.ai's web lane with a browser sessionKey cookie.
 	// UNOFFICIAL: it violates Anthropic's terms of service, the endpoints are
 	// unverified and may break or vanish at any time, and Anthropic may ban the
