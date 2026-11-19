@@ -14,6 +14,18 @@ Release history up to the fork point is archived in the upstream repo's
   the pending-fragment splice now lands under this Unreleased heading instead
   of above the file title.
 
+## [v1.5.5] - 2026-11-20
+
+### Added
+- **Perplexity-web executor** — perplexity.ai's schematized SSE ask endpoint served by a browser session cookie: OpenAI-shaped streaming and buffered replies with reasoning_content for the pro-search narration, FNV-1a session continuation, and the reference-only tools hint.
+- **Generic per-provider web-login** — one WebLoginConfig per provider (page, cookie domain, required token sources); POST /api/providers/{id}/browser-login and /import-chrome serve every configured provider and 404-name the rest. New configs: chatgpt-web and muse-web (Baidu Yiyan).
+- **Persistent browser profiles** — per-provider profiles under <DATA_DIR>/browser-profiles/ (0700, locked per launch, wiped by POST /api/providers/{id}/reset-profile) keep re-logins warm; gemini-web deliberately stays throwaway.
+- **Xvfb virtual display** — web-logins on displayless Linux hosts launch against an Xvfb display automatically for persistent-profile providers.
+
+### Fixed
+- **muse-web display identity** — the provider advertises Baidu Yiyan Web (Free) with the AuthHint naming Baidu Yiyan/ERNIE (historical-compatibility id), plus a brand guard walking every web-cookie provider.
+- **UI hygiene sweep (audit Hallmark + MWG)** — svg-only provider artwork resolves as .svg (atmorouter broken image), emoji replaced with icons, autocomplete tokens on password inputs, explicit rel=noopener, instant focus ring, 100vw removal, dead manifest duplicate removed, AbortSignal.timeout, field-edge contrast token, cli-tools LCP priority, color-scheme meta, button nowrap, passive scroll listeners, toSorted conversions, named transition properties, service-worker waitUntil, decimal inputmode, sidebar/row/aria-labels, skip link, modal focus trap, toast aria-live, reduced-motion fallback, and view-level h1 headings.
+
 ## [v1.5.4] - 2026-11-19
 
 ### Added
