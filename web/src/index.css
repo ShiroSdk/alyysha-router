@@ -2095,6 +2095,17 @@ textarea.bg-surface-2 {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  /* C6 global fallback: every animation and transition collapses to an
+     instant state so nothing demands motion from a user who asked for
+     none. The component-specific rules below stay as belt-and-braces. */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
   .glyph-modal {
     animation: none;
   }
