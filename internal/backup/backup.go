@@ -67,6 +67,12 @@ type BackupResult struct {
 	SizeBytes  int64     `json:"sizeBytes"`
 }
 
+// CreateBackup creates a backup — a SQLite snapshot plus the dashboard JSON
+// export, never a walk of DATA_DIR. Browser profiles
+// (<DATA_DIR>/browser-profiles/, see internal/browserlogin/profile.go) carry
+// live credentials and are deliberately outside any backup surface; there
+// is no mechanism here that could include them, and one must not be added.
+//
 // CreateBackup creates an immediate SQLite point-in-time snapshot using VACUUM INTO,
 // and rotates old backups exceeding the configured retention.
 func (m *Manager) CreateBackup(ctx context.Context, jsonExporter func(context.Context) ([]byte, error)) (*BackupResult, error) {

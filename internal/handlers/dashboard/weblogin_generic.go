@@ -147,3 +147,20 @@ func originOf(loginURL string) string {
 	}
 	return trimmed
 }
+
+// HandleProviderResetProfile handles POST /api/providers/{id}/reset-profile:
+// the operator deleting a persistent browser profile. The directory carries
+// credentials, so the operator must be able to wipe it.
+func (h *DashboardHandler) HandleProviderResetProfile(w http.ResponseWriter, r *http.Request) {
+	providerID := chi.URLParam(r, "id")
+	removed, err := browserlogin.ResetProfile(providerID)
+	if err != nil {
+		handlerutil.WriteJSONError(w, http.StatusBadRequest, err.Error())
+		return
+	}
+	log.Info(providerID, "the persistent browser profile was reset", "path", removed)
+	handlerutil.WriteJSON(w, http.StatusOK, map[string]any{
+		"provider": providerID,
+		"status":   "reset",
+	})
+}

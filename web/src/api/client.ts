@@ -2212,6 +2212,13 @@ export const api = {
       { method: 'POST', body: JSON.stringify({ profile: profile ?? '' }) }
     ),
 
+  // C: the operator deleting a persistent browser profile.
+  providerResetProfile: (id: string) =>
+    request<{ provider: string; status: string }>(
+      `/api/providers/${encodeURIComponent(id)}/reset-profile`,
+      { method: 'POST' }
+    ),
+
   // N13 onboarding + doctor: the first-run tour reads this and the health
   // check surfaces it on demand.
   getOnboardingStatus: () =>

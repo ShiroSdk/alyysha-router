@@ -5,6 +5,7 @@
   // Priority + Proxy Pool, provider-specific sub-forms (Azure, Cloudflare
   // Workers AI, Ollama host, Region) and Save/Cancel footer.
   import Button from '../../lib/ui/Button.svelte'
+  import { notifications } from '../../lib/notifications'
   import { api, type CreateConnectionPayload, type ProxyPool } from '../../api/client'
   import { PROVIDER_CATALOG } from '../../lib/providers'
   import { planBulkAdd } from '../../lib/bulk-add'
@@ -182,6 +183,18 @@
     } catch (e) {
       genericLogin = 'failed'
       genericLoginNote = e instanceof Error ? e.message : String(e)
+    }
+  }
+
+  async function handleGenericProfileReset() {
+    if (!confirm('Reset the browser profile for ' + providerId + '? The stored session is wiped.')) return
+    try {
+      await api.providerResetProfile(providerId)
+      notifications.success('Profile reset.')
+      genericLogin = null
+      genericLoginNote = ''
+    } catch (e) {
+      notifications.error(`Reset failed: ${e instanceof Error ? e.message : String(e)}`)
     }
   }
 
@@ -803,7 +816,18 @@
                 >
                   Import from a signed-in browser
                 </button>
+                <button
+                  type="button"
+                  onclick={handleGenericProfileReset}
+                  class="rounded-lg px-2.5 py-1.5 text-xs text-red-500 hover:bg-red-500/10 transition-colors"
+                >
+                  Reset profile
+                </button>
               </div>
+              <p class="text-[11px] text-text-muted">
+                The throwaway browser keeps this provider's profile under the data dir
+                (browser-profiles/{providerId}) so re-logins stay warm — it holds credentials, and "Reset profile" wipes it.
+              </p>
               {#if genericLoginNote}
                 <p class="text-xs {genericLogin === 'failed' ? 'text-red-500' : 'text-text-muted'}" role="status">{genericLoginNote}</p>
               {/if}

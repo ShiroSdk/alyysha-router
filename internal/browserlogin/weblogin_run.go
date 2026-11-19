@@ -53,14 +53,32 @@ func RunProvider(ctx context.Context, providerID string) (*WebLoginResult, error
 			"use an Incognito window instead and paste the credential manually")
 	}
 
-	profile, err := os.MkdirTemp(browserProfileRoot(binary), "9router-"+cfg.ProviderID+"-login-*")
-	if err != nil {
-		return nil, fmt.Errorf("create the temporary browser profile: %w", err)
+	// Profile discipline (C): persistent-profile providers keep their
+	// directory on disk (warm session, warm cf_clearance) and are locked
+	// per profile so two launches cannot race Chromium's own locks;
+	// everything else keeps the throwaway temp profile.
+	var profile string
+	if cfg.PersistentProfile {
+		persistent, err := persistentProfileDir(cfg.ProviderID)
+		if err != nil {
+			return nil, err
+		}
+		unlock, ok := lockProfile(persistent)
+		if !ok {
+			return nil, fmt.Errorf("a web-login for %s is already running; try again when it finishes", cfg.ProviderID)
+		}
+		profile = persistent
+		defer unlock()
+	} else {
+		temp, err := os.MkdirTemp(browserProfileRoot(binary), "9router-"+cfg.ProviderID+"-login-*")
+		if err != nil {
+			return nil, fmt.Errorf("create the temporary browser profile: %w", err)
+		}
+		profile = temp
+		// The profile holds a signed-in session. Leaving it on disk would
+		// leave the credential in a temporary directory nothing cleans up.
+		defer func() { _ = os.RemoveAll(profile) }()
 	}
-	// The profile holds a signed-in session. Leaving it on disk would leave
-	// the credential in a temporary directory nothing cleans up. (Section C
-	// moves persistent-profile providers to a durable directory instead.)
-	defer func() { _ = os.RemoveAll(profile) }()
 
 	port, err := freePort()
 	if err != nil {

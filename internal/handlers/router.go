@@ -201,6 +201,8 @@ func SetupDashboardRoutes(r chi.Router, repo *db.Repo, chatH *chat.ChatHandler) 
 	// keep winning their segments.
 	r.Post("/api/providers/{id}/browser-login", dashH.HandleProviderWebBrowserLogin)
 	r.Post("/api/providers/{id}/import-chrome", dashH.HandleProviderWebImportChrome)
+	// C: the operator deleting a persistent browser profile.
+	r.Post("/api/providers/{id}/reset-profile", dashH.HandleProviderResetProfile)
 	r.Post("/api/providers/gemini-web/import-chrome", dashH.HandleGeminiWebImportChrome)
 	r.Post("/api/providers/deepseek-web/browser-login", dashH.HandleDeepSeekWebBrowserLogin)
 	r.Post("/api/providers/deepseek-web/import-chrome", dashH.HandleDeepSeekWebImportChrome)

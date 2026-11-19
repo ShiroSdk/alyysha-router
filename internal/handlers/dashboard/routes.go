@@ -166,6 +166,10 @@ func RegisterRoutes(r chi.Router, h *DashboardHandler) {
 		r.Post("/proxy-pools/{id}/harvest", h.HandleHarvestProxyPool)
 		// N18b: the model comparison arena (mirrored in the real router).
 		r.Post("/arena/run", h.HandleArenaRun)
+		// B/C: generic web-login + profile reset (mirrored in the real router).
+		r.Post("/providers/{id}/browser-login", h.HandleProviderWebBrowserLogin)
+		r.Post("/providers/{id}/import-chrome", h.HandleProviderWebImportChrome)
+		r.Post("/providers/{id}/reset-profile", h.HandleProviderResetProfile)
 
 		// API Keys
 		r.Get("/keys", h.HandleGetApiKeys)
