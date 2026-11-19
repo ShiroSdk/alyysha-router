@@ -486,6 +486,12 @@
         }}
       />
     {/if}
+    <!-- C2: skip link — first focusable element, jumps past the sidebar to
+         the main content column. Visually hidden until focused. -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:rounded-lg focus:bg-brand-600 focus:px-4 focus:py-2 focus:text-white focus:text-sm focus:font-medium"
+    >Skip to main content</a>
     <!-- Mobile sidebar drawer backdrop. Escape closes the drawer from a
          <svelte:window> handler below: the backdrop div is never focused, so
          an onkeydown on it was dead wiring and the key did nothing. -->
@@ -598,7 +604,7 @@
         <UpdateBanner />
       </div>
 
-      <main class="flex-1 overflow-y-auto custom-scrollbar p-6 lg:p-10">
+      <main id="main-content" tabindex="-1" class="flex-1 overflow-y-auto custom-scrollbar p-6 lg:p-10">
         <div class="max-w-[1200px] mx-auto">
           {#if isLoading}
             <div class="flex flex-col items-center justify-center h-[70vh] gap-3 text-text-muted">
