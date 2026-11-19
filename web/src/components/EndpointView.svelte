@@ -1130,9 +1130,9 @@
         <Radio class="w-5 h-5" />
       </div>
       <div class="min-w-0 flex-1">
-        <h2 class="text-lg font-semibold text-text-main flex items-center gap-2">
+        <h1 class="text-lg font-semibold text-text-main flex items-center gap-2">
           API Endpoint
-        </h2>
+        </h1>
         <p class="text-xs text-text-muted">Direct, secure connection points to your local AI router</p>
       </div>
     </div>

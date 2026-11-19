@@ -11,7 +11,8 @@
 
 <div class="flex flex-col gap-4">
   <div class="min-w-0">
-    <p class="text-sm text-text-muted">
+    <h1 class="font-headline text-2xl sm:text-3xl font-bold text-text-main tracking-tight">Model Combos</h1>
+    <p class="text-sm text-text-muted mt-1">
       Group models under one name, then pick a strategy per combo:
     </p>
     <ul class="text-sm text-text-muted mt-2 flex flex-col gap-1">
