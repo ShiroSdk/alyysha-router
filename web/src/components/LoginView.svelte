@@ -47,12 +47,8 @@
     // Surface SSO callback failures (?error=...) like upstream /login.
     const queryError = new URLSearchParams(window.location.search).get('error')
     if (queryError) errorMessage = queryError
-    const controller = new AbortController()
-    const timeoutId = setTimeout(() => controller.abort(), 5000)
-    fetch('/api/auth/status', { signal: controller.signal })
+    fetch('/api/auth/status', { signal: AbortSignal.timeout(5000) })
       .then(async (res) => {
-        clearTimeout(timeoutId)
-
         if (!res.ok) {
           // Safe fallback to avoid an infinite loading state.
           hasPassword = true
@@ -80,7 +76,8 @@
         tick().then(focusPasswordField)
       })
       .catch(() => {
-        clearTimeout(timeoutId)
+        // A timeout (TimeoutError) or a gateway that is down lands here:
+        // safe fallback to the password form either way.
         hasPassword = true
         tick().then(focusPasswordField)
       })

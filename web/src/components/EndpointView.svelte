@@ -247,17 +247,14 @@
     if (!url) return false
     for (const path of ['/health', '/api/health']) {
       try {
-        const controller = new AbortController()
-        const timeoutId = setTimeout(() => controller.abort(), 5000)
         const res = await fetch(`${url}${path}`, {
           mode: 'cors',
           cache: 'no-store',
-          signal: controller.signal,
+          signal: AbortSignal.timeout(5000),
         })
-        clearTimeout(timeoutId)
         if (res.ok) return true
       } catch {
-        // try the next path
+        // try the next path (a timeout lands here too, as TimeoutError)
       }
     }
     return false

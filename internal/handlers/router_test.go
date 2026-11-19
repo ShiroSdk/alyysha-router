@@ -285,8 +285,10 @@ func TestSetupServerRouter_SPARoutes(t *testing.T) {
 		t.Errorf("expected GET /providers/anthropic.png to return 200, got %d", wAsset.Code)
 	}
 
-	// PWA shell files referenced by index.html must be served at root
-	for _, p := range []string{"/sw.js", "/manifest.webmanifest", "/manifest.json"} {
+	// PWA shell files referenced by index.html must be served at root. The
+	// duplicate manifest.json was removed (A8) — only the .webmanifest that
+	// index.html links is asserted here.
+	for _, p := range []string{"/sw.js", "/manifest.webmanifest"} {
 		req := httptest.NewRequest("GET", p, nil)
 		w := httptest.NewRecorder()
 		r.ServeHTTP(w, req)
