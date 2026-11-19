@@ -2,20 +2,20 @@
   "latestVersion": "1.5.5",
   "downloadUrl": "https://github.com/yanstd888/9routerx/releases/latest",
   "downloadUrls": {
-    "linux_amd64": "https://github.com/yanstd888/9routerx/releases/download/v1.5.4/9routerx-linux-amd64",
-    "linux_arm64": "https://github.com/yanstd888/9routerx/releases/download/v1.5.4/9routerx-linux-arm64",
-    "darwin_amd64": "https://github.com/yanstd888/9routerx/releases/download/v1.5.4/9routerx-darwin-amd64",
-    "darwin_arm64": "https://github.com/yanstd888/9routerx/releases/download/v1.5.4/9routerx-darwin-arm64",
-    "windows_amd64": "https://github.com/yanstd888/9routerx/releases/download/v1.5.4/9routerx-windows-amd64.exe"
+    "linux_amd64": "https://github.com/yanstd888/9routerx/releases/download/v1.5.5/9routerx-linux-amd64",
+    "linux_arm64": "https://github.com/yanstd888/9routerx/releases/download/v1.5.5/9routerx-linux-arm64",
+    "darwin_amd64": "https://github.com/yanstd888/9routerx/releases/download/v1.5.5/9routerx-darwin-amd64",
+    "darwin_arm64": "https://github.com/yanstd888/9routerx/releases/download/v1.5.5/9routerx-darwin-arm64",
+    "windows_amd64": "https://github.com/yanstd888/9routerx/releases/download/v1.5.5/9routerx-windows-amd64.exe"
   },
   "sha256s": {
-    "darwin_amd64": "0b4cfc67638cf0d9ba9107b23e7d9ecbfff47c30584e8569cff81683dc3af7f8",
-    "darwin_arm64": "b0718d67c509658644aeceb8d97bf16f188b13f64c7ff1bf78b4199f1fbfd638",
-    "linux_amd64": "5f7a05af19fa9ee38e677cb4193b708b262d1b2cbe5e212fa232e9d94e16c710",
-    "linux_arm64": "f7b6f75d4ffe18f04f2a0f04f45a90859a2a758506b3c604fdb2b12bc8352afb",
-    "windows_amd64": "48365e4b8a1eed84a7bd9a47c1185bd4afe38655a4c8debbf41b53ee4f623cd5"
+    "darwin_amd64": "2e74c511b200ef4bbe1f4466eabee7b8e952214a8537ec752a9b29c30cdcc021",
+    "darwin_arm64": "65e8bd4db544f6d40f25b28630a460a5111b4c8e6e121772102db2d0607a9b05",
+    "linux_amd64": "b8144736ce352a0dbba2fc611c96179c071251573de742193db51f6b4395dd70",
+    "linux_arm64": "61ced65e01eb96ce7220161288824c003074a05a284e717d9415d1e300e41463",
+    "windows_amd64": "2c4ff9cdbb933f5e0f405a52deae36ecc296f290ac466745c4cfc1e54487c798"
   },
-  "releaseNotes": "\n\n### Added\n- **Proxy pool harvest** — POST /api/proxy-pools/{id}/harvest ingests a batch of candidate proxies (up to 500), normalizes and deduplicates them, probes the new entries concurrently through the same dual-target probe the test button uses, and writes back only the survivors. Relay pools ingest without probing. The pool card grows a Harvest panel: paste, ingest & probe, one summary line.\n- **Least-known-good provider strategy (lkgp)** — the combo ladder reorders by each member provider's ledger workload: the provider that has served the least in the last hour goes first, spreading traffic across the ladder. A failed read keeps the stored order; same-provider members keep their relative order.\n- **Cache hit-rate telemetry** — GET /api/cache answers a hitRates block: the prompt-cache share of requests carrying cached tokens in the window, and the semantic cache's process-lifetime hit share.\n- **Model arena** — POST /api/arena/run runs one prompt against up to six combo members side by side; the combos view grows the arena panel with member pills and a results grid (output, latency, tokens). API-key and compatible connections dispatch directly; OAuth and web-cookie members are reported as skipped with the reason.\n",
-  "releaseUrl": "https://github.com/yanstd888/9routerx/releases/tag/v1.5.4",
-  "publishedAt": "2026-11-18T20:46:00Z"
+  "releaseNotes": "\n\n### Added\n- **Perplexity-web executor** — perplexity.ai's schematized SSE ask endpoint served by a browser session cookie: OpenAI-shaped streaming and buffered replies with reasoning_content for the pro-search narration, FNV-1a session continuation, and the reference-only tools hint.\n- **Generic per-provider web-login** — one WebLoginConfig per provider (page, cookie domain, required token sources); POST /api/providers/{id}/browser-login and /import-chrome serve every configured provider and 404-name the rest. New configs: chatgpt-web and muse-web (Baidu Yiyan).\n- **Persistent browser profiles** — per-provider profiles under <DATA_DIR>/browser-profiles/ (0700, locked per launch, wiped by POST /api/providers/{id}/reset-profile) keep re-logins warm; gemini-web deliberately stays throwaway.\n- **Xvfb virtual display** — web-logins on displayless Linux hosts launch against an Xvfb display automatically for persistent-profile providers.\n\n### Fixed\n- **muse-web display identity** — the provider advertises Baidu Yiyan Web (Free) with the AuthHint naming Baidu Yiyan/ERNIE (historical-compatibility id), plus a brand guard walking every web-cookie provider.\n- **UI hygiene sweep (audit Hallmark + MWG)** — svg-only provider artwork resolves as .svg (atmorouter broken image), emoji replaced with icons, autocomplete tokens on password inputs, explicit rel=noopener, instant focus ring, 100vw removal, dead manifest duplicate removed, AbortSignal.timeout, field-edge contrast token, cli-tools LCP priority, color-scheme meta, button nowrap, passive scroll listeners, toSorted conversions, named transition properties, service-worker waitUntil, decimal inputmode, sidebar/row/aria-labels, skip link, modal focus trap, toast aria-live, reduced-motion fallback, and view-level h1 headings.\n",
+  "releaseUrl": "https://github.com/yanstd888/9routerx/releases/tag/v1.5.5",
+  "publishedAt": "2026-11-19T21:42:35Z"
 }
