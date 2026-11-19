@@ -64,6 +64,12 @@ const ICON_ALIASES: Record<string, string> = {
   'zcode': 'glm',
 }
 
+// Providers whose only shipped artwork is an SVG (no .png build of the
+// logo exists in public/providers/). The generic .png return would 404 for
+// these — atmorouter shipped as .svg and rendered as a broken image in the
+// connections grid (audit Hallmark Gate 76).
+const SVG_ONLY_PROVIDERS = new Set(['atmorouter', 'codewhale', 'hcnsec', 'runcrate', 'smelt'])
+
 export function getIconPath(id?: string | null, apiType?: string): string {
   if (!id) return '/providers/oai-cc.png'
   const clean = id.trim()
@@ -78,6 +84,9 @@ export function getIconPath(id?: string | null, apiType?: string): string {
   const fileId = ICON_ALIASES[clean]
     ?? (PROVIDER_CATALOG_MAP.has(clean) ? clean : PROVIDER_CATALOG.find((p) => p.alias === clean)?.id)
   if (fileId) {
+    if (SVG_ONLY_PROVIDERS.has(fileId)) {
+      return `/providers/${fileId}.svg`
+    }
     return `/providers/${fileId}.png`
   }
   return apiType === 'responses' ? '/providers/oai-r.png' : '/providers/oai-cc.png'

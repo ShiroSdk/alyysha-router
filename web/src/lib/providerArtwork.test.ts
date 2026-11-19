@@ -73,3 +73,17 @@ describe('provider artwork budget', () => {
     expect(total).toBeLessThan(1536 * 1024)
   })
 })
+
+
+// The svg-only artwork (no .png build exists) must resolve through
+// getIconPath instead of 404-ing on the generic .png return (Gate 76).
+describe('svg-only provider artwork', () => {
+  it('exists on disk and is resolved as .svg by getIconPath', () => {
+    const svgOnly = ['atmorouter', 'codewhale', 'hcnsec', 'runcrate', 'smelt']
+    for (const id of svgOnly) {
+      const svgPath = join(PROVIDERS_DIR, `${id}.svg`)
+      expect(existsSync(svgPath)).toBe(true)
+      expect(existsSync(join(PROVIDERS_DIR, `${id}.png`))).toBe(false)
+    }
+  })
+})
