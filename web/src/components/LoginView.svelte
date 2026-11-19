@@ -261,6 +261,7 @@
                   <input
                     id="login-new-password"
                     type="password"
+                    autocomplete="new-password"
                     placeholder="Enter new password"
                     bind:value={newPassword}
                     required
@@ -315,6 +316,7 @@
                         <input
                           id="login-password"
                           type={showPassword ? 'text' : 'password'}
+                          autocomplete="current-password"
                           placeholder="Enter password"
                           bind:value={password}
                           required
