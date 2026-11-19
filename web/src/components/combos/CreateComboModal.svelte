@@ -479,6 +479,7 @@
           <input
             id="combo-budget-limit"
             type="number"
+            inputmode="decimal"
             min="0"
             step="any"
             placeholder="Off"

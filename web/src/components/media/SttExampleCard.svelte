@@ -306,6 +306,7 @@
         <div class="w-full min-w-0 flex-1">
           <input
             type="number"
+            inputmode="decimal"
             step="0.1"
             min="0"
             max="1"

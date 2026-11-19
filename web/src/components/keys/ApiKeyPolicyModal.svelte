@@ -486,6 +486,7 @@
             <input
               id="pol-cost"
               type="number"
+              inputmode="decimal"
               min="0"
               step="0.01"
               bind:value={dailyCostLimit}
