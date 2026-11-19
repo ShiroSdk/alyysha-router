@@ -2198,6 +2198,20 @@ export const api = {
       { method: 'POST', body: JSON.stringify(payload) }
     ),
 
+  // Generic web-login (B): every provider with a WebLoginConfig. The
+  // throwaway-browser run answers cookie + tokens; the import reads a
+  // browser the operator is already signed in to.
+  providerWebBrowserLogin: (id: string) =>
+    request<{ provider: string; cookie: string; tokens: Record<string, string>; userAgent: string }>(
+      `/api/providers/${encodeURIComponent(id)}/browser-login`,
+      { method: 'POST' }
+    ),
+  providerWebImportChrome: (id: string, profile?: string) =>
+    request<{ provider: string; cookie: string; tokens: Record<string, string>; warning?: string }>(
+      `/api/providers/${encodeURIComponent(id)}/import-chrome`,
+      { method: 'POST', body: JSON.stringify({ profile: profile ?? '' }) }
+    ),
+
   // N13 onboarding + doctor: the first-run tour reads this and the health
   // check surfaces it on demand.
   getOnboardingStatus: () =>

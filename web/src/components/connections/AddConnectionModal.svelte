@@ -164,6 +164,40 @@
   /** The throwaway-browser sign-in is running, or its outcome. */
   let browserLogin = $state<'running' | 'done' | 'failed' | null>(null)
   let browserLoginNote = $state('')
+  // Generic web-login (B): providers with a WebLoginConfig get the
+  // throwaway-browser and import-chrome buttons; providers without one
+  // render exactly as before.
+  const genericWebLoginProviders = ['grok-web', 'perplexity-web', 'chatgpt-web', 'muse-web']
+  let genericLogin = $state<'running' | 'done' | 'failed' | null>(null)
+  let genericLoginNote = $state('')
+
+  async function handleGenericWebLogin() {
+    genericLogin = 'running'
+    genericLoginNote = 'A browser window is opening — sign in to ' + (providerId) + ' there. It closes by itself.'
+    try {
+      const res = await api.providerWebBrowserLogin(providerId)
+      formApiKey = res.cookie || (Object.values(res.tokens)[0] ?? '')
+      genericLogin = 'done'
+      genericLoginNote = 'Signed in. The credential is filled in below — save the connection.'
+    } catch (e) {
+      genericLogin = 'failed'
+      genericLoginNote = e instanceof Error ? e.message : String(e)
+    }
+  }
+
+  async function handleGenericChromeImport() {
+    genericLogin = 'running'
+    genericLoginNote = 'Reading the signed-in browser profile…'
+    try {
+      const res = await api.providerWebImportChrome(providerId)
+      formApiKey = res.cookie || (Object.values(res.tokens)[0] ?? '')
+      genericLogin = 'done'
+      genericLoginNote = res.warning || 'The credential is filled in below — save the connection.'
+    } catch (e) {
+      genericLogin = 'failed'
+      genericLoginNote = e instanceof Error ? e.message : String(e)
+    }
+  }
   /** The session read out of a browser that was already signed in. */
   let chromeImport = $state<'running' | 'done' | 'failed' | null>(null)
   let chromeImportNote = $state('')
@@ -749,6 +783,30 @@
                   </a>
                 {/if}
               </p>
+            {/if}
+
+            {#if genericWebLoginProviders.includes(providerId)}
+              <div class="flex flex-wrap gap-2">
+                <button
+                  type="button"
+                  onclick={handleGenericWebLogin}
+                  disabled={genericLogin === 'running'}
+                  class="rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-text-main hover:bg-surface-2 disabled:opacity-50 transition-colors"
+                >
+                  Open a throwaway browser
+                </button>
+                <button
+                  type="button"
+                  onclick={handleGenericChromeImport}
+                  disabled={genericLogin === 'running'}
+                  class="rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-text-main hover:bg-surface-2 disabled:opacity-50 transition-colors"
+                >
+                  Import from a signed-in browser
+                </button>
+              </div>
+              {#if genericLoginNote}
+                <p class="text-xs {genericLogin === 'failed' ? 'text-red-500' : 'text-text-muted'}" role="status">{genericLoginNote}</p>
+              {/if}
             {/if}
 
             {#if providerId === 'gemini-web'}

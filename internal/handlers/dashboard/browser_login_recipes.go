@@ -49,15 +49,9 @@ func runBrowserRecipe(w http.ResponseWriter, r *http.Request, provider string, r
 	})
 }
 
-// HandleGrokWebBrowserLogin handles POST /api/providers/grok-web/browser-login.
-func (h *DashboardHandler) HandleGrokWebBrowserLogin(w http.ResponseWriter, r *http.Request) {
-	runBrowserRecipe(w, r, "grok-web", browserlogin.RecipeGrokWeb, "cookie")
-}
-
-// HandlePerplexityWebBrowserLogin handles POST /api/providers/perplexity-web/browser-login.
-func (h *DashboardHandler) HandlePerplexityWebBrowserLogin(w http.ResponseWriter, r *http.Request) {
-	runBrowserRecipe(w, r, "perplexity-web", browserlogin.RecipePerplexityWeb, "cookie")
-}
+// The grok-web and perplexity-web recipe handlers moved to the generic
+// WebLoginConfig flow (weblogin_generic.go) — their configs carry the same
+// capture the recipes encoded, plus persistent profiles and import-chrome.
 
 // HandleClaudeWebBrowserLogin handles POST /api/providers/claude-web/browser-login.
 // The provider stays opt-in: this flow only captures the cookie, the

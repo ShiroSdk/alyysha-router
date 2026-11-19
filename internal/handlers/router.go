@@ -192,10 +192,15 @@ func SetupDashboardRoutes(r chi.Router, repo *db.Repo, chatH *chat.ChatHandler) 
 	// real server.
 	r.Get("/api/providers/catalog", dashH.HandleGetProviderCatalog)
 	r.Post("/api/providers/gemini-web/browser-login", dashH.HandleGeminiWebBrowserLogin)
-	// N12: the same throwaway-browser flow for three more cookie providers.
-	r.Post("/api/providers/grok-web/browser-login", dashH.HandleGrokWebBrowserLogin)
-	r.Post("/api/providers/perplexity-web/browser-login", dashH.HandlePerplexityWebBrowserLogin)
+	// N12: claude-web keeps its dedicated recipe flow (no generic config —
+	// the provider itself stays opt-in behind CLAUDE_WEB_ENABLED).
 	r.Post("/api/providers/claude-web/browser-login", dashH.HandleClaudeWebBrowserLogin)
+	// B: the generic web-login flows for every provider with a WebLoginConfig
+	// (grok-web, perplexity-web, chatgpt-web, muse-web). Providers without a
+	// config answer 404 by name; the concrete gemini/deepseek mounts above
+	// keep winning their segments.
+	r.Post("/api/providers/{id}/browser-login", dashH.HandleProviderWebBrowserLogin)
+	r.Post("/api/providers/{id}/import-chrome", dashH.HandleProviderWebImportChrome)
 	r.Post("/api/providers/gemini-web/import-chrome", dashH.HandleGeminiWebImportChrome)
 	r.Post("/api/providers/deepseek-web/browser-login", dashH.HandleDeepSeekWebBrowserLogin)
 	r.Post("/api/providers/deepseek-web/import-chrome", dashH.HandleDeepSeekWebImportChrome)
