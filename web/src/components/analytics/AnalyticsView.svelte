@@ -872,9 +872,9 @@
                   ></span>
                 </td>
                 <td class="py-1.5 pr-2 min-w-0">
-                  <span class="inline-flex items-center gap-1 max-w-full truncate font-mono text-[11px]" title={req.loopWarning ? `⚠️ ${req.loopWarning} · ${req.model}` : req.model}>
+                  <span class="inline-flex items-center gap-1 max-w-full truncate font-mono text-[11px]" title={req.loopWarning ? `Warning: ${req.loopWarning} · ${req.model}` : req.model}>
                     {#if req.loopWarning}
-                      <span class="text-amber-500 text-[11px] shrink-0">⚠️</span>
+                      <span class="material-symbols-outlined text-[12px] text-amber-500 shrink-0" aria-hidden="true">warning</span>
                     {/if}
                     <span class="truncate">{req.model}</span>
                   </span>

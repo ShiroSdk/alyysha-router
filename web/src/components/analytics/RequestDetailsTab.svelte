@@ -250,9 +250,9 @@
                 </div>
               </td>
               <td data-label="Model" class="py-3 px-4 font-mono text-[11px] text-text-muted">
-                <div class="flex items-center gap-1 max-w-[140px] truncate" title={item.loopWarning ? `⚠️ ${item.loopWarning} · ${item.model}` : item.model}>
+                <div class="flex items-center gap-1 max-w-[140px] truncate" title={item.loopWarning ? `Warning: ${item.loopWarning} · ${item.model}` : item.model}>
                   {#if item.loopWarning || (item.anomalies && item.anomalies.length > 0)}
-                    <span class="text-amber-500 text-[12px] shrink-0" title={item.loopWarning || 'Possible loop detected'}>⚠️</span>
+                    <span class="material-symbols-outlined text-[12px] text-amber-500 shrink-0" title={item.loopWarning || 'Possible loop detected'}>warning</span>
                   {/if}
                   <span class="truncate block">{item.model}</span>
                 </div>

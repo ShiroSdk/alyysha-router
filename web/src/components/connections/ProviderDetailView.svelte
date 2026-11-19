@@ -3362,7 +3362,7 @@
     <div class="flex items-center gap-2 px-3 py-2 rounded-lg bg-yellow-500/10 border border-yellow-500/30">
       <span class="material-symbols-outlined text-[16px] text-yellow-500 mt-0.5 shrink-0">warning</span>
       <p class="text-xs text-red-600 dark:text-yellow-400 leading-relaxed">
-        ⚠️ Risk Notice: This provider uses a subscription/OAuth session not officially licensed for proxy/router use. Account may be restricted or banned. Use at your own risk.
+        This provider uses a subscription/OAuth session not officially licensed for proxy/router use. Account may be restricted or banned. Use at your own risk.
       </p>
     </div>
   {/if}
@@ -3903,7 +3903,7 @@
                             class="inline-flex items-center gap-1 rounded-full font-semibold px-2 py-0.5 text-[10px] bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
                             title="Active session bound to {boundModel}"
                           >
-                            <span>🔒</span>
+                            <span class="material-symbols-outlined text-[12px]">lock</span>
                             <span class="font-mono">{boundModel}</span>
                           </span>
                         {:else if fbSess?.status === 'queued'}
@@ -3911,14 +3911,14 @@
                             class="inline-flex items-center gap-1 rounded-full font-semibold px-2 py-0.5 text-[10px] bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20"
                             title="Waiting in queue"
                           >
-                            <span>⏳</span> queued
+                            <span class="material-symbols-outlined text-[12px]">schedule</span> queued
                           </span>
                         {:else if fbSess?.status === 'banned'}
                           <span
                             class="inline-flex items-center gap-1 rounded-full font-semibold px-2 py-0.5 text-[10px] bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20"
                             title="Account banned"
                           >
-                            <span>🚫</span> banned
+                            <span class="material-symbols-outlined text-[12px]">block</span> banned
                           </span>
                         {:else if fbSess}
                           <span
@@ -4917,7 +4917,7 @@
         </button>
       </div>
       <p class="text-xs text-red-600 dark:text-yellow-400 leading-relaxed mb-6">
-        ⚠️ Risk Notice: This provider uses a subscription/OAuth session not officially licensed for proxy/router use. Account may be restricted or banned. Use at your own risk.
+        This provider uses a subscription/OAuth session not officially licensed for proxy/router use. Account may be restricted or banned. Use at your own risk.
       </p>
       <div class="flex gap-2 justify-end">
         <button
