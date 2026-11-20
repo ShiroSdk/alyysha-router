@@ -14,6 +14,21 @@ Release history up to the fork point is archived in the upstream repo's
   the pending-fragment splice now lands under this Unreleased heading instead
   of above the file title.
 
+## [v1.5.6] - 2026-11-21
+
+### Added
+- **OMP connect from an empty models.yml** — a fresh oh-my-pi install's empty (0-byte), whitespace-only, BOM-prefixed or comment-only `~/.omp/agent/models.yml` no longer fails connect with the raw `yaml: line 1: did not find expected <document start>` parser error: the patcher builds the whole nested `providers.9router` document from scratch (flow object value written verbatim, verified by re-decoding), and a file whose first content line is genuinely not a mapping is refused with an actionable message naming the file (issue #7).
+- **Dual-cookie browser capture** — throwaway-browser and import-chrome results fill both dual-cookie fields for gemini-web and grok-web (the captured session used to be discarded on submit), the combined header keeps exact cookie names through Base64-padded values, and a missing timestamp/`sso-rw` cookie keeps the form open with a paste-it-manually note.
+- **ZCode plan quota for pasted connections** — the quota tracker resolves the billing JWT from provider data (`zcodeJwtToken` → `zaiBusinessToken` → `accessToken` → `apiKey`) so legacy plan-JWT connections read their balance, and billing rejections (401/403, codes 3001/3012/401, `token_version`) answer with reconnect-via-OAuth guidance instead of a bare error.
+- **Credential encryption guidance** — the OFF banner links "How to set it" straight to the README's Credential encryption section (32-byte padded-Base64 key, gateway-process env, persistence, `ROUTER_MASTER_KEY_PREVIOUS` rotation), and the command palette finds the section via `ROUTER_MASTER_KEY` (issue #8).
+- **Confirmed `service take-over` migration** — shared port/process diagnostics, first-run alternative-port selection and actionable noninteractive conflict errors; legacy autostart is inspected read-only and disabled only on exact legacy gateway path matches, preserving unrelated Node apps and 9RouterX entries, with per-OS autostart discovery and migration documented.
+
+### Fixed
+- **Wiki navbar spacing** — the published wiki's top navigation regains flex spacing and 44px link targets after the homepage menu moved to `.site-nav`, without touching the mobile sheet behavior.
+- **Space-safe daemon pidfiles** — executable paths containing spaces are preserved in daemon pidfiles.
+- **Service autostart details** — the effective service port/data paths persist, supervised Windows launches stay out of the terminal picker, long scheduled-task commands import via UTF-16 XML, and cron/desktop global flags precede `start`.
+- **Site icon sync** — the site renderer's icon annotations match the current README, with every current section pinned in a regression test so the Pages gate keeps holding.
+
 ## [v1.5.5] - 2026-11-20
 
 ### Added
