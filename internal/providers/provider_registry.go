@@ -310,6 +310,7 @@ var ProviderRegistry = map[string]ProviderMeta{
 		Icon:         "terminal",
 		Priority:     141,
 		AuthModes:    []string{"oauth"},
+		AuthHint:     "Quota tracking needs the ZCode OAuth (device-code) login. A pasted API key cannot read the plan balance. Reconnect via Sign in with ZCode.",
 		ServiceKinds: []string{"llm"},
 		Website:      "https://zcode.z.ai",
 		Notice:       &Notice{SignupURL: "https://zcode.z.ai", Text: "Sign in with your Z.ai account. Consumes the free Start Plan / Weekend Build quota."},

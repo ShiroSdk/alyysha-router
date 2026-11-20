@@ -258,7 +258,7 @@ func TestFetchZcodeUsage(t *testing.T) {
 				}
 			},
 			jwt:         "plan.jwt.value",
-			wantMessage: "ZCode authentication expired. Please re-authorize this connection.",
+			wantMessage: zcodeQuotaAuthMessage,
 			wantBare:    true,
 		},
 		{
@@ -269,7 +269,7 @@ func TestFetchZcodeUsage(t *testing.T) {
 				}
 			},
 			jwt:         "plan.jwt.value",
-			wantMessage: "ZCode connected. Unable to fetch usage: parameter error",
+			wantMessage: zcodeQuotaAuthMessage,
 			wantBare:    true,
 		},
 		{

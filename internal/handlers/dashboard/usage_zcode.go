@@ -5,6 +5,7 @@ import (
 	"context"
 	"crypto/sha256"
 	"encoding/binary"
+	"errors"
 	"fmt"
 	"net/http"
 	"strings"
@@ -32,6 +33,10 @@ const (
 // above stay constants, only the host moves.
 var zcodeBillingOrigin = "https://zcode.z.ai"
 
+const zcodeQuotaAuthMessage = "ZCode quota needs the OAuth (device-code) login. A pasted API key cannot read the plan balance. Reconnect via Sign in with ZCode."
+
+var errZcodeBillingAuth = errors.New("ZCode billing authentication rejected")
+
 // fetchZcodeUsage reads one connection's grant buckets and renders the
 // normalized {plan, quotas} shape the dashboard parser consumes: one row
 // per model, plans summed the way bridge quota.js byModel() does.
@@ -46,10 +51,10 @@ func fetchZcodeUsage(ctx context.Context, jwt, deviceID string) usageResult {
 	// returns a non-nil error for every non-2xx, so checking err first made this
 	// branch unreachable and told a user with an expired token to "retry" a
 	// request that can only succeed after re-authorization.
-	if status == http.StatusUnauthorized || status == http.StatusForbidden {
+	if status == http.StatusUnauthorized || status == http.StatusForbidden || errors.Is(err, errZcodeBillingAuth) {
 		return usageResult{
 			plan:    "ZCode",
-			message: "ZCode authentication expired. Please re-authorize this connection.",
+			message: zcodeQuotaAuthMessage,
 			bare:    true,
 		}
 	}
@@ -63,7 +68,11 @@ func fetchZcodeUsage(ctx context.Context, jwt, deviceID string) usageResult {
 	if len(plans) == 0 {
 		// Balance answered but without plan definitions: fall back to
 		// current (bare auth — the control face empties its payload).
-		if cur, cstatus, cerr := zcodeBillingGet(ctx, zcodeCurrentPath, jwt, ""); cerr == nil && cstatus >= 200 && cstatus < 300 {
+		cur, cstatus, cerr := zcodeBillingGet(ctx, zcodeCurrentPath, jwt, "")
+		if cstatus == http.StatusUnauthorized || cstatus == http.StatusForbidden || errors.Is(cerr, errZcodeBillingAuth) {
+			return usageResult{plan: "ZCode", message: zcodeQuotaAuthMessage, bare: true}
+		}
+		if cerr == nil && cstatus >= 200 && cstatus < 300 {
 			curPlans, _ := zcodePlanRows(cur)
 			if len(curPlans) > 0 {
 				plans = curPlans
@@ -107,6 +116,9 @@ func zcodeBillingGet(ctx context.Context, path, jwt, deviceMid string) (map[stri
 		msg := usageStr(env["msg"])
 		if msg == "" {
 			msg = fmt.Sprintf("code %d", int64(code))
+		}
+		if code == 3001 || code == 3012 || code == 401 || strings.Contains(strings.ToLower(msg), "token_version") {
+			return nil, status, errZcodeBillingAuth
 		}
 		return nil, status, fmt.Errorf("%s", msg)
 	}
