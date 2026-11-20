@@ -430,6 +430,17 @@ Factual capability matrix comparing **9RouterX**, upstream **9router-go**, and t
 | **Advanced Modules** | **MCP Server, A2A, TLS Stealth, MITM Inspector, Multi-Target Webhooks, Telegram Bot, Vault** | Core Proxy Routing | Core Proxy Routing |
 | **Supported Platforms** | **5 Platforms** (`linux-x64`, `linux-arm64`, `win32-x64`, `darwin-x64`, `darwin-arm64`) | Go Target Builds | Requires Node.js Environment |
 
+## Credential encryption
+
+The "Credential encryption: OFF" banner means provider credentials and browser sessions are stored unencrypted. An absent or invalid `ROUTER_MASTER_KEY` disables sealing.
+
+1. Generate **32 random bytes** on your own machine and encode them with standard padded Base64 (for example, `openssl rand -base64 32`). Keep the result private; never paste it into chat or logs.
+2. Set `ROUTER_MASTER_KEY` in the environment of the **gateway process**. On Linux/macOS, use `export ROUTER_MASTER_KEY='<BASE64_VALUE>'`; in PowerShell, use `$env:ROUTER_MASTER_KEY='<BASE64_VALUE>'`. These are placeholders, not usable keys.
+3. Persist the value in your protected service/container environment or secret store, then restart the gateway. A shell export does not change an already running service.
+4. Check Dashboard → Security → Credential Vault: sealing must show enabled. Keep the same key on later restarts and protect a separate backup of it alongside your database recovery plan.
+
+Do not replace the key casually. Losing it can make sealed credentials unrecoverable. The vault supports re-wrapping and an optional `ROUTER_MASTER_KEY_PREVIOUS`; preserve the old key during a planned rotation and persist the new current key before restarting. Without a usable old key, affected credentials must be re-entered. See [Security](https://yanstd888.github.io/9routerx/security.html) for the vault boundaries.
+
 ## Claude Web (Unofficial, Opt-in)
 
 9RouterX can also drive claude.ai's web interface with the `sessionKey` browser cookie through a provider named `claude-web`. **It is disabled by default and it is not part of the free-tier catalog.** Enable it with `CLAUDE_WEB_ENABLED=true` or the toggle in Dashboard → Web Cookie Providers; `CLAUDE_WEB_ENABLED=false` is the operator kill-switch that always wins.
