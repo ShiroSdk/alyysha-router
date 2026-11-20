@@ -94,6 +94,7 @@
     if (!text.includes(';')) return
     const r = splitCookieHeader(text, providerId as 'gemini-web' | 'grok-web')
     if (!r) return
+    e.preventDefault()
     cookiePrimary = r.primary
     cookieSecondary = r.secondary
     cookieSplitHint = 'Auto-split from pasted cookie header'
@@ -101,7 +102,22 @@
   // Combine the two columns into the format the backend executor parses
   // (`primary=...; secondary=...`), or fall back to the primary alone.
   function combineDualCookie(): string {
-    return combineCookieFields(cookiePrimary, cookieSecondary)
+    return combineCookieFields(cookiePrimary, cookieSecondary, providerId as 'gemini-web' | 'grok-web')
+  }
+
+  function fillBrowserCredential(cookie: string): string {
+    if (!isDualCookie) {
+      formApiKey = cookie
+      return ''
+    }
+    const fields = splitCookieHeader(cookie, providerId as 'gemini-web' | 'grok-web')
+    cookiePrimary = fields?.primary ?? ''
+    cookieSecondary = fields?.secondary ?? ''
+    formApiKey = combineDualCookie()
+    const key = providerId === 'gemini-web' ? '__Secure-1PSIDTS' : 'sso-rw'
+    const complete = formApiKey.split(';').some((part) => part.trim().startsWith(`${key}=`))
+    cookieSplitHint = complete ? '' : 'The second session cookie was not captured. Paste it manually in the second field.'
+    return cookieSplitHint
   }
   let credentialLabel = $derived(
     isDeepSeekWeb
@@ -177,9 +193,9 @@
     genericLoginNote = 'A browser window is opening — sign in to ' + (providerId) + ' there. It closes by itself.'
     try {
       const res = await api.providerWebBrowserLogin(providerId)
-      formApiKey = res.cookie || (Object.values(res.tokens)[0] ?? '')
+      const note = fillBrowserCredential(res.cookie || (Object.values(res.tokens)[0] ?? ''))
       genericLogin = 'done'
-      genericLoginNote = 'Signed in. The credential is filled in below — save the connection.'
+      genericLoginNote = note || 'Signed in. The credential is filled in below. Save the connection.'
     } catch (e) {
       genericLogin = 'failed'
       genericLoginNote = e instanceof Error ? e.message : String(e)
@@ -203,9 +219,9 @@
     genericLoginNote = 'Reading the signed-in browser profile…'
     try {
       const res = await api.providerWebImportChrome(providerId)
-      formApiKey = res.cookie || (Object.values(res.tokens)[0] ?? '')
+      const note = fillBrowserCredential(res.cookie || (Object.values(res.tokens)[0] ?? ''))
       genericLogin = 'done'
-      genericLoginNote = res.warning || 'The credential is filled in below — save the connection.'
+      genericLoginNote = note || res.warning || 'The credential is filled in below. Save the connection.'
     } catch (e) {
       genericLogin = 'failed'
       genericLoginNote = e instanceof Error ? e.message : String(e)
@@ -249,6 +265,15 @@
     mode = 'single'
     formName = ''
     formApiKey = ''
+    cookiePrimary = ''
+    cookieSecondary = ''
+    cookieSplitHint = ''
+    browserLogin = null
+    browserLoginNote = ''
+    chromeImport = null
+    chromeImportNote = ''
+    genericLogin = null
+    genericLoginNote = ''
     formDefaultModel = ''
     formPriority = 1
     formProxyPoolId = NONE_PROXY_POOL_VALUE
@@ -355,9 +380,9 @@
     browserLoginNote = 'A browser window is opening — sign in to Google there. It closes by itself.'
     try {
       const res = await api.geminiWebBrowserLogin()
-      formApiKey = res.cookie
+      const note = fillBrowserCredential(res.cookie)
       browserLogin = 'done'
-      browserLoginNote = 'Signed in. The cookie is filled in below — save the connection.'
+      browserLoginNote = note || 'Signed in. Both cookie fields are filled in below. Save the connection.'
       validation = null
       validationNote = ''
     } catch (err) {
@@ -439,9 +464,9 @@
     chromeImportNote = 'Reading the browser…'
     try {
       const res = await api.geminiWebImportChrome()
-      formApiKey = res.cookie
+      const note = fillBrowserCredential(res.cookie)
       chromeImport = 'done'
-      chromeImportNote = res.warning || 'The session is filled in below — save the connection.'
+      chromeImportNote = note || res.warning || 'Both cookie fields are filled in below. Save the connection.'
       validation = null
       validationNote = ''
     } catch (err) {
@@ -458,7 +483,7 @@
   let saveDisabled = $derived(
     saving ||
       (!isOllamaLocal && !formName.trim()) ||
-      (!credentialIsOptional && !formApiKey.trim()) ||
+      (!credentialIsOptional && !(isDualCookie ? cookiePrimary : formApiKey).trim()) ||
       (isCompatible && !formDefaultModel.trim()) ||
       (isAzure && (!azureData.azureEndpoint || !azureData.deployment || !azureData.organization)) ||
       (isCloudflareAi && !cloudflareAccountId.trim()) ||

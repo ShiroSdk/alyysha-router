@@ -75,17 +75,21 @@ export function splitCookieHeader(
 
 // combineCookieFields joins the two column values into the `primary=...;
 // secondary=...` format the backend executor parses. Used on submit.
-export function combineCookieFields(primary: string, secondary: string): string {
+export function combineCookieFields(
+	primary: string,
+	secondary: string,
+	provider: 'gemini-web' | 'grok-web'
+): string {
+	const primaryKey = provider === 'gemini-web' ? GEMINI_PRIMARY : GROK_PRIMARY
+	const secondaryKey = provider === 'gemini-web' ? GEMINI_SECONDARY : GROK_SECONDARY
 	const p = primary.trim()
 	const s = secondary.trim()
-	if (!s) return p
-	return `${p}; ${secondaryKeyLabel(s)}=${s}`
-}
-
-// secondaryKeyLabel infers the secondary cookie's key name from the value or
-// from whether it already carries one. The backend parser reads name=value
-// pairs, so the combined string needs the key label.
-function secondaryKeyLabel(value: string): string {
-	if (value.includes('=')) return value.split('=')[0].trim()
-	return 'secondary'
+	if (!p) return ''
+	const labelledPrimary = p.toLowerCase().startsWith(`${primaryKey.toLowerCase()}=`) ? p : `${primaryKey}=${p}`
+	if (!s) return labelledPrimary
+	const first = s.split(';', 1)[0].trim()
+	const labelledSecondary = first.toLowerCase().startsWith(`${secondaryKey.toLowerCase()}=`) ||
+		first.toLowerCase().startsWith(`${GROK_EXTRA}=`)
+		? s : `${secondaryKey}=${s}`
+	return `${labelledPrimary}; ${labelledSecondary}`
 }

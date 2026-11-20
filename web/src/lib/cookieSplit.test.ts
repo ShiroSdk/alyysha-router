@@ -48,12 +48,25 @@ describe('splitCookieHeader', () => {
 })
 
 describe('combineCookieFields', () => {
-	test('primary only (no secondary)', () => {
-		expect(combineCookieFields('abc123', '')).toBe('abc123')
+	for (const provider of ['gemini-web', 'grok-web'] as const) {
+		test(`${provider}: split values round-trip with exact cookie names`, () => {
+			const header = provider === 'gemini-web'
+				? '__Secure-1PSID=primary==; __Secure-1PSIDTS=timestamp='
+				: 'sso=primary==; sso-rw=timestamp='
+			const fields = splitCookieHeader(header, provider)!
+			expect(combineCookieFields(fields.primary, fields.secondary, provider)).toBe(header)
+			expect(combineCookieFields(header.split(';')[0], header.split(';')[1], provider)).toBe(header)
+		})
+	}
+	test('primary only retains its label', () => {
+		expect(combineCookieFields('abc123', '', 'gemini-web')).toBe('__Secure-1PSID=abc123')
 	})
-
-	test('primary + secondary joined with key label', () => {
-		expect(combineCookieFields('abc123', 'sid-ts-1')).toContain('abc123')
-		expect(combineCookieFields('abc123', 'sid-ts-1')).toContain('sid-ts-1')
+	test('grok extras retain their original name without duplicating labels', () => {
+		const header = 'sso=primary; sso-rw=secondary; cf_clearance=clearance'
+		const fields = splitCookieHeader(header, 'grok-web')!
+		expect(combineCookieFields(fields.primary, fields.secondary, 'grok-web')).toBe(header)
+	})
+	test('no primary cannot form a credential', () => {
+		expect(combineCookieFields('', 'secondary', 'grok-web')).toBe('')
 	})
 })
