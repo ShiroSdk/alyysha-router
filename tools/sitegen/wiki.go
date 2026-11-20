@@ -219,7 +219,7 @@ func renderWikiPage(path, outDir string) (*page, error) {
 	// Wrap the tables after rendering, so a wide one scrolls inside its own box
 	// instead of widening the page. See wrapTables for why this is not an AST
 	// transform.
-	rendered := wrapTables(buf.String())
+	rendered := normalizeImages(wrapTables(buf.String()))
 
 	title := fm.Title
 	if title == "" {

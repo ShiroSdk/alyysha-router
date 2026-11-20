@@ -3673,12 +3673,12 @@
           type="button"
           onclick={() => emailPrivacy.toggle()}
           class="flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs transition-colors cursor-pointer {$emailPrivacy ? 'border-brand-500/40 bg-brand-500/10 text-brand-500 font-medium' : 'border-border-subtle bg-surface text-text-muted hover:text-text-main hover:bg-surface-2'}"
-          title={$emailPrivacy ? 'Tampilkan email lengkap' : 'Sensor / sembunyikan email'}
+          title={$emailPrivacy ? 'Show full email' : 'Mask / hide email'}
         >
           <span class="material-symbols-outlined text-[15px]">
             {$emailPrivacy ? 'visibility_off' : 'visibility'}
           </span>
-          <span>{$emailPrivacy ? 'Email Disensor' : 'Sensor Email'}</span>
+          <span>{$emailPrivacy ? 'Email Masked' : 'Mask Email'}</span>
         </button>
       </div>
     {/if}

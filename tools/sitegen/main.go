@@ -197,7 +197,7 @@ func renderMarkdown(readmePath, outDir, repo string) ([]byte, error) {
 	// emoji-free markdown sources no longer carry (see icons.go): the same
 	// post-render point wrapTables runs at, on the exact markup the browser
 	// gets.
-	return []byte(renderSvgCodeSpans(injectIcons(wrapTables(buf.String())))), nil
+	return []byte(normalizeImages(renderSvgCodeSpans(injectIcons(wrapTables(buf.String()))))), nil
 }
 
 // svgCodeSpan matches a goldmark code span whose entire body is one inline
