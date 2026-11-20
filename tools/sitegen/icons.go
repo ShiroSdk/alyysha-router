@@ -114,7 +114,7 @@ var headingIcons = map[string]string{
 	"screenshots":                     "camera",
 	"supported-ai-coding-clients":     "monitor",
 	"free-ai-providers-and-keyless-models-catalog": "gift",
-	"provider-categories-breakdown-155-providers":  "globe",
+	"provider-categories-breakdown-154-providers":  "globe",
 	"embedded-dashboard-overview":                  "monitor",
 	"setup-guide-summary-and-wiki-documentation":   "settings",
 	"9routerx-vs-9router-vs-omniroute":             "arrow-left-right",
@@ -132,7 +132,7 @@ var headingIcons = map[string]string{
 // listIcons maps bold leads in the current dashboard and contribution lists.
 var listIcons = map[string]string{
 	`<li><strong>Token Saver &amp; Compression Analytics:</strong>`:      "compress",
-	`<li><strong>Connections &amp; 1-Click OAuth Manager:</strong>`:      "key",
+	`<li><strong>Connections &amp; Authentication:</strong>`:             "key",
 	`<li><strong>Per-Key Governance &amp; Custom Usage Ranges:</strong>`: "sliders-horizontal",
 	`<li><strong>Bug report</strong>`:                                    "wrench",
 	`<li><strong>Feature request</strong>`:                               "lightbulb",

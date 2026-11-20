@@ -6,8 +6,10 @@ section: Under the Hood
 
 # Database
 
-9routerx reads the upstream 9Router database as-is. There is no import, export,
-or migration.
+9RouterX can open an upstream 9Router SQLite database without a manual
+migration script. Bootstrap adds missing tables and columns. Dashboard
+import/export and automatic backups are separate features; they do not mean
+that every export is a complete database snapshot.
 
 ## Location
 
@@ -24,25 +26,17 @@ provider connections, proxy pools, combos, API keys, model aliases, and usage
 history are all there — 9RouterX's dashboard renders them because it *is* the
 same data.
 
-You **do not have to stop 9Router** if you want to keep the Node.js dashboard
-around. Run 9RouterX on a different port against the same `DATA_DIR`:
+Use one active gateway writer per database. Stop the legacy gateway before
+switching; changing only the port does not isolate SQLite or settings writes.
+For side-by-side evaluation, use a separate `DATA_DIR` and a stopped, copied
+snapshot, never the live database.
 
-```bash
-# Both gateways now default to :20128 — give 9RouterX an explicit
-# different port (any free one works) to run side by side:
-PORT=20129 DATA_DIR=/home/you/.9router ./9routerx
-```
-
-Both read the same tables, so a connection you add in either dashboard shows up
-in the other. SQLite serialises the writes; the supported setup is one active
-writer, so avoid editing the same combo or settings entry in both at the same
-moment.
-
-**Running it the other way round** (9RouterX first, then pointing 9Router at the
-same directory) works the same way. 9RouterX will have added two columns to
-`providerConnections` (`lastUsedAt`, `consecutiveUseCount`) and one extra table
-(`upstream_leases`). Upstream ignores both — its schema sync is additive and
-doesn't drop unknown columns.
+9RouterX adds more than the original connection-rotation columns, including
+governance, dashboard-token, settings-history, and combo-budget storage. Do not
+assume a reverse switch to an arbitrary upstream version preserves every
+9RouterX-specific field. Keep a pre-switch snapshot and consult the current
+[`DATABASE.md`](https://github.com/yanstd888/9routerx/blob/main/DATABASE.md)
+operator contract.
 
 ## What it does not do
 
@@ -56,11 +50,26 @@ doesn't drop unknown columns.
 
 ## Backup
 
-Take a backup first if the database matters:
+Stop the daemon before making a filesystem copy of the database directory,
+including its WAL sidecars:
 
 ```bash
-cp -r ~/.9router/db ~/9router-db-backup   # stop the daemon first
+cp -r ~/.9router/db ~/9router-db-backup
 ```
+
+`GET /api/settings/database` exports dashboard JSON; `POST` imports it. This
+format is a data transfer, not a full snapshot of every table/column. In
+particular, the current JSON export omits combo-budget columns and auto-backup
+settings. Preserve a SQLite snapshot when those fields or full recovery matter.
+
+The automatic backup path creates a primary SQLite snapshot and a best-effort
+JSON companion. Remote Telegram/GitHub delivery prefers sensitive JSON and
+falls back to the full SQLite snapshot when JSON is empty or fails. Neither
+artifact is encrypted as a SyncBundle; the configured `.json` destination can
+still contain SQLite bytes, so inspect the format before restoring. Browser-profile
+directories are outside these built-in database backups. See
+[Operations](operations.md#automatic-and-remote-backups) for settings,
+retention, and restore limitations.
 
 ## Binary portability
 

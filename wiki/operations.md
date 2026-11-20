@@ -14,16 +14,19 @@ maintenance, and the background loops that keep a deployment healthy.
 ```bash
 docker run -d --name 9routerx --restart unless-stopped \
   -p 20128:20128 -v "$HOME/.9router:/data" \
-  -e PORT=20128 -e DATA_DIR=/data \
+  -e PORT=20128 -e DATA_DIR=/data -e HOST=0.0.0.0 \
   -e INITIAL_PASSWORD=your-secure-password \
-  yanstd888/9routerx:latest
+  ghcr.io/yanstd888/9routerx:latest
 ```
 
 `docker-compose.yml` in the repository root is the same shape if you prefer
 compose.
 
-Experimental builds are marked **Pre-release** and never offered to a normal
-install; Docker Hub tags them `exp` (`yanstd888/9routerx:exp`), never `latest`.
+Experimental releases are marked **Pre-release** and are not selected by the
+stable updater. GHCR publishes experimental containers as
+`ghcr.io/yanstd888/9routerx:exp`, separate from `latest`. The example above sets
+`HOST=0.0.0.0` because the default loopback listener cannot serve a published
+container port. Keep strong dashboard authentication enabled.
 
 ## Tunnels
 
@@ -94,6 +97,60 @@ Usage-history pruning keeps a **carryover** per dimension, so spend that has
 already been counted is not billed twice after the rows it came from are pruned.
 The invariant is tested: node spend is identical before and after a prune, and a
 quota reset is not re-banked.
+
+## Automatic and remote backups
+
+`GET /api/settings/auto-backup` reads sanitized settings; `PATCH` changes them.
+Defaults are `enabled: false`, `intervalHours: 24`, `retention: 7`, and an empty
+`destination` (the built-in backup directory). The scheduler checks immediately
+at startup and then hourly; the interval is not an exact wall-clock cron.
+
+Local backups use a SQLite snapshot as the primary artifact and a best-effort
+JSON export. JSON is partial: it omits some storage, including combo-budget
+columns and the auto-backup settings scope. It is not equivalent to restoring
+the full SQLite snapshot ([Database](database.md#backup)).
+
+An optional `remote.kind` selects `telegram`, `github`, or an empty string to
+disable remote delivery. Telegram uses `telegramToken` and `telegramChat`;
+GitHub uses `githubToken`, `githubRepo`, `githubBranch`, and `githubPath`. GitHub
+defaults to branch `main` and path `backups/9routerx-backup.json`. Omitted
+credentials are retained; if you include a `remote` object without `kind`, the
+remote kind is cleared. Configuration responses replace token fields with has-token flags. Status/error
+fields are not equivalently sanitized: `lastRemoteError` can include a Telegram
+request URL containing the bot token. Treat the entire response as sensitive
+and redact it before sharing.
+
+**Remote backup artifacts are sensitive and not encrypted as a SyncBundle.**
+Delivery prefers JSON but falls back to the full SQLite snapshot when JSON
+export fails or is empty. The configured GitHub path, including a `.json`
+filename, is retained even for a SQLite fallback; inspect the format before
+restore. These artifacts can contain account/key material and private
+configuration, including fields omitted from JSON when SQLite is sent.
+Choose a private destination, restrict access, and review retention before
+enabling delivery. A remote failure does not turn a successful local backup
+into a failed local operation. Browser-profile directories are not included.
+
+`POST /api/settings/auto-backup` accepts `action: "backup"`, `"restore"`, or
+`"delete"`; the latter two take `file`. A path can be relative to the backup
+directory or absolute. Review the target and make an independent snapshot
+before restore/delete. The current delete handler ignores file-removal errors,
+so its success response alone is not proof that a file was deleted.
+
+## Proxy-pool harvest
+
+`POST /api/proxy-pools/{id}/harvest` imports a user-supplied `proxies` array of
+1–500 entries. It normalizes addresses (default scheme `http`) and deduplicates
+them. It does not discover proxies automatically. `probe` and `dropDead` both
+default to true.
+
+Only new entries are probed; existing pool entries stay. Eight workers share a
+12-second batch context, with a 5-second HTTP probe limit, not a fresh
+12-second deadline per proxy. Relays bypass the probe. An alive verdict means
+that the configured probe returned below `400`, not that every LLM provider is
+reachable. With `probe: false`, entries are stored unproven. With
+`dropDead: false`, dead entries can remain while `dropped` still counts dead
+verdicts. Duplicate/invalid-only batches can return a shorter result without
+`poolSize`.
 
 ## Background loops
 

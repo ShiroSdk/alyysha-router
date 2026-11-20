@@ -43,6 +43,17 @@ limits run first, in middleware; provider limits run after resolution. A caller
 who exceeded their own limit is rejected *without* consuming provider quota —
 one abusive caller must not spend a healthy node's budget.
 
+## Fair-share scheduling
+
+Fair-share is a scheduling hint between authenticated keys when the resilience
+concurrency cap is active. It is not a token quota, billing allocation, or
+reserved share. The default controller semaphore is disabled, which bypasses
+this scheduling path.
+
+The current ledger clears its buckets at a bucket transition, so it does not
+provide a reliable rolling-hour history. Do not use the hint as a fairness SLA;
+use the explicit rate limits and budgets above for enforceable per-key limits.
+
 ## Budgets
 
 USD and token budgets with a period and a hard cutoff, checked when a request

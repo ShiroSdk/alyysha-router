@@ -16,7 +16,7 @@ section: Getting Started
 |---|---|
 | Install and run | [Installation](installation.html) |
 | Use it from a CLI tool (Claude Code, Codex, Cursor…) | [Client Setup](client-setup.html) |
-| See every endpoint | [API](api.html) |
+| Browse the main endpoint groups | [API](api.html) |
 | Get to know the dashboard | [Dashboard](dashboard.html) |
 | Connect AI providers | [Providers](providers.html) |
 | Build fallback chains | [Combos](combos.html) |
@@ -41,9 +41,10 @@ section: Getting Started
 # Dashboard: http://localhost:20128 (initial password: 123456)
 ```
 
-Dashboard → Providers → connect **Kiro AI** (≈50 free credits per month) or
-**OpenCode Free** (no auth), then point your CLI tool at
-`http://localhost:20128/v1`.
+Dashboard → Providers → connect a supported provider, then create a local
+engine API key in Settings → API Keys before pointing your client at
+`http://127.0.0.1:20128/v1`. OpenCode Free is cataloged as a no-upstream-login
+lane; Kiro still requires a supported credential flow.
 
 ## Which version am I on?
 
@@ -61,13 +62,13 @@ branch rather than in a release you can download.
 | Area | What you get |
 |---|---|
 | Proxy APIs | OpenAI Chat, Claude Messages, Responses, embeddings, images, video, audio, search, batches |
-| Routing | Combos with fallback, round-robin, sticky, capacity, and fusion — cache-optimized, quota-weighted, and reset-aware strategies, with a 3-tier strike breaker across subscription, cheap, and free tiers |
-| Token savers | RTK compression, the anti-slop / context-squeezer / JSON-guard suite, and Caveman, Ponytail, ADHD output styles |
-| Governance | Per-key rate limits, daily cost caps, request limits, IP whitelists, per-key system prompts and endpoint permissions, USD/token budgets, plans, model allowlists |
-| Security | AES-GCM credential vault, Argon2id key hashing, PII and injection guardrails, SSRF protection, security event log, audit log |
-| Providers | 40+ providers, OAuth for most, custom OpenAI/Anthropic-compatible nodes, web executors, free-tier tracking |
+| Routing | [Combo strategies](combos.html), including `lkgp`, budgets and family warnings; arena uses a limited direct path |
+| Token savers | RTK and compression/output styles; opt-in [tool-loop watch](token-saver.md#tool-loop-watch) with protocol-dependent coverage |
+| Governance | Per-key rate limits, budgets, plans, allowlists, and a [fair-share scheduling hint](governance.md#fair-share-scheduling), not a reserved quota |
+| Security | Credential vault, key hashing, dashboard-token scopes, reversible PII placeholders, guardrails, and audit records with documented limits |
+| Providers | 154 built-in entries (91 API category, 28 OAuth category, 29 free, 6 web-cookie); auth modes vary. 248 static free models across 36 providers, including 24 keyless; custom endpoint templates are separate |
 | Agents | MCP server endpoint, A2A endpoints, multi-target webhooks, team cost centers |
-| Operations | Docker, tunnels, self-update with release banner channels, background loops, Prometheus metrics |
+| Operations | Docker, tunnels, updates, automatic snapshots, sensitive remote JSON backups, supplied proxy harvest, and local doctor/onboarding status |
 
 ## Search
 

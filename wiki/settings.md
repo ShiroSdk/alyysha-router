@@ -16,6 +16,24 @@ what to type or pick.
 
 ---
 
+## Settings API and history
+
+`GET /api/settings` reads settings; updates merge **top-level keys**, not nested
+sections. If you submit `chat`, preserve all its sibling fields from the current
+value. Sending only `chat.pii_vault` inside a replacement section can drop other
+`chat` settings. See [Security](security.md#reversible-pii-vault) and
+[Token Saver](token-saver.md#tool-loop-watch) before enabling these options.
+
+`GET /api/settings/history?key=&limit=` returns best-effort history for a
+top-level key (default 20 results, maximum 100). Old/new values are serialized
+strings. `POST /api/settings/history/{id}/rollback` restores an old stored
+value; it does not invoke every live settings hook, so a restart or explicit
+reapplication can be needed. Truncated or masked values can make rollback fail
+with `400`.
+
+History masking is not a guarantee that nested or mixed-case secret fields are
+removed. Treat history payloads as sensitive and do not publish them.
+
 ## Runtime Storage
 
 Shows where your data lives and lets you move it in and out.
@@ -34,6 +52,13 @@ Two buttons:
 > live database file. It restores your settings, connections, and keys — it is
 > not a substitute for backing up the SQLite file itself. See
 > [Database](database.html).
+
+Automatic backup settings use a separate API and save path, not just the main
+Save Changes button. See [Operations](operations.md#automatic-and-remote-backups)
+for schedule, retention, remote destinations, and sensitive-artifact warnings.
+Dashboard access-token scopes are described in
+[Security](security.md#dashboard-access-tokens); per-key limits and scheduling
+hints are described in [Governance](governance.html).
 
 ---
 

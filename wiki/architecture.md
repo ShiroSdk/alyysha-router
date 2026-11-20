@@ -44,15 +44,10 @@ of tokens. The guards it keeps:
 
 ## Combo strategies
 
-Each combo carries its own strategy:
-
-| Strategy | Behaviour |
-|---|---|
-| Fallback | Try candidates in order until one succeeds |
-| Round-robin | Rotate across candidates |
-| Sticky | Hold the same candidate while it succeeds |
-| Capacity | Reorder capability-aware |
-| Fusion | Combine several models into one panel |
+The current strategy IDs, combo budgets, family warnings, and limited arena
+path are documented in [Combos](combos.md#strategies). Strategy selection
+and enforcement vary by request path; do not infer universal support from a
+single strategy name.
 
 ## Design decisions that matter
 

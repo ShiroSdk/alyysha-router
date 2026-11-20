@@ -100,13 +100,14 @@ port. Require strong dashboard authentication before allowing network access.
 ```bash
 docker run -d --name 9routerx --restart unless-stopped \
   -p 20128:20128 -v "$HOME/.9router:/data" \
-  -e PORT=20128 -e DATA_DIR=/data \
+  -e PORT=20128 -e DATA_DIR=/data -e HOST=0.0.0.0 \
   -e INITIAL_PASSWORD=your-secure-password \
-  yanstd888/9routerx:latest
+  ghcr.io/yanstd888/9routerx:latest
 ```
 
-Experimental builds are marked **Pre-release** and never offered to a normal
-install; Docker Hub tags them `exp` (`yanstd888/9routerx:exp`), never `latest`.
+Experimental releases are marked **Pre-release** and are not selected by the
+stable updater. GHCR uses `ghcr.io/yanstd888/9routerx:exp` for experimental
+containers, separate from `latest`.
 
 ## Building from source
 
@@ -114,7 +115,7 @@ Prerequisites: Go 1.27 and Bun 1.x (the dashboard is embedded into the binary, s
 
 ```bash
 git clone https://github.com/yanstd888/9routerx.git
-cd 9RouterX
+cd 9routerx
 make web-build   # bun install --frozen-lockfile && bun run build
 make build       # embeds VERSION into the Go binary
 ```

@@ -14,11 +14,15 @@ How 9RouterX relates to **9Router** (decolua — the JavaScript project it was p
 |---|---|---|---|
 | Runtime | Single native Go binary + embedded Svelte 5 dashboard | JavaScript / Node.js + Next.js | TypeScript / Node.js |
 | Install | One binary (~48 MB linux-amd64), zero runtime deps | `npm i -g 9router` (6 deps, needs Node) | npm (~105 deps) / Docker / pnpm |
-| Providers | 155 (91 API · 28 OAuth · 29 free · 4 cookie) | 40+ | 375–380 (150+ free) |
+| Providers | 154 built-in entries (91 API category · 28 OAuth category · 29 free · 6 cookie; categories are not authentication-flow counts) | 40+ | 375–380 (150+ free) |
 | Free models | 248 across 36 providers (24 keyless) | 100+ | 1,400+ models, ~1.62B free tokens/mo |
 | Dashboard | Svelte 5 + Vite + Tailwind 4, embedded (1 dashboard dep) | Next.js React app | Desktop / PWA |
 | Database | Embedded SQLite, drop-in schema-compatible | Same SQLite schema | SQLite |
 | Usage under heavy traffic | *On paper:* compiled native process, no V8/GC overhead as queues grow — no public benchmark; measure on your workload | *On paper:* Node.js event loop; depends on Node version and warm-up | *On paper:* Node.js, same caveats |
+
+See [Providers](providers.html) for actual authentication support, [Combos](combos.html)
+for strategy/budget boundaries, and [Security](security.html) for masking and
+transport limits. Catalog size does not guarantee live upstream availability.
 
 ## What 9RouterX adds over 9Router
 

@@ -26,7 +26,7 @@ reordered from Settings; a fresh install hides only **Plans** and **Persona**.
 | CLI Tools | Which installed CLI tools the gateway has written config for |
 | Security | Credential vault, guardrails, and the enforcement panel |
 | Security Log | The per-event security log the gateway records on |
-| Audit Log | Compliance trail of dashboard actions (logins, key changes, updates) |
+| Audit Log | Operational records of dashboard actions; not a complete tamper-evident ledger |
 | Persona | Agent prompt presets, per-model binding *(hidden by default)* |
 | Free Tier | Free-tier provider catalog with usage and cost tracking |
 | Web Executors | Browser-based provider executors and their session health |
@@ -95,6 +95,27 @@ Two pages read the same ledger:
 - **Cache Analytics** (`CacheAnalyticsView.svelte`) — semantic cache hit rate and
   the entries behind it.
 
+## Onboarding and local doctor
+
+`GET /api/onboarding/status` counts active connections and engine keys. Its
+`complete` result means both counts are positive, not that an upstream call
+has succeeded; read failures can appear as zero. `POST /api/onboarding/complete`
+stores the separate dismissal flag. Dismissing onboarding does not create
+credentials or prove readiness.
+
+`GET /api/doctor` runs five graded local checks, including a temporary
+`.doctor-probe` write/delete. It is not side-effect-free. Database ping and a
+quick-check attempt do not certify database integrity or WAL health; the
+quick-check result is not used as an integrity verdict. Use the response to
+locate local setup issues, not to certify upstream access or security.
+
+## Keyboard and motion
+
+The dashboard includes a skip link, visible focus styles, named icon actions,
+and reduced-motion handling. Use Tab/Shift+Tab to move between native controls
+and Enter/Space to activate them. These mechanisms do not constitute a complete
+accessibility audit or certification of every control and theme.
+
 ## Appearance
 
 A theme toggle in the top bar switches between light and dark; the choice is
@@ -104,6 +125,6 @@ product, not two tools.
 
 ## Screenshots
 
-The [Screenshots](screenshots.html) page shows the current dashboard — every
-page, in both themes, at desktop and mobile widths, captured from a build of
-this release.
+The [Screenshots](screenshots.html) page contains historical dashboard
+captures in both themes at desktop and mobile widths. They are not fresh
+captures of the current release.

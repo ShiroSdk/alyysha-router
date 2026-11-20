@@ -113,9 +113,8 @@ There are no `--port` flags; use environment variables.
 | `PORT` | `20128` | HTTP port |
 | `DATA_DIR` | `~/.9router` (`%APPDATA%/9router` on Windows) | Data root |
 | `DB_PATH` | `$DATA_DIR/db/data.sqlite` | SQLite file |
-| `HOST` / `BIND_ADDR` | all interfaces | Listener address |
+| `HOST` / `BIND_ADDR` | `127.0.0.1` | Loopback listener; set `HOST=0.0.0.0` explicitly for all IPv4 interfaces |
 | `INITIAL_PASSWORD` | unset (`123456` on localhost) | First dashboard password |
-| `JWT_SECRET` | generated | Session signing secret — set it in production |
 | `API_KEY_SECRET` | built-in default | API key hashing secret |
 | `MACHINE_ID_SALT` | built-in default | Machine identity salt |
 | `9ROUTERX_BACKGROUND` | unset | Same as `--background` |

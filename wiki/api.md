@@ -7,8 +7,9 @@ section: Getting Started
 # API
 
 9routerx speaks the OpenAI, Claude, Gemini and Ollama dialects, and adds media,
-batching, and a dashboard REST API. This page is the full surface, taken from the
-route table.
+batching, and a dashboard REST API. This is a grouped reference to the main
+mounted routes, not an exhaustive OpenAPI schema. Provider-specific support and
+operational limits are linked from each section.
 
 ## Authentication tiers
 
@@ -16,10 +17,15 @@ route table.
 |---|---|
 | Public | `/health`, `/version`, `/api/hello`, `/changelog`, OAuth callbacks, dashboard assets |
 | Client API key (`Authorization: Bearer` / `X-API-Key`) | every `/v1/*` proxy route |
-| Dashboard session / CLI token | Dashboard management routes; valid engine keys get 403 |
+| Dashboard session / CLI token / dashboard access token | Management APIs; dashboard-token scopes restrict methods and paths, engine keys get 403 |
 | Engine key, read-only dashboard allowlist | GET `/api/providers/catalog`, GET `/api/models/caps` |
-| Console-log session / CLI token | `/api/translator/console-logs*` (client API keys are rejected) |
-| Admin session / CLI token | update, auto-update toggle, shutdown, `/debug/pprof/*` |
+| Privileged dashboard access | Explicit method/path exclusions protect some APIs; `write` still allows vault rotation and auto-backup restore/delete |
+
+Dashboard access tokens use the `x-9r-access-token` header and are distinct from
+engine keys. Export with login required adds a handler-level password/session/CLI
+check that an admin access token alone does not satisfy. See
+[Security](security.md#dashboard-access-tokens) for scopes,
+revocation, and caching.
 
 ## Chat and models
 
@@ -90,7 +96,15 @@ DELETE /api/providers/{id}/models          Bulk model removal
 GET    /api/providers/{id}/overrides       Per-provider header overrides
 PUT    /api/providers/{id}/overrides
 POST   /api/providers/validate             Validate an endpoint before saving
+POST   /api/providers/{id}/browser-login   Provider-specific browser capture
+POST   /api/providers/{id}/import-chrome   Supported Chromium profile import
+POST   /api/providers/{id}/reset-profile   Configured persistent profile reset
+POST   /api/connections/{id}/renew-deepseek Persist a renewed DeepSeek session
 ```
+
+These generic patterns do not imply every provider supports every operation.
+See the [browser support matrix](providers.md#browser-based-login) for
+dedicated overrides, temporary profiles, import limits, and credential handling.
 
 ### Custom provider nodes
 
@@ -118,7 +132,11 @@ DELETE /api/combos/{id}
 POST   /api/combos/reconcile                  Apply every combo's smart rules
 POST   /api/combos/{id}/smart/preview         Dry-run one combo's rules
 POST   /api/combos/{id}/smart/load            Apply one combo's rules
+POST   /api/arena/run                        Limited direct model comparison
 ```
+
+Budget fields, strategy coverage, family warnings, and the arena's direct
+API-key-only path are described in [Combos](combos.html).
 
 ### API keys, plans, and model access
 
@@ -169,6 +187,7 @@ POST   /api/proxy-pools
 PUT    /api/proxy-pools/{id}
 DELETE /api/proxy-pools/{id}
 POST   /api/proxy-pools/{id}/test
+POST   /api/proxy-pools/{id}/harvest      Import/probe a supplied proxy batch
 POST   /api/proxy-pools/vercel-deploy      Deploy a relay
 POST   /api/proxy-pools/deno-deploy
 POST   /api/proxy-pools/cloudflare-deploy
@@ -191,12 +210,17 @@ POST /api/usage/{connectionId}/reset-credits/consume
 GET /api/usage/{connectionId}/glm-reset-cards        GLM reset cards
 POST /api/usage/{connectionId}/glm-reset-cards
 GET /api/analytics/compression                      Token-saver analytics
+GET /api/savings/summary                            Estimated savings by period
+GET /api/burn-rate                                  Rough gateway-rate projections
 ```
+
+See [Usage & Analytics](usage-analytics.html) for metric windows and estimates;
+see [Operations](operations.md#proxy-pool-harvest) for harvest limits.
 
 ### Cache
 
 ```text
-GET    /api/cache
+GET    /api/cache                     Includes hitRates for prompt/semantic cache
 DELETE /api/cache
 GET    /api/cache/entries
 DELETE /api/cache/entries
@@ -219,7 +243,20 @@ POST   /api/settings/currency/refresh  Refresh exchange rates
 GET    /api/tokensaver/rtk/filters
 POST   /api/tokensaver/rtk/test
 POST   /api/tokensaver/caveman/test
+GET    /api/settings/history           Best-effort top-level key history
+POST   /api/settings/history/{id}/rollback
+GET    /api/settings/auto-backup        Sanitized config/status and local backups
+PATCH  /api/settings/auto-backup        Configure schedule and remote destination
+POST   /api/settings/auto-backup        Backup, restore, or delete
+GET    /api/doctor                     Local diagnostic probes
+GET    /api/onboarding/status          Connection/key counts, not live validation
+POST   /api/onboarding/complete        Dismiss onboarding
 ```
+
+Settings section replacement and history rollback caveats are in
+[Settings](settings.md#settings-api-and-history). Backup formats and sensitive
+remote artifacts are covered in [Operations](operations.md#automatic-and-remote-backups).
+Doctor/onboarding semantics are in [Dashboard](dashboard.md#onboarding-and-local-doctor).
 
 ### Tunnels
 
@@ -236,6 +273,9 @@ POST /api/tunnel/tailscale-disable
 
 ```text
 GET    /api/vault/status
+GET    /api/dashboard-tokens            Scoped dashboard-token metadata
+POST   /api/dashboard-tokens            Mint once-visible token
+DELETE /api/dashboard-tokens/{id}       Revoke token
 POST   /api/vault/rotate
 GET    /api/guardrails/policies
 POST   /api/guardrails/policies
@@ -253,6 +293,9 @@ GET    /api/security-logs               Alias of the above
 DELETE /api/security-log                Clear the security log
 GET    /api/audit                       Audit trail of dashboard actions
 ```
+
+See [Security](security.md#security-log-and-audit-log) for audit coverage and
+integrity limits. Internal verification helpers are not a mounted public API.
 
 ### Web executors
 

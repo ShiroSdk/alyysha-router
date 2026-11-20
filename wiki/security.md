@@ -15,10 +15,31 @@ through it. This page covers every control that protects them.
 |---|---|
 | Public | `/health`, dashboard HTML/assets, `/login`, OAuth callbacks |
 | Proxy routes (`/v1/*`, `/api/chat`) | Active client API key (`Authorization: Bearer` / `X-API-Key`) |
-| Dashboard management APIs | Operator session cookie or CLI token; engine keys are forbidden |
+| Dashboard management APIs | Operator session, local CLI token, or a dashboard access token with a permitted scope; engine keys are forbidden |
 | Read-only metadata (`/api/providers/catalog`, `/api/models/caps`) | An active, unexpired engine API key is also accepted |
-| Destructive operations (shutdown, update, DB import, vault rotation) | Session or CLI token — never a client API key |
-| Console log APIs | Full dashboard session or local CLI token; client API keys are rejected |
+| Shutdown, update, DB import | Session, local CLI token, or dashboard token with admin permission; never an engine API key |
+| DB export with login required | Additional handler check requires a valid session, local CLI token, or verified `x-9r-password`; an admin dashboard token alone is insufficient |
+| Vault rotation and automatic-backup restore/delete | Dashboard `write` or `admin` token can reach these routes; do not treat `write` as non-destructive |
+| Console log APIs | Full session, local CLI token, or permitted dashboard-token scope; engine API keys are rejected |
+
+### Dashboard access tokens
+
+Dashboard tokens are separate from client/engine keys. `GET /api/dashboard-tokens`
+lists token metadata; `POST` accepts a name and scope (`admin`, `write`, or
+`read`). Creation shows the plaintext `9rdt_` token once. Send it in the
+`x-9r-access-token` header, not as an assumed Bearer token. Do not put it in URLs
+or logs.
+
+`read` and `write` permissions are restricted by HTTP method and explicit path
+exclusions. Shutdown, update, and DB import are privileged. DB export adds a
+handler-level password/session/CLI check when login is required; an admin
+access token alone does not satisfy it. Vault rotation and automatic-backup
+restore/delete are still in scope for `write`.
+Do not equate `write` with safe or non-destructive access. These scopes do not
+replace engine-key model/budget policies. Tokens have no expiry option and
+remain usable until revoked with `DELETE /api/dashboard-tokens/{id}`. Minting
+and revocation invalidate the local cache; a separate process can retain a
+cached decision for up to 30 seconds.
 
 **First login.** On localhost the initial password is `123456`; change it in
 Settings → Profile. On a remote host the default password is blocked (CVE-2026-56679
@@ -85,6 +106,21 @@ model → chain → API key, most-specific wins, and actions are
 > [Advanced Features](advanced-features.html) page before using Persona to
 > bypass a model's limits.
 
+## Reversible PII vault
+
+`chat.pii_vault` accepts `off` (default) or `on`. This is an in-memory,
+session-scoped placeholder map, separate from encrypted credential storage.
+It recognizes a subset of emails, public IP addresses, NIK, card numbers, and
+IBAN patterns on inbound Chat/Messages paths; it does not cover the Responses
+path or every kind of sensitive data.
+
+Restoration is best effort and requires the exact placeholder to survive the
+model response. JSON transformations and placeholders split across SSE chunks
+are not universally restored. Excess matches or collisions can pass through
+raw after 256 mappings per session. Session eviction is pressure-based; the
+30-minute TTL is not a guaranteed deletion timer. Do not treat this feature as
+an anonymization guarantee or compliance boundary.
+
 ## SSRF protection
 
 Requests the gateway makes on your behalf — provider validation, proxy tests,
@@ -106,17 +142,26 @@ Two sidebar pages record what happened, at two levels:
   attempts, lockouts, and classified anomalies. Each entry carries severity,
   actor, IP, method, path, and status, so an incident review starts here rather
   than in the raw request log.
-- **Audit Log** (`/api/audit`, `internal/db/auditlog.go`) — the compliance trail
-  of dashboard actions: key created or rotated, plan changed, update triggered,
-  backup exported. Write-ahead entries record the intent even when the action
-  itself fails.
+- **Audit Log** (`/api/audit`, `internal/db/auditlog.go`) records dashboard
+  actions for operational review. This is not a comprehensive tamper-evident
+  ledger: ordinary writes are not fully wired to the internal hash-chain
+  helpers. There is no public verification endpoint or independent anchor
+  that proves completeness. Protect the database and retain independent logs
+  when stronger audit evidence is required.
 
-TLS stealth sits under the same umbrella as an opt-in lane: with
-`ROUTERX_TLS_STEALTH=1`, upstream connections present a browser TLS fingerprint
-(JA3/JA4, `internal/tlsstealth/`) instead of the Go default handshake — a
-compatibility layer for your own official accounts, not an evasion tool. It
-ships off, and while it is on the gateway emits a daily compliance notice in the
-notification feed and over webhooks.
+## TLS transport boundaries
+
+TLS fingerprinting support lives in `internal/tlsstealth`. The global switch is
+not consumed by every outbound transport, and provider-specific fingerprints
+are configured independently. A profile's advertised browser version can also
+differ from the underlying library version. Do not assume one toggle changes
+all requests.
+
+Some transports retry certificate failures with verification disabled unless
+`STRICT_SSL=true` or `STRICT_SSL=1`. Set strict verification for deployments
+that must reject such failures, and test the transport actually used. TLS
+fingerprinting is not a security certification or a substitute for certificate
+verification.
 
 ## Session and CLI tokens
 

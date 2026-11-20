@@ -77,17 +77,36 @@ Around RTK sits a set of guards and further compressions:
 Every piece is fail-open by design: when a guard cannot prove its output is
 equivalent, the original text passes through untouched.
 
+## Tool-loop watch
+
+The `chat` settings section accepts `tool_loop_watch`: `off` (default), `log`,
+or `break`, with `tool_loop_threshold` defaulting to 3. A session identity is
+required. The watcher compares the first choice's ordered tool names and raw
+argument strings across responses. It is not semantic equivalence detection;
+a no-tool response does not reset the current streak.
+
+In supported buffered OpenAI-shaped responses, `break` withholds the repeated
+response and returns `429`. In SSE, the error is added near the end, after
+content may already have reached the client. The OpenAI-to-Claude streaming
+adapter does not call the check, so neither logging nor blocking is universal.
+Inactive entries are lazily expired after 10 minutes; the 2,048-entry sweep
+trigger is not a hard memory cap. Test your actual client/protocol before using
+`break` unattended.
+
+The reversible PII setting belongs to the same `chat` section; see
+[Security](security.md#reversible-pii-vault). Preserve sibling fields when
+saving a nested settings section ([Settings](settings.md#settings-api-and-history)).
+
 ## Testing a saver before enabling it
 
-Two benches post a sample payload through the real compressor and show the
-result, so you can see the saving and the risk before turning anything on:
+Use the dashboard benches to submit a sample through the real compressor.
+Their management routes require a session, local CLI token, or permitted
+dashboard access token, not an engine API key. API clients must supply the
+route's sample payload rather than copying a placeholder as JSON:
 
-```bash
-curl -X POST http://localhost:20128/api/tokensaver/rtk/test \
-  -H 'Authorization: Bearer sk-your-api-key' -d '{...}'
-
-curl -X POST http://localhost:20128/api/tokensaver/caveman/test \
-  -H 'Authorization: Bearer sk-your-api-key' -d '{...}'
+```text
+POST /api/tokensaver/rtk/test
+POST /api/tokensaver/caveman/test
 ```
 
 ## Runtime flags

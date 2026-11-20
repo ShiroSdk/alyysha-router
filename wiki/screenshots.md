@@ -6,11 +6,11 @@ section: Contributing
 
 # Screenshots
 
-Every screenshot below is taken from the **current build** (v1.0.0, the shadcn
-dashboard), served by the same binary that ships in releases. The instance they
-came from was seeded with fictional data only — providers named `provider-a`,
-`provider-b`, and `provider-c`, demo models, and demo API keys that are masked in
-every shot. Nothing here shows a real key, account, or upstream URL.
+This gallery preserves historical dashboard captures from the v1.0.0-era
+shadcn build; it is not a fresh capture of the latest release. The capture
+setup used fictional providers, demo models, and masked demo keys. Later UI and
+feature changes can differ from these images. No new screenshots were taken
+for this documentation update.
 
 Each page was captured in **dark and light themes**, at **desktop (1280px)** and
 **mobile (390px)** widths. Click any image to open the file under

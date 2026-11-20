@@ -112,6 +112,31 @@ The dashboard reports the cache the engine actually serves from. That matters: a
 second cache instance would report zero entries while the engine served hits, and
 clearing from the dashboard would leave the engine still serving them.
 
+### Cache-hit rates
+
+The `hitRates` block in `GET /api/cache?period=` combines metrics with different meanings.
+Prompt-cache rate counts usage rows containing either cached-read **or cache
+creation** tokens in the selected window; creation is not a cache-read hit.
+Semantic-cache hits/misses are counters for the current process lifetime, not
+that same ledger window. Compare them separately rather than treating the two
+percentages as one measurement.
+
+### Savings and burn-rate estimates
+
+`GET /api/savings/summary?period=` defaults to `7d`. Prompt-cache and compression
+savings are estimates derived from token/pricing data. Unpriced compression
+tokens contribute zero USD, but prompt-cache estimates fall back to $3/million
+and a 90% discount when no positive price is available, even for unknown or
+zero-priced models. The summary includes this assumption. RTK is counted in
+compression, while the separate
+`token_saver` source currently contributes zero; do not add sources as if each
+were independently measured savings.
+
+`GET /api/burn-rate` projects from 24-hour gateway-wide usage. The current
+per-key projections reuse the total gateway rate rather than each key's actual
+rate. They are rough planning estimates, not a per-key forecast or a substitute
+for [budget enforcement](governance.md#budgets).
+
 ## Retention
 
 Usage history is pruned on a schedule. Pruning keeps a carryover per dimension, so

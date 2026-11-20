@@ -12,13 +12,58 @@ subscription, the next is cheap, the last is free.
 
 ## Strategies
 
-| Strategy | Behaviour |
+| Strategy ID | Behaviour |
 |---|---|
-| Fallback | Try candidates in order until one succeeds |
-| Round-robin | Rotate across candidates |
-| Sticky | Hold the same candidate while it succeeds |
-| Capacity | Reorder capability-aware — a model that cannot serve the request is skipped rather than tried |
-| Fusion | Combine several models into one panel |
+| `fallback` | Try candidates in order until one succeeds |
+| `round-robin` | Rotate across candidates |
+| `sticky` | Hold the same candidate while it succeeds |
+| `capacity` | Skip candidates that cannot serve the request's capabilities |
+| `fusion` | Query a multi-model panel and combine its results |
+| `cache-optimized` | Prefer candidates likely to retain prompt-cache locality |
+| `auto` | Choose an order using the available routing signals |
+| `quota-weighted` | Weight candidates using available quota information |
+| `reset-aware` | Score remaining quota with assumed windows; rotate leading-score ties, not actual provider reset timestamps |
+| `lkgp` | Stable ascending order by provider usage-row count over the prior hour |
+
+Despite its name, `lkgp` is a usage-based ranking, not a last-success health
+check: its query does not filter for successful responses. It is applied in
+the Chat Completions combo path, not explicitly in the separate
+Messages/Responses loop. `reset-aware` receives the same remaining-quota
+fraction for both windows and assumed reset distances of 5 hours/7 days, not
+provider reset timestamps. Other strategy effects depend on available signals;
+none guarantees an upstream quota or uninterrupted streaming.
+
+## Combo budgets and model families
+
+A combo can carry `budgetLimitUsd`, `budgetPeriod` (`daily`, `weekly`, `monthly`,
+or `total`). Set the limit to `0` to clear it. The global `budget.breach_mode`
+(`reject` or `downgrade`) selects the exhausted-budget action. The
+request-start gate can reject with `402` or restrict the combo to its cheapest
+**priced** member, returning `X-Budget-Downgraded: combo:<name>`.
+An unpriced member is not a reliable cheapest choice.
+
+This is not a universal spend reservation: in-flight requests can overshoot,
+budget read failures fail open, and multi-member fusion bypasses this gate.
+Per-key [governance](governance.html) is a separate control.
+
+Family classification and the `crossFamily` result provide a derived warning
+when members span model families. They do not enforce a strict family boundary
+or automatically make different protocols interchangeable.
+
+## Model arena
+
+`POST /api/arena/run` accepts a prompt and 1–6 members. `maxTokens` defaults to
+256 when outside the accepted 1–2048 range. Four workers share a 90-second
+context. The reported latency measures arrival of response headers, not full
+completion time.
+
+The arena selects the first active connection, then checks its credentials.
+If that connection is OAuth/cookie/unusable, it skips the member rather than
+searching later connections for an API key. Accepted connections receive a direct
+OpenAI-shaped request with Bearer authentication. It does not run the normal
+router's proxy pools, custom headers, governance,
+refresh protocols, or usage accounting. Use it for a limited comparison, not
+as proof that the same members work through every client or combo path.
 
 ## Creating a combo
 
