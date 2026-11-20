@@ -71,6 +71,13 @@ describe('command palette index', () => {
     expect(result.rows[0]?.label).toBe('Quota Tracker')
   })
 
+  it('finds credential encryption setup by its environment variable and banner text', () => {
+    for (const text of ['ROUTER_MASTER_KEY', 'credential encryption off', 'browser sessions unencrypted']) {
+      const result = searchPalette({ text })
+      expect(result.rows.some((row) => row.id === 'settings:credential-encryption' && row.route === '/dashboard/security')).toBe(true)
+    }
+  })
+
   it('finds a settings section by its name', () => {
     const result = searchPalette({ text: 'currency' })
     expect(result.rows.some((row) => row.group === 'settings')).toBe(true)

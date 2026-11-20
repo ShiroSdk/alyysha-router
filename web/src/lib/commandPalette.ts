@@ -100,15 +100,26 @@ const SETTINGS_SECTIONS: { id: string; label: string; hint: string }[] = [
 ]
 
 function settingsRows(): PaletteRow[] {
-  return SETTINGS_SECTIONS.map((section) => ({
-    id: `settings:${section.id}`,
-    group: 'settings' as const,
-    label: section.label,
-    hint: section.hint,
-    route: '/dashboard/profile',
-    icon: 'tune',
-    search: `${section.label} settings ${section.hint} ${section.id}`.toLowerCase(),
-  }))
+  return [
+    {
+      id: 'settings:credential-encryption',
+      group: 'settings' as const,
+      label: 'Credential encryption',
+      hint: 'Security › Credential Vault',
+      route: TAB_ROUTES.security,
+      icon: 'shield_lock',
+      search: 'credential encryption off provider credentials browser sessions database unencrypted router_master_key set restart gateway vault',
+    },
+    ...SETTINGS_SECTIONS.map((section) => ({
+      id: `settings:${section.id}`,
+      group: 'settings' as const,
+      label: section.label,
+      hint: section.hint,
+      route: '/dashboard/profile',
+      icon: 'tune',
+      search: `${section.label} settings ${section.hint} ${section.id}`.toLowerCase(),
+    })),
+  ]
 }
 
 let cache: PaletteRow[] | null = null

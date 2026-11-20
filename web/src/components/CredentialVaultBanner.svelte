@@ -39,6 +39,12 @@
           'Provider credentials and browser sessions are stored in the database unencrypted. Set ROUTER_MASTER_KEY and restart the gateway to seal them.'
         )}
       </p>
+      <a
+        href="https://yanstd888.github.io/9routerx/readme.html#credential-encryption"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-1 inline-flex min-h-11 items-center underline underline-offset-2 hover:no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"
+      >How to set it</a>
     </div>
   </div>
 {/if}
