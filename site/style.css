@@ -299,7 +299,8 @@ a:hover {
   transform: translateY(-6px) rotate(-45deg);
 }
 
-.site-nav {
+.site-nav,
+.wiki-project-nav {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -307,7 +308,8 @@ a:hover {
   font-size: 0.9375rem;
 }
 
-.site-nav > a {
+.site-nav > a,
+.wiki-project-nav > a {
   color: var(--text-muted);
   text-decoration: none;
   /* 44px tall target without a 44px tall bar. */
@@ -315,8 +317,20 @@ a:hover {
   display: inline-block;
 }
 
-.site-nav > a:hover {
+.site-nav > a:hover,
+.wiki-project-nav > a:hover {
   color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+.wiki-project-nav > a:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 3px;
+}
+
+.wiki-project-nav > a:active {
+  color: var(--text);
   text-decoration: underline;
   text-decoration-thickness: 2px;
 }

@@ -290,6 +290,16 @@ var wikiTemplate = `<!doctype html>
       .masthead-inner {
         max-width: 76rem;
       }
+      .masthead .wordmark {
+        min-height: 2.75rem;
+      }
+      .wiki-project-nav {
+        margin-left: auto;
+      }
+      .wiki-project-nav > a {
+        min-width: 2.75rem;
+        min-height: 2.75rem;
+      }
       /* Trigger sits at the far left of the bar, before the wordmark, so it is
          the first thing a phone reader reaches. Hidden on desktop, where the
          sidebar is already open. Icon-only: the glyph carries the meaning, and
@@ -304,8 +314,8 @@ var wikiTemplate = `<!doctype html>
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        width: 2.5rem;
-        height: 2.5rem;
+        width: 2.75rem;
+        height: 2.75rem;
         padding: 0;
         border: 1px solid var(--border);
         border-radius: var(--radius);
@@ -320,6 +330,13 @@ var wikiTemplate = `<!doctype html>
         background: var(--bg-alt);
         color: var(--text);
       }
+      .wiki-theme-btn-bar:active,
+      .wiki-menu-btn:active,
+      .wiki-links-toggle:active,
+      .wiki-sheet-close:active {
+        background: var(--bg-alt);
+        box-shadow: inset 0 0 0 1px var(--text-muted);
+      }
       .wiki-theme-btn-bar:focus-visible {
         outline: 2px solid var(--brand);
         outline-offset: 1px;
@@ -332,6 +349,7 @@ var wikiTemplate = `<!doctype html>
         align-items: center;
         gap: 0.6rem;
         width: 100%;
+        min-height: 2.75rem;
         padding: 0.55rem 0.7rem;
         border: 0;
         border-radius: var(--radius);
@@ -372,10 +390,9 @@ var wikiTemplate = `<!doctype html>
         display: none;
         align-items: center;
         justify-content: center;
-        /* 40px square, comfortably above the 24px minimum target, without a
-           label widening the bar. */
-        width: 2.5rem;
-        height: 2.5rem;
+        /* 44px square without a label widening the bar. */
+        width: 2.75rem;
+        height: 2.75rem;
         padding: 0;
         border: 1px solid var(--border);
         border-radius: var(--radius);
@@ -438,12 +455,15 @@ var wikiTemplate = `<!doctype html>
         .masthead nav.is-open {
           display: flex;
           flex-direction: column;
+          align-items: stretch;
           position: absolute;
           top: 100%;
           right: 0;
           left: auto;
           z-index: 40;
           min-width: 12rem;
+          margin-left: 0;
+          gap: 0;
           padding: 0.5rem;
           border: 1px solid var(--border);
           border-radius: var(--radius);
@@ -496,8 +516,8 @@ var wikiTemplate = `<!doctype html>
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
-          width: 2.5rem;
-          height: 2.5rem;
+          width: 2.75rem;
+          height: 2.75rem;
           padding: 0;
           border: 1px solid var(--border);
           border-radius: var(--radius);
@@ -683,7 +703,7 @@ var wikiTemplate = `<!doctype html>
           /></span>
           <span>9RouterX</span>
         </a>
-        <nav aria-label="Project" id="project-links">
+        <nav class="wiki-project-nav" aria-label="Project" id="project-links">
           <!-- Labeled "Home" rather than "Project": the wordmark goes to the
                same page but carries no name a screen reader can announce as a
                destination, and a visitor who landed deep in the wiki needs a
