@@ -7,6 +7,7 @@ import (
 	"io/fs"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 )
 
@@ -149,6 +150,31 @@ func applyPlans(plans []FilePlan, now func() time.Time) (Result, error) {
 	return res, nil
 }
 
+// yamlRootLooksLikeMapping reports whether the first content line of a YAML
+// file reads as a mapping key. It is a textual check, not a parse: the files
+// this guards against are precisely the ones that fail to parse, so there is
+// no decoded root to inspect. Comments, document markers and blank lines are
+// skipped; the first line that carries content decides.
+func yamlRootLooksLikeMapping(src []byte) bool {
+	for _, line := range strings.Split(string(src), "\n") {
+		t := strings.TrimSpace(strings.TrimPrefix(line, "\ufeff"))
+		t = strings.TrimSuffix(t, "\r")
+		if t == "" || strings.HasPrefix(t, "#") || t == "---" || t == "..." {
+			continue
+		}
+		if strings.HasPrefix(t, "\"") || strings.HasPrefix(t, "'") {
+			q := t[0]
+			if i := strings.IndexByte(t[1:], q); i >= 0 {
+				rest := strings.TrimSpace(t[i+2:])
+				return strings.HasPrefix(rest, ":")
+			}
+			return false
+		}
+		return strings.Contains(t, ":")
+	}
+	return false
+}
+
 // applyOnePlan writes one file. It returns whether anything changed and the
 // backup path, if one was made.
 func applyOnePlan(p FilePlan, now func() time.Time) (changed bool, backup string, err error) {
@@ -186,6 +212,21 @@ func applyOnePlan(p FilePlan, now func() time.Time) (changed bool, backup string
 			continue
 		}
 		if patchErr != nil {
+			// A YAML create-from-missing against a file whose first content line
+			// is not a mapping key (a bare scalar, a sequence, prose text) can
+			// never splice. Surface the file and the fix rather than the
+			// patcher's raw parser noise: that raw "unparsable output" error is
+			// exactly what issue #7 reported. A file that looks like a mapping
+			// keeps its original parse error, which names the real defect.
+			if p.File.Format == FormatYAML && e.CreateIfMissing && !e.Delete &&
+				(errors.Is(patchErr, ErrUnsupportedStructure) ||
+					errors.Is(patchErr, ErrInternalInconsistency) ||
+					errors.Is(patchErr, ErrParseFailure)) {
+				if !yamlRootLooksLikeMapping(cur) {
+					return false, "", fmt.Errorf("%s does not look like a YAML mapping (line 1). Delete or fix the file, or let this connection recreate it.: %w",
+						filepath.Base(p.File.Path), ErrUnsupportedStructure)
+				}
+			}
 			return false, "", fmt.Errorf("%s: %w", p.File.Purpose, patchErr)
 		}
 		cur = next

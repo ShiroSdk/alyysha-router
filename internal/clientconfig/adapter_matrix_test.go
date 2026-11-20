@@ -107,7 +107,7 @@ func TestAdapterS3RefusesMalformed(t *testing.T) {
 	broken := map[string]string{
 		"claude": "{\"a\": ", "opencode": "{\"a\": ", "droid": "{\"a\": ",
 		"crush": "{\"a\": ", "kilo": "{\"a\": ", "pi": "{\"a\": ",
-		"cline": "{\"a\": ", "codex": "model = \n[[[", "omp": "\t\tbad: [\n",
+		"cline": "{\"a\": ", "codex": "model = \n[[[", "omp": "\t\tbad: [\n", "hermes": "just scalar\n",
 	}
 	opts := Options{BaseURL: "http://h:1", APIKey: "k", Model: "m"}
 	for _, id := range IDs() {

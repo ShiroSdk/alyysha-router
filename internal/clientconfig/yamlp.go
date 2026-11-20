@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"io"
+	"reflect"
 	"strings"
 	"unicode/utf8"
 
@@ -205,7 +206,11 @@ func plainYAMLEnd(src []byte, start int) int {
 }
 
 func patchYAML(src []byte, e Edit) ([]byte, error) {
-	docs, err := decodeYAML(src)
+	decodeSrc := src
+	if hasBOM(src) {
+		decodeSrc = src[bomLen:]
+	}
+	docs, err := decodeYAML(decodeSrc)
 	if err != nil {
 		return nil, err
 	}
@@ -213,6 +218,28 @@ func patchYAML(src []byte, e Edit) ([]byte, error) {
 	if err != nil {
 		if !errors.Is(err, ErrKeyNotFound) || !e.CreateIfMissing || e.Delete {
 			return nil, err
+		}
+		// A file with no document at all (empty, whitespace-only, comment-only)
+		// or one holding only an empty flow mapping `{}` has nothing to splice
+		// into, and appendYAMLTopKey cannot reach a nested path from there. OMP's
+		// first-ever connect is exactly this case: build the document from
+		// scratch. appendYAMLTopKey stays the path for a file that already has a
+		// mapping to extend.
+		emptyRoot := len(docs) == 0
+		if !emptyRoot {
+			last := docs[len(docs)-1]
+			emptyRoot = len(last.Content) == 1 &&
+				last.Content[0].Kind == yaml.MappingNode && len(last.Content[0].Content) == 0
+		}
+		if emptyRoot {
+			createSrc := src
+			if len(docs) != 0 {
+				// An empty `{}` root cannot absorb appended block keys, so the
+				// original bytes are dropped; there is nothing else in the file
+				// to preserve.
+				createSrc = nil
+			}
+			return buildEmptyDocWithKeyPath(createSrc, e)
 		}
 		return appendYAMLTopKey(src, docs, e.KeyPath, e.Value)
 	}
@@ -503,6 +530,102 @@ func verifyYAMLValue(out []byte, e Edit) ([]byte, error) {
 			ErrInternalInconsistency, e.KeyPath[len(e.KeyPath)-1])
 	}
 	return out, nil
+}
+
+// buildEmptyDocWithKeyPath writes a whole YAML document for a file that has
+// nothing to splice into: no document at all (empty, whitespace-only,
+// comment-only) or only an empty `{}` mapping. The key path nests one
+// two-space indent per element, and a ValueJSON flow collection becomes the
+// leaf value verbatim — this is how OMP's first connect lands
+// providers.9router with its full flow object on a zero-byte models.yml.
+// appendYAMLTopKey stays the creation path for a file that already holds a
+// mapping to extend.
+func buildEmptyDocWithKeyPath(src []byte, e Edit) ([]byte, error) {
+	if len(e.KeyPath) == 0 {
+		return nil, fmt.Errorf("%w: empty key path", ErrKeyNotFound)
+	}
+	leaf := yamlQuote(e.Value)
+	if e.ValueJSON != "" {
+		flow := strings.TrimSpace(e.ValueJSON)
+		if !strings.HasPrefix(flow, "[") && !strings.HasPrefix(flow, "{") {
+			return nil, fmt.Errorf("%w: ValueJSON must be a flow collection", ErrUnsupportedStructure)
+		}
+		if _, err := decodeYAML([]byte("k: " + flow + "\n")); err != nil {
+			return nil, fmt.Errorf("%w: ValueJSON does not parse: %w", ErrUnsupportedStructure, err)
+		}
+		leaf = flow
+	}
+	nl := newlineFor(src)
+	var out bytes.Buffer
+	out.Write(src)
+	if out.Len() > 0 && out.Bytes()[out.Len()-1] != '\n' {
+		out.WriteString(nl)
+	}
+	for i, part := range e.KeyPath {
+		out.WriteString(strings.Repeat("  ", i))
+		out.WriteString(yamlQuote(part))
+		out.WriteString(":")
+		if i == len(e.KeyPath)-1 {
+			out.WriteString(" ")
+			out.WriteString(leaf)
+		}
+		out.WriteString(nl)
+	}
+	built := out.Bytes()
+	docs, err := decodeYAML(built)
+	if err != nil {
+		return nil, fmt.Errorf("%w: %w", ErrInternalInconsistency, err)
+	}
+	n, err := findYAMLScalar(docs, e.KeyPath)
+	if err != nil {
+		return nil, fmt.Errorf("%w: %w", ErrInternalInconsistency, err)
+	}
+	if e.ValueJSON == "" {
+		if n.Kind != yaml.ScalarNode || n.Value != e.Value {
+			return nil, fmt.Errorf("%w: %q did not read back as written",
+				ErrInternalInconsistency, e.KeyPath[len(e.KeyPath)-1])
+		}
+		return built, nil
+	}
+	// A flow collection leaf is not a scalar, so the scalar verifier cannot
+	// compare it. Re-decode both sides into generic values and require the
+	// written path to carry exactly the object the caller serialized.
+	if n.Kind == yaml.ScalarNode {
+		return nil, fmt.Errorf("%w: %q did not read back as written",
+			ErrInternalInconsistency, e.KeyPath[len(e.KeyPath)-1])
+	}
+	var got, want any
+	if err := yaml.Unmarshal(built, &got); err != nil {
+		return nil, fmt.Errorf("%w: %w", ErrInternalInconsistency, err)
+	}
+	if err := yaml.Unmarshal([]byte("k: "+leaf+"\n"), &want); err != nil {
+		return nil, fmt.Errorf("%w: %w", ErrInternalInconsistency, err)
+	}
+	cur, ok := got.(map[string]any)
+	if !ok {
+		return nil, fmt.Errorf("%w: built document is not a mapping", ErrInternalInconsistency)
+	}
+	for _, part := range e.KeyPath {
+		next, ok := cur[part]
+		if !ok {
+			return nil, fmt.Errorf("%w: %q missing from built document",
+				ErrInternalInconsistency, part)
+		}
+		if part == e.KeyPath[len(e.KeyPath)-1] {
+			wantDoc, _ := want.(map[string]any)
+			if !reflect.DeepEqual(next, wantDoc["k"]) {
+				return nil, fmt.Errorf("%w: %q did not read back as written",
+					ErrInternalInconsistency, part)
+			}
+			return built, nil
+		}
+		cur, ok = next.(map[string]any)
+		if !ok {
+			return nil, fmt.Errorf("%w: %q is not a mapping in the built document",
+				ErrInternalInconsistency, part)
+		}
+	}
+	return nil, fmt.Errorf("%w: unreachable key-path walk", ErrInternalInconsistency)
 }
 
 // verifyYAML re-decodes the output and confirms the target now reads back as
