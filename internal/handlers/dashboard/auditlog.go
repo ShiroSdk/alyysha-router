@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -13,10 +13,10 @@ import (
 
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/auth"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/models"
+	"alyysha/proxy/internal/auth"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/models"
 )
 
 // Audit action vocabulary. Dotted <subject>.<verb> names, written by the
@@ -120,7 +120,7 @@ func (h *DashboardHandler) HandleListAuditLogs(w http.ResponseWriter, r *http.Re
 	if strings.EqualFold(strings.TrimSpace(r.URL.Query().Get("format")), "csv") {
 		stamp := time.Now().UTC().Format("2006-01-02")
 		w.Header().Set("Content-Type", "text/csv; charset=utf-8")
-		w.Header().Set("Content-Disposition", fmt.Sprintf(`attachment; filename="9routerx-audit-%s.csv"`, stamp))
+		w.Header().Set("Content-Disposition", fmt.Sprintf(`attachment; filename="alyysha-audit-%s.csv"`, stamp))
 		writeAuditCSV(w, entries)
 		return
 	}

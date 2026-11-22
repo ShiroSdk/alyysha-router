@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
@@ -9,8 +9,8 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/proxy/executor"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/proxy/executor"
 )
 
 func TestForwardIflowRequest_Stream(t *testing.T) {

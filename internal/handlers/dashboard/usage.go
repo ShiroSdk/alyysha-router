@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -8,10 +8,10 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/fetchgate"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/fetchgate"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/providers"
 )
 
 // quotaFetchGate paces every live quota read this handler makes (issue #30).
@@ -20,7 +20,7 @@ import (
 // with ten accounts behind one office IP fired ten quota reads within a few
 // milliseconds. Google answered 429, and the chat path reads a 429 as real
 // quota exhaustion — locking accounts whose tokens were still live, and taking
-// the paid combos down with them. Upstream decolua/9router has no throttle here
+// the paid combos down with them. Upstream decolua/alyysha has no throttle here
 // either, so this is a deliberate gap and not a parity regression.
 //
 // The floor is 250ms with up to 120ms of jitter on top: enough that a burst

@@ -1,14 +1,14 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package handlers
 
 import (
 	json "encoding/json/v2"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/guardrails"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/observ"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/guardrails"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/observ"
 )
 
 // guardrailAudit persists one guardrail decision per firing.

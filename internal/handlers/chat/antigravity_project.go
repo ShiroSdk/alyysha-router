@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
@@ -12,10 +12,10 @@ import (
 	"sync"
 	"time"
 
-	json "9routerx/proxy/internal/fastjson"
-	"9routerx/proxy/internal/handlers/shared"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/providers"
+	json "alyysha/proxy/internal/fastjson"
+	"alyysha/proxy/internal/handlers/shared"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/providers"
 )
 
 // vars (not consts) so tests can point them at a local server.

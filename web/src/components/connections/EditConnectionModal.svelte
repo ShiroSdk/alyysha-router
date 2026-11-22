@@ -1,4 +1,4 @@
-<!-- 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
   // The single Edit Connection modal, shared by the Providers tab and the
   // Quota Tracker (issue #158). Both used to keep their own copy of the same

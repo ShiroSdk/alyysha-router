@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package tunnel
 
 import (
@@ -11,13 +11,13 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/config"
+	"alyysha/proxy/internal/config"
 )
 
 // tunnelDir is where cloudflared's PID file and the quick-tunnel state live.
 // It is deliberately the same directory the upstream Node implementation uses
 // (`<DATA_DIR>/tunnel`), because both binaries resolve the same data dir: an
-// operator who ran upstream 9router and then switched to this binary must not
+// operator who ran upstream alyysha and then switched to this binary must not
 // end up with two tunnel states, or a tunnel that one of them thinks is dead
 // while the other still holds the URL.
 //

@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
@@ -18,11 +18,11 @@ import (
 	"github.com/google/uuid"
 	"golang.org/x/sync/singleflight"
 
-	"9routerx/proxy/internal/handlers/shared"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/models"
-	"9routerx/proxy/internal/providers"
-	internalproxy "9routerx/proxy/internal/proxy"
+	"alyysha/proxy/internal/handlers/shared"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/models"
+	"alyysha/proxy/internal/providers"
+	internalproxy "alyysha/proxy/internal/proxy"
 )
 
 // Live model discovery for /v1/models, ported from the upstream

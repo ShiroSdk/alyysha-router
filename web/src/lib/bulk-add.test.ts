@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Guards the bulk-add naming bug: generated "Key N" names must never collide
 // with an existing connection name (connections are upserted by name, so a
 // collision overwrites instead of inserting). Ported from upstream

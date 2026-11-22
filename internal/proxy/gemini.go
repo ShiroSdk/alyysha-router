@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package proxy
 
 import (
@@ -13,11 +13,11 @@ import (
 	"os"
 	"strings"
 
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/translator"
 )
 
 // ForwardGemini sends an OpenAI-format request to a Gemini-native endpoint.
@@ -136,16 +136,16 @@ func ForwardGemini(ctx context.Context, client *http.Client, cfg *providers.Prov
 		// Always dump 400 INVALID_ARGUMENT payloads for post-mortem (covers
 		// "items.items: missing field." and other schema rejections).
 		if resp.StatusCode == http.StatusBadRequest {
-			_ = os.WriteFile("/tmp/9router-gemini-400.json", sendBody, 0644)
+			_ = os.WriteFile("/tmp/alyysha-gemini-400.json", sendBody, 0644)
 			preview := sendBody
 			if len(preview) > 8000 {
 				preview = preview[:8000]
 			}
-			log.Warn("gemini", "dumped 400 request to /tmp/9router-gemini-400.json", "model", modelName, "bytes", len(sendBody), "error", string(errBody[:min(500, len(errBody))]), "preview", string(preview))
+			log.Warn("gemini", "dumped 400 request to /tmp/alyysha-gemini-400.json", "model", modelName, "bytes", len(sendBody), "error", string(errBody[:min(500, len(errBody))]), "preview", string(preview))
 		}
 		if bytes.Contains(errBody, []byte("thought signature")) || bytes.Contains(errBody, []byte("Thought signature")) {
-			_ = os.WriteFile("/tmp/9router-ag-debug.json", sendBody, 0644)
-			log.Warn("gemini", "dumped thought-signature request to /tmp/9router-ag-debug.json", "model", modelName, "bytes", len(sendBody), "error", string(errBody[:min(200, len(errBody))]))
+			_ = os.WriteFile("/tmp/alyysha-ag-debug.json", sendBody, 0644)
+			log.Warn("gemini", "dumped thought-signature request to /tmp/alyysha-ag-debug.json", "model", modelName, "bytes", len(sendBody), "error", string(errBody[:min(200, len(errBody))]))
 			preview := sendBody
 			if len(preview) > 4000 {
 				preview = preview[:4000]

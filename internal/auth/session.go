@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Package auth implements the dashboard login session: an HS256 JWT stored in
 // an httpOnly `auth_token` cookie. Mirrors upstream src/lib/auth/dashboardSession.js
 // so the Go dashboard can enforce login the way the Next dashboard does.
@@ -22,9 +22,9 @@ import (
 
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/config"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/envcompat"
+	"alyysha/proxy/internal/config"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/envcompat"
 )
 
 const (
@@ -561,7 +561,7 @@ func ResolveClientIP(r *http.Request, trustedCIDRs []netip.Prefix, trustCloudfla
 // only with the per-process peer proof (upstream trustedPeer); a TRUST_PROXY
 // or TRUSTED_PROXIES is honored with right-to-left multi-hop CIDR validation.
 func LoginClientIP(r *http.Request) string {
-	if token := envcompat.Getenv("9ROUTERX_PEER_TOKEN", "NINEROUTER_PEER_TOKEN"); token != "" {
+	if token := envcompat.Getenv("ALYYSHA_PEER_TOKEN", "NINEROUTER_PEER_TOKEN"); token != "" {
 		if subtle.ConstantTimeCompare(
 			[]byte(r.Header.Get("x-9r-peer-token")),
 			[]byte(token),

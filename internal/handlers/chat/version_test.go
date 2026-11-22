@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
@@ -11,8 +11,8 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/updater"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/updater"
 )
 
 func TestHandleVersion(t *testing.T) {
@@ -87,7 +87,7 @@ func TestHandleToggleAutoUpdate(t *testing.T) {
 // falls through to the release API that can. This manifest carries the digest
 // precisely so it still answers on its own — the fallthrough is covered in
 // internal/updater. Without it this test would be asserting the old
-// manifest-always-wins behaviour, where `9routerx update` always failed
+// manifest-always-wins behaviour, where `alyysha update` always failed
 // with "release carries no checksum".
 func TestHandleCheckUpdate_Mock(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

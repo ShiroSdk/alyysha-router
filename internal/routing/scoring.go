@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Package routing implements FASE 5 routing strategies: the `auto` candidate
 // score, cache-optimized sticky selection via rendezvous hashing, quota-weighted
 // random selection, and reset-aware ordering. The strategies are pure functions

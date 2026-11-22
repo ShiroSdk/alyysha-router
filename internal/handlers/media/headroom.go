@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package media
 
 import (
@@ -10,10 +10,10 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
-	"9routerx/proxy/internal/config"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/headroom"
+	"alyysha/proxy/internal/config"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/headroom"
 )
 
 // hopByHopHeaders are stripped from both forwarded requests and responses.
@@ -91,7 +91,7 @@ func (h *HeadroomHandler) HandleHeadroomRestart(w http.ResponseWriter, r *http.R
 func (h *HeadroomHandler) handleHeadroomStart(w http.ResponseWriter, r *http.Request, restart bool) {
 	hurl := h.headroomURL()
 	if !headroom.IsLoopbackHeadroomUrl(hurl) {
-		writeHeadroomError(w, http.StatusBadRequest, "External Headroom proxies must be started outside 9RouterX", "EXTERNAL_PROXY")
+		writeHeadroomError(w, http.StatusBadRequest, "External Headroom proxies must be started outside Alyysha Router", "EXTERNAL_PROXY")
 		return
 	}
 	port := headroom.ParsePortFromURL(hurl)

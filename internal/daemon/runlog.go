@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package daemon
 
 import (
@@ -9,7 +9,7 @@ import (
 	"os"
 	"strings"
 
-	"9routerx/proxy/internal/constants"
+	"alyysha/proxy/internal/constants"
 )
 
 // RunLogMaxBytes is the cap the background log is trimmed to at open time.

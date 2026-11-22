@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 /**
  * The four surfaces #224 collapsed that the API-key suite does not already
  * cover: the top bar, the quota tracker header, the proxy-pool add dialog, and

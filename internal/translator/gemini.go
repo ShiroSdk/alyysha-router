@@ -1,9 +1,9 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package translator
 
 import (
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/thinking"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/thinking"
 	"bytes"
 	"encoding/json/jsontext"
 	json "encoding/json/v2"
@@ -213,7 +213,7 @@ func TranslateOpenAIToGeminiWithSession(openaiBody []byte, sessionID string) ([]
 	// id->name map keeps only the LAST name and an earlier turn's tool result
 	// would then be renamed to the later tool. Each tool result consumes the
 	// oldest unconsumed name for its id, so a functionResponse always answers the
-	// functionCall it belongs to. Parity with decolua/9router #4273 / #4589.
+	// functionCall it belongs to. Parity with decolua/alyysha #4273 / #4589.
 	tcID2Names := make(map[string][]string)
 	tcID2Name := make(map[string]string)
 	for _, msg := range msgs {
@@ -394,7 +394,7 @@ func TranslateOpenAIToGeminiWithSession(openaiBody []byte, sessionID string) ([]
 	}
 
 	// Normalize Gemini contents: merge adjacent same-role messages, strip empty parts,
-	// and ensure first turn is "user" (parity with decolua/9router v0.5.75 #e7b5f09).
+	// and ensure first turn is "user" (parity with decolua/alyysha v0.5.75 #e7b5f09).
 	req.Contents = NormalizeGeminiContentsForModel(req.Contents, oreq.Model)
 
 	// Tools
@@ -524,7 +524,7 @@ func extractThoughtSig(id string) string {
 }
 
 // geminiCleanToolCallID drops the "__ts__<sig>" transport suffix from a tool
-// call id, leaving the id the client actually sees. The suffix is a 9routerx
+// call id, leaving the id the client actually sees. The suffix is a alyysha
 // encoding for carrying a thought signature back to Gemini, so it must never
 // reach the wire nor appear on one side of a call/response pair only.
 func geminiCleanToolCallID(id string) string {
@@ -1169,7 +1169,7 @@ func geminiFinishToOpenAI(reason string) string {
 // within a single assistant turn — a replayed id would otherwise make an
 // earlier turn's result carry a later tool's name. Returns "" when no call for
 // the id is known, so the caller can fall back to the id-derived name.
-// Parity with decolua/9router #4273 / #4589.
+// Parity with decolua/alyysha #4273 / #4589.
 func nextToolNameForID(queued map[string][]string, fallback map[string]string, cursor map[string]int, id, cleanID string) string {
 	queue, key := queued[id], id
 	if len(queue) == 0 && cleanID != id {

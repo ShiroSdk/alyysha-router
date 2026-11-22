@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package db
 
 import (
@@ -8,7 +8,7 @@ import (
 
 // legacyProviderIDs maps a stored providerConnections.provider value that no
 // longer exists in the catalog to its current canonical id. "ollama-cloud"
-// was never a 9routerx provider id (the catalog has only ever shipped
+// was never a alyysha provider id (the catalog has only ever shipped
 // "ollama"); rows with that value were synced in from a sibling project that
 // uses a different naming scheme (see AGENTS.md §1 "OmniRoute"). Left
 // unmapped, getProviderConfig has no KnownProviders entry and no stored

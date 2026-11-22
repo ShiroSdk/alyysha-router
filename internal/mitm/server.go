@@ -1,8 +1,8 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package mitm
 
 import (
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/log"
 	"bufio"
 	"crypto"
 	"crypto/tls"
@@ -15,7 +15,7 @@ import (
 	"strings"
 	"sync"
 
-	"9routerx/proxy/internal/mitm/handlers"
+	"alyysha/proxy/internal/mitm/handlers"
 )
 
 // toolDomains maps SNI hostname → handler function.

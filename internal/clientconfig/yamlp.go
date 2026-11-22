@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package clientconfig
 
 import (
@@ -537,7 +537,7 @@ func verifyYAMLValue(out []byte, e Edit) ([]byte, error) {
 // comment-only) or only an empty `{}` mapping. The key path nests one
 // two-space indent per element, and a ValueJSON flow collection becomes the
 // leaf value verbatim — this is how OMP's first connect lands
-// providers.9router with its full flow object on a zero-byte models.yml.
+// providers.alyysha with its full flow object on a zero-byte models.yml.
 // appendYAMLTopKey stays the creation path for a file that already holds a
 // mapping to extend.
 func buildEmptyDocWithKeyPath(src []byte, e Edit) ([]byte, error) {

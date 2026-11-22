@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package tlsstealth
 
 import (
@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/log"
 )
 
 // AlertEventType is the webhook event the daily alert dispatches. It is not

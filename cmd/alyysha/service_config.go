@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package main
 
 import (
@@ -9,7 +9,7 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	"9routerx/proxy/internal/config"
+	"alyysha/proxy/internal/config"
 )
 
 // Service argv keeps the effective port/data location across supervisor logins.

@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package executor
 
 import (
@@ -15,7 +15,7 @@ import (
 
 	fhttp "github.com/bogdanfinn/fhttp"
 
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/log"
 )
 
 // Quota on Gemini Web.

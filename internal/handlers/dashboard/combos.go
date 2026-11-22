@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -12,12 +12,12 @@ import (
 	"sort"
 	"strings"
 
-	"9routerx/proxy/internal/budget"
-	"9routerx/proxy/internal/combos/smart"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/models"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/budget"
+	"alyysha/proxy/internal/combos/smart"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/models"
+	"alyysha/proxy/internal/providers"
 	"github.com/google/uuid"
 )
 

@@ -1,4 +1,4 @@
-<!-- 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
   import { api, getAuthHeaders, normalizeLastError, type ProviderConnection, type ProviderNode } from '../../api/client'
   import { PROVIDER_CATALOG } from '../../lib/providers'
@@ -32,7 +32,7 @@
   import { usageBlocks, isPanelVisible } from '../../lib/usagePanel.svelte'
   import Card from '../../lib/ui/Card.svelte'
   import { emailPrivacy, formatEmailLabel } from '../../lib/privacy'
-  // TASK-9routerX-shadcn-dashboard: the shadcn dashboard layer — a LayerChart
+  // TASK-alyyshaX-shadcn-dashboard: the shadcn dashboard layer — a LayerChart
   // area chart (gradient fill) and the bar/donut grid, both fed by data the
   // Overview already reads (frontend aggregation, no new endpoints).
   import UsageTrendAreaChart from '../../lib/components/dashboard/UsageTrendAreaChart.svelte'
@@ -341,7 +341,7 @@
     let controller: AbortController | null = null
     let reconnectTimeout: ReturnType<typeof setTimeout> | null = null
 
-    const token = typeof localStorage !== 'undefined' ? localStorage.getItem('9routerx_key') || '' : ''
+    const token = typeof localStorage !== 'undefined' ? localStorage.getItem('alyysha_key') || '' : ''
     let streamInitialized = false
 
     const connectStream = async () => {
@@ -663,7 +663,7 @@
     {#each usageBlocks('overview') as block (block.key)}
       {#if block.key === 'overview.kpi'}
         <SummaryKpiCards {stats} trend={trendBuckets} />
-        <!-- TASK-9routerX-shadcn-dashboard §2: the dashboard's large area
+        <!-- TASK-alyyshaX-shadcn-dashboard §2: the dashboard's large area
              chart, directly under the KPI row (spec layout). It follows the
              KPI panel's arrangement visibility — the two read as one summary
              block; the deeper Usage trend panel below keeps its own modes. -->
@@ -784,7 +784,7 @@
           {/if}
         </Card>
       {:else if block.key === 'overview.breakdown'}
-        <!-- TASK-9routerX-shadcn-dashboard §2: the bar/donut grid directly
+        <!-- TASK-alyyshaX-shadcn-dashboard §2: the bar/donut grid directly
              above the metric data-table (spec layout), fed by the same
              stats the table reads. -->
         <ProviderBreakdownCharts {stats} {providerNodes} />

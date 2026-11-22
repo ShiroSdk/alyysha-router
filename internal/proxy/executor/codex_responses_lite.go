@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package executor
 
 import "strings"
@@ -52,7 +52,7 @@ func responseInputItems(items any) ([]any, bool) {
 
 // isCodexResponsesLiteModel reports whether a model uses the responses-lite
 // shape. A trailing "(level)" override is stripped first: that suffix is a
-// 9router request override, not part of the model id.
+// alyysha request override, not part of the model id.
 func isCodexResponsesLiteModel(model string) bool {
 	base := model
 	if open := strings.LastIndex(base, "("); open != -1 && strings.HasSuffix(base, ")") {

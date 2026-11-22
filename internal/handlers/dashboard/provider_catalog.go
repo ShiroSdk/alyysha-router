@@ -1,12 +1,12 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package dashboard
 
 import (
 	"net/http"
 
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/proxy/executor"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/proxy/executor"
 )
 
 // HandleGetProviderCatalog serves the provider registry the dashboard renders

@@ -1,7 +1,7 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // The config-bundle CLI commands (FASE 10.5, the CONFIG BUNDLE half of
-// OmniRoute's "Sync Tokens & Config Bundle"): `9routerx export-bundle` and
-// `9routerx import-bundle`.
+// OmniRoute's "Sync Tokens & Config Bundle"): `alyysha export-bundle` and
+// `alyysha import-bundle`.
 //
 // This file only DEFINES the commands; main.go's Commands slice gains
 // syncBundleCommands() when the feature is wired, which is why everything
@@ -14,10 +14,10 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	"9routerx/proxy/internal/config"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/syncbundle"
-	"9routerx/proxy/internal/vault"
+	"alyysha/proxy/internal/config"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/syncbundle"
+	"alyysha/proxy/internal/vault"
 )
 
 // syncBundleCommands returns the bundle subcommands for main's command list.
@@ -77,7 +77,7 @@ func writeBundleFile(path string, data []byte) error {
 func exportBundle(cCtx *cli.Context) error {
 	outPath := cCtx.String("out")
 	if outPath == "" {
-		return fmt.Errorf("usage: 9routerx export-bundle --out <file>")
+		return fmt.Errorf("usage: alyysha export-bundle --out <file>")
 	}
 	repo, closeRepo, err := openBundleRepo()
 	if err != nil {
@@ -110,7 +110,7 @@ func exportBundle(cCtx *cli.Context) error {
 func importBundle(cCtx *cli.Context) error {
 	inPath := cCtx.String("in")
 	if inPath == "" {
-		return fmt.Errorf("usage: 9routerx import-bundle --in <file>")
+		return fmt.Errorf("usage: alyysha import-bundle --in <file>")
 	}
 	blob, err := os.ReadFile(inPath)
 	if err != nil {

@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package guardrails
 
 import (
@@ -8,8 +8,8 @@ import (
 	"net/http"
 	"strings"
 
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/middleware"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/middleware"
 )
 
 // maxScanBody caps how much of a request body is read for scanning. A larger

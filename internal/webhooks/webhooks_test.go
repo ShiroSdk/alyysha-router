@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package webhooks
 
 import (
@@ -11,7 +11,7 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"9routerx/proxy/internal/telegram"
+	"alyysha/proxy/internal/telegram"
 )
 
 // pointAtTestServer disables the SSRF guard for the loopback httptest origins

@@ -1,11 +1,11 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package media
 
 import (
 	"encoding/base64"
 	"testing"
 
-	"9routerx/proxy/internal/handlers/chat"
+	"alyysha/proxy/internal/handlers/chat"
 )
 
 // Upstream b08f12d5: the codex image lane resolves the ChatGPT plan at request

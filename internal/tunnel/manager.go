@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package tunnel
 
 import (
@@ -16,8 +16,8 @@ import (
 	"sync"
 	"time"
 
-	"9routerx/proxy/internal/config"
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/config"
+	"alyysha/proxy/internal/log"
 )
 
 // workerBaseURL is the service that maps a shortId onto its tunnel URL, which
@@ -668,7 +668,7 @@ func normaliseProtocol(p string) string {
 // by default, and a named-tunnel config sitting there would silently turn a
 // quick tunnel into something else.
 func writeQuickTunnelConfig() (string, func(), error) {
-	dir, err := os.MkdirTemp("", "9router-quick-tunnel-")
+	dir, err := os.MkdirTemp("", "alyysha-quick-tunnel-")
 	if err != nil {
 		return "", nil, fmt.Errorf("tunnel.writeQuickTunnelConfig: %w", err)
 	}

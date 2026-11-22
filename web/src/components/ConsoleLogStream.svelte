@@ -1,4 +1,4 @@
-<!-- 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
   // Renders the console buffer: filter by level, search, and read the rows.
   // The server stamps each row's level (internal/log.ConsoleEntry), so colour

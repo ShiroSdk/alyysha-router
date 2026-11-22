@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package providers
 
 import (
@@ -325,7 +325,7 @@ func WithHeader(headers map[string]string, key, value string) map[string]string 
 // MergeHeaderOverrides returns a copy of headers with the operator's
 // per-provider overrides applied on top. It is the Go shape of upstream's
 // `Object.assign(headers, providerOverrides.headers)`
-// (decolua/9router v0.5.95, open-sse/executors/base.js:132) — an override
+// (decolua/alyysha v0.5.95, open-sse/executors/base.js:132) — an override
 // wins over what the registry set, which is the whole point: the operator is
 // correcting a header the gateway sends, not adding a second opinion.
 //
@@ -718,7 +718,7 @@ var KnownProviders = map[string]ProviderConfig{
 		BaseURL:    "https://api.cline.bot/api/v1/chat/completions",
 		AuthHeader: "Authorization",
 		AuthScheme: "bearer",
-		// No StaticHeaders: the 9Router client identity (upstream
+		// No StaticHeaders: the Alyysha client identity (upstream
 		// buildClineHeaders) carries the linked version, which a registry
 		// literal cannot see (import cycle). getProviderConfig injects it
 		// per request via ClineIdentityHeaders.
@@ -868,7 +868,7 @@ var KnownProviders = map[string]ProviderConfig{
 		AuthScheme: "bearer",
 		StaticHeaders: map[string]string{
 			// Static identity headers of command-code@1.88.0
-			// buildCommandAuthHeaders() (upstream decolua/9router b1effa03).
+			// buildCommandAuthHeaders() (upstream decolua/alyysha b1effa03).
 			"User-Agent":             "cli",
 			"x-command-code-version": "1.88.0",
 			"x-cli-environment":      "production",
@@ -900,7 +900,7 @@ var KnownProviders = map[string]ProviderConfig{
 	// Global is the same protocol on different hosts, and sign-ins are per
 	// site — an account on agent.minimax.cn says nothing about
 	// agent.minimax.io. The two are never aliased onto each other
-	// (AGENTS.md §3.A). Port of upstream decolua/9router registry
+	// (AGENTS.md §3.A). Port of upstream decolua/alyysha registry
 	// minimax-code.js / minimax-code-global.js.
 	"minimax-code": {
 		BaseURL:               "https://agent.minimax.cn/mavis/api/v1/llm/v1/messages",

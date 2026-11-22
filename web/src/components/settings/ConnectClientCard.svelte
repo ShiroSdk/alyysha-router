@@ -1,10 +1,10 @@
-<!-- 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
   import Card from '../../lib/ui/Card.svelte'
   import Button from '../../lib/ui/Button.svelte'
   import { notifications } from '../../lib/notifications'
 
-  // The dashboard drives the same clientconfig patcher the `9routerx connect`
+  // The dashboard drives the same clientconfig patcher the `alyysha connect`
   // CLI uses — endpoint, credential and model only; the server-side guard
   // refuses a hooks-shaped payload before anything is written.
   const CLIENTS = [

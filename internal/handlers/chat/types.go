@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
@@ -6,15 +6,15 @@ import (
 	"sync"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/freeresilience"
-	"9routerx/proxy/internal/handlers/shared"
-	"9routerx/proxy/internal/middleware"
-	"9routerx/proxy/internal/models"
-	"9routerx/proxy/internal/promptcache"
-	"9routerx/proxy/internal/proxy"
-	"9routerx/proxy/internal/resilience"
-	"9routerx/proxy/internal/semanticcache"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/freeresilience"
+	"alyysha/proxy/internal/handlers/shared"
+	"alyysha/proxy/internal/middleware"
+	"alyysha/proxy/internal/models"
+	"alyysha/proxy/internal/promptcache"
+	"alyysha/proxy/internal/proxy"
+	"alyysha/proxy/internal/resilience"
+	"alyysha/proxy/internal/semanticcache"
 )
 
 type comboStickyState struct {

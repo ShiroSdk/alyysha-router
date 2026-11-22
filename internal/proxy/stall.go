@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package proxy
 
 import (
@@ -12,8 +12,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/shutdown"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/shutdown"
 )
 
 // DefaultStallTimeout is the default maximum idle time (no data) before an SSE
@@ -31,10 +31,10 @@ const DefaultFirstEventTimeout = 5 * time.Minute
 const FlashFirstEventTimeout = 60 * time.Second
 
 // ResolveDefaultStallTimeout reads environment variables STREAM_STALL_TIMEOUT_MS
-// and 9ROUTERX_STREAM_STALL_TIMEOUT_MS. If set to a positive integer (milliseconds),
+// and ALYYSHA_STREAM_STALL_TIMEOUT_MS. If set to a positive integer (milliseconds),
 // returns that duration. Otherwise returns DefaultStallTimeout.
 func ResolveDefaultStallTimeout() time.Duration {
-	for _, envVar := range []string{"STREAM_STALL_TIMEOUT_MS", "9ROUTERX_STREAM_STALL_TIMEOUT_MS", "NINEROUTER_STREAM_STALL_TIMEOUT_MS"} {
+	for _, envVar := range []string{"STREAM_STALL_TIMEOUT_MS", "ALYYSHA_STREAM_STALL_TIMEOUT_MS", "NINEROUTER_STREAM_STALL_TIMEOUT_MS"} {
 		if val := os.Getenv(envVar); val != "" {
 			if ms, err := strconv.Atoi(val); err == nil && ms > 0 {
 				return time.Duration(ms) * time.Millisecond

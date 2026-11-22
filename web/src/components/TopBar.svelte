@@ -1,4 +1,4 @@
-<!-- 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id -->
+<!-- Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers -->
 <script lang="ts">
   import { api } from '../api/client'
   import ProviderIcon from './connections/ProviderIcon.svelte'
@@ -31,7 +31,7 @@
     onOpenSearch?: () => void
   } = $props()
 
-  const TELEGRAM_GROUP_URL = 'https://t.me/aiclub_id'
+  const TELEGRAM_GROUP_URL = 'https://t.me/YannClippers'
 
   // Theme state
   let isDark = $state(true)
@@ -46,7 +46,7 @@
   })
   $effect(() => {
     if (typeof window !== 'undefined') {
-      const stored = localStorage.getItem('9routerx-theme') || localStorage.getItem('theme')
+      const stored = localStorage.getItem('alyysha-theme') || localStorage.getItem('theme')
       if (stored === 'light') {
         isDark = false
       } else if (stored === 'dark') {
@@ -61,7 +61,7 @@
   function applyTheme(dark: boolean) {
     document.documentElement.classList.toggle('dark', dark)
     document.documentElement.classList.toggle('light', !dark)
-    localStorage.setItem('9routerx-theme', dark ? 'dark' : 'light')
+    localStorage.setItem('alyysha-theme', dark ? 'dark' : 'light')
     localStorage.setItem('theme', dark ? 'dark' : 'light')
     // The browser-chrome color follows the theme too, so the toggle reaches
     // 100% of the surface (values mirror --9x-bg in index.css).
@@ -173,7 +173,7 @@
     },
     skills: {
       title: 'Agent Skills',
-      description: 'Copy a link and paste to your AI to use 9RouterX — no install needed',
+      description: 'Copy a link and paste to your AI to use Alyysha Router — no install needed',
       icon: 'extension',
     },
     'console-log': {
@@ -383,7 +383,7 @@
       <div class="flex items-center justify-between pb-3 border-b border-border-subtle">
         <h2 class="text-lg font-semibold text-text-main flex items-center gap-2">
           <span class="material-symbols-outlined text-pink-500">volunteer_activism</span>
-          Support 9RouterX
+          Support Alyysha Router
         </h2>
         <button
           type="button"
@@ -396,7 +396,7 @@
       </div>
 
       <p class="text-sm text-text-muted leading-relaxed">
-        9RouterX is a fast, lightweight and open-source high-throughput AI gateway in Go. If 9RouterX saves you time and tokens, consider supporting the project!
+        Alyysha Router is a fast, lightweight and open-source high-throughput AI gateway in Go. If Alyysha Router saves you time and tokens, consider supporting the project!
       </p>
 
       <!-- Three destinations, stacked rather than tiled: a 2-column grid leaves
@@ -404,7 +404,7 @@
            reads as a list, which is what these are. -->
       <div class="flex flex-col gap-2.5">
         <a
-          href="https://github.com/yanstd888/9routerx"
+          href="https://github.com/ShiroSdk/alyysha-router"
           target="_blank"
           rel="noopener noreferrer"
           class="flex items-center gap-3 p-3.5 rounded-xl border border-border-subtle bg-surface-2 hover:border-brand-500/40 transition-colors group"
@@ -421,7 +421,7 @@
         </a>
 
         <a
-          href="https://github.com/yanstd888/9routerx/releases"
+          href="https://github.com/ShiroSdk/alyysha-router/releases"
           target="_blank"
           rel="noopener noreferrer"
           class="flex items-center gap-3 p-3.5 rounded-xl border border-border-subtle bg-surface-2 hover:border-pink-500/40 transition-colors group"

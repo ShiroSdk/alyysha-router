@@ -1,13 +1,13 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/handlerutil"
 	"context"
 	"time"
 
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/providers"
 )
 
 // deprecationRecordTTL bounds how long a deprecation is cached in memory after

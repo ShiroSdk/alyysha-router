@@ -1,8 +1,8 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package db
 
 import (
-	"9routerx/proxy/internal/models"
+	"alyysha/proxy/internal/models"
 	"context"
 	"database/sql"
 	json "encoding/json/v2"

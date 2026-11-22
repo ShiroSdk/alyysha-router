@@ -1,5 +1,5 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
-// Package testingparity holds contract tests that pin 9RouterX's output to the
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
+// Package testingparity holds contract tests that pin Alyysha Router's output to the
 // serenhope reference implementation (FASE 8 task 2): the same input must
 // produce the same output here as `open-sse` produces upstream. Each table
 // names the upstream test case it ports, so a divergence can be traced back to
@@ -16,7 +16,7 @@ import (
 
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/translator"
 )
 
 // canonicalJSON marshals deterministically so parsed values can be compared

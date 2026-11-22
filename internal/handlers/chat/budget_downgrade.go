@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
@@ -11,10 +11,10 @@ import (
 
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/budget"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/pricing"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/budget"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/pricing"
+	"alyysha/proxy/internal/providers"
 )
 
 // Budget breach downgrade: when the operator's breach mode is "downgrade",

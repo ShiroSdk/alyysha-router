@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
@@ -7,8 +7,8 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/providers"
 )
 
 // An edge relay pool is a transport, not a rewrite.

@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package executor
 
 import (
@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/browserlogin"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/models"
+	"alyysha/proxy/internal/browserlogin"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/models"
 )
 
 // The renewal writes the credential it produced back to the row.

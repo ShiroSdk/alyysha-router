@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Package fastjson is a thin seam over encoding/json/v2 shared by the proxy
 // hot paths: chat request/response translation, upstream payload repair, and
 // the semantic cache key builder.

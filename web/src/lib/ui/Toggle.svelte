@@ -1,6 +1,6 @@
-<!-- 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
-  // Port of decolua/9router src/shared/components/Toggle.js (switch)
+  // Port of decolua/alyysha src/shared/components/Toggle.js (switch)
   let {
     checked = false,
     disabled = false,
@@ -21,7 +21,7 @@
 </script>
 
 <!--
-  Switch (TASK-9routerX-ui-polish §2). adapted from uiverse.io/alexruix/splendid-liger-23
+  Switch (TASK-alyyshaX-ui-polish §2). adapted from uiverse.io/alexruix/splendid-liger-23
   (MIT) — inset track + raised thumb — repainted to the theme tokens: the OFF
   track keeps a hairline border so it never dissolves into a light card (the
   light-theme trap from spec §1.5.3), the ON track is the accent, and the thumb

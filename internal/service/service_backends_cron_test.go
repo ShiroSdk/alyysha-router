@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package service
 
 import (
@@ -15,7 +15,7 @@ func TestInstallCronWritesEntryAndDesktopFile(t *testing.T) {
 	crontab := stubCrontab(t, "")
 	stubRun(t)
 
-	info, err := installCron("/usr/local/bin/9routerx", []string{"--rtk=true"})
+	info, err := installCron("/usr/local/bin/alyysha", []string{"--rtk=true"})
 	if err != nil {
 		t.Fatalf("installCron() error = %v", err)
 	}
@@ -25,7 +25,7 @@ func TestInstallCronWritesEntryAndDesktopFile(t *testing.T) {
 	if !strings.Contains(*crontab, cronMarker) || !strings.Contains(*crontab, "@reboot") {
 		t.Errorf("crontab = %q, want an @reboot entry carrying the marker", *crontab)
 	}
-	desktop := filepath.Join(home, ".config", "autostart", "9routerx.desktop")
+	desktop := filepath.Join(home, ".config", "autostart", "alyysha.desktop")
 	if !fileExists(desktop) {
 		t.Fatalf("autostart desktop entry not written to %s", desktop)
 	}
@@ -33,11 +33,11 @@ func TestInstallCronWritesEntryAndDesktopFile(t *testing.T) {
 
 func TestInstallCronIsIdempotent(t *testing.T) {
 	setHome(t)
-	line := renderCronLine("/usr/local/bin/9routerx", nil)
+	line := renderCronLine("/usr/local/bin/alyysha", nil)
 	crontab := stubCrontab(t, "0 * * * * /usr/bin/backup\n"+line+"\n")
 	stubRun(t)
 
-	if _, err := installCron("/usr/local/bin/9routerx", nil); err != nil {
+	if _, err := installCron("/usr/local/bin/alyysha", nil); err != nil {
 		t.Fatalf("installCron() error = %v", err)
 	}
 	if strings.Count(*crontab, cronMarker) != 1 {
@@ -52,11 +52,11 @@ func TestInstallCronMigratesLegacyMarker(t *testing.T) {
 	setHome(t)
 	// A pre-rename install carries the old ownership tag. Installing again must
 	// replace that line, not add a second @reboot that fights it for the port.
-	legacy := "@reboot /usr/local/bin/9router" + "-go start # 9router" + "-go-autostart"
+	legacy := "@reboot /usr/local/bin/alyysha" + "-go start # alyysha" + "-go-autostart"
 	crontab := stubCrontab(t, "0 * * * * /usr/bin/backup\n"+legacy+"\n")
 	stubRun(t)
 
-	if _, err := installCron("/usr/local/bin/9routerx", nil); err != nil {
+	if _, err := installCron("/usr/local/bin/alyysha", nil); err != nil {
 		t.Fatalf("installCron() error = %v", err)
 	}
 	if strings.Contains(*crontab, legacyCronMarker) {
@@ -72,7 +72,7 @@ func TestInstallCronMigratesLegacyMarker(t *testing.T) {
 
 func TestUninstallCronRemovesLegacyMarker(t *testing.T) {
 	setHome(t)
-	legacy := "@reboot /usr/local/bin/9router" + "-go start # 9router" + "-go-autostart"
+	legacy := "@reboot /usr/local/bin/alyysha" + "-go start # alyysha" + "-go-autostart"
 	crontab := stubCrontab(t, "0 * * * * /usr/bin/backup\n"+legacy+"\n")
 	stubRun(t)
 
@@ -91,8 +91,8 @@ func TestUninstallCronRemovesLegacyDesktopFile(t *testing.T) {
 	home := setHome(t)
 	stubCrontab(t, "")
 	stubRun(t)
-	legacy := filepath.Join(home, ".config", "autostart", "9routerx.desktop")
-	writeFile(t, legacy, "[Desktop Entry]\nExec=/usr/local/bin/9routerx start\n"+legacyCronMarker+"\n")
+	legacy := filepath.Join(home, ".config", "autostart", "alyysha.desktop")
+	writeFile(t, legacy, "[Desktop Entry]\nExec=/usr/local/bin/alyysha start\n"+legacyCronMarker+"\n")
 
 	if _, ok := uninstallCron(); !ok {
 		t.Fatal("uninstallCron() ok = false with a legacy desktop entry, want true")
@@ -109,7 +109,7 @@ func TestInstallCronWriteFailure(t *testing.T) {
 	t.Cleanup(func() { writeCrontab = previous })
 	stubRun(t)
 
-	if _, err := installCron("/usr/local/bin/9routerx", nil); err == nil {
+	if _, err := installCron("/usr/local/bin/alyysha", nil); err == nil {
 		t.Fatal("installCron() error = nil when crontab write fails, want error")
 	}
 }
@@ -117,7 +117,7 @@ func TestInstallCronWriteFailure(t *testing.T) {
 func TestStatusCron(t *testing.T) {
 	t.Run("crontab owns an entry", func(t *testing.T) {
 		setHome(t)
-		stubCrontab(t, renderCronLine("/usr/local/bin/9routerx", nil)+"\n")
+		stubCrontab(t, renderCronLine("/usr/local/bin/alyysha", nil)+"\n")
 		stubRun(t)
 
 		info, ok := statusCron()
@@ -133,8 +133,8 @@ func TestStatusCron(t *testing.T) {
 		home := setHome(t)
 		stubCrontab(t, "")
 		stubRun(t)
-		desktop := filepath.Join(home, ".config", "autostart", "9routerx.desktop")
-		writeFile(t, desktop, renderAutostartDesktop("/usr/local/bin/9routerx", nil))
+		desktop := filepath.Join(home, ".config", "autostart", "alyysha.desktop")
+		writeFile(t, desktop, renderAutostartDesktop("/usr/local/bin/alyysha", nil))
 
 		info, ok := statusCron()
 		if !ok || info.Path != desktop {
@@ -155,10 +155,10 @@ func TestStatusCron(t *testing.T) {
 func TestUninstallCron(t *testing.T) {
 	t.Run("removes the crontab entry and the desktop entry", func(t *testing.T) {
 		home := setHome(t)
-		crontab := stubCrontab(t, "0 * * * * /usr/bin/backup\n"+renderCronLine("/usr/local/bin/9routerx", nil)+"\n")
+		crontab := stubCrontab(t, "0 * * * * /usr/bin/backup\n"+renderCronLine("/usr/local/bin/alyysha", nil)+"\n")
 		stubRun(t)
-		desktop := filepath.Join(home, ".config", "autostart", "9routerx.desktop")
-		writeFile(t, desktop, renderAutostartDesktop("/usr/local/bin/9routerx", nil))
+		desktop := filepath.Join(home, ".config", "autostart", "alyysha.desktop")
+		writeFile(t, desktop, renderAutostartDesktop("/usr/local/bin/alyysha", nil))
 
 		if _, ok := uninstallCron(); !ok {
 			t.Fatal("uninstallCron() = false, want true")
@@ -178,7 +178,7 @@ func TestUninstallCron(t *testing.T) {
 		home := setHome(t)
 		stubCrontab(t, "")
 		stubRun(t)
-		desktop := filepath.Join(home, ".config", "autostart", "9routerx.desktop")
+		desktop := filepath.Join(home, ".config", "autostart", "alyysha.desktop")
 		writeFile(t, desktop, "[Desktop Entry]\nExec=someone-elses-app\n")
 
 		if _, ok := uninstallCron(); ok {
@@ -204,8 +204,8 @@ func TestUninstallCron(t *testing.T) {
 		home := setHome(t)
 		stubCrontab(t, "")
 		stubRun(t)
-		desktop := filepath.Join(home, ".config", "autostart", "9routerx.desktop")
-		writeFile(t, desktop, renderAutostartDesktop("/usr/local/bin/9routerx", nil))
+		desktop := filepath.Join(home, ".config", "autostart", "alyysha.desktop")
+		writeFile(t, desktop, renderAutostartDesktop("/usr/local/bin/alyysha", nil))
 		previousRemove := remove
 		remove = func(string) error { return errors.New("permission denied") }
 		t.Cleanup(func() { remove = previousRemove })
@@ -222,7 +222,7 @@ func TestUninstallCron(t *testing.T) {
 // TestCronLineHasRebootSchedule pins the @reboot schedule and the trailing
 // ownership marker.
 func TestCronLineHasRebootSchedule(t *testing.T) {
-	line := renderCronLine("/usr/local/bin/9routerx", []string{"--rtk=true"})
+	line := renderCronLine("/usr/local/bin/alyysha", []string{"--rtk=true"})
 	if !strings.HasPrefix(line, "@reboot ") {
 		t.Fatalf("cron line = %q, want an @reboot schedule", line)
 	}
@@ -241,7 +241,7 @@ func TestCronLineHasRebootSchedule(t *testing.T) {
 // TestAutostartDesktopIsAValidEntry validates the XDG autostart entry with
 // desktop-file-validate where present, plus the required keys and marker.
 func TestAutostartDesktopIsAValidEntry(t *testing.T) {
-	entry := renderAutostartDesktop("/usr/local/bin/9routerx", []string{"--rtk=true"})
+	entry := renderAutostartDesktop("/usr/local/bin/alyysha", []string{"--rtk=true"})
 
 	section, keys := parseDesktopEntry(t, entry)
 	if section != "Desktop Entry" {
@@ -268,7 +268,7 @@ func TestAutostartDesktopIsAValidEntry(t *testing.T) {
 		t.Logf("desktop-file-validate not installed, structural checks only")
 		return
 	}
-	path := filepath.Join(t.TempDir(), "9routerx.desktop")
+	path := filepath.Join(t.TempDir(), "alyysha.desktop")
 	if err := os.WriteFile(path, []byte(entry), 0o644); err != nil {
 		t.Fatal(err)
 	}

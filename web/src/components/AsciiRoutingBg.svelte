@@ -1,11 +1,11 @@
-<!-- 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
   import { onMount } from 'svelte'
   import { onRoutingBurst } from '../lib/routingBurst'
   import { backgroundAnimation } from '../lib/backgroundAnim.svelte'
 
   /**
-   * "Live Routing Flow" background (TASK-9routerX-anim-bg).
+   * "Live Routing Flow" background (TASK-alyyshaX-anim-bg).
    *
    * One <canvas>, same seeded ASCII routing topology as the old static <pre>
    * (provider-node clusters joined by L-shaped route runs), animated in ONE

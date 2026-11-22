@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package headroom
 
 import (
@@ -13,8 +13,8 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/proxy"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/proxy"
 )
 
 // DefaultTimeoutMs is the default timeout in milliseconds for compression requests,

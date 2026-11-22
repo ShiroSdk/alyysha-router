@@ -4,7 +4,7 @@ order: 1
 section: Getting Started
 ---
 
-# 9RouterX
+# Alyysha Router
 
 **Never stop coding. Save 20-40% tokens with RTK + auto-fallback to FREE & cheap AI models.**
 

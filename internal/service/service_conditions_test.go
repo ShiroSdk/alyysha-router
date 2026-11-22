@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package service
 
 import (
@@ -58,7 +58,7 @@ func TestHomeScopedPathsWithoutHome(t *testing.T) {
 func TestInstallLaunchdWithoutHome(t *testing.T) {
 	stubNoHome(t)
 	stubRun(t)
-	if _, err := installLaunchd("/Applications/9routerx", nil); err == nil {
+	if _, err := installLaunchd("/Applications/alyysha", nil); err == nil {
 		t.Error("installLaunchd() error = nil without a home directory, want error")
 	}
 }
@@ -66,7 +66,7 @@ func TestInstallLaunchdWithoutHome(t *testing.T) {
 func TestInstallSystemdUserWithoutHome(t *testing.T) {
 	stubNoHome(t)
 	stubRun(t)
-	if _, err := installSystemd("/usr/local/bin/9routerx", nil); err == nil {
+	if _, err := installSystemd("/usr/local/bin/alyysha", nil); err == nil {
 		t.Error("installSystemd(user) error = nil without a home directory, want error")
 	}
 	if filepath.IsAbs(userUnitPath()) {
@@ -79,7 +79,7 @@ func TestInstallCronWithoutHomeStillWritesTheCrontab(t *testing.T) {
 	crontab := stubCrontab(t, "")
 	stubRun(t)
 
-	info, err := installCron("/usr/local/bin/9routerx", nil)
+	info, err := installCron("/usr/local/bin/alyysha", nil)
 	if err != nil {
 		t.Fatalf("installCron() error = %v", err)
 	}

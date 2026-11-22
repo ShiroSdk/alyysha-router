@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package daemon
 
 import (
@@ -15,8 +15,8 @@ func TestPortConflictFingerprints(t *testing.T) {
 		kind       GatewayKind
 		hint       bool
 	}{
-		{"X", "<title>9RouterX</title>", GatewayX, true},
-		{"legacy Next", "<title>9Router</title><script src=\"/_next/main.js\"></script>", GatewayLegacy, true},
+		{"X", "<title>Alyysha Router</title>", GatewayX, true},
+		{"legacy Next", "<title>Alyysha</title><script src=\"/_next/main.js\"></script>", GatewayLegacy, true},
 		{"unrelated Next", "<title>Other</title><script src=\"/_next/main.js\"></script>", GatewayUnknown, false},
 		{"unrelated", "hello", GatewayUnknown, false},
 	} {
@@ -24,7 +24,7 @@ func TestPortConflictFingerprints(t *testing.T) {
 			server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { fmt.Fprint(w, tc.body) }))
 			defer server.Close()
 			// HTTP evidence is tested separately from process fallback: this test executable
-			// itself legitimately contains 9routerx in its path.
+			// itself legitimately contains alyysha in its path.
 			got := fingerprintGateway(server.URL)
 			if got != tc.kind {
 				t.Fatalf("kind=%s, want %s", got, tc.kind)
@@ -41,7 +41,7 @@ func TestPortConflictFingerprints(t *testing.T) {
 }
 func TestPortConflictDoesNotFollowExternalRedirect(t *testing.T) {
 	called := false
-	remote := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { called = true; fmt.Fprint(w, "9routerx") }))
+	remote := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { called = true; fmt.Fprint(w, "alyysha") }))
 	defer remote.Close()
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) { http.Redirect(w, r, remote.URL, http.StatusFound) }))
 	defer server.Close()
@@ -66,10 +66,10 @@ func TestProcessGatewayDoesNotClassifyArbitraryArguments(t *testing.T) {
 		p    ProcessInfo
 		want GatewayKind
 	}{
-		{ProcessInfo{Executable: `C:\\bin\\9routerx.exe`}, GatewayX},
-		{ProcessInfo{Executable: `C:\\bin\\node.exe`, CommandLine: `node C:\\apps\\9router\\server.js`}, GatewayLegacy},
-		{ProcessInfo{Executable: `C:\\bin\\python.exe`, CommandLine: `python unrelated.py --notes=9routerx`}, GatewayUnknown},
-		{ProcessInfo{Executable: `C:\\bin\\9routerx.test.exe`}, GatewayUnknown},
+		{ProcessInfo{Executable: `C:\\bin\\alyysha.exe`}, GatewayX},
+		{ProcessInfo{Executable: `C:\\bin\\node.exe`, CommandLine: `node C:\\apps\\alyysha\\server.js`}, GatewayLegacy},
+		{ProcessInfo{Executable: `C:\\bin\\python.exe`, CommandLine: `python unrelated.py --notes=alyysha`}, GatewayUnknown},
+		{ProcessInfo{Executable: `C:\\bin\\alyysha.test.exe`}, GatewayUnknown},
 	} {
 		if got := processGateway(tc.p); got != tc.want {
 			t.Fatalf("%+v: got %s, want %s", tc.p, got, tc.want)

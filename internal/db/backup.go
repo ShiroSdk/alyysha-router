@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package db
 
 import (
@@ -34,7 +34,7 @@ type AutoBackupRemote struct {
 	GithubToken   string `json:"githubToken,omitempty"`   // PAT with contents:write
 	GithubRepo    string `json:"githubRepo,omitempty"`    // owner/name
 	GithubBranch  string `json:"githubBranch,omitempty"`  // default "main"
-	GithubPath    string `json:"githubPath,omitempty"`    // default backups/9routerx-backup.json
+	GithubPath    string `json:"githubPath,omitempty"`    // default backups/alyysha-backup.json
 }
 
 // RemoteKinds are the remote destinations a backup can be pushed to.

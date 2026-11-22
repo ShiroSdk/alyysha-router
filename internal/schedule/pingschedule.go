@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Package schedule holds the anchored ping schedule: the wall-clock slots at
 // which a provider connection is pinged so a fresh quota window starts on time
 // (port of upstream src/shared/services/quotaPingSchedule.js).

@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Guards the bulk-create key planner. The failure this file exists for is a
 // batch that looks right and is not: a dropped machineId, a duplicate name, or
 // a secret that never reached the operator. Ported in spirit from

@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
@@ -7,8 +7,8 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/translator"
 )
 
 // This file pins what can be pinned about the G06–G08 pre-pivot routes today.
@@ -55,7 +55,7 @@ const claudeFixture = `{
 				{
 					"type": "thinking",
 					"thinking": "Calculating 1/0 which triggers division by zero.",
-					"signature": "sig_thought_9router_123"
+					"signature": "sig_thought_alyysha_123"
 				},
 				{
 					"type": "tool_use",
@@ -143,7 +143,7 @@ func TestDirectRoutes_PivotLosesToolErrorState(t *testing.T) {
 
 	// The thinking signature is the other property the pivot cannot carry: the
 	// Chat lane has one reasoning_content string and no field for a signature.
-	if strings.Contains(string(openaiJSON), "sig_thought_9router_123") {
+	if strings.Contains(string(openaiJSON), "sig_thought_alyysha_123") {
 		t.Errorf("the pivot now preserves the thought signature:\n%s", openaiJSON)
 	}
 }

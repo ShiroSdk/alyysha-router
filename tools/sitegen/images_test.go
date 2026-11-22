@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package main
 
 import (
@@ -12,7 +12,7 @@ import (
 	htmltoken "golang.org/x/net/html"
 )
 
-const rawBadge = `<a href="https://trendshift.io/repositories/348263?utm_source=trendshift-badge&amp;utm_medium=badge" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/348263/daily?language=Go" alt="9RouterX | Trendshift" width="250" height="55"/></a>`
+const rawBadge = `<a href="https://trendshift.io/repositories/348263?utm_source=trendshift-badge&amp;utm_medium=badge" target="_blank" rel="noopener noreferrer"><img src="https://trendshift.io/api/badge/trendshift/repositories/348263/daily?language=Go" alt="Alyysha Router | Trendshift" width="250" height="55"/></a>`
 
 func TestRenderRawHTMLImage(t *testing.T) {
 	for _, renderer := range []string{"readme", "wiki"} {
@@ -38,7 +38,7 @@ func TestRenderRawHTMLImage(t *testing.T) {
 				}
 				rendered = string(page.Body)
 			}
-			for _, attr := range []string{`loading="lazy"`, `decoding="async"`, `width="250"`, `height="55"`, `alt="9RouterX | Trendshift"`} {
+			for _, attr := range []string{`loading="lazy"`, `decoding="async"`, `width="250"`, `height="55"`, `alt="Alyysha Router | Trendshift"`} {
 				if !strings.Contains(rendered, attr) {
 					t.Errorf("missing %s in rendered raw image: %s", attr, rendered)
 				}

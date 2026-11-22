@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package providers
 
 import (
@@ -155,7 +155,7 @@ func TestNousAttribution(t *testing.T) {
 			}
 		}
 
-		want := []string{"product=9router", "client=9router", "user=9router"}
+		want := []string{"product=alyysha", "client=alyysha", "user=alyysha"}
 		for _, w := range want {
 			if !slices.Contains(tags, w) {
 				t.Errorf("missing tag %q in %v", w, tags)
@@ -184,22 +184,22 @@ func TestNousAttribution(t *testing.T) {
 			}
 		}
 
-		// product=my-app must be preserved, not overwritten with product=9router
+		// product=my-app must be preserved, not overwritten with product=alyysha
 		if !slices.Contains(tags, "product=my-app") {
 			t.Errorf("expected caller product=my-app preserved, got %v", tags)
 		}
-		if slices.Contains(tags, "product=9router") {
-			t.Errorf("product=9router should not overwrite product=my-app: %v", tags)
+		if slices.Contains(tags, "product=alyysha") {
+			t.Errorf("product=alyysha should not overwrite product=my-app: %v", tags)
 		}
 		if !slices.Contains(tags, "custom=value") {
 			t.Errorf("expected custom=value preserved: %v", tags)
 		}
-		// Empty user= and client= should be cleaned up and filled with 9router defaults
-		if !slices.Contains(tags, "client=9router") {
-			t.Errorf("expected client=9router in %v", tags)
+		// Empty user= and client= should be cleaned up and filled with alyysha defaults
+		if !slices.Contains(tags, "client=alyysha") {
+			t.Errorf("expected client=alyysha in %v", tags)
 		}
-		if !slices.Contains(tags, "user=9router") {
-			t.Errorf("expected user=9router in %v", tags)
+		if !slices.Contains(tags, "user=alyysha") {
+			t.Errorf("expected user=alyysha in %v", tags)
 		}
 		if slices.Contains(tags, "user=") || slices.Contains(tags, "client= ") {
 			t.Errorf("empty tags not removed: %v", tags)

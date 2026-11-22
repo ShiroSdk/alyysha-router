@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package clientconfig
 
 import (
@@ -64,8 +64,8 @@ func TestAdapterS1RoundTrip(t *testing.T) {
 			}
 			for _, f := range paths.Files {
 				got := readFixture(t, f.Path)
-				if n := strings.Count(got, "9router"); n > 0 && id != "kilo" {
-					t.Errorf("%s: Reset left 9router behind:\n%s", f.Purpose, got)
+				if n := strings.Count(got, "alyysha"); n > 0 && id != "kilo" {
+					t.Errorf("%s: Reset left alyysha behind:\n%s", f.Purpose, got)
 				}
 			}
 		})

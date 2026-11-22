@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package usagetracker
 
 import (
@@ -8,9 +8,9 @@ import (
 	"sync"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/translator"
 )
 
 const (
@@ -27,7 +27,7 @@ type ActiveRequest struct {
 	// RequestedModel is the name the client asked for, and ComboName is set
 	// only when a combo served the request. A combo request reports the member
 	// that serves it in Model/Provider, so the dashboard can draw
-	// 9routerx -> combo -> member instead of showing the member as if the
+	// alyysha -> combo -> member instead of showing the member as if the
 	// caller had asked for it by name. ComboName is the explicit signal: the
 	// map must not have to guess which names are combos.
 	RequestedModel string `json:"requestedModel,omitempty"`

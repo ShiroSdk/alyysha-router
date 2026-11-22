@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package service
 
 import (
@@ -51,9 +51,9 @@ func redirectInitPaths(t *testing.T) string {
 	root := t.TempDir()
 	previousOpenRC := openRCServicePath
 	previousRunitDir, previousRunitLink := runitSystemDir, runitSystemLink
-	openRCServicePath = filepath.Join(root, "etc", "init.d", "9routerx")
-	runitSystemDir = filepath.Join(root, "etc", "sv", "9routerx")
-	runitSystemLink = filepath.Join(root, "var", "service", "9routerx")
+	openRCServicePath = filepath.Join(root, "etc", "init.d", "alyysha")
+	runitSystemDir = filepath.Join(root, "etc", "sv", "alyysha")
+	runitSystemLink = filepath.Join(root, "var", "service", "alyysha")
 	t.Cleanup(func() {
 		openRCServicePath = previousOpenRC
 		runitSystemDir, runitSystemLink = previousRunitDir, previousRunitLink

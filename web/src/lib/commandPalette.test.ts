@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 import { describe, expect, it } from 'bun:test'
 import { buildPaletteIndex, resetPaletteIndex, searchPalette } from './commandPalette'
 import { __setProviderCatalogForTest } from './providers'

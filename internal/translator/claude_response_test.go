@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package translator
 
 import (
@@ -98,7 +98,7 @@ func TestTranslateClaudeChunkToOpenAI(t *testing.T) {
 }
 
 func TestTranslateClaudeChunkToOpenAI_Refusal(t *testing.T) {
-	// Port of decolua/9router#4210: a refusal (zero output tokens, no content
+	// Port of decolua/alyysha#4210: a refusal (zero output tokens, no content
 	// blocks) must surface as finish_reason "content_filter" carrying
 	// Anthropic's explanation — not a clean, empty "stop".
 	const explanation = "This request was blocked as it seems to violate Anthropic's Terms of Service restrictions."

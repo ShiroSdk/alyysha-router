@@ -262,10 +262,10 @@ cross-tray-one:
 
 ## icons — regenerate the Windows icon assets from the logo
 #
-# web/public/logo-9routerx.png is the single source. icongen writes the
+# web/public/logo-alyysha.png is the single source. icongen writes the
 # multi-frame .ico (16/24/32/48/64/128/256, 32-bit BGRA + AND mask) into
-# cmd/9routerx-tray/tray.ico (the runtime tray icon, go:embed'd) and
-# cmd/9routerx/icon.ico; go-winres then turns each .ico into an
+# cmd/alyysha-tray/tray.ico (the runtime tray icon, go:embed'd) and
+# cmd/alyysha/icon.ico; go-winres then turns each .ico into an
 # rsrc_windows_amd64.syso resource object. `go build` links a .syso that
 # matches the target GOOS/GOARCH automatically, so BOTH 9routerx.exe and
 # 9routerx-tray.exe carry the new icon with no extra build step.
@@ -276,8 +276,8 @@ cross-tray-one:
 GO_WINRES := go run github.com/tc-hib/go-winres@v0.3.3
 
 icons:
-	go run ./tools/icongen make web/public/logo-9routerx.png cmd/9routerx-tray/tray.ico
-	go run ./tools/icongen make web/public/logo-9routerx.png cmd/9routerx/icon.ico
+	go run ./tools/icongen make web/public/logo-alyysha.png cmd/alyysha-tray/tray.ico
+	go run ./tools/icongen make web/public/logo-alyysha.png cmd/alyysha/icon.ico
 	cd cmd/9routerx && $(GO_WINRES) make --in winres/winres.json --arch amd64 --out rsrc
 	cd cmd/9routerx-tray && $(GO_WINRES) make --in winres/winres.json --arch amd64 --out rsrc
 
@@ -319,7 +319,7 @@ clean:
 
 ## help — show targets
 	help:
-	@echo "9RouterX — Makefile targets:"
+	@echo "Alyysha Router — Makefile targets:"
 	@grep -E '^## ' Makefile | sed 's/## /  make /' | sed 's/ — /  /'
 	@echo ""
 	@echo "Options:"

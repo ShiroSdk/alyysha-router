@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package providers
 
 import (
@@ -38,7 +38,7 @@ func nodePlatformVersion() string {
 }
 
 // ClineIdentityHeaders is the port of upstream buildClineHeaders
-// (open-sse/shared/clineAuth.js) — the identity 9router presents to
+// (open-sse/shared/clineAuth.js) — the identity alyysha presents to
 // api.cline.bot. Platform values are the Go runtime's own. version is
 // passed in (never imported): providers cannot import the version owner
 // without an import cycle (db → providers → updater → daemon → auth → db),
@@ -47,10 +47,10 @@ func ClineIdentityHeaders(version string, extra map[string]string) map[string]st
 	headers := map[string]string{
 		"HTTP-Referer":       "https://cline.bot",
 		"X-Title":            "Cline",
-		"User-Agent":         "9Router/" + version,
+		"User-Agent":         "Alyysha/" + version,
 		"X-PLATFORM":         nodePlatform(),
 		"X-PLATFORM-VERSION": nodePlatformVersion(),
-		"X-CLIENT-TYPE":      "9router",
+		"X-CLIENT-TYPE":      "alyysha",
 		"X-CLIENT-VERSION":   version,
 		"X-CORE-VERSION":     version,
 		"X-IS-MULTIROOT":     "false",

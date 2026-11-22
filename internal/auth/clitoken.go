@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package auth
 
 import (
@@ -10,8 +10,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"9routerx/proxy/internal/config"
-	"9routerx/proxy/internal/constants"
+	"alyysha/proxy/internal/config"
+	"alyysha/proxy/internal/constants"
 )
 
 // cliAuthSalt mirrors upstream's CLI_TOKEN_SALT ("9r-cli-auth") in

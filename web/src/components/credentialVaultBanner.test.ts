@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // The credential-encryption banner is the only surface that tells an operator
 // their credentials are being written unencrypted, and after the
 // ROUTER_MASTER_KEY docs landed its "How to set it" link is the only
@@ -38,7 +38,7 @@ describe('credential encryption banner contract', () => {
   })
 
   it('links "How to set it" to the README credential-encryption anchor', () => {
-    const anchor = 'https://yanstd888.github.io/9routerx/readme.html#credential-encryption'
+    const anchor = 'https://ShiroSdk.github.io/alyysha/readme.html#credential-encryption'
     expect(component).toContain(`href="${anchor}"`)
     expect(component).toContain('rel="noopener noreferrer"')
     expect(component).toContain('>How to set it</a>')

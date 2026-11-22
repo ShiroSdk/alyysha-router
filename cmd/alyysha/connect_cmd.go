@@ -1,11 +1,11 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package main
 
 import (
 	"fmt"
 	"strings"
 
-	"9routerx/proxy/internal/clientconfig"
+	"alyysha/proxy/internal/clientconfig"
 
 	"github.com/urfave/cli/v2"
 )
@@ -62,7 +62,7 @@ func maskConnectValue(v string) string {
 	return v[:4] + strings.Repeat("*", len(v)-8) + v[len(v)-4:]
 }
 
-// newConnectCommand builds the `9routerx connect <client>` command: it patches
+// newConnectCommand builds the `alyysha connect <client>` command: it patches
 // the named AI client's config to point at this gateway — endpoint, credential
 // and default model only, never anything else (the hooks guard refuses a
 // payload that carries more).
@@ -87,12 +87,12 @@ func newConnectCommand() *cli.Command {
 func runConnect(cCtx *cli.Context) error {
 	clientName := cCtx.Args().First()
 	if clientName == "" {
-		return fmt.Errorf("connect: name the client to configure (try `9routerx connect --help`)")
+		return fmt.Errorf("connect: name the client to configure (try `alyysha connect --help`)")
 	}
 	adapter, err := clientconfig.Resolve(clientName)
 	if err != nil {
 		// The registry knows the nine names; a typo lands here.
-		return fmt.Errorf("connect: unknown client %q — known clients are listed in `9routerx connect --help`", clientName)
+		return fmt.Errorf("connect: unknown client %q — known clients are listed in `alyysha connect --help`", clientName)
 	}
 
 	opts := connectOptionsFromFlags(cCtx)

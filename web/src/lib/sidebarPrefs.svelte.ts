@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 // The two sidebar layout preferences, mirrored for the components that read
 // them outside the Settings panel: the sidebar draws the Pinned section and the
 // icon rail, and the Settings switch writes both.

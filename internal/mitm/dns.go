@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package mitm
 
 import (
@@ -52,14 +52,14 @@ func AddHostsEntries() error {
 	return c.Run()
 }
 
-// RemoveHostsEntries removes /etc/hosts entries added by 9router.
+// RemoveHostsEntries removes /etc/hosts entries added by alyysha.
 func RemoveHostsEntries() error {
 	if runtime.GOOS == "windows" {
 		return fmt.Errorf("Windows MITM not yet supported")
 	}
-	args := []string{"sed", "-i", "-e", "/# 9router-mitm/d"}
+	args := []string{"sed", "-i", "-e", "/# alyysha-mitm/d"}
 	if runtime.GOOS == "darwin" {
-		args = []string{"sed", "-i", "", "-e", "/# 9router-mitm/d"}
+		args = []string{"sed", "-i", "", "-e", "/# alyysha-mitm/d"}
 	}
 	args = append(args, "/etc/hosts")
 	return exec.Command("sudo", args...).Run()
@@ -77,10 +77,10 @@ func CheckDNSStatus() (map[string]bool, error) {
 
 func hostsEntries() string {
 	var b strings.Builder
-	b.WriteString("\n# 9router-mitm\n")
+	b.WriteString("\n# alyysha-mitm\n")
 	for _, d := range AllDomains() {
 		b.WriteString(fmt.Sprintf("127.0.0.1 %s\n", d))
 	}
-	b.WriteString("# end 9router-mitm\n")
+	b.WriteString("# end alyysha-mitm\n")
 	return b.String()
 }

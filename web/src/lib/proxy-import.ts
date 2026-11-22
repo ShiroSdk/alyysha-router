@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Port of parseProxyLine from upstream
 // src/app/(dashboard)/dashboard/proxy-pools/page.js.
 // Supported batch-import line formats:

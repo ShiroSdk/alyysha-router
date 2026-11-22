@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package db
 
 import (
@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/analyticsrange"
+	"alyysha/proxy/internal/analyticsrange"
 )
 
 // The window is the contract these analytics report against: every card, every

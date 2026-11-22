@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // The provider catalog is served by GET /api/providers/catalog, which reads the
 // Go registry in internal/providers. The dashboard used to ship a second copy
 // of this data as a TypeScript literal, so a provider added to one and not the

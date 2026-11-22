@@ -1,6 +1,6 @@
-<!-- 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
-  // Port of decolua/9router src/shared/components/Button.js
+  // Port of decolua/alyysha src/shared/components/Button.js
   import type { Snippet } from 'svelte'
 
   type Variant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'quiet' | 'danger' | 'success'

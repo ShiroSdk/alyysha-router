@@ -1,4 +1,4 @@
-<!-- 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
   // Lazy wrapper for the dashboard's large tab views: the view module is a
   // dynamic import, so each heavy view lands in its own async chunk instead

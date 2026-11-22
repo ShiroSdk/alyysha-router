@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package executor
 
 import (
@@ -15,9 +15,9 @@ import (
 	"sync"
 	"time"
 
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/proxy"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/proxy"
 )
 
 // chat.deepseek.com's web client API, ported from OmniRoute

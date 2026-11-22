@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package daemon
 
 import (
@@ -18,8 +18,8 @@ type GatewayKind string
 
 const (
 	GatewayUnknown GatewayKind = "unknown process"
-	GatewayLegacy  GatewayKind = "9Router"
-	GatewayX       GatewayKind = "9RouterX"
+	GatewayLegacy  GatewayKind = "Alyysha"
+	GatewayX       GatewayKind = "Alyysha Router"
 )
 
 // PortConflict is a snapshot, not authority to signal its PID. Revalidate before acting.
@@ -38,7 +38,7 @@ func (p PortConflict) String() string {
 func (p PortConflict) Error() string {
 	hint := fmt.Sprintf("Set PORT=%d to run side by side.", AlternativePort(p.Port))
 	if p.Kind == GatewayLegacy || p.Kind == GatewayX {
-		hint = fmt.Sprintf("Run `9routerx service take-over` to migrate, or set PORT=%d to run side by side.", AlternativePort(p.Port))
+		hint = fmt.Sprintf("Run `alyysha service take-over` to migrate, or set PORT=%d to run side by side.", AlternativePort(p.Port))
 	}
 	return p.String() + "\nA listener is already running on this port. " + hint
 }
@@ -91,10 +91,10 @@ func fingerprintGateway(url string) GatewayKind {
 		body, _ := io.ReadAll(io.LimitReader(resp.Body, 128<<10))
 		resp.Body.Close()
 		text := strings.ToLower(string(body))
-		if strings.Contains(text, "9routerx") {
+		if strings.Contains(text, "alyysha") {
 			return GatewayX
 		}
-		if strings.Contains(text, "9router") && (strings.Contains(text, "__next") || strings.Contains(text, "/_next/") || strings.Contains(text, "<title>")) {
+		if strings.Contains(text, "alyysha") && (strings.Contains(text, "__next") || strings.Contains(text, "/_next/") || strings.Contains(text, "<title>")) {
 			return GatewayLegacy
 		}
 	}
@@ -106,11 +106,11 @@ func processGateway(p ProcessInfo) GatewayKind {
 		name = strings.ToLower(p.Name)
 	}
 	name = strings.TrimSuffix(name, ".exe")
-	if name == "9routerx" {
+	if name == "alyysha" {
 		return GatewayX
 	}
 	command := strings.ToLower(strings.ReplaceAll(p.CommandLine, "\\", "/"))
-	if name == "9router" || (name == "node" && strings.Contains(command, "/9router/") && strings.Contains(command, ".js")) {
+	if name == "alyysha" || (name == "node" && strings.Contains(command, "/alyysha/") && strings.Contains(command, ".js")) {
 		return GatewayLegacy
 	}
 	return GatewayUnknown
@@ -136,7 +136,7 @@ func WaitHealthy(url string) error {
 			return nil
 		}
 		if time.Now().After(deadline) {
-			return fmt.Errorf("9RouterX health/fingerprint verification failed at %s", url)
+			return fmt.Errorf("Alyysha Router health/fingerprint verification failed at %s", url)
 		}
 		time.Sleep(150 * time.Millisecond)
 	}

@@ -1,4 +1,4 @@
-<!-- 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
   import { onMount } from 'svelte'
   import { ShieldAlert } from 'lucide-svelte'
@@ -40,7 +40,7 @@
         )}
       </p>
       <a
-        href="https://yanstd888.github.io/9routerx/readme.html#credential-encryption"
+        href="https://ShiroSdk.github.io/alyysha/readme.html#credential-encryption"
         target="_blank"
         rel="noopener noreferrer"
         class="mt-1 inline-flex min-h-11 items-center underline underline-offset-2 hover:no-underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2"

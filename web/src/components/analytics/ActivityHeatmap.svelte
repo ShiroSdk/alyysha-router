@@ -1,4 +1,4 @@
-<!-- 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
   // GitHub-style activity heatmap for the Details section (issue #280): a
   // trailing-12-month grid of daily request counts, ported from

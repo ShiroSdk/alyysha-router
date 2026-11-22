@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 // Command changelog-merge folds the pending per-PR fragments in .changes/ into
 // CHANGELOG.md under a new version heading, then empties the folder.
 //
@@ -19,7 +19,7 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/changelogfrag"
+	"alyysha/proxy/internal/changelogfrag"
 )
 
 func main() {

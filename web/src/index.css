@@ -1,4 +1,4 @@
-/* 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id */
+/* Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers */
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn-svelte/tailwind.css";
@@ -10,7 +10,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*
- * 9RouterX design tokens — glyph edition.
+ * Alyysha Router design tokens — glyph edition.
  *
  * DARK is the shipped default (`<html class="dark">` in index.html); the
  * `.dark` block rebinds every token to the glyph dark palette. LIGHT is the
@@ -1352,7 +1352,7 @@ body {
 }
 
 /*
- * 9RouterX glyph dashboard reskin — FASE UI-GLEPH commit 3 (spec TASK-9routerX-ui-glyph.md §4).
+ * Alyysha Router glyph dashboard reskin — FASE UI-GLEPH commit 3 (spec TASK-9routerX-ui-glyph.md §4).
  *
  * Skin only: nothing here changes behaviour. Every rule restyles markup that
  * already exists — Card.svelte carries `.glyph-surface`, the usage tables carry

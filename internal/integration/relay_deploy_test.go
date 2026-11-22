@@ -1,6 +1,6 @@
 //go:build integration
 
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package integration
 
 import (
@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/auth"
+	"alyysha/proxy/internal/auth"
 )
 
 // TestRelayDeployRoutesAcceptDashboardSession pins that the four relay-deploy

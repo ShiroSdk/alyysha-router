@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package main
 
 import (
@@ -9,7 +9,7 @@ import (
 )
 
 func TestBlobURL(t *testing.T) {
-	const repo = "yanstd888/9routerx"
+	const repo = "ShiroSdk/alyysha-router"
 
 	tests := []struct {
 		name string
@@ -19,17 +19,17 @@ func TestBlobURL(t *testing.T) {
 		{
 			name: "repository markdown becomes a blob url",
 			dest: "DATABASE.md",
-			want: "https://github.com/yanstd888/9routerx/blob/main/DATABASE.md",
+			want: "https://github.com/ShiroSdk/alyysha-router/blob/main/DATABASE.md",
 		},
 		{
 			name: "nested path is preserved",
 			dest: "docs/TELEGRAM_RELEASE_NOTIFICATIONS.md",
-			want: "https://github.com/yanstd888/9routerx/blob/main/docs/TELEGRAM_RELEASE_NOTIFICATIONS.md",
+			want: "https://github.com/ShiroSdk/alyysha-router/blob/main/docs/TELEGRAM_RELEASE_NOTIFICATIONS.md",
 		},
 		{
 			name: "fragment survives",
 			dest: "docs/DATABASE.md#migration",
-			want: "https://github.com/yanstd888/9routerx/blob/main/docs/DATABASE.md#migration",
+			want: "https://github.com/ShiroSdk/alyysha-router/blob/main/docs/DATABASE.md#migration",
 		},
 		{
 			name: "heading anchor is left alone",
@@ -38,8 +38,8 @@ func TestBlobURL(t *testing.T) {
 		},
 		{
 			name: "absolute url is left alone",
-			dest: "https://github.com/decolua/9router",
-			want: "https://github.com/decolua/9router",
+			dest: "https://github.com/decolua/alyysha",
+			want: "https://github.com/decolua/alyysha",
 		},
 		{
 			name: "scheme relative url is left alone",
@@ -149,8 +149,8 @@ func TestGenerate(t *testing.T) {
 	}
 	writeFixture(t, filepath.Join(assets, "style.css"), "body{}")
 	writeFixture(t, filepath.Join(assets, "tg.html"), "<a href=\"tg\">tg</a>")
-	writeFixture(t, filepath.Join(assets, "logo-9routerx-128.png"), "logo-bytes")
-	writeFixture(t, filepath.Join(assets, "llms.txt"), "# 9RouterX\n")
+	writeFixture(t, filepath.Join(assets, "logo-alyysha-128.png"), "logo-bytes")
+	writeFixture(t, filepath.Join(assets, "llms.txt"), "# Alyysha Router\n")
 
 	shot := filepath.Join(root, "docs", "screenshots", "providers.png")
 	if err := os.MkdirAll(filepath.Dir(shot), 0o755); err != nil {
@@ -161,7 +161,7 @@ func TestGenerate(t *testing.T) {
 	out := filepath.Join(root, "_site")
 	// Non-zero stats: the hero must render the numbers it is given, so the
 	// live-numbers strip is exercised here with known values.
-	if err := generate(readme, assets, out, "yanstd888/9routerx", heroStats{Version: "9.9.9", Providers: 123, WikiPages: 7}); err != nil {
+	if err := generate(readme, assets, out, "ShiroSdk/alyysha-router", heroStats{Version: "9.9.9", Providers: 123, WikiPages: 7}); err != nil {
 		t.Fatalf("generate: %v", err)
 	}
 
@@ -172,7 +172,7 @@ func TestGenerate(t *testing.T) {
 		"tg.html",
 		"tg/index.html",
 		"llms.txt",
-		"logo-9routerx-128.png",
+		"logo-alyysha-128.png",
 		filepath.FromSlash("docs/screenshots/providers.png"),
 	} {
 		if _, err := os.Stat(filepath.Join(out, rel)); err != nil {
@@ -187,7 +187,7 @@ func TestGenerate(t *testing.T) {
 	if strings.Contains(page, `<article id="readme"`) {
 		t.Error("index.html still embeds the README; the landing is pure design now")
 	}
-	if strings.Contains(page, `href="https://github.com/yanstd888/9routerx/blob/main/docs/DATABASE.md"`) {
+	if strings.Contains(page, `href="https://github.com/ShiroSdk/alyysha-router/blob/main/docs/DATABASE.md"`) {
 		t.Error("index.html carries README body content")
 	}
 	if got := strings.Count(page, `href="readme.html"`); got < 3 {
@@ -198,7 +198,7 @@ func TestGenerate(t *testing.T) {
 	// injected, its own H1 kept.
 	article := readFile(t, filepath.Join(out, "readme.html"))
 	for _, want := range []string{
-		`href="https://github.com/yanstd888/9routerx/blob/main/docs/DATABASE.md"`,
+		`href="https://github.com/ShiroSdk/alyysha-router/blob/main/docs/DATABASE.md"`,
 		`src="docs/screenshots/providers.png"`,
 		`src="https://img.shields.io/badge/build-passing-green"`,
 		`<h1 id="title">Title</h1>`,
@@ -248,10 +248,10 @@ func TestGenerateFailsOnMissingImage(t *testing.T) {
 	}
 	writeFixture(t, filepath.Join(assets, "style.css"), "body{}")
 	writeFixture(t, filepath.Join(assets, "tg.html"), "<a></a>")
-	writeFixture(t, filepath.Join(assets, "logo-9routerx-128.png"), "logo-bytes")
-	writeFixture(t, filepath.Join(assets, "llms.txt"), "# 9RouterX\n")
+	writeFixture(t, filepath.Join(assets, "logo-alyysha-128.png"), "logo-bytes")
+	writeFixture(t, filepath.Join(assets, "llms.txt"), "# Alyysha Router\n")
 
-	err := generate(readme, assets, filepath.Join(root, "_site"), "yanstd888/9routerx", heroStats{})
+	err := generate(readme, assets, filepath.Join(root, "_site"), "ShiroSdk/alyysha-router", heroStats{})
 	if err == nil {
 		t.Fatal("generate() succeeded with a missing image, want an error")
 	}
@@ -302,14 +302,14 @@ func TestCopyIcons(t *testing.T) {
 
 	// One icon short of the set — say, a rename in web/public that did not
 	// reach the generator — must stop the build with the file named.
-	if err := os.Remove(filepath.Join(icons, "logo-9routerx.png")); err != nil {
+	if err := os.Remove(filepath.Join(icons, "logo-alyysha.png")); err != nil {
 		t.Fatalf("Remove: %v", err)
 	}
 	err := copyIcons(icons, filepath.Join(root, "_site-2"))
 	if err == nil {
 		t.Fatal("copyIcons() succeeded with a missing icon, want an error")
 	}
-	if !strings.Contains(err.Error(), "logo-9routerx.png") {
+	if !strings.Contains(err.Error(), "logo-alyysha.png") {
 		t.Errorf("error does not name the missing icon: %v", err)
 	}
 }
@@ -338,15 +338,15 @@ func TestPageTemplateChrome(t *testing.T) {
 		t.Errorf("page head is missing og:image with the absolute logo URL %s", ogImageURL)
 	}
 
-	// Title and wordmark carry the brand spelling: "9RouterX", capital R and
+	// Title and wordmark carry the brand spelling: "Alyysha Router", capital R and
 	// capital X — the owner's original complaint was the lowercase wordmark.
-	if !strings.Contains(pageTemplate, "<title>9RouterX — ") {
-		t.Errorf("the document title does not start with the brand spelling: %q", "9RouterX — ")
+	if !strings.Contains(pageTemplate, "<title>Alyysha Router — ") {
+		t.Errorf("the document title does not start with the brand spelling: %q", "Alyysha Router — ")
 	}
-	if !strings.Contains(pageTemplate, `<span>9RouterX</span>`) {
-		t.Error("the wordmark text is not the capitalized brand spelling 9RouterX")
+	if !strings.Contains(pageTemplate, `<span>Alyysha Router</span>`) {
+		t.Error("the wordmark text is not the capitalized brand spelling Alyysha Router")
 	}
-	if !strings.Contains(pageTemplate, `src="logo-9routerx-128.png"`) {
+	if !strings.Contains(pageTemplate, `src="logo-alyysha-128.png"`) {
 		t.Error("the masthead does not use the real 128px logo asset")
 	}
 	if strings.Contains(pageTemplate, `wordmark-mark" style="background:`) {
@@ -432,7 +432,7 @@ func TestPageTemplateChrome(t *testing.T) {
 
 	// The masthead logo obeys it too — the lazy assert in pages.yml counts
 	// every <img> on every page, masthead included.
-	logoAt := strings.Index(pageTemplate, `src="logo-9routerx-128.png"`)
+	logoAt := strings.Index(pageTemplate, `src="logo-alyysha-128.png"`)
 	if logoAt < 0 {
 		t.Fatal("the masthead has no logo")
 	}

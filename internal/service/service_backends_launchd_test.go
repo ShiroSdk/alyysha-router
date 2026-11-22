@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package service
 
 import (
@@ -16,7 +16,7 @@ func TestInstallLaunchdWritesPlistAndLoads(t *testing.T) {
 	home := setHome(t)
 	calls := stubRun(t)
 
-	info, err := installLaunchd("/Applications/9routerx", []string{"--rtk=true"})
+	info, err := installLaunchd("/Applications/alyysha", []string{"--rtk=true"})
 	if err != nil {
 		t.Fatalf("installLaunchd() error = %v", err)
 	}
@@ -45,7 +45,7 @@ func TestInstallLaunchdLoadFailure(t *testing.T) {
 		return "", nil
 	})
 
-	info, err := installLaunchd("/Applications/9routerx", nil)
+	info, err := installLaunchd("/Applications/alyysha", nil)
 	if err == nil {
 		t.Fatal("installLaunchd() error = nil, want error when load fails")
 	}
@@ -65,7 +65,7 @@ func TestStatusLaunchd(t *testing.T) {
 	t.Run("plist present and job listed", func(t *testing.T) {
 		home := setHome(t)
 		writeFile(t, filepath.Join(home, "Library", "LaunchAgents", launchdLabel+".plist"), "<plist/>")
-		stubRunFunc(t, func(string, ...string) (string, error) { return launchdLabel + "\t0\tcom.9router.gateway", nil })
+		stubRunFunc(t, func(string, ...string) (string, error) { return launchdLabel + "\t0\tcom.alyysha.gateway", nil })
 
 		info, ok := statusLaunchd()
 		if !ok {
@@ -176,7 +176,7 @@ func TestControlLaunchd(t *testing.T) {
 // TestLaunchdPlistRoundTripsThroughXMLParser checks the plist is well-formed and
 // that args with &, <, > and quotes decode back byte for byte.
 func TestLaunchdPlistRoundTripsThroughXMLParser(t *testing.T) {
-	exe := "/Applications/9routerx"
+	exe := "/Applications/alyysha"
 	args := []string{"--rtk=true", "--name=A & B <c> \"d\""}
 	dict, version := parseLaunchdPlist(t, renderLaunchdPlist(exe, args))
 
@@ -205,7 +205,7 @@ func TestLaunchdPlistRoundTripsThroughXMLParser(t *testing.T) {
 // skipped where neither exists.
 func TestLaunchdPlistAcceptedByValidator(t *testing.T) {
 	path := filepath.Join(t.TempDir(), "agent.plist")
-	plist := renderLaunchdPlist("/Applications/9routerx", []string{"--rtk=true", "--name=A & B"})
+	plist := renderLaunchdPlist("/Applications/alyysha", []string{"--rtk=true", "--name=A & B"})
 	if err := os.WriteFile(path, []byte(plist), 0o644); err != nil {
 		t.Fatal(err)
 	}

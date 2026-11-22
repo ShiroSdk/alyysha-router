@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package browserlogin
 
 // Generic per-provider web-login configuration (weblogin_config.go): one
@@ -76,7 +76,7 @@ var webLoginConfigs = map[string]WebLoginConfig{
 		PersistentProfile: true,
 	},
 	"muse-web": {
-		// 9RouterX's muse-web is Baidu Yiyan (yiyan.baidu.com, BDUSS) — not
+		// Alyysha Router's muse-web is Baidu Yiyan (yiyan.baidu.com, BDUSS) — not
 		// muse.ai, and not the upstream's Meta AI muse entry.
 		ProviderID:   "muse-web",
 		LoginURL:     "https://yiyan.baidu.com/",

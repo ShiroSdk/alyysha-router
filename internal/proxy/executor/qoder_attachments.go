@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package executor
 
 import (
@@ -17,7 +17,7 @@ import (
 
 	"github.com/google/uuid"
 
-	"9routerx/proxy/internal/proxy"
+	"alyysha/proxy/internal/proxy"
 )
 
 // Qoder attachment rewrite & OSS image upload — port of
@@ -26,7 +26,7 @@ import (
 // Native qodercli does NOT stuff image/PDF bytes into agent_chat_generation.
 // It PUTs them to /algo/api/v2/image/upload (COSY-signed multipart) and then
 // sends the returned OSS URL. Agents like Claude Code send OpenAI/Claude
-// data-URIs instead, which upstream 9router previously forwarded verbatim —
+// data-URIs instead, which upstream alyysha previously forwarded verbatim —
 // 10MB images become 30MB+ JSON and upstream 413s even though the model window
 // is ~200k tokens.
 //
@@ -103,7 +103,7 @@ func qoderStubText(name, mime string, sizeBytes int, reason string) string {
 }
 
 func qoderBuildMultipartFile(data []byte, fileName, mediaType string) (string, []byte) {
-	boundary := fmt.Sprintf("----9routerQoder%x%s", time.Now().UnixNano(), uuid.NewString()[:8])
+	boundary := fmt.Sprintf("----alyyshaQoder%x%s", time.Now().UnixNano(), uuid.NewString()[:8])
 	if fileName == "" {
 		fileName = "upload." + qoderMimeExt(mediaType)
 	}

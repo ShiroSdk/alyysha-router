@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // The command palette's search index: every model, provider, sidebar entry and
 // settings section the dashboard can open, flattened into one list of rows.
 //

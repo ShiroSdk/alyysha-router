@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package main
 
 import "strings"
@@ -106,18 +106,18 @@ func iconSVG(name string) string {
 
 // headingIcons maps every current README section id to its inline icon.
 var headingIcons = map[string]string{
-	"why-9routerx":                    "help-circle",
+	"why-alyysha":                    "help-circle",
 	"system-architecture":             "layers",
 	"key-features":                    "lightbulb",
 	"quick-start":                     "zap",
-	"sharing-a-database-with-9router": "database",
+	"sharing-a-database-with-alyysha": "database",
 	"screenshots":                     "camera",
 	"supported-ai-coding-clients":     "monitor",
 	"free-ai-providers-and-keyless-models-catalog": "gift",
 	"provider-categories-breakdown-154-providers":  "globe",
 	"embedded-dashboard-overview":                  "monitor",
 	"setup-guide-summary-and-wiki-documentation":   "settings",
-	"9routerx-vs-9router-vs-omniroute":             "arrow-left-right",
+	"alyysha-vs-alyysha-vs-omniroute":             "arrow-left-right",
 	"architecture-comparison":                      "compass",
 	"credential-encryption":                        "lock",
 	"claude-web-unofficial-opt-in":                 "cloud",

@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package providers
 
 import (
@@ -9,7 +9,7 @@ import (
 // Grok 4.7 has a 500k window like 4.6, but had no pattern row of its own, so
 // it fell through to the *grok-4* catch-all and the 128000/4096 limit floor.
 // Combos report the smallest member window and history trimming cuts at 80%
-// of it (upstream decolua/9router b0655314).
+// of it (upstream decolua/alyysha b0655314).
 
 func TestGrok47ContextWindow(t *testing.T) {
 	for _, provider := range []string{"xai", "grok-cli", "opencode-go", "tokenharbor"} {

@@ -1,8 +1,8 @@
-<!-- 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
   // Same six KPIs and the same data flow the panel always had; the visual is
   // now the tremor-style KpiCard (/* adapted from tremor (Apache-2.0) */) on
-  // the shadcn foundation (TASK-9routerX-shadcn-dashboard §1). The optional
+  // the shadcn foundation (TASK-alyyshaX-shadcn-dashboard §1). The optional
   // `trend` series (the usage chart buckets the parent already reads) is the
   // only delta/sparkline source: badges render only where a series honestly
   // exists — the API exposes no per-bucket in/out split, so the token cards

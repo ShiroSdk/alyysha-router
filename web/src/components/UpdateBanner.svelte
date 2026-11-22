@@ -1,4 +1,4 @@
-<!-- 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
   import { onMount } from 'svelte'
   import { api, type UpdateCheckResponse } from '../api/client'
@@ -12,19 +12,19 @@
   } from '../lib/updateBanner'
 
   /**
-   * Update banner (TASK-9routerX updater A): renders when the cached
+   * Update banner (TASK-alyyshaX updater A): renders when the cached
    * /api/update/check reports a newer release AND the operator has not
    * skipped that version. One check per dashboard session — the component
    * mounts once in the app shell, and the server answers from its cache.
    *
    * Channel behaviors (docs/updater-contract.md):
    *  - binary → "Update now" opens the release page (only ever a
-   *    github.com/yanstd888 URL) and shows the per-OS asset name + checksum.
+   *    github.com/ShiroSdk URL) and shows the per-OS asset name + checksum.
    *  - npm → the static upgrade command with a copy button.
    *  - dev → information plus the release link.
    *
    * There is deliberately NO auto-download and NO self-replace here — the
-   * banner is information only; `9routerx update` (UpdateModal) stays the
+   * banner is information only; `alyysha update` (UpdateModal) stays the
    * install path. Remote strings (notes, versions, URLs) render as escaped
    * text; nothing from the release feed is ever HTML.
    */

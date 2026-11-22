@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -11,7 +11,7 @@ import (
 	"slices"
 	"testing"
 
-	"9routerx/proxy/internal/combos/smart"
+	"alyysha/proxy/internal/combos/smart"
 )
 
 // seedSmartNode inserts a custom provider node, a connection for it and one

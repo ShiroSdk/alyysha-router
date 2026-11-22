@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/auth"
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/auth"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 // TOTP 2FA (E2): the settings endpoints manage the enrollment, and the login
@@ -62,7 +62,7 @@ func (h *DashboardHandler) HandleTOTPStatus(w http.ResponseWriter, r *http.Reque
 // secret + otpauth URI and stages it (not enabled yet) until the first code
 // verifies.
 func (h *DashboardHandler) HandleTOTPEnrollStart(w http.ResponseWriter, r *http.Request) {
-	secret, uri, err := auth.GenerateTOTPSecret("dashboard-owner", "9RouterX")
+	secret, uri, err := auth.GenerateTOTPSecret("dashboard-owner", "Alyysha Router")
 	if err != nil {
 		handlerutil.WriteJSONError(w, http.StatusInternalServerError, err.Error())
 		return

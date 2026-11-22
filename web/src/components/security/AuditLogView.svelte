@@ -1,4 +1,4 @@
-<!-- 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
   import { onMount } from 'svelte'
   import { getAuthHeaders } from '../../api/client'
@@ -65,7 +65,7 @@
       const url = URL.createObjectURL(await res.blob())
       const a = document.createElement('a')
       a.href = url
-      a.download = `9routerx-audit-${new Date().toISOString().slice(0, 10)}.csv`
+      a.download = `alyysha-audit-${new Date().toISOString().slice(0, 10)}.csv`
       a.click()
       URL.revokeObjectURL(url)
     } catch (err) {

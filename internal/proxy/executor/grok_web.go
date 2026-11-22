@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package executor
 
 import (
@@ -16,8 +16,8 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/proxy"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/proxy"
 )
 
 // grok.com's web chat, ported from upstream open-sse/executors/grok-web.js

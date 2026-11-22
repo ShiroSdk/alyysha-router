@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package media
 
 import (
@@ -13,13 +13,13 @@ import (
 
 	"github.com/google/uuid"
 
-	"9routerx/proxy/internal/handlers/chat"
-	"9routerx/proxy/internal/middleware"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/models"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/usagetracker"
+	"alyysha/proxy/internal/handlers/chat"
+	"alyysha/proxy/internal/middleware"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/models"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/usagetracker"
 )
 
 // Codex has no image endpoint of its own: its image models are Responses-API

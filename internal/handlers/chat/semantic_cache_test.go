@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package chat
 
 import (
@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/semanticcache"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/semanticcache"
+	"alyysha/proxy/internal/translator"
 )
 
 func TestChatHandler_SemanticCacheHit(t *testing.T) {

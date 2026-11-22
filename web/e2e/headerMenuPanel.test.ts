@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 /**
  * Every menu panel in this dashboard is `position: fixed` and placed against its
  * trigger's measured rect. The top bar's `<header>` carries `backdrop-blur-xl`,

@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package main
 
 import (
@@ -191,7 +191,7 @@ func TestGenerateWiki(t *testing.T) {
 		t.Fatalf("MkdirAll(out): %v", err)
 	}
 
-	if err := generateWiki(wiki, out, "yanstd888/9routerx"); err != nil {
+	if err := generateWiki(wiki, out, "ShiroSdk/alyysha-router"); err != nil {
 		t.Fatalf("generateWiki: %v", err)
 	}
 
@@ -314,7 +314,7 @@ func TestTeamPageCreditsEveryContributor(t *testing.T) {
 	}
 	body := teamMarkdown
 
-	// 25 people: the owner plus 24 contributors (including the original 9router-go
+	// 25 people: the owner plus 24 contributors (including the original alyysha-go
 	// author, credited). The bot account is deliberately excluded — not a person.
 	if got := strings.Count(body, `class="contrib-card`); got != 25 {
 		t.Errorf("got %d contributor cards, want 25", got)
@@ -357,7 +357,7 @@ func TestTeamPageCreditsEveryContributor(t *testing.T) {
 
 // The theme switcher is the wiki's first hand-written control that persists a
 // choice, so its contract is the same one the dashboard's toggle already keeps:
-// a light/dark class on <html>, and the "9router-theme" key in localStorage.
+// a light/dark class on <html>, and the "alyysha-theme" key in localStorage.
 // A second key or a second class name would mean a reader's choice applies in
 // one surface and is silently ignored in the other.
 func TestThemeSwitcherUsesTheDashboardContract(t *testing.T) {
@@ -386,7 +386,7 @@ func TestThemeSwitcherUsesTheDashboardContract(t *testing.T) {
 
 	// The stored value must be applied before the first paint, in <head>.
 	headScript := wikiTemplate[:strings.Index(wikiTemplate, "<body")]
-	if !strings.Contains(headScript, `localStorage.getItem("9router-theme")`) {
+	if !strings.Contains(headScript, `localStorage.getItem("alyysha-theme")`) {
 		t.Error("the head does not read the stored theme, so a dark reader gets a light flash on load")
 	}
 	if !strings.Contains(headScript, `classList.toggle("dark"`) {
@@ -394,7 +394,7 @@ func TestThemeSwitcherUsesTheDashboardContract(t *testing.T) {
 	}
 	// The click handler must use the same key, or the choice never comes back.
 	body := wikiTemplate[strings.Index(wikiTemplate, "<body"):]
-	if !strings.Contains(body, `localStorage.setItem("9router-theme", next)`) {
+	if !strings.Contains(body, `localStorage.setItem("alyysha-theme", next)`) {
 		t.Error("the toggle does not store its choice under the dashboard's key")
 	}
 	if !strings.Contains(body, `id="theme-toggle"`) {
@@ -450,7 +450,7 @@ func TestNoDuplicateProjectLinkInTheArticle(t *testing.T) {
 	if strings.Contains(wikiTemplate, "wiki-back") {
 		t.Error("the article carries its own back-to-project link; the wordmark already does this")
 	}
-	if strings.Contains(wikiTemplate, "9routerx project") {
+	if strings.Contains(wikiTemplate, "alyysha project") {
 		t.Error("the article still names the project page in a link label")
 	}
 	// The wordmark must remain the way back, or removing the article link leaves
@@ -812,7 +812,7 @@ func TestGenerateWikiFailsWithoutPages(t *testing.T) {
 	if err := os.MkdirAll(wiki, 0o755); err != nil {
 		t.Fatalf("MkdirAll: %v", err)
 	}
-	err := generateWiki(wiki, filepath.Join(root, "_site"), "yanstd888/9routerx")
+	err := generateWiki(wiki, filepath.Join(root, "_site"), "ShiroSdk/alyysha-router")
 	if err == nil {
 		t.Fatal("generateWiki() succeeded with no pages, want an error")
 	}
@@ -846,7 +846,7 @@ func TestHeadingsIgnoresFencedCode(t *testing.T) {
 		"",
 		"```bash",
 		"# a comment inside a sample script",
-		"PORT=20129 ./9routerx",
+		"PORT=20129 ./alyysha",
 		"```",
 		"",
 		"## Another Real Heading",
@@ -881,7 +881,7 @@ func TestAnchorIDMatchesGoldmarkOutput(t *testing.T) {
 	if err := os.MkdirAll(out, 0o755); err != nil {
 		t.Fatalf("MkdirAll: %v", err)
 	}
-	if err := generateWiki(wiki, out, "yanstd888/9routerx"); err != nil {
+	if err := generateWiki(wiki, out, "ShiroSdk/alyysha-router"); err != nil {
 		t.Fatalf("generateWiki: %v", err)
 	}
 
@@ -933,18 +933,18 @@ func TestWikiTemplateChrome(t *testing.T) {
 	}
 	// Same brand as the project page: the real 128px logo in the masthead and
 	// the capitalized wordmark — no colored-letter plate, no lowercase name.
-	if !strings.Contains(wikiTemplate, `src="logo-9routerx-128.png"`) {
+	if !strings.Contains(wikiTemplate, `src="logo-alyysha-128.png"`) {
 		t.Error("the wiki masthead does not use the real 128px logo asset")
 	}
-	if !strings.Contains(wikiTemplate, `<span>9RouterX</span>`) {
-		t.Error("the wiki wordmark text is not the capitalized brand spelling 9RouterX")
+	if !strings.Contains(wikiTemplate, `<span>Alyysha Router</span>`) {
+		t.Error("the wiki wordmark text is not the capitalized brand spelling Alyysha Router")
 	}
 	if strings.Contains(wikiTemplate, `wordmark-mark" style="background:`) {
 		t.Error("the wiki masthead still carries the colored-letter plate instead of the logo")
 	}
 	// The lazy+sized contract pages.yml enforces on every <img> applies to the
 	// masthead logo on all 20 wiki pages too.
-	logoAt := strings.Index(wikiTemplate, `src="logo-9routerx-128.png"`)
+	logoAt := strings.Index(wikiTemplate, `src="logo-alyysha-128.png"`)
 	if logoAt < 0 {
 		t.Fatal("the wiki masthead has no logo")
 	}

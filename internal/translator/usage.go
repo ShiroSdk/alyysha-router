@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package translator
 
 import (
@@ -189,7 +189,7 @@ func RequestedModelFromContext(ctx context.Context) string {
 }
 
 // SeedStreamState pre-seeds a stream session with the requested model so message_start
-// echoes the client's model instead of the provider's chunk model (decolua/9router#3693).
+// echoes the client's model instead of the provider's chunk model (decolua/alyysha#3693).
 func SeedStreamState(sessionKey, model string) {
 	if sessionKey == "" || model == "" {
 		return

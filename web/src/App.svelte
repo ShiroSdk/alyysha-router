@@ -1,4 +1,4 @@
-<!-- 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
   import { onMount } from 'svelte'
   import { Loader2 } from 'lucide-svelte'
@@ -207,8 +207,8 @@
         // When login is required, only the server-verified session cookie is authoritative.
         isAuthenticatedState = !!authStatus.authenticated
         if (!isAuthenticatedState) {
-          sessionStorage.removeItem('9routerx_auth')
-          localStorage.removeItem('9routerx_auth')
+          sessionStorage.removeItem('alyysha_auth')
+          localStorage.removeItem('alyysha_auth')
         }
       } else {
         isAuthenticatedState = true
@@ -226,8 +226,8 @@
     // A share link is read from the fragment on mount, and from the login stash
     // when the redirect to /login lost it. sessionStorage, not localStorage: a
     // pending link must not outlive the tab it was opened in.
-    const stashed = sessionStorage.getItem('9routerx_pending_add')
-    if (stashed) sessionStorage.removeItem('9routerx_pending_add')
+    const stashed = sessionStorage.getItem('alyysha_pending_add')
+    if (stashed) sessionStorage.removeItem('alyysha_pending_add')
     const parsed = parseProviderShareHash(stashed || window.location.hash)
     if (Array.isArray(parsed)) pendingAddLinks = parsed
     else if (parsed) pendingAddLinks = [parsed]
@@ -236,10 +236,10 @@
     // an operator who arrives unauthenticated would otherwise land on the
     // dashboard instead of the paste surface.
     if (new URLSearchParams(window.location.search).get('import') === '1') {
-      sessionStorage.setItem('9routerx_pending_import', '1')
+      sessionStorage.setItem('alyysha_pending_import', '1')
     }
-    if (sessionStorage.getItem('9routerx_pending_import') === '1') {
-      sessionStorage.removeItem('9routerx_pending_import')
+    if (sessionStorage.getItem('alyysha_pending_import') === '1') {
+      sessionStorage.removeItem('alyysha_pending_import')
       isImportOpen = true
     }
     // Ctrl+K / Cmd+K opens the search palette from anywhere in the dashboard.
@@ -358,7 +358,7 @@
     }
   })
   const pageMeta: Record<ActiveTab, { title: string; description: string }> = {
-    login: { title: 'Login', description: 'Authenticate to access 9RouterX' },
+    login: { title: 'Login', description: 'Authenticate to access Alyysha Router' },
     endpoint: { title: 'Endpoint & Key', description: 'API endpoint and key configuration' },
     connections: { title: 'Providers & Endpoints', description: 'Manage your AI provider connections' },
     combos: { title: 'Combo & Routing', description: 'Model combos and failover strategies' },
@@ -377,7 +377,7 @@
     'media-systemone': { title: 'System One', description: 'Structured state evaluation models' },
     'media-web': { title: 'Web Fetch & Search', description: 'Configure web search and scrape tools' },
     'proxy-pools': { title: 'Proxy Pools', description: 'Manage your proxy pool configurations' },
-    skills: { title: 'Agent Skills', description: 'Copy a link and paste to your AI to use 9RouterX — no install needed' },
+    skills: { title: 'Agent Skills', description: 'Copy a link and paste to your AI to use Alyysha Router — no install needed' },
     'console-log': { title: 'Console Log', description: 'Live server console output' },
     terminal: { title: 'Console Log', description: 'Live server console output' },
     settings: { title: 'Settings', description: 'Manage your preferences and configuration' },
@@ -609,7 +609,7 @@
           {#if isLoading}
             <div class="flex flex-col items-center justify-center h-[70vh] gap-3 text-text-muted">
               <Loader2 class="w-7 h-7 animate-spin text-brand-500" />
-              <span class="font-code text-xs">Connecting to 9RouterX Localhost Gateway (:20128)...</span>
+              <span class="font-code text-xs">Connecting to Alyysha Router Localhost Gateway (:20128)...</span>
             </div>
           {:else}
             {#if showOnboarding && activeTab === 'endpoint'}
@@ -749,7 +749,7 @@
                  line at the foot of every dashboard page (spec §4). -->
             <footer class="mt-10 border-t border-[var(--app-border)] pt-4 pb-2 text-center">
               <span class="font-code text-[10px] tracking-[0.18em] text-[var(--app-text-subtle)]">
-                9RouterX — 9R Next Go Generation
+                Alyysha Router — 9R Next Go Generation
               </span>
             </footer>
           {/if}

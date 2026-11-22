@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package main
 
 import (
@@ -15,13 +15,13 @@ import (
 	"time"
 )
 
-const siteBaseURL = "https://yanstd888.github.io/9routerx/"
+const siteBaseURL = "https://ShiroSdk.github.io/alyysha/"
 
 var pageDescriptions = map[string]string{
-	"installation":      "Install 9RouterX through npm, release binaries or GHCR and configure its background service.",
+	"installation":      "Install Alyysha Router through npm, release binaries or GHCR and configure its background service.",
 	"client-setup":      "Connect Claude Code, Cursor, Codex, Cline and other clients to the authenticated local gateway.",
 	"api":               "Use the OpenAI-compatible, Anthropic-compatible, MCP and A2A gateway endpoints.",
-	"migration":         "Move an existing 9Router installation to 9RouterX while preserving its compatible SQLite data.",
+	"migration":         "Move an existing Alyysha installation to Alyysha Router while preserving its compatible SQLite data.",
 	"dashboard":         "Manage provider connections, API keys, combos and request analytics from the embedded dashboard.",
 	"providers":         "Explore 155 providers and 248 free models across 36 providers, with authentication requirements explained.",
 	"combos":            "Group models into routing combos with fallback, round-robin, sticky, capacity and fusion strategies.",
@@ -29,23 +29,23 @@ var pageDescriptions = map[string]string{
 	"token-saver":       "Configure RTK compression and per-tool filters to reduce tool-output token consumption.",
 	"settings":          "Configure gateway behavior, authentication, display preferences and diagnostic retention.",
 	"usage-analytics":   "Inspect request usage, costs, cache activity and compression analytics by time window.",
-	"cli":               "Run 9RouterX daemon, status, restart, log and update commands from the terminal.",
+	"cli":               "Run Alyysha Router daemon, status, restart, log and update commands from the terminal.",
 	"architecture":      "Understand the Go gateway architecture, provider isolation and subscription-to-free fallback routing.",
-	"database":          "Understand SQLite storage, DATA_DIR paths and compatibility with the original 9Router database.",
+	"database":          "Understand SQLite storage, DATA_DIR paths and compatibility with the original Alyysha database.",
 	"parity":            "Review the feature parity and compatibility boundaries of the native Go port.",
 	"advanced-features": "Configure advanced gateway integrations including tunnels, web executors and webhooks.",
 	"operations":        "Operate the gateway with deployment, monitoring, backup and troubleshooting procedures.",
 	"governance":        "Control per-key budgets, request limits, IP allowlists and other gateway governance policies.",
 	"contributing":      "Contribute changes using the repository's development, test and review conventions.",
 	"screenshots":       "View dashboard screenshots showing the provider, routing and analytics interfaces.",
-	"team":              "Read the project ownership and contributor acknowledgments for 9RouterX.",
+	"team":              "Read the project ownership and contributor acknowledgments for Alyysha Router.",
 }
 
 func describePage(p *page) string {
 	if description := pageDescriptions[p.Slug]; description != "" {
 		return description
 	}
-	return "Read the 9RouterX guide to " + html.UnescapeString(p.Title) + "."
+	return "Read the Alyysha Router guide to " + html.UnescapeString(p.Title) + "."
 }
 
 func writeLLMFiles(readmePath, assetsDir, wikiDir, outDir string) error {
@@ -87,7 +87,7 @@ func writeLLMFiles(readmePath, assetsDir, wikiDir, outDir string) error {
 		return pages[i].Slug < pages[j].Slug
 	})
 	var corpus strings.Builder
-	corpus.WriteString("# 9RouterX README\n\n" + cleanCorpus(string(readme)) + "\n\n")
+	corpus.WriteString("# Alyysha Router README\n\n" + cleanCorpus(string(readme)) + "\n\n")
 	if wikiHome != nil {
 		corpus.WriteString("# " + html.UnescapeString(wikiHome.Title) + " (wiki source home)\n\n" + cleanCorpus(wikiHome.Text) + "\n\n")
 	}
@@ -159,11 +159,11 @@ func plainFAQText(src string) string {
 
 func softwareSchema(version string) json.RawMessage {
 	data := map[string]any{
-		"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "9RouterX",
+		"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Alyysha Router",
 		"applicationCategory": "DeveloperApplication", "operatingSystem": "Linux, macOS, Windows",
-		"description": "9RouterX is a single-binary local AI gateway in Go. One endpoint for Claude Code, Codex, Cursor and any OpenAI-compatible CLI: 155 providers, 248 free models, automatic fallback and 20-40% token savings.",
-		"url":         siteBaseURL, "downloadUrl": "https://github.com/yanstd888/9routerx/releases",
-		"author": map[string]any{"@type": "Person", "name": "Muhammad Dian", "url": "https://yanstd888.github.io/"},
+		"description": "Alyysha Router is a single-binary local AI gateway in Go. One endpoint for Claude Code, Codex, Cursor and any OpenAI-compatible CLI: 155 providers, 248 free models, automatic fallback and 20-40% token savings.",
+		"url":         siteBaseURL, "downloadUrl": "https://github.com/ShiroSdk/alyysha-router/releases",
+		"author": map[string]any{"@type": "Person", "name": "Muhammad Dian", "url": "https://ShiroSdk.github.io/"},
 		"offers": map[string]any{"@type": "Offer", "price": "0", "priceCurrency": "USD"},
 		"license": "https://opensource.org/licenses/MIT",
 		"keywords": []string{
@@ -184,7 +184,7 @@ func breadcrumbSchema(p *page) json.RawMessage {
 	data, _ := json.Marshal(map[string]any{
 		"@context": "https://schema.org", "@type": "BreadcrumbList",
 		"itemListElement": []map[string]any{
-			{"@type": "ListItem", "position": 1, "name": "9RouterX Docs", "item": siteBaseURL},
+			{"@type": "ListItem", "position": 1, "name": "Alyysha Router Docs", "item": siteBaseURL},
 			{"@type": "ListItem", "position": 2, "name": html.UnescapeString(p.Title), "item": siteBaseURL + p.Slug + ".html"},
 		},
 	})

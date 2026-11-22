@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package media
 
 import (
@@ -108,8 +108,8 @@ func TestListHermesProfiles_SkipsBareDirectories(t *testing.T) {
 	if profiles[1].Command != "hermes -p work" {
 		t.Errorf("command = %q, want %q", profiles[1].Command, "hermes -p work")
 	}
-	if !profiles[1].Has9Router {
-		t.Error("a custom provider on 127.0.0.1 must report has9Router")
+	if !profiles[1].HasAlyysha {
+		t.Error("a custom provider on 127.0.0.1 must report hasAlyysha")
 	}
 	if profiles[1].Alias == nil || *profiles[1].Alias != "work" {
 		t.Errorf("alias = %v, want work", profiles[1].Alias)

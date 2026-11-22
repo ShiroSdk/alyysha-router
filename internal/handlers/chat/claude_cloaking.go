@@ -1,10 +1,10 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
-	json "9routerx/proxy/internal/fastjson"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/proxy/executor"
+	json "alyysha/proxy/internal/fastjson"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/proxy/executor"
 	"bytes"
 	"crypto/rand"
 	"crypto/sha256"

@@ -1,11 +1,11 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package tray
 
 import (
 	"errors"
 	"testing"
 
-	"9routerx/proxy/internal/service"
+	"alyysha/proxy/internal/service"
 )
 
 // TestResolve_UnknownIsNotStopped is C5: an unanswered question must never

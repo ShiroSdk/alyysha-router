@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package main
 
 import "encoding/json"
@@ -52,7 +52,7 @@ func groupBySection(pages []*page) []pageGroup {
 // stylesheet the project page uses, a sidebar built from every page, the article
 // itself, and the client-side search box.
 //
-// Paths are relative because the site is served from the /9routerx/ project
+// Paths are relative because the site is served from the /alyysha/ project
 // subpath, where a root-absolute /style.css would 404. The README is one level
 // up at index.html, so the wordmark points there.
 //
@@ -69,9 +69,9 @@ var wikiTemplate = `<!doctype html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{{ .Page.Title }} — 9RouterX Wiki</title>
+    <title>{{ .Page.Title }} — Alyysha Router Wiki</title>
     <meta name="description" content="{{ .Page.Description }}" />
-    <link rel="canonical" href="https://yanstd888.github.io/9routerx/{{ .Page.Slug }}.html" />
+    <link rel="canonical" href="https://ShiroSdk.github.io/alyysha/{{ .Page.Slug }}.html" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     <link rel="alternate" type="text/plain" title="LLM documentation map" href="llms.txt" />
     <link rel="alternate" type="text/plain" title="Full LLM documentation" href="llms-full.txt" />
@@ -99,13 +99,13 @@ var wikiTemplate = `<!doctype html>
       // Apply the stored theme before the first paint. Without this the page
       // renders in whatever the OS prefers and then repaints a moment later,
       // which is a white flash on a reader who chose dark — the exact symptom
-      // the dashboard's own boot avoids. Reads "9router-theme", the same key
+      // the dashboard's own boot avoids. Reads "alyysha-theme", the same key
       // TopBar.svelte writes, so a choice made in either surface holds in both.
       // Falls back to the OS preference, which is what the media query in
       // style.css provides on its own.
       (function () {
         try {
-          var stored = localStorage.getItem("9router-theme");
+          var stored = localStorage.getItem("alyysha-theme");
           if (stored !== "light" && stored !== "dark") return;
           var root = document.documentElement;
           root.classList.toggle("dark", stored === "dark");
@@ -692,16 +692,16 @@ var wikiTemplate = `<!doctype html>
           <span class="wiki-menu-icon" aria-hidden="true">` + wikiMenuIcon + `</span>
         </button>
         <a class="wordmark" href="index.html">
-          <!-- The real logo (site/logo-9routerx-128.png, the 128px resize of
-               web/public/logo-9routerx.png) inside a solid dark tile — same
+          <!-- The real logo (site/logo-alyysha-128.png, the 128px resize of
+               web/public/logo-alyysha.png) inside a solid dark tile — same
                mark as the project page, so the wordmark reads as one brand
                across the whole site. The asset's background is transparent and
                the tile stays dark in BOTH themes, the way the dashboard
                presents the mark on its dark panel. -->
           <span class="wordmark-mark" aria-hidden="true"
-            ><img src="logo-9routerx-128.png" alt="9RouterX — Local AI Gateway and Token Saver Logo" width="128" height="128" loading="lazy" decoding="async"
+            ><img src="logo-alyysha-128.png" alt="Alyysha Router — Local AI Gateway and Token Saver Logo" width="128" height="128" loading="lazy" decoding="async"
           /></span>
-          <span>9RouterX</span>
+          <span>Alyysha Router</span>
         </a>
         <nav class="wiki-project-nav" aria-label="Project" id="project-links">
           <!-- Labeled "Home" rather than "Project": the wordmark goes to the
@@ -954,7 +954,7 @@ var wikiTemplate = `<!doctype html>
       })();
 
       // Theme switcher. Same contract as the dashboard's toggle: a "light" or
-      // "dark" class on <html>, stored under "9router-theme". The wiki is a
+      // "dark" class on <html>, stored under "alyysha-theme". The wiki is a
       // hand-written static page with no framework, so it cannot import the
       // Svelte component — it reuses the storage key and the class names, so a
       // reader's choice carries between the two surfaces instead of being asked
@@ -1009,7 +1009,7 @@ var wikiTemplate = `<!doctype html>
           document.documentElement.classList.toggle("dark", next === "dark");
           document.documentElement.classList.toggle("light", next === "light");
           try {
-            localStorage.setItem("9router-theme", next);
+            localStorage.setItem("alyysha-theme", next);
           } catch (e) {
             // Private browsing and some embedded contexts refuse storage. The
             // theme still applies for this visit; it just will not persist.
@@ -1036,7 +1036,7 @@ var wikiTemplate = `<!doctype html>
         }
         // Another tab changed the theme: follow it, so the two stay in step.
         window.addEventListener("storage", function (e) {
-          if (e.key !== "9router-theme") return;
+          if (e.key !== "alyysha-theme") return;
           if (e.newValue !== "light" && e.newValue !== "dark") return;
           document.documentElement.classList.toggle("dark", e.newValue === "dark");
           document.documentElement.classList.toggle("light", e.newValue === "light");

@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Package tlsstealth presents browser TLS fingerprints (JA3/JA4) for the
 // web-executor lane and pairs the capability with a mandatory alert system.
 //

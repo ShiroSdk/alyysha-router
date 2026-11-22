@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Shared custom/disabled-models envelope parsing + change notification.
 // Upstream parity:
 // - GET /api/models/custom -> { models: [...] } (ModelSelectModal fetchCustomModels,

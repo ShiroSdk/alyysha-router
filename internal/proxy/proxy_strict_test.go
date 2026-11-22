@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package proxy
 
 import (
@@ -11,7 +11,7 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"9routerx/proxy/internal/constants"
+	"alyysha/proxy/internal/constants"
 )
 
 // newPoolTransport builds the transport shape the chat handler caches per

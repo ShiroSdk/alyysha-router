@@ -1,7 +1,7 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 /**
  * Tiny module-level event bus for the "Live Routing Flow" background
- * (spec TASK-9routerX-anim-bg 2.5.2). UI actions call `routingBurst()` to
+ * (spec TASK-alyyshaX-anim-bg 2.5.2). UI actions call `routingBurst()` to
  * make the ASCII background fire one fast pulse plus a small glyph spray;
  * the background component subscribes with `onRoutingBurst`.
  *

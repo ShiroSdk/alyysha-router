@@ -1,4 +1,4 @@
-<!-- 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
   import { api, type SystemVersionInfo } from '../api/client'
   import { marked } from 'marked'
@@ -30,7 +30,7 @@
   // operation was cancelled and must not act.
   let shutdownToken = 0
 
-  const INSTALL_CMD = '9routerx update'
+  const INSTALL_CMD = 'alyysha update'
 
   marked.setOptions({ gfm: true, breaks: true })
 
@@ -197,7 +197,7 @@
           </div>
           <div>
             <h2 class="text-base font-semibold text-text-main">
-              Update 9RouterX{updateInfo?.latestVersion ? ` to v${updateInfo.latestVersion}` : ''}
+              Update Alyysha Router{updateInfo?.latestVersion ? ` to v${updateInfo.latestVersion}` : ''}
             </h2>
             <p class="text-xs text-text-muted">
               Current version: v{currentVersion || '1.9.1'}
@@ -309,7 +309,7 @@
       </div>
       <h2 class="text-lg font-semibold text-text-main mb-1">Server Stopped</h2>
       <p class="text-xs text-text-muted mb-4">
-        Now run <code class="px-1.5 py-0.5 rounded bg-surface-2 font-mono text-amber-500">9routerx update</code> in your terminal.
+        Now run <code class="px-1.5 py-0.5 rounded bg-surface-2 font-mono text-amber-500">alyysha update</code> in your terminal.
       </p>
       <button
         type="button"

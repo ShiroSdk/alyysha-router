@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -19,7 +19,7 @@ import (
 // MiniMax Code account usage — credits balance, plan tier, and M Plan rate
 // windows, read the way MiniMax Code itself reads them (its signed account
 // API). Port of upstream open-sse/services/minimaxCodeUsage.js
-// (decolua/9router 85bc33ce); the protocol itself is the one magpie's
+// (decolua/alyysha 85bc33ce); the protocol itself is the one magpie's
 // opencode-minimax-auth plugin speaks.
 //
 // Signing (account API only — the coding_plan/remains endpoint is plain

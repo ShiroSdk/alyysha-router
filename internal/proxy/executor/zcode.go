@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package executor
 
 import (
@@ -18,7 +18,7 @@ import (
 	"sync"
 	"time"
 
-	"9routerx/proxy/internal/proxy"
+	"alyysha/proxy/internal/proxy"
 )
 
 //go:embed zcode_identity_system.json
@@ -135,7 +135,7 @@ func zcodeSessionID(conversationKey, seed string) string {
 	}
 	seed = strings.TrimSpace(seed)
 	if seed == "" {
-		seed = zcodeEnvOr("ZCODE_SESSION_SEED", "9router-zcode")
+		seed = zcodeEnvOr("ZCODE_SESSION_SEED", "alyysha-zcode")
 	}
 	mac := hmac.New(sha256.New, []byte(seed))
 	mac.Write([]byte{0})

@@ -1,6 +1,6 @@
 //go:build linux || darwin || freebsd || netbsd || openbsd || dragonfly
 
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package clientconfig
 
 import (

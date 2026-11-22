@@ -1,6 +1,6 @@
 //go:build integration
 
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package integration
 
 import (
@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"testing"
 
-	"9routerx/proxy/internal/modelhealth"
+	"alyysha/proxy/internal/modelhealth"
 )
 
 // The two invariants the maintainer's review of #687 called out, driven through

@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
@@ -9,7 +9,7 @@ import (
 )
 
 // Live tests reach a real provider over the network using the operator's own
-// credentials from ~/.9router/db/data.sqlite. Two things follow, and both are
+// credentials from ~/.alyysha/db/data.sqlite. Two things follow, and both are
 // reasons such a test must never run in CI:
 //
 //   - The models are free-tier and shared. oc/space-bunny-free and the
@@ -28,11 +28,11 @@ import (
 //
 //	make test-live
 //
-// which is `9ROUTERX_LIVE_TESTS=1 go test ./internal/handlers/chat/ -v -run 'Live|MuseSpark'`.
+// which is `ALYYSHA_LIVE_TESTS=1 go test ./internal/handlers/chat/ -v -run 'Live|MuseSpark'`.
 
-// liveUpstreamEnv is the opt-in variable. The 9ROUTER_ prefix keeps it from
+// liveUpstreamEnv is the opt-in variable. The ALYYSHA_ prefix keeps it from
 // colliding with a real runtime setting and makes it greppable.
-const liveUpstreamEnv = "9ROUTERX_LIVE_TESTS"
+const liveUpstreamEnv = "ALYYSHA_LIVE_TESTS"
 
 // liveUpstreamEnabled reports whether live upstream tests were opted into.
 func liveUpstreamEnabled() bool {

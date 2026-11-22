@@ -1,6 +1,6 @@
-<!-- 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
-  // Port of decolua/9router src/shared/components/Input.js
+  // Port of decolua/alyysha src/shared/components/Input.js
   let {
     label = '',
     type = 'text',

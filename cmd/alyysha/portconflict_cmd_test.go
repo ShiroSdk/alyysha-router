@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package main
 
 import (
@@ -9,7 +9,7 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	"9routerx/proxy/internal/daemon"
+	"alyysha/proxy/internal/daemon"
 )
 
 func TestFirstRunPromptDoesNotStealPickerInput(t *testing.T) {
@@ -19,7 +19,7 @@ func TestFirstRunPromptDoesNotStealPickerInput(t *testing.T) {
 		want    bool
 	}{
 		{"no command", nil, false},
-		{"bare picker", &cli.Command{Name: "9routerx"}, false},
+		{"bare picker", &cli.Command{Name: "alyysha"}, false},
 		{"explicit start", &cli.Command{Name: "start"}, true},
 	} {
 		t.Run(tc.name, func(t *testing.T) {

@@ -1,4 +1,4 @@
-<!-- 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
   // Pagination for a paged list: the page label on the left, the prev/next
   // pair on the right. Both lists on the jailbreak page used to carry this

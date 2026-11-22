@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Test-only parser for internal/providers/provider_registry.go.
 //
 // The provider catalog the dashboard renders is served from that Go registry, so

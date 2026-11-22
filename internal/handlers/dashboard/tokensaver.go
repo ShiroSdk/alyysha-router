@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"strings"
 
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/tokensaver"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/tokensaver"
 	json "encoding/json/v2"
 )
 

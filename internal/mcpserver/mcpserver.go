@@ -1,6 +1,6 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Package mcpserver implements a minimal Model Context Protocol server for
-// 9RouterX: JSON-RPC 2.0 over stdio (for IDE integrations) and over HTTP POST
+// Alyysha Router: JSON-RPC 2.0 over stdio (for IDE integrations) and over HTTP POST
 // (for remote callers), with a scoped auth token.
 //
 // The tool set is deliberately small (the task doc's "10-20 tools"): every
@@ -22,8 +22,8 @@ import (
 	"strings"
 	"sync"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/log"
 )
 
 // jsonrpcRequest is one JSON-RPC 2.0 call (method + params + id).
@@ -94,7 +94,7 @@ func (s *MCPServer) handleCall(ctx context.Context, method string, params json.R
 		return map[string]any{
 			"protocolVersion": "2024-11-05",
 			"capabilities":    map[string]any{"tools": map[string]any{}},
-			"serverInfo":      map[string]any{"name": "9RouterX", "version": "1.0"},
+			"serverInfo":      map[string]any{"name": "Alyysha Router", "version": "1.0"},
 		}, nil
 	case "tools/list":
 		return map[string]any{"tools": toolDefinitions()}, nil

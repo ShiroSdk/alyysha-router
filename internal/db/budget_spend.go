@@ -1,12 +1,12 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package db
 
 import (
 	"context"
 	"fmt"
 
-	"9routerx/proxy/internal/budget"
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/budget"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 // Per-period budget spend (F-2).

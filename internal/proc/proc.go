@@ -1,7 +1,7 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Package proc holds the portable process primitives shared by everything in
 // this repo that manages an external process: the headroom proxy and the
-// 9router daemon itself.
+// alyysha daemon itself.
 //
 // Every platform answers the same three questions — is this PID alive, ask it
 // to stop, and force it to stop — so callers never branch on runtime.GOOS.

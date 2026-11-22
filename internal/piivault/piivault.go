@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Package piivault implements the PII vault (N6): with the vault armed, the
 // gateway replaces personal data in the INBOUND request with deterministic
 // placeholders — [PII:EMAIL:ab12cd34] — so the model and the upstream
@@ -27,7 +27,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"9routerx/proxy/internal/guardrails"
+	"alyysha/proxy/internal/guardrails"
 )
 
 const (

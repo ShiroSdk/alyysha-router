@@ -1,19 +1,19 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package main
 
 import (
 	"fmt"
 	"os"
 
-	"9routerx/proxy/internal/auth"
-	"9routerx/proxy/internal/config"
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/auth"
+	"alyysha/proxy/internal/config"
+	"alyysha/proxy/internal/db"
 
 	"github.com/urfave/cli/v2"
 	"golang.org/x/crypto/bcrypt"
 )
 
-// newReset2FACommand builds the `9routerx reset-2fa` recovery command: it
+// newReset2FACommand builds the `alyysha reset-2fa` recovery command: it
 // clears the TOTP enrollment after a dashboard-password confirmation, so a
 // lost phone is never a permanent lock-out. The command reads the same
 // database the gateway runs, and the confirmation is the dashboard password

@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 import { describe, expect, it } from 'bun:test'
 import { encodeQR } from './qr'
 
@@ -30,19 +30,19 @@ function finderDarkCount(m: boolean[][]): number {
 
 describe('encodeQR', () => {
   it('produces a square matrix for a short token', () => {
-    const m = encodeQR('9routerx://abc')
+    const m = encodeQR('alyysha://abc')
     expect(m.length).toBe(m[0].length)
-    // Version 1 holds 16 bytes at level M; "9routerx://abc" is 13.
+    // Version 1 holds 16 bytes at level M; "alyysha://abc" is 13.
     expect(m.length).toBe(21)
   })
 
   it('draws all three finder patterns', () => {
-    const m = encodeQR('9routerx://abc')
+    const m = encodeQR('alyysha://abc')
     expect(finderDarkCount(m)).toBe(3 * 33)
   })
 
   it('draws the finder centres dark and their rings light', () => {
-    const m = encodeQR('9routerx://abc')
+    const m = encodeQR('alyysha://abc')
     // Top-left finder: dark outer ring, light separator, dark inner ring,
     // light separator, dark 3×3 core.
     expect(at(m, 0, 0)).toBe(true)
@@ -65,7 +65,7 @@ describe('encodeQR', () => {
   })
 
   it('draws the timing pattern as alternating modules', () => {
-    const m = encodeQR('9routerx://abc')
+    const m = encodeQR('alyysha://abc')
     for (let c = 8; c < m.length - 8; c++) expect(at(m, 6, c)).toBe(c % 2 === 0)
   })
 
@@ -98,9 +98,9 @@ describe('encodeQR', () => {
     expect(finderDarkCount(m)).toBe(3 * 33)
   })
 
-  it('handles a realistic 9routerx:// token', () => {
+  it('handles a realistic alyysha:// token', () => {
     // A token for two providers, the size the share modal actually produces.
-    const token = '9routerx://' + btoa(JSON.stringify([
+    const token = 'alyysha://' + btoa(JSON.stringify([
       { prov: 'openai-compatible-chat-alpha', url: 'https://alpha.example.com/v1', api: [], keys: [], models: 'auto', prefix: 'alpha', name: 'Alpha Provider', note: '', type: 'openai-compatible', apiType: 'chat' },
       { prov: 'anthropic-compatible-delta', url: 'https://delta.example.com/v1', api: [], keys: [], models: 'ask', prefix: 'delta', name: 'Delta Provider', note: '', type: 'anthropic-compatible', apiType: '' },
     ])).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
@@ -115,14 +115,14 @@ describe('encodeQR', () => {
   })
 
   it('is deterministic for the same input', () => {
-    const a = encodeQR('9routerx://same').map((r) => r.join(''))
-    const b = encodeQR('9routerx://same').map((r) => r.join(''))
+    const a = encodeQR('alyysha://same').map((r) => r.join(''))
+    const b = encodeQR('alyysha://same').map((r) => r.join(''))
     expect(a).toEqual(b)
   })
 
   it('produces a different matrix for different input', () => {
-    const a = encodeQR('9routerx://one').map((r) => r.join(''))
-    const b = encodeQR('9routerx://two').map((r) => r.join(''))
+    const a = encodeQR('alyysha://one').map((r) => r.join(''))
+    const b = encodeQR('alyysha://two').map((r) => r.join(''))
     expect(a).not.toEqual(b)
   })
 })

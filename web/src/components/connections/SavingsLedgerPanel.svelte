@@ -1,4 +1,4 @@
-<!-- 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
   import { onMount } from 'svelte'
   import Card from '../../lib/ui/Card.svelte'

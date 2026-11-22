@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package media
 
 import (
@@ -68,7 +68,7 @@ func buildWav(pcm []byte) []byte {
 // longer than codexMaxAudioSeconds is killed and refused rather than
 // truncated.
 func convertAudio(fileBytes []byte) ([]byte, error) {
-	dir, err := os.MkdirTemp("", "9router-codex-stt-")
+	dir, err := os.MkdirTemp("", "alyysha-codex-stt-")
 	if err != nil {
 		return nil, codexSTTFailure(502, "Audio conversion failed")
 	}

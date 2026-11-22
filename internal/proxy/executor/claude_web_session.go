@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package executor
 
 import (
@@ -95,7 +95,7 @@ func claudeWebCreateConversation(ctx context.Context, cookie, orgID string) (str
 		"Cookie":       cookie,
 		"Origin":       "https://claude.ai",
 		"Referer":      "https://claude.ai/chat",
-	}, []byte(`{"name":"9RouterX"}`))
+	}, []byte(`{"name":"Alyysha Router"}`))
 	if err != nil {
 		return "", err
 	}

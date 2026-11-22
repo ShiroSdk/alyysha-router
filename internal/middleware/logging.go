@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package middleware
 
 import (
@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/log"
 )
 
 // statusWriter wraps http.ResponseWriter to capture the status code
@@ -54,7 +54,7 @@ func isQuietPath(path string) bool {
 		path == "/apple-touch-icon.png" ||
 		path == "/android-chrome-192x192.png" ||
 		path == "/android-chrome-512x512.png" ||
-		path == "/logo-9routerx.png" ||
+		path == "/logo-alyysha.png" ||
 		path == "/icons.svg" {
 		return true
 	}

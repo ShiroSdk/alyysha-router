@@ -1,6 +1,6 @@
 //go:build integration
 
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package integration
 
 import (
@@ -12,7 +12,7 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/db"
 )
 
 // newCountingProxy returns a proxy that counts every request it is asked to

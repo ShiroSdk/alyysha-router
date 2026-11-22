@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Bulk-add API-key planner — port of upstream src/shared/utils/bulkAdd.js.
 //
 // Background: connections are upserted BY NAME, so a generated name that

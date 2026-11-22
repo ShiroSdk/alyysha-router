@@ -1,8 +1,8 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/log"
 	"bytes"
 	"context"
 	"crypto/sha256"
@@ -16,11 +16,11 @@ import (
 	"sync"
 	"time"
 
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/proxy/executor"
-	"9routerx/proxy/internal/thinking"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/proxy/executor"
+	"alyysha/proxy/internal/thinking"
+	"alyysha/proxy/internal/translator"
 )
 
 // MiMo anti-abuse: the free chat endpoint returns 403 "Illegal access"

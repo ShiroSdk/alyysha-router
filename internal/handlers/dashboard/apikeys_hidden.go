@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -8,11 +8,11 @@ import (
 	"net/http"
 	"strings"
 
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/keikey"
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/keikey"
+	"alyysha/proxy/internal/log"
 
-	"9routerx/proxy/internal/handlers/chat"
+	"alyysha/proxy/internal/handlers/chat"
 )
 
 // Per-key model visibility (FASE 10.3) — dashboard surface.

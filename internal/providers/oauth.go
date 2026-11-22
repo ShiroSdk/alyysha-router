@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package providers
 
 import (
@@ -10,7 +10,7 @@ import (
 	"os"
 	"time"
 
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 // OAuthClientConfig holds OAuth app credentials for token refresh.
@@ -130,7 +130,7 @@ var RefreshLeadMs = map[string]time.Duration{
 	// maps it onto kimi's entry rather than dropping back to the default.
 	"kimi-coding": 5 * time.Minute,
 	// MiniMax Code access tokens live ~1h; upstream renews 10 minutes early
-	// (registry `oauth.refreshLeadMs`, decolua/9router minimax-code.js).
+	// (registry `oauth.refreshLeadMs`, decolua/alyysha minimax-code.js).
 	"minimax-code":        10 * time.Minute,
 	"minimax-code-global": 10 * time.Minute,
 }

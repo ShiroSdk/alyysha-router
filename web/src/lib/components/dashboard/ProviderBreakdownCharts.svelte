@@ -1,9 +1,9 @@
-<!-- 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
   // /* via shadcn-svelte (MIT) */ — bar + donut grid over the usage stats the
   // Overview already holds (stats.byProvider): requests per provider as bars,
   // token share as a donut. Zero new endpoints; aggregation is frontend-side
-  // (TASK-9routerX-shadcn-dashboard §2).
+  // (TASK-alyyshaX-shadcn-dashboard §2).
   import { BarChart, PieChart, Text } from 'layerchart'
   import * as Chart from '$lib/components/ui/chart/index.js'
   import { fmtTokens } from '$lib/compactNumber'

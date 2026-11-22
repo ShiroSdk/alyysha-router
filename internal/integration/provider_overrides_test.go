@@ -1,6 +1,6 @@
 //go:build integration
 
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package integration
 
 import (
@@ -8,9 +8,9 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/auth"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/auth"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/providers"
 )
 
 // Issue #101 part 4: a stored per-provider header override has to reach the

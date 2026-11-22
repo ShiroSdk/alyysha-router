@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package providers
 
 import (
@@ -93,7 +93,7 @@ func TestClientIdentityHeadersAreInternallyConsistent(t *testing.T) {
 
 // TestCodexStaticHeadersCarryVersion is the client-visible half: the codex
 // backend reads the `version` header next to the User-Agent, and omitting it
-// is what leaves newer models gated (upstream decolua/9router ca6e8407).
+// is what leaves newer models gated (upstream decolua/alyysha ca6e8407).
 func TestCodexStaticHeadersCarryVersion(t *testing.T) {
 	cfg, ok := KnownProviders["codex"]
 	if !ok {

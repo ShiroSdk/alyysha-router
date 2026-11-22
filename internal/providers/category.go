@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package providers
 
 import (
@@ -9,7 +9,7 @@ import (
 )
 
 // Category mirrors the section a provider is grouped under in the dashboard.
-// The values are the upstream 9router provider registry's own keys, so a
+// The values are the upstream alyysha provider registry's own keys, so a
 // dashboard section added upstream lands here without a rename.
 type Category string
 

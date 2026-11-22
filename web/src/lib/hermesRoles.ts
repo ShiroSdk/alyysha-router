@@ -1,8 +1,8 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 /**
  * Hermes model-role catalog.
  *
- * Port of `CLI_TOOLS.hermes.roles` from upstream decolua/9router
+ * Port of `CLI_TOOLS.hermes.roles` from upstream decolua/alyysha
  * (`src/shared/constants/cliTools.js`). The card renders the main model as its
  * own "Default Model" picker, so `default` is deliberately absent here and is
  * added at the payload level as the top-level `model:` block.

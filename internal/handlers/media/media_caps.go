@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package media
 
 import (
@@ -13,8 +13,8 @@ import (
 	"strconv"
 	"strings"
 
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/middleware"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/middleware"
 )
 
 // A note on the total-size cap this file used to carry: MediaMaxTotalBytes was

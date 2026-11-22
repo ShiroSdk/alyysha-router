@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package db
 
 import (
@@ -419,8 +419,8 @@ var goOnlyColumns = [][3]string{
 	{"apiKeys", "alertPct", "INTEGER DEFAULT 0"},
 	{"apiKeys", "hardCutoff", "INTEGER DEFAULT 0"},
 	// serenhope per-key governance columns (port(serenhope), apiKeysRepo.js
-	// schema). Additive like every entry above: an existing 9Router /
-	// 9Router Pro database gains them on the next startup and keeps every
+	// schema). Additive like every entry above: an existing Alyysha /
+	// Alyysha Pro database gains them on the next startup and keeps every
 	// column it already had. dailyCostLimit is a USD-per-UTC-day ceiling with
 	// costSpent/costDay holding the lazy-reset accumulator (a costDay stamp
 	// from an earlier day makes the next write replace, not add — the same

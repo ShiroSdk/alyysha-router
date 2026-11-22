@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -21,20 +21,20 @@ import (
 
 	"github.com/google/uuid"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlers/media"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/models"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/proxy"
-	"9routerx/proxy/internal/proxy/executor"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlers/media"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/models"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/proxy"
+	"alyysha/proxy/internal/proxy/executor"
 )
 
 // probeMessageContent is the short natural test message sent during probe calls (~22 chars).
 const probeMessageContent = "Hi there, how are you?"
 
 // ClassifyUpstreamNetworkError classifies network errors during probe/models fetch.
-// Parity with decolua/9router#4843.
+// Parity with decolua/alyysha#4843.
 func ClassifyUpstreamNetworkError(err error) (int, string, string) {
 	if err == nil {
 		return http.StatusOK, "", ""

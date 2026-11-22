@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 /**
  * The arrangement half of the Usage panel preferences: which order the panels of
  * a section are drawn in, and how that order folds into renderable blocks.

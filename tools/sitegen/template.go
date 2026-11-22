@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package main
 
 import (
@@ -16,8 +16,8 @@ import (
 //
 // Absolute, not relative: og:image is read by crawlers that fetch the image
 // out of context — a relative URL would resolve against the crawler's own
-// origin, not the /9routerx/ subpath this site is published under.
-const ogImageURL = "https://yanstd888.github.io/9routerx/logo-9routerx.png"
+// origin, not the /alyysha/ subpath this site is published under.
+const ogImageURL = "https://ShiroSdk.github.io/alyysha/logo-alyysha.png"
 
 // heroStats carries the numbers the homepage hero is allowed to claim. Every
 // computed field is gathered from the repository at build time; a field the
@@ -163,7 +163,7 @@ func countWikiPages(wikiDir string) int {
 // The landing copy is this repository's own — feature names, commands and FAQ
 // answers come from README.md and the wiki, never invented here.
 //
-// Paths are relative because the site is served from the /9routerx/ project
+// Paths are relative because the site is served from the /alyysha/ project
 // subpath, where a root-absolute /style.css would 404. The favicon paths are
 // no exception: the icon files are copied into the site root by copyIcons, so
 // a bare favicon.ico resolves on every page the same way style.css does.
@@ -172,29 +172,29 @@ const pageTemplate = `<!doctype html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>9RouterX — Local AI gateway &amp; token saver</title>
+    <title>Alyysha Router — Local AI gateway &amp; token saver</title>
     <meta
       name="description"
-      content="9RouterX is a single-binary local AI gateway in Go. One endpoint for Claude Code, Codex, Cursor and any OpenAI-compatible CLI: 155 providers, 248 free models, automatic fallback and 20-40% token savings."
+      content="Alyysha Router is a single-binary local AI gateway in Go. One endpoint for Claude Code, Codex, Cursor and any OpenAI-compatible CLI: 155 providers, 248 free models, automatic fallback and 20-40% token savings."
     />
     <meta
       name="keywords"
       content="ai router, llm gateway, local ai gateway, token saver, claude code proxy, codex proxy, cursor proxy, opencode, openai-compatible, free ai api, keyless llm, automatic fallback, golang, single binary, mcp server, a2a, semantic cache"
     />
-    <link rel="canonical" href="https://yanstd888.github.io/9routerx/" />
+    <link rel="canonical" href="https://ShiroSdk.github.io/alyysha/" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
-    <meta property="og:title" content="9RouterX — Local AI Gateway and Token Saver" />
+    <meta property="og:title" content="Alyysha Router — Local AI Gateway and Token Saver" />
     <meta
       property="og:description"
-      content="9RouterX is a single-binary local AI gateway in Go. One endpoint for Claude Code, Codex, Cursor and any OpenAI-compatible CLI: 155 providers, 248 free models, automatic fallback and 20-40% token savings."
+      content="Alyysha Router is a single-binary local AI gateway in Go. One endpoint for Claude Code, Codex, Cursor and any OpenAI-compatible CLI: 155 providers, 248 free models, automatic fallback and 20-40% token savings."
     />
-    <meta property="og:url" content="https://yanstd888.github.io/9routerx/" />
+    <meta property="og:url" content="https://ShiroSdk.github.io/alyysha/" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="9RouterX — Local AI Gateway and Token Saver" />
+    <meta name="twitter:title" content="Alyysha Router — Local AI Gateway and Token Saver" />
     <meta
       name="twitter:description"
-      content="9RouterX is a single-binary local AI gateway in Go. One endpoint for Claude Code, Codex, Cursor and any OpenAI-compatible CLI: 155 providers, 248 free models, automatic fallback and 20-40% token savings."
+      content="Alyysha Router is a single-binary local AI gateway in Go. One endpoint for Claude Code, Codex, Cursor and any OpenAI-compatible CLI: 155 providers, 248 free models, automatic fallback and 20-40% token savings."
     />
     <link rel="alternate" type="text/plain" title="LLM documentation map" href="llms.txt" />
     <link rel="alternate" type="text/plain" title="Full LLM documentation" href="llms-full.txt" />
@@ -264,16 +264,16 @@ const pageTemplate = `<!doctype html>
     <header class="masthead">
       <div class="masthead-inner">
         <a class="wordmark" href="index.html">
-          <!-- The real logo (site/logo-9routerx-128.png, a 128px resize of
-               web/public/logo-9routerx.png) inside a solid dark tile. The
+          <!-- The real logo (site/logo-alyysha-128.png, a 128px resize of
+               web/public/logo-alyysha.png) inside a solid dark tile. The
                asset's background is transparent, and a floating transparent
                flame on the pale light theme would have no edge — the dashboard
                presents the same mark on a dark panel, so the masthead does
                too. The tile stays dark in BOTH themes. -->
           <span class="wordmark-mark" aria-hidden="true"
-            ><img src="logo-9routerx-128.png" alt="9RouterX — Local AI Gateway and Token Saver Logo" width="128" height="128" loading="lazy" decoding="async"
+            ><img src="logo-alyysha-128.png" alt="Alyysha Router — Local AI Gateway and Token Saver Logo" width="128" height="128" loading="lazy" decoding="async"
           /></span>
-          <span>9RouterX</span>
+          <span>Alyysha Router</span>
         </a>
         <button
           class="menu-toggle"
@@ -318,7 +318,7 @@ const pageTemplate = `<!doctype html>
            text-scramble the dashboard's login headline runs
            (web/src/lib/scramble.ts). Everything respects
            prefers-reduced-motion. -->
-      <section class="hero" aria-label="9RouterX at a glance">
+      <section class="hero" aria-label="Alyysha Router at a glance">
         <!-- Decorative glyph layer: three oversized mono glyphs drifting behind
              the content, the login screen's ambient motion in homepage form.
              Pure CSS, aria-hidden, pointer-events none, below .hero-inner. -->
@@ -329,9 +329,9 @@ const pageTemplate = `<!doctype html>
         </div>
         <div class="hero-inner">
           <p class="hero-eyebrow">Local AI gateway &middot; single binary &middot; Go + Svelte</p>
-          <h1 id="hero-title">9RouterX — One Endpoint. Every AI Model. Tokens Saved Automatically.</h1>
+          <h1 id="hero-title">Alyysha Router — One Endpoint. Every AI Model. Tokens Saved Automatically.</h1>
           <p class="hero-sub">
-            9RouterX is a local LLM gateway and AI router in <strong>one Go binary</strong>. Point
+            Alyysha Router is a local LLM gateway and AI router in <strong>one Go binary</strong>. Point
             Claude Code, Codex, Cursor, or any OpenAI-compatible CLI at one endpoint and
             get automatic fallback across subscription, cheap and free tiers &mdash; with a
             token-saver suite that cuts tool-output tokens by 20&ndash;40% and the management
@@ -350,7 +350,7 @@ const pageTemplate = `<!doctype html>
               <span class="install-label">Install &mdash; npm (any OS)</span>
               <button class="install-copy" id="copy-install" type="button">Copy</button>
             </div>
-            <pre><code id="install-cmd" data-cmd="npm install -g 9routerx">npm install -g 9routerx</code><span class="install-caret" aria-hidden="true"></span></pre>
+            <pre><code id="install-cmd" data-cmd="npm install -g alyysha">npm install -g alyysha</code><span class="install-caret" aria-hidden="true"></span></pre>
           </div>
 
           <!-- The two facts an installer wants before clicking: the license and
@@ -419,7 +419,7 @@ const pageTemplate = `<!doctype html>
           <figure class="hero-shot">
             <img
               src="docs/screenshots/providers.png"
-              alt="Providers page of the 9RouterX dashboard in dark theme — the provider catalog and connection list"
+              alt="Providers page of the Alyysha Router dashboard in dark theme — the provider catalog and connection list"
               width="1280"
               height="800"
               loading="lazy"
@@ -670,7 +670,7 @@ const pageTemplate = `<!doctype html>
           <h2 id="quickstart-title">Install, run, point your CLI</h2>
           <p class="landing-lede">
             Defaults are enough for most people &mdash; port <code>20128</code>, data in
-            <code>~/.9router</code>, no flags needed.
+            <code>~/.alyysha</code>, no flags needed.
           </p>
           <ol class="steps">
             <li class="step">
@@ -684,22 +684,22 @@ const pageTemplate = `<!doctype html>
                 <div class="install-head">
                   <span class="install-label">npm &mdash; any OS</span>
                 </div>
-                <pre><code>npm install -g 9routerx</code></pre>
+                <pre><code>npm install -g alyysha</code></pre>
               </div>
               <div class="codeblock">
                 <div class="install-head">
                   <span class="install-label">alternative &mdash; script installer (same binaries)</span>
                 </div>
-                <pre><code>curl -fsSL https://raw.githubusercontent.com/yanstd888/9routerx/main/install.sh | bash</code></pre>
+                <pre><code>curl -fsSL https://raw.githubusercontent.com/ShiroSdk/alyysha-router/main/install.sh | bash</code></pre>
               </div>
               <div class="codeblock">
                 <div class="install-head">
                   <span class="install-label">alternative &mdash; container</span>
                 </div>
-                <pre><code>docker run -d --name 9routerx --restart unless-stopped \
-  -p 20128:20128 -v "$HOME/.9router:/data" \
+                <pre><code>docker run -d --name alyysha --restart unless-stopped \
+  -p 20128:20128 -v "$HOME/.alyysha:/data" \
   -e PORT=20128 -e DATA_DIR=/data \
-  ghcr.io/yanstd888/9routerx:latest</code></pre>
+  ghcr.io/ShiroSdk/alyysha-router:latest</code></pre>
               </div>
             </li>
             <li class="step">
@@ -712,7 +712,7 @@ const pageTemplate = `<!doctype html>
                 <div class="install-head">
                   <span class="install-label">shell</span>
                 </div>
-                <pre><code>9routerx
+                <pre><code>alyysha
 # Dashboard: http://localhost:20128 (Default password: 123456)</code></pre>
               </div>
             </li>
@@ -732,7 +732,7 @@ const pageTemplate = `<!doctype html>
                   <span class="install-label">curl &mdash; one request through the gateway</span>
                 </div>
                 <pre><code>curl http://localhost:20128/v1/chat/completions \
-  -H "Authorization: Bearer $9ROUTERX_API_KEY" \
+  -H "Authorization: Bearer $ALYYSHA_API_KEY" \
   -d '{"model":"auto","messages":[{"role":"user","content":"Hello"}]}'</code></pre>
               </div>
               <div class="codeblock">
@@ -771,7 +771,7 @@ Model:    antigravity/gemini-3.7-flash-medium
                 Release notes, setup tips and support (Bahasa Indonesia) at the AI Club channel
                 and group.
               </p>
-              <a class="btn btn-ghost" href="https://t.me/aiclub_id">Join @aiclub_id</a>
+              <a class="btn btn-ghost" href="https://t.me/YannClippers">Join @YannClippers</a>
             </article>
             <article class="community-card">
               <h3>Contribute</h3>
@@ -793,7 +793,7 @@ Model:    antigravity/gemini-3.7-flash-medium
           </p>
           <div class="faq-list">
             <details>
-              <summary>Is 9RouterX really free?</summary>
+              <summary>Is Alyysha Router really free?</summary>
               <p>
                 Yes &mdash; MIT-licensed and free to run. The gateway itself costs nothing; you
                 bring your own provider accounts, and its whole design pushes traffic toward the
@@ -813,16 +813,16 @@ Model:    antigravity/gemini-3.7-flash-medium
             <details>
               <summary>How is this different from running Ollama?</summary>
               <p>
-                Ollama serves local models. 9RouterX is a router in front of cloud and subscription
+                Ollama serves local models. Alyysha Router is a router in front of cloud and subscription
                 providers &mdash; it fails over between your subscription quota, cheap paid models,
                 and free tiers, and adds token compression, caching, and per-key governance on
                 top. The two compose fine: an Ollama endpoint can be one of the providers.
               </p>
             </details>
             <details>
-              <summary>Do I have to migrate my data from 9Router?</summary>
+              <summary>Do I have to migrate my data from Alyysha?</summary>
               <p>
-                No. Point 9routerx at the same <code>DATA_DIR</code> and it opens the same SQLite
+                No. Point alyysha at the same <code>DATA_DIR</code> and it opens the same SQLite
                 database &mdash; providers, combos, keys, and history carry over as-is. There is
                 no import step and no migration.
               </p>
@@ -848,7 +848,7 @@ Model:    antigravity/gemini-3.7-flash-medium
             <span class="install-label">npm &mdash; any OS</span>
             <button class="install-copy" id="copy-cta" type="button">Copy</button>
           </div>
-          <pre><code id="cta-cmd" data-cmd="npm install -g 9routerx">npm install -g 9routerx</code></pre>
+          <pre><code id="cta-cmd" data-cmd="npm install -g alyysha">npm install -g alyysha</code></pre>
         </div>
         <p class="cta-note">MIT licensed. Free to run, forever. <a href="readme.html">Prefer the full README? Open it here</a>.</p>
       </section>
@@ -1017,9 +1017,9 @@ const colophon = `    <footer class="colophon">
         <div class="colophon-brand">
           <a class="wordmark" href="index.html">
             <span class="wordmark-mark" aria-hidden="true"
-              ><img src="logo-9routerx-128.png" alt="9RouterX — Local AI Gateway and Token Saver Logo" width="128" height="128" loading="lazy" decoding="async"
+              ><img src="logo-alyysha-128.png" alt="Alyysha Router — Local AI Gateway and Token Saver Logo" width="128" height="128" loading="lazy" decoding="async"
             /></span>
-            <span>9RouterX</span>
+            <span>Alyysha Router</span>
           </a>
           <p>Local AI gateway and token saver. One endpoint, 155 providers.</p>
         </div>
@@ -1039,23 +1039,23 @@ const colophon = `    <footer class="colophon">
             <ul>
               <li><a href="security.html">Security</a></li>
               <li><a href="https://github.com/{{ .Repo }}/releases">Releases</a></li>
-              <li><a href="https://www.npmjs.com/package/9routerx">npm package</a></li>
+              <li><a href="https://www.npmjs.com/package/alyysha">npm package</a></li>
               <li><a href="readme.html">Full README</a></li>
             </ul>
           </div>
           <div class="colophon-col">
             <h3>Community</h3>
             <ul>
-              <li><a href="https://t.me/aiclub_id">Telegram group</a></li>
+              <li><a href="https://t.me/YannClippers">Telegram group</a></li>
               <li><a href="https://github.com/{{ .Repo }}">GitHub repo</a></li>
               <li><a href="https://github.com/{{ .Repo }}/issues">GitHub Issues</a></li>
             </ul>
           </div>
         </nav>
         <p class="colophon-legal">
-          &copy; {{ .Year }} 9RouterX. MIT licensed. A Go + Svelte source port continuing
-          <a href="https://github.com/decolua/9router">9Router</a> and
-          <a href="https://github.com/luqman-v1/9router-go">9router-go</a>; the ownership
+          &copy; {{ .Year }} Alyysha Router. MIT licensed. A Go + Svelte source port continuing
+          <a href="https://github.com/decolua/alyysha">Alyysha</a> and
+          <a href="https://github.com/luqman-v1/alyysha-go">alyysha-go</a>; the ownership
           inventory lives in <a href="{{ blob "ATTRIBUTION.md" }}">ATTRIBUTION.md</a>.
         </p>
       </div>
@@ -1080,9 +1080,9 @@ var readmeTemplate = `<!doctype html>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>README — 9RouterX</title>
-    <meta name="description" content="The full 9RouterX README: features, quickstart, provider catalog and FAQ for the single-binary local AI gateway." />
-    <link rel="canonical" href="https://yanstd888.github.io/9routerx/readme.html" />
+    <title>README — Alyysha Router</title>
+    <meta name="description" content="The full Alyysha Router README: features, quickstart, provider catalog and FAQ for the single-binary local AI gateway." />
+    <link rel="canonical" href="https://ShiroSdk.github.io/alyysha/readme.html" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
     <link rel="alternate" type="text/plain" title="LLM documentation map" href="llms.txt" />
     <link rel="alternate" type="text/plain" title="Full LLM documentation" href="llms-full.txt" />
@@ -1140,7 +1140,7 @@ var readmeTemplate = `<!doctype html>
       // wiki pages run, reading the same key the dashboard writes.
       (function () {
         try {
-          var stored = localStorage.getItem("9router-theme");
+          var stored = localStorage.getItem("alyysha-theme");
           if (stored !== "light" && stored !== "dark") return;
           var root = document.documentElement;
           root.classList.toggle("dark", stored === "dark");
@@ -1158,16 +1158,16 @@ var readmeTemplate = `<!doctype html>
       <div class="masthead-inner">
         <a class="wordmark" href="index.html">
           <span class="wordmark-mark" aria-hidden="true"
-            ><img src="logo-9routerx-128.png" alt="9RouterX — Local AI Gateway and Token Saver Logo" width="128" height="128" loading="lazy" decoding="async"
+            ><img src="logo-alyysha-128.png" alt="Alyysha Router — Local AI Gateway and Token Saver Logo" width="128" height="128" loading="lazy" decoding="async"
           /></span>
-          <span>9RouterX</span>
+          <span>Alyysha Router</span>
         </a>
         <nav aria-label="Project">
           <a href="index.html">Home</a>
           <a href="installation.html">Wiki</a>
           <a href="https://github.com/{{ .Repo }}">Repository</a>
           <a href="https://github.com/{{ .Repo }}/releases">Releases</a>
-          <a href="https://t.me/aiclub_id">Telegram group</a>
+          <a href="https://t.me/YannClippers">Telegram group</a>
         </nav>
       </div>
     </header>

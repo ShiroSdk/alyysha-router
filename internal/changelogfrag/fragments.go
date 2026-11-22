@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Package changelogfrag assembles the changelog the dashboard renders from a
 // released CHANGELOG.md plus the per-PR fragments in .changes/.
 //

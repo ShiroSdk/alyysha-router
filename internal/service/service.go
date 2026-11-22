@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 // Package service installs the gateway as an autostart service so it comes
 // back after a reboot: a systemd user unit on systemd Linux, a launchd agent
 // on macOS, an OpenRC/runit service where those inits run, a cron @reboot
@@ -14,7 +14,7 @@ import (
 	"strconv"
 	"strings"
 
-	"9routerx/proxy/internal/proc"
+	"alyysha/proxy/internal/proc"
 )
 
 // Backend names the init/autostart system an install targets.
@@ -28,11 +28,11 @@ const (
 	BackendRunit       Backend = "runit"
 	BackendCron        Backend = "cron"
 	BackendWindowsTask Backend = "windows-task"
-	BackendOverrideEnv         = "9ROUTERX_SERVICE_BACKEND"
+	BackendOverrideEnv         = "ALYYSHA_SERVICE_BACKEND"
 )
 
 // ErrNotInstalled is returned when no autostart entry exists to remove.
-var ErrNotInstalled = errors.New("9routerx autostart is not installed")
+var ErrNotInstalled = errors.New("alyysha autostart is not installed")
 
 // Test seams. CI only runs one OS, so the live host facts detection and the
 // Windows guard depend on are read through these instead of the runtime
@@ -153,7 +153,7 @@ func Status() (Info, bool) {
 }
 
 // Detect picks the backend Install will use on this machine. The
-// 9ROUTERX_SERVICE_BACKEND env var forces one (systemd, launchd, openrc,
+// ALYYSHA_SERVICE_BACKEND env var forces one (systemd, launchd, openrc,
 // runit, cron) for machines with several inits or for testing. The override is
 // read before the OS short-circuits so it is authoritative on every platform:
 // a pinned backend must win even on Windows, where the schtasks check would

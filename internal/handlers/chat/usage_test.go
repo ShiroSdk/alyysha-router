@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
@@ -7,8 +7,8 @@ import (
 	"testing"
 	"unicode/utf8"
 
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/translator"
 )
 
 func TestExtractContent(t *testing.T) {

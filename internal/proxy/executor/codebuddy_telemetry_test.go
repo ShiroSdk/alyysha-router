@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package executor
 
 import (
@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/providers"
 )
 
 // codebuddyLifecycleCopy snapshots the lifecycle-dedup map under its lock, so

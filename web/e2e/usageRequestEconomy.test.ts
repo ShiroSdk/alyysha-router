@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 /**
  * Usage page: the dashboard payload is read once, and the ten-second
  * connection poll stays off the tabs that do not draw connections.

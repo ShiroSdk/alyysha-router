@@ -1,4 +1,4 @@
-<!-- 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id -->
+<!-- Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers -->
 <script lang="ts">
   import { onMount, tick } from 'svelte'
   import { api } from '../api/client'
@@ -117,7 +117,7 @@
     try {
       const res = await api.login(password)
       if (res.success) {
-        // Live routing flow (TASK-9routerX-anim-bg 2.5.2), wiring point 2 of
+        // Live routing flow (TASK-alyyshaX-anim-bg 2.5.2), wiring point 2 of
         // 2: a successful login submit fires a background data burst.
         routingBurst()
         if (onSuccess) {
@@ -188,8 +188,8 @@
   const passwordAvailable = $derived(authMode === 'password' || authMode === 'both' || !ssoAvailable)
 
   const version = typeof __APP_VERSION__ !== 'undefined' ? __APP_VERSION__ : ''
-  const GITHUB_URL = 'https://github.com/yanstd888/9routerx'
-  const DOCS_URL = 'https://github.com/yanstd888/9routerx/wiki'
+  const GITHUB_URL = 'https://github.com/ShiroSdk/alyysha-router'
+  const DOCS_URL = 'https://github.com/ShiroSdk/alyysha-router/wiki'
 </script>
 
 <div class="relative min-h-screen flex flex-col overflow-hidden bg-[var(--9x-bg)] text-[var(--9x-ink)]">
@@ -212,7 +212,7 @@
   <header class="relative z-10 flex items-center justify-between px-4 sm:px-6 h-14 shrink-0">
     <div class="flex items-center gap-2.5 min-w-0">
       <img src="/android-chrome-192x192.png" alt="" class="size-6 object-contain" />
-      <span class="font-headline font-bold tracking-tight text-[15px]">9RouterX</span>
+      <span class="font-headline font-bold tracking-tight text-[15px]">Alyysha Router</span>
       {#if version}
         <span class="hidden sm:inline font-code text-[11px] text-[var(--9x-ink)]/40">v{version}</span>
       {/if}
@@ -237,7 +237,7 @@
           <div class="gl-panel" class:gl-shake={errorMessage}>
             <!-- Lockup -->
             <div class="flex items-center gap-2.5 mb-5">
-              <img src="/android-chrome-192x192.png" alt="9RouterX" class="size-7 object-contain" />
+              <img src="/android-chrome-192x192.png" alt="Alyysha Router" class="size-7 object-contain" />
               <span class="font-code text-[10px] tracking-[0.18em] text-[var(--9x-ink)]/40">9R Next Go Generation</span>
             </div>
 
@@ -378,7 +378,7 @@
 
             <!-- Mobile: pills move under the panel; neutral line instead of the keyboard hint -->
             <p class="md:hidden font-code text-[10px] text-[var(--9x-ink)]/40 text-center mt-4 tracking-[0.14em]">
-              9RouterX &middot; 9R Next Go Generation
+              Alyysha Router &middot; 9R Next Go Generation
             </p>
           </div>
       {/if}
@@ -387,7 +387,7 @@
       {#if hasPassword !== null}
         <!-- Desktop >=1024px only: infrastructure status column -->
         <aside class="hidden lg:flex flex-col gap-2 pt-2 font-code text-[11px] text-[var(--9x-ink)]/45 shrink-0" aria-hidden="true">
-          <span class="text-[var(--9x-ink)]/60 tracking-[0.14em]">9RouterX &middot; 9R Next Go Generation</span>
+          <span class="text-[var(--9x-ink)]/60 tracking-[0.14em]">Alyysha Router &middot; 9R Next Go Generation</span>
           <span>gateway &middot; <span class="text-[var(--9x-ok)]">ready</span></span>
           <span>region &middot; local</span>
           {#if version}<span>version &middot; v{version}</span>{/if}

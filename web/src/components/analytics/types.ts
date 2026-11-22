@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 import { PROVIDER_CATALOG } from '../../lib/providers'
 
 export type MainTab = 'overview' | 'details'
@@ -191,9 +191,9 @@ export function normalizeCustomPeriod(input: string): PeriodPreset | null {
 
 // Each Usage section remembers its last window across reloads: an operator who
 // narrowed to 12h expects to come back to 12h, not to the section default.
-// Keys are namespaced like the other UI choices (9routerx-theme,
-// 9routerx-nav-*).
-const PERIOD_STORAGE_PREFIX = '9routerx-analytics-period-'
+// Keys are namespaced like the other UI choices (alyysha-theme,
+// alyysha-nav-*).
+const PERIOD_STORAGE_PREFIX = 'alyysha-analytics-period-'
 
 // Accepts only a value the selector could have produced — a known preset or a
 // custom window within the ten-year cap. Anything stale, corrupt or

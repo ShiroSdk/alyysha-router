@@ -13,7 +13,7 @@ section: Under the Hood
        │ http://localhost:20128/v1
        ↓
 ┌─────────────────────────────────────────────┐
-│         9RouterX (Smart Router)           │
+│         Alyysha Router (Smart Router)           │
 │  • RTK Token Saver (cut tool_result tokens) │
 │  • Format translation (OpenAI ↔ Claude)     │
 │  • Quota tracking                           │

@@ -1,8 +1,8 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package resilience
 
 import (
-	"9routerx/proxy/internal/fairshare"
+	"alyysha/proxy/internal/fairshare"
 	"context"
 	"time"
 )

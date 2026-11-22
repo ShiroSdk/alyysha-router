@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package oauth
 
 import (
@@ -14,9 +14,9 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/proxy"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/proxy"
 )
 
 // deviceProviders lists providers supporting the device-code family.
@@ -358,7 +358,7 @@ func kimiHeaders(deviceID string) map[string]string {
 		deviceID = randomUUID()
 	}
 	return map[string]string{
-		"X-Msh-Platform": "9router", "X-Msh-Version": "1.0",
+		"X-Msh-Platform": "alyysha", "X-Msh-Version": "1.0",
 		"X-Msh-Device-Name": "unknown", "X-Msh-Device-Model": "server",
 		"X-Msh-Device-Id": strings.TrimSpace(deviceID),
 	}

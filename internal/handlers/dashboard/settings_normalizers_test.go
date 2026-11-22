@@ -1,11 +1,11 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package dashboard
 
 import (
 	"testing"
 
-	"9routerx/proxy/internal/budget"
-	"9routerx/proxy/internal/handlers/chat"
+	"alyysha/proxy/internal/budget"
+	"alyysha/proxy/internal/handlers/chat"
 )
 
 // The section normalizers must leave a valid section in the payload so

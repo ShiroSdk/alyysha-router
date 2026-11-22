@@ -1,6 +1,6 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 /**
- * Text-scramble headline decode (spec TASK-9routerX-anim-bg 2.5.4).
+ * Text-scramble headline decode (spec TASK-alyyshaX-anim-bg 2.5.4).
  *
  * `use:scramble` on a headline: on first appearance the text nodes cycle
  * random mono glyphs (≤500ms total) and then settle on the final text. One

@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
@@ -11,8 +11,8 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/translator"
 )
 
 // applyJailbreak is the injection boundary for every chat request. These tests

@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package media
 
 import (
@@ -12,7 +12,7 @@ import (
 	"slices"
 	"strings"
 
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/handlerutil"
 	json "encoding/json/v2"
 )
 
@@ -26,7 +26,7 @@ import (
 
 const (
 	hermesAPIKeyEnv    = "OPENAI_API_KEY"
-	hermesProviderName = "9router"
+	hermesProviderName = "alyysha"
 )
 
 // HermesHandler serves the Hermes profile list and the profile-scoped
@@ -103,7 +103,7 @@ func (h *HermesHandler) HandleGet(w http.ResponseWriter, r *http.Request) {
 		"installed":  true,
 		"profile":    home,
 		"settings":   settings,
-		"has9Router": settings.has9RouterConfig(),
+		"hasAlyysha": settings.hasAlyyshaConfig(),
 		"configPath": home.ConfigPath,
 	})
 }
@@ -165,7 +165,7 @@ func (h *HermesHandler) HandlePost(w http.ResponseWriter, r *http.Request) {
 }
 
 // HandleDelete serves DELETE /api/cli-tools/hermes-settings — removes only
-// the blocks 9router wrote, scoped to one profile.
+// the blocks alyysha wrote, scoped to one profile.
 func (h *HermesHandler) HandleDelete(w http.ResponseWriter, r *http.Request) {
 	home, ok := resolveHermesHomeParam(w, deleteProfileParam(r))
 	if !ok {
@@ -218,7 +218,7 @@ func deleteProfileParam(r *http.Request) string {
 
 // applyToAllProfiles propagates the endpoint and API key across every profile.
 //
-// A profile already routed through 9router keeps its own model and only has
+// A profile already routed through alyysha keeps its own model and only has
 // the endpoint refreshed. A profile on another provider is reported, never
 // rewritten. A profile with no model yet is wired to the model chosen in this
 // request, which is what makes a freshly created profile usable in one click.
@@ -297,7 +297,7 @@ func applyToOneProfile(name, baseURL, apiKey, model string) hermesApplyResult {
 }
 
 // refreshCustomBlocks re-points the delegation and auxiliary blocks a profile
-// already routes through 9router, leaving foreign-provider blocks untouched.
+// already routes through alyysha, leaving foreign-provider blocks untouched.
 func refreshCustomBlocks(yaml, baseURL string) string {
 	if d := parseHermesDelegationBlock(yaml); d != nil && d.Model != nil && isCustomBlock(d.provider()) {
 		yaml = upsertDelegationBlock(yaml, buildDelegationBlock(*d.Model, baseURL))
@@ -310,7 +310,7 @@ func refreshCustomBlocks(yaml, baseURL string) string {
 	return yaml
 }
 
-// resetHermesConfig strips the blocks 9router owns and reports both lists.
+// resetHermesConfig strips the blocks alyysha owns and reports both lists.
 // A block owned by another provider is this profile's own configuration and
 // must survive a reset, so it is kept and reported instead of deleted.
 func resetHermesConfig(yaml string) (remaining string, removed map[string]any, kept []string) {
@@ -356,13 +356,13 @@ func parseHermesSettings(yaml string) hermesSettings {
 	}
 }
 
-// has9RouterConfig reports whether any block points at a local 9router.
-func (s hermesSettings) has9RouterConfig() bool {
-	if has9RouterConfig(s.Model.provider(), s.Model.baseURL()) || has9RouterConfig(s.Delegation.provider(), s.Delegation.baseURL()) {
+// hasAlyyshaConfig reports whether any block points at a local alyysha.
+func (s hermesSettings) hasAlyyshaConfig() bool {
+	if hasAlyyshaConfig(s.Model.provider(), s.Model.baseURL()) || hasAlyyshaConfig(s.Delegation.provider(), s.Delegation.baseURL()) {
 		return true
 	}
 	for _, cfg := range s.Auxiliary {
-		if has9RouterConfig(cfg.Provider, cfg.BaseURL) {
+		if hasAlyyshaConfig(cfg.Provider, cfg.BaseURL) {
 			return true
 		}
 	}

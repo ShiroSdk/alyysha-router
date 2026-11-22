@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package updater
 
 import (
@@ -114,7 +114,7 @@ func TestCheckUpdate_Manifest(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		manifest := map[string]any{
 			"latestVersion": "2.0.0",
-			"downloadUrl":   "https://example.com/downloads/9routerx",
+			"downloadUrl":   "https://example.com/downloads/alyysha",
 			"releaseNotes":  "Major release 2.0.0",
 			"sha256":        "abcdef123456",
 		}
@@ -140,7 +140,7 @@ func TestCheckUpdate_Manifest(t *testing.T) {
 	if info.LatestVersion != "2.0.0" {
 		t.Errorf("expected latestVersion 2.0.0, got %s", info.LatestVersion)
 	}
-	if info.DownloadURL != "https://example.com/downloads/9routerx" {
+	if info.DownloadURL != "https://example.com/downloads/alyysha" {
 		t.Errorf("expected downloadUrl, got %s", info.DownloadURL)
 	}
 }
@@ -167,12 +167,12 @@ func TestCheckUpdate_GitHubReleasesFallback(t *testing.T) {
 			"body":     "Awesome new features",
 			"assets": []map[string]any{
 				{
-					"name":                 "9routerx_darwin_arm64.tar.gz",
-					"browser_download_url": "https://github.com/releases/9routerx_darwin_arm64.tar.gz",
+					"name":                 "alyysha_darwin_arm64.tar.gz",
+					"browser_download_url": "https://github.com/releases/alyysha_darwin_arm64.tar.gz",
 				},
 				{
-					"name":                 "9routerx_linux_amd64.tar.gz",
-					"browser_download_url": "https://github.com/releases/9routerx_linux_amd64.tar.gz",
+					"name":                 "alyysha_linux_amd64.tar.gz",
+					"browser_download_url": "https://github.com/releases/alyysha_linux_amd64.tar.gz",
 				},
 			},
 		}
@@ -198,7 +198,7 @@ func TestCheckUpdate_GitHubReleasesFallback(t *testing.T) {
 }
 
 func TestExtractExecutableBytes_TarGz(t *testing.T) {
-	// Create a dummy .tar.gz containing a 9routerx binary payload
+	// Create a dummy .tar.gz containing a alyysha binary payload
 	binaryContent := targetExecutablePayload(t, 2048)
 
 	var buf bytes.Buffer
@@ -206,7 +206,7 @@ func TestExtractExecutableBytes_TarGz(t *testing.T) {
 	tw := tar.NewWriter(gw)
 
 	hdr := &tar.Header{
-		Name: "9routerx",
+		Name: "alyysha",
 		Mode: 0755,
 		Size: int64(len(binaryContent)),
 	}
@@ -219,7 +219,7 @@ func TestExtractExecutableBytes_TarGz(t *testing.T) {
 	tw.Close()
 	gw.Close()
 
-	extracted, err := extractExecutableBytes(buf.Bytes(), "9routerx_darwin_arm64.tar.gz")
+	extracted, err := extractExecutableBytes(buf.Bytes(), "alyysha_darwin_arm64.tar.gz")
 	if err != nil {
 		t.Fatalf("extractExecutableBytes failed: %v", err)
 	}
@@ -235,7 +235,7 @@ func TestExtractExecutableBytes_Zip(t *testing.T) {
 	var buf bytes.Buffer
 	zw := zip.NewWriter(&buf)
 
-	f, err := zw.Create("9routerx.exe")
+	f, err := zw.Create("alyysha.exe")
 	if err != nil {
 		t.Fatalf("create zip entry: %v", err)
 	}
@@ -244,7 +244,7 @@ func TestExtractExecutableBytes_Zip(t *testing.T) {
 	}
 	zw.Close()
 
-	extracted, err := extractExecutableBytes(buf.Bytes(), "9routerx_windows_amd64.zip")
+	extracted, err := extractExecutableBytes(buf.Bytes(), "alyysha_windows_amd64.zip")
 	if err != nil {
 		t.Fatalf("extract zip failed: %v", err)
 	}
@@ -256,9 +256,9 @@ func TestExtractExecutableBytes_Zip(t *testing.T) {
 
 func TestMatchReleaseAsset(t *testing.T) {
 	assets := []releaseAsset{
-		{Name: "9routerx_linux_amd64.tar.gz", BrowserDownloadURL: "url-linux-amd64"},
-		{Name: "9routerx_darwin_arm64.tar.gz", BrowserDownloadURL: "url-darwin-arm64"},
-		{Name: "9routerx_windows_amd64.zip", BrowserDownloadURL: "url-windows-amd64"},
+		{Name: "alyysha_linux_amd64.tar.gz", BrowserDownloadURL: "url-linux-amd64"},
+		{Name: "alyysha_darwin_arm64.tar.gz", BrowserDownloadURL: "url-darwin-arm64"},
+		{Name: "alyysha_windows_amd64.zip", BrowserDownloadURL: "url-windows-amd64"},
 		{Name: "checksums.txt", BrowserDownloadURL: "url-checksums"},
 	}
 
@@ -296,7 +296,7 @@ func TestAutoUpdate_StatusAndToggle(t *testing.T) {
 // platformBinaryAsset is the release asset name for the platform the tests run
 // on, which is the entry the checksum manifest has to carry.
 func platformBinaryAsset() string {
-	name := fmt.Sprintf("9routerx_%s_%s", runtime.GOOS, runtime.GOARCH)
+	name := fmt.Sprintf("alyysha_%s_%s", runtime.GOOS, runtime.GOARCH)
 	if runtime.GOOS == "windows" {
 		name += ".exe"
 	}
@@ -321,7 +321,7 @@ func TestCheckGitHubReleases_PublishesPlatformChecksum(t *testing.T) {
 		if strings.HasSuffix(r.URL.Path, "/"+checksumsAssetName) {
 			checksumRequests++
 			w.Header().Set("Content-Type", "text/plain")
-			fmt.Fprintf(w, "%s  9routerx-linux-amd64\n", strings.Repeat("11", 32))
+			fmt.Fprintf(w, "%s  alyysha-linux-amd64\n", strings.Repeat("11", 32))
 			fmt.Fprintf(w, "%s *%s\n", wantDigest, platformAsset)
 			return
 		}
@@ -357,7 +357,7 @@ func TestCheckGitHubReleases_PublishesPlatformChecksum(t *testing.T) {
 }
 
 func TestCheckGitHubReleases_ChecksumLookupFailures(t *testing.T) {
-	platformAsset := fmt.Sprintf("9routerx_%s_%s", runtime.GOOS, runtime.GOARCH)
+	platformAsset := fmt.Sprintf("alyysha_%s_%s", runtime.GOOS, runtime.GOARCH)
 
 	tests := []struct {
 		name  string
@@ -366,7 +366,7 @@ func TestCheckGitHubReleases_ChecksumLookupFailures(t *testing.T) {
 		{name: "release has no SHA256SUMS.txt asset"},
 		{
 			name:  "SHA256SUMS.txt has no entry for this platform",
-			lines: []string{strings.Repeat("ab", 32) + "  9routerx-plan9-mips.tar.gz"},
+			lines: []string{strings.Repeat("ab", 32) + "  alyysha-plan9-mips.tar.gz"},
 		},
 		{
 			name:  "SHA256SUMS.txt lines are unreadable",
@@ -423,12 +423,12 @@ func TestParseChecksumLine(t *testing.T) {
 		wantName  string
 		wantEmpty bool
 	}{
-		{name: "two space text mode", line: digest + "  9routerx-linux-amd64", wantName: "9routerx-linux-amd64"},
-		{name: "single space separator", line: digest + " 9routerx-linux-amd64", wantName: "9routerx-linux-amd64"},
-		{name: "star binary mode", line: digest + " *9routerx-linux-amd64", wantName: "9routerx-linux-amd64"},
-		{name: "leading ./ prefix", line: digest + "  ./9routerx-linux-amd64", wantName: "./9routerx-linux-amd64"},
-		{name: "digest too short", line: "abc123  9routerx-linux-amd64", wantEmpty: true},
-		{name: "digest is not hex", line: strings.Repeat("zz", 32) + "  9routerx-linux-amd64", wantEmpty: true},
+		{name: "two space text mode", line: digest + "  alyysha-linux-amd64", wantName: "alyysha-linux-amd64"},
+		{name: "single space separator", line: digest + " alyysha-linux-amd64", wantName: "alyysha-linux-amd64"},
+		{name: "star binary mode", line: digest + " *alyysha-linux-amd64", wantName: "alyysha-linux-amd64"},
+		{name: "leading ./ prefix", line: digest + "  ./alyysha-linux-amd64", wantName: "./alyysha-linux-amd64"},
+		{name: "digest too short", line: "abc123  alyysha-linux-amd64", wantEmpty: true},
+		{name: "digest is not hex", line: strings.Repeat("zz", 32) + "  alyysha-linux-amd64", wantEmpty: true},
 		{name: "no filename", line: digest, wantEmpty: true},
 		{name: "blank line", line: "", wantEmpty: true},
 	}
@@ -457,10 +457,10 @@ func TestAssetFileName(t *testing.T) {
 		url  string
 		want string
 	}{
-		{url: "https://example.test/9routerx-linux-amd64", want: "9routerx-linux-amd64"},
-		{url: "https://example.test/9routerx-windows-amd64.exe?token=abc", want: "9routerx-windows-amd64.exe"},
+		{url: "https://example.test/alyysha-linux-amd64", want: "alyysha-linux-amd64"},
+		{url: "https://example.test/alyysha-windows-amd64.exe?token=abc", want: "alyysha-windows-amd64.exe"},
 		{url: "https://example.test/dir/", want: "dir"},
-		{url: "9routerx-darwin-arm64.tar.gz", want: "9routerx-darwin-arm64.tar.gz"},
+		{url: "alyysha-darwin-arm64.tar.gz", want: "alyysha-darwin-arm64.tar.gz"},
 	}
 
 	for _, tt := range tests {
@@ -480,7 +480,7 @@ func updateAssetTarGz(t *testing.T, payload []byte) []byte {
 	var buf bytes.Buffer
 	gw := gzip.NewWriter(&buf)
 	tw := tar.NewWriter(gw)
-	if err := tw.WriteHeader(&tar.Header{Name: "9routerx", Mode: 0755, Size: int64(len(payload))}); err != nil {
+	if err := tw.WriteHeader(&tar.Header{Name: "alyysha", Mode: 0755, Size: int64(len(payload))}); err != nil {
 		t.Fatalf("write tar header: %v", err)
 	}
 	if _, err := tw.Write(payload); err != nil {
@@ -500,7 +500,7 @@ func updateAssetTarGz(t *testing.T, payload []byte) []byte {
 // binary itself.
 func stubRunningBinary(t *testing.T, payload []byte) string {
 	t.Helper()
-	stub := filepath.Join(t.TempDir(), "9routerx")
+	stub := filepath.Join(t.TempDir(), "alyysha")
 	if err := os.WriteFile(stub, payload, 0o755); err != nil {
 		t.Fatalf("write stub binary: %v", err)
 	}
@@ -517,7 +517,7 @@ func TestPerformSelfUpdate_RefusesInstallWithoutChecksum(t *testing.T) {
 	}))
 	defer server.Close()
 
-	if err := PerformSelfUpdate(server.URL+"/9routerx_linux_amd64.tar.gz", ""); err == nil {
+	if err := PerformSelfUpdate(server.URL+"/alyysha_linux_amd64.tar.gz", ""); err == nil {
 		t.Fatal("expected an error when the release carries no checksum")
 	}
 
@@ -537,7 +537,7 @@ func TestPerformSelfUpdate_KeepsBinaryOnChecksumMismatch(t *testing.T) {
 	}))
 	defer server.Close()
 
-	err := PerformSelfUpdate(server.URL+"/9routerx_linux_amd64.tar.gz", strings.Repeat("ff", 32))
+	err := PerformSelfUpdate(server.URL+"/alyysha_linux_amd64.tar.gz", strings.Repeat("ff", 32))
 	if err == nil {
 		t.Fatal("expected an error on checksum mismatch")
 	}
@@ -663,7 +663,7 @@ func TestRunCheckCycle_SkipsPrereleaseForFinalInstall(t *testing.T) {
 // no sha256. Since #72 made the digest mandatory, returning that manifest on
 // sight meant the one path that CAN fill the digest from the release's
 // SHA256SUMS.txt never ran: every install ended in "release carries no
-// checksum", and `9routerx update` failed outright. This pins the manifest to
+// checksum", and `alyysha update` failed outright. This pins the manifest to
 // being a lead rather than an answer when it describes an update it cannot
 // verify.
 func TestCheckUpdate_ManifestWithoutDigestFallsThroughToReleaseDigest(t *testing.T) {
@@ -843,7 +843,7 @@ func TestCheckUpdate_ManifestPerPlatformSHA256(t *testing.T) {
 				"latestVersion": "1.9.7",
 				"downloadUrl":   "https://example.invalid/releases/latest",
 				"downloadUrls": map[string]string{
-					platformKey: "https://example.invalid/9routerx-" + platformKey,
+					platformKey: "https://example.invalid/alyysha-" + platformKey,
 				},
 				"sha256s": digests,
 			})
@@ -871,7 +871,7 @@ func TestCheckUpdate_ManifestPerPlatformSHA256(t *testing.T) {
 	if info.SHA256 != platformDigest {
 		t.Errorf("SHA256 = %q, want this platform's digest %q", info.SHA256, platformDigest)
 	}
-	if info.DownloadURL != "https://example.invalid/9routerx-"+platformKey {
+	if info.DownloadURL != "https://example.invalid/alyysha-"+platformKey {
 		t.Errorf("DownloadURL = %q, want this platform's asset URL", info.DownloadURL)
 	}
 	if releaseRequests != 0 {
@@ -944,7 +944,7 @@ func TestCheckUpdate_ManifestDigestPrecedence(t *testing.T) {
 
 // The tray companion asset carries the same OS and arch substrings as the main
 // binary, and GitHub lists release assets alphabetically, so
-// 9routerx-tray-windows-amd64.exe comes BEFORE 9routerx-windows-amd64.exe.
+// alyysha-tray-windows-amd64.exe comes BEFORE alyysha-windows-amd64.exe.
 // The first-cut matcher returned the tray, "updated" a Windows install onto
 // it (the SHA256SUMS digest verified, being the tray's own), and left the
 // gateway replaced by a systray binary. This pins the matcher to the main
@@ -952,12 +952,12 @@ func TestCheckUpdate_ManifestDigestPrecedence(t *testing.T) {
 func TestMatchReleaseAsset_SkipsTrayCompanion(t *testing.T) {
 	// Exact shape of the v1.1.1 release, in GitHub's alphabetical order.
 	assets := []releaseAsset{
-		{Name: "9routerx-darwin-amd64", BrowserDownloadURL: "url-darwin-amd64"},
-		{Name: "9routerx-darwin-arm64", BrowserDownloadURL: "url-darwin-arm64"},
-		{Name: "9routerx-linux-amd64", BrowserDownloadURL: "url-linux-amd64"},
-		{Name: "9routerx-linux-arm64", BrowserDownloadURL: "url-linux-arm64"},
-		{Name: "9routerx-tray-windows-amd64.exe", BrowserDownloadURL: "url-tray"},
-		{Name: "9routerx-windows-amd64.exe", BrowserDownloadURL: "url-windows"},
+		{Name: "alyysha-darwin-amd64", BrowserDownloadURL: "url-darwin-amd64"},
+		{Name: "alyysha-darwin-arm64", BrowserDownloadURL: "url-darwin-arm64"},
+		{Name: "alyysha-linux-amd64", BrowserDownloadURL: "url-linux-amd64"},
+		{Name: "alyysha-linux-arm64", BrowserDownloadURL: "url-linux-arm64"},
+		{Name: "alyysha-tray-windows-amd64.exe", BrowserDownloadURL: "url-tray"},
+		{Name: "alyysha-windows-amd64.exe", BrowserDownloadURL: "url-windows"},
 		{Name: "SHA256SUMS.txt", BrowserDownloadURL: "url-sums"},
 	}
 
@@ -969,7 +969,7 @@ func TestMatchReleaseAsset_SkipsTrayCompanion(t *testing.T) {
 	}
 	// The no-OS-match fallback must not land on the tray either.
 	bare := []releaseAsset{
-		{Name: "9routerx-tray-windows-amd64.exe", BrowserDownloadURL: "url-tray"},
+		{Name: "alyysha-tray-windows-amd64.exe", BrowserDownloadURL: "url-tray"},
 		{Name: "SHA256SUMS.txt", BrowserDownloadURL: "url-sums"},
 	}
 	if url := matchReleaseAsset(bare, "plan9", "amd64"); url != "" {

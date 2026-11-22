@@ -1,8 +1,8 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 /**
  * Harness for the dashboard E2E suite.
  *
- * The suite drives a real `9routerx` binary against a real SQLite file and
+ * The suite drives a real `alyysha` binary against a real SQLite file and
  * a real Chromium, because the regressions it exists to catch live in the DOM.
  *
  * Every other gate in this repo is structurally blind to them: `tsc` reads
@@ -31,7 +31,7 @@ const REPO_ROOT = resolve(import.meta.dirname, '..', '..')
 // Checked before the spawn, in startDashboard: bun reports a rejected beforeAll
 // as a 5s hook timeout followed by an afterAll crash on the undefined handle,
 // so one missing file used to read as six failures.
-const BINARY = join(REPO_ROOT, process.platform === 'win32' ? '9routerx.exe' : '9routerx')
+const BINARY = join(REPO_ROOT, process.platform === 'win32' ? 'alyysha.exe' : 'alyysha')
 
 export interface Dashboard {
   page: Page
@@ -57,7 +57,7 @@ export async function startDashboard(port: number): Promise<Dashboard> {
     throw new Error(`gateway binary not found at ${BINARY}; build it before running the e2e suite`)
   }
 
-  const dataDir = mkdtempSync(join(tmpdir(), '9routerx-e2e-'))
+  const dataDir = mkdtempSync(join(tmpdir(), 'alyysha-e2e-'))
   const server = spawn(BINARY, [], {
     cwd: REPO_ROOT,
     env: {

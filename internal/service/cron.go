@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package service
 
 import (
@@ -9,24 +9,24 @@ import (
 	"slices"
 	"strings"
 
-	"9routerx/proxy/internal/constants"
+	"alyysha/proxy/internal/constants"
 )
 
 // cronMarker tags the @reboot line this package owns, so install stays
 // idempotent and uninstall never touches the user's own crontab entries.
-const cronMarker = "# 9routerx-autostart"
+const cronMarker = "# alyysha-autostart"
 
-// legacyCronMarker is the tag releases before the 9RouterX rename wrote. A
+// legacyCronMarker is the tag releases before the Alyysha Router rename wrote. A
 // self-updated install carries crontab and autostart entries tagged with it,
 // so every ownership check has to match both: matching only the new marker
 // would report such an install as "not installed" and leave its @reboot line
 // firing after an uninstall.
 // legacyCronMarker is the ownership tag the PRE-rename binary wrote into
 // crontabs. It must stay spelled exactly as the old binary spelled it —
-// "9router" + "-go-autostart" — because its job is to find and remove lines
+// "alyysha" + "-go-autostart" — because its job is to find and remove lines
 // that install wrote; a marker renamed along with the product would orphan
 // them. ownedCronLine matches both tags.
-const legacyCronMarker = "# 9router" + "-go-autostart"
+const legacyCronMarker = "# alyysha" + "-go-autostart"
 
 // ownedCronLine reports whether a crontab line was written by this package,
 // under either the current or the pre-rename ownership tag.
@@ -47,8 +47,8 @@ func renderCronLine(exe string, args []string) string {
 func renderAutostartDesktop(exe string, args []string) string {
 	return "[Desktop Entry]\n" +
 		"Type=Application\n" +
-		"Name=9routerx gateway\n" +
-		"Comment=9RouterX AI API proxy gateway\n" +
+		"Name=alyysha gateway\n" +
+		"Comment=Alyysha Router AI API proxy gateway\n" +
 		"Exec=" + commandLine(exe, append(slices.Clone(args), "start")) + "\n" +
 		"Terminal=false\n" +
 		"X-GNOME-Autostart-enabled=true\n" +
@@ -60,7 +60,7 @@ func autostartDesktopPath() string {
 	if err != nil {
 		return ""
 	}
-	return filepath.Join(home, ".config", "autostart", "9routerx.desktop")
+	return filepath.Join(home, ".config", "autostart", "alyysha.desktop")
 }
 
 func installCron(exe string, args []string) (Info, error) {
@@ -90,7 +90,7 @@ func uninstallCron() (Info, bool) {
 // rule the launchd and OpenRC backends already follow. A file that survived
 // (locked, permission denied) still fires at the next graphical login, so
 // reporting it as removed told the user something untrue. The pre-rename
-// 9routerx.desktop is removed too, so an uninstall does not leave a second
+// alyysha.desktop is removed too, so an uninstall does not leave a second
 // entry firing behind the renamed one.
 func removeOwnedDesktopEntry() bool {
 	removed := false
@@ -119,7 +119,7 @@ func removeOwnedDesktopEntry() bool {
 func ownedDesktopPaths() []string {
 	paths := []string{autostartDesktopPath()}
 	if home, err := userHomeDir(); err == nil {
-		paths = append(paths, filepath.Join(home, ".config", "autostart", "9routerx.desktop"))
+		paths = append(paths, filepath.Join(home, ".config", "autostart", "alyysha.desktop"))
 	}
 	return paths
 }
@@ -216,7 +216,7 @@ func removeCronEntry() bool {
 // stripCronEntries removes every line this package owns from the crontab
 // content, preserving the user's own entries byte for byte. Lines tagged with
 // the pre-rename marker count as owned, so an uninstall reaches installs that
-// predate the 9RouterX rename.
+// predate the Alyysha Router rename.
 func stripCronEntries(existing string) (string, bool) {
 	kept := []string{}
 	removed := false

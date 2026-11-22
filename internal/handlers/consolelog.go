@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package handlers
 
 import (
@@ -8,10 +8,10 @@ import (
 	"strconv"
 	"time"
 
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/shutdown"
-	"9routerx/proxy/internal/tracing"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/shutdown"
+	"alyysha/proxy/internal/tracing"
 )
 
 // consolePingInterval matches the Next dashboard's 25s keepalive so proxies

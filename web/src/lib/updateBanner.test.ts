@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 import { afterEach, beforeEach, describe, expect, it } from 'bun:test'
 import {
   ASSET_BY_OS,
@@ -13,9 +13,9 @@ import {
 
 describe('asset per-OS mapping', () => {
   it('follows the documented naming convention', () => {
-    expect(ASSET_BY_OS.windows).toBe('9routerx_windows_amd64.exe')
-    expect(ASSET_BY_OS.macos).toBe('9routerx_darwin_arm64.tar.gz')
-    expect(ASSET_BY_OS.linux).toBe('9routerx_linux_amd64.tar.gz')
+    expect(ASSET_BY_OS.windows).toBe('alyysha_windows_amd64.exe')
+    expect(ASSET_BY_OS.macos).toBe('alyysha_darwin_arm64.tar.gz')
+    expect(ASSET_BY_OS.linux).toBe('alyysha_linux_amd64.tar.gz')
   })
 
   it('maps a Windows UA to the windows asset', () => {
@@ -40,17 +40,17 @@ describe('asset per-OS mapping', () => {
 
 describe('release URL trust (anti link injection)', () => {
   it('links the real release host', () => {
-    expect(releaseUrlTrust('https://github.com/yanstd888/9RouterX/releases/tag/v0.6.0')).toBe('trusted')
+    expect(releaseUrlTrust('https://github.com/ShiroSdk/Alyysha Router/releases/tag/v0.6.0')).toBe('trusted')
   })
 
   it('refuses lookalike hosts and other repos', () => {
-    expect(releaseUrlTrust('https://github.com.evil.example/yanstd888/9routerx/releases')).toBe('untrusted')
-    expect(releaseUrlTrust('https://github.com/other/9routerx/releases/latest')).toBe('untrusted')
-    expect(releaseUrlTrust('https://gitlab.com/yanstd888/9routerx/releases')).toBe('untrusted')
+    expect(releaseUrlTrust('https://github.com.evil.example/ShiroSdk/alyysha-router/releases')).toBe('untrusted')
+    expect(releaseUrlTrust('https://github.com/other/alyysha/releases/latest')).toBe('untrusted')
+    expect(releaseUrlTrust('https://gitlab.com/ShiroSdk/alyysha-router/releases')).toBe('untrusted')
   })
 
   it('refuses non-https and non-URL values', () => {
-    expect(releaseUrlTrust('http://github.com/yanstd888/9routerx/releases')).toBe('untrusted')
+    expect(releaseUrlTrust('http://github.com/ShiroSdk/alyysha-router/releases')).toBe('untrusted')
     expect(releaseUrlTrust('javascript:alert(1)')).toBe('untrusted')
     expect(releaseUrlTrust('not a url')).toBe('untrusted')
   })
@@ -125,6 +125,6 @@ describe('skip list (localStorage)', () => {
   })
 
   it('the npm command is the static, documented string', () => {
-    expect(NPM_PACKAGE_CMD).toBe('npm i -g 9routerx@latest')
+    expect(NPM_PACKAGE_CMD).toBe('npm i -g alyysha@latest')
   })
 })

@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package db
 
 import (
@@ -9,7 +9,7 @@ import (
 
 // ProviderOverrides is what an operator may add to one provider's outbound
 // request on top of what the registry already sends. It mirrors upstream's
-// `providerOverrides` settings entry (decolua/9router v0.5.95,
+// `providerOverrides` settings entry (decolua/alyysha v0.5.95,
 // src/app/api/providers/[id]/overrides/route.js).
 type ProviderOverrides struct {
 	Headers      map[string]string `json:"headers,omitempty"`

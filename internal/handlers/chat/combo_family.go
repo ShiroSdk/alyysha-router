@@ -1,10 +1,10 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
 	"strings"
 
-	"9routerx/proxy/internal/models"
+	"alyysha/proxy/internal/models"
 )
 
 // Model-family fallback grouping (N9): a combo ladder that crosses a model

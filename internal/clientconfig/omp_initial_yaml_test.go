@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package clientconfig
 
 import (
@@ -18,7 +18,7 @@ type ompProviderEntry struct {
 }
 
 // TestOmpInitialYAML proves a first-ever OMP connect lands the full nested
-// providers.9router object on a file that has no YAML document to splice
+// providers.alyysha object on a file that has no YAML document to splice
 // into — the empty 0-byte models.yml a fresh oh-my-pi install leaves behind
 // (issue #7). Written values are read back through the decoder, not string
 // matching, so any structurally wrong success fails here.
@@ -74,9 +74,9 @@ func TestOmpInitialYAML(t *testing.T) {
 			if err := yaml.Unmarshal(data, &doc); err != nil {
 				t.Fatalf("written YAML does not decode: %v\n%s", err, data)
 			}
-			entry, ok := doc.Providers["9router"]
+			entry, ok := doc.Providers["alyysha"]
 			if !ok {
-				t.Fatalf("providers.9router missing from written file:\n%s", data)
+				t.Fatalf("providers.alyysha missing from written file:\n%s", data)
 			}
 			if entry.BaseURL != "http://127.0.0.1:20130/v1" || entry.APIKey != "fixture-key" || entry.API != "openai-completions" {
 				t.Fatalf("written provider entry has wrong values: %+v", entry)

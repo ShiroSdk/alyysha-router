@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package translator
 
 import (
@@ -217,7 +217,7 @@ type ClaudeTool struct {
 	InputSchema jsontext.Value `json:"input_schema,omitempty"`
 	// Strict is not an Anthropic-native field; it is carried through translation
 	// so a client instruction survives a Claude<->OpenAI hop (parity with
-	// decolua/9router#4607). Pointer + omitempty keeps "unset" distinguishable
+	// decolua/alyysha#4607). Pointer + omitempty keeps "unset" distinguishable
 	// from an explicit false, which is a real client instruction. A non-boolean
 	// value is dropped rather than fatal — see UnmarshalStrict.
 	Strict *bool `json:"strict,omitempty"`
@@ -266,7 +266,7 @@ type ClaudeToolChoice struct {
 	Type string `json:"type"`
 	// DisableParallelToolUse is Claude's single-tool-call policy: the model may
 	// emit at most one tool call per turn. It is the counterpart of OpenAI's
-	// parallel_tool_calls:false (parity with decolua/9router#4581). Plain bool
+	// parallel_tool_calls:false (parity with decolua/alyysha#4581). Plain bool
 	// with omitempty: only an explicit true is worth putting on the wire.
 	DisableParallelToolUse bool `json:"disable_parallel_tool_use,omitempty"`
 	Name string `json:"name,omitempty"`
@@ -364,7 +364,7 @@ type OpenAIFunction struct {
 	Description string         `json:"description,omitempty"`
 	Parameters  jsontext.Value `json:"parameters,omitempty"`
 	// Strict preserves an explicit client strict mode in both directions
-	// (parity with decolua/9router#4607/#4543/#4573). Pointer + omitempty keeps
+	// (parity with decolua/alyysha#4607/#4543/#4573). Pointer + omitempty keeps
 	// "unset" distinguishable from an explicit false.
 	Strict *bool `json:"strict,omitempty"`
 }

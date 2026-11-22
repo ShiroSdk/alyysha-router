@@ -1,10 +1,10 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package db
 
 import (
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/thinking"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/thinking"
 )
 
 func applyComboStrategies(s *SettingsData, raw map[string]any) {

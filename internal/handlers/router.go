@@ -1,27 +1,27 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package handlers
 
 import (
-	"9routerx/proxy/internal/a2a"
-	"9routerx/proxy/internal/auth"
-	"9routerx/proxy/internal/clientconfig"
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/guardrails"
-	"9routerx/proxy/internal/handlers/batches"
-	"9routerx/proxy/internal/handlers/chat"
-	"9routerx/proxy/internal/handlers/dashboard"
-	"9routerx/proxy/internal/handlers/media"
-	"9routerx/proxy/internal/handlers/oauth"
-	"9routerx/proxy/internal/handlers/shared"
-	"9routerx/proxy/internal/handlers/sso"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/mcpserver"
-	"9routerx/proxy/internal/middleware"
-	"9routerx/proxy/internal/observ"
-	"9routerx/proxy/internal/securitylog"
-	"9routerx/proxy/internal/webhooks"
-	"9routerx/proxy/web"
+	"alyysha/proxy/internal/a2a"
+	"alyysha/proxy/internal/auth"
+	"alyysha/proxy/internal/clientconfig"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/guardrails"
+	"alyysha/proxy/internal/handlers/batches"
+	"alyysha/proxy/internal/handlers/chat"
+	"alyysha/proxy/internal/handlers/dashboard"
+	"alyysha/proxy/internal/handlers/media"
+	"alyysha/proxy/internal/handlers/oauth"
+	"alyysha/proxy/internal/handlers/shared"
+	"alyysha/proxy/internal/handlers/sso"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/mcpserver"
+	"alyysha/proxy/internal/middleware"
+	"alyysha/proxy/internal/observ"
+	"alyysha/proxy/internal/securitylog"
+	"alyysha/proxy/internal/webhooks"
+	"alyysha/proxy/web"
 	json "encoding/json/v2"
 	"github.com/go-chi/chi/v5"
 	"net/http"
@@ -650,9 +650,9 @@ func SetupServerRouter(r chi.Router, repo *db.Repo, ts *TokenSaverConfig) *chat.
 	// Public (unauthenticated) endpoints
 	r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set(constants.HeaderContentType, constants.ContentTypeJSON)
-		// The name field is the API identity (9RouterX rebrand): a client asking
+		// The name field is the API identity (Alyysha Router rebrand): a client asking
 		// "what am I talking to" reads it without parsing any other payload.
-		w.Write([]byte(`{"status":"ok","name":"9RouterX"}`))
+		w.Write([]byte(`{"status":"ok","name":"Alyysha Router"}`))
 	})
 	// Version info is public (upstream PUBLIC_API_PATHS): the Sidebar polls
 	// /api/version on every dashboard page including /login, before any
@@ -714,7 +714,7 @@ func SetupServerRouter(r chi.Router, repo *db.Repo, ts *TokenSaverConfig) *chat.
 	r.HandleFunc("/apple-touch-icon.png", webH.ServeHTTP)
 	r.HandleFunc("/android-chrome-192x192.png", webH.ServeHTTP)
 	r.HandleFunc("/android-chrome-512x512.png", webH.ServeHTTP)
-	r.HandleFunc("/logo-9routerx.png", webH.ServeHTTP)
+	r.HandleFunc("/logo-alyysha.png", webH.ServeHTTP)
 	r.HandleFunc("/icons.svg", webH.ServeHTTP)
 	r.HandleFunc("/sw.js", webH.ServeHTTP)
 	r.HandleFunc("/manifest.webmanifest", webH.ServeHTTP)

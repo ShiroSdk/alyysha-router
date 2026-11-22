@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 import { describe, expect, it } from 'bun:test'
 import { PERIODS, normalizeCustomPeriod, periodLabel, rememberPeriod, sanitizeStoredPeriod, storedPeriod } from './types'
 
@@ -91,7 +91,7 @@ describe('stored period', () => {
       expect(storedPeriod('usage', 'today')).toBe('12h')
       expect(storedPeriod('cache', '24h')).toBe('14d')
       expect(storedPeriod('compression', '24h')).toBe('30d')
-      values.set('9routerx-analytics-period-usage', '99999d')
+      values.set('alyysha-analytics-period-usage', '99999d')
       expect(storedPeriod('usage', 'today')).toBe('today')
     })
   })

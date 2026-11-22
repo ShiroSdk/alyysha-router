@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -6,10 +6,10 @@ import (
 	"sort"
 	"time"
 
-	"9routerx/proxy/internal/analyticsrange"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/pricing"
+	"alyysha/proxy/internal/analyticsrange"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/pricing"
 )
 
 // HandleGetSavingsSummary aggregates the savings the gateway measures —

@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package tunnel
 
 import (
@@ -16,12 +16,12 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/log"
 )
 
 // isolateDataDir points the package's data dir at a temp directory for the
 // duration of the test. Without it these tests read and write the developer's
-// real ~/.9router/tunnel, and a state.json written here would make the next
+// real ~/.alyysha/tunnel, and a state.json written here would make the next
 // dashboard start believe a tunnel exists.
 //
 // Only DATA_DIR is pinned. The paths inside the package resolve from it on

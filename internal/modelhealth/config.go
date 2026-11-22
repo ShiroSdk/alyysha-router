@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Package modelhealth holds the automatic model-health loop: it probes the
 // models an operator has already looked at, counts consecutive failures, and
 // disables a model that has failed often enough to be considered dead — then

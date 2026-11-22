@@ -1,5 +1,5 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
-// Frontend aggregation for the shadcn dashboard charts (TASK-9routerX-shadcn-dashboard §2):
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
+// Frontend aggregation for the shadcn dashboard charts (TASK-alyyshaX-shadcn-dashboard §2):
 // pure functions over the EXISTING /api/usage/chart response — no new endpoints.
 
 export interface TrendBucket {

@@ -1,6 +1,6 @@
-<!-- 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id -->
+<!-- Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers -->
 <script lang="ts">
-  // Custom radio (TASK-9routerX-ui-polish §2): the dot pops in with the same
+  // Custom radio (TASK-alyyshaX-ui-polish §2): the dot pops in with the same
   // 120ms scale the checkbox uses. adapted from uiverse.io/sssynk/tall-octopus-55
   // (MIT) — the same tick-pop family, round. Every color is a theme token, so
   // dark and light come from the same component.

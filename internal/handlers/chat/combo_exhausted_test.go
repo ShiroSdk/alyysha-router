@@ -1,8 +1,8 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
-	"9routerx/proxy/internal/resilience"
+	"alyysha/proxy/internal/resilience"
 	json "encoding/json/v2"
 	"fmt"
 	"net/http"
@@ -12,7 +12,7 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/db"
 )
 
 // exhaustedBody renders an upstream 429 the way providers actually send it.

@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -148,7 +148,7 @@ func TestHandleValidateProvider_ClinepassProbesRegistryModelsEndpoint(t *testing
 		t.Errorf("expected bearer auth header, got %q", got)
 	}
 	// API-key probes carry only Accept + Authorization (upstream
-	// buildModelListHeaders); the 9Router identity goes on OAuth probes.
+	// buildModelListHeaders); the Alyysha identity goes on OAuth probes.
 	if got := probe.headers.Get("User-Agent"); got != "" {
 		t.Errorf("expected no identity User-Agent on API-key probe, got %q", got)
 	}

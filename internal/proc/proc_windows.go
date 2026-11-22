@@ -1,6 +1,6 @@
 //go:build windows
 
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package proc
 
 import (
@@ -26,7 +26,7 @@ var ErrStopUnsupported = errors.New("proc: graceful stop unsupported on this pla
 // The exit code is checked because a process this package spawned and released
 // without waiting on keeps its PID as a zombie and still reports STILL_ACTIVE
 // until the handle is reused — reporting that as alive would make
-// `9routerx stop` wait on a process that is already gone.
+// `alyysha stop` wait on a process that is already gone.
 func pidAlive(pid int) bool {
 	if pid <= 0 {
 		return false

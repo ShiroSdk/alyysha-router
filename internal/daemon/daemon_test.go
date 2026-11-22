@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package daemon
 
 import (
@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/proc"
+	"alyysha/proxy/internal/proc"
 )
 
 // isolate points DATA_DIR at a temp directory so the tests never read or write
@@ -208,7 +208,7 @@ func writePIDFile(t *testing.T, content string) {
 func livePID(t *testing.T) int {
 	t.Helper()
 	cmd := exec.Command(os.Args[0], "-test.run=TestDaemonLivePIDHelper")
-	cmd.Env = append(os.Environ(), "9ROUTERX_PID_HELPER=1")
+	cmd.Env = append(os.Environ(), "ALYYSHA_PID_HELPER=1")
 	if err := cmd.Start(); err != nil {
 		t.Fatalf("start helper process: %v", err)
 	}
@@ -222,7 +222,7 @@ func livePID(t *testing.T) int {
 // TestDaemonLivePIDHelper is the payload livePID spawns; it only sleeps when
 // the environment marker says it is the helper rather than a real test run.
 func TestDaemonLivePIDHelper(t *testing.T) {
-	if os.Getenv("9ROUTERX_PID_HELPER") != "1" {
+	if os.Getenv("ALYYSHA_PID_HELPER") != "1" {
 		t.Skip("helper payload, only meaningful as a spawned child")
 	}
 	time.Sleep(30 * time.Second)

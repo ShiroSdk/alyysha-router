@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package service
 
 import (
@@ -8,11 +8,11 @@ import (
 )
 
 // windowsTaskName is the scheduled-task name this package owns.
-const windowsTaskName = "9routerx"
+const windowsTaskName = "alyysha"
 
 // windowsTaskUser resolves the account the logon task runs as. It is the
 // interactive user that ran install, never SYSTEM: a SYSTEM task reads
-// %APPDATA%\9router — a different data directory from the user's, silently.
+// %APPDATA%\alyysha — a different data directory from the user's, silently.
 // It is a seam for tests.
 var windowsTaskUser = func() string {
 	for _, key := range []string{"USERNAME", "USER"} {
@@ -26,7 +26,7 @@ var windowsTaskUser = func() string {
 // windowsQuoteArg quotes one argv element for the cmd.exe command line
 // schtasks stores in its /tr value. strconv.Quote (used for the POSIX targets)
 // escapes backslashes, which cmd.exe does not understand: it would see
-// "C:\\Program Files\\9routerx.exe" as a path it cannot run. An element
+// "C:\\Program Files\\alyysha.exe" as a path it cannot run. An element
 // without spaces or tabs is safe verbatim.
 func windowsQuoteArg(arg string) string {
 	if arg == "" {

@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package db
 
 import (
@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/combos/smart"
+	"alyysha/proxy/internal/combos/smart"
 )
 
 // The smart-rule column and the methods that read and write it.

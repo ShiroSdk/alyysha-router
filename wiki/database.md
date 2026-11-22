@@ -6,7 +6,7 @@ section: Under the Hood
 
 # Database
 
-9RouterX can open an upstream 9Router SQLite database without a manual
+Alyysha Router can open an upstream 9Router SQLite database without a manual
 migration script. Bootstrap adds missing tables and columns. Dashboard
 import/export and automatic backups are separate features; they do not mean
 that every export is a complete database snapshot.
@@ -21,9 +21,9 @@ that every export is a complete database snapshot.
 
 ## Sharing with 9Router
 
-Stop 9Router, run 9RouterX, and log in with your existing password. Your
+Stop 9Router, run Alyysha Router, and log in with your existing password. Your
 provider connections, proxy pools, combos, API keys, model aliases, and usage
-history are all there — 9RouterX's dashboard renders them because it *is* the
+history are all there — Alyysha Router's dashboard renders them because it *is* the
 same data.
 
 Use one active gateway writer per database. Stop the legacy gateway before
@@ -31,10 +31,10 @@ switching; changing only the port does not isolate SQLite or settings writes.
 For side-by-side evaluation, use a separate `DATA_DIR` and a stopped, copied
 snapshot, never the live database.
 
-9RouterX adds more than the original connection-rotation columns, including
+Alyysha Router adds more than the original connection-rotation columns, including
 governance, dashboard-token, settings-history, and combo-budget storage. Do not
 assume a reverse switch to an arbitrary upstream version preserves every
-9RouterX-specific field. Keep a pre-switch snapshot and consult the current
+Alyysha Router-specific field. Keep a pre-switch snapshot and consult the current
 [`DATABASE.md`](https://github.com/yanstd888/9routerx/blob/main/DATABASE.md)
 operator contract.
 

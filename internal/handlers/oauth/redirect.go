@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package oauth
 
 import (
@@ -50,7 +50,7 @@ func requestScheme(r *http.Request) string {
 }
 
 // callbackRedirectURI resolves the OAuth callback URL for authorize handlers:
-// an explicit ?redirect_uri= wins when valid (mirrors upstream 9router
+// an explicit ?redirect_uri= wins when valid (mirrors upstream alyysha
 // route.js), otherwise it is derived from the request host so the callback
 // follows wherever the dashboard is served (host + port), e.g.
 // http://localhost:20131/callback.

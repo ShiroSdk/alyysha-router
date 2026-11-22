@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package main
 
 import (
@@ -14,7 +14,7 @@ import (
 	"github.com/urfave/cli/v2"
 	"golang.org/x/term"
 
-	"9routerx/proxy/internal/daemon"
+	"alyysha/proxy/internal/daemon"
 )
 
 func firstRunConflict(c *cli.Context, target string) (bool, error) {
@@ -53,7 +53,7 @@ func resolveFirstConflict(c *cli.Context, conflict daemon.PortConflict, in *bufi
 		if err := os.Setenv("PORT", strconv.Itoa(port)); err != nil {
 			return true, err
 		}
-		fmt.Fprintf(out, "Set PORT=%d (env) or `9routerx service install` to make it permanent.\nFor this specific port: 9routerx --port=%d service install\n", port, port)
+		fmt.Fprintf(out, "Set PORT=%d (env) or `alyysha service install` to make it permanent.\nFor this specific port: alyysha --port=%d service install\n", port, port)
 		// Call the underlying start only once; do not re-enter the first-run menu.
 		return true, startDetachedOn(c, daemonURL())
 	default:

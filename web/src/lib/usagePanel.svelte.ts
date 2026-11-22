@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 /**
  * The Usage page's panel selection and arrangement, as one draft: the Settings
  * card edits it, every Usage section reads it through `isPanelVisible` and

@@ -1,7 +1,7 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package headroom
 
-// Live probe against a real Headroom proxy. Skipped unless 9ROUTERX_HEADROOM_LIVE
+// Live probe against a real Headroom proxy. Skipped unless ALYYSHA_HEADROOM_LIVE
 // is set, because it needs a proxy process the test cannot start.
 
 import (
@@ -14,9 +14,9 @@ import (
 )
 
 func TestLiveCompressAgainstRealProxy(t *testing.T) {
-	url := os.Getenv("9ROUTERX_HEADROOM_LIVE")
+	url := os.Getenv("ALYYSHA_HEADROOM_LIVE")
 	if url == "" {
-		t.Skip("set 9ROUTERX_HEADROOM_LIVE=http://127.0.0.1:8787 to run")
+		t.Skip("set ALYYSHA_HEADROOM_LIVE=http://127.0.0.1:8787 to run")
 	}
 	lines := make([]string, 200)
 	for i := range lines {
@@ -53,9 +53,9 @@ func TestLiveCompressAgainstRealProxy(t *testing.T) {
 }
 
 func TestLiveGuardStopsRealProxy(t *testing.T) {
-	url := os.Getenv("9ROUTERX_HEADROOM_LIVE")
+	url := os.Getenv("ALYYSHA_HEADROOM_LIVE")
 	if url == "" {
-		t.Skip("set 9ROUTERX_HEADROOM_LIVE to run")
+		t.Skip("set ALYYSHA_HEADROOM_LIVE to run")
 	}
 	// Same long log, but carried by a Read tool result. If the guard works the
 	// proxy is never contacted; the body comes back byte-identical.

@@ -1,11 +1,11 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package dashboard
 
 import (
 	"net/http"
 
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/tlsstealth"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/tlsstealth"
 )
 
 // HandleGetTLSStealthStatus serves GET /api/tls-stealth/status: the state the

@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 /**
  * Provider share link — the codec behind `/v1/add#…`.
  *
@@ -374,11 +374,11 @@ export function applyModelFilters(models: CatalogModel[], selection: ModelSelect
 }
 
 // ---------------------------------------------------------------------------
-// 9routerx:// scheme
+// alyysha:// scheme
 // ---------------------------------------------------------------------------
 
 /**
- * The scheme form: `9routerx://<base64url JSON>`.
+ * The scheme form: `alyysha://<base64url JSON>`.
  *
  * The same payload as `set=`, without the `#`-fragment wrapping. It exists
  * because a query-string URL grows past what a chat client or an SMS will
@@ -389,11 +389,11 @@ export function applyModelFilters(models: CatalogModel[], selection: ModelSelect
  * URL form holds, because an explicit scheme makes the link look ordinary
  * enough to be pasted somewhere it will be logged. Identity and models only.
  */
-export const SHARE_SCHEME = '9routerx://'
+export const SHARE_SCHEME = 'alyysha://'
 /** Max decoded payload, mirroring SET_CAPS so both forms refuse the same input. */
 export const SCHEME_CAPS = { maxEntries: 8, maxChars: 4000 } as const
 
-/** A `.9routerx.json` file: the same array, on disk. */
+/** A `.alyysha.json` file: the same array, on disk. */
 export interface ShareFile {
   version: 1
   links: ProviderShareLink[]
@@ -415,40 +415,40 @@ export function encodeScheme(links: ProviderShareLink[]): string {
   return SHARE_SCHEME + encoded
 }
 
-/** Decodes a `9routerx://…` token, enforcing the same caps as the encoder. */
+/** Decodes a `alyysha://…` token, enforcing the same caps as the encoder. */
 export function decodeScheme(token: string): ProviderShareLink[] {
   const trimmed = token.trim()
   const body = trimmed.startsWith(SHARE_SCHEME) ? trimmed.slice(SHARE_SCHEME.length) : trimmed
-  if (!body) throw new Error('share link: the 9routerx:// payload is empty')
+  if (!body) throw new Error('share link: the alyysha:// payload is empty')
   let parsed: unknown
   try {
     parsed = JSON.parse(fromBase64Url(body))
   } catch {
-    throw new Error('share link: the 9routerx:// payload is not valid base64url JSON')
+    throw new Error('share link: the alyysha:// payload is not valid base64url JSON')
   }
   // A bare array is accepted too, so a hand-assembled token without the version
   // wrapper still loads rather than failing on a shape nobody was told about.
   const raw = Array.isArray(parsed)
     ? parsed
     : (parsed as ShareFile | null)?.links
-  if (!Array.isArray(raw)) throw new Error('share link: the 9routerx:// payload is not a provider list')
-  if (raw.length === 0) throw new Error('share link: the 9routerx:// payload carries no providers')
+  if (!Array.isArray(raw)) throw new Error('share link: the alyysha:// payload is not a provider list')
+  if (raw.length === 0) throw new Error('share link: the alyysha:// payload carries no providers')
   if (raw.length > SCHEME_CAPS.maxEntries) {
-    throw new Error(`share link: the 9routerx:// payload carries ${raw.length} providers, over the ${SCHEME_CAPS.maxEntries} limit`)
+    throw new Error(`share link: the alyysha:// payload carries ${raw.length} providers, over the ${SCHEME_CAPS.maxEntries} limit`)
   }
   if (body.length > SCHEME_CAPS.maxChars) {
-    throw new Error(`share link: the 9routerx:// payload is ${body.length} characters, over the ${SCHEME_CAPS.maxChars} limit`)
+    throw new Error(`share link: the alyysha:// payload is ${body.length} characters, over the ${SCHEME_CAPS.maxChars} limit`)
   }
   return raw.map((entry) => normalizeLink(entry as Record<string, unknown>))
 }
 
-/** Serialises links for a `.9routerx.json` download. */
+/** Serialises links for a `.alyysha.json` download. */
 export function encodeShareFile(links: ProviderShareLink[]): string {
   const payload: ShareFile = { version: 1, links }
   return JSON.stringify(payload, null, 2)
 }
 
-/** Parses the contents of a `.9routerx.json` file. */
+/** Parses the contents of a `.alyysha.json` file. */
 export function decodeShareFile(text: string): ProviderShareLink[] {
   let parsed: unknown
   try {
@@ -468,7 +468,7 @@ export function decodeShareFile(text: string): ProviderShareLink[] {
 /**
  * The one entry point every import path goes through.
  *
- * Accepts, in order: a `9routerx://` token, a `.9routerx.json` body, or a
+ * Accepts, in order: a `alyysha://` token, a `.alyysha.json` body, or a
  * `/add#…` URL (the original form). Returns `null` for text that is none of
  * those, so a caller can tell "not a share link" from "a malformed one" —
  * the latter throws.

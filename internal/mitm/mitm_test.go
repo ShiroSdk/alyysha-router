@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package mitm
 
 import (
@@ -127,7 +127,7 @@ func TestHostsEntries(t *testing.T) {
 	if !strings.Contains(entries, "chatgpt.com") {
 		t.Error("expected codex domain in entries")
 	}
-	if !strings.Contains(entries, "# 9router-mitm") {
+	if !strings.Contains(entries, "# alyysha-mitm") {
 		t.Error("expected marker comment")
 	}
 }

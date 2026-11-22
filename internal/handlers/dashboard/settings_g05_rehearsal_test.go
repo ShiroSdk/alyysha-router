@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -11,7 +11,7 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/auth"
+	"alyysha/proxy/internal/auth"
 )
 
 // g05FixturePayload is the migration rehearsal corpus: every access state the

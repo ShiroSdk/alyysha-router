@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package main
 
 import (
@@ -16,14 +16,14 @@ import (
 	"github.com/urfave/cli/v2"
 	"go.uber.org/fx"
 
-	"9routerx/proxy/internal/app"
-	"9routerx/proxy/internal/backup"
-	"9routerx/proxy/internal/config"
-	"9routerx/proxy/internal/daemon"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlers/dashboard"
-	"9routerx/proxy/internal/shutdown"
-	"9routerx/proxy/internal/updater"
+	"alyysha/proxy/internal/app"
+	"alyysha/proxy/internal/backup"
+	"alyysha/proxy/internal/config"
+	"alyysha/proxy/internal/daemon"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlers/dashboard"
+	"alyysha/proxy/internal/shutdown"
+	"alyysha/proxy/internal/updater"
 )
 
 // binaryName lets the same executable answer to `opencode-go`, so a renamed
@@ -32,7 +32,7 @@ func binaryName() string {
 	if base := filepath.Base(os.Args[0]); strings.HasPrefix(base, "opencode-go") {
 		return "opencode-go"
 	}
-	return "9routerx"
+	return "alyysha"
 }
 
 func main() {
@@ -78,7 +78,7 @@ func main() {
 			&cli.BoolFlag{
 				Name:    daemon.BackgroundName,
 				Aliases: []string{"d"},
-				Usage:   "run as a background daemon: detaches from the terminal and returns (env: 9ROUTERX_BACKGROUND)",
+				Usage:   "run as a background daemon: detaches from the terminal and returns (env: ALYYSHA_BACKGROUND)",
 			},
 		},
 		Commands: []*cli.Command{
@@ -90,13 +90,13 @@ func main() {
 				Action: func(cCtx *cli.Context) error {
 					info, err := updater.CheckUpdate(cCtx.Context)
 					if err != nil {
-						fmt.Printf("9routerx version %s (%s/%s)\nUpdate check failed: %v\n", updater.CurrentVersion, runtime.GOOS, runtime.GOARCH, err)
+						fmt.Printf("alyysha version %s (%s/%s)\nUpdate check failed: %v\n", updater.CurrentVersion, runtime.GOOS, runtime.GOARCH, err)
 						return nil
 					}
-					fmt.Printf("9routerx version %s (%s/%s)\n", info.CurrentVersion, info.OS, info.Arch)
+					fmt.Printf("alyysha version %s (%s/%s)\n", info.CurrentVersion, info.OS, info.Arch)
 					fmt.Printf("Latest version: %s\n", info.LatestVersion)
 					if info.HasUpdate {
-						fmt.Printf("\n[UPDATE] v%s available — run '9routerx update'\nNotes: %s\n", info.LatestVersion, info.ReleaseNotes)
+						fmt.Printf("\n[UPDATE] v%s available — run 'alyysha update'\nNotes: %s\n", info.LatestVersion, info.ReleaseNotes)
 					} else {
 						fmt.Println("App is up to date.")
 					}
@@ -113,14 +113,14 @@ func main() {
 						return fmt.Errorf("update check failed: %w", err)
 					}
 					if !info.HasUpdate {
-						fmt.Printf("9routerx is already on the latest version (%s).\n", info.CurrentVersion)
+						fmt.Printf("alyysha is already on the latest version (%s).\n", info.CurrentVersion)
 						return nil
 					}
 					fmt.Printf("Downloading update v%s...\n", info.LatestVersion)
 					if err := updater.PerformSelfUpdate(info.DownloadURL, info.SHA256); err != nil {
 						return fmt.Errorf("update failed: %w", err)
 					}
-					fmt.Println("[OK] 9routerx updated successfully!")
+					fmt.Println("[OK] alyysha updated successfully!")
 					return nil
 				},
 			},
@@ -135,7 +135,7 @@ func main() {
 						Action: func(cCtx *cli.Context) error {
 							filePath := cCtx.Args().First()
 							if filePath == "" {
-								return fmt.Errorf("usage: 9routerx db restore <file>")
+								return fmt.Errorf("usage: alyysha db restore <file>")
 							}
 							cfg := config.LoadConfig()
 							conn, err := db.OpenDatabase(cfg.DatabasePath)
@@ -239,7 +239,7 @@ func main() {
 					},
 					{
 						Name:   "take-over",
-						Usage:  "Replace an old gateway and matching legacy autostart, then verify 9RouterX",
+						Usage:  "Replace an old gateway and matching legacy autostart, then verify Alyysha Router",
 						Flags:  []cli.Flag{&cli.BoolFlag{Name: "yes", Usage: "approve reported stop, force fallback, autostart and service actions without prompts"}},
 						Action: serviceTakeOver,
 					},
@@ -299,7 +299,7 @@ func foregroundOrBackground(cCtx *cli.Context) error {
 	if cCtx.Bool("service-process") {
 		return runServer(cCtx)
 	}
-	// On a terminal, bare `9routerx` offers the interface picker; without one
+	// On a terminal, bare `alyysha` offers the interface picker; without one
 	// (service unit, container, pipe) it boots the server as before.
 	if stdinIsTerminal() {
 		return runMenu(cCtx)
@@ -354,7 +354,7 @@ func runServer(cCtx *cli.Context) error {
 	signal.Notify(signals, os.Interrupt, syscall.SIGTERM)
 	defer signal.Stop(signals)
 
-	// A daemon records its PID so `9routerx stop|status|restart` can find it
+	// A daemon records its PID so `alyysha stop|status|restart` can find it
 	// after the launching terminal is long gone.
 	if daemon.IsBackgroundProcess() {
 		daemon.RegisterPID()

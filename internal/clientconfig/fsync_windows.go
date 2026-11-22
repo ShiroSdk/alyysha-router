@@ -1,6 +1,6 @@
 //go:build windows
 
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package clientconfig
 
 // fsyncDir is a no-op on Windows: opening a directory for sync fails with

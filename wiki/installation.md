@@ -58,7 +58,7 @@ HOST=127.0.0.1 9routerx
 ## Background mode
 
 ```bash
-9routerx start          # same as: 9RouterX --background   (or -d)
+9routerx start          # same as: Alyysha Router --background   (or -d)
 9routerx status         # pid, dashboard, log
 9routerx restart
 9routerx logs -n 100

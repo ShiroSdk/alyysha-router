@@ -1,7 +1,7 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package thinking
 
-import "9routerx/proxy/internal/providers"
+import "alyysha/proxy/internal/providers"
 
 // writerCtx carries what a per-format writer needs: the body to write into,
 // the intent (already clamped to minimal when the model cannot disable), and

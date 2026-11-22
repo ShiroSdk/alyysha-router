@@ -1,10 +1,10 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package dashboard
 
 import (
 	"fmt"
 
-	"9routerx/proxy/internal/schedule"
+	"alyysha/proxy/internal/schedule"
 )
 
 // mergeAutoPingSchedules replaces each auto-ping payload in `updates` with the

@@ -1,4 +1,4 @@
-<!-- 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
   // Port of upstream EditCompatibleNodeModal.js (dashboard/providers/[id]).
   import Badge from '../../lib/ui/Badge.svelte'

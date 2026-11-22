@@ -1,5 +1,5 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
-// Port of 9router Next.js ProviderLimits/utils.js for the native Go dashboard.
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
+// Port of alyysha Next.js ProviderLimits/utils.js for the native Go dashboard.
 // Pure helpers + localStorage quota cache + quota visibility filtering.
 import { getModelsByProviderId } from '../../lib/models'
 

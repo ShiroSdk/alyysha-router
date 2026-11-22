@@ -1,10 +1,10 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package app
 
 import (
 	"go.uber.org/fx"
 
-	"9routerx/proxy/internal/config"
+	"alyysha/proxy/internal/config"
 )
 
 // ConfigModule loads config.Config, provides *viper.Viper, and provides CLI/environment parameters.

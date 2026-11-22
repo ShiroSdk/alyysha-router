@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // The Material Symbols font is declared in `src/index.css` and shipped from
 // `src/assets`, not imported here. The npm package's stylesheet points at its
 // own 3.9 MB variable font with every axis live; the vendored copy is the

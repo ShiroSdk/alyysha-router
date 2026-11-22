@@ -1,9 +1,9 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package dashboard
 
 import (
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlerutil"
 	"context"
 	"encoding/json"
 	"errors"
@@ -802,7 +802,7 @@ func (imp *jailbreakImporter) fetchText(ctx context.Context, u string, limit int
 	if err != nil {
 		return "", err
 	}
-	req.Header.Set("User-Agent", "9routerx")
+	req.Header.Set("User-Agent", "alyysha")
 	resp, err := imp.client.Do(req)
 	if err != nil {
 		return "", err
@@ -828,7 +828,7 @@ func (imp *jailbreakImporter) fetchBytes(ctx context.Context, u string, limit in
 	if err != nil {
 		return nil, "", err
 	}
-	req.Header.Set("User-Agent", "9routerx")
+	req.Header.Set("User-Agent", "alyysha")
 	resp, err := imp.client.Do(req)
 	if err != nil {
 		return nil, "", err

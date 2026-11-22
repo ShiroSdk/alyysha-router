@@ -1,12 +1,12 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package dashboard
 
 import (
 	"net/http"
 	"time"
 
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/providers"
 )
 
 // ProviderHealthResponse is one free provider's health row for the dashboard's

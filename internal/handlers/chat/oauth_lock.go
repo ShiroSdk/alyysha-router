@@ -1,12 +1,12 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
 	"net/http"
 	"time"
 
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/providers"
 )
 
 // parkRejectedOAuthAccount cools a connection down after the provider rejected

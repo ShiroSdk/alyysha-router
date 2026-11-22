@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package auth
 
 import (
@@ -12,11 +12,11 @@ import (
 // TestTOTPEnrollVerify pins the happy path: enroll generates a secret and an
 // otpauth URI, and a code generated from that secret validates.
 func TestTOTPEnrollVerify(t *testing.T) {
-	secret, uri, err := GenerateTOTPSecret("owner@9routerx", "9RouterX")
+	secret, uri, err := GenerateTOTPSecret("owner@alyysha", "Alyysha Router")
 	if err != nil {
 		t.Fatalf("generate: %v", err)
 	}
-	if !strings.HasPrefix(uri, "otpauth://totp/9RouterX:") {
+	if !strings.HasPrefix(uri, "otpauth://totp/Alyysha Router:") {
 		t.Errorf("uri = %q, want an otpauth://totp URL", uri)
 	}
 	if !strings.Contains(uri, "secret="+secret) {
@@ -37,7 +37,7 @@ func TestTOTPEnrollVerify(t *testing.T) {
 // TestTOTPSkew pins (c): a code generated ±90 seconds away validates (the
 // skew window), one ±2 minutes away does not.
 func TestTOTPSkew(t *testing.T) {
-	secret, _, err := GenerateTOTPSecret("owner@9routerx", "9RouterX")
+	secret, _, err := GenerateTOTPSecret("owner@alyysha", "Alyysha Router")
 	if err != nil {
 		t.Fatal(err)
 	}

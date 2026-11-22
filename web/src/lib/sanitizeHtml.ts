@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 /**
  * Dependency-free HTML sanitizer for the three places the dashboard renders
  * server- or markdown-derived markup with {@html}: the changelog modal, the

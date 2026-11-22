@@ -1,9 +1,9 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package oauth
 
 import (
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/updater"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/updater"
 	"bytes"
 	"context"
 	json "encoding/json/v2"
@@ -58,7 +58,7 @@ func RefreshCline(ctx context.Context, p *Params) (*TokenResult, error) {
 	}
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Accept", "application/json")
-	// 9Router client identity (upstream buildClineHeaders); the body keeps
+	// Alyysha client identity (upstream buildClineHeaders); the body keeps
 	// clientType "extension" like upstream.
 	for k, v := range providers.ClineIdentityHeaders(updater.CurrentVersion, nil) {
 		req.Header.Set(k, v)

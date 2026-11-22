@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package proxy
 
 import (
@@ -9,13 +9,13 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/providers"
 )
 
 func TestResolveDefaultStallTimeout(t *testing.T) {
 	// 1. Unset env -> DefaultStallTimeout (6m)
 	os.Unsetenv("STREAM_STALL_TIMEOUT_MS")
-	os.Unsetenv("9ROUTERX_STREAM_STALL_TIMEOUT_MS")
+	os.Unsetenv("ALYYSHA_STREAM_STALL_TIMEOUT_MS")
 	if d := ResolveDefaultStallTimeout(); d != DefaultStallTimeout {
 		t.Errorf("ResolveDefaultStallTimeout() with unset env = %v, want %v", d, DefaultStallTimeout)
 	}
@@ -26,16 +26,16 @@ func TestResolveDefaultStallTimeout(t *testing.T) {
 		t.Errorf("ResolveDefaultStallTimeout() = %v, want 15s", d)
 	}
 
-	// 3. 9ROUTERX_STREAM_STALL_TIMEOUT_MS = 20000 -> 20s
+	// 3. ALYYSHA_STREAM_STALL_TIMEOUT_MS = 20000 -> 20s
 	os.Unsetenv("STREAM_STALL_TIMEOUT_MS")
-	t.Setenv("9ROUTERX_STREAM_STALL_TIMEOUT_MS", "20000")
+	t.Setenv("ALYYSHA_STREAM_STALL_TIMEOUT_MS", "20000")
 	if d := ResolveDefaultStallTimeout(); d != 20*time.Second {
 		t.Errorf("ResolveDefaultStallTimeout() = %v, want 20s", d)
 	}
 
 	// 4. Invalid string fallback -> DefaultStallTimeout
 	t.Setenv("STREAM_STALL_TIMEOUT_MS", "invalid")
-	t.Setenv("9ROUTERX_STREAM_STALL_TIMEOUT_MS", "0")
+	t.Setenv("ALYYSHA_STREAM_STALL_TIMEOUT_MS", "0")
 	if d := ResolveDefaultStallTimeout(); d != DefaultStallTimeout {
 		t.Errorf("ResolveDefaultStallTimeout() with invalid env = %v, want %v", d, DefaultStallTimeout)
 	}

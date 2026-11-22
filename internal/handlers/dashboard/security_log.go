@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"strings"
 
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/securitylog"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/securitylog"
 )
 
 // maxSecurityLogLimit caps the ?limit= parameter. The default already covers

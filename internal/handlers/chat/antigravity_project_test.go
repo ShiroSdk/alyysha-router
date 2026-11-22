@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
@@ -11,8 +11,8 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/handlers/shared"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/handlers/shared"
+	"alyysha/proxy/internal/providers"
 )
 
 // TestFetchAntigravityProjectID_outcomes pins the classification that drives the

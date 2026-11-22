@@ -1,6 +1,6 @@
-<!-- 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
-  // Custom checkbox (TASK-9routerX-ui-polish §2): tick pops in with a 120ms
+  // Custom checkbox (TASK-alyyshaX-ui-polish §2): tick pops in with a 120ms
   // scale from 0.6 to 1. adapted from uiverse.io/sssynk/tall-octopus-55 (MIT),
   // repainted to the theme tokens — every color here is a variable, so the box
   // follows dark and light without a second component.

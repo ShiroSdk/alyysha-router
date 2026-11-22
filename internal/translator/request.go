@@ -1,9 +1,9 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package translator
 
 import (
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/thinking"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/thinking"
 	"encoding/json/jsontext"
 	json "encoding/json/v2"
 	"fmt"
@@ -431,7 +431,7 @@ func TranslateClaudeToOpenAI(claudeBody []byte) ([]byte, error) {
 	}
 
 	// Claude states the single-tool-call policy inside tool_choice; OpenAI
-	// states it beside it (parity with decolua/9router#4581).
+	// states it beside it (parity with decolua/alyysha#4581).
 	if creq.ToolChoice != nil && claudeDisablesParallelToolUse(*creq.ToolChoice) {
 		oreq.ParallelToolCalls = new(false)
 	}
@@ -479,7 +479,7 @@ func TranslateClaudeToOpenAI(claudeBody []byte) ([]byte, error) {
 }
 
 // SanitizeClaudePassthrough drops foreign server_tool_use blocks that would poison Claude history.
-// Port of decolua/9router PR #3686 (fix/claude: drop server_tool_use blocks carrying a foreign id).
+// Port of decolua/alyysha PR #3686 (fix/claude: drop server_tool_use blocks carrying a foreign id).
 // Anthropic validates server_tool_use.id against ^srvtoolu_[a-zA-Z0-9_]+$ and 400s if not matched.
 // Providers like z.ai/glm emit OpenAI-style call_ ids for built-in tools (e.g. analyze_image).
 // In a mixed combo those blocks stay in history and every later Claude turn fails.
@@ -508,7 +508,7 @@ func SanitizeClaudePassthrough(body []byte, intentionalPrefill bool) []byte {
 	changed := false
 
 	// First pass: drop foreign server_tool_use and collect their ids
-	// Wrap bare content block objects into single-element array (parity with decolua/9router v0.5.75 #8a81085)
+	// Wrap bare content block objects into single-element array (parity with decolua/alyysha v0.5.75 #8a81085)
 	for _, mRaw := range messagesRaw {
 		if msgMap, ok := mRaw.(map[string]any); ok {
 			normalizeMessageContent(msgMap)

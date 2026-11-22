@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package middleware
 
 import (
@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"strings"
 
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/log"
 )
 
 // RequestID returns a middleware that injects a unique request ID (Correlation ID)

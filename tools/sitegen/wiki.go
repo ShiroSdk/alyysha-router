@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package main
 
 import (
@@ -299,7 +299,7 @@ func imageSize(path string) (int, int, bool) {
 // defaultRepo is the repository the wiki's repository-relative links resolve
 // against. The generator only has one repo to resolve against, so the wiki
 // pages do not need their own.
-const defaultRepo = "yanstd888/9routerx"
+const defaultRepo = "ShiroSdk/alyysha-router"
 
 // tableWrapperAttr marks the element the generator adds around a table.
 const tableWrapperAttr = "data-table-scroll"

@@ -1,11 +1,11 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package modelhealth
 
 import (
 	json "encoding/json/v2"
 	"strings"
 
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/db"
 )
 
 // RepoStore adapts the dashboard repository to the loop's Store interface.

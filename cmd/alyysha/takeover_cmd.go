@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package main
 
 import (
@@ -15,9 +15,9 @@ import (
 	"github.com/urfave/cli/v2"
 	"golang.org/x/term"
 
-	"9routerx/proxy/internal/config"
-	"9routerx/proxy/internal/daemon"
-	"9routerx/proxy/internal/service"
+	"alyysha/proxy/internal/config"
+	"alyysha/proxy/internal/daemon"
+	"alyysha/proxy/internal/service"
 )
 
 type migrationPrompts struct {
@@ -79,7 +79,7 @@ func takeOver(c *cli.Context, p migrationPrompts) error {
 	if err != nil {
 		return err
 	}
-	fmt.Fprintln(p.out, "Health: 200; GET / fingerprint: 9RouterX")
+	fmt.Fprintln(p.out, "Health: 200; GET / fingerprint: Alyysha Router")
 	printMigrationData(p.out, cfg.DatabasePath)
 	if len(disabled) == 0 {
 		disabled = []string{"none"}
@@ -149,7 +149,7 @@ func (p migrationPrompts) disableLegacy(old daemon.PortConflict) ([]string, erro
 }
 func (p migrationPrompts) installGateway(c *cli.Context, cfg *config.Config, target string) (service.Info, error) {
 	var info service.Info
-	if err := p.confirm(fmt.Sprintf("Install/start 9RouterX using %s on port %d, DATA_DIR=%s?", service.Detect(), cfg.Port, config.ResolveDataDir())); err != nil {
+	if err := p.confirm(fmt.Sprintf("Install/start Alyysha Router using %s on port %d, DATA_DIR=%s?", service.Detect(), cfg.Port, config.ResolveDataDir())); err != nil {
 		return info, err
 	}
 	// Persist effective configuration in the same backend's argv, not the launching shell.

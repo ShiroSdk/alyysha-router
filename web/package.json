@@ -1,12 +1,12 @@
 {
-  "name": "9routerx-web",
+  "name": "alyysha-web",
   "private": true,
   "version": "1.5.6",
-  "description": "9RouterX native Svelte 5 dashboard — providers, combos, API keys, usage and settings for the Go gateway",
-  "author": "Muhammad Dian (yanstd888) <https://github.com/yanstd888/>",
+  "description": "Alyysha Router native Svelte 5 dashboard — providers, combos, API keys, usage and settings for the Go gateway",
+  "author": "Muhammad Dian (ShiroSdk) <https://github.com/ShiroSdk/>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yanstd888/9routerx.git",
+    "url": "git+https://github.com/ShiroSdk/alyysha-router.git",
     "directory": "web"
   },
   "license": "MIT",
@@ -54,5 +54,5 @@
     "typescript": "~6.0.2",
     "vite": "^8.3.0"
   },
-  "attribution": "all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id"
+  "attribution": "all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers"
 }

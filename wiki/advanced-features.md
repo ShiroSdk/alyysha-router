@@ -6,7 +6,7 @@ section: Under the Hood
 
 # Advanced Features
 
-Three features in 9RouterX came from other projects. Where that happened, the
+Three features in Alyysha Router came from other projects. Where that happened, the
 source is listed as a link at the end of each feature — you do not need to know
 where something came from to use it.
 

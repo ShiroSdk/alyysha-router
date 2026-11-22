@@ -1,11 +1,11 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package tray
 
 import (
 	"errors"
 	"fmt"
 
-	"9routerx/proxy/internal/service"
+	"alyysha/proxy/internal/service"
 )
 
 // State is what the menu renders. Four values, not two: §C5 forbids showing
@@ -112,12 +112,12 @@ func (s Snapshot) CanStop() bool {
 func (s Snapshot) Title() string {
 	switch s.State {
 	case StateRunning:
-		return fmt.Sprintf("9RouterX (Port %d)", s.Port)
+		return fmt.Sprintf("Alyysha Router (Port %d)", s.Port)
 	case StateStopped:
-		return "9RouterX (Stopped)"
+		return "Alyysha Router (Stopped)"
 	case StatePortConflict:
-		return fmt.Sprintf("9RouterX (Port %d in use by foreign process (PID %d))", s.Port, s.PID)
+		return fmt.Sprintf("Alyysha Router (Port %d in use by foreign process (PID %d))", s.Port, s.PID)
 	default:
-		return "9RouterX (Unknown)"
+		return "Alyysha Router (Unknown)"
 	}
 }

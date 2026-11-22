@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
@@ -9,11 +9,11 @@ import (
 
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlers/shared"
-	"9routerx/proxy/internal/models"
-	"9routerx/proxy/internal/pricing"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlers/shared"
+	"alyysha/proxy/internal/models"
+	"alyysha/proxy/internal/pricing"
+	"alyysha/proxy/internal/providers"
 )
 
 // ModelInfoObject represents a model entry in the /v1/models response. The

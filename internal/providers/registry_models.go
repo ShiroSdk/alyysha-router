@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package providers
 
 import "strings"
@@ -12,7 +12,7 @@ const CodexAutoPingModel = "gpt-5.6-terra"
 // with a ChatGPT account"); gpt-5.6-terra is accepted (upstream b08f12d5).
 const CodexImagesMainModel = "gpt-5.6-terra"
 
-// ProviderModels maps provider aliases/IDs to their supported models in 9router.
+// ProviderModels maps provider aliases/IDs to their supported models in alyysha.
 // Ported verbatim from open-sse/providers/registry (registry/{id}.js models arrays,
 // keyed by uiAlias/alias and by provider id so both lookups resolve).
 var ProviderModels = map[string][]string{

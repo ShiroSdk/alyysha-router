@@ -6,7 +6,7 @@ section: Using the Gateway
 
 # Providers
 
-9RouterX has 154 built-in provider entries: 91 in the API-key category, 28 in
+Alyysha Router has 154 built-in provider entries: 91 in the API-key category, 28 in
 OAuth, 29 in the free categories, and 6 in web-cookie. These are catalog groups,
 not counts of guaranteed authentication flows; for example, `muse` is grouped
 under OAuth but uses API-key authentication. The grouped catalog also includes

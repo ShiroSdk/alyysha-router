@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // The API-key row menu collapses seven per-row controls into one trigger, and
 // the batch bar adds actions over a selection. The rules the table depends on
 // are stated once in tableActions.ts and pinned here.

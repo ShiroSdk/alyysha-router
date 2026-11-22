@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package webhooks
 
 import (
@@ -10,8 +10,8 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 // Handler serves the /api/webhooks dashboard API (FASE 10.4): CRUD over the
@@ -149,7 +149,7 @@ func (h *Handler) HandleTest(w http.ResponseWriter, r *http.Request) {
 	}
 	err = t.Send(Event{
 		Type:     EventTestPing,
-		Title:    "9RouterX test ping",
+		Title:    "Alyysha Router test ping",
 		Body:     "A test notification from the dashboard.",
 		Severity: SeverityInfo,
 	})

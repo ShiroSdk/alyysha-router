@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package auth
 
 import (
@@ -21,7 +21,7 @@ import (
 // is useless without the hash — and a code burns on use, so a replay is dead
 // on arrival.
 //
-// Recovery: losing the phone is never a lock-out — the CLI `9routerx
+// Recovery: losing the phone is never a lock-out — the CLI `alyysha
 // reset-2fa` command clears the enrollment after a dashboard-password
 // confirmation, and the backup codes exist precisely for this path.
 

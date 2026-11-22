@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -12,12 +12,12 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/models"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/proxy"
-	"9routerx/proxy/internal/proxy/executor"
-	"9routerx/proxy/internal/proxy/oauth"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/models"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/proxy"
+	"alyysha/proxy/internal/proxy/executor"
+	"alyysha/proxy/internal/proxy/oauth"
 )
 
 // Port of upstream src/app/api/providers/[id]/test/testUtils.js: a real probe
@@ -190,7 +190,7 @@ var oauthProbeConfigs = map[string]oauthProbeConfig{
 	"github": {
 		url: "https://api.github.com/user", method: http.MethodGet,
 		authHeader: "Authorization", authPrefix: "Bearer ",
-		extraHeaders: map[string]string{"User-Agent": "9Router", "Accept": "application/vnd.github+json"},
+		extraHeaders: map[string]string{"User-Agent": "Alyysha", "Accept": "application/vnd.github+json"},
 	},
 	"iflow": {
 		buildURL: func(token string) string {

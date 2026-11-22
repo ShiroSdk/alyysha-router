@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 /**
  * Issue #165: the CLI Tools page had no card for the pi / Oh My Pi coding
  * agents, so a user who connects them through `models.json` / `models.yml` had
@@ -27,8 +27,8 @@ import { startDashboard, type Dashboard } from './harness'
  * because that is the only line the card can keep now that the secret itself is
  * not readable from the dashboard. */
 const AGENTS = [
-  { card: 'Pi', id: 'pi', configPath: '.pi/agent/models.json', credentialLine: '<your-9routerx-api-key>' },
-  { card: 'Oh My Pi', id: 'omp', configPath: '.omp/agent/models.yml', credentialLine: '9ROUTERX_API_KEY' },
+  { card: 'Pi', id: 'pi', configPath: '.pi/agent/models.json', credentialLine: '<your-alyysha-api-key>' },
+  { card: 'Oh My Pi', id: 'omp', configPath: '.omp/agent/models.yml', credentialLine: 'ALYYSHA_API_KEY' },
 ] as const
 
 let app: Dashboard
@@ -166,7 +166,7 @@ describe('CLI Tools page lists the pi / Oh My Pi agents (#165)', () => {
 
     const dialog = await openTool('Pi')
     const text = (await dialog.innerText()).replace(/\s+/g, ' ')
-    expect(text).toContain('<your-9routerx-api-key>')
+    expect(text).toContain('<your-alyysha-api-key>')
     // An empty apiKey is not a placeholder: pi would send the provider without
     // auth and fail at runtime with a far less obvious error.
     expect(text).not.toContain('"apiKey":""')

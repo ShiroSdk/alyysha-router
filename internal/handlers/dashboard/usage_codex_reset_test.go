@@ -1,18 +1,18 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package dashboard
 
 import (
 	"io"
 
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/db"
 	"bytes"
 	json "encoding/json/v2"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
-	"9routerx/proxy/internal/auth"
-	"9routerx/proxy/internal/codexquota"
+	"alyysha/proxy/internal/auth"
+	"alyysha/proxy/internal/codexquota"
 )
 
 // insertResetCreditConn seeds a provider connection the reset-credit handlers

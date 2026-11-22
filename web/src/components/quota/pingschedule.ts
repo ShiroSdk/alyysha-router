@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Port of src/shared/services/quotaPingSchedule.js for the native Go dashboard.
 //
 // Pure helpers only: the schedule editor renders these and the numbers it sends

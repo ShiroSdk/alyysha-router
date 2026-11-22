@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package mcpserver
 
 import (
@@ -84,7 +84,7 @@ func (s *MCPServer) toolListKeys(ctx context.Context) (any, *jsonrpcError) {
 }
 
 func (s *MCPServer) toolGetHealth(ctx context.Context) (any, *jsonrpcError) {
-	return map[string]any{"status": "ok", "name": "9RouterX"}, nil
+	return map[string]any{"status": "ok", "name": "Alyysha Router"}, nil
 }
 
 func (s *MCPServer) toolListModels(ctx context.Context) (any, *jsonrpcError) {

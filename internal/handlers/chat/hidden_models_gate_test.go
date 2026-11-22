@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
@@ -9,9 +9,9 @@ import (
 	"slices"
 	"testing"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/middleware"
-	"9routerx/proxy/internal/models"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/middleware"
+	"alyysha/proxy/internal/models"
 )
 
 // keyedRequest attaches a synthetic API key to a request the way the auth

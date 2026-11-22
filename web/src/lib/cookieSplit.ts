@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 
 // Cookie key names the backend executors look for (grokExtractCookieValue in
 // internal/proxy/executor/grok_web.go and the gemini executor). Keeping the

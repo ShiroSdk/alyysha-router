@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package main
 
 import (
@@ -8,8 +8,8 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	"9routerx/proxy/internal/daemon"
-	"9routerx/proxy/internal/service"
+	"alyysha/proxy/internal/daemon"
+	"alyysha/proxy/internal/service"
 )
 
 // serviceInstall writes the autostart entry so the gateway starts on boot,
@@ -39,7 +39,7 @@ func serviceInstall(cCtx *cli.Context) error {
 		fmt.Println("  State:   enabled and running — it will start automatically on boot.")
 	case info.Enabled:
 		fmt.Println("  State:   enabled — it will start automatically on next boot.")
-		fmt.Println("  Note:    the current gateway (if any) keeps running; reboot or run `9routerx service restart` to hand over.")
+		fmt.Println("  Note:    the current gateway (if any) keeps running; reboot or run `alyysha service restart` to hand over.")
 	}
 	if info.Backend == service.BackendSystemdUser {
 		fmt.Println("  Tip:     run `loginctl enable-linger $USER` to keep it alive after logout.")
@@ -60,7 +60,7 @@ func serviceUninstall(_ *cli.Context) error {
 		if info, ok := service.Status(); ok {
 			return fmt.Errorf("failed to remove %s entry %s — check permissions and retry", info.Backend, info.Path)
 		}
-		fmt.Println("9routerx autostart is not installed.")
+		fmt.Println("alyysha autostart is not installed.")
 		return nil
 	}
 	for _, info := range removed {
@@ -82,7 +82,7 @@ func serviceStart(cCtx *cli.Context) error {
 	if err != nil {
 		return err
 	}
-	fmt.Printf("9routerx started via %s (%s, starts on boot)\n", info.Backend, activeState(info))
+	fmt.Printf("alyysha started via %s (%s, starts on boot)\n", info.Backend, activeState(info))
 	return nil
 }
 
@@ -96,7 +96,7 @@ func serviceStop(cCtx *cli.Context) error {
 	if err != nil {
 		return err
 	}
-	fmt.Printf("9routerx stopped via %s (still enabled for boot)\n", info.Backend)
+	fmt.Printf("alyysha stopped via %s (still enabled for boot)\n", info.Backend)
 	return nil
 }
 
@@ -110,17 +110,17 @@ func serviceRestart(cCtx *cli.Context) error {
 	if err != nil {
 		return err
 	}
-	fmt.Printf("9routerx restarted via %s (%s)\n", info.Backend, activeState(info))
+	fmt.Printf("alyysha restarted via %s (%s)\n", info.Backend, activeState(info))
 	return nil
 }
 
 // warnPidConflict notes when the pid-file daemon is also alive: two
 // supervisors binding the same port means one of them crash-loops, which is
 // exactly the `activating (auto-restart)` state users hit after installing
-// the unit while `9routerx start` still holds the port.
+// the unit while `alyysha start` still holds the port.
 func warnPidConflict() {
 	if pid := daemon.RunningPID(); pid > 0 {
-		fmt.Printf("  Warning: background daemon (pid %d) from `9routerx start` is also running — both bind the same port. Keep one: `9routerx stop` or `9routerx service stop`.\n", pid)
+		fmt.Printf("  Warning: background daemon (pid %d) from `alyysha start` is also running — both bind the same port. Keep one: `alyysha stop` or `alyysha service stop`.\n", pid)
 	}
 }
 
@@ -128,8 +128,8 @@ func warnPidConflict() {
 func serviceStatus(_ *cli.Context) error {
 	info, ok := service.Status()
 	if !ok {
-		fmt.Println("9routerx autostart is not installed.")
-		fmt.Println("  Install with: 9routerx service install")
+		fmt.Println("alyysha autostart is not installed.")
+		fmt.Println("  Install with: alyysha service install")
 		return nil
 	}
 	fmt.Printf("Autostart backend: %s\n", info.Backend)
@@ -166,20 +166,20 @@ func activeState(info service.Info) string {
 func inspectHint(backend service.Backend) string {
 	switch backend {
 	case service.BackendSystemdUser:
-		return "systemctl --user status 9routerx.service"
+		return "systemctl --user status alyysha.service"
 	case service.BackendLaunchd:
-		return "launchctl list com.9routerx.gateway"
+		return "launchctl list com.alyysha.gateway"
 	case service.BackendOpenRC:
-		return "rc-service 9routerx status"
+		return "rc-service alyysha status"
 	case service.BackendRunit:
-		return "sv status 9routerx"
+		return "sv status alyysha"
 	case service.BackendCron:
-		// The @reboot line carries the # 9routerx-autostart marker (and a
-		// pre-rename install's line carries # 9routerx-autostart), so either
+		// The @reboot line carries the # alyysha-autostart marker (and a
+		// pre-rename install's line carries # alyysha-autostart), so either
 		// string finds the owned entry.
-		return "crontab -l | grep 9routerx"
+		return "crontab -l | grep alyysha"
 	case service.BackendWindowsTask:
-		return "schtasks /query /tn 9routerx"
+		return "schtasks /query /tn alyysha"
 	default:
 		return ""
 	}

@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package main
 
 import (
@@ -428,7 +428,7 @@ func TestMenuModelRenderNoPanic(t *testing.T) {
 	m.busy = true
 	states = append(states, m)
 	m.busy = false
-	m.err = errors.New("9routerx is already running on http://127.0.0.1:20128 — stop it first")
+	m.err = errors.New("alyysha is already running on http://127.0.0.1:20128 — stop it first")
 	states = append(states, m)
 	for i := 0; i <= len(m.items); i++ {
 		mm := newMenuModel(testContext(), rec.actions())
@@ -440,7 +440,7 @@ func TestMenuModelRenderNoPanic(t *testing.T) {
 		if v == "" {
 			t.Errorf("state %d rendered an empty view", i)
 		}
-		if !strings.Contains(v, "9routerx v") {
+		if !strings.Contains(v, "alyysha v") {
 			t.Errorf("state %d view missing the version header", i)
 		}
 		if !strings.Contains(v, "Server:") {
@@ -462,7 +462,7 @@ func TestMenuModelRenderNoPanic(t *testing.T) {
 // inside the picker (rendered by the model), not print-and-vanish.
 func TestMenuModelErrorVisibleInTUI(t *testing.T) {
 	rec := &recordedActions{errs: map[string]error{
-		"startDetached": fmt.Errorf("9routerx is already running on http://127.0.0.1:20128 (started outside this binary) — stop it first"),
+		"startDetached": fmt.Errorf("alyysha is already running on http://127.0.0.1:20128 (started outside this binary) — stop it first"),
 	}}
 	m := newMenuModel(testContext(), rec.actions())
 
@@ -473,7 +473,7 @@ func TestMenuModelErrorVisibleInTUI(t *testing.T) {
 		t.Fatal("a failed start must set the model error")
 	}
 	v := m.View()
-	if !strings.Contains(v, "[!] 9routerx is already running") {
+	if !strings.Contains(v, "[!] alyysha is already running") {
 		t.Errorf("failed start error not rendered in the picker view:\n%s", v)
 	}
 	if m.quitRequested() {

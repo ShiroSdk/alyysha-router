@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package executor
 
 import (
@@ -13,9 +13,9 @@ import (
 	"strings"
 	"sync"
 
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/providers"
-	"9routerx/proxy/internal/proxy"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/providers"
+	"alyysha/proxy/internal/proxy"
 	fhttp "github.com/bogdanfinn/fhttp"
 	"github.com/bogdanfinn/fhttp/http2"
 	tls_client "github.com/bogdanfinn/tls-client"

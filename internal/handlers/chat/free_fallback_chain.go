@@ -1,11 +1,11 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
-	json "9routerx/proxy/internal/fastjson"
-	"9routerx/proxy/internal/freeresilience"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/providers"
+	json "alyysha/proxy/internal/fastjson"
+	"alyysha/proxy/internal/freeresilience"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/providers"
 	"context"
 	"errors"
 	"fmt"
@@ -22,7 +22,7 @@ import (
 // provider that serves the same model, instead of answering the client with
 // the refusal. The chain never silently reroutes onto a paid provider: paid
 // candidates only run after every free candidate failed, and the response
-// then carries x-9routerx-fallback-paid so the operator can see it happened.
+// then carries x-alyysha-fallback-paid so the operator can see it happened.
 //
 // The chain runs at the single-model dispatch level, after the failed
 // provider's own account rotation (handleAccountFallback) is exhausted: that
@@ -36,11 +36,11 @@ const (
 	// order, arrow-separated: "groq→nvidia". Set before the first chain
 	// attempt and extended as the walk proceeds, so a success carries the
 	// full path and a failure carries how far it got.
-	HeaderFallbackChain = "x-9routerx-fallback-chain"
+	HeaderFallbackChain = "x-alyysha-fallback-chain"
 	// HeaderFallbackPaid marks a response that was served by a PAID provider
 	// after every free candidate failed. The operator pays for that turn;
 	// the marking is what keeps it from happening silently.
-	HeaderFallbackPaid = "x-9routerx-fallback-paid"
+	HeaderFallbackPaid = "x-alyysha-fallback-paid"
 )
 
 // isFreeRoutableProvider reports whether the provider id (or alias) is one
@@ -159,7 +159,7 @@ func upstreamErrorParts(err error) (int, []byte) {
 // injection. Returns nil when a candidate served the response (headers are
 // already on the writer); otherwise it returns origErr unchanged — the client
 // hears about the provider it actually asked for, with the chain's progress
-// in the log and in x-9routerx-fallback-chain.
+// in the log and in x-alyysha-fallback-chain.
 func (h *ChatHandler) runFreeFallbackChain(
 	ctx context.Context,
 	cw *committedResponseWriter,

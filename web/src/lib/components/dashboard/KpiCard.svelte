@@ -1,4 +1,4 @@
-<!-- 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
   // /* adapted from tremor (Apache-2.0) */ — KPI card with the delta badge
   // (▲/▼) and the mini area sparkline. Presentational only: every input is a

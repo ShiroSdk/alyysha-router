@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package media
 
 import (
@@ -9,11 +9,11 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/handlers/chat"
-	"9routerx/proxy/internal/handlers/shared"
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/handlers/chat"
+	"alyysha/proxy/internal/handlers/shared"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
 )
 
 // SoundGenerationRequest is the caller's body for /v1/audio/sound-generation.

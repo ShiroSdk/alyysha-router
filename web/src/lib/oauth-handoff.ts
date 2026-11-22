@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // OAuth callback handoff protocol (dashboard tab <-> provider callback tab).
 //
 // Flow: user clicks Login -> dashboard opens provider auth URL in a new tab
@@ -11,9 +11,9 @@
 // Storage ciphers (localStorage keys):
 //   pendingKey  -> OAuthPending[]  (written at authorize time)
 //   callbackKey -> OAuthCallback   (written by the /callback page, consumed once)
-export const OAUTH_CHANNEL = '9routerx-oauth'
-export const OAUTH_PENDING_KEY = '9routerx.oauth.pending.v1'
-export const OAUTH_CALLBACK_KEY = '9routerx.oauth.callback.v1'
+export const OAUTH_CHANNEL = 'alyysha-oauth'
+export const OAUTH_PENDING_KEY = 'alyysha.oauth.pending.v1'
+export const OAUTH_CALLBACK_KEY = 'alyysha.oauth.callback.v1'
 // Pending sessions older than this are ignored (stale Login clicks).
 export const PENDING_TTL_MS = 15 * 60 * 1000
 

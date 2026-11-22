@@ -1,6 +1,6 @@
 //go:build integration
 
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package integration
 
 import (
@@ -54,7 +54,7 @@ func TestChatCompletionForwardsToUpstream(t *testing.T) {
 	if sent.Path != "/chat/completions" {
 		t.Errorf("upstream path = %q, want /chat/completions (the connection baseUrl is used verbatim)", sent.Path)
 	}
-	// The provider prefix is a 9router routing concept; the upstream only
+	// The provider prefix is a alyysha routing concept; the upstream only
 	// knows the bare model id.
 	if got := sent.Model(t); got != "deepseek-chat" {
 		t.Errorf("upstream model = %q, want \"deepseek-chat\" (the prefix must be stripped)", got)

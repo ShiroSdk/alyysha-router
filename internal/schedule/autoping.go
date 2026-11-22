@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Package schedule holds the anchored ping schedule and the auto-ping
 // scheduler that fires it.
 //
@@ -19,8 +19,8 @@ import (
 	"fmt"
 	"time"
 
-	"9routerx/proxy/internal/handlers/chat"
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/handlers/chat"
+	"alyysha/proxy/internal/log"
 )
 
 // Ping models and text, ported from upstream QUOTA_AUTOPING_CONFIG

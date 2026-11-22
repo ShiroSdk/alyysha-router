@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package proxy
 
 import (
@@ -28,7 +28,7 @@ func errorFrame(t *testing.T, stream string) (sseErrorPayload, bool) {
 
 // Issue #57: a stream that dies after HTTP 200 used to be closed silently, so
 // clients kept the truncated text and reported success. The abort must arrive
-// as a parseable in-band error frame instead (upstream decolua/9router 93001213).
+// as a parseable in-band error frame instead (upstream decolua/alyysha 93001213).
 func TestSSECopy_AbortEmitsInBandErrorFrame(t *testing.T) {
 	const partial = "data: {\"choices\":[{\"delta\":{\"content\":\"the answer is\"}}]}\n\n" +
 		"data: {\"choices\":[{\"delta\":{\"content\":\" forty-two and\"}}]}\n\n"

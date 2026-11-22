@@ -21,7 +21,7 @@ score.
     <div>
       <p class="contrib-name"><a href="https://github.com/yanstd888">Muhammad Dian</a></p>
       <p class="contrib-login">@yanstd888</p>
-      <p class="contrib-count">Maintainer of the 9RouterX fork</p>
+      <p class="contrib-count">Maintainer of the Alyysha Router fork</p>
       <p class="contrib-count">repository owner</p>
     </div>
   </div>

@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package main
 
 import (
@@ -8,8 +8,8 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	"9routerx/proxy/internal/config"
-	"9routerx/proxy/internal/daemon"
+	"alyysha/proxy/internal/config"
+	"alyysha/proxy/internal/daemon"
 )
 
 // daemonURL is the address the background daemon is expected to answer on.
@@ -75,16 +75,16 @@ func startDetached(cCtx *cli.Context) error {
 func startDetachedOn(cCtx *cli.Context, url string) error {
 	res, err := daemon.Start(url, forwardArgs(cCtx))
 	if err == daemon.ErrAlreadyRunning {
-		fmt.Printf("9routerx already running (pid %d) → %s\n", res.PID, res.URL)
+		fmt.Printf("alyysha already running (pid %d) → %s\n", res.PID, res.URL)
 		return nil
 	}
 	if err != nil {
 		return err
 	}
-	fmt.Printf("9routerx started in background (pid %d)\n", res.PID)
+	fmt.Printf("alyysha started in background (pid %d)\n", res.PID)
 	fmt.Printf("  Dashboard: %s\n", res.URL)
 	fmt.Printf("  Log:       %s\n", daemon.LogPath())
-	fmt.Println("  Stop with: 9routerx stop")
+	fmt.Println("  Stop with: alyysha stop")
 	return nil
 }
 
@@ -95,10 +95,10 @@ func stopDetached(_ *cli.Context) error {
 		return err
 	}
 	if !res.Stopped {
-		fmt.Println("9routerx is not running in background.")
+		fmt.Println("alyysha is not running in background.")
 		return nil
 	}
-	fmt.Printf("9routerx stopped (pid %d).\n", res.PID)
+	fmt.Printf("alyysha stopped (pid %d).\n", res.PID)
 	return nil
 }
 
@@ -109,7 +109,7 @@ func restartDetached(cCtx *cli.Context) error {
 	if err != nil {
 		return err
 	}
-	fmt.Printf("9routerx restarted in background (pid %d)\n", res.PID)
+	fmt.Printf("alyysha restarted in background (pid %d)\n", res.PID)
 	fmt.Printf("  Dashboard: %s\n", res.URL)
 	fmt.Printf("  Log:       %s\n", daemon.LogPath())
 	return nil
@@ -119,10 +119,10 @@ func restartDetached(cCtx *cli.Context) error {
 func statusDetached(_ *cli.Context) error {
 	pid := daemon.RunningPID()
 	if pid == 0 {
-		fmt.Println("9routerx is not running in background.")
+		fmt.Println("alyysha is not running in background.")
 		return nil
 	}
-	fmt.Printf("9routerx is running in background (pid %d)\n", pid)
+	fmt.Printf("alyysha is running in background (pid %d)\n", pid)
 	fmt.Printf("  Dashboard: %s\n", daemonURL())
 	fmt.Printf("  Log:       %s\n", daemon.LogPath())
 	return nil

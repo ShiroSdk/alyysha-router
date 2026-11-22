@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package media
 
 import (
@@ -11,9 +11,9 @@ import (
 
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/clientconfig"
-	chathandlers "9routerx/proxy/internal/handlers/chat"
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/clientconfig"
+	chathandlers "alyysha/proxy/internal/handlers/chat"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 // Handler for the nine CLI-client config adapters.
@@ -152,7 +152,7 @@ func (h *CLIToolHandler) HandleCLIToolGet(w http.ResponseWriter, r *http.Request
 	handlerutil.WriteJSON(w, http.StatusOK, map[string]any{
 		"tool":       adapter.ID(),
 		"installed":  installedFor(adapter),
-		"has9Router": ToolHas9Router(adapter.ID()),
+		"hasAlyysha": ToolHasAlyysha(adapter.ID()),
 		"files":      files,
 		"plan":       planFiles(plan),
 	})

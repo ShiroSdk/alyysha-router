@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package headroom
 
 import (
@@ -12,8 +12,8 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/proc"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/proc"
 )
 
 // StartupTimeout is how long start waits for the proxy to stay up.

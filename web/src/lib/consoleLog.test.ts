@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 import { describe, expect, it } from 'bun:test'
 import {
   countByLevel,
@@ -194,7 +194,7 @@ describe('stripAnsi', () => {
 describe('downloadFilename', () => {
   it('stamps the export time', () => {
     expect(downloadFilename(new Date(2026, 9, 3, 7, 8, 9))).toBe(
-      '9routerx-console-20261003-070809.log'
+      'alyysha-console-20261003-070809.log'
     )
   })
 })

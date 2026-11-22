@@ -1,9 +1,9 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
-// Package tray is the logic behind the 9router-tray companion: what state the
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
+// Package tray is the logic behind the alyysha-tray companion: what state the
 // gateway is in, and which stop paths are permitted from an unprivileged
 // desktop process.
 //
-// It holds no GUI code. The binary in cmd/9router-tray owns the systray event
+// It holds no GUI code. The binary in cmd/alyysha-tray owns the systray event
 // loop and calls in here, so every decision below is testable without a
 // display.
 //
@@ -17,7 +17,7 @@
 package tray
 
 import (
-	"9routerx/proxy/internal/service"
+	"alyysha/proxy/internal/service"
 )
 
 // StopPath says how, or whether, this process may stop the gateway.

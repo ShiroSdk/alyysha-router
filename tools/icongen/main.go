@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Command icongen generates the multi-size Windows .ico from the product logo,
 // and dumps an existing .ico back to per-frame PNGs for verification.
 //
@@ -13,10 +13,10 @@
 // that can render an icon. dump extracts each frame as a PNG so the result can
 // be compared against the source artwork (frames land as <dir>/<w>x<h>.png).
 //
-// The generated .ico feeds three consumers: cmd/9routerx-tray/tray.ico (the
+// The generated .ico feeds three consumers: cmd/alyysha-tray/tray.ico (the
 // runtime tray icon, go:embed'd), and — through go-winres — the embedded
-// RT_GROUP_ICON resource of both release executables (cmd/9routerx and
-// cmd/9routerx-tray). Regenerate with `make icons` after changing the logo.
+// RT_GROUP_ICON resource of both release executables (cmd/alyysha and
+// cmd/alyysha-tray). Regenerate with `make icons` after changing the logo.
 package main
 
 import (

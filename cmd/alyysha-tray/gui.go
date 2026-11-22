@@ -1,6 +1,6 @@
 //go:build windows || tray
 
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // The build constraint is what keeps `go vet ./...`, `go test ./...` and
 // golangci-lint green on a Linux box. getlantern/systray compiles through
 // pkg-config for ayatana-appindicator3-0.1 on Linux and through Cocoa on
@@ -11,7 +11,7 @@
 // Windows is in the constraint without a tag because systray reaches the Win32
 // API directly there: no cgo, no pkg-config, nothing to install. Requiring a
 // tag on the one platform that builds out of the box would mean a plain
-// `go build ./cmd/9router-tray/` silently produces the stub instead.
+// `go build ./cmd/alyysha-tray/` silently produces the stub instead.
 package main
 
 import (
@@ -23,7 +23,7 @@ import (
 
 	"github.com/getlantern/systray"
 
-	"9routerx/proxy/internal/tray"
+	"alyysha/proxy/internal/tray"
 )
 
 //go:embed tray.ico
@@ -42,7 +42,7 @@ type menu struct {
 func runGUI(actions tray.Actions, port int) error {
 	systray.Run(func() {
 		systray.SetIcon(trayIcon)
-		systray.SetTitle("9RouterX")
+		systray.SetTitle("Alyysha Router")
 		go runMenu(actions, port)
 	}, func() {
 		// Quit Tray: release the icon and return. Deliberately empty — C4 says
@@ -62,7 +62,7 @@ func runGUI(actions tray.Actions, port int) error {
 // pid file plus a non-blocking service probe costs nothing.
 func runMenu(actions tray.Actions, port int) {
 	m := &menu{
-		status: systray.AddMenuItem("9RouterX", ""),
+		status: systray.AddMenuItem("Alyysha Router", ""),
 		start:  systray.AddMenuItem("Start Gateway", ""),
 		stop:   systray.AddMenuItem("Stop Gateway", ""),
 		// A real checkbox rather than a "✓ " prefix: the prefix is a picture of

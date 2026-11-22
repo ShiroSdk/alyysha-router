@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package executor
 
 import (
@@ -9,10 +9,10 @@ import (
 
 	"time"
 
-	"9routerx/proxy/internal/browserlogin"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/models"
+	"alyysha/proxy/internal/browserlogin"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/models"
 )
 
 // The renewal of a DeepSeek Web credential.

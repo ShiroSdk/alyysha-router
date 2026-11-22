@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package executor
 
 import (
@@ -8,10 +8,10 @@ import (
 	"net/http"
 	"time"
 
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/proxy"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/proxy"
+	"alyysha/proxy/internal/translator"
 )
 
 // handleClaudeMessagesStream pipes a Claude Messages SSE stream from upstream,

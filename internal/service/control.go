@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package service
 
 import (
@@ -10,7 +10,7 @@ import (
 
 // ErrNoSupervisor reports that the installed backend has no runtime
 // supervisor: cron only wakes the gateway at boot, so process control falls
-// back to the pid-file daemon (`9routerx start|stop|restart`).
+// back to the pid-file daemon (`alyysha start|stop|restart`).
 var ErrNoSupervisor = errors.New("service: autostart backend has no supervisor, manage the process directly")
 
 // controlTimeout bounds how long start/stop/restart wait for the supervised
@@ -87,7 +87,7 @@ func controlSystemd(op string) error {
 
 // logHint points at the user journal, the only scope this package manages.
 func logHint() string {
-	return "journalctl --user -u 9routerx.service"
+	return "journalctl --user -u alyysha.service"
 }
 
 // waitSystemdInactive polls until the unit leaves the active state.

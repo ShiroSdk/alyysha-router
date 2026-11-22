@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package middleware
 
 import (
@@ -10,7 +10,7 @@ import (
 	"regexp"
 	"testing"
 
-	"9routerx/proxy/web"
+	"alyysha/proxy/web"
 )
 
 func TestSecurityHeadersPresent(t *testing.T) {

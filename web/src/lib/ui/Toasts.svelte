@@ -1,4 +1,4 @@
-<!-- 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
   // Port of the toast stack in upstream DashboardLayout.js.
   import { onMount } from 'svelte'
@@ -51,7 +51,7 @@
     }
   })
 
-  // Live routing flow (TASK-9routerX-anim-bg 2.5.2), wiring point 1 of 2:
+  // Live routing flow (TASK-alyyshaX-anim-bg 2.5.2), wiring point 1 of 2:
   // every toast show fires a background data burst (no coords — the burst
   // picks a route itself; the AsciiRoutingBg component consumes this).
   onMount(() => {

@@ -1,10 +1,10 @@
-<!-- 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id -->
+<!-- Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers -->
 <script lang="ts">
-  // Port of decolua/9router src/shared/components/ThemeToggle.js
+  // Port of decolua/alyysha src/shared/components/ThemeToggle.js
   let theme = $state<'light' | 'dark'>('dark')
 
   $effect(() => {
-    const stored = localStorage.getItem('9routerx-theme')
+    const stored = localStorage.getItem('alyysha-theme')
     if (stored === 'light' || stored === 'dark') theme = stored
     apply(theme)
   })
@@ -12,7 +12,7 @@
   function apply(t: 'light' | 'dark') {
     document.documentElement.classList.toggle('dark', t === 'dark')
     document.documentElement.classList.toggle('light', t === 'light')
-    localStorage.setItem('9routerx-theme', t)
+    localStorage.setItem('alyysha-theme', t)
   }
 
   function toggle() {

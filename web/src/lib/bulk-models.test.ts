@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 // Guards the bulk-model parser: what the operator pasted must arrive as the ids
 // they meant, and nothing may be dropped without being reported — an id that
 // quietly disappears between the paste and the table looks exactly like a typo,

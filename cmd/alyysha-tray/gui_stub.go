@@ -1,6 +1,6 @@
 //go:build !windows && !tray
 
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // This build has no GUI toolkit linked in. It exists so that `go build ./...`,
 // `go vet ./...`, `go test ./...` and the linter all work on a Linux machine
 // that has never installed libayatana-appindicator3-dev — the same reason
@@ -16,9 +16,9 @@ import (
 	"fmt"
 	"runtime"
 
-	"9routerx/proxy/internal/tray"
+	"alyysha/proxy/internal/tray"
 )
 
 func runGUI(tray.Actions, int) error {
-	return fmt.Errorf("this 9routerx-tray build has no GUI: rebuild with -tags tray (required on %s; Windows needs no tag)", runtime.GOOS)
+	return fmt.Errorf("this alyysha-tray build has no GUI: rebuild with -tags tray (required on %s; Windows needs no tag)", runtime.GOOS)
 }

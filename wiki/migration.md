@@ -17,7 +17,7 @@ The command uses the configured `PORT` (default 20128) and `DATA_DIR`. It report
 the listener's fingerprint, PID, executable, command line and parent PID, asks
 before stopping it, waits for the port, inventories matching legacy autostart,
 asks before disabling each entry, and calls the **same service backend as
-`service install`**. It then checks `/health` and the 9RouterX root fingerprint
+`service install`**. It then checks `/health` and the Alyysha Router root fingerprint
 and prints read-only counts of `providerConnections` and `apiKeys`, the database
 path, dashboard URL and login guidance. Zero rows warn about a different
 `DATA_DIR`; they do not mean migration erased anything.
@@ -37,7 +37,7 @@ an Administrator terminal; a failure is reported, not presented as success.
 
 ## The real problem this solves
 
-An operator installed 9RouterX while an autostarted Node.js/Next.js 9Router kept
+An operator installed Alyysha Router while an autostarted Node.js/Next.js 9Router kept
 returning after every restart. Task Scheduler, the Startup folder, Task Manager
 Startup apps and Registry Run keys all appeared empty. There was no obvious
 process to stop or useful error: both gateways competed for port 20128, or the
@@ -54,11 +54,11 @@ claim that every Next.js page identifies 9Router.
 Upstream's shutdown endpoint can terminate multiple matching processes and
 `cloudflared`, so take-over deliberately does **not** call that broad legacy
 shutdown helper. It requests a stop of the verified listener PID only. For a
-9RouterX daemon with a valid pidfile it reuses authenticated graceful HTTP shutdown.
+Alyysha Router daemon with a valid pidfile it reuses authenticated graceful HTTP shutdown.
 
 ## First run and side-by-side operation
 
-9RouterX now listens on `127.0.0.1` by default. Existing LAN or container
+Alyysha Router now listens on `127.0.0.1` by default. Existing LAN or container
 setups that relied on implicit all-interface binding must opt in with
 `HOST=0.0.0.0` (or `HOST=*`) and keep dashboard authentication enabled.
 
@@ -70,7 +70,7 @@ a terminal shows:
 3. Abort (default).
 
 With piped/non-TTY stdin it exits with an informative error; no automatic
-choice and no prompt. Identified 9Router/9RouterX conflicts name take-over;
+choice and no prompt. Identified 9Router/Alyysha Router conflicts name take-over;
 unrelated listeners only get the alternative-port hint. Later starts use the
 same conflict description, without repeating the first-run menu.
 
@@ -135,7 +135,7 @@ HKCU Run, Startup files/shortcut targets and Windows service paths. HKLM Run
 is considered only when the old listener was proven to be a Windows service.
 It disables matching tasks/services, removes confirmed Run values with a
 registry warning, and renames matching Startup files with `.9router-disabled`.
-It never matches generic `node.exe` alone or disables 9RouterX entries. An entry
+It never matches generic `node.exe` alone or disables Alyysha Router entries. An entry
 whose command changed since inspection is refused. Multi-action tasks and
 compound/multiline commands are left for manual inspection so another app is
 not disabled with the gateway. Wrappers with no exact legacy gateway path

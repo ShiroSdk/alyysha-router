@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // The bundle file's own encryption: AES-256-GCM under ROUTER_MASTER_KEY,
 // packed as "sxb1:" + base64(nonce || ciphertext).
 //
@@ -24,7 +24,7 @@ import (
 	"os"
 	"strings"
 
-	"9routerx/proxy/internal/vault"
+	"alyysha/proxy/internal/vault"
 )
 
 // encryptedPrefix marks a bundle blob as AES-256-GCM ciphertext. ":" is safe

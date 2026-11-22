@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package media
 
 import (
@@ -13,8 +13,8 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/envcompat"
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/envcompat"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 // cliStatus is the per-tool installed/version shape the dashboard expects
@@ -22,7 +22,7 @@ import (
 type cliStatus struct {
 	Installed  bool    `json:"installed"`
 	Version    *string `json:"version"`
-	Has9Router bool    `json:"has9Router"`
+	HasAlyysha bool    `json:"hasAlyysha"`
 }
 
 // cliVersionTimeout bounds each `--version` probe; install detection via
@@ -43,16 +43,16 @@ type toolDef struct {
 	hasVer     bool
 	dirCheck   func() bool
 	alwaysOn   bool
-	has9Router func() bool
+	hasAlyysha func() bool
 }
 
 var cliTools = []toolDef{
-	{id: "claude", bin: "claude", has9Router: claudeHas9Router},
-	{id: "codex", bin: "codex", has9Router: codexHas9Router},
-	{id: "opencode", bin: "opencode", has9Router: opencodeHas9Router},
-	{id: "droid", bin: "droid", has9Router: droidHas9Router},
+	{id: "claude", bin: "claude", hasAlyysha: claudeHasAlyysha},
+	{id: "codex", bin: "codex", hasAlyysha: codexHasAlyysha},
+	{id: "opencode", bin: "opencode", hasAlyysha: opencodeHasAlyysha},
+	{id: "droid", bin: "droid", hasAlyysha: droidHasAlyysha},
 	{id: "openclaw", bin: "openclaw"},
-	{id: "hermes", bin: "hermes", has9Router: hermesHas9Router},
+	{id: "hermes", bin: "hermes", hasAlyysha: hermesHasAlyysha},
 	{id: "cowork", dirCheck: coworkDirOK},
 	{id: "copilot", alwaysOn: true}, // VS Code config tool; reference returns installed:true
 	{id: "cline", bin: "cline"},
@@ -61,9 +61,9 @@ var cliTools = []toolDef{
 	{id: "jcode", bin: "jcode"},
 	{id: "grok-build", bin: "grok"},
 	{id: "devin", bin: "devin", hasVer: true},
-	{id: "pi", bin: "pi", has9Router: piHas9Router},
-	{id: "omp", bin: "omp", hasVer: true, has9Router: ompHas9Router},
-	{id: "crush", bin: "crush", has9Router: crushHas9Router},
+	{id: "pi", bin: "pi", hasAlyysha: piHasAlyysha},
+	{id: "omp", bin: "omp", hasVer: true, hasAlyysha: ompHasAlyysha},
+	{id: "crush", bin: "crush", hasAlyysha: crushHasAlyysha},
 	{id: "forge", bin: "forge"},
 	{id: "smelt", bin: "smelt"},
 	{id: "codewhale", bin: "codewhale"},
@@ -106,16 +106,16 @@ func (t toolDef) detector() toolDetector {
 	case t.alwaysOn:
 		return func(context.Context) (*cliStatus, error) {
 			s := &cliStatus{Installed: true}
-			if t.has9Router != nil {
-				s.Has9Router = t.has9Router()
+			if t.hasAlyysha != nil {
+				s.HasAlyysha = t.hasAlyysha()
 			}
 			return s, nil
 		}
 	case t.dirCheck != nil:
 		return func(context.Context) (*cliStatus, error) {
 			s := &cliStatus{Installed: t.dirCheck()}
-			if s.Installed && t.has9Router != nil {
-				s.Has9Router = t.has9Router()
+			if s.Installed && t.hasAlyysha != nil {
+				s.HasAlyysha = t.hasAlyysha()
 			}
 			return s, nil
 		}
@@ -126,8 +126,8 @@ func (t toolDef) detector() toolDetector {
 				installed = true
 			}
 			has9 := false
-			if t.has9Router != nil {
-				has9 = t.has9Router()
+			if t.hasAlyysha != nil {
+				has9 = t.hasAlyysha()
 				if has9 {
 					installed = true
 				}
@@ -136,7 +136,7 @@ func (t toolDef) detector() toolDetector {
 				// Not installed is a value, not an error (tool ≠ null).
 				return &cliStatus{Installed: false}, nil
 			}
-			s := &cliStatus{Installed: true, Has9Router: has9}
+			s := &cliStatus{Installed: true, HasAlyysha: has9}
 			if t.hasVer {
 				if v, err := binVersion(ctx, t.bin); err == nil && v != "" {
 					s.Version = &v
@@ -205,14 +205,14 @@ func coworkDirOK() bool {
 	return false
 }
 
-var claudeREHasBaseURL = regexp.MustCompile(`"(ANTHROPIC_BASE_URL|(9ROUTERX|NINEROUTER)_URL)"\s*:\s*"[^"]+"`)
+var claudeREHasBaseURL = regexp.MustCompile(`"(ANTHROPIC_BASE_URL|(ALYYSHA|NINEROUTER)_URL)"\s*:\s*"[^"]+"`)
 
-// ToolHas9Router reports whether the named tool has 9router configured.
-func ToolHas9Router(id string) bool {
+// ToolHasAlyysha reports whether the named tool has alyysha configured.
+func ToolHasAlyysha(id string) bool {
 	for _, t := range cliTools {
 		if t.id == id {
-			if t.has9Router != nil {
-				return t.has9Router()
+			if t.hasAlyysha != nil {
+				return t.hasAlyysha()
 			}
 			return false
 		}
@@ -220,12 +220,12 @@ func ToolHas9Router(id string) bool {
 	return false
 }
 
-// claudeHas9Router reports whether Claude Code is configured to use 9router.
-func claudeHas9Router() bool {
+// claudeHasAlyysha reports whether Claude Code is configured to use alyysha.
+func claudeHasAlyysha() bool {
 	if u := os.Getenv("ANTHROPIC_BASE_URL"); strings.TrimSpace(u) != "" {
 		return true
 	}
-	if u := envcompat.Getenv("9ROUTERX_URL", "NINEROUTER_URL"); strings.TrimSpace(u) != "" {
+	if u := envcompat.Getenv("ALYYSHA_URL", "NINEROUTER_URL"); strings.TrimSpace(u) != "" {
 		return true
 	}
 	home, err := os.UserHomeDir()
@@ -241,14 +241,14 @@ func claudeHas9Router() bool {
 		if err != nil {
 			continue
 		}
-		if claudeConfigBytesHas9Router(raw) {
+		if claudeConfigBytesHasAlyysha(raw) {
 			return true
 		}
 	}
 	return false
 }
 
-func claudeConfigBytesHas9Router(raw []byte) bool {
+func claudeConfigBytesHasAlyysha(raw []byte) bool {
 	var cfg struct {
 		Env map[string]any `json:"env"`
 	}
@@ -256,7 +256,7 @@ func claudeConfigBytesHas9Router(raw []byte) bool {
 		if v, ok := cfg.Env["ANTHROPIC_BASE_URL"].(string); ok && strings.TrimSpace(v) != "" {
 			return true
 		}
-		if v, ok := cfg.Env["9ROUTERX_URL"].(string); ok && strings.TrimSpace(v) != "" {
+		if v, ok := cfg.Env["ALYYSHA_URL"].(string); ok && strings.TrimSpace(v) != "" {
 			return true
 		}
 		// One-version fallback: a user config written by the pre-rename build
@@ -268,7 +268,7 @@ func claudeConfigBytesHas9Router(raw []byte) bool {
 	return claudeREHasBaseURL.Match(raw)
 }
 
-func codexHas9Router() bool {
+func codexHasAlyysha() bool {
 	home, err := os.UserHomeDir()
 	if err != nil || home == "" {
 		return false
@@ -278,10 +278,10 @@ func codexHas9Router() bool {
 		return false
 	}
 	s := string(raw)
-	return strings.Contains(s, `model_provider = "9router"`) || strings.Contains(s, `[model_providers.9router]`)
+	return strings.Contains(s, `model_provider = "alyysha"`) || strings.Contains(s, `[model_providers.alyysha]`)
 }
 
-func opencodeHas9Router() bool {
+func opencodeHasAlyysha() bool {
 	home, err := os.UserHomeDir()
 	if err != nil || home == "" {
 		return false
@@ -290,10 +290,10 @@ func opencodeHas9Router() bool {
 	if err != nil {
 		return false
 	}
-	return bytes.Contains(raw, []byte(`"9router"`))
+	return bytes.Contains(raw, []byte(`"alyysha"`))
 }
 
-func droidHas9Router() bool {
+func droidHasAlyysha() bool {
 	home, err := os.UserHomeDir()
 	if err != nil || home == "" {
 		return false
@@ -302,10 +302,10 @@ func droidHas9Router() bool {
 	if err != nil {
 		return false
 	}
-	return bytes.Contains(raw, []byte(`"custom:9Router`))
+	return bytes.Contains(raw, []byte(`"custom:Alyysha`))
 }
 
-func crushHas9Router() bool {
+func crushHasAlyysha() bool {
 	home, err := os.UserHomeDir()
 	if err != nil || home == "" {
 		return false
@@ -314,10 +314,10 @@ func crushHas9Router() bool {
 	if err != nil {
 		return false
 	}
-	return bytes.Contains(raw, []byte(`"9router"`))
+	return bytes.Contains(raw, []byte(`"alyysha"`))
 }
 
-func ompHas9Router() bool {
+func ompHasAlyysha() bool {
 	home, err := os.UserHomeDir()
 	if err != nil || home == "" {
 		return false
@@ -326,10 +326,10 @@ func ompHas9Router() bool {
 	if err != nil {
 		return false
 	}
-	return bytes.Contains(raw, []byte("9router"))
+	return bytes.Contains(raw, []byte("alyysha"))
 }
 
-func hermesHas9Router() bool {
+func hermesHasAlyysha() bool {
 	home, err := resolveHermesHome("")
 	if err != nil {
 		return false
@@ -338,9 +338,9 @@ func hermesHas9Router() bool {
 	if err != nil || yaml == "" {
 		return false
 	}
-	return parseHermesSettings(yaml).has9RouterConfig()
+	return parseHermesSettings(yaml).hasAlyyshaConfig()
 }
 
-func piHas9Router() bool {
-	return piHas9RouterConfig(readPiConfig())
+func piHasAlyysha() bool {
+	return piHasAlyyshaConfig(readPiConfig())
 }

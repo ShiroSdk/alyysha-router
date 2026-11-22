@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Package browsercookies reads a Google session out of a browser's own cookie
 // database.
 //
@@ -79,7 +79,7 @@ func Read(ctx context.Context, dbPath string) (*Result, error) {
 // session in the process's memory, which is more exposure than the task
 // needs.
 func ReadDomain(ctx context.Context, dbPath, domain string) (*Result, error) {
-	tmpDir, err := os.MkdirTemp("", "9router-cookies-")
+	tmpDir, err := os.MkdirTemp("", "alyysha-cookies-")
 	if err != nil {
 		return nil, fmt.Errorf("browsercookies.Read: make a work directory: %w", err)
 	}

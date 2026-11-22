@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/proxy/executor"
+	"alyysha/proxy/internal/proxy/executor"
 )
 
 // TestLiveE2E_Antigravity_Gemini38FlashMedium_RealChat hits the real upstream

@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package backup
 
 import (
@@ -16,8 +16,8 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/log"
 )
 
 // Remote push (N8): after a local backup succeeds, the JSON export is pushed
@@ -137,7 +137,7 @@ func pushGithub(ctx context.Context, r db.AutoBackupRemote, payload []byte) erro
 	}
 	target := r.GithubPath
 	if target == "" {
-		target = "backups/9routerx-backup.json"
+		target = "backups/alyysha-backup.json"
 	}
 	ownerRepo := r.GithubRepo
 
@@ -170,7 +170,7 @@ func pushGithub(ctx context.Context, r db.AutoBackupRemote, payload []byte) erro
 	}
 
 	payloadBody := map[string]any{
-		"message": "9routerx auto-backup " + time.Now().UTC().Format("2006-01-02T15:04:05Z"),
+		"message": "alyysha auto-backup " + time.Now().UTC().Format("2006-01-02T15:04:05Z"),
 		"content": base64.StdEncoding.EncodeToString(payload),
 		"branch":  branch,
 	}

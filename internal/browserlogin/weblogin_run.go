@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package browserlogin
 
 import (
@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/log"
 )
 
 // Generic web-login runner (weblogin_run.go): one flow per configured
@@ -85,7 +85,7 @@ func RunProvider(ctx context.Context, providerID string) (*WebLoginResult, error
 		profile = persistent
 		defer unlock()
 	} else {
-		temp, err := os.MkdirTemp(browserProfileRoot(binary), "9router-"+cfg.ProviderID+"-login-*")
+		temp, err := os.MkdirTemp(browserProfileRoot(binary), "alyysha-"+cfg.ProviderID+"-login-*")
 		if err != nil {
 			return nil, fmt.Errorf("create the temporary browser profile: %w", err)
 		}

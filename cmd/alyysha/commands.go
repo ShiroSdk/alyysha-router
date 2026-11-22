@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package main
 
 import (
@@ -7,7 +7,7 @@ import (
 
 	"github.com/urfave/cli/v2"
 
-	"9routerx/proxy/internal/mitm"
+	"alyysha/proxy/internal/mitm"
 )
 
 func resolveDataDir() string {
@@ -17,9 +17,9 @@ func resolveDataDir() string {
 	}
 	home, err := os.UserHomeDir()
 	if err != nil {
-		return ".9router"
+		return ".alyysha"
 	}
-	return home + "/.9router"
+	return home + "/.alyysha"
 }
 
 func mitmEnable(_ *cli.Context) error {
@@ -28,7 +28,7 @@ func mitmEnable(_ *cli.Context) error {
 	if err := mgr.Enable(); err != nil {
 		return fmt.Errorf("MITM enable failed: %w", err)
 	}
-	fmt.Println("MITM proxy enabled. Intercepted traffic on :443 → 9RouterX proxy.")
+	fmt.Println("MITM proxy enabled. Intercepted traffic on :443 → Alyysha Router proxy.")
 	return nil
 }
 

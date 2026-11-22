@@ -1,6 +1,6 @@
 //go:build integration
 
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package integration
 
 import (
@@ -10,9 +10,9 @@ import (
 
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/app"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlers"
+	"alyysha/proxy/internal/app"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlers"
 )
 
 // A /v1/responses client on a Responses-speaking upstream with a token saver
@@ -20,7 +20,7 @@ import (
 // backend answers `400 Unknown parameter: 'input[0].content'` for the Chat
 // shape `{"role":"system","content":"<text>"}` a messages[] injector writes,
 // and that 400 takes the whole request down (issue #307; upstream
-// decolua/9router carries the same failure as #2497).
+// decolua/alyysha carries the same failure as #2497).
 
 // cavemanSaver turns the one token saver that injects a system prompt, leaving
 // RTK off so the outbound body differs only by the injected turn.

@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package oauth
 
 import (
@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
 )
 
 // GrokCliImportItem represents one item in a bulk import payload (supporting snake_case and camelCase).

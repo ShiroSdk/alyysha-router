@@ -1,6 +1,6 @@
 //go:build integration
 
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package bootfx
 
 import (
@@ -11,7 +11,7 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/db"
+	"alyysha/proxy/internal/db"
 )
 
 // TestRealApplicationBootAndServesTraffic is the end-to-end smoke test: the

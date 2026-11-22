@@ -1,5 +1,5 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
-// Package log provides a structured logger with levels and context tracing for the 9router proxy.
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
+// Package log provides a structured logger with levels and context tracing for the alyysha proxy.
 //
 // Usage:
 //

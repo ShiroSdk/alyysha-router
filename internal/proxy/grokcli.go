@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package proxy
 
 import (
@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/providers"
 )
 
 func setAuth(headers map[string]string, cfg *providers.ProviderConfig, apiKey string) {
@@ -262,7 +262,7 @@ func kiroEndpoints(cfg *providers.ProviderConfig, psd map[string]any) []string {
 
 const (
 	// KiroToolResultsPlaceholder is a neutral placeholder for user turns carrying only tool results.
-	// Prevents models from answering "Nothing in progress to continue" (decolua/9router #4109).
+	// Prevents models from answering "Nothing in progress to continue" (decolua/alyysha #4109).
 	KiroToolResultsPlaceholder = "Tool results provided."
 	KiroEmptyUserPlaceholder   = "continue"
 )

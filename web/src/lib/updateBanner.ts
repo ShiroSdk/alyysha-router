@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 /**
  * Update banner helpers: per-OS asset naming, the skip list, and the one
  * place that decides whether a release URL may be linked.
@@ -9,20 +9,20 @@
  */
 
 /** The npm package the banner instructs users to install (Bagian B publishes it). */
-export const NPM_PACKAGE_CMD = 'npm i -g 9routerx@latest'
+export const NPM_PACKAGE_CMD = 'npm i -g alyysha@latest'
 
 /** localStorage key holding the JSON array of skipped version strings. */
-export const SKIP_STORAGE_KEY = '9routerx.update.skipped'
+export const SKIP_STORAGE_KEY = 'alyysha.update.skipped'
 
 /**
  * Asset naming convention per OS/arch — the constant map Bagian B names its
- * release assets after. `9routerx_{os}_{arch}` plus the platform suffix:
+ * release assets after. `alyysha_{os}_{arch}` plus the platform suffix:
  * `.exe` on Windows, nothing on the tarballs.
  */
 export const ASSET_BY_OS: Record<string, string> = {
-  windows: '9routerx_windows_amd64.exe',
-  macos: '9routerx_darwin_arm64.tar.gz',
-  linux: '9routerx_linux_amd64.tar.gz'
+  windows: 'alyysha_windows_amd64.exe',
+  macos: 'alyysha_darwin_arm64.tar.gz',
+  linux: 'alyysha_linux_amd64.tar.gz'
 }
 
 /**
@@ -55,7 +55,7 @@ export function releaseUrlTrust(url: string | undefined | null): 'trusted' | 'un
   try {
     const parsed = new URL(url)
     if (parsed.protocol !== 'https:') return 'untrusted'
-    if (!parsed.pathname.toLowerCase().startsWith('/yanstd888/9routerx')) return 'untrusted'
+    if (!parsed.pathname.toLowerCase().startsWith('/ShiroSdk/alyysha-router')) return 'untrusted'
     return TRUSTED_RELEASE_HOSTS.has(parsed.hostname.toLowerCase()) ? 'trusted' : 'untrusted'
   } catch {
     return 'untrusted'

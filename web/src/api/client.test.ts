@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 import { describe, expect, it } from 'bun:test'
 import {
   api,
@@ -28,18 +28,18 @@ describe('dashboard API authentication and errors', () => {
     },
   })
   it('omits Authorization when no API key is explicitly stored', () => {
-    localStorage.removeItem('9routerx_key')
+    localStorage.removeItem('alyysha_key')
 
     expect(getAuthHeaders()).toEqual({ 'Content-Type': 'application/json' })
   })
 
   it('uses an explicitly stored API key', () => {
-    localStorage.setItem('9routerx_key', 'sk-test')
+    localStorage.setItem('alyysha_key', 'sk-test')
 
     try {
       expect(getAuthHeaders().Authorization).toBe('Bearer sk-test')
     } finally {
-      localStorage.removeItem('9routerx_key')
+      localStorage.removeItem('alyysha_key')
     }
   })
 
@@ -50,21 +50,21 @@ describe('dashboard API authentication and errors', () => {
   })
 
   it('omits Authorization when the stored value is masked', () => {
-    localStorage.setItem('9routerx_key', 'sk-8b7…e34f')
+    localStorage.setItem('alyysha_key', 'sk-8b7…e34f')
     try {
       expect(getAuthHeaders()).toEqual({ 'Content-Type': 'application/json' })
     } finally {
-      localStorage.removeItem('9routerx_key')
+      localStorage.removeItem('alyysha_key')
     }
   })
 
   it('uses only the full stored key for media runners', () => {
-    localStorage.setItem('9routerx_key', ' sk-test-123 ')
+    localStorage.setItem('alyysha_key', ' sk-test-123 ')
     try {
       expect(getStoredAPIKey()).toBe('sk-test-123')
       expect(getAuthHeaders().Authorization).toBe('Bearer sk-test-123')
     } finally {
-      localStorage.removeItem('9routerx_key')
+      localStorage.removeItem('alyysha_key')
     }
   })
 
@@ -114,7 +114,7 @@ describe('dashboard API authentication and errors', () => {
 
   it('triggers onUnauthorized and clears storage on 401 responses', async () => {
     const originalFetch = globalThis.fetch
-    localStorage.setItem('9routerx_auth', 'true')
+    localStorage.setItem('alyysha_auth', 'true')
 
     const { promise, resolve } = Promise.withResolvers<void>()
     const unsub = onUnauthorized(() => {
@@ -132,11 +132,11 @@ describe('dashboard API authentication and errors', () => {
       await expect(api.getConnections()).rejects.toThrow()
       await promise
 
-      expect(localStorage.getItem('9routerx_auth')).toBeNull()
+      expect(localStorage.getItem('alyysha_auth')).toBeNull()
     } finally {
       unsub()
       globalThis.fetch = originalFetch
-      localStorage.removeItem('9routerx_auth')
+      localStorage.removeItem('alyysha_auth')
     }
   })
 

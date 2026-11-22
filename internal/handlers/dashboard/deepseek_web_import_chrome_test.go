@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package dashboard
 
 import (
@@ -11,9 +11,9 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/browsercookies"
-	"9routerx/proxy/internal/browserlogin"
-	"9routerx/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/browsercookies"
+	"alyysha/proxy/internal/browserlogin"
+	"alyysha/proxy/internal/handlerutil"
 )
 
 // The DeepSeek import answers with BOTH halves of the credential: the

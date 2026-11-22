@@ -1,13 +1,13 @@
 //go:build integration
 
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package integration
 
 import (
 	"net/http"
 	"testing"
 
-	"9routerx/proxy/internal/auth"
+	"alyysha/proxy/internal/auth"
 )
 
 // Issue #90 smoke: a custom model on an OpenAI-compatible provider node

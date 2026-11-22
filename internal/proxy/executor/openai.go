@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package executor
 
 import (
@@ -10,12 +10,12 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/guardrails"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/proxy"
-	"9routerx/proxy/internal/shutdown"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/guardrails"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/proxy"
+	"alyysha/proxy/internal/shutdown"
+	"alyysha/proxy/internal/translator"
 	"encoding/json/jsontext"
 	json "encoding/json/v2"
 )
@@ -110,7 +110,7 @@ func renameMaxTokensBody(body []byte) []byte {
 
 // DowngradeJsonSchemaToJSONObject downgrades response_format from "json_schema"
 // to {"type":"json_object"} for providers like DeepSeek or openai-compatible nodes
-// that do not support OpenAI Structured Outputs (upstream decolua/9router PR #5304).
+// that do not support OpenAI Structured Outputs (upstream decolua/alyysha PR #5304).
 func DowngradeJsonSchemaToJSONObject(body []byte) []byte {
 	var m map[string]jsontext.Value
 	if err := json.Unmarshal(body, &m); err != nil {

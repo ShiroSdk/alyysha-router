@@ -1,4 +1,4 @@
-<!-- 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
   // Port of upstream src/app/(dashboard)/dashboard/providers/[id]/AddApiKeyModal.js
   // Single/Bulk add, credential label per provider, Check (validate) button,

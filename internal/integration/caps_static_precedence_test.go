@@ -1,13 +1,13 @@
 //go:build integration
 
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package integration
 
 import (
 	"net/http"
 	"testing"
 
-	"9routerx/proxy/internal/auth"
+	"alyysha/proxy/internal/auth"
 )
 
 // Issue #424: listing the models — the normal startup move for an SDK or a CLI —

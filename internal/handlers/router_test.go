@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package handlers
 
 import (
@@ -15,9 +15,9 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
-	"9routerx/proxy/internal/auth"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/dbtest"
+	"alyysha/proxy/internal/auth"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/dbtest"
 )
 
 func setupTestDB(t *testing.T) (*sql.DB, func()) {

@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 /**
  * The panel universe of the Usage page: every card, table and dialog each Usage
  * section can draw, grouped by the section that draws it. Pure data — no state,

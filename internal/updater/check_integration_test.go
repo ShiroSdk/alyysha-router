@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package updater
 
 import (
@@ -59,7 +59,7 @@ func manifestServer(t *testing.T, status int, body string) (*httptest.Server, *a
 const mergedManifest = `{
   "version": "1.9.17",
   "minVersion": "1.9.0",
-  "releaseUrl": "https://github.com/yanstd888/9RouterX/releases/tag/v1.9.17",
+  "releaseUrl": "https://github.com/ShiroSdk/alyysha-router/releases/tag/v1.9.17",
   "notes": "merged contract release",
   "publishedAt": "2026-11-01T00:00:00Z",
   "latestVersion": "1.9.17",
@@ -86,7 +86,7 @@ func TestCheckUpdate_MergedManifestFields(t *testing.T) {
 	if info.MinVersion != "1.9.0" {
 		t.Errorf("MinVersion = %q, want 1.9.0", info.MinVersion)
 	}
-	if info.ReleaseURL != "https://github.com/yanstd888/9RouterX/releases/tag/v1.9.17" {
+	if info.ReleaseURL != "https://github.com/ShiroSdk/alyysha-router/releases/tag/v1.9.17" {
 		t.Errorf("ReleaseURL = %q", info.ReleaseURL)
 	}
 	if info.PublishedAt != "2026-11-01T00:00:00Z" {
@@ -216,7 +216,7 @@ func TestCheckUpdate_404FallsBackToReleases(t *testing.T) {
 		switch r.URL.Path {
 		case "/version.json":
 			http.NotFound(w, r)
-		case "/repos/yanstd888/9routerx/releases/latest":
+		case "/repos/ShiroSdk/alyysha-router/releases/latest":
 			w.Header().Set("Content-Type", "application/json")
 			_, _ = fmt.Fprintf(w, `{"tag_name":"v1.9.17","body":"notes","assets":[]}`)
 		default:
@@ -226,7 +226,7 @@ func TestCheckUpdate_404FallsBackToReleases(t *testing.T) {
 	defer srv.Close()
 	base = srv.URL
 	DefaultUpdateURL = base + "/version.json"
-	DefaultGitHubRepo = "yanstd888/9routerx"
+	DefaultGitHubRepo = "ShiroSdk/alyysha-router"
 	githubReleasesAPI = base + "/repos/%s/releases/latest"
 
 	info, err := CheckUpdate(context.Background())
@@ -252,11 +252,11 @@ func TestManifestURL_HostPinned(t *testing.T) {
 		env    string
 		honors bool
 	}{
-		{"pinned host honored", "https://raw.githubusercontent.com/yanstd888/9routerx/staging/version.json", true},
+		{"pinned host honored", "https://raw.githubusercontent.com/ShiroSdk/alyysha-router/staging/version.json", true},
 		{"foreign host ignored", "https://evil.example/version.json", false},
-		{"http downgrade ignored", "http://raw.githubusercontent.com/yanstd888/9routerx/main/version.json", false},
+		{"http downgrade ignored", "http://raw.githubusercontent.com/ShiroSdk/alyysha-router/main/version.json", false},
 		{"lookalike host ignored", "https://raw.githubusercontent.com.evil.example/version.json", false},
-		{"bare host without path honored (root manifest)", "https://raw.githubusercontent.com/yanstd888/9routerx/main/version.json", true},
+		{"bare host without path honored (root manifest)", "https://raw.githubusercontent.com/ShiroSdk/alyysha-router/main/version.json", true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -274,14 +274,14 @@ func TestManifestURL_HostPinned(t *testing.T) {
 // path tricks and malformed values are ignored.
 func TestRepoName_Validation(t *testing.T) {
 	resetCheckState(t)
-	DefaultGitHubRepo = "yanstd888/9routerx"
+	DefaultGitHubRepo = "ShiroSdk/alyysha-router"
 	for env, want := range map[string]string{
 		"fixture/fork":       "fixture/fork",
-		"yanstd888/9routerx": "yanstd888/9routerx",
-		"a/b/c":              "yanstd888/9routerx",
-		"../etc":             "yanstd888/9routerx",
-		"owner/na me":        "yanstd888/9routerx",
-		"":                   "yanstd888/9routerx",
+		"ShiroSdk/alyysha-router": "ShiroSdk/alyysha-router",
+		"a/b/c":              "ShiroSdk/alyysha-router",
+		"../etc":             "ShiroSdk/alyysha-router",
+		"owner/na me":        "ShiroSdk/alyysha-router",
+		"":                   "ShiroSdk/alyysha-router",
 	} {
 		t.Setenv("UPDATE_REPO", env)
 		if got := repoName(); got != want {

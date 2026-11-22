@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package executor
 
 import (
@@ -11,8 +11,8 @@ import (
 
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/proxy"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/proxy"
 )
 
 // The client-attestation headers chat.deepseek.com's web client sends.

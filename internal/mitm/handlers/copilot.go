@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package handlers
 
 import (
@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-// HandleCopilot intercepts GitHub Copilot requests and forwards to 9router chat completions.
+// HandleCopilot intercepts GitHub Copilot requests and forwards to alyysha chat completions.
 func HandleCopilot(w http.ResponseWriter, r *http.Request, body []byte) {
 	var reqBody map[string]any
 	if err := json.Unmarshal(body, &reqBody); err != nil {

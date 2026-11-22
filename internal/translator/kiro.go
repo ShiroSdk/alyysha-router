@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package translator
 
 import (
@@ -28,7 +28,7 @@ const kiroDefaultMaxTokens = 32000
 
 // kiroEmptyUserText mirrors kiroEmptyUserContent in kiroConversation.js: an
 // empty user turn would make the model answer "nothing to continue", so a
-// neutral placeholder is injected (decolua/9router #4109).
+// neutral placeholder is injected (decolua/alyysha #4109).
 const (
 	kiroToolResultsPlaceholder = "Tool results provided."
 	kiroEmptyUserPlaceholder   = "continue"

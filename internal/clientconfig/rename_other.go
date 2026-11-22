@@ -1,6 +1,6 @@
 //go:build !windows
 
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package clientconfig
 
 // isRetryableRenameErr is Windows-only. POSIX rename fails for reasons that do

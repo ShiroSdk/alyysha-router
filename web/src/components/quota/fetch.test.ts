@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 import { describe, expect, it } from 'bun:test'
 import { QUOTA_FETCH_CONCURRENCY, runQuotaFetchCycle, type QuotaFetchTarget } from './fetch'
 

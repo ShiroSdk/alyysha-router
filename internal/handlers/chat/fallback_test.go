@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
@@ -15,8 +15,8 @@ import (
 	"testing"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/tokensaver"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/tokensaver"
 )
 
 // seedConnDB inserts a single active connection for the given provider pointing at upstream.

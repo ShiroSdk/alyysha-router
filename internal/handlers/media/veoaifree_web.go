@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package media
 
 import (
@@ -16,8 +16,8 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/handlers/chat"
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/handlers/chat"
+	"alyysha/proxy/internal/log"
 )
 
 // veoaifree.com free media generator, ported from upstream

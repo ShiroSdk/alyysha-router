@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package updater
 
 import (
@@ -134,8 +134,8 @@ func gzipBytes(t *testing.T, raw []byte) []byte {
 }
 
 func TestExtractExecutableBytes_RejectsOversizedTarEntry(t *testing.T) {
-	archive := gzipBytes(t, tarHeaderBlock("9routerx_linux_amd64", maxArchiveEntryBytes+1, tar.TypeReg))
-	_, err := extractExecutableBytes(archive, "9routerx_linux_amd64.tar.gz")
+	archive := gzipBytes(t, tarHeaderBlock("alyysha_linux_amd64", maxArchiveEntryBytes+1, tar.TypeReg))
+	_, err := extractExecutableBytes(archive, "alyysha_linux_amd64.tar.gz")
 	if err == nil || !strings.Contains(err.Error(), "over the") {
 		t.Fatalf("err = %v, want an over-the-limit refusal", err)
 	}
@@ -146,7 +146,7 @@ func TestExtractExecutableBytes_RejectsTooManyEntries(t *testing.T) {
 	for i := 0; i <= maxArchiveEntries; i++ {
 		raw = append(raw, tarHeaderBlock(fmt.Sprintf("docs/file-%d", i), 0, tar.TypeReg)...)
 	}
-	_, err := extractExecutableBytes(gzipBytes(t, raw), "9routerx.tar.gz")
+	_, err := extractExecutableBytes(gzipBytes(t, raw), "alyysha.tar.gz")
 	if err == nil || !strings.Contains(err.Error(), "more than") {
 		t.Fatalf("err = %v, want an entry-count refusal", err)
 	}
@@ -155,7 +155,7 @@ func TestExtractExecutableBytes_RejectsTooManyEntries(t *testing.T) {
 func TestExtractExecutableBytes_RejectsSymlinkZip(t *testing.T) {
 	var buf bytes.Buffer
 	zw := zip.NewWriter(&buf)
-	hdr := &zip.FileHeader{Name: "9routerx"}
+	hdr := &zip.FileHeader{Name: "alyysha"}
 	hdr.SetMode(os.ModeSymlink | 0o777)
 	w, err := zw.CreateHeader(hdr)
 	if err != nil {
@@ -167,7 +167,7 @@ func TestExtractExecutableBytes_RejectsSymlinkZip(t *testing.T) {
 	if err := zw.Close(); err != nil {
 		t.Fatalf("close zip: %v", err)
 	}
-	if _, err := extractExecutableBytes(buf.Bytes(), "9routerx_linux_amd64.zip"); err == nil ||
+	if _, err := extractExecutableBytes(buf.Bytes(), "alyysha_linux_amd64.zip"); err == nil ||
 		!strings.Contains(err.Error(), "symlink") {
 		t.Fatalf("err = %v, want a symlink refusal", err)
 	}
@@ -179,8 +179,8 @@ func TestExtractExecutableBytes_MalformedArchiveIsNotRawFallback(t *testing.T) {
 		data []byte
 		url  string
 	}{
-		{"truncated gzip", []byte{0x1f, 0x8b, 0x08, 0x00}, "9routerx_linux_amd64.tar.gz"},
-		{"truncated zip", []byte("PK\x03\x04"), "9routerx_windows_amd64.zip"},
+		{"truncated gzip", []byte{0x1f, 0x8b, 0x08, 0x00}, "alyysha_linux_amd64.tar.gz"},
+		{"truncated zip", []byte("PK\x03\x04"), "alyysha_windows_amd64.zip"},
 	}
 	for _, tc := range cases {
 		t.Run(tc.name, func(t *testing.T) {
@@ -194,14 +194,14 @@ func TestExtractExecutableBytes_MalformedArchiveIsNotRawFallback(t *testing.T) {
 
 func TestExtractExecutableBytes_RejectsForeignTargetFormat(t *testing.T) {
 	archive := updateAssetTarGz(t, foreignExecutablePayload(t, 2048))
-	_, err := extractExecutableBytes(archive, "9routerx_"+runtime.GOOS+"_"+runtime.GOARCH+".tar.gz")
+	_, err := extractExecutableBytes(archive, "alyysha_"+runtime.GOOS+"_"+runtime.GOARCH+".tar.gz")
 	if err == nil {
 		t.Fatal("an executable for another platform must not be installed")
 	}
 }
 
 func TestExtractExecutableBytes_RawNonExecutableIsRejected(t *testing.T) {
-	if _, err := extractExecutableBytes(bytes.Repeat([]byte("text"), 1024), "9routerx_linux_amd64"); err == nil {
+	if _, err := extractExecutableBytes(bytes.Repeat([]byte("text"), 1024), "alyysha_linux_amd64"); err == nil {
 		t.Fatal("a raw non-executable download must be refused")
 	}
 }

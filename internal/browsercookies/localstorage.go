@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Package browsercookies reads a browser's cookie database.
 //
 // The DeepSeek Web credential is two things, and only one of them is a

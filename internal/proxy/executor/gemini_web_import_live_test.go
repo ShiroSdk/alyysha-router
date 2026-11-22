@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package executor
 
 import (
@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"9routerx/proxy/internal/browsercookies"
+	"alyysha/proxy/internal/browsercookies"
 )
 
 // TestGeminiWebLiveImportedSession exercises a session that was read out of a

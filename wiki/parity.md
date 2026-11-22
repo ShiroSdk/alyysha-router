@@ -10,7 +10,7 @@ Both projects share the same database and schema. What differs is the runtime.
 
 ## Comparison
 
-| | 9RouterX | 9Router (upstream) |
+| | Alyysha Router | 9Router (upstream) |
 |---|---|---|
 | Runtime | Single Go binary | Node.js + Next.js |
 | Dashboard | Embedded Svelte 5 | React 19 |
@@ -52,7 +52,7 @@ since the last tag, so what you read there is current even between releases.
 
 ## Go-only features
 
-Some features exist only in 9RouterX and do not collide with upstream:
+Some features exist only in Alyysha Router and do not collide with upstream:
 
 - Per-custom-provider limits (RPM/TPM/concurrency/quota/expiry)
 - Per-API-key rate limiting with a FIFO queue

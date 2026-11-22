@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package service
 
 import (
@@ -16,7 +16,7 @@ func TestInstallSystemdUserWritesAndEnablesUnit(t *testing.T) {
 	home := setHome(t)
 	calls := stubRun(t)
 
-	info, err := installSystemd("/usr/local/bin/9routerx", []string{"--rtk=true"})
+	info, err := installSystemd("/usr/local/bin/alyysha", []string{"--rtk=true"})
 	if err != nil {
 		t.Fatalf("installSystemd() error = %v", err)
 	}
@@ -70,7 +70,7 @@ func TestInstallSystemdErrorPaths(t *testing.T) {
 				return "", nil
 			})
 
-			info, err := installSystemd("/usr/local/bin/9routerx", nil)
+			info, err := installSystemd("/usr/local/bin/alyysha", nil)
 			if (err != nil) != tt.wantErr {
 				t.Fatalf("installSystemd() err = %v, wantErr %v", err, tt.wantErr)
 			}
@@ -171,7 +171,7 @@ func TestInstallSystemdEnablesLingerOnBothPaths(t *testing.T) {
 				return "", nil
 			})
 
-			if _, err := installSystemd("/usr/local/bin/9routerx", nil); err != nil {
+			if _, err := installSystemd("/usr/local/bin/alyysha", nil); err != nil {
 				t.Fatalf("installSystemd() error = %v", err)
 			}
 

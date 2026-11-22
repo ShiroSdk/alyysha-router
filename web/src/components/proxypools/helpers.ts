@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 import type { ProxyPool } from '../../api/client'
 
 export type PoolStatusFilter = 'all' | 'active' | 'passed' | 'failed'
@@ -26,7 +26,7 @@ export function getLatencyBadge(
 
 /**
  * A pool counts as failed when its last probe reported a hard failure. The
- * gateway writes `failed`, upstream `decolua/9router` writes `error`, and rows
+ * gateway writes `failed`, upstream `decolua/alyysha` writes `error`, and rows
  * imported from an upstream database can still carry either.
  */
 export function isFailedStatus(pool: ProxyPool): boolean {

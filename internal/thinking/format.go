@@ -1,8 +1,8 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package thinking
 
 import (
-	"9routerx/proxy/internal/providers"
+	"alyysha/proxy/internal/providers"
 	"bytes"
 	json "encoding/json/v2"
 	"strings"

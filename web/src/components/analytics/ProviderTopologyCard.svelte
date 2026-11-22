@@ -1,4 +1,4 @@
-<!-- 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id -->
+<!-- Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers -->
 <script lang="ts">
   import { onMount } from 'svelte'
   import type { ActiveRequestItem } from './types'
@@ -390,13 +390,13 @@
     >
       <img
         src="/android-chrome-192x192.png"
-        alt="9RouterX"
+        alt="Alyysha Router"
         class="w-6 h-6 mr-2 object-contain {activeCount > 0 ? 'topology-router-icon' : ''}"
         loading="lazy"
         decoding="async"
       />
       <span class="text-sm font-bold {activeCount > 0 ? 'topology-router-label topology-router-ink' : 'text-primary'}">
-        9RouterX
+        Alyysha Router
       </span>
       {#if activeCount > 0}
         <span class="ml-2 px-1.5 py-0.5 rounded-full bg-yellow-400 text-black text-xs font-bold topology-router-badge">

@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package app_test
 
 import (
@@ -10,11 +10,11 @@ import (
 
 	json "encoding/json/v2"
 
-	"9routerx/proxy/internal/app"
-	"9routerx/proxy/internal/config"
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/handlers/chat"
-	"9routerx/proxy/internal/translator"
+	"alyysha/proxy/internal/app"
+	"alyysha/proxy/internal/config"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/handlers/chat"
+	"alyysha/proxy/internal/translator"
 	"github.com/go-chi/chi/v5"
 	"go.uber.org/fx"
 )

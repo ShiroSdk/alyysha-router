@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Guards the conversions between the limits form (text), the API (numbers and
 // RFC3339) and the read-only summary. A wrong conversion here is silent: a limit
 // that should be unlimited becomes 1, or a contract that ends on the 31st is

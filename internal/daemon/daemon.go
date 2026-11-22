@@ -1,4 +1,4 @@
-// 9RouterX — derived from the work of https://github.com/yanstd888/ — port and modifications by the maintainers — https://t.me/aiclub_id
+// Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers
 package daemon
 
 import (
@@ -15,11 +15,11 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/auth"
-	"9routerx/proxy/internal/config"
-	"9routerx/proxy/internal/constants"
-	"9routerx/proxy/internal/log"
-	"9routerx/proxy/internal/proc"
+	"alyysha/proxy/internal/auth"
+	"alyysha/proxy/internal/config"
+	"alyysha/proxy/internal/constants"
+	"alyysha/proxy/internal/log"
+	"alyysha/proxy/internal/proc"
 )
 
 // StartupTimeout bounds how long Start waits for the daemon to answer /health
@@ -39,7 +39,7 @@ const (
 )
 
 // ErrAlreadyRunning is returned when a live daemon already owns the port.
-var ErrAlreadyRunning = errors.New("9routerx is already running")
+var ErrAlreadyRunning = errors.New("alyysha is already running")
 
 // StopTimeout is how long Restart waits for the old daemon's port to be
 // released before giving up.

@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package main
 
 import (
@@ -20,17 +20,17 @@ import (
 	"github.com/urfave/cli/v2"
 	"golang.org/x/term"
 
-	"9routerx/proxy/internal/config"
-	"9routerx/proxy/internal/daemon"
-	"9routerx/proxy/internal/proc"
-	"9routerx/proxy/internal/updater"
+	"alyysha/proxy/internal/config"
+	"alyysha/proxy/internal/daemon"
+	"alyysha/proxy/internal/proc"
+	"alyysha/proxy/internal/updater"
 )
 
 // menuActions collects the operations the menu can trigger. Both renderers —
 // the Bubble Tea model and the plain numbered fallback — call these same
 // functions, so start/stop/status logic exists exactly once (in daemon_cmd.go
 // and here for the tray), and a menu pick can never drift from the
-// `9routerx start|stop|status` sub-commands.
+// `alyysha start|stop|status` sub-commands.
 type menuActions struct {
 	openDashboard func(*cli.Context) error
 	startDetached func(*cli.Context) error
@@ -87,7 +87,7 @@ func stdinIsTerminal() bool {
 	return fi.Mode()&os.ModeCharDevice != 0
 }
 
-// runMenu is the bare-`9routerx` entry point. On a real terminal it shows the
+// runMenu is the bare-`alyysha` entry point. On a real terminal it shows the
 // interactive picker (arrows/numbers, colour highlight); anything else —
 // pipe, CI, service, /dev/null — takes the plain numbered fallback, which is
 // byte-for-byte the behaviour this binary always had.
@@ -393,7 +393,7 @@ func runBubbleMenu(cCtx *cli.Context, actions menuActions) (string, error) {
 // startTray hands the tray to its own binary and returns, so the terminal is
 // free while the icon stays.
 //
-// The tray lives in cmd/9router-tray because a GUI toolkit cannot be linked
+// The tray lives in cmd/alyysha-tray because a GUI toolkit cannot be linked
 // into this binary without breaking the CGO_ENABLED=0 cross-build for all five
 // targets (docs/specs/tray-companion-architecture.md §X2). Spawning keeps the
 // menu entry the Node CLI has ("Hide to Tray") without importing it here.

@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package db
 
 import (
@@ -9,8 +9,8 @@ import (
 	"sort"
 	"time"
 
-	"9routerx/proxy/internal/analyticsrange"
-	"9routerx/proxy/internal/pricing"
+	"alyysha/proxy/internal/analyticsrange"
+	"alyysha/proxy/internal/pricing"
 )
 
 // PromptCacheProviderStats holds per-provider cache metrics.

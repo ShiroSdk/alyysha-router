@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package handlers
 
 import (
@@ -18,7 +18,7 @@ var proxyBase = "http://localhost:20128"
 // local router for every request the MITM proxy forwards.
 var routerClient = &http.Client{Timeout: 5 * time.Minute}
 
-// FetchRouter sends a request body to the 9router proxy endpoint and returns the response.
+// FetchRouter sends a request body to the alyysha proxy endpoint and returns the response.
 func FetchRouter(ctx context.Context, body []byte, endpoint string, headers http.Header, apiKey string) (*http.Response, error) {
 	url := proxyBase + endpoint
 	req, err := http.NewRequestWithContext(ctx, "POST", url, bytes.NewReader(body))

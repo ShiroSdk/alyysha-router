@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package chat
 
 import (
@@ -6,12 +6,12 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/db"
-	"9routerx/proxy/internal/models"
+	"alyysha/proxy/internal/db"
+	"alyysha/proxy/internal/models"
 )
 
 // forceFallbackEnv is the deployment-level override upstream reads from the
-// process environment (decolua/9router PR #130, .env.example). It forces the
+// process environment (decolua/alyysha PR #130, .env.example). It forces the
 // strategy on without a dashboard write, so a deployment can keep serving
 // traffic through a temporary provider outage before anyone opens the UI.
 const forceFallbackEnv = "FORCE_FALLBACK_ON_ALL_UNAVAILABLE"
@@ -29,7 +29,7 @@ func forceFallbackEnabled(settings *db.SettingsData) bool {
 
 // forceMinCooldownConnection returns the account whose cooldown expires first
 // among the candidates the selector just rejected, so a provider outage costs a
-// client turn instead of an error (upstream decolua/9router PR #130: sort the
+// client turn instead of an error (upstream decolua/alyysha PR #130: sort the
 // forced candidates by rateLimitedUntil and take the head).
 //
 // Only accounts that really are in account cooldown are eligible. A candidate

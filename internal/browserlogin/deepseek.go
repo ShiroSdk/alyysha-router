@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 // Package browserlogin captures a DeepSeek web session from an isolated
 // browser.
 //
@@ -104,7 +104,7 @@ func RunDeepSeek(ctx context.Context) (*DeepSeekResult, error) {
 			"use an Incognito window instead and paste the userToken from chat.deepseek.com localStorage")
 	}
 
-	profile, err := os.MkdirTemp(browserProfileRoot(binary), "9router-deepseek-login-*")
+	profile, err := os.MkdirTemp(browserProfileRoot(binary), "alyysha-deepseek-login-*")
 	if err != nil {
 		return nil, fmt.Errorf("create the temporary browser profile: %w", err)
 	}

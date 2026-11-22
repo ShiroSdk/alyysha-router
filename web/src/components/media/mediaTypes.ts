@@ -1,4 +1,4 @@
-// 9RouterX — this file is part of a port maintained by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — this file is part of a port maintained by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 import type { ProviderConnection } from '../../api/client'
 
 export type MediaKind = 'embedding' | 'image' | 'tts' | 'stt' | 'video' | 'systemone' | 'webSearch' | 'webFetch'

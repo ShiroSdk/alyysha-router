@@ -1,4 +1,4 @@
-// 9RouterX — ported & modified by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — ported & modified by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package db
 
 import (
@@ -9,8 +9,8 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/analyticsrange"
-	"9routerx/proxy/internal/pricing"
+	"alyysha/proxy/internal/analyticsrange"
+	"alyysha/proxy/internal/pricing"
 )
 
 // CompressionModeStats holds per-mode compression statistics.

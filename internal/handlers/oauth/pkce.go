@@ -1,4 +1,4 @@
-// 9RouterX — source port and modifications by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — source port and modifications by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package oauth
 
 import (
@@ -14,12 +14,12 @@ import (
 	"strings"
 	"time"
 
-	"9routerx/proxy/internal/handlerutil"
-	"9routerx/proxy/internal/log"
+	"alyysha/proxy/internal/handlerutil"
+	"alyysha/proxy/internal/log"
 )
 
 // pkceConfig describes a standard OAuth2 authorization_code+PKCE provider.
-// Mirrors the upstream 9router provider modules (src/lib/oauth/providers/*).
+// Mirrors the upstream alyysha provider modules (src/lib/oauth/providers/*).
 type pkceConfig struct {
 	providers      []string
 	clientID       string

@@ -1,4 +1,4 @@
-// 9RouterX — all source code port and modification by https://github.com/yanstd888/ — https://t.me/aiclub_id
+// Alyysha Router — all source code port and modification by https://github.com/ShiroSdk/ — https://t.me/YannClippers
 package proxy
 
 import (
@@ -373,7 +373,7 @@ func (c *sseCopier) finish() error {
 // finish_reason is worse than nothing: OpenAI clients treat both as a normal
 // completion and keep the truncated text, so a stall timeout and a dropped
 // socket are indistinguishable from a finished answer. The error frame is
-// what makes the difference visible (upstream decolua/9router 93001213).
+// what makes the difference visible (upstream decolua/alyysha 93001213).
 func (c *sseCopier) abort(cause error) {
 	if len(c.pending) > 0 {
 		frag := c.pending
