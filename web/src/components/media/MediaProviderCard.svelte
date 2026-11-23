@@ -5,7 +5,7 @@
   import Badge from '../../lib/ui/Badge.svelte'
   import Card from '../../lib/ui/Card.svelte'
   import Toggle from '../../lib/ui/Toggle.svelte'
-  import ProviderArtwork from '../providers/ProviderArtwork.svelte'
+  import ProviderLogo from '../providers/ProviderLogo.svelte'
 
   interface Props {
     provider: ProviderCatalogItem
@@ -84,9 +84,11 @@
           class="size-8 rounded-lg flex items-center justify-center shrink-0"
           style="background-color: {bgColor}"
         >
-          <ProviderArtwork
+          <ProviderLogo
             id={provider.id}
-            class="object-contain rounded-lg max-w-[30px] max-h-[30px]"
+            name={provider.name}
+            size={30}
+            radius={8}
           />
         </div>
         <div class="min-w-0">

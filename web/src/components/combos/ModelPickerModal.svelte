@@ -8,7 +8,7 @@
   import { Info, Search, X } from 'lucide-svelte'
   import { api, type Combo, type ProviderConnection, type ProviderNode } from '../../api/client'
   import ModelPill from './ModelPill.svelte'
-  import ProviderArtwork from '../providers/ProviderArtwork.svelte'
+  import ProviderLogo from '../providers/ProviderLogo.svelte'
   import {
     resolveFilteredCombos,
     resolveFilteredGroups,
@@ -220,10 +220,11 @@
         {#each filteredGroups as group (group.id)}
           <div>
             <div class="flex items-center gap-1.5 mb-1.5 sticky top-0 bg-surface py-0.5 z-10">
-              <ProviderArtwork
+              <ProviderLogo
                 id={group.id}
-                alt={group.name}
-                class="w-3.5 h-3.5 object-contain rounded-sm text-[9px] leading-none font-semibold"
+                name={group.name}
+                size={14}
+                radius={4}
               />
               <span class="text-xs font-medium text-brand-500">
                 {formatEmailLabel(group.name, $emailPrivacy)}

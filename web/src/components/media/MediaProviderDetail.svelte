@@ -9,7 +9,7 @@
   import { parseCustomModelsResponse, subscribeCustomModelsChanged } from '../../lib/customModels'
   import type { ProviderCatalogItem } from '../../lib/providers'
   import Badge from '../../lib/ui/Badge.svelte'
-  import ProviderArtwork from '../providers/ProviderArtwork.svelte'
+  import ProviderLogo from '../providers/ProviderLogo.svelte'
   import { type MediaKind, MEDIA_KIND_INFO } from './mediaTypes'
   import NoAuthProxyCard from './NoAuthProxyCard.svelte'
   import TtsExampleCard from './TtsExampleCard.svelte'
@@ -626,10 +626,11 @@
         class="size-12 rounded-lg flex items-center justify-center shrink-0 border border-border/40 overflow-hidden"
         style="background-color: {provider.color ? provider.color + '15' : '#88888815'}"
       >
-        <ProviderArtwork
+        <ProviderLogo
           id={provider.id}
-          alt={provider.name}
-          class="object-contain size-8 rounded text-sm leading-none font-semibold"
+          name={provider.name}
+          size={32}
+          radius={8}
         />
       </div>
       <div class="min-w-0 flex-1">

@@ -94,7 +94,7 @@
   import ExportKeysModal from './ExportKeysModal.svelte'
   import ShareProviderModal from './ShareProviderModal.svelte'
   import FreebuffSessionBanner from './FreebuffSessionBanner.svelte'
-  import ProviderIcon from './ProviderIcon.svelte'
+  import ProviderLogo from '../providers/ProviderLogo.svelte'
 
   interface Props {
     providerId: string
@@ -3303,12 +3303,13 @@
           class="flex size-12 shrink-0 items-center justify-center rounded-lg"
           style="background-color: {providerColor}15;"
         >
-          <ProviderIcon
+          <ProviderLogo
             id={providerId}
+            name={providerName}
             apiType={selectedNode?.apiType}
             baseUrl={selectedNode?.baseUrl}
-            size="lg"
-            class="border-transparent bg-transparent"
+            size={48}
+            radius={12}
           />
         </div>
 

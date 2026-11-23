@@ -4,7 +4,7 @@
   import Badge from '../../lib/ui/Badge.svelte'
   import Card from '../../lib/ui/Card.svelte'
   import Toggle from '../../lib/ui/Toggle.svelte'
-  import ProviderIcon from './ProviderIcon.svelte'
+  import ProviderLogo from '../providers/ProviderLogo.svelte'
   import { type ProviderStats } from './types'
   import { isProviderTogglePersistent as readProviderTogglePersistent } from '../../lib/compactNumber'
 
@@ -62,7 +62,7 @@
   >
     <div class="flex min-w-0 items-center justify-between gap-3">
       <div class="flex min-w-0 items-center gap-3">
-        <ProviderIcon {id} {apiType} {baseUrl} size="md" />
+        <ProviderLogo {id} {name} {apiType} {baseUrl} size={40} />
         <div class="min-w-0">
           <h3 class="truncate font-semibold text-sm text-text-main group-hover:text-brand-500 transition-colors">
             {name}

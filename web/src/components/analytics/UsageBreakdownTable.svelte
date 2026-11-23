@@ -2,7 +2,7 @@
 <script lang="ts">
   import Badge from '../../lib/ui/Badge.svelte'
   import Card from '../../lib/ui/Card.svelte'
-  import ProviderArtwork from '../providers/ProviderArtwork.svelte'
+  import ProviderLogo from '../providers/ProviderLogo.svelte'
   import {
     fmt,
     timeAgo,
@@ -288,10 +288,11 @@
                 <td data-label={nameHeader} class="py-3 px-4 font-mono font-medium text-text-main text-xs">
                   <div class="flex items-center gap-2">
                     {#if row.provider}
-                      <ProviderArtwork
+                      <ProviderLogo
                         id={row.provider}
-                        alt={row.provider}
-                        class="w-4 h-4 object-contain rounded shrink-0 bg-surface-2 p-0.5 border border-border/40 text-[9px] leading-none font-semibold"
+                        name={row.provider}
+                        size={16}
+                        radius={5}
                       />
                     {/if}
                     <span class="truncate">{row.label}</span>
@@ -301,10 +302,11 @@
                   <td data-label="Provider" class="py-3 px-4 hidden md:table-cell">
                     <div class="flex items-center gap-1.5">
                       {#if row.provider}
-                        <ProviderArtwork
+                        <ProviderLogo
                           id={row.provider}
-                          alt={row.provider}
-                          class="w-3.5 h-3.5 object-contain rounded shrink-0 text-[9px] leading-none font-semibold"
+                          name={row.provider}
+                          size={14}
+                          radius={4}
                         />
                       {/if}
                       <Badge variant="neutral" size="sm">{row.provider || 'unknown'}</Badge>

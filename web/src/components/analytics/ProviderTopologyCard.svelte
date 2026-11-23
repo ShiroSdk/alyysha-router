@@ -2,7 +2,7 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import type { ActiveRequestItem } from './types'
-  import ProviderArtwork from '../providers/ProviderArtwork.svelte'
+  import ProviderLogo from '../providers/ProviderLogo.svelte'
 
   interface ProviderNodeItem {
     id: string
@@ -415,7 +415,7 @@
           style="background-color: {node.color}15;"
         >
           {#if !imageErrors[node.id]}
-            <ProviderArtwork id={node.id} class="w-6 h-6 rounded-sm object-contain" />
+            <ProviderLogo id={node.id} name={node.name} size={24} radius={6} />
           {:else}
             <span class="text-sm font-bold" style="color: {node.color};">
               {node.textIcon}

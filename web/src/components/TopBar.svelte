@@ -1,7 +1,7 @@
 <!-- Alyysha Router — derived from the work of https://github.com/ShiroSdk/ — port and modifications by the maintainers — https://t.me/YannClippers -->
 <script lang="ts">
   import { api } from '../api/client'
-  import ProviderIcon from './connections/ProviderIcon.svelte'
+  import ProviderLogo from './providers/ProviderLogo.svelte'
   import ChangelogModal from './ChangelogModal.svelte'
   import NotificationBell from './NotificationBell.svelte'
   import Menu from '../lib/ui/Menu.svelte'
@@ -268,7 +268,7 @@
         <div class="flex items-center gap-2 min-w-0">
           <span class="material-symbols-outlined text-text-muted text-base">chevron_right</span>
           <div class="flex items-center gap-2 min-w-0">
-            <ProviderIcon id={selectedProvider.id} size="sm" />
+            <ProviderLogo id={selectedProvider.id} name={selectedProvider.name} size={28} radius={8} />
             <h1
               class="font-headline font-light lowercase text-base lg:text-2xl text-text-main tracking-tight truncate"
               use:scramble={{ text: selectedProvider.name }}

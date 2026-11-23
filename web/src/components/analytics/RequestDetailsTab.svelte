@@ -4,7 +4,7 @@
   import Badge from '../../lib/ui/Badge.svelte'
   import Button from '../../lib/ui/Button.svelte'
   import Card from '../../lib/ui/Card.svelte'
-  import ProviderArtwork from '../providers/ProviderArtwork.svelte'
+  import ProviderLogo from '../providers/ProviderLogo.svelte'
   import { api, normalizeLastError, type ProviderConnection } from '../../api/client'
   import UsageDashboard from './UsageDashboard.svelte'
   import { isPanelVisible } from '../../lib/usagePanel.svelte'
@@ -241,10 +241,11 @@
               <td data-label="Provider" class="py-3 px-4 hidden md:table-cell">
                 <div class="flex items-center gap-1.5">
                   {#if item.provider}
-                    <ProviderArtwork
+                    <ProviderLogo
                       id={item.provider}
-                      alt={item.provider}
-                      class="w-3.5 h-3.5 object-contain rounded shrink-0"
+                      name={item.provider}
+                      size={14}
+                      radius={4}
                     />
                   {/if}
                   <span title={item.provider || undefined} class="font-sans">
