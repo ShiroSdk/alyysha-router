@@ -36,11 +36,11 @@
 
   // Keyed on the source, so switching providers re-attempts the artwork instead
   // of inheriting the previous provider's failure.
-  const failed = $state(new Map<string, boolean>())
-  const showImage = $derived(!failed.get(src))
+  let failedSrc = $state<string | null>(null)
+  const showImage = $derived(failedSrc !== src)
 
   function handleError() {
-    failed.set(src, true)
+    failedSrc = src
   }
 </script>
 
