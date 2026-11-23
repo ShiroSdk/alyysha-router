@@ -12,11 +12,13 @@
   interface Props {
     id?: string | null
     apiType?: string
+    /** Base URL of a custom provider node; its hostname picks the vendor artwork. */
+    baseUrl?: string
     size?: 'sm' | 'md' | 'lg'
     class?: string
   }
 
-  let { id, apiType, size = 'sm', class: klass = '' }: Props = $props()
+  let { id, apiType, baseUrl, size = 'sm', class: klass = '' }: Props = $props()
 
   const glyph = $derived(getProviderGlyph(id))
 
@@ -33,5 +35,5 @@
   aria-label={glyph.name}
   title={glyph.name}
 >
-  <ProviderArtwork {id} {apiType} class="{art} {text} object-contain leading-none font-semibold" />
+  <ProviderArtwork {id} {apiType} {baseUrl} class="{art} {text} object-contain leading-none font-semibold" />
 </div>

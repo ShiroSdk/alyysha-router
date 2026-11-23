@@ -12,6 +12,8 @@
     id: string
     name: string
     apiType?: string
+    /** Base URL of a custom provider node; its hostname picks the vendor artwork. */
+    baseUrl?: string
     stats: ProviderStats
     noAuth?: boolean
     onClick: () => void
@@ -22,6 +24,7 @@
     id,
     name,
     apiType,
+    baseUrl,
     stats,
     noAuth = false,
     onClick,
@@ -59,7 +62,7 @@
   >
     <div class="flex min-w-0 items-center justify-between gap-3">
       <div class="flex min-w-0 items-center gap-3">
-        <ProviderIcon {id} {apiType} size="md" />
+        <ProviderIcon {id} {apiType} {baseUrl} size="md" />
         <div class="min-w-0">
           <h3 class="truncate font-semibold text-sm text-text-main group-hover:text-brand-500 transition-colors">
             {name}

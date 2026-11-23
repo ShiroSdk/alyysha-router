@@ -136,6 +136,7 @@
             id={node.id}
             name={node.name}
             apiType={node.apiType}
+            baseUrl={node.baseUrl}
             stats={node.stats}
             onClick={() => onSelectProvider(node.id)}
             onToggleAll={(active) => onToggleAll(node.id, active)}

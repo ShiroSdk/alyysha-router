@@ -21,6 +21,8 @@
     id?: string | null
     /** apiType picks between the OpenAI chat and Responses glyphs. */
     apiType?: string
+    /** Base URL of a custom provider node; its hostname picks the vendor artwork. */
+    baseUrl?: string
     /** Alt text; the provider's display name when omitted. */
     alt?: string
     class?: string
@@ -28,9 +30,9 @@
     style?: string
   }
 
-  let { id, apiType, alt, class: klass = '', style }: Props = $props()
+  let { id, apiType, baseUrl, alt, class: klass = '', style }: Props = $props()
 
-  const src = $derived(getIconPath(id, apiType))
+  const src = $derived(getIconPath(id, apiType, baseUrl))
   const glyph = $derived(getProviderGlyph(id))
   const label = $derived(alt ?? glyph.name)
 

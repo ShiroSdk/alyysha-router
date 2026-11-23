@@ -68,9 +68,57 @@ const ICON_ALIASES: Record<string, string> = {
 // logo exists in public/providers/). The generic .png return would 404 for
 // these — atmorouter shipped as .svg and rendered as a broken image in the
 // connections grid (audit Hallmark Gate 76).
-const SVG_ONLY_PROVIDERS = new Set(['atmorouter', 'codewhale', 'hcnsec', 'runcrate', 'smelt'])
+const SVG_ONLY_PROVIDERS = new Set(['atmorouter', 'codewhale', 'hcnsec', 'runcrate', 'smelt', 'bansos', 'folkrouter', 'mavy', 'wadam', 'clonella', 'kavia-k9r'])
 
-export function getIconPath(id?: string | null, apiType?: string): string {
+// Domain -> artwork mapping for custom provider nodes whose baseUrl hostname
+// identifies the vendor. A node registered against `gemini` / `claude` /
+// `openai` / `deepseek` / ... gets the vendor's logo automatically instead of
+// the generic OpenAI glyph or an initials badge, even when the node id is a
+// random uuid or a bespoke prefix (bansos, clonella-pool, kavia-k9r). The keys
+// are matched as hostname substrings (case-insensitive), so a baseUrl of
+// `https://clonella.yannclipper.net/v1` resolves via the `clonella` entry
+// without needing an exact host match.
+const DOMAIN_LOGO_MAP: Array<[string, string]> = [
+  ['gemini', 'gemini'],
+  ['claude', 'claude'],
+  ['anthropic', 'anthropic'],
+  ['openai', 'openai'],
+  ['deepseek', 'deepseek'],
+  ['minimax', 'minimax'],
+  ['qwen', 'qwen'],
+  ['glm', 'glm'],
+  ['zai', 'glm'],
+  ['zcode', 'glm'],
+  ['llmtr', 'qwen'],
+  ['clonella', 'clonella'],
+  ['k9r', 'kavia-k9r'],
+  ['kavia', 'kavia-k9r'],
+  ['claudepeak', 'claude'],
+  ['cent-ai', 'openai'],
+  ['100milionseek', 'bansos'],
+  ['folkrouter', 'folkrouter'],
+  ['mavy', 'mavy'],
+  ['wadam', 'wadam'],
+]
+
+function domainIconPath(baseUrl?: string): string | null {
+  if (!baseUrl) return null
+  const host = baseUrl.toLowerCase()
+  for (const [needle, logo] of DOMAIN_LOGO_MAP) {
+    if (host.includes(needle)) {
+      if (SVG_ONLY_PROVIDERS.has(logo)) return `/providers/${logo}.svg`
+      return `/providers/${logo}.png`
+    }
+  }
+  return null
+}
+
+export function getIconPath(id?: string | null, apiType?: string, baseUrl?: string): string {
+  // A custom node's baseUrl hostname wins when it names a vendor we ship
+  // artwork for: the domain is the ground truth for what the endpoint is,
+  // whereas the node id is a prefix chosen by the operator.
+  const fromDomain = domainIconPath(baseUrl)
+  if (fromDomain) return fromDomain
   if (!id) return '/providers/oai-cc.png'
   const clean = id.trim()
   if (clean.startsWith('openai-compatible')) {
