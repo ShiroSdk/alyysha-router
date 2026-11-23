@@ -16,6 +16,8 @@
     baseUrl?: string
     stats: ProviderStats
     noAuth?: boolean
+    /** Web-cookie provider that is opt-in disabled (enable via dashboard toggle / env). */
+    optInDisabled?: boolean
     onClick: () => void
     onToggleAll?: (active: boolean) => void
   }
@@ -27,6 +29,7 @@
     baseUrl,
     stats,
     noAuth = false,
+    optInDisabled = false,
     onClick,
     onToggleAll,
   }: Props = $props()
@@ -69,34 +72,42 @@
           </h3>
           <div class="flex min-w-0 items-center gap-1.5 text-xs flex-wrap mt-0.5">
             {#if isAllDisabled}
-              <Badge variant="default" size="sm">
-                <span class="flex items-center gap-1">
-                  <PauseCircle class="w-3 h-3" />
+              <Badge variant="default" size="sm" class="max-w-full truncate">
+                <span class="flex items-center gap-1 whitespace-nowrap">
+                  <PauseCircle class="w-3 h-3 shrink-0" />
                   Disabled
                 </span>
               </Badge>
             {:else if stats.errorCount > 0}
-              <Badge variant="error" size="sm" dot>
+              <Badge variant="error" size="sm" dot class="max-w-full truncate whitespace-nowrap">
                 {stats.errorCount} Error
               </Badge>
               {#if stats.connected > 0}
-                <Badge variant="success" size="sm" dot>
+                <Badge variant="success" size="sm" dot class="max-w-full truncate whitespace-nowrap">
                   {stats.connected} Connected
                 </Badge>
               {/if}
             {:else if noAuth}
-              <Badge variant="success" size="sm" dot>Ready</Badge>
+              <Badge variant="success" size="sm" dot class="max-w-full truncate whitespace-nowrap">Ready</Badge>
             {:else if stats.connected > 0}
-              <Badge variant="success" size="sm" dot>
+              <Badge variant="success" size="sm" dot class="max-w-full truncate whitespace-nowrap">
                 {stats.connected} Connected
               </Badge>
               {#if apiType}
-                <Badge variant="default" size="sm">
+                <Badge variant="default" size="sm" class="max-w-full truncate whitespace-nowrap">
                   {apiType === 'responses' ? 'Responses' : 'Chat'}
                 </Badge>
               {/if}
             {:else}
-              <span class="text-text-muted">No connections</span>
+              <span class="text-text-muted whitespace-nowrap">No connections</span>
+            {/if}
+            {#if optInDisabled}
+              <Badge variant="warning" size="sm" class="max-w-full min-w-0">
+                <span class="flex items-center gap-1 whitespace-nowrap truncate" title="disabled — enable via the Web Cookie Providers dashboard toggle / CLAUDE_WEB_ENABLED">
+                  <PauseCircle class="w-3 h-3 shrink-0" />
+                  <span class="truncate">disabled — enable via dashboard toggle / CLAUDE_WEB_ENABLED</span>
+                </span>
+              </Badge>
             {/if}
           </div>
         </div>

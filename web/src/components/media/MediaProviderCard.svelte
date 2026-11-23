@@ -95,23 +95,23 @@
           <h3 class="font-semibold text-sm text-text-main truncate">{provider.name}</h3>
           <div class="flex items-center gap-2 mt-0.5 flex-wrap">
             {#if isCustom}
-              <Badge variant="default" size="sm">Custom</Badge>
+              <Badge variant="default" size="sm" class="max-w-full truncate whitespace-nowrap">Custom</Badge>
             {/if}
             {#if isNoAuth}
-              <Badge variant="success" size="sm">Ready</Badge>
+              <Badge variant="success" size="sm" class="max-w-full truncate whitespace-nowrap">Ready</Badge>
             {:else if allDisabled}
-              <Badge variant="default" size="sm">Disabled</Badge>
+              <Badge variant="default" size="sm" class="max-w-full truncate whitespace-nowrap">Disabled</Badge>
             {:else if total === 0}
-              <span class="text-xs text-text-muted">No connections</span>
+              <span class="text-xs text-text-muted whitespace-nowrap">No connections</span>
             {:else}
               {#if connected > 0}
-                <Badge variant="success" size="sm" dot>{connected} Connected</Badge>
+                <Badge variant="success" size="sm" dot class="max-w-full truncate whitespace-nowrap">{connected} Connected</Badge>
               {/if}
               {#if error > 0}
-                <Badge variant="error" size="sm" dot>{error} Error</Badge>
+                <Badge variant="error" size="sm" dot class="max-w-full truncate whitespace-nowrap">{error} Error</Badge>
               {/if}
               {#if connected === 0 && error === 0}
-                <Badge variant="default" size="sm">{total} Added</Badge>
+                <Badge variant="default" size="sm" class="max-w-full truncate whitespace-nowrap">{total} Added</Badge>
               {/if}
             {/if}
           </div>

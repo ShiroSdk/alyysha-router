@@ -147,3 +147,5 @@ __pycache__/
 # No-emoji icon audit screenshots (local evidence only)
 /audit-screens-noemoji/
 alyysha
+alyysha-linux-amd64
+alyysha-linux-arm64

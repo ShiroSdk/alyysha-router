@@ -236,18 +236,11 @@
       <div class="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
         {#each webCookieProviders as p (p.id)}
           <div class="relative">
-            {#if p.optInDisabled}
-              <span
-                class="absolute right-2 top-2 z-10 rounded-full bg-surface-2 text-text-muted font-semibold px-2 py-0.5 text-[10px]"
-                title="disabled — enable via the Web Cookie Providers dashboard toggle / CLAUDE_WEB_ENABLED"
-              >
-                disabled — enable via dashboard toggle / CLAUDE_WEB_ENABLED
-              </span>
-            {/if}
             <ProviderCard
               id={p.id}
               name={p.name}
               stats={p.stats}
+              optInDisabled={p.optInDisabled}
               onClick={() => onSelectProvider(p.id)}
               onToggleAll={(active) => onToggleAll(p.id, active)}
             />
