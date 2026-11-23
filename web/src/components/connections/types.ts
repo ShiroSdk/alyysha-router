@@ -79,6 +79,8 @@ const SVG_ONLY_PROVIDERS = new Set(['atmorouter', 'codewhale', 'hcnsec', 'runcra
 // `https://clonella.yannclipper.net/v1` resolves via the `clonella` entry
 // without needing an exact host match.
 const DOMAIN_LOGO_MAP: Array<[string, string]> = [
+  ['generativelanguage', 'gemini'],
+  ['aistudio', 'gemini'],
   ['gemini', 'gemini'],
   ['claude', 'claude'],
   ['anthropic', 'anthropic'],

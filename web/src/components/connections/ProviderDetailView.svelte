@@ -3306,6 +3306,7 @@
           <ProviderIcon
             id={providerId}
             apiType={selectedNode?.apiType}
+            baseUrl={selectedNode?.baseUrl}
             size="lg"
             class="border-transparent bg-transparent"
           />
